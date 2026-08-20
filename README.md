@@ -61,7 +61,7 @@ The Brand Kit product contract is accepted by this documentation. Runtime behavi
 | Capability | State | Tracking |
 | --- | --- | --- |
 | Brand Kit product contract | Accepted | [#6](https://github.com/egohygiene/identity/issues/6) |
-| Toolchain decisions | Proposed | [#7](https://github.com/egohygiene/identity/issues/7) |
+| Toolchain decisions | Accepted | [#7](https://github.com/egohygiene/identity/issues/7), [evaluation](docs/evaluations/brand-kit-foundations.md), [ADRs](DECISIONS.md) |
 | Independent CLI | Proposed | [#8](https://github.com/egohygiene/identity/issues/8) |
 | v1 identity schema | Proposed | [#9](https://github.com/egohygiene/identity/issues/9) |
 | Compiler and packages | Proposed | [#10](https://github.com/egohygiene/identity/issues/10), [#11](https://github.com/egohygiene/identity/issues/11) |
@@ -79,7 +79,9 @@ The Brand Kit product contract is accepted by this documentation. Runtime behavi
 - [System responsibilities](SYSTEM.md)
 - [Architecture and boundaries](ARCHITECTURE.md)
 - [Design system contract](DESIGN_SYSTEM.md)
+- [Architecture decisions](DECISIONS.md)
+- [Brand Kit foundations evaluation](docs/evaluations/brand-kit-foundations.md)
+- [Dependency policy](docs/DEPENDENCY_POLICY.md)
 - [Roadmap](ROADMAP.md)
 
 The [roadmap issue](https://github.com/egohygiene/identity/issues/5) is the execution source of truth. Architecture documents define durable intent and boundaries; individual issues own implementation detail and evidence.
-
