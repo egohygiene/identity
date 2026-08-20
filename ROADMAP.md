@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: identity-roadmap
 title: Identity Roadmap
 kind: architecture-document
-version: 0.1.0
-status: provisional
+version: 1.0.0
+status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-20
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -28,83 +28,85 @@ supersedes: []
 
 ## Strategic context
 
-This roadmap describes capability evolution, not promised dates or an issue queue. Sequence follows architecture dependencies and may change when evidence or risk changes.
+Identity is evolving from an incubated product-identity CLI into a standalone Brand Kit generator. This document maps durable capability evolution to the executable [roadmap issue #5](https://github.com/egohygiene/identity/issues/5). It describes dependency order and release evidence, not promised dates.
 
-## Phase 1: Extract the incubated Identity CLI
+## Umbrella outcomes
 
-**Outcome:** A bounded capability advances from documented intent to validated, independently usable behavior.
+The original portfolio issues remain outcome-level anchors:
 
-**Exit signals:**
+- [#1](https://github.com/egohygiene/identity/issues/1) — canonical identity and design-token schema;
+- [#2](https://github.com/egohygiene/identity/issues/2) — compiler and distributable packages;
+- [#3](https://github.com/egohygiene/identity/issues/3) — visual-motion validation.
 
-- The owning contract and acceptance criteria are versioned.
-- Implementation and documentation agree.
-- Relevant tests and safety checks pass.
-- Downstream consumers and migration impact are understood.
-- Remaining uncertainty is visible.
+They close only when the refining issues below provide implementation and validation evidence.
 
-## Phase 2: Stabilize the identity schema
+## Dependency-ordered waves
 
-**Outcome:** A bounded capability advances from documented intent to validated, independently usable behavior.
+| Wave | Outcome | Issues | Exit evidence |
+| --- | --- | --- | --- |
+| 0 — Product and foundations | Accept the Brand Kit boundary and select replaceable foundations | #6, #7 | Active product contract, boundary review, toolchain ADRs, dependency policy, proof of high-risk integrations |
+| 1 — Extraction and canonical contracts | Establish an independent CLI and versioned consumer-owned source | #8, #9 | Parity tests, migration fixtures, published schemas, deterministic merge/override diagnostics |
+| 2 — Compiler and packages | Produce reproducible projections through stable adapter contracts | #10, #11 | Offline core tests, adapter contract tests, golden outputs, packages, manifests, checksums |
+| 3 — Trust and governance | Make quality, accessibility, provenance, voice, and approval testable | #12, #13 | Release-blocking validation, human-review evidence, usage/voice schemas, recovery guidance |
+| 4 — Public product experience | Present, preview, approve, download, and publish a Brand Kit | #14, #15, #16 | Accessible renderer, mutation-safe studio, immutable publication contract, deployed route checks |
+| 5 — Proof and release | Prove variation across consumers and publish v1.0.0 | #17, #18 | Empathy/OptiFlow pilots, clean-room quickstart, compatibility suite, attestations, stable release |
 
-**Exit signals:**
+## Current wave
 
-- The owning contract and acceptance criteria are versioned.
-- Implementation and documentation agree.
-- Relevant tests and safety checks pass.
-- Downstream consumers and migration impact are understood.
-- Remaining uncertainty is visible.
+Wave 0 establishes decisions that constrain every implementation PR:
 
-## Phase 3: Complete deterministic projections
+### #6 — Brand Kit product contract
 
-**Outcome:** A bounded capability advances from documented intent to validated, independently usable behavior.
+**Exit criteria:**
 
-**Exit signals:**
+- ownership and non-ownership are explicit;
+- compiler, packages, renderer, studio, consumer, evidence, and publication interfaces are named;
+- canonical, generated, transient, and published authority are distinct;
+- personas, workflows, surfaces, failure states, and measurable signals are documented;
+- `/identity` is canonical and `/brand-kit` is a redirect;
+- capabilities use implemented, accepted, proposed, and deferred honestly;
+- architecture links, document front matter, and repository boundaries validate.
 
-- The owning contract and acceptance criteria are versioned.
-- Implementation and documentation agree.
-- Relevant tests and safety checks pass.
-- Downstream consumers and migration impact are understood.
-- Remaining uncertainty is visible.
+### #7 — Standards, libraries, and framework adapters
 
-## Phase 4: Add reviewed creative generation
+**Exit criteria:**
 
-**Outcome:** A bounded capability advances from documented intent to validated, independently usable behavior.
+- adopt/adapt/reject decisions are evidence-backed;
+- dependencies have bounded purposes and replacement strategies;
+- local and CI output assumptions are proven;
+- no framework or library becomes canonical domain truth.
 
-**Exit signals:**
+## v1 capability map
 
-- The owning contract and acceptance criteria are versioned.
-- Implementation and documentation agree.
-- Relevant tests and safety checks pass.
-- Downstream consumers and migration impact are understood.
-- Remaining uncertainty is visible.
+| v1 promise | Owning issues | Required tests/evidence |
+| --- | --- | --- |
+| Initialize or migrate a project-owned identity | #8, #9 | Command parity, schema, valid/invalid fixtures, migration and rollback tests |
+| Resolve organization defaults and product overrides | #9, #17 | Merge/conflict diagnostics and contrasting consumer snapshots |
+| Plan before mutation | #10 | Mutation-free plan tests covering writes, replacements, removals, warnings, and approvals |
+| Generate deterministic target profiles | #10, #11 | Offline unit/integration tests, adapter contracts, golden manifests, checksum stability |
+| Block inaccessible, unlicensed, or untraceable releases | #3, #12, #13 | Accessibility, visual, license, provenance, approval, and recovery reports |
+| Distribute portable Brand Kit packages | #11, #18 | Consumer installation, compatibility, clean-room build, and release provenance |
+| Render and preview an understandable Brand Kit | #14, #15 | Accessibility, responsive, link, download, visual regression, and mutation-isolation tests |
+| Publish the organization Brand Kit at `/identity` | #16 | Immutable handoff, metadata, redirect, deployment smoke test, and rollback evidence |
+| Preserve product variation within a family | #17 | Empathy and OptiFlow inheritance/override evidence |
+| Release a supportable v1.0.0 | #18 | Platform matrix, documentation, SBOM/license inventory, checksums, attestations, and all release gates |
 
-## Phase 5: Integrate every repository surface
+## Cross-cutting requirements
 
-**Outcome:** A bounded capability advances from documented intent to validated, independently usable behavior.
+Every wave must preserve:
 
-**Exit signals:**
-
-- The owning contract and acceptance criteria are versioned.
-- Implementation and documentation agree.
-- Relevant tests and safety checks pass.
-- Downstream consumers and migration impact are understood.
-- Remaining uncertainty is visible.
-
-## Cross-cutting tracks
-
-- Security, privacy, accessibility, licensing, and provenance.
-- Documentation, architecture portals, examples, and onboarding.
-- Packaging, release, compatibility, and self-hosting.
-- Organization integration through explicit contracts.
-- Observatory evidence and Pace conformance when those systems exist.
+- human authority, privacy, accessibility, licensing, and provenance;
+- canonical/generated/transient/publication boundaries;
+- deterministic local and CI behavior for supported projections;
+- versioned cross-repository contracts and immutable dependencies;
+- implementation, documentation, tests, migration, and rollback agreement;
+- visible uncertainty, partial coverage, unsupported behavior, and deferred work.
 
 ## Deferred direction
 
-Optional managed services, enterprise controls, marketplaces, and the conversational organization compiler remain later architecture work. Current choices should preserve portability and avoid foreclosing them.
+Managed collaboration, enterprise controls, marketplaces, provider-specific generative systems, and a conversational organization compiler remain outside v1. The architecture preserves ports for later work without making those services prerequisites or implying support before evidence exists.
 
-## Evidence and uncertainty
+## Execution policy
 
-- **Observed:** The repository README establishes the intended boundary as the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; significant implementation remains incomplete.
-- **Decided for this draft:** The repository owns the bounded concern described here and participates through versioned contracts.
-- **Proposed:** Target systems and later roadmap phases remain proposals until accepted and implemented.
-- **Open question:** Which parts of this draft should become active in the first independently versioned release?
+Work one scoped PR at a time. Architecture and specification changes land before dependent implementation. Pause after each wave for review. If work belongs to another repository, open a follow-up there instead of expanding Identity's boundary.
+

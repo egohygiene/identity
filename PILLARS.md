@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: identity-pillars
 title: Identity Pillars
 kind: architecture-document
-version: 0.1.0
-status: provisional
+version: 1.0.0
+status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-20
 governed_by:
   - architecture-pillars
 depends_on:
@@ -27,31 +27,49 @@ supersedes: []
 
 ## Role
 
-The pillars are enduring strategic capabilities, not projects, repositories, components, or roadmap phases.
+The pillars are enduring capabilities required for Identity to remain a trustworthy Brand Kit generator. They are not repositories, frameworks, components, or roadmap phases.
 
-## Pillar 1: Identity contracts
+## Pillar 1: Portable identity contracts
 
-This capability must remain healthy for Identity to fulfill its purpose. Its health should be visible through versioned contracts, tests or review evidence, documentation, and clear ownership.
+**Outcome:** A consumer-owned, versioned source expresses brand intent, inheritance, overrides, approvals, provenance, and target requirements without depending on one renderer or provider.
 
-## Pillar 2: Creative generation handoff
+**Health evidence:** Published schemas, compatibility tests, migration fixtures, editor diagnostics, and documented ownership.
 
-This capability must remain healthy for Identity to fulfill its purpose. Its health should be visible through versioned contracts, tests or review evidence, documentation, and clear ownership.
+**Primary roadmap:** #1 and #9.
 
-## Pillar 3: Deterministic asset projection
+## Pillar 2: Human-owned creative direction
 
-This capability must remain healthy for Identity to fulfill its purpose. Its health should be visible through versioned contracts, tests or review evidence, documentation, and clear ownership.
+**Outcome:** People can brief, compare, approve, reject, supersede, and hand off creative work while preserving authorship, rationale, source lineage, and provider boundaries.
+
+**Health evidence:** Approval records, candidate-state tests, provenance validation, and visible plan/apply boundaries.
+
+**Primary roadmap:** #13 and #15.
+
+## Pillar 3: Deterministic Brand Kit projection
+
+**Outcome:** Reviewed intent produces reproducible tokens, platform assets, metadata, guidance, packages, manifests, and checksums.
+
+**Health evidence:** Golden fixtures, byte-stability where formats permit, adapter contract tests, clean-room builds, and release attestations.
+
+**Primary roadmap:** #2, #10, and #11.
 
 ## Pillar 4: Cross-platform brand integrity
 
-This capability must remain healthy for Identity to fulfill its purpose. Its health should be visible through versioned contracts, tests or review evidence, documentation, and clear ownership.
+**Outcome:** Supported projections remain recognizable, accessible, licensed, performant, and usable across themes, sizes, motion preferences, and platform constraints.
+
+**Health evidence:** Contrast, alt-text, focus, reduced-motion, safe-zone, small-size, visual-regression, license, and provenance reports.
+
+**Primary roadmap:** #3 and #12.
+
+## Pillar 5: Understandable distribution
+
+**Outcome:** Humans and software can inspect, download, integrate, version, and publish the Brand Kit without copying Identity internals.
+
+**Health evidence:** Typed packages, a framework-neutral view model, an accessible reference renderer, immutable publication handoffs, and consumer pilots.
+
+**Primary roadmap:** #14, #16, #17, and #18.
 
 ## Balance
 
-No pillar is complete in isolation. Delivery that weakens trust, ownership, accessibility, or evidence does not count as durable progress.
+No pillar is complete in isolation. A beautiful projection without provenance is not trustworthy; a precise schema without an understandable experience is not usable; automation that bypasses approval is not progress. Delivery counts only when it strengthens the whole product boundary.
 
-## Evidence and uncertainty
-
-- **Observed:** The repository README establishes the intended boundary as the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; significant implementation remains incomplete.
-- **Decided for this draft:** The repository owns the bounded concern described here and participates through versioned contracts.
-- **Proposed:** Target systems and later roadmap phases remain proposals until accepted and implemented.
-- **Open question:** Which parts of this draft should become active in the first independently versioned release?
