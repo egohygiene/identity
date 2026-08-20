@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: identity-system
 title: Identity System
 kind: architecture-document
-version: 0.1.0
-status: provisional
+version: 1.0.0
+status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-20
 governed_by:
   - architecture-system
 depends_on:
@@ -26,41 +26,88 @@ supersedes: []
 
 ## Purpose and scope
 
-This document identifies Identity's logical systems and responsibilities. It answers what the major systems do; [ARCHITECTURE.md](ARCHITECTURE.md) owns their structural organization and dependency rules.
+Identity is a Brand Kit generator with three product layers: compiler and contracts, generated Brand Kit data/packages, and a reference public renderer with an approval-aware asset studio. This document names the logical systems and their responsibilities. [ARCHITECTURE.md](ARCHITECTURE.md) owns their structure and dependency direction.
+
+## Capability-state vocabulary
+
+| State | Evidence required |
+| --- | --- |
+| Implemented | Runtime behavior and validation evidence exist on the default branch |
+| Accepted | A reviewed contract constrains later implementation |
+| Proposed | A roadmap issue defines the target, but its acceptance criteria are not complete |
+| Deferred | The capability is intentionally outside the current boundary or awaits explicit dependencies |
+
+The product contract is accepted. No runtime system in this repository is represented as implemented until its code and evidence are extracted or built here.
 
 ## System inventory
 
-| System | State | Responsibility |
+| System | State | Responsibility | Inputs | Outputs | Tracking |
+| --- | --- | --- | --- | --- | --- |
+| Product contract | Accepted | Defines the Brand Kit product, ownership, authority, lifecycle states, and stable interfaces | Reviewed architecture decisions | Versioned architecture documents | #6 |
+| Identity source contract | Proposed | Models consumer-owned intent, tokens, voice, usage, targets, approvals, inheritance, overrides, licenses, and provenance | `.identity/` source | Validated and resolved identity model | #1, #9 |
+| Compiler core | Proposed | Executes the read, validate, resolve, plan, render, verify, and manifest lifecycle without depending on a provider | Resolved identity and adapter capabilities | Diagnostics, asset plan, verified result | #2, #10 |
+| Projection adapters | Proposed | Render tokens, vector/raster assets, metadata, guidance, and archives behind replaceable ports | Asset plan and approved sources | Target-specific artifacts | #7, #11 |
+| Validation and evidence | Proposed | Test accessibility, dimensions, visual integrity, licensing, provenance, compatibility, and reproducibility | Source, outputs, manifest, fixtures | Machine report and human recovery guidance | #3, #12 |
+| Package distribution | Proposed | Assemble versioned token, metadata, voice, asset, manifest, and download packages | Verified artifacts | Immutable consumer packages and checksums | #11, #18 |
+| Brand Kit renderer | Proposed | Present the generated view model as an accessible, framework-replaceable public reference experience | Versioned Brand Kit view model | Static/reference Brand Kit and downloads | #14 |
+| Asset studio | Proposed | Preview intent and candidates, compare results, and apply approved changes without making preview state canonical | Source, candidates, presets, view model | Preview, plan, approval record, handoff | #15 |
+| Publication handoff | Deferred | Deliver an immutable approved artifact to a consumer-owned deployment boundary | Released Brand Kit bundle | Versioned integration and rollback metadata | #16 |
+
+## Named public interfaces
+
+| Interface | Authority | Contract |
 | --- | --- | --- |
-| Identity schema | Target | Owns its bounded portion of the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; exposes explicit inputs, outputs, failure states, and evidence. |
-| Creative brief builder | Target | Owns its bounded portion of the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; exposes explicit inputs, outputs, failure states, and evidence. |
-| Asset planner | Target | Owns its bounded portion of the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; exposes explicit inputs, outputs, failure states, and evidence. |
-| Raster and vector adapters | Target | Owns its bounded portion of the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; exposes explicit inputs, outputs, failure states, and evidence. |
-| Text and metadata generator | Target | Owns its bounded portion of the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; exposes explicit inputs, outputs, failure states, and evidence. |
-| Validation and manifest | Target | Owns its bounded portion of the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; exposes explicit inputs, outputs, failure states, and evidence. |
-| Consumer integration | Target | Owns its bounded portion of the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; exposes explicit inputs, outputs, failure states, and evidence. |
+| Source interface | Consumer | Versioned `.identity/` directory; canonical human-reviewed intent |
+| CLI interface | Identity | `init`, `validate`, `plan`, and `handoff` are observed in the incubated CLI; generation commands require accepted design in #10 |
+| Compiler library interface | Identity | Pure domain and application ports for validation, planning, rendering, verification, and manifests |
+| Package interface | Identity | Versioned tokens, assets, metadata, voice, manifests, checksums, and compatibility metadata |
+| Brand Kit view-model interface | Identity | Framework-neutral representation consumed by renderers and public surfaces |
+| Renderer interface | Identity | Reference static/public experience over an immutable view model |
+| Consumer interface | Consumer repository | Pinned package or release integration; no access to Identity internals |
+| Publication interface | Owning website or product | Explicit promotion of a verified immutable release with rollback data |
+| Evidence interface | Identity, Relay, Observatory | Stable machine-readable diagnostics, validation reports, manifests, and health signals |
 
-## External systems
+## Canonical, generated, transient, and published state
 
-- Hygiene requirements
-- Empathy identity directory
-- Holon generation
-- LaunchKit and documentation sites
-- GitHub repository branding
+| State | Storage boundary | Mutation authority | Distribution rule |
+| --- | --- | --- | --- |
+| Canonical | Consumer-owned `.identity/` | Explicit human-approved change | Versioned as source; private material remains excluded |
+| Generated | `assets/identity/` or package build output | Deterministic compiler after plan approval | Distributed with manifest, version, checksums, and provenance |
+| Transient | Ignored implementation workspace, cache, preview, or candidate session | Active CLI/studio session | Never distributed or promoted implicitly; exact layout belongs to #9 and #10 |
+| Published | Consumer deployment or public route | Owning repository/service | References one immutable verified release and supports rollback |
 
-External systems are integrations, not hidden implementation units. Each requires version, authentication, availability, data, error, and replacement boundaries appropriate to its risk.
+## Primary workflows
 
-## System interactions
+### Initialize or migrate
 
-Inputs enter through an adapter or validated contract, move through domain systems, produce artifacts and diagnostics, and leave through a stable interface. Evidence flows back to validation, review, and future decisions.
+Create a versioned source contract, preserve provenance, validate it, and present migration decisions before replacing existing identity state.
+
+### Validate and plan
+
+Resolve defaults and overrides, validate requirements, discover adapters, and enumerate writes, replacements, removals, warnings, approvals, and unsupported targets without mutation.
+
+### Generate and verify
+
+Apply an accepted plan transactionally, render deterministic targets, validate the result, and emit a manifest and evidence. Partial output cannot be reported as verified success.
+
+### Review creative candidates
+
+Compare candidates with approved sources, retain provider and source lineage, record a human decision, then regenerate deterministic projections from the accepted state.
+
+### Package and publish
+
+Assemble immutable packages and a Brand Kit bundle, verify release gates, then hand the release to a consumer-owned publication boundary. Generation never publishes as an implicit side effect.
 
 ## Failure model
 
-Systems fail closed at destructive, publication, privacy, and security boundaries. Partial results identify coverage and remain distinguishable from complete success.
+| Failure state | Required behavior |
+| --- | --- |
+| Invalid | Reject the affected source with stable diagnostics and paths |
+| Unsupported | Identify the missing capability without claiming partial support |
+| Blocked | Preserve state and identify the dependency, authority, or approval required |
+| Partial | Isolate incomplete output, report coverage, and withhold verification |
+| Failed | Preserve canonical state, provide evidence, and offer a recoverable retry or rollback |
+| Drifted | Identify differences between source, generated state, package, or published release |
 
-## Evidence and uncertainty
+Destructive, publication, privacy, security, license, and approval boundaries fail closed.
 
-- **Observed:** The repository README establishes the intended boundary as the identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; significant implementation remains incomplete.
-- **Decided for this draft:** The repository owns the bounded concern described here and participates through versioned contracts.
-- **Proposed:** Target systems and later roadmap phases remain proposals until accepted and implemented.
-- **Open question:** Which parts of this draft should become active in the first independently versioned release?
