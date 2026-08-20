@@ -76,6 +76,13 @@ Wave 0 establishes decisions that constrain every implementation PR:
 - local and CI output assumptions are proven;
 - no framework or library becomes canonical domain truth.
 
+**Accepted evidence:**
+
+- [foundation comparison matrix](docs/evaluations/brand-kit-foundations.md);
+- [toolchain and boundary ADRs](DECISIONS.md);
+- [dependency policy](docs/DEPENDENCY_POLICY.md);
+- [deterministic DTCG projection-boundary proof](experiments/dtcg-projection-boundary/README.md).
+
 ## v1 capability map
 
 | v1 promise | Owning issues | Required tests/evidence |
@@ -109,4 +116,3 @@ Managed collaboration, enterprise controls, marketplaces, provider-specific gene
 ## Execution policy
 
 Work one scoped PR at a time. Architecture and specification changes land before dependent implementation. Pause after each wave for review. If work belongs to another repository, open a follow-up there instead of expanding Identity's boundary.
-

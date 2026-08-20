@@ -1,0 +1,36 @@
+{
+  "identity": {
+    "color": {
+      "$type": "color",
+      "brand": {
+        "primary": {
+          "$description": "Primary Identity accent",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.486, 0.227, 0.929],
+            "hex": "#7c3aed"
+          }
+        },
+        "focus": {
+          "$value": "{identity.color.brand.primary}"
+        }
+      }
+    },
+    "space": {
+      "$type": "dimension",
+      "unit": {
+        "$value": {
+          "value": 0.25,
+          "unit": "rem"
+        }
+      },
+      "medium": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      }
+    }
+  }
+}
+

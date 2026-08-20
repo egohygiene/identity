@@ -105,6 +105,9 @@ Exact fields, commands, and package formats belong to their versioned specificat
 
 ## Dependency rules
 
+The operational admission, pinning, update, security, and replacement rules are
+defined by the [dependency policy](docs/DEPENDENCY_POLICY.md).
+
 - Sibling capabilities integrate through versioned public contracts, releases, packages, immutable commits, schemas, or documented APIs.
 - Generated artifacts never become canonical source.
 - Provider and framework adapters depend on application ports; core behavior does not depend on one adapter.
@@ -129,4 +132,3 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | Public route | Deferred pending released artifacts and website work | Immutable `/identity` deployment with `/brand-kit` redirect |
 
 Implementation evidence determines availability. An accepted architecture direction is not itself an implemented runtime capability.
-
