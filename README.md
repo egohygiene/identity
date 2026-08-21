@@ -28,6 +28,37 @@ The canonical Ego Hygiene Brand Kit will be published at `https://egohygiene.io/
 
 Frameworks, renderers, and providers remain replaceable adapters around these stable layers.
 
+## CLI foundation
+
+The independently buildable Rust CLI currently preserves four local-first
+commands from the Empathy incubation:
+
+```bash
+cargo run -- init \
+  --repository-root "path/to/consumer" \
+  --project-id "consumer" \
+  --display-name "Consumer"
+
+cargo run -- validate --repository-root "path/to/consumer"
+
+cargo run -- plan \
+  --repository-root "path/to/consumer" \
+  --format "markdown"
+
+cargo run -- handoff \
+  --repository-root "path/to/consumer" \
+  --output-directory ".cache/identity/handoff"
+```
+
+`init` creates consumer-owned `.identity/` intent. `validate` checks the v0
+project and profile contracts. `plan` resolves eight profiles and 45 targets
+without generating them. `handoff` creates a deterministic, provenance-aware
+creative source-pack request whose candidates remain unapproved by default.
+
+Raster/vector rendering, asset application, packaging, and publication remain
+outside this extracted vertical slice. See the
+[Empathy extraction evidence](docs/migration/EMPATHY_EXTRACTION.md).
+
 ## State and authority
 
 | State | Owner | Meaning |
@@ -56,13 +87,16 @@ Frameworks, renderers, and providers remain replaceable adapters around these st
 
 ## Current capability state
 
-The Brand Kit product contract is accepted by this documentation. Runtime behavior remains proposed until its owning issue lands in this repository. The incubated CLI is observed in Empathy but is not yet an implemented capability of this repository.
+The Brand Kit product contract and toolchain decisions are accepted. The
+extracted CLI now provides independently tested initialization, validation,
+planning, and creative handoff behavior. Later compiler stages remain proposed
+until their owning issues land.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
 | Brand Kit product contract | Accepted | [#6](https://github.com/egohygiene/identity/issues/6) |
 | Toolchain decisions | Accepted | [#7](https://github.com/egohygiene/identity/issues/7), [evaluation](docs/evaluations/brand-kit-foundations.md), [ADRs](DECISIONS.md) |
-| Independent CLI | Proposed | [#8](https://github.com/egohygiene/identity/issues/8) |
+| Independent CLI | Implemented in this change | [#8](https://github.com/egohygiene/identity/issues/8) |
 | v1 identity schema | Proposed | [#9](https://github.com/egohygiene/identity/issues/9) |
 | Compiler and packages | Proposed | [#10](https://github.com/egohygiene/identity/issues/10), [#11](https://github.com/egohygiene/identity/issues/11) |
 | Quality and governance | Proposed | [#12](https://github.com/egohygiene/identity/issues/12), [#13](https://github.com/egohygiene/identity/issues/13) |

@@ -1,0 +1,52 @@
+{
+  "schema": "identity.profile/v0",
+  "id": "social",
+  "version": "0.1.0",
+  "verified_at": "2026-08-14",
+  "references": ["https://ogp.me/"],
+  "targets": [
+    {
+      "id": "open-graph",
+      "path": "social/open-graph.png",
+      "format": "png",
+      "source_role": "social-background",
+      "description": "General-purpose Open Graph card composed with approved identity copy.",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "id": "square-avatar",
+      "path": "social/avatar-square.png",
+      "format": "png",
+      "source_role": "mark-maskable",
+      "description": "High-resolution square profile image.",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "landscape-card",
+      "path": "social/card-landscape.png",
+      "format": "png",
+      "source_role": "social-background",
+      "description": "Reusable landscape announcement composition.",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "id": "portrait-card",
+      "path": "social/card-portrait.png",
+      "format": "png",
+      "source_role": "social-background",
+      "description": "Reusable portrait or story composition.",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "release-template",
+      "path": "social/release-template.svg",
+      "format": "svg",
+      "source_role": "social-background",
+      "description": "Editable release-announcement template with text-safe regions."
+    }
+  ]
+}

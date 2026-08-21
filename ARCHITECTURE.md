@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-20
+updated: 2026-08-21
 governed_by:
   - architecture-architecture
 depends_on:
@@ -125,7 +125,7 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | Capability | Current evidence | Target |
 | --- | --- | --- |
 | Product contract | Accepted architecture documents | Maintained v1 boundary and compatibility policy |
-| Incubated CLI | Observed in Empathy | Extracted, independently tested Identity workspace |
+| CLI foundation | Extracted workspace with `init`, `validate`, `plan`, and `handoff` parity evidence | Evolve through versioned contracts without losing the local-first authority boundary |
 | Schema and compiler | Proposed issues and prior fixtures | Versioned source contract and deterministic adapter pipeline |
 | Packages and validation | Proposed | Reproducible distributions with release-blocking evidence |
 | Renderer and studio | Proposed | Accessible framework-replaceable reference experience |

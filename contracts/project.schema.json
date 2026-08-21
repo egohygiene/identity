@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/project.schema.json",
+  "title": "identity project specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "project", "paths", "profiles", "sources"],
+  "properties": {
+    "schema": {
+      "const": "identity.project/v0"
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "display_name", "repository", "tagline"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string"
+        },
+        "tagline": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["output_root", "source_root", "brief"],
+      "properties": {
+        "output_root": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "source_root": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "brief": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled"],
+      "properties": {
+        "enabled": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "inapplicable": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approval", "required"],
+      "properties": {
+        "approval": {
+          "const": "human"
+        },
+        "required": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/sourceRequirement"
+          }
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/relativePath"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "(^/|(^|/)\\.\\.(/|$))"
+      }
+    },
+    "sourceRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "format", "description"],
+      "properties": {
+        "role": {
+          "$ref": "#/$defs/identifier"
+        },
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

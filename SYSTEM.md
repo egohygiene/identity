@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-20
+updated: 2026-08-21
 governed_by:
   - architecture-system
 depends_on:
@@ -37,13 +37,15 @@ Identity is a Brand Kit generator with three product layers: compiler and contra
 | Proposed | A roadmap issue defines the target, but its acceptance criteria are not complete |
 | Deferred | The capability is intentionally outside the current boundary or awaits explicit dependencies |
 
-The product contract is accepted. No runtime system in this repository is represented as implemented until its code and evidence are extracted or built here.
+The product contract is accepted. The extracted CLI foundation is implemented;
+all later runtime systems remain proposed until code and evidence land here.
 
 ## System inventory
 
 | System | State | Responsibility | Inputs | Outputs | Tracking |
 | --- | --- | --- | --- | --- | --- |
 | Product contract | Accepted | Defines the Brand Kit product, ownership, authority, lifecycle states, and stable interfaces | Reviewed architecture decisions | Versioned architecture documents | #6 |
+| CLI foundation | Implemented | Initializes and validates v0 consumer intent, resolves deterministic plans, and creates provenance-aware creative handoffs | Consumer repository and `.identity/` v0 source | Diagnostics, 45-target plan, candidate template, and handoff manifest | #8 |
 | Identity source contract | Proposed | Models consumer-owned intent, tokens, voice, usage, targets, approvals, inheritance, overrides, licenses, and provenance | `.identity/` source | Validated and resolved identity model | #1, #9 |
 | Compiler core | Proposed | Executes the read, validate, resolve, plan, render, verify, and manifest lifecycle without depending on a provider | Resolved identity and adapter capabilities | Diagnostics, asset plan, verified result | #2, #10 |
 | Projection adapters | Proposed | Render tokens, vector/raster assets, metadata, guidance, and archives behind replaceable ports | Asset plan and approved sources | Target-specific artifacts | #7, #11 |
@@ -58,7 +60,7 @@ The product contract is accepted. No runtime system in this repository is repres
 | Interface | Authority | Contract |
 | --- | --- | --- |
 | Source interface | Consumer | Versioned `.identity/` directory; canonical human-reviewed intent |
-| CLI interface | Identity | `init`, `validate`, `plan`, and `handoff` are observed in the incubated CLI; generation commands require accepted design in #10 |
+| CLI interface | Identity | `init`, `validate`, `plan`, and `handoff` are implemented with parity evidence; generation commands require accepted design in #10 |
 | Compiler library interface | Identity | Pure domain and application ports for validation, planning, rendering, verification, and manifests |
 | Package interface | Identity | Versioned tokens, assets, metadata, voice, manifests, checksums, and compatibility metadata |
 | Brand Kit view-model interface | Identity | Framework-neutral representation consumed by renderers and public surfaces |
@@ -110,4 +112,3 @@ Assemble immutable packages and a Brand Kit bundle, verify release gates, then h
 | Drifted | Identify differences between source, generated state, package, or published release |
 
 Destructive, publication, privacy, security, license, and approval boundaries fail closed.
-

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/candidate-manifest.schema.json",
+  "title": "identity candidate source manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "projectId",
+    "status",
+    "generator",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "const": "identity.candidate-manifest/v0"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "status": {
+      "const": "candidate"
+    },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "model", "conversation", "promptNotes"],
+      "properties": {
+        "tool": { "type": "string" },
+        "model": { "type": "string" },
+        "conversation": { "type": "string" },
+        "promptNotes": { "type": "string" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "path",
+          "format",
+          "description",
+          "sha256",
+          "authorship",
+          "license",
+          "provenance",
+          "altText"
+        ],
+        "properties": {
+          "role": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "format": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "sha256": {
+            "type": ["string", "null"],
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "authorship": { "type": "string" },
+          "license": { "type": "string" },
+          "provenance": { "type": "string" },
+          "altText": { "type": "string" }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approved", "approvedBy", "approvedAt", "notes"],
+      "properties": {
+        "approved": { "const": false },
+        "approvedBy": { "type": "string" },
+        "approvedAt": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
