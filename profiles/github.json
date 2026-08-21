@@ -1,0 +1,46 @@
+{
+  "schema": "identity.profile/v0",
+  "id": "github",
+  "version": "0.1.0",
+  "verified_at": "2026-08-14",
+  "references": [
+    "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/customizing-your-repositorys-social-media-preview"
+  ],
+  "targets": [
+    {
+      "id": "repository-social-preview",
+      "path": "github/social-preview.png",
+      "format": "png",
+      "source_role": "social-background",
+      "description": "Solid-background GitHub repository social preview composed with the primary lockup.",
+      "width": 1280,
+      "height": 640,
+      "maximum_bytes": 1000000
+    },
+    {
+      "id": "readme-header",
+      "path": "github/readme-header.png",
+      "format": "png",
+      "source_role": "social-background",
+      "description": "Wide repository README header with safe responsive composition.",
+      "width": 1600,
+      "height": 400
+    },
+    {
+      "id": "repository-avatar",
+      "path": "github/avatar.png",
+      "format": "png",
+      "source_role": "mark-maskable",
+      "description": "Square repository or organization avatar source.",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "upload-instructions",
+      "path": "github/social-preview-upload.md",
+      "format": "markdown",
+      "source_role": "project-spec",
+      "description": "Current manual GitHub settings upload instructions and validation results."
+    }
+  ]
+}

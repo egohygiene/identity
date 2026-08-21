@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-20
+updated: 2026-08-21
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -52,6 +52,9 @@ They close only when the refining issues below provide implementation and valida
 | 5 — Proof and release | Prove variation across consumers and publish v1.0.0 | #17, #18 | Empathy/OptiFlow pilots, clean-room quickstart, compatibility suite, attestations, stable release |
 
 ## Current wave
+
+Wave 0 is complete. Wave 1 begins with the independently extracted CLI in #8;
+the v1 canonical source contract and migration work remain in #9.
 
 Wave 0 establishes decisions that constrain every implementation PR:
 

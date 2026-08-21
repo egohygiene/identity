@@ -1,0 +1,69 @@
+{
+  "schema": "identity.profile/v0",
+  "id": "web",
+  "version": "0.1.0",
+  "verified_at": "2026-08-14",
+  "references": [
+    "https://developer.mozilla.org/en-US/docs/Glossary/Favicon",
+    "https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html"
+  ],
+  "targets": [
+    {
+      "id": "favicon-svg",
+      "path": "web/favicon.svg",
+      "format": "svg",
+      "source_role": "mark-monochrome",
+      "description": "Scalable browser favicon with a small-size-safe composition."
+    },
+    {
+      "id": "favicon-ico",
+      "path": "web/favicon.ico",
+      "format": "ico",
+      "source_role": "mark",
+      "description": "Compatibility favicon containing 16, 32, and 48 pixel images."
+    },
+    {
+      "id": "favicon-16",
+      "path": "web/favicon-16x16.png",
+      "format": "png",
+      "source_role": "mark",
+      "description": "Explicit 16 pixel browser icon.",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "id": "favicon-32",
+      "path": "web/favicon-32x32.png",
+      "format": "png",
+      "source_role": "mark",
+      "description": "Explicit 32 pixel browser icon.",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "id": "favicon-48",
+      "path": "web/favicon-48x48.png",
+      "format": "png",
+      "source_role": "mark",
+      "description": "Explicit 48 pixel browser icon.",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "id": "apple-touch-icon",
+      "path": "web/apple-touch-icon.png",
+      "format": "png",
+      "source_role": "mark-maskable",
+      "description": "Primary Apple Web Clip icon.",
+      "width": 180,
+      "height": 180
+    },
+    {
+      "id": "web-head-snippet",
+      "path": "web/head.html",
+      "format": "html",
+      "source_role": "project-spec",
+      "description": "Framework-neutral link and theme metadata snippet."
+    }
+  ]
+}

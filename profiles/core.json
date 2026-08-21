@@ -1,0 +1,74 @@
+{
+  "schema": "identity.profile/v0",
+  "id": "core",
+  "version": "0.1.0",
+  "verified_at": "2026-08-14",
+  "references": [],
+  "targets": [
+    {
+      "id": "mark-vector",
+      "path": "core/mark.svg",
+      "format": "svg",
+      "source_role": "mark",
+      "description": "Canonical full-color mark as sanitized vector geometry."
+    },
+    {
+      "id": "mark-dark",
+      "path": "core/mark-dark.svg",
+      "format": "svg",
+      "source_role": "mark",
+      "description": "Mark adjusted for dark backgrounds."
+    },
+    {
+      "id": "mark-light",
+      "path": "core/mark-light.svg",
+      "format": "svg",
+      "source_role": "mark",
+      "description": "Mark adjusted for light backgrounds."
+    },
+    {
+      "id": "mark-monochrome",
+      "path": "core/mark-monochrome.svg",
+      "format": "svg",
+      "source_role": "mark-monochrome",
+      "description": "Single-color mark inheriting the consumer-selected color."
+    },
+    {
+      "id": "wordmark-vector",
+      "path": "core/wordmark.svg",
+      "format": "svg",
+      "source_role": "wordmark",
+      "description": "Canonical wordmark with deterministic font treatment."
+    },
+    {
+      "id": "horizontal-lockup",
+      "path": "core/lockup-horizontal.svg",
+      "format": "svg",
+      "source_role": "lockup-horizontal",
+      "description": "Primary horizontal lockup."
+    },
+    {
+      "id": "stacked-lockup",
+      "path": "core/lockup-stacked.svg",
+      "format": "svg",
+      "source_role": "lockup-stacked",
+      "description": "Primary stacked lockup."
+    },
+    {
+      "id": "mark-raster",
+      "path": "core/mark-1024.png",
+      "format": "png",
+      "source_role": "mark",
+      "description": "High-resolution transparent raster mark.",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "brand-guide",
+      "path": "brand-guide.md",
+      "format": "markdown",
+      "source_role": "identity-brief",
+      "description": "Generated usage, clear-space, minimum-size, accessibility, and misuse guidance."
+    }
+  ]
+}

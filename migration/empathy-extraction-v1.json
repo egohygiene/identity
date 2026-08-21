@@ -1,0 +1,221 @@
+{
+  "schema": "identity.extraction-manifest/v1",
+  "source": {
+    "repository": "egohygiene/empathy",
+    "revision": "cbd6e0dfb08befa1d8bf795f5328bac9fddb27fc",
+    "implementation_root": "identity"
+  },
+  "profile_inventory": {
+    "ids": [
+      "core",
+      "docs",
+      "github",
+      "metadata",
+      "pwa",
+      "social",
+      "tokens",
+      "web"
+    ],
+    "target_count": 45
+  },
+  "entries": [
+    {
+      "source": "identity/Cargo.toml",
+      "destination": "Cargo.toml",
+      "disposition": "adapted-repository-metadata",
+      "sha256": "05d220810113839d34680a5a2ed659400d73eeaeed27a935236dc7eac2a76cda"
+    },
+    {
+      "source": "identity/LICENSE",
+      "destination": "LICENSE",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "1deb55b00af813e1c8f086e851d0e1ed2084ea942a54996f069df05cd0561372"
+    },
+    {
+      "source": "identity/rust-toolchain.toml",
+      "destination": "rust-toolchain.toml",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc"
+    },
+    {
+      "source": "identity/src/cli.rs",
+      "destination": "src/cli.rs",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "af7594d834fae7c9f618bff2b06c08744ae12f598cade665e716b3c5191dd8dd"
+    },
+    {
+      "source": "identity/src/commands.rs",
+      "destination": "src/commands.rs",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "01f0fe85a4fa1fa3c09db4db237b087912f8e73fe4d536cc24a87a56dbb87c32"
+    },
+    {
+      "source": "identity/src/contract.rs",
+      "destination": "src/contract.rs",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "7e18331543b0a8d2820ebb0889f50d566840880ea37dc8bbb03b69c1b2882a96"
+    },
+    {
+      "source": "identity/src/lib.rs",
+      "destination": "src/lib.rs",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "696dfac6faa771c3068c38d45893f19b0ea6e6f9301be0e627a1aff4c9f3eb11"
+    },
+    {
+      "source": "identity/src/main.rs",
+      "destination": "src/main.rs",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "a665a03eacf10e0a6cd9fb31c1bd6c72058798ef5bfe8e1b8d909691380efc28"
+    },
+    {
+      "source": "identity/src/output.rs",
+      "destination": "src/output.rs",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "ac274a7fc099e1fef177cea505c2c872365315bfa9becfd001e7a326a5020d12"
+    },
+    {
+      "source": "identity/contracts/candidate-manifest.schema.json",
+      "destination": "contracts/candidate-manifest.schema.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "1f98f393940344b6a2a13b62a58eebb720ef8223a02c30dbda43998a29185338"
+    },
+    {
+      "source": "identity/contracts/handoff-manifest.schema.json",
+      "destination": "contracts/handoff-manifest.schema.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "908a7441acd59acea8fb5641f9e37a153e937d0a798b3ce208b4bcddb71725e4"
+    },
+    {
+      "source": "identity/contracts/profile.schema.json",
+      "destination": "contracts/profile.schema.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "e1067e03fb2d6d933e23d9c75665c9d0b2a2396e236e842ef1cef917413dc49e"
+    },
+    {
+      "source": "identity/contracts/project.schema.json",
+      "destination": "contracts/project.schema.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "2f30f5d88e436718e11223be24460588ba0a9d894dc721d47150d719902ceef4"
+    },
+    {
+      "source": "identity/profiles/core.json",
+      "destination": "profiles/core.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "8b534733fa500f1a02e86ac4f1825cd9d4e6b8c5c74a1d6b15c064655fc6ebf1"
+    },
+    {
+      "source": "identity/profiles/docs.json",
+      "destination": "profiles/docs.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "11bfcc0ab5bfc5349f9a24122f9b104414d3e1a46c2193f5a98a6cf7cc78d159"
+    },
+    {
+      "source": "identity/profiles/github.json",
+      "destination": "profiles/github.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "fd9eb0086a982ce23b4f4905fa989f9860bd62be791cfd6e059fbbf4c1ecb88f"
+    },
+    {
+      "source": "identity/profiles/metadata.json",
+      "destination": "profiles/metadata.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "cf81bc3a41c011ac42b8c5ea551d6ec69933f809f0dcfa69273a5865af369d1e"
+    },
+    {
+      "source": "identity/profiles/pwa.json",
+      "destination": "profiles/pwa.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "e4480861fe0c128dbf2010e9423030d7f656fa16fb7594c193dfe7ef00fe8c1e"
+    },
+    {
+      "source": "identity/profiles/social.json",
+      "destination": "profiles/social.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "bf89db91253c0c2dd0a8b696684d14515434d0fdea284a08e9bec6fc26106e0a"
+    },
+    {
+      "source": "identity/profiles/tokens.json",
+      "destination": "profiles/tokens.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "842b5852cfc0b44bbfe3dab23fe39827c11169a803d8a5859ec5ef76391ccfd0"
+    },
+    {
+      "source": "identity/profiles/web.json",
+      "destination": "profiles/web.json",
+      "disposition": "copied-byte-for-byte",
+      "sha256": "f9819168c3876f35545d817f01466161826dedb81c138581e36e01dcf5665b8b"
+    },
+    {
+      "source": "identity/ARCHITECTURE.md",
+      "destination": "ARCHITECTURE.md",
+      "disposition": "superseded-by-accepted-product-architecture",
+      "sha256": "482347391ad3274bbca36635297983822eca52b866a1ea7dd751cc70e55a207e"
+    },
+    {
+      "source": "identity/EXTRACTION.md",
+      "destination": "docs/migration/EMPATHY_EXTRACTION.md",
+      "disposition": "adapted-with-extraction-evidence",
+      "sha256": "df26e88dabae039a02036cf8a301d25cbc698536fb3f053b55121232759cb54e"
+    },
+    {
+      "source": "identity/PROVENANCE.md",
+      "destination": "docs/migration/EMPATHY_EXTRACTION.md",
+      "disposition": "consolidated-with-extraction-evidence",
+      "sha256": "c7599648dd7262f2c25754ae407af4716e7d51cfc3f778d3bb1d33126e016bb8"
+    },
+    {
+      "source": "identity/README.md",
+      "destination": "README.md",
+      "disposition": "superseded-by-accepted-product-contract",
+      "sha256": "14d7bcda64f0eb510d0617c539693ccea3666bd0260179fbab9f8d57d0f759b8"
+    },
+    {
+      "source": "tests/test_identity_integration.py",
+      "destination": "tests/cli_parity.rs",
+      "disposition": "rewritten-as-independent-command-parity-tests",
+      "sha256": "bb5b3cf115ab2601914b43aa17545e8cd746f36382fdcef5ca21f7abae069351"
+    },
+    {
+      "source": ".github/workflows/identity.yml",
+      "destination": ".github/workflows/validate.yml",
+      "disposition": "adapted-to-canonical-repository",
+      "sha256": "88ebc7feef18a104837c7272cb3ac5e817ee259fc5bba7cf2ba3c56ed78b3e8b"
+    },
+    {
+      "source": ".tasks/identity.yml",
+      "destination": null,
+      "disposition": "consumer-adapter-remains-empathy-owned",
+      "sha256": "e653290caab49ad6bbf41369cccf3f051605028342a9b78fa150831d1b4d86c9"
+    },
+    {
+      "source": ".identity/identity.toml",
+      "destination": null,
+      "disposition": "consumer-intent-remains-empathy-owned",
+      "sha256": "f1d196f1494c73a20b9dd2f36ea58939141e28167c027cda21cf31ee48812af1"
+    },
+    {
+      "source": ".identity/brief.md",
+      "destination": null,
+      "disposition": "consumer-intent-remains-empathy-owned",
+      "sha256": "bb6fd3bf035bc351e12ca074992bc815bd3c4519a0096393762d3bf77bb345d2"
+    },
+    {
+      "source": ".identity/candidates/README.md",
+      "destination": null,
+      "disposition": "consumer-state-remains-empathy-owned",
+      "sha256": "d510d701d049f9b242b927c454fd95d8c3af50bb1d357744db138391d3f044e6"
+    },
+    {
+      "source": ".identity/references/README.md",
+      "destination": null,
+      "disposition": "consumer-state-remains-empathy-owned",
+      "sha256": "acf5efc00fb14ed383973cfd66a1ee179c3367c89b3a4ae5b9c705e6bc62bd77"
+    },
+    {
+      "source": ".identity/sources/README.md",
+      "destination": null,
+      "disposition": "consumer-state-remains-empathy-owned",
+      "sha256": "44ab04d56f7ad243dadeb050431fd459532dbcf437defe401a6519927fdbc823"
+    }
+  ]
+}

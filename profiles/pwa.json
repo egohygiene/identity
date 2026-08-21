@@ -1,0 +1,75 @@
+{
+  "schema": "identity.profile/v0",
+  "id": "pwa",
+  "version": "0.1.0",
+  "verified_at": "2026-08-14",
+  "references": [
+    "https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/icons",
+    "https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable",
+    "https://web.dev/articles/maskable-icon"
+  ],
+  "targets": [
+    {
+      "id": "icon-192",
+      "path": "pwa/icon-192x192.png",
+      "format": "png",
+      "source_role": "mark",
+      "description": "Install icon with manifest purpose any.",
+      "width": 192,
+      "height": 192,
+      "purpose": "any"
+    },
+    {
+      "id": "icon-512",
+      "path": "pwa/icon-512x512.png",
+      "format": "png",
+      "source_role": "mark",
+      "description": "Large install icon with manifest purpose any.",
+      "width": 512,
+      "height": 512,
+      "purpose": "any"
+    },
+    {
+      "id": "maskable-192",
+      "path": "pwa/maskable-192x192.png",
+      "format": "png",
+      "source_role": "mark-maskable",
+      "description": "Full-bleed icon whose essential content remains inside the maskable safe zone.",
+      "width": 192,
+      "height": 192,
+      "purpose": "maskable"
+    },
+    {
+      "id": "maskable-512",
+      "path": "pwa/maskable-512x512.png",
+      "format": "png",
+      "source_role": "mark-maskable",
+      "description": "Large maskable install icon.",
+      "width": 512,
+      "height": 512,
+      "purpose": "maskable"
+    },
+    {
+      "id": "monochrome",
+      "path": "pwa/monochrome.svg",
+      "format": "svg",
+      "source_role": "mark-monochrome",
+      "description": "Single-color manifest icon.",
+      "purpose": "monochrome"
+    },
+    {
+      "id": "manifest-fragment",
+      "path": "pwa/manifest.identity.json",
+      "format": "json",
+      "source_role": "project-spec",
+      "description": "Identity-owned icon, name, and color fragment that does not overwrite application navigation behavior."
+    },
+    {
+      "id": "maskable-safe-zone-preview",
+      "path": "previews/pwa-maskable-safe-zone.svg",
+      "format": "svg",
+      "source_role": "mark-maskable",
+      "description": "Review overlay showing the maskable icon safe region."
+    }
+  ]
+}

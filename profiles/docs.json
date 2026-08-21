@@ -1,0 +1,48 @@
+{
+  "schema": "identity.profile/v0",
+  "id": "docs",
+  "version": "0.1.0",
+  "verified_at": "2026-08-14",
+  "references": ["https://quartz.jzhao.xyz/configuration"],
+  "targets": [
+    {
+      "id": "docs-icon",
+      "path": "docs/icon.png",
+      "format": "png",
+      "source_role": "mark-maskable",
+      "description": "Documentation-site icon suitable for Quartz static assets.",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "docs-open-graph",
+      "path": "docs/og-image.png",
+      "format": "png",
+      "source_role": "social-background",
+      "description": "Default documentation Open Graph image.",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "id": "navigation-lockup-light",
+      "path": "docs/navigation-light.svg",
+      "format": "svg",
+      "source_role": "lockup-horizontal",
+      "description": "Compact navigation lockup for light surfaces."
+    },
+    {
+      "id": "navigation-lockup-dark",
+      "path": "docs/navigation-dark.svg",
+      "format": "svg",
+      "source_role": "lockup-horizontal",
+      "description": "Compact navigation lockup for dark surfaces."
+    },
+    {
+      "id": "footer-mark",
+      "path": "docs/footer-mark.svg",
+      "format": "svg",
+      "source_role": "mark-monochrome",
+      "description": "Monochrome documentation footer mark."
+    }
+  ]
+}

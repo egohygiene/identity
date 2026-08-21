@@ -1,0 +1,85 @@
+---
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Validate Identity CLI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "identity-validation-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate extraction, formatting, lint, and behavior
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+
+      - name: Checkout Identity
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Install pinned Rust toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install "1.97.1" \
+            --profile "minimal" \
+            --component "clippy,rustfmt"
+
+      # This temporary evidence step bootstraps the first canonical Cargo.lock.
+      # It is removed once the generated lock is committed in this pull request.
+      - name: Bootstrap dependency lock evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo generate-lockfile
+          printf '%s\n' "CARGO_LOCK_BASE64_BEGIN"
+          base64 --wrap=0 "Cargo.lock"
+          printf '\n%s\n' "CARGO_LOCK_BASE64_END"
+
+      - name: Verify Rust formatting
+        run: cargo fmt --all --check
+
+      - name: Run Clippy
+        run: >-
+          cargo clippy
+          --locked
+          --all-targets
+          --all-features
+          --
+          -D warnings
+
+      - name: Run command parity and unit tests
+        run: cargo test --locked --all-features
+
+      - name: Verify extraction provenance and profile inventory
+        run: python3 scripts/verify_extraction.py
+
+      - name: Parse machine-readable contracts and profiles
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r document; do
+            python3 -m json.tool "${document}" >/dev/null
+          done < <(find contracts migration profiles -type f -name "*.json" -print | sort)
+
+      - name: Compile Python verification tools
+        run: python3 -m compileall -q scripts

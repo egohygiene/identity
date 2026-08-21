@@ -1,0 +1,44 @@
+{
+  "schema": "identity.profile/v0",
+  "id": "metadata",
+  "version": "0.1.0",
+  "verified_at": "2026-08-14",
+  "references": ["https://ogp.me/"],
+  "targets": [
+    {
+      "id": "canonical-metadata",
+      "path": "metadata/identity.json",
+      "format": "json",
+      "source_role": "project-spec",
+      "description": "Canonical names, descriptions, URLs, keywords, and approved copy."
+    },
+    {
+      "id": "open-graph-snippet",
+      "path": "metadata/open-graph.html",
+      "format": "html",
+      "source_role": "project-spec",
+      "description": "Open Graph and social-card metadata snippet."
+    },
+    {
+      "id": "structured-data",
+      "path": "metadata/structured-data.json",
+      "format": "json",
+      "source_role": "project-spec",
+      "description": "Schema.org-compatible project identity fragment."
+    },
+    {
+      "id": "copy-sheet",
+      "path": "metadata/copy.md",
+      "format": "markdown",
+      "source_role": "identity-brief",
+      "description": "Approved tagline, repository description, elevator pitch, and short/medium/long descriptions."
+    },
+    {
+      "id": "alt-text-registry",
+      "path": "metadata/alt-text.json",
+      "format": "json",
+      "source_role": "identity-brief",
+      "description": "Canonical accessible descriptions for generated visual assets."
+    }
+  ]
+}
