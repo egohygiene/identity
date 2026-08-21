@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/usage.schema.json",
+  "title": "Identity v1 brand usage guidance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "sections", "assets", "accessibility", "legal"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)usage.schema.json$" },
+    "schema": { "const": "identity.usage/v1" },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/section" }
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "accessibility": { "$ref": "#/$defs/accessibility" },
+    "legal": { "$ref": "#/$defs/legal" }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "source", "capturedAt"],
+      "properties": {
+        "method": {
+          "enum": ["human-authored", "handoff-candidate", "imported"]
+        },
+        "source": { "type": "string", "minLength": 1 },
+        "capturedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "state", "visibility", "provenance", "approval"],
+      "properties": {
+        "subject": { "type": "string", "minLength": 1 },
+        "state": {
+          "enum": ["candidate", "approved", "rejected", "superseded"]
+        },
+        "visibility": { "enum": ["public", "internal"] },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "approval": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/identifier" }
+          ]
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "category",
+        "instruction",
+        "rationale",
+        "details",
+        "contexts",
+        "governance"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "kind": { "enum": ["do", "dont"] },
+        "category": {
+          "enum": [
+            "mark",
+            "color",
+            "typography",
+            "imagery",
+            "illustration",
+            "mascot",
+            "motion",
+            "accessibility",
+            "legal",
+            "localization"
+          ]
+        },
+        "instruction": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "details": { "$ref": "#/$defs/nonEmptyStrings" },
+        "contexts": { "$ref": "#/$defs/nonEmptyStrings" },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "description", "rules"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/rule" }
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "kind",
+        "path",
+        "status",
+        "availability",
+        "replacement",
+        "downloadName",
+        "notes",
+        "governance"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["mark", "wordmark", "imagery", "illustration", "mascot"] },
+        "path": { "$ref": "#/$defs/relativePath" },
+        "status": { "enum": ["active", "legacy"] },
+        "availability": { "enum": ["public", "internal", "blocked"] },
+        "replacement": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/identifier" }
+          ]
+        },
+        "downloadName": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "notes": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "rules", "governance"],
+      "properties": {
+        "summary": { "type": "string", "minLength": 1 },
+        "rules": { "$ref": "#/$defs/nonEmptyStrings" },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "thirdPartyLicense": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "spdx", "attribution"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "spdx": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string", "minLength": 1 }
+      }
+    },
+    "legal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trademark",
+        "copyright",
+        "attribution",
+        "thirdPartyLicenses",
+        "governance"
+      ],
+      "properties": {
+        "trademark": { "type": "string", "minLength": 1 },
+        "copyright": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string", "minLength": 1 },
+        "thirdPartyLicenses": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/thirdPartyLicense" }
+        },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    }
+  }
+}

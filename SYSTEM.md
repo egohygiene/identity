@@ -37,8 +37,9 @@ Identity is a Brand Kit generator with three product layers: compiler and contra
 | Proposed | A roadmap issue defines the target, but its acceptance criteria are not complete |
 | Deferred | The capability is intentionally outside the current boundary or awaits explicit dependencies |
 
-The product contract is accepted. The extracted CLI foundation is implemented;
-all later runtime systems remain proposed until code and evidence land here.
+The product contract is accepted. The extracted CLI, v1 source, and brand
+guidance projection are implemented; remaining compiler, package, quality,
+public renderer, studio, and release systems stay proposed or deferred.
 
 ## System inventory
 
@@ -46,12 +47,13 @@ all later runtime systems remain proposed until code and evidence land here.
 | --- | --- | --- | --- | --- | --- |
 | Product contract | Accepted | Defines the Brand Kit product, ownership, authority, lifecycle states, and stable interfaces | Reviewed architecture decisions | Versioned architecture documents | #6 |
 | CLI foundation | Implemented | Initializes and validates v0 consumer intent, resolves deterministic plans, and creates provenance-aware creative handoffs | Consumer repository and `.identity/` v0 source | Diagnostics, 45-target plan, candidate template, and handoff manifest | #8 |
-| Identity source contract | Implemented | Models content-addressed organization defaults, intentional product overrides, DTCG semantic tokens, target profiles, approvals, licenses, provenance, and reserved voice/usage paths | `.identity/identity.json` and declared local documents | Stable diagnostics and validated resolved-token evidence | #1, #9 |
+| Identity source contract | Implemented | Models content-addressed organization defaults, intentional product overrides, DTCG semantic tokens, target profiles, approvals, licenses, provenance, voice, and usage | `.identity/identity.json` and declared local documents | Stable diagnostics and validated resolved-token evidence | #1, #9 |
+| Brand guidance projection | Implemented | Preserves contextual voice, do/don't rules, accessibility/legal notes, lifecycle state, legacy policy, and human decisions without generating prose | Validated `identity.voice/v1` and `identity.usage/v1` source | Context-selectable `identity.brand-guidance/v1`, Markdown, and static HTML | #13 |
 | Compiler core | Proposed | Executes the read, validate, resolve, plan, render, verify, and manifest lifecycle without depending on a provider | Resolved identity and adapter capabilities | Diagnostics, asset plan, verified result | #2, #10 |
 | Projection adapters | Proposed | Render tokens, vector/raster assets, metadata, guidance, and archives behind replaceable ports | Asset plan and approved sources | Target-specific artifacts | #7, #11 |
 | Validation and evidence | Proposed | Test accessibility, dimensions, visual integrity, licensing, provenance, compatibility, and reproducibility | Source, outputs, manifest, fixtures | Machine report and human recovery guidance | #3, #12 |
 | Package distribution | Proposed | Assemble versioned token, metadata, voice, asset, manifest, and download packages | Verified artifacts | Immutable consumer packages and checksums | #11, #18 |
-| Brand Kit renderer | Proposed | Present the generated view model as an accessible, framework-replaceable public reference experience | Versioned Brand Kit view model | Static/reference Brand Kit and downloads | #14 |
+| Public Brand Kit renderer | Proposed | Present the implemented guidance model plus later generated assets as an accessible, framework-replaceable public experience | Versioned Brand Kit view model | Public Brand Kit and downloads | #14 |
 | Asset studio | Proposed | Preview intent and candidates, compare results, and apply approved changes without making preview state canonical | Source, candidates, presets, view model | Preview, plan, approval record, handoff | #15 |
 | Publication handoff | Deferred | Deliver an immutable approved artifact to a consumer-owned deployment boundary | Released Brand Kit bundle | Versioned integration and rollback metadata | #16 |
 
@@ -63,7 +65,7 @@ all later runtime systems remain proposed until code and evidence land here.
 | CLI interface | Identity | `init`, `validate`, `plan`, and `handoff` are implemented with parity evidence; generation commands require accepted design in #10 |
 | Compiler library interface | Identity | Pure domain and application ports for validation, planning, rendering, verification, and manifests |
 | Package interface | Identity | Versioned tokens, assets, metadata, voice, manifests, checksums, and compatibility metadata |
-| Brand Kit view-model interface | Identity | Framework-neutral representation consumed by renderers and public surfaces |
+| Brand Kit view-model interface | Identity | Implemented `identity.brand-guidance/v1` representation consumed by renderers and public surfaces |
 | Renderer interface | Identity | Reference static/public experience over an immutable view model |
 | Consumer interface | Consumer repository | Pinned package or release integration; no access to Identity internals |
 | Publication interface | Owning website or product | Explicit promotion of a verified immutable release with rollback data |

@@ -55,7 +55,10 @@ They close only when the refining issues below provide implementation and valida
 
 Wave 0 is complete. Wave 1 now has an independently extracted CLI from #8 and
 the implemented v1 source/schema/validation boundary from #9. Empathy's pinned
-consumer transition remains the final extraction gate.
+consumer transition remains the final extraction gate. #13's independently
+testable voice/usage contract and guidance projections are also implemented;
+the deterministic compiler and packages in Wave 2 remain the next production
+path before the broader Wave 3 quality gates.
 
 Wave 0 establishes decisions that constrain every implementation PR:
 

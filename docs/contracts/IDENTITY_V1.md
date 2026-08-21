@@ -23,17 +23,17 @@ The v1 topology is:
 │   ├── provenance.json              # license, lineage, accessibility, usage
 │   └── approvals.json               # human decisions and evidence
 ├── guidance/
-│   ├── voice.json                   # optional until IDN-11 lands
-│   └── usage.json                   # optional until IDN-11 lands
+│   ├── voice.json                   # contextual voice and messaging evidence
+│   └── usage.json                   # do/don't, downloads, legacy, legal policy
 ├── sources/                         # approved canonical source assets
 ├── candidates/                      # unapproved work state
 └── references/                      # reviewed inspiration, never implicit license
 ```
 
 The manifest may choose different normalized repository-relative paths, but it
-must name every boundary above. Voice and usage paths are nullable in the first
-v1 slice so #13 can stabilize their contents without pretending that v0 prose
-was already structured. Directories are never optional.
+must name every boundary above. Voice and usage are required versioned source;
+v0 migrations mark their human restructuring as an explicit review action
+rather than inventing guidance. Directories are never optional.
 
 ## Layer and merge model
 
@@ -101,6 +101,21 @@ status must be `approved`, its provenance must be complete, and its approval
 must resolve to an approved human decision for the same subject. Candidates
 and references remain distinct trust zones.
 
+## Voice, usage, and approval state
+
+Voice and usage validate against separate v1 schemas and project into a shared
+`identity.brand-guidance/v1` renderer model. Purpose, positioning, contextual
+tone, vocabulary, message examples, do/don't rules, accessibility, legal
+notes, downloads, and legacy records remain structured instead of requiring a
+consumer to parse presentation prose.
+
+Each consequential record exposes subject, lifecycle state, visibility,
+provenance, and a human decision reference. Candidates stay internal with a
+null approval. Approved, rejected, and superseded records must resolve to a
+decision for the same subject and state. See the
+[guidance contract](GUIDANCE_V1.md) for the complete projection and retrieval
+rules.
+
 ## Diagnostics
 
 Validation emits `identity.diagnostics/v1`. Diagnostics are sorted by JSON
@@ -115,6 +130,7 @@ message, and a concrete recovery action. The initial code families are:
 | `IDN1300`–`IDN1399` | layers, overrides, aliases, and conflicts |
 | `IDN1400`–`IDN1499` | license, provenance, source bytes, and approvals |
 | `IDN1500`–`IDN1599` | target profiles and compatibility |
+| `IDN1600`–`IDN1699` | voice, usage, lifecycle, context, and legacy policy |
 
 JSON output is the automation contract. Human output renders the same records;
 it does not invent a second validation result.
@@ -148,7 +164,14 @@ python3 scripts/validate_identity.py \
 python3 scripts/validate_identity.py \
   --repository-root "path/to/consumer" \
   --format "json"
+
+python3 scripts/render_guidance.py \
+  --repository-root "path/to/consumer" \
+  --format "html" \
+  --output "assets/identity/brand-guidance.html"
 ```
 
 The validator uses only the Python standard library, reads local files, makes
-no network calls, and never mutates canonical or generated state.
+no network calls, and never mutates canonical or generated state. The renderer
+uses the same validated source, copies reviewed prose exactly, and refuses to
+write beneath `.identity/`.

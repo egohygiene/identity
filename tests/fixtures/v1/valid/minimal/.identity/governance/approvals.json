@@ -5,20 +5,112 @@
     {
       "id": "approve-primary-mark",
       "subject": "primary-mark",
+      "candidate": ".identity/sources/mark.svg",
       "status": "approved",
       "reviewedBy": "example-maintainer",
       "reviewedAt": "2026-08-21T12:00:00Z",
       "evidence": "https://example.invalid/reviews/primary-mark",
+      "supersedes": null,
       "notes": "Approved as the canonical minimal fixture mark."
     },
     {
       "id": "approve-product-primary",
       "subject": "token:color.brand.primary",
+      "candidate": "token:color.brand.primary@product-override",
       "status": "approved",
       "reviewedBy": "example-maintainer",
       "reviewedAt": "2026-08-21T12:05:00Z",
       "evidence": "https://example.invalid/reviews/product-primary",
+      "supersedes": null,
       "notes": "Approved product distinction."
+    },
+    {
+      "id": "approve-legacy-wordmark-source",
+      "subject": "legacy-wordmark",
+      "candidate": ".identity/sources/legacy-wordmark.svg",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2025-02-01T10:00:00Z",
+      "evidence": "https://example.invalid/reviews/legacy-wordmark-source",
+      "supersedes": null,
+      "notes": "The source remains governed for migration and internal historical use."
+    },
+    {
+      "id": "approve-voice-core",
+      "subject": "voice:core-guidance",
+      "candidate": "guidance:voice-core/v1",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-21T12:10:00Z",
+      "evidence": "https://example.invalid/reviews/voice-core",
+      "supersedes": null,
+      "notes": "Approved foundation, mechanics, contexts, and public examples."
+    },
+    {
+      "id": "approve-usage-core",
+      "subject": "usage:core-guidance",
+      "candidate": "guidance:usage-core/v1",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-21T12:15:00Z",
+      "evidence": "https://example.invalid/reviews/usage-core",
+      "supersedes": null,
+      "notes": "Approved usage, accessibility, and legal guidance."
+    },
+    {
+      "id": "reject-hype-claim",
+      "subject": "voice-example:hype-claim",
+      "candidate": "handoff:voice-hype-claim/v1",
+      "status": "rejected",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-21T12:20:00Z",
+      "evidence": "https://example.invalid/reviews/hype-claim",
+      "supersedes": null,
+      "notes": "Rejected because the unprovable superlative conflicts with the honest voice."
+    },
+    {
+      "id": "approve-old-tagline",
+      "subject": "voice-example:old-tagline",
+      "candidate": "guidance:old-tagline/v0",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2025-02-01T10:00:00Z",
+      "evidence": "https://example.invalid/reviews/old-tagline-v0",
+      "supersedes": null,
+      "notes": "Historical approval retained to explain the later replacement."
+    },
+    {
+      "id": "supersede-old-tagline",
+      "subject": "voice-example:old-tagline",
+      "candidate": "guidance:old-tagline/v0",
+      "status": "superseded",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-21T12:25:00Z",
+      "evidence": "https://example.invalid/reviews/old-tagline",
+      "supersedes": "approve-old-tagline",
+      "notes": "Retained internally as migration history, not current copy."
+    },
+    {
+      "id": "approve-legacy-wordmark-usage",
+      "subject": "usage-asset:legacy-wordmark",
+      "candidate": "asset:legacy-wordmark/v0",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2025-02-01T10:05:00Z",
+      "evidence": "https://example.invalid/reviews/legacy-wordmark-v0",
+      "supersedes": null,
+      "notes": "Historical use approval retained for the deprecation ledger."
+    },
+    {
+      "id": "supersede-legacy-wordmark",
+      "subject": "usage-asset:legacy-wordmark",
+      "candidate": "asset:legacy-wordmark/v0",
+      "status": "superseded",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-21T12:30:00Z",
+      "evidence": "https://example.invalid/reviews/legacy-wordmark",
+      "supersedes": "approve-legacy-wordmark-usage",
+      "notes": "Internal migration access only; use the primary mark for new work."
     }
   ]
 }

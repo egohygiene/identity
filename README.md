@@ -79,6 +79,34 @@ Both tools are standard-library-only, offline, and non-mutating. The complete
 [v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
 aliases, compatibility, diagnostics, migration, and rollback.
 
+## Brand guidance outputs
+
+Versioned voice and usage source now renders deterministically from one
+approval-aware model:
+
+```bash
+python3 scripts/render_guidance.py \
+  --repository-root "tests/fixtures/v1/valid/minimal" \
+  --audience "review" \
+  --format "markdown"
+
+python3 scripts/render_guidance.py \
+  --repository-root "tests/fixtures/v1/valid/minimal" \
+  --context "repository-readme" \
+  --format "json"
+
+python3 scripts/render_guidance.py \
+  --repository-root "tests/fixtures/v1/valid/minimal" \
+  --format "html" \
+  --output "assets/identity/brand-guidance.html"
+```
+
+The review views preserve exact prose, provenance, and
+candidate/approved/rejected/superseded state. The CLI defaults to a public
+projection that excludes every internal or unapproved record. Public active
+downloads and labeled legacy records remain separate. See the
+[guidance contract](docs/contracts/GUIDANCE_V1.md).
+
 ## State and authority
 
 | State | Owner | Meaning |
@@ -109,8 +137,9 @@ aliases, compatibility, diagnostics, migration, and rollback.
 
 The Brand Kit product contract and toolchain decisions are accepted. The
 extracted CLI now provides independently tested initialization, validation,
-planning, and creative handoff behavior. Later compiler stages remain proposed
-until their owning issues land.
+planning, and creative handoff behavior. The v1 source and guidance renderer
+are also implemented; later compiler/package stages remain proposed until
+their owning issues land.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
@@ -119,7 +148,8 @@ until their owning issues land.
 | Independent CLI | Implemented in this change | [#8](https://github.com/egohygiene/identity/issues/8) |
 | v1 identity schema | Implemented in this change | [#9](https://github.com/egohygiene/identity/issues/9), [contract](docs/contracts/IDENTITY_V1.md) |
 | Compiler and packages | Proposed | [#10](https://github.com/egohygiene/identity/issues/10), [#11](https://github.com/egohygiene/identity/issues/11) |
-| Quality and governance | Proposed | [#12](https://github.com/egohygiene/identity/issues/12), [#13](https://github.com/egohygiene/identity/issues/13) |
+| Accessibility and visual gates | Proposed | [#12](https://github.com/egohygiene/identity/issues/12) |
+| Voice, usage, and approval outputs | Implemented in this change | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |
 | Renderer and asset studio | Proposed | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public `/identity` route | Deferred until its dependencies land | [#16](https://github.com/egohygiene/identity/issues/16) |
 | Stable v1.0.0 release | Deferred until all v1 gates pass | [#18](https://github.com/egohygiene/identity/issues/18) |

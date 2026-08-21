@@ -53,8 +53,8 @@
           "additionalProperties": false,
           "required": ["voice", "usage"],
           "properties": {
-            "voice": { "$ref": "#/$defs/optionalRelativePath" },
-            "usage": { "$ref": "#/$defs/optionalRelativePath" }
+            "voice": { "$ref": "#/$defs/relativePath" },
+            "usage": { "$ref": "#/$defs/relativePath" }
           }
         }
       }
@@ -92,12 +92,6 @@
       "type": "string",
       "minLength": 1,
       "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
-    },
-    "optionalRelativePath": {
-      "oneOf": [
-        { "type": "null" },
-        { "$ref": "#/$defs/relativePath" }
-      ]
     },
     "sha256": {
       "type": "string",

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/brand-guidance.schema.json",
+  "title": "Identity v1 renderer-ready brand guidance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "audience",
+    "project",
+    "selectedContext",
+    "foundation",
+    "characteristics",
+    "contexts",
+    "localization",
+    "sections",
+    "doDont",
+    "downloads",
+    "legacyAssets",
+    "accessibility",
+    "legal",
+    "decisions"
+  ],
+  "properties": {
+    "schema": { "const": "identity.brand-guidance/v1" },
+    "audience": { "enum": ["public", "review"] },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "tagline", "repository"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "tagline": { "type": "string", "minLength": 1 },
+        "repository": { "type": "string", "minLength": 1 }
+      }
+    },
+    "selectedContext": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "foundation": { "$ref": "voice.schema.json#/$defs/foundation" },
+    "characteristics": {
+      "type": "array",
+      "items": { "$ref": "voice.schema.json#/$defs/characteristic" }
+    },
+    "contexts": {
+      "type": "array",
+      "items": { "$ref": "voice.schema.json#/$defs/context" }
+    },
+    "localization": { "$ref": "voice.schema.json#/$defs/localization" },
+    "sections": {
+      "type": "array",
+      "items": { "$ref": "usage.schema.json#/$defs/section" }
+    },
+    "doDont": {
+      "type": "array",
+      "items": { "$ref": "usage.schema.json#/$defs/rule" }
+    },
+    "downloads": {
+      "type": "array",
+      "items": { "$ref": "usage.schema.json#/$defs/asset" }
+    },
+    "legacyAssets": {
+      "type": "array",
+      "items": { "$ref": "usage.schema.json#/$defs/asset" }
+    },
+    "accessibility": { "$ref": "usage.schema.json#/$defs/accessibility" },
+    "legal": { "$ref": "usage.schema.json#/$defs/legal" },
+    "decisions": {
+      "type": "array",
+      "items": { "$ref": "approvals.schema.json#/$defs/decision" }
+    }
+  }
+}
