@@ -28,7 +28,10 @@ fn initialized_project() -> TempDir {
     run(identity_command().args([
         "init",
         "--repository-root",
-        repository.path().to_str().expect("temporary path must be UTF-8"),
+        repository
+            .path()
+            .to_str()
+            .expect("temporary path must be UTF-8"),
         "--project-id",
         "example-project",
         "--display-name",
@@ -62,7 +65,10 @@ fn validate_preserves_eight_profiles_and_forty_five_targets() {
     let output = run(identity_command().args([
         "validate",
         "--repository-root",
-        repository.path().to_str().expect("temporary path must be UTF-8"),
+        repository
+            .path()
+            .to_str()
+            .expect("temporary path must be UTF-8"),
     ]));
     let stdout = String::from_utf8(output.stdout).expect("stdout must be UTF-8");
 
@@ -76,12 +82,17 @@ fn plan_is_machine_readable_complete_and_deterministically_ordered() {
     let output = run(identity_command().args([
         "plan",
         "--repository-root",
-        repository.path().to_str().expect("temporary path must be UTF-8"),
+        repository
+            .path()
+            .to_str()
+            .expect("temporary path must be UTF-8"),
         "--format",
         "json",
     ]));
     let plan: Value = serde_json::from_slice(&output.stdout).expect("plan must be valid JSON");
-    let targets = plan["targets"].as_array().expect("plan targets must be an array");
+    let targets = plan["targets"]
+        .as_array()
+        .expect("plan targets must be an array");
 
     assert_eq!(plan["schema"], "identity.plan/v0");
     assert_eq!(plan["profiles"].as_array().map(Vec::len), Some(8));
@@ -108,7 +119,10 @@ fn handoff_is_complete_and_byte_stable() {
     let arguments = [
         "handoff",
         "--repository-root",
-        repository.path().to_str().expect("temporary path must be UTF-8"),
+        repository
+            .path()
+            .to_str()
+            .expect("temporary path must be UTF-8"),
         "--output-directory",
         relative_output
             .to_str()
@@ -131,5 +145,8 @@ fn handoff_is_complete_and_byte_stable() {
     assert_eq!(first, second);
     let manifest: Value = serde_json::from_slice(&first[2]).expect("manifest must be valid JSON");
     assert_eq!(manifest["schema"], "identity.handoff-manifest/v0");
-    assert_eq!(manifest["profiles"].as_object().map(|value| value.len()), Some(8));
+    assert_eq!(
+        manifest["profiles"].as_object().map(|value| value.len()),
+        Some(8)
+    );
 }

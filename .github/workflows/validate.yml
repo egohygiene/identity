@@ -44,16 +44,8 @@ jobs:
             --profile "minimal" \
             --component "clippy,rustfmt"
 
-      # This temporary evidence step bootstraps the first canonical Cargo.lock.
-      # It is removed once the generated lock is committed in this pull request.
-      - name: Bootstrap dependency lock evidence
-        shell: bash
-        run: |
-          set -euo pipefail
-          cargo generate-lockfile
-          printf '%s\n' "CARGO_LOCK_BASE64_BEGIN"
-          base64 --wrap=0 "Cargo.lock"
-          printf '\n%s\n' "CARGO_LOCK_BASE64_END"
+      - name: Verify locked dependency resolution
+        run: cargo metadata --locked --format-version "1" --no-deps >/dev/null
 
       - name: Verify Rust formatting
         run: cargo fmt --all --check
