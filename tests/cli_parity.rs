@@ -145,5 +145,8 @@ fn handoff_is_complete_and_byte_stable() {
     assert_eq!(first, second);
     let manifest: Value = serde_json::from_slice(&first[2]).expect("manifest must be valid JSON");
     assert_eq!(manifest["schema"], "identity.handoff-manifest/v0");
-    assert_eq!(manifest["profiles"].as_object().map(serde_json::Map::len), Some(8));
+    assert_eq!(
+        manifest["profiles"].as_object().map(serde_json::Map::len),
+        Some(8)
+    );
 }
