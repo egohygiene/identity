@@ -20,19 +20,28 @@
       "required": [
         "id",
         "subject",
+        "candidate",
         "status",
         "reviewedBy",
         "reviewedAt",
         "evidence",
+        "supersedes",
         "notes"
       ],
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
         "subject": { "type": "string", "minLength": 1 },
+        "candidate": { "type": "string", "minLength": 1 },
         "status": { "enum": ["approved", "rejected", "superseded"] },
         "reviewedBy": { "type": "string", "minLength": 1 },
         "reviewedAt": { "type": "string", "format": "date-time" },
         "evidence": { "type": "string", "minLength": 1 },
+        "supersedes": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          ]
+        },
         "notes": { "type": "string" }
       }
     }

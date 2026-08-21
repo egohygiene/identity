@@ -141,7 +141,19 @@ class IdentityV1ValidatorTests(unittest.TestCase):
             schemas["diagnostics.schema.json"]["properties"]["schema"]["const"],
             validator.DIAGNOSTICS_SCHEMA,
         )
-        self.assertEqual(len(schemas), 6)
+        self.assertEqual(
+            schemas["voice.schema.json"]["properties"]["schema"]["const"],
+            validator.VOICE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["usage.schema.json"]["properties"]["schema"]["const"],
+            validator.USAGE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],
+            "identity.brand-guidance/v1",
+        )
+        self.assertEqual(len(schemas), 9)
 
     def test_cli_returns_stable_json_and_process_status(self) -> None:
         valid = subprocess.run(

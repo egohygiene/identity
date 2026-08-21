@@ -55,6 +55,7 @@ the decision changes materially.
 - [ADR-010: Render from a framework-neutral immutable view model](docs/decisions/ADR-010-reference-renderer-boundary.md)
 - [ADR-011: Layer normative, exact, browser, and human quality evidence](docs/decisions/ADR-011-accessibility-and-visual-evidence.md)
 - [ADR-012: Use local, layered Identity v1 source contracts](docs/decisions/ADR-012-local-layered-identity-v1.md)
+- [ADR-013: Preserve guidance lifecycle state in every projection](docs/decisions/ADR-013-preserve-guidance-lifecycle.md)
 
 ## ADR-001: Keep creative approval human-owned
 
@@ -92,6 +93,6 @@ the decision changes materially.
 ## Evidence and uncertainty
 
 - **Observed:** The repository defines an Identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; significant implementation remains incomplete.
-- **Accepted:** The Brand Kit product contract and ADR-001 through ADR-012 constrain future implementation.
+- **Accepted:** The Brand Kit product contract and ADR-001 through ADR-013 constrain future implementation.
 - **Proposed:** Runtime capabilities and later roadmap phases remain proposals until their owning issues provide implementation evidence.
 - **Open question:** Which optional adapter profiles belong in the first independently versioned release?
