@@ -1,0 +1,12 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "override-conflict",
+  "mutations": [
+    {
+      "document": ".identity/overrides/product.tokens.json",
+      "operation": "remove",
+      "pointer": "/color/brand/primary/$extensions/org.egohygiene.identity/override"
+    }
+  ],
+  "expectedCodes": ["IDN1304"]
+}

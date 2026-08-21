@@ -126,7 +126,8 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | --- | --- | --- |
 | Product contract | Accepted architecture documents | Maintained v1 boundary and compatibility policy |
 | CLI foundation | Extracted workspace with `init`, `validate`, `plan`, and `handoff` parity evidence | Evolve through versioned contracts without losing the local-first authority boundary |
-| Schema and compiler | Proposed issues and prior fixtures | Versioned source contract and deterministic adapter pipeline |
+| Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while the compiler adopts the resolved model |
+| Compiler pipeline | Proposed issues and prior planning behavior | Deterministic adapter pipeline over the validated v1 model |
 | Packages and validation | Proposed | Reproducible distributions with release-blocking evidence |
 | Renderer and studio | Proposed | Accessible framework-replaceable reference experience |
 | Public route | Deferred pending released artifacts and website work | Immutable `/identity` deployment with `/brand-kit` redirect |

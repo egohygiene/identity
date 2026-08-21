@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "layer-order",
+  "mutations": [
+    {
+      "document": ".identity/identity.json",
+      "operation": "replace",
+      "pointer": "/layers/1/priority",
+      "value": 0
+    }
+  ],
+  "expectedCodes": ["IDN1301"]
+}

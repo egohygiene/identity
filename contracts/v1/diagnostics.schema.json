@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/diagnostics.schema.json",
+  "title": "Identity v1 validation diagnostics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "valid", "repository", "diagnostics"],
+  "properties": {
+    "schema": { "const": "identity.diagnostics/v1" },
+    "valid": { "type": "boolean" },
+    "repository": { "type": "string" },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "severity", "path", "message", "recovery"],
+        "properties": {
+          "code": { "type": "string", "pattern": "^IDN[0-9]{4}$" },
+          "severity": { "enum": ["error", "warning"] },
+          "path": { "type": "string" },
+          "message": { "type": "string", "minLength": 1 },
+          "recovery": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
