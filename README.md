@@ -99,8 +99,8 @@ aliases, compatibility, diagnostics, migration, and rollback.
 
 ## Compiler core
 
-The Rust library now exposes the deterministic framework-neutral compiler
-boundary behind the Brand Kit generator:
+The Rust library exposes the deterministic framework-neutral compiler boundary
+behind the Brand Kit generator:
 
 ```text
 read → validate → resolve → plan → render → verify → manifest
@@ -116,10 +116,33 @@ projection adapters are rejected from the compiler-owned path.
 
 The [compiler v1 contract](docs/contracts/COMPILER_V1.md) documents the public
 Rust ports plus `identity.compiler-plan/v1` and
-`identity.compiler-manifest/v1`. Concrete DTCG/CSS/Tailwind/metadata/vector,
-raster, archive, and package profiles remain the next implementation slice in
-[#11](https://github.com/egohygiene/identity/issues/11), so no new generation
-CLI command is claimed yet.
+`identity.compiler-manifest/v1`. Generation remains a library/application
+boundary until a later CLI design explicitly exposes it; the existing four CLI
+commands keep their extraction-parity contract.
+
+## Brand Kit packages
+
+The built-in package layer implements nine versioned output profiles over the
+compiler ports: `core`, `web`, `pwa`, `github`, `docs`, `social`, `tokens`,
+`metadata`, and `archive`.
+
+Those profiles can deterministically project a resolved identity into:
+
+- DTCG JSON, CSS custom properties, JavaScript, TypeScript declarations, and a
+  Tailwind-compatible theme;
+- document CSS, public metadata, Open Graph markup, PWA icon metadata, and
+  explicit voice/usage guidance state;
+- approved SVG marks plus PNG favicon, PWA, maskable, social-card, and GitHub
+  preview assets through the offline `resvg` adapter boundary;
+- package metadata, SHA-256 indexes/checksums, and a deterministic downloadable
+  ZIP with fixed ordering and timestamps.
+
+Consumers select profile IDs and compatible versions; selecting a subset does
+not generate unrelated profiles. The compiler manifest remains the transaction
+and evidence record for the exact selected build. The
+[Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
+defines the stable generated interface, compatibility rules, archive semantics,
+and consumer boundary.
 
 ## State and authority
 
@@ -150,9 +173,10 @@ CLI command is claimed yet.
 ## Current capability state
 
 The Brand Kit product contract and toolchain decisions are accepted. The
-extracted CLI and v1 source contract are implemented, and the deterministic
-compiler core is implemented in this change. Concrete output/package adapters
-and later public-product layers remain proposed until their owning issues land.
+extracted CLI, v1 source contract, and deterministic compiler core are
+implemented. This change adds the concrete built-in projection adapters and
+versioned distributable package layer; quality/governance and public-product
+layers remain the next gates.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
@@ -160,15 +184,15 @@ and later public-product layers remain proposed until their owning issues land.
 | Toolchain decisions | Accepted | [#7](https://github.com/egohygiene/identity/issues/7), [evaluation](docs/evaluations/brand-kit-foundations.md), [ADRs](DECISIONS.md) |
 | Independent CLI | Implemented | [#8](https://github.com/egohygiene/identity/issues/8) |
 | v1 identity schema | Implemented | [#9](https://github.com/egohygiene/identity/issues/9), [contract](docs/contracts/IDENTITY_V1.md) |
-| Compiler core | Implemented in this change | [#10](https://github.com/egohygiene/identity/issues/10), [contract](docs/contracts/COMPILER_V1.md) |
-| Projection adapters and packages | Proposed | [#11](https://github.com/egohygiene/identity/issues/11) |
+| Compiler core | Implemented | [#10](https://github.com/egohygiene/identity/issues/10), [contract](docs/contracts/COMPILER_V1.md) |
+| Projection adapters and packages | Implemented in this change | [#11](https://github.com/egohygiene/identity/issues/11), [contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md) |
 | Quality and governance | Proposed | [#12](https://github.com/egohygiene/identity/issues/12), [#13](https://github.com/egohygiene/identity/issues/13) |
 | Renderer and asset studio | Proposed | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public `/identity` route | Deferred until its dependencies land | [#16](https://github.com/egohygiene/identity/issues/16) |
 | Stable v1.0.0 release | Deferred until all v1 gates pass | [#18](https://github.com/egohygiene/identity/issues/18) |
 
 The umbrella [#2](https://github.com/egohygiene/identity/issues/2) remains open
-until distributable packages and the required consumer proof land.
+until the required Empathy and OptiFlow consumer proof lands through #17.
 
 ## Architecture
 
@@ -184,6 +208,7 @@ until distributable packages and the required consumer proof land.
 - [Dependency policy](docs/DEPENDENCY_POLICY.md)
 - [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)
 - [Compiler v1 contract](docs/contracts/COMPILER_V1.md)
+- [Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
 - [Roadmap](ROADMAP.md)
 
 The [roadmap issue](https://github.com/egohygiene/identity/issues/5) is the execution source of truth. Architecture documents define durable intent and boundaries; individual issues own implementation detail and evidence.

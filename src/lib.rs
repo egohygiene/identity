@@ -1,6 +1,7 @@
 // Copyright 2026 Ego Hygiene
 // SPDX-License-Identifier: MIT
 
+pub mod brandkit;
 pub mod compiler;
 
 mod cli;

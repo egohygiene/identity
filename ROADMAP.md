@@ -46,7 +46,7 @@ They close only when the refining issues below provide implementation and valida
 | --- | --- | --- | --- |
 | 0 — Product and foundations | Accept the Brand Kit boundary and select replaceable foundations | #6, #7 | Active product contract, boundary review, toolchain ADRs, dependency policy, proof of high-risk integrations |
 | 1 — Extraction and canonical contracts | Establish an independent CLI and versioned consumer-owned source | #8, #9 | Parity tests, migration fixtures, published schemas, deterministic merge/override diagnostics |
-| 2 — Compiler and packages | Produce reproducible projections through stable adapter contracts | #10, #11 | Offline core tests, adapter contract tests, golden outputs, packages, manifests, checksums |
+| 2 — Compiler and packages | Produce reproducible projections through stable adapter contracts | #10, #11 | Offline core tests, adapter contract tests, deterministic outputs, packages, manifests, checksums |
 | 3 — Trust and governance | Make quality, accessibility, provenance, voice, and approval testable | #12, #13 | Release-blocking validation, human-review evidence, usage/voice schemas, recovery guidance |
 | 4 — Public product experience | Present, preview, approve, download, and publish a Brand Kit | #14, #15, #16 | Accessible renderer, mutation-safe studio, immutable publication contract, deployed route checks |
 | 5 — Proof and release | Prove variation across consumers and publish v1.0.0 | #17, #18 | Empathy/OptiFlow pilots, clean-room quickstart, compatibility suite, attestations, stable release |
@@ -57,12 +57,25 @@ Wave 0 is complete. Wave 1 has the independently extracted CLI from #8 and the
 implemented v1 source/schema/validation boundary from #9; Empathy's pinned
 consumer transition remains the final cross-repository extraction gate.
 
-Wave 2 is now active. #10 implements the deterministic, offline compiler core,
-adapter SDK, mutation-free plans, manifests, transactional generated-state
-apply, and explicit recovery. #11 remains the next gate: real Brand Kit
-projection adapters, named output profiles, versioned packages, golden outputs,
-and package checksums. The umbrella #2 remains open until those package outputs
-and the required consumer evidence are complete.
+Wave 2 implementation is complete in Identity after #10 and this #11 change.
+#10 provides the deterministic offline compiler core, adapter SDK,
+mutation-free plans, manifests, transactional generated-state apply, and
+explicit recovery. #11 adds nine versioned Brand Kit output profiles, concrete
+token/web/document/metadata/vector/raster/archive adapters, deterministic
+package indexes/checksums, subset compatibility, and byte-identical package
+proof across clean repositories.
+
+The next implementation wave is trust and governance. #12 builds the shared
+accessibility, provenance, visual-quality, and regression evidence harness used
+by umbrella #3; #3 then adds the Astryx/motion-specific consistency rules on
+that common evidence layer. #13 stabilizes voice, usage, and human-approval
+outputs before the public renderer and consumer pilots.
+
+The umbrella #2 remains open despite the Wave 2 implementation milestone. Its
+remaining acceptance evidence is the real Empathy and OptiFlow consumer proof
+owned by #17 after the required quality/governance and renderer dependencies
+land. This prevents package implementation from being mistaken for successful
+fleet consumption.
 
 Wave 0 establishes decisions that constrain every implementation PR:
 
@@ -101,9 +114,9 @@ Wave 0 establishes decisions that constrain every implementation PR:
 | Initialize or migrate a project-owned identity | #8, #9 | Command parity, schema, valid/invalid fixtures, migration and rollback tests |
 | Resolve organization defaults and product overrides | #9, #17 | Merge/conflict diagnostics and contrasting consumer snapshots |
 | Plan before mutation | #10 | Mutation-free plan tests covering writes, replacements, removals, warnings, and approvals |
-| Generate deterministic target profiles | #10, #11 | Offline unit/integration tests, adapter contracts, golden manifests, checksum stability |
+| Generate deterministic target profiles | #10, #11 | Offline unit/integration tests, adapter contracts, byte-identical outputs/manifests, checksum stability |
 | Block inaccessible, unlicensed, or untraceable releases | #3, #12, #13 | Accessibility, visual, license, provenance, approval, and recovery reports |
-| Distribute portable Brand Kit packages | #11, #18 | Consumer installation, compatibility, clean-room build, and release provenance |
+| Distribute portable Brand Kit packages | #11, #18 | Versioned profile/package contracts, checksums, deterministic archive, consumer installation, clean-room build, and release provenance |
 | Render and preview an understandable Brand Kit | #14, #15 | Accessibility, responsive, link, download, visual regression, and mutation-isolation tests |
 | Publish the organization Brand Kit at `/identity` | #16 | Immutable handoff, metadata, redirect, deployment smoke test, and rollback evidence |
 | Preserve product variation within a family | #17 | Empathy and OptiFlow inheritance/override evidence |
