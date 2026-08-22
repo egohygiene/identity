@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../contracts/v1/visual-motion-manifest.schema.json",
+  "schema": "identity.visual-motion-manifest/v1",
+  "projectId": "identity",
+  "sourceDigest": "e1d4eb874e19111b873153b1eb221001f12110ff15800c5a377626b36541f7f9",
+  "assets": [
+    {
+      "id": "identity-hero",
+      "kind": "animation",
+      "source": {
+        "creator": "Ego Hygiene",
+        "method": "first-party",
+        "reference": "tests/fixtures/motion/identity-hero.storyboard.txt",
+        "sha256": "abd4210d820aa0e9a83226ecb50fd8185790bf9a8a1828419c4d234c349a379a",
+        "licenseSpdx": "MIT",
+        "approval": "approve-motion"
+      },
+      "generator": {
+        "id": "identity-fixture-renderer",
+        "version": "1.0.0"
+      },
+      "output": {
+        "path": "identity-hero.svg",
+        "mediaType": "image/svg+xml",
+        "sha256": "c37063d859b38d5bc6116de5a34dfe2bd0ffc3530b16b0b008c76c4b387a5430",
+        "bytes": 177,
+        "width": 1200,
+        "height": 630,
+        "frameRate": 60,
+        "durationMs": 1200
+      },
+      "behavior": {
+        "purpose": "landing-sequence",
+        "animatedProperties": ["opacity", "transform"],
+        "easing": "standard",
+        "blocksInteraction": false,
+        "autoplay": true,
+        "looped": false,
+        "muted": true,
+        "reducedMotion": "static-fallback",
+        "fallbackPath": "identity-hero-reduced.svg",
+        "fallbackSha256": "3308cf7c13b0efc5f518e110d494957ed9ca215a14c4b235e9ec7085dd8b5c69"
+      },
+      "capture": {
+        "viewportWidth": 1200,
+        "viewportHeight": 630,
+        "locale": "en-US",
+        "timezone": "UTC",
+        "networkMode": "offline",
+        "privacySafe": true,
+        "syntheticData": true
+      },
+      "baselineTargetId": "identity-hero-motion"
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+# Visual-Motion Validation v1
+
+## Status
+
+Implemented by Identity issue #3 as an extension of the shared quality/evidence
+layer from #12.
+
+Stable contracts:
+
+- `identity.motion-policy/v1`
+- `identity.visual-motion-manifest/v1`
+- release evidence remains `identity.quality-report/v1`
+
+Rust entry point: `identity::motion`.
+
+## Purpose
+
+Visual-motion validation governs animation, generated imagery, landing
+sequences, continuous status motion, and deterministic demo captures without
+creating a second release authority.
+
+```text
+reviewed brand intent + approved source/candidate
+        ↓
+generate / capture derived asset
+        ↓
+visual-motion manifest + baseline + reduced-motion projection
+        ↓
+#12 quality report + #3 motion checks
+        ↓
+one releaseAllowed decision
+```
+
+Identity owns the policy and evidence contract. Capture/render implementations
+remain replaceable producers.
+
+## Astryx research boundary
+
+The design research is recorded in
+[`docs/evaluations/astryx-motion-patterns.md`](../evaluations/astryx-motion-patterns.md).
+Identity adopts compatible motion principles while remaining framework-neutral.
+It does not depend on Astryx, React, or StyleX.
+
+The upstream research revision is pinned in that evaluation. Astryx is MIT
+licensed; this issue copies no Astryx component implementation.
+
+## Default motion policy
+
+The default `identity.motion-policy/v1` policy is intentionally conservative:
+
+| Purpose | Maximum duration | Maximum asset bytes |
+| --- | ---: | ---: |
+| Micro interaction | 200 ms | 262,144 |
+| UI transition | 500 ms | 524,288 |
+| Landing sequence | 2,000 ms | 1,048,576 |
+| Continuous status cycle | 2,000 ms | 524,288 |
+| Demo capture | 15,000 ms | 4,194,304 |
+| Static imagery | n/a | 1,048,576 |
+
+Cross-cutting defaults:
+
+- maximum frame rate: 60 fps;
+- maximum width/height: 3,840 px;
+- UI animated properties: `transform`, `opacity`;
+- easing: standard decelerating/ease-out family;
+- deterministic network modes: `offline`, `recorded-fixture`;
+- capture data must be privacy-safe and synthetic;
+- motion must never block the next interaction.
+
+A product can version a different policy, but exceptions must be explicit rather
+than silently widening the global defaults.
+
+## Motion purposes
+
+### Micro interaction
+
+Small, frequent feedback such as toggle or selection state. These must be brief
+and must never make hover or repeated interactions feel delayed.
+
+### Transition
+
+Panel, dialog, expansion, or navigation-related movement. Direction/origin
+requires human semantic review because correctness depends on interaction
+context.
+
+### Landing sequence
+
+A bounded brand or product-story sequence on a public landing surface. This is
+the deliberate exception to the general rule against gratuitous initial-load
+animation. A landing sequence may autoplay only when it is:
+
+- muted;
+- non-looping;
+- within the 2-second default budget;
+- interaction non-blocking;
+- backed by an immutable reduced-motion fallback.
+
+### Continuous status
+
+Spinner/progress-like motion whose repetition communicates ongoing state.
+Looping is allowed only for this semantic purpose and still requires a
+reduced-motion alternative.
+
+### Demo capture
+
+A deterministic product/documentation capture produced by a system such as
+Relay #8. Captures require immutable repository/script/fixture lineage and a
+fixed capture context.
+
+### Static imagery
+
+Generated or derived imagery that has no duration. It still participates in
+provenance, file-size, visual-baseline, and human-approval rules.
+
+## Reduced motion
+
+Every non-static asset declares one of:
+
+- `instant` — interactive CSS/UI motion becomes an immediate state change;
+- `static-fallback` — a digest-bound static projection is supplied;
+- `paired-reduced-capture` — a separately captured reduced-motion asset is
+  supplied.
+
+Landing sequences, continuous-status assets, and demo captures cannot satisfy
+reduced-motion requirements with metadata alone; they require a real fallback
+artifact and SHA-256 digest.
+
+## Visual-motion manifest
+
+`identity.visual-motion-manifest/v1` records each derived asset independently.
+
+### Source provenance
+
+Each asset records:
+
+- creator;
+- method: `first-party`, `captured`, `generated`, or `licensed`;
+- source/reference identifier;
+- source SHA-256 digest;
+- SPDX license;
+- exact human approval identifier.
+
+Captured assets additionally require:
+
+- repository reference;
+- immutable 40-character commit SHA;
+- capture script path;
+- fixture path;
+- fixture SHA-256 digest.
+
+This lets Relay or another capture producer prove exactly what was captured
+without moving capture implementation into Identity.
+
+### Generator
+
+The generator/tool id and version are recorded. The tool is replaceable; the
+manifest shape is the stable contract.
+
+### Output
+
+Generated output records path, media type, SHA-256, byte count, dimensions, and
+optional frame rate/duration. Runtime validation compares actual generated bytes
+with this declaration.
+
+### Behavior
+
+Behavior records:
+
+- semantic purpose;
+- animated properties;
+- easing;
+- whether interaction is blocked;
+- autoplay, loop, and mute state;
+- reduced-motion behavior;
+- fallback path/digest when required.
+
+### Capture context
+
+Every record carries viewport, locale, timezone, network mode, privacy-safe
+state, and synthetic-data state. This keeps generated/captured media auditable
+and makes downstream capture reproducibility explicit.
+
+## Quality-report integration
+
+`MotionQualityExtension::evaluate` first runs the existing #12
+`QualityHarness`, adds motion checks to the same `QualityReport`, sorts the
+combined checks deterministically, recomputes coverage, and derives the same
+`releaseAllowed` field.
+
+There is no separate motion-pass boolean and no second report schema.
+
+Stable check families include:
+
+- `motion.provenance.*`
+- `motion.capture.*`
+- `motion.properties.*`
+- `motion.easing.*`
+- `motion.interaction.*`
+- `motion.autoplay.*`
+- `motion.loop.*`
+- `motion.output-digest.*`
+- `motion.file-size.*`
+- `motion.dimensions.*`
+- `motion.frame-rate.*`
+- `motion.duration.*`
+- `motion.reduced-motion.*`
+- `motion.meaning.*`
+- `motion.direction.*`
+- existing `visual.regression.*`
+
+Blocking `failed` or `review-required` checks make the shared report fail
+closed.
+
+## Human review
+
+Automation validates objective boundaries such as checksums, dimensions,
+network mode, budgets, allowed properties, and fallback existence. It does not
+approve creative intent.
+
+Human review is required for:
+
+- whether motion has a meaningful product/brand purpose;
+- whether transition direction/origin is semantically coherent;
+- whether a changed visual/motion baseline is intentionally accepted.
+
+The reviewer, timestamp, and evidence reference use the existing
+`HumanReviewEvidence` structure from #12.
+
+## Visual regression fixtures
+
+`tests/fixtures/motion/` contains a checked-in fixture set with:
+
+- a landing-sequence projection;
+- a reduced-motion fallback;
+- the default motion policy;
+- source/storyboard evidence;
+- the v1 visual-motion provenance manifest;
+- an approved visual baseline;
+- explicit human-review notes.
+
+Rust tests additionally prove rejection of layout-property motion, live-network
+capture, non-synthetic capture data, missing reduced-motion fallback, immutable
+capture-lineage gaps, file-size/duration regressions, and unsupported policy
+versions.
+
+## Relay integration
+
+`egohygiene/relay#8` (`REL-07`) owns reproducible website/demo capture. It should
+produce optimized media plus `identity.visual-motion-manifest/v1` evidence (or a
+lossless projection into it) rather than invent a second provenance contract.
+
+Identity does **not** copy Relay capture implementation and Relay does **not**
+own motion policy.
+
+## Renderer integration
+
+Issue #14 owns browser-level behavior for the public Brand Kit. It must consume
+these policy decisions and provide real rendered evidence for keyboard/focus,
+forced-color/high-contrast behavior, reduced motion, target sizes, and runtime
+performance. #3 does not claim those renderer checks pass before #14 exists.
+
+## Failure and recovery
+
+| Failure | Recovery |
+| --- | --- |
+| Disallowed animated property/easing | Change the presentation to the approved motion primitives or version an explicit exception. |
+| Motion blocks interaction | Make the target interactive immediately and remove animation as a gate. |
+| Missing reduced-motion fallback | Generate a static or paired reduced-motion projection and record its digest. |
+| Live/non-synthetic capture | Recapture from offline/recorded synthetic fixtures. |
+| Missing capture lineage | Pin repository commit, script, and fixture evidence. |
+| File-size/duration/frame-rate failure | Optimize or intentionally version the purpose-specific budget. |
+| Visual baseline drift | Compare source/generated evidence and record a human decision. |
+
+## Compatibility
+
+These are v1 contracts. Additive implementation behavior may evolve while the
+serialized contracts retain their declared meaning. A breaking field or
+semantic change requires a new contract version rather than silently changing
+v1.

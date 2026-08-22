@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/motion-policy.schema.json",
+  "title": "Identity v1 motion policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "durationsMs",
+    "assetBytes",
+    "maximumFrameRate",
+    "maximumDimensionPixels",
+    "allowedAnimatedProperties",
+    "allowedEasing",
+    "allowedNetworkModes"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)motion-policy.schema.json$" },
+    "schema": { "const": "identity.motion-policy/v1" },
+    "durationsMs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["microInteraction", "transition", "landingSequence", "continuousStatus", "demoCapture"],
+      "properties": {
+        "microInteraction": { "type": "integer", "minimum": 0 },
+        "transition": { "type": "integer", "minimum": 0 },
+        "landingSequence": { "type": "integer", "minimum": 0 },
+        "continuousStatus": { "type": "integer", "minimum": 0 },
+        "demoCapture": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "assetBytes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["microInteraction", "transition", "landingSequence", "continuousStatus", "demoCapture", "staticImagery"],
+      "properties": {
+        "microInteraction": { "type": "integer", "minimum": 1 },
+        "transition": { "type": "integer", "minimum": 1 },
+        "landingSequence": { "type": "integer", "minimum": 1 },
+        "continuousStatus": { "type": "integer", "minimum": 1 },
+        "demoCapture": { "type": "integer", "minimum": 1 },
+        "staticImagery": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "maximumFrameRate": { "type": "number", "exclusiveMinimum": 0 },
+    "maximumDimensionPixels": { "type": "integer", "minimum": 1 },
+    "allowedAnimatedProperties": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "allowedEasing": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "allowedNetworkModes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["offline", "recorded-fixture"] }
+    }
+  }
+}

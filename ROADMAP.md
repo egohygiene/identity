@@ -65,14 +65,15 @@ token/web/document/metadata/vector/raster/archive adapters, deterministic
 package indexes/checksums, subset compatibility, and byte-identical package
 proof across clean repositories.
 
-Wave 3 is now partially implemented. This #12 change establishes the shared
+Wave 3 is now substantially implemented. #12 established the shared
 `identity.quality-report/v1` evidence harness, package/publication scopes,
 release-blocking accessibility/provenance/license/reproducibility/visual checks,
-visual baselines, explicit skipped coverage, human-review evidence, and initial
-motion/performance budgets. #3 is the next extension and adds the
-Astryx/motion-specific consistency rules to that same harness. #13 then
-stabilizes voice, usage, and human-approval outputs before the public renderer
-and consumer pilots.
+visual baselines, explicit skipped coverage, and human-review evidence. This #3
+change adds framework-neutral visual-motion governance to that same release
+decision: Astryx-informed adopt/adapt/reject rules, purpose budgets,
+reduced-motion fallbacks, deterministic capture/provenance contracts, motion
+fixtures, and semantic human-review boundaries. #13 is now the remaining Wave 3
+gate before the public renderer and consumer pilots.
 
 The umbrella #2 remains open despite the Wave 2 implementation milestone. Its
 remaining acceptance evidence is the real Empathy and OptiFlow consumer proof
@@ -118,7 +119,7 @@ Wave 0 establishes decisions that constrain every implementation PR:
 | Resolve organization defaults and product overrides | #9, #17 | Merge/conflict diagnostics and contrasting consumer snapshots |
 | Plan before mutation | #10 | Mutation-free plan tests covering writes, replacements, removals, warnings, and approvals |
 | Generate deterministic target profiles | #10, #11 | Offline unit/integration tests, adapter contracts, byte-identical outputs/manifests, checksum stability |
-| Block inaccessible, unlicensed, or untraceable releases | #3, #12, #13 | Implemented #12 quality-report contract, accessibility/provenance/license/visual/reproducibility checks and human-review evidence; #3 motion consistency and #13 guidance/approval integration complete the gate |
+| Block inaccessible, unlicensed, or untraceable releases | #3, #12, #13 | #12 quality-report/accessibility/provenance/license/visual/reproducibility gates and #3 visual-motion/capture/provenance gates are implemented; #13 guidance/approval integration remains |
 | Distribute portable Brand Kit packages | #11, #18 | Versioned profile/package contracts, checksums, deterministic archive, consumer installation, clean-room build, and release provenance |
 | Render and preview an understandable Brand Kit | #14, #15 | Accessibility, responsive, link, download, visual regression, and mutation-isolation tests |
 | Publish the organization Brand Kit at `/identity` | #16 | Immutable handoff, metadata, redirect, deployment smoke test, and rollback evidence |
