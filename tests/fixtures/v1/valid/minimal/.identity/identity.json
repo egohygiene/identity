@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../../../../contracts/v1/project.schema.json",
+  "schema": "identity.project/v1",
+  "project": {
+    "id": "example-product",
+    "displayName": "Example Product",
+    "repository": "https://example.invalid/example-product",
+    "tagline": "A complete, governed Identity v1 fixture.",
+    "kind": "product"
+  },
+  "layers": [
+    {
+      "id": "example-organization",
+      "kind": "organization-defaults",
+      "priority": 0,
+      "tokens": ".identity/defaults/organization.tokens.json",
+      "sha256": "c7c9313829c1995afe25e5c08e72b73fbf0db46bdc2de77e451259e0e12a509e"
+    },
+    {
+      "id": "example-product",
+      "kind": "product-override",
+      "priority": 10,
+      "tokens": ".identity/overrides/product.tokens.json",
+      "sha256": "f03b0d20a09c9fd7b33a556799c5d23c2bf248fbcd7fba37c47825a4146a3632"
+    }
+  ],
+  "documents": {
+    "brief": ".identity/brief.md",
+    "targets": ".identity/targets/profiles.json",
+    "provenance": ".identity/governance/provenance.json",
+    "approvals": ".identity/governance/approvals.json",
+    "guidance": {
+      "voice": null,
+      "usage": null
+    }
+  },
+  "directories": {
+    "sources": ".identity/sources",
+    "candidates": ".identity/candidates",
+    "references": ".identity/references"
+  },
+  "compatibility": {
+    "acceptedSchemaMajor": 1,
+    "migrationFrom": []
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/project.schema.json",
+  "title": "Identity v1 consumer project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "project",
+    "layers",
+    "documents",
+    "directories",
+    "compatibility"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "(^|/)project.schema.json$"
+    },
+    "schema": { "const": "identity.project/v1" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "repository", "tagline", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "displayName": { "type": "string", "minLength": 1 },
+        "repository": {
+          "type": "string",
+          "pattern": "^https://[^\\s]+$"
+        },
+        "tagline": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["organization", "product", "repository"] }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/layer" }
+    },
+    "documents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["brief", "targets", "provenance", "approvals", "guidance"],
+      "properties": {
+        "brief": { "$ref": "#/$defs/relativePath" },
+        "targets": { "$ref": "#/$defs/relativePath" },
+        "provenance": { "$ref": "#/$defs/relativePath" },
+        "approvals": { "$ref": "#/$defs/relativePath" },
+        "guidance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["voice", "usage"],
+          "properties": {
+            "voice": { "$ref": "#/$defs/optionalRelativePath" },
+            "usage": { "$ref": "#/$defs/optionalRelativePath" }
+          }
+        }
+      }
+    },
+    "directories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "candidates", "references"],
+      "properties": {
+        "sources": { "$ref": "#/$defs/relativePath" },
+        "candidates": { "$ref": "#/$defs/relativePath" },
+        "references": { "$ref": "#/$defs/relativePath" }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["acceptedSchemaMajor", "migrationFrom"],
+      "properties": {
+        "acceptedSchemaMajor": { "const": 1 },
+        "migrationFrom": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
+    },
+    "optionalRelativePath": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/relativePath" }
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "priority", "tokens", "sha256"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "kind": { "enum": ["organization-defaults", "product-override"] },
+        "priority": { "type": "integer", "minimum": 0 },
+        "tokens": { "$ref": "#/$defs/relativePath" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

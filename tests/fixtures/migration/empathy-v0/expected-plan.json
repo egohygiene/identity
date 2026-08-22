@@ -1,0 +1,142 @@
+{
+  "schema": "identity.migration-plan/v1",
+  "source": {
+    "schema": "identity.project/v0",
+    "path": ".identity/identity.toml",
+    "sha256": "f1d196f1494c73a20b9dd2f36ea58939141e28167c027cda21cf31ee48812af1"
+  },
+  "target": {
+    "schema": "identity.project/v1",
+    "path": ".identity-v1/identity.json",
+    "promotionPath": ".identity/identity.json"
+  },
+  "preserved": {
+    "project": {
+      "id": "empathy",
+      "displayName": "Empathy",
+      "repository": "https://github.com/egohygiene/empathy",
+      "tagline": "A humane foundation for people, automation, and AI agents."
+    },
+    "brief": {
+      "path": ".identity/brief.md",
+      "sha256": "bb6fd3bf035bc351e12ca074992bc815bd3c4519a0096393762d3bf77bb345d2"
+    },
+    "enabledProfiles": [
+      "core",
+      "web",
+      "pwa",
+      "github",
+      "docs",
+      "social",
+      "tokens",
+      "metadata"
+    ],
+    "inapplicableProfiles": [],
+    "requiredSources": [
+      {
+        "role": "mark",
+        "path": "mark.svg",
+        "format": "svg",
+        "description": "Primary scalable symbol with editable vector geometry."
+      },
+      {
+        "role": "wordmark",
+        "path": "wordmark.svg",
+        "format": "svg",
+        "description": "Lowercase Empathy wordmark using outlined custom lettering or licensed fonts."
+      },
+      {
+        "role": "lockup-horizontal",
+        "path": "lockup-horizontal.svg",
+        "format": "svg",
+        "description": "Horizontal mark-and-wordmark composition with generous clear space."
+      },
+      {
+        "role": "lockup-stacked",
+        "path": "lockup-stacked.svg",
+        "format": "svg",
+        "description": "Stacked mark-and-wordmark composition."
+      },
+      {
+        "role": "mark-monochrome",
+        "path": "mark-monochrome.svg",
+        "format": "svg",
+        "description": "Single-color symbol that remains recognizable at favicon size."
+      },
+      {
+        "role": "mark-maskable",
+        "path": "mark-maskable.svg",
+        "format": "svg",
+        "description": "Full-bleed square source with essential geometry inside the maskable safe zone."
+      },
+      {
+        "role": "social-background",
+        "path": "social-background.svg",
+        "format": "svg",
+        "description": "Editable calm, spacious background composition without platform-specific copy."
+      },
+      {
+        "role": "palette",
+        "path": "palette.json",
+        "format": "json",
+        "description": "Named canonical colors with semantic intent, theme pairings, and contrast notes."
+      }
+    ],
+    "contextFiles": [
+      "README.md",
+      "PURPOSE.md",
+      "VISION.md",
+      "PRINCIPLES.md",
+      "DESIGN.md",
+      "DESIGN_SYSTEM.md"
+    ]
+  },
+  "actions": [
+    {
+      "id": "create-v1-topology",
+      "status": "ready",
+      "authority": "migration-tool",
+      "reason": "Create a separate review workspace without replacing v0 source."
+    },
+    {
+      "id": "pin-organization-defaults",
+      "status": "requires-human-review",
+      "authority": "consumer-maintainer",
+      "reason": "v0 did not record an immutable organization-default token layer."
+    },
+    {
+      "id": "convert-palette-to-dtcg",
+      "status": "requires-human-review",
+      "authority": "consumer-maintainer",
+      "reason": "v0 declared a palette source role but not reviewed DTCG semantic tokens."
+    },
+    {
+      "id": "record-license-provenance-and-approval",
+      "status": "requires-human-review",
+      "authority": "consumer-maintainer",
+      "reason": "v0 source requirements did not prove license, byte provenance, or approval records."
+    },
+    {
+      "id": "structure-voice-and-usage",
+      "status": "deferred-to-idn-11",
+      "authority": "consumer-maintainer",
+      "reason": "v1 reserves explicit guidance paths without inventing reviewed content."
+    },
+    {
+      "id": "validate-and-compare",
+      "status": "blocked",
+      "authority": "identity-validator",
+      "reason": "Run v1 validation and compare profile/plan evidence after review actions complete."
+    },
+    {
+      "id": "promote-v1",
+      "status": "blocked",
+      "authority": "consumer-maintainer",
+      "reason": "Promotion requires human approval and a verified rollback anchor."
+    }
+  ],
+  "rollback": {
+    "anchor": ".identity/identity.toml",
+    "rule": "Keep v0 source and its last generated outputs until v1 promotion is accepted."
+  }
+}

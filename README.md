@@ -77,6 +77,26 @@ Raster/vector rendering, asset application, packaging, and publication remain
 outside this extracted vertical slice. See the
 [Empathy extraction evidence](docs/migration/EMPATHY_EXTRACTION.md).
 
+## Identity v1 source
+
+The v1 contract adds content-addressed organization defaults, intentional
+product overrides, DTCG-compatible semantic tokens, versioned target profiles,
+asset provenance/licensing, and human approvals beneath `.identity/`.
+
+```bash
+python3 scripts/validate_identity.py \
+  --repository-root "tests/fixtures/v1/valid/minimal" \
+  --format "human"
+
+python3 scripts/plan_v0_migration.py \
+  --repository-root "tests/fixtures/migration/empathy-v0" \
+  --format "human"
+```
+
+Both tools are standard-library-only, offline, and non-mutating. The complete
+[v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
+aliases, compatibility, diagnostics, migration, and rollback.
+
 ## State and authority
 
 | State | Owner | Meaning |
@@ -115,7 +135,7 @@ until their owning issues land.
 | Brand Kit product contract | Accepted | [#6](https://github.com/egohygiene/identity/issues/6) |
 | Toolchain decisions | Accepted | [#7](https://github.com/egohygiene/identity/issues/7), [evaluation](docs/evaluations/brand-kit-foundations.md), [ADRs](DECISIONS.md) |
 | Independent CLI | Implemented in this change | [#8](https://github.com/egohygiene/identity/issues/8) |
-| v1 identity schema | Proposed | [#9](https://github.com/egohygiene/identity/issues/9) |
+| v1 identity schema | Implemented in this change | [#9](https://github.com/egohygiene/identity/issues/9), [contract](docs/contracts/IDENTITY_V1.md) |
 | Compiler and packages | Proposed | [#10](https://github.com/egohygiene/identity/issues/10), [#11](https://github.com/egohygiene/identity/issues/11) |
 | Quality and governance | Proposed | [#12](https://github.com/egohygiene/identity/issues/12), [#13](https://github.com/egohygiene/identity/issues/13) |
 | Renderer and asset studio | Proposed | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |

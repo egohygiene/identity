@@ -62,6 +62,19 @@ jobs:
       - name: Run command parity and unit tests
         run: cargo test --locked --all-features
 
+      - name: Run v1 schema, diagnostics, and migration tests
+        run: >-
+          python3 -m unittest discover
+          --start-directory tests
+          --pattern "test_*.py"
+          --verbose
+
+      - name: Validate the complete v1 fixture
+        run: >-
+          python3 scripts/validate_identity.py
+          --repository-root "tests/fixtures/v1/valid/minimal"
+          --format "human"
+
       - name: Verify extraction provenance and profile inventory
         run: python3 scripts/verify_extraction.py
 
@@ -71,7 +84,7 @@ jobs:
           set -euo pipefail
           while IFS= read -r document; do
             python3 -m json.tool "${document}" >/dev/null
-          done < <(find contracts migration profiles -type f -name "*.json" -print | sort)
+          done < <(find contracts migration profiles tests/fixtures -type f -name "*.json" -print | sort)
 
       - name: Compile Python verification tools
-        run: python3 -m compileall -q scripts
+        run: python3 -m compileall -q scripts tests

@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "unresolved-alias",
+  "mutations": [
+    {
+      "document": ".identity/overrides/product.tokens.json",
+      "operation": "replace",
+      "pointer": "/color/action/primary/$value",
+      "value": "{color.missing}"
+    }
+  ],
+  "expectedCodes": ["IDN1305"]
+}

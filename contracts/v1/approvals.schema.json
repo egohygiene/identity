@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/approvals.schema.json",
+  "title": "Identity v1 human approval decisions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "decisions"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)approvals.schema.json$" },
+    "schema": { "const": "identity.approvals/v1" },
+    "decisions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/decision" }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "subject",
+        "status",
+        "reviewedBy",
+        "reviewedAt",
+        "evidence",
+        "notes"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "subject": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["approved", "rejected", "superseded"] },
+        "reviewedBy": { "type": "string", "minLength": 1 },
+        "reviewedAt": { "type": "string", "format": "date-time" },
+        "evidence": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "missing-provenance",
+  "mutations": [
+    {
+      "document": ".identity/governance/provenance.json",
+      "operation": "remove",
+      "pointer": "/assets/0"
+    }
+  ],
+  "expectedCodes": ["IDN1401"]
+}
