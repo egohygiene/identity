@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 512" role="img" aria-labelledby="title desc">
+  <title id="title">identity — brand kit generator</title>
+  <desc id="desc">Lowercase identity wordmark beside a luminous crystal prism and restrained cosmic geometry.</desc>
+  <defs>
+    <linearGradient id="crystal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2efe9"/>
+      <stop offset="0.28" stop-color="#d4af6a"/>
+      <stop offset="0.58" stop-color="#bca9ff"/>
+      <stop offset="0.8" stop-color="#6a4cff"/>
+      <stop offset="1" stop-color="#6ea8ff"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop offset="0" stop-color="#f2efe9" stop-opacity="0.72"/>
+      <stop offset="0.22" stop-color="#d4af6a" stop-opacity="0.24"/>
+      <stop offset="0.58" stop-color="#6a4cff" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#0a0a0e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1536" height="512" fill="#0a0a0e"/>
+  <circle cx="1102" cy="255" r="330" fill="url(#halo)" opacity="0.42"/>
+
+  <g fill="none" stroke="#d4af6a" opacity="0.22">
+    <circle cx="1102" cy="247" r="182" stroke-width="1.2"/>
+    <circle cx="1102" cy="247" r="148" stroke-width="0.9"/>
+    <circle cx="1102" cy="247" r="116" stroke-width="0.7" stroke-dasharray="2 7"/>
+    <line x1="884" y1="247" x2="1320" y2="247" stroke-width="0.8"/>
+    <line x1="1102" y1="40" x2="1102" y2="462" stroke-width="0.8"/>
+  </g>
+
+  <g opacity="0.28" fill="#bca9ff">
+    <circle cx="920" cy="116" r="1.4"/><circle cx="1278" cy="92" r="1.1"/><circle cx="1360" cy="310" r="1.2"/>
+    <circle cx="854" cy="372" r="1.1"/><circle cx="1198" cy="424" r="1.4"/><circle cx="1000" cy="64" r="0.9"/>
+  </g>
+
+  <g filter="url(#soft-glow)">
+    <line x1="1102" y1="74" x2="1102" y2="438" stroke="#f2efe9" stroke-width="1.8" opacity="0.86"/>
+    <polygon points="1102,128 1143,181 1143,310 1102,364 1061,310 1061,181" fill="url(#crystal)" fill-opacity="0.72" stroke="#f2efe9" stroke-width="1.2"/>
+    <polyline points="1102,128 1102,364" fill="none" stroke="#f2efe9" stroke-width="2" opacity="0.9"/>
+    <polyline points="1102,128 1061,181 1102,364" fill="none" stroke="#bca9ff" stroke-width="0.9" opacity="0.62"/>
+    <polyline points="1102,128 1143,181 1102,364" fill="none" stroke="#d4af6a" stroke-width="0.9" opacity="0.68"/>
+    <circle cx="1102" cy="76" r="4.5" fill="#f2efe9"/>
+    <circle cx="920" cy="247" r="3.4" fill="#f2efe9"/>
+    <circle cx="1284" cy="247" r="3.4" fill="#f2efe9"/>
+    <circle cx="1102" cy="418" r="3.4" fill="#f2efe9"/>
+  </g>
+
+  <g fill="none" stroke="#d4af6a" opacity="0.38">
+    <ellipse cx="1102" cy="421" rx="94" ry="18"/>
+    <ellipse cx="1102" cy="421" rx="66" ry="11" stroke-width="0.8"/>
+    <ellipse cx="1102" cy="421" rx="42" ry="6" stroke-width="0.6"/>
+  </g>
+
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="112" y="262" fill="#f2efe9" font-size="116" font-weight="300" letter-spacing="17">identity</text>
+    <text x="120" y="328" fill="#d4af6a" font-size="30" font-weight="300" letter-spacing="9">brand kit generator</text>
+  </g>
+</svg>
