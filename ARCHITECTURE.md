@@ -75,7 +75,7 @@ Dependencies point inward toward stable contracts and domain behavior. External 
 - **Source contract:** versioned consumer-owned `.identity/` intent.
 - **CLI contract:** local orchestration and human-readable/machine-readable diagnostics.
 - **Compiler contract:** provider-independent domain and application ports, versioned plan/manifest schemas, adapter compatibility, and transactional generated-state recovery.
-- **Package contract:** versioned tokens, assets, metadata, voice, manifests, checksums, and compatibility.
+- **Package contract:** versioned profile selection and generated tokens, assets, metadata, guidance, indexes, checksums, deterministic archives, and compatibility as documented by [`docs/contracts/BRAND_KIT_PACKAGES_V1.md`](docs/contracts/BRAND_KIT_PACKAGES_V1.md).
 - **Brand Kit view model:** framework-neutral public representation of an immutable release.
 - **Renderer contract:** replaceable presentation of the view model.
 - **Consumer contract:** pinned installation without access to repository internals.
@@ -116,7 +116,7 @@ defined by the [dependency policy](docs/DEPENDENCY_POLICY.md).
 - The compiler is deterministic and offline by default; networked generation is an explicit provider handoff.
 - Transient state is ignored, disposable, and never promoted implicitly.
 
-## Implemented compiler boundary
+## Implemented compiler and package boundary
 
 The v1 compiler core is a public Rust library boundary described by
 [`docs/contracts/COMPILER_V1.md`](docs/contracts/COMPILER_V1.md). It owns
@@ -132,10 +132,21 @@ writes under `.cache/identity/transactions/`, backs up replacements/removals,
 promotes the generated manifest last, and fails closed until an interrupted
 transaction is explicitly recovered.
 
-The core rejects network-dependent or nondeterministic projection adapters. It
-does not yet implement the concrete DTCG/CSS/Tailwind/metadata/vector/raster or
-package profiles tracked by #11, and it does not add a generation CLI command
-before those public projections exist.
+The built-in package layer consumes those ports rather than bypassing them. It
+adds a framework-neutral `identity.brand-kit-model/v1`, nine semantically
+versioned output profiles, and six offline adapters for token, metadata,
+guidance, approved SVG, raster, and archive projections. Generated artifacts
+include DTCG/CSS/JavaScript/TypeScript/Tailwind token packages, document CSS,
+metadata and Open Graph projections, PWA/GitHub/social imagery, checksums,
+package indexes, and a deterministic ZIP. SVG rasterization is isolated behind
+the accepted `resvg` adapter boundary; archive bytes are produced by an
+Identity-owned deterministic ZIP32 writer.
+
+The compiler still rejects network-dependent or nondeterministic adapters. The
+package layer does not make its output canonical, does not publish implicitly,
+and does not add a generation CLI command. Broader accessibility, provenance,
+visual-regression, and motion consistency gates remain the validation layer
+owned by #12 and umbrella #3.
 
 ## Trust boundaries
 
@@ -147,9 +158,9 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | --- | --- | --- |
 | Product contract | Accepted architecture documents | Maintained v1 boundary and compatibility policy |
 | CLI foundation | Extracted workspace with `init`, `validate`, `plan`, and `handoff` parity evidence | Evolve through versioned contracts without losing the local-first authority boundary |
-| Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while concrete projections consume the resolved model |
-| Compiler pipeline | Deterministic Rust core, adapter registry, mutation-free plan, plan/manifest schemas, checksum evidence, transactional local store, recovery tests, and offline/compatibility gates | Concrete Brand Kit projection adapters and profile integration without changing core authority boundaries |
-| Packages and projection validation | Proposed in #11 and later quality gates | Reproducible distributions with golden outputs, package checksums, and release-blocking evidence |
+| Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while package and consumer layers consume the resolved model |
+| Compiler pipeline | Deterministic Rust core, adapter registry, mutation-free plan, plan/manifest schemas, checksum evidence, transactional local store, recovery tests, and offline/compatibility gates | Preserve authority boundaries while downstream validation and interfaces evolve |
+| Packages and projection validation | Nine versioned profiles, built-in offline adapters, DTCG/web/document/metadata/raster/archive projections, deterministic package/checksum schemas, cross-repository byte-identity tests, incremental tests, and subset-selection tests | Release-blocking accessibility/provenance/visual gates plus immutable consumer/release proof |
 | Renderer and studio | Proposed | Accessible framework-replaceable reference experience |
 | Public route | Deferred pending released artifacts and website work | Immutable `/identity` deployment with `/brand-kit` redirect |
 

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/brand-kit-package.schema.json",
+  "title": "Identity Brand Kit package index v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "projectId",
+    "sourceDigest",
+    "profiles",
+    "files"
+  ],
+  "properties": {
+    "schema": {
+      "const": "identity.brand-kit-package/v1"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "sourceDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "profiles": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "core",
+          "web",
+          "pwa",
+          "github",
+          "docs",
+          "social",
+          "tokens",
+          "metadata",
+          "archive"
+        ]
+      }
+    },
+    "files": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/file"
+      }
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}
