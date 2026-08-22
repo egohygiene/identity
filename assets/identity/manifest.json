@@ -1,0 +1,70 @@
+{
+  "schema": "identity.brand-assets-manifest/v0",
+  "status": "human-approved-visual-direction",
+  "approved_on": "2026-08-22",
+  "authority": {
+    "canonical": "future consumer-owned .identity/ source contract",
+    "generated": "assets/identity/",
+    "note": "This commit records reviewed generated projections without redefining the canonical Identity source boundary."
+  },
+  "generation": {
+    "method": "AI-assisted visual exploration followed by explicit human selection and deterministic production projections",
+    "direction": "lowercase, near-black, warm ivory, soft gold, spectral lavender/blue, luminous crystal/prism, restrained cosmic geometry"
+  },
+  "palette": {
+    "obsidian": "#0A0A0E",
+    "ivory": "#F2EFE9",
+    "aureus": "#D4AF6A",
+    "champagne": "#CDBA9A",
+    "lavender-spectrum": "#BCA9FF",
+    "deep-violet": "#6A4CFF",
+    "luminous-blue": "#6EA8FF"
+  },
+  "outputs": {
+    "hero": [
+      {"path": "brand/banner-readme.webp", "role": "README hero", "dimensions": "1536x512", "git_blob": "ddf31f1b0489d242fcba7b8d5fd8c5864cf2661b"},
+      {"path": "brand/banner-hires.webp", "role": "high-resolution 3:1 hero", "dimensions": "1800x600", "git_blob": "8256dbbc83a6e632f5e391635e580904b37af8b7"}
+    ],
+    "production_vectors": [
+      "brand/emblem.svg",
+      "brand/avatar-square.svg",
+      "brand/lockup-horizontal.svg",
+      "brand/social-preview.svg",
+      "brand/open-graph.svg"
+    ],
+    "guidelines": [
+      "guidelines/color-palette.svg",
+      "guidelines/design-system.svg",
+      "guidelines/usage-guidelines.svg"
+    ],
+    "reference_previews": [
+      {"path": "reference/master-emblem.webp", "git_blob": "51d893116ba14f582a43a348fa373490127a2fa6"},
+      {"path": "reference/avatar-square.webp", "git_blob": "31fa6e91f387e1e59b17593f92f9b242350dc919"},
+      {"path": "reference/lockup.webp", "git_blob": "7e58ee872d8442bfa4cad7231c5d15578376f9b7"},
+      {"path": "reference/social-preview.webp", "git_blob": "b52d7993ce18718ecf2516b4dc731c8965bd919b"},
+      {"path": "reference/color-palette.webp", "git_blob": "43921d4427ba9650e0aba373a1e7c91fcfae888a"},
+      {"path": "reference/design-system.webp", "git_blob": "7eb5e45da76d29ee6f96be7177e5c3c34f91b335"},
+      {"path": "reference/usage-guidelines.webp", "git_blob": "7ae7e3399065eba80c06a67cf91c6da2203e55b4"}
+    ],
+    "web": [
+      "web/icon.svg",
+      "web/maskable-icon.svg",
+      "web/apple-touch-icon.png",
+      "web/icon-192x192.png",
+      "web/favicon.png",
+      "web/favicon-16x16.png",
+      "web/favicon-32x32.png",
+      "web/favicon-48x48.png",
+      "web/favicon-64x64.png",
+      "web/site.webmanifest",
+      "web/identity-palette.css"
+    ]
+  },
+  "integration_targets": [
+    "GitHub README",
+    "Repository Intelligence",
+    "Zensical",
+    "LaunchKit",
+    "future Relay brand projection actions"
+  ]
+}
