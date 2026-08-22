@@ -22,7 +22,8 @@
   },
   "outputs": {
     "hero": [
-      {"path": "brand/banner-readme.webp", "role": "README hero", "dimensions": "1536x512", "git_blob": "ddf31f1b0489d242fcba7b8d5fd8c5864cf2661b"},
+      {"path": "brand/banner-readme.svg", "role": "README hero; cross-client safe vector projection", "dimensions": "1536x512 viewBox"},
+      {"path": "brand/banner-readme.webp", "role": "legacy raster README projection retained for web consumers", "dimensions": "1536x512", "git_blob": "ddf31f1b0489d242fcba7b8d5fd8c5864cf2661b"},
       {"path": "brand/banner-hires.webp", "role": "high-resolution 3:1 hero", "dimensions": "1800x600", "git_blob": "8256dbbc83a6e632f5e391635e580904b37af8b7"}
     ],
     "production_vectors": [
