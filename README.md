@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/identity/brand/banner-readme.webp" alt="identity — brand kit generator" width="100%" />
+  <img src="assets/identity/brand/banner-readme.svg" alt="identity — brand kit generator" width="100%" />
 </p>
 
 # Identity
