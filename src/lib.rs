@@ -3,6 +3,7 @@
 
 pub mod brandkit;
 pub mod compiler;
+pub mod motion;
 pub mod quality;
 
 mod cli;

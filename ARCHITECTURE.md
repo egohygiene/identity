@@ -80,7 +80,7 @@ Dependencies point inward toward stable contracts and domain behavior. External 
 - **Renderer contract:** replaceable presentation of the view model.
 - **Consumer contract:** pinned installation without access to repository internals.
 - **Publication handoff:** explicit promotion and rollback metadata for an immutable release.
-- **Evidence contract:** `identity.quality-report/v1` with stable statuses, coverage/skips, human-review boundaries, source/generated context, and release decisions as documented by [`docs/contracts/QUALITY_GATES_V1.md`](docs/contracts/QUALITY_GATES_V1.md).
+- **Evidence contract:** `identity.quality-report/v1` with stable statuses, coverage/skips, human-review boundaries, source/generated context, and release decisions as documented by [`docs/contracts/QUALITY_GATES_V1.md`](docs/contracts/QUALITY_GATES_V1.md); governed visual-motion producers additionally use `identity.motion-policy/v1` and `identity.visual-motion-manifest/v1` from [`docs/contracts/VISUAL_MOTION_V1.md`](docs/contracts/VISUAL_MOTION_V1.md).
 
 Exact fields, commands, and package formats belong to their versioned specifications and roadmap issues.
 
@@ -91,7 +91,7 @@ Exact fields, commands, and package formats belong to their versioned specificat
 | Hygiene | Organization policy and conformance requirements | Supplies versioned requirements; does not own product brand intent |
 | Aether | Shared schemas, architecture vocabulary, and agent instructions | Governs document/contracts conventions through published artifacts |
 | Holon | Reusable product components and templates | Consumes Identity tokens and packages; does not invent a second palette |
-| Relay | Reusable CI/CD and release automation | Executes thin, pinned validation and release workflows |
+| Relay | Reusable CI/CD and release automation | Executes thin, pinned validation/release workflows; Relay #8 owns deterministic browser/demo capture that emits Identity-owned visual-motion provenance rather than defining a second motion policy |
 | Pace | Fleet synchronization and conformance changes | Proposes or applies versioned consumer upgrades through explicit plans |
 | Observatory | Organization health and evidence projection | Reads stable Identity validation and release evidence |
 | Empathy | Baseline consumer and former incubation host | Owns its `.identity/` source and consumes an immutable Identity release |
@@ -116,7 +116,7 @@ defined by the [dependency policy](docs/DEPENDENCY_POLICY.md).
 - The compiler is deterministic and offline by default; networked generation is an explicit provider handoff.
 - Transient state is ignored, disposable, and never promoted implicitly.
 
-## Implemented compiler, package, and quality boundary
+## Implemented compiler, package, quality, and motion boundary
 
 The v1 compiler core is a public Rust library boundary described by
 [`docs/contracts/COMPILER_V1.md`](docs/contracts/COMPILER_V1.md). It owns
@@ -155,10 +155,20 @@ metadata so creative content and approval/license lineage do not collapse into
 one authority object. Quality evaluation is read-only and cannot repair source,
 rewrite generated artifacts, approve creative changes, or publish a release.
 
+The #3 visual-motion layer extends that existing report rather than creating a
+parallel validator. `identity.motion-policy/v1` constrains purpose-specific
+duration/file-size budgets, cheap animated properties, easing, frame rate,
+dimensions, deterministic capture modes, and reduced-motion behavior.
+`identity.visual-motion-manifest/v1` records source license/approval, immutable
+capture lineage, generator version, output digests/geometry/timing, behavioral
+semantics, capture context, fallback digests, and baseline identity. Objective
+checks are automated while motion meaning, direction/origin, and changed visual
+baselines remain human decisions. Relay #8 is a downstream capture producer for
+this contract, not an Identity runtime dependency.
+
 Renderer interaction checks are deliberately skipped in package scope and become
 blocking review requirements in publication scope until #14 supplies browser
-evidence. Astryx/motion-specific consistency remains #3 work and must extend the
-same report/release-decision contract rather than create a parallel validator.
+evidence.
 
 ## Trust boundaries
 
@@ -173,7 +183,8 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while package and consumer layers consume the resolved model |
 | Compiler pipeline | Deterministic Rust core, adapter registry, mutation-free plan, plan/manifest schemas, checksum evidence, transactional local store, recovery tests, and offline/compatibility gates | Preserve authority boundaries while downstream validation and interfaces evolve |
 | Packages and projection validation | Nine versioned profiles, built-in offline adapters, DTCG/web/document/metadata/raster/archive projections, deterministic package/checksum schemas, cross-repository byte-identity tests, incremental tests, and subset-selection tests | Preserve package compatibility through real consumer/release proof |
-| Quality and release evidence | `identity.quality-report/v1`, package/publication scopes, WCAG/reduced-motion/source-governance/SVG/PNG/manifest/budget checks, visual baselines, explicit skips, and human-review tests | Extend with #3 motion consistency and #14 browser evidence without changing authority boundaries |
+| Quality and release evidence | `identity.quality-report/v1`, package/publication scopes, WCAG/reduced-motion/source-governance/SVG/PNG/manifest/budget checks, visual baselines, explicit skips, and human-review tests | Preserve the single release authority while #14 supplies browser evidence |
+| Visual-motion governance | `identity.motion-policy/v1`, `identity.visual-motion-manifest/v1`, Astryx adopt/adapt/reject evidence, deterministic capture/provenance checks, purpose budgets, reduced-motion fallbacks, baseline review, and adversarial tests | Consume deterministic capture evidence from Relay #8 and renderer evidence from #14 without coupling Identity to their implementations |
 | Renderer and studio | Proposed | Accessible framework-replaceable reference experience |
 | Public route | Deferred pending released artifacts and website work | Immutable `/identity` deployment with `/brand-kit` redirect |
 

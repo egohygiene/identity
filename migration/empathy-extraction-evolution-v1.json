@@ -5,9 +5,9 @@
     {
       "destination": "src/lib.rs",
       "baseline_sha256": "696dfac6faa771c3068c38d45893f19b0ea6e6f9301be0e627a1aff4c9f3eb11",
-      "current_sha256": "005f09de50868310d6ee98c54346954c9ecf69f498342bc9b74c2fd7ce16895e",
-      "issue": "https://github.com/egohygiene/identity/issues/12",
-      "reason": "Continue the intentional post-extraction evolution from #10 and #11 by exporting the shared Brand Kit quality/evidence harness while preserving the original Empathy extraction digest and existing CLI parity evidence."
+      "current_sha256": "4749c22cbd0e681fcd75b7921afc0d62fdda2ce371bd34f84c346a54888b2003",
+      "issue": "https://github.com/egohygiene/identity/issues/3",
+      "reason": "Continue the intentional post-extraction evolution from #10, #11, and #12 by exporting governed visual-motion validation that contributes to the canonical quality report while preserving the original Empathy extraction digest and existing CLI parity evidence."
     }
   ]
 }

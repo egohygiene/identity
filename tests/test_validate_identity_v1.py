@@ -142,11 +142,13 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "compiler-manifest.schema.json",
                 "compiler-plan.schema.json",
                 "diagnostics.schema.json",
+                "motion-policy.schema.json",
                 "project.schema.json",
                 "quality-report.schema.json",
                 "provenance.schema.json",
                 "targets.schema.json",
                 "tokens.schema.json",
+                "visual-motion-manifest.schema.json",
             },
         )
         self.assertEqual(
@@ -176,6 +178,14 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["quality-report.schema.json"]["properties"]["schema"]["const"],
             "identity.quality-report/v1",
+        )
+        self.assertEqual(
+            schemas["motion-policy.schema.json"]["properties"]["schema"]["const"],
+            "identity.motion-policy/v1",
+        )
+        self.assertEqual(
+            schemas["visual-motion-manifest.schema.json"]["properties"]["schema"]["const"],
+            "identity.visual-motion-manifest/v1",
         )
 
     def test_cli_returns_stable_json_and_process_status(self) -> None:

@@ -163,8 +163,29 @@ explicit human decisions rather than automated approval.
 
 The [quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md) defines the
 status vocabulary, default budgets, review evidence, failure/recovery semantics,
-and the extension boundary for #3. Astryx/motion-specific validation remains
-#3 work and must extend this harness rather than create a second release gate.
+and the extension boundary used by visual-motion governance.
+
+## Visual-motion governance
+
+The visual-motion layer extends that same `identity.quality-report/v1` release
+decision with versioned `identity.motion-policy/v1` and
+`identity.visual-motion-manifest/v1` contracts. It validates animation,
+generated imagery, landing sequences, continuous-status motion, and
+deterministic demo captures without creating a second release authority.
+
+The default policy is meaning-first and conservative: UI movement uses
+`transform`/`opacity`, standard decelerating easing, bounded purpose-specific
+durations and file sizes, non-blocking interaction, deterministic synthetic
+capture state, and real reduced-motion fallbacks where pre-rendered motion is
+used. Motion meaning, direction/origin, and intentional baseline changes remain
+explicit human-review boundaries.
+
+The [visual-motion v1 contract](docs/contracts/VISUAL_MOTION_V1.md) defines the
+stable runtime/evidence boundary. The
+[Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) records the
+pinned upstream research, MIT license decision, and adopt/adapt/reject matrix.
+Relay #8 owns deterministic browser/demo capture and should emit this
+Identity-owned provenance contract; Relay does not become motion-policy owner.
 
 ## State and authority
 
@@ -196,9 +217,9 @@ and the extension boundary for #3. Astryx/motion-specific validation remains
 
 The Brand Kit product contract and toolchain decisions are accepted. The
 extracted CLI, v1 source contract, deterministic compiler core, built-in
-projection/package layer, and shared quality/evidence harness are implemented.
-Astryx/motion validation (#3), voice/usage/approval guidance (#13), and the
-public renderer/studio remain the next gates.
+projection/package layer, shared quality/evidence harness, and governed
+visual-motion validation are implemented. Voice/usage/approval guidance (#13)
+and the public renderer/studio remain the next gates.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
@@ -208,8 +229,8 @@ public renderer/studio remain the next gates.
 | v1 identity schema | Implemented | [#9](https://github.com/egohygiene/identity/issues/9), [contract](docs/contracts/IDENTITY_V1.md) |
 | Compiler core | Implemented | [#10](https://github.com/egohygiene/identity/issues/10), [contract](docs/contracts/COMPILER_V1.md) |
 | Projection adapters and packages | Implemented | [#11](https://github.com/egohygiene/identity/issues/11), [contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md) |
-| Quality and release evidence | Implemented in this change | [#12](https://github.com/egohygiene/identity/issues/12), [contract](docs/contracts/QUALITY_GATES_V1.md) |
-| Visual-motion validation | Proposed | [#3](https://github.com/egohygiene/identity/issues/3) |
+| Quality and release evidence | Implemented | [#12](https://github.com/egohygiene/identity/issues/12), [contract](docs/contracts/QUALITY_GATES_V1.md) |
+| Visual-motion validation | Implemented in this change | [#3](https://github.com/egohygiene/identity/issues/3), [contract](docs/contracts/VISUAL_MOTION_V1.md), [Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) |
 | Voice, usage, and approval guidance | Proposed | [#13](https://github.com/egohygiene/identity/issues/13) |
 | Renderer and asset studio | Proposed | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public `/identity` route | Deferred until its dependencies land | [#16](https://github.com/egohygiene/identity/issues/16) |
@@ -234,6 +255,8 @@ until the required Empathy and OptiFlow consumer proof lands through #17.
 - [Compiler v1 contract](docs/contracts/COMPILER_V1.md)
 - [Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
 - [Quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md)
+- [Visual-motion v1 contract](docs/contracts/VISUAL_MOTION_V1.md)
+- [Astryx motion-pattern evaluation](docs/evaluations/astryx-motion-patterns.md)
 - [Roadmap](ROADMAP.md)
 
 The [roadmap issue](https://github.com/egohygiene/identity/issues/5) is the execution source of truth. Architecture documents define durable intent and boundaries; individual issues own implementation detail and evidence.

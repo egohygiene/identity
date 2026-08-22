@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/visual-motion-manifest.schema.json",
+  "title": "Identity v1 visual and motion asset manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "projectId", "sourceDigest", "assets"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)visual-motion-manifest.schema.json$" },
+    "schema": { "const": "identity.visual-motion-manifest/v1" },
+    "projectId": { "$ref": "#/$defs/identifier" },
+    "sourceDigest": { "$ref": "#/$defs/sha256" },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "source",
+        "generator",
+        "output",
+        "behavior",
+        "capture",
+        "baselineTargetId"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "kind": { "enum": ["animation", "imagery", "demo-capture"] },
+        "source": { "$ref": "#/$defs/source" },
+        "generator": { "$ref": "#/$defs/generator" },
+        "output": { "$ref": "#/$defs/output" },
+        "behavior": { "$ref": "#/$defs/behavior" },
+        "capture": { "$ref": "#/$defs/capture" },
+        "baselineTargetId": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["creator", "method", "reference", "sha256", "licenseSpdx", "approval"],
+      "properties": {
+        "creator": { "type": "string", "minLength": 1 },
+        "method": { "enum": ["first-party", "captured", "generated", "licensed"] },
+        "reference": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "licenseSpdx": { "type": "string", "minLength": 1 },
+        "approval": { "$ref": "#/$defs/identifier" },
+        "repository": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "scriptPath": { "type": "string", "minLength": 1 },
+        "fixturePath": { "type": "string", "minLength": 1 },
+        "fixtureSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "mediaType", "sha256", "bytes", "width", "height"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "mediaType": { "enum": ["image/svg+xml", "image/png", "image/webp", "image/gif", "video/mp4", "video/webm"] },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "frameRate": { "type": "number", "exclusiveMinimum": 0 },
+        "durationMs": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "behavior": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "animatedProperties",
+        "easing",
+        "blocksInteraction",
+        "autoplay",
+        "looped",
+        "muted",
+        "reducedMotion"
+      ],
+      "properties": {
+        "purpose": { "enum": ["micro-interaction", "transition", "landing-sequence", "continuous-status", "demo-capture", "static-imagery"] },
+        "animatedProperties": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "easing": { "type": "string", "minLength": 1 },
+        "blocksInteraction": { "type": "boolean" },
+        "autoplay": { "type": "boolean" },
+        "looped": { "type": "boolean" },
+        "muted": { "type": "boolean" },
+        "reducedMotion": { "enum": ["instant", "static-fallback", "paired-reduced-capture"] },
+        "fallbackPath": { "type": "string", "minLength": 1 },
+        "fallbackSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "viewportWidth",
+        "viewportHeight",
+        "locale",
+        "timezone",
+        "networkMode",
+        "privacySafe",
+        "syntheticData"
+      ],
+      "properties": {
+        "viewportWidth": { "type": "integer", "minimum": 1 },
+        "viewportHeight": { "type": "integer", "minimum": 1 },
+        "locale": { "type": "string", "minLength": 1 },
+        "timezone": { "type": "string", "minLength": 1 },
+        "networkMode": { "enum": ["offline", "recorded-fixture", "live"] },
+        "privacySafe": { "type": "boolean" },
+        "syntheticData": { "type": "boolean" }
+      }
+    }
+  }
+}

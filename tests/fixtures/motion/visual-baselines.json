@@ -1,0 +1,11 @@
+{
+  "schema": "identity.visual-baselines/v1",
+  "baselines": [
+    {
+      "targetId": "identity-hero-motion",
+      "sha256": "c37063d859b38d5bc6116de5a34dfe2bd0ffc3530b16b0b008c76c4b387a5430",
+      "sourceContext": "tests/fixtures/motion/identity-hero.storyboard.txt",
+      "generatedContext": "tests/fixtures/motion/identity-hero.svg"
+    }
+  ]
+}

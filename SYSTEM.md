@@ -38,11 +38,11 @@ Identity is a Brand Kit generator with three product layers: compiler and contra
 | Deferred | The capability is intentionally outside the current boundary or awaits explicit dependencies |
 
 The product contract, extracted CLI foundation, v1 source contract, compiler
-core, built-in projection adapters, package contracts, and shared quality
-release-evidence harness are implemented or accepted with validation evidence.
-Astryx/motion validation, voice/usage/approval guidance, the reference renderer,
-studio, consumer proof, and publication remain proposed or deferred until their
-owning issues land.
+core, built-in projection adapters, package contracts, shared quality
+release-evidence harness, and governed visual-motion validation are implemented
+or accepted with validation evidence. Voice/usage/approval guidance, the
+reference renderer, studio, consumer proof, and publication remain proposed or
+deferred until their owning issues land.
 
 ## System inventory
 
@@ -53,8 +53,8 @@ owning issues land.
 | Identity source contract | Implemented | Models content-addressed organization defaults, intentional product overrides, DTCG semantic tokens, target profiles, approvals, licenses, provenance, and reserved voice/usage paths | `.identity/identity.json` and declared local documents | Stable diagnostics and validated resolved-token evidence | #1, #9 |
 | Compiler core | Implemented | Executes deterministic read, validate, resolve, plan, render, verify, manifest, transaction, and recovery boundaries behind replaceable ports | Resolved identity, target requests, adapter capabilities, and generated-state evidence | Stable plans, compatibility diagnostics, verified artifacts, manifests, checksums, and recovery evidence | #2, #10 |
 | Projection adapters | Implemented | Render DTCG/CSS/JS/TypeScript/Tailwind tokens, SVG/PNG assets, metadata, guidance, PWA/GitHub/social surfaces, and archives behind compiler ports | Resolved Brand Kit model, approved source bytes, and versioned target profiles | Verified target-specific artifacts with adapter evidence | #7, #11 |
-| Validation and evidence | Implemented in this change | Evaluate accessibility, dimensions, visual integrity, licensing, provenance, reproducibility, budgets, visual baselines, explicit skips, and human-review boundaries without mutation | Resolved Brand Kit model, compiler manifest, generated artifacts, baselines, review evidence | `identity.quality-report/v1`, release decision, coverage, source/generated context, and recovery guidance | #12 |
-| Visual-motion validation | Proposed | Extend the shared evidence model with Astryx-derived motion, animation, and generated-imagery consistency rules | Quality policy, motion assets, animation fixtures, provenance | Additional stable checks in the same quality report | #3 |
+| Validation and evidence | Implemented | Evaluate accessibility, dimensions, visual integrity, licensing, provenance, reproducibility, budgets, visual baselines, explicit skips, and human-review boundaries without mutation | Resolved Brand Kit model, compiler manifest, generated artifacts, baselines, review evidence | `identity.quality-report/v1`, release decision, coverage, source/generated context, and recovery guidance | #12 |
+| Visual-motion validation | Implemented in this change | Govern animation, generated imagery, landing sequences, status motion, and deterministic demo captures through purpose budgets, reduced-motion fallbacks, provenance, capture determinism, visual baselines, and human semantic review | `identity.motion-policy/v1`, `identity.visual-motion-manifest/v1`, generated assets, quality input, review evidence | Motion checks appended to the same `identity.quality-report/v1` release decision | #3 |
 | Package distribution | Implemented | Assemble versioned token, metadata, guidance, asset, index, checksum, and download bundles without exposing repository internals | Verified profile artifacts and resolved source digest | Portable package files, SHA-256 indexes, and deterministic ZIP bundle | #2, #11 |
 | Brand Kit renderer | Proposed | Present the generated view model as an accessible, framework-replaceable public reference experience | Versioned Brand Kit view model | Static/reference Brand Kit and downloads | #14 |
 | Asset studio | Proposed | Preview intent and candidates, compare results, and apply approved changes without making preview state canonical | Source, candidates, presets, view model | Preview, plan, approval record, handoff | #15 |
@@ -72,7 +72,7 @@ owning issues land.
 | Renderer interface | Identity | Reference static/public experience over an immutable view model |
 | Consumer interface | Consumer repository | Pinned package or release integration; no access to Identity internals |
 | Publication interface | Owning website or product | Explicit promotion of a verified immutable release with rollback data |
-| Evidence interface | Identity, Relay, Observatory | `identity.quality-report/v1`, stable diagnostics, compiler manifests, coverage/skips, review evidence, and health signals as documented by [QUALITY_GATES_V1.md](docs/contracts/QUALITY_GATES_V1.md) |
+| Evidence interface | Identity, Relay, Observatory | `identity.quality-report/v1` plus `identity.motion-policy/v1` and `identity.visual-motion-manifest/v1`, stable diagnostics, compiler manifests, coverage/skips, review evidence, and health signals as documented by [QUALITY_GATES_V1.md](docs/contracts/QUALITY_GATES_V1.md) and [VISUAL_MOTION_V1.md](docs/contracts/VISUAL_MOTION_V1.md) |
 
 ## Canonical, generated, transient, and published state
 
@@ -95,7 +95,7 @@ Resolve defaults and overrides, validate requirements, discover adapters, and en
 
 ### Generate and verify
 
-Select compatible output-profile IDs and versions, apply an accepted plan transactionally, render deterministic targets through offline adapters, validate format/dimension/package invariants, and emit a manifest. The shared #12 quality harness then evaluates accessibility, visual integrity, provenance/licensing, reproducibility, budgets, baselines, skips, and human-review requirements without mutation. Partial coverage cannot be reported as verified success; Astryx/motion-specific consistency remains #3 work.
+Select compatible output-profile IDs and versions, apply an accepted plan transactionally, render deterministic targets through offline adapters, validate format/dimension/package invariants, and emit a manifest. The shared #12 quality harness evaluates accessibility, visual integrity, provenance/licensing, reproducibility, budgets, baselines, skips, and human-review requirements without mutation; #3 adds governed motion/capture/provenance checks to that same report and release decision. Partial coverage cannot be reported as verified success.
 
 ### Review creative candidates
 

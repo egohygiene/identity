@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../contracts/v1/motion-policy.schema.json",
+  "schema": "identity.motion-policy/v1",
+  "durationsMs": {
+    "microInteraction": 200,
+    "transition": 500,
+    "landingSequence": 2000,
+    "continuousStatus": 2000,
+    "demoCapture": 15000
+  },
+  "assetBytes": {
+    "microInteraction": 262144,
+    "transition": 524288,
+    "landingSequence": 1048576,
+    "continuousStatus": 524288,
+    "demoCapture": 4194304,
+    "staticImagery": 1048576
+  },
+  "maximumFrameRate": 60,
+  "maximumDimensionPixels": 3840,
+  "allowedAnimatedProperties": ["opacity", "transform"],
+  "allowedEasing": ["ease-out", "ease-out-expo", "ease-out-quart", "ease-out-quint", "standard"],
+  "allowedNetworkModes": ["offline", "recorded-fixture"]
+}
