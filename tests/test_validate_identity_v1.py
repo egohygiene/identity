@@ -134,6 +134,19 @@ class IdentityV1ValidatorTests(unittest.TestCase):
             for path in (REPOSITORY_ROOT / "contracts/v1").glob("*.json")
         }
         self.assertEqual(
+            set(schemas),
+            {
+                "approvals.schema.json",
+                "compiler-manifest.schema.json",
+                "compiler-plan.schema.json",
+                "diagnostics.schema.json",
+                "project.schema.json",
+                "provenance.schema.json",
+                "targets.schema.json",
+                "tokens.schema.json",
+            },
+        )
+        self.assertEqual(
             schemas["project.schema.json"]["properties"]["schema"]["const"],
             validator.PROJECT_SCHEMA,
         )
@@ -141,7 +154,14 @@ class IdentityV1ValidatorTests(unittest.TestCase):
             schemas["diagnostics.schema.json"]["properties"]["schema"]["const"],
             validator.DIAGNOSTICS_SCHEMA,
         )
-        self.assertEqual(len(schemas), 6)
+        self.assertEqual(
+            schemas["compiler-plan.schema.json"]["properties"]["schema"]["const"],
+            "identity.compiler-plan/v1",
+        )
+        self.assertEqual(
+            schemas["compiler-manifest.schema.json"]["properties"]["schema"]["const"],
+            "identity.compiler-manifest/v1",
+        )
 
     def test_cli_returns_stable_json_and_process_status(self) -> None:
         valid = subprocess.run(

@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-21
+updated: 2026-08-22
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -53,9 +53,16 @@ They close only when the refining issues below provide implementation and valida
 
 ## Current wave
 
-Wave 0 is complete. Wave 1 now has an independently extracted CLI from #8 and
-the implemented v1 source/schema/validation boundary from #9. Empathy's pinned
-consumer transition remains the final extraction gate.
+Wave 0 is complete. Wave 1 has the independently extracted CLI from #8 and the
+implemented v1 source/schema/validation boundary from #9; Empathy's pinned
+consumer transition remains the final cross-repository extraction gate.
+
+Wave 2 is now active. #10 implements the deterministic, offline compiler core,
+adapter SDK, mutation-free plans, manifests, transactional generated-state
+apply, and explicit recovery. #11 remains the next gate: real Brand Kit
+projection adapters, named output profiles, versioned packages, golden outputs,
+and package checksums. The umbrella #2 remains open until those package outputs
+and the required consumer evidence are complete.
 
 Wave 0 establishes decisions that constrain every implementation PR:
 

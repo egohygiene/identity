@@ -10,7 +10,19 @@ beneath `identity/`; Empathy's consumer-owned intent remains beneath
 
 The machine-readable [extraction manifest](../../migration/empathy-extraction-v1.json)
 records the source-to-destination disposition and SHA-256 digest for each
-reusable implementation file.
+reusable implementation file at the extraction boundary. That manifest remains
+historical evidence and is not rewritten when canonical Identity implementation
+files later evolve.
+
+Intentional evolution of an originally byte-identical extracted file is recorded
+separately in the
+[extraction evolution registry](../../migration/empathy-extraction-evolution-v1.json).
+Each record preserves the original extraction digest, pins the exact current
+digest, links the owning issue, and explains why the canonical file changed.
+The verifier continues to require untouched extracted files to remain
+byte-identical and requires every intentionally evolved file to match its
+explicitly recorded current digest. This preserves extraction provenance without
+turning the extraction snapshot into a permanent implementation freeze.
 
 ## Preserved behavior
 
