@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-21
+updated: 2026-08-22
 governed_by:
   - architecture-architecture
 depends_on:
@@ -74,7 +74,7 @@ Dependencies point inward toward stable contracts and domain behavior. External 
 
 - **Source contract:** versioned consumer-owned `.identity/` intent.
 - **CLI contract:** local orchestration and human-readable/machine-readable diagnostics.
-- **Compiler contract:** provider-independent domain and application ports.
+- **Compiler contract:** provider-independent domain and application ports, versioned plan/manifest schemas, adapter compatibility, and transactional generated-state recovery.
 - **Package contract:** versioned tokens, assets, metadata, voice, manifests, checksums, and compatibility.
 - **Brand Kit view model:** framework-neutral public representation of an immutable release.
 - **Renderer contract:** replaceable presentation of the view model.
@@ -116,6 +116,27 @@ defined by the [dependency policy](docs/DEPENDENCY_POLICY.md).
 - The compiler is deterministic and offline by default; networked generation is an explicit provider handoff.
 - Transient state is ignored, disposable, and never promoted implicitly.
 
+## Implemented compiler boundary
+
+The v1 compiler core is a public Rust library boundary described by
+[`docs/contracts/COMPILER_V1.md`](docs/contracts/COMPILER_V1.md). It owns
+framework-neutral models and ports for reading, validating, resolving, planning,
+rendering, verification, manifests, adapter discovery, and generated-state
+transactions.
+
+Planning is mutation-free and records create, replace, remove, unchanged, or
+blocked actions together with checksums, compatibility evidence, warnings, and
+required approvals. Rendering and adapter verification complete before the
+artifact store receives mutation authority. The local store stages verified
+writes under `.cache/identity/transactions/`, backs up replacements/removals,
+promotes the generated manifest last, and fails closed until an interrupted
+transaction is explicitly recovered.
+
+The core rejects network-dependent or nondeterministic projection adapters. It
+does not yet implement the concrete DTCG/CSS/Tailwind/metadata/vector/raster or
+package profiles tracked by #11, and it does not add a generation CLI command
+before those public projections exist.
+
 ## Trust boundaries
 
 Canonical source, generated work state, released packages, provider sessions, CI, and published surfaces are separate trust zones. Every crossing requires explicit data, authority, version, error, privacy, and recovery behavior. Credentials, private source material, and unapproved candidates never enter public artifacts or provenance intended for distribution.
@@ -126,9 +147,9 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | --- | --- | --- |
 | Product contract | Accepted architecture documents | Maintained v1 boundary and compatibility policy |
 | CLI foundation | Extracted workspace with `init`, `validate`, `plan`, and `handoff` parity evidence | Evolve through versioned contracts without losing the local-first authority boundary |
-| Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while the compiler adopts the resolved model |
-| Compiler pipeline | Proposed issues and prior planning behavior | Deterministic adapter pipeline over the validated v1 model |
-| Packages and validation | Proposed | Reproducible distributions with release-blocking evidence |
+| Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while concrete projections consume the resolved model |
+| Compiler pipeline | Deterministic Rust core, adapter registry, mutation-free plan, plan/manifest schemas, checksum evidence, transactional local store, recovery tests, and offline/compatibility gates | Concrete Brand Kit projection adapters and profile integration without changing core authority boundaries |
+| Packages and projection validation | Proposed in #11 and later quality gates | Reproducible distributions with golden outputs, package checksums, and release-blocking evidence |
 | Renderer and studio | Proposed | Accessible framework-replaceable reference experience |
 | Public route | Deferred pending released artifacts and website work | Immutable `/identity` deployment with `/brand-kit` redirect |
 

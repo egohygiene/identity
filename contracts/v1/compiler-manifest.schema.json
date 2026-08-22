@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/compiler-manifest.schema.json",
+  "title": "Identity compiler manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "projectId",
+    "sourceDigest",
+    "planDigest",
+    "outputs",
+    "adapters",
+    "evidence"
+  ],
+  "properties": {
+    "schema": { "const": "identity.compiler-manifest/v1" },
+    "projectId": { "$ref": "#/$defs/identifier" },
+    "sourceDigest": { "$ref": "#/$defs/sha256" },
+    "planDigest": { "$ref": "#/$defs/sha256" },
+    "outputs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/output" }
+    },
+    "adapters": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/adapter" }
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidence" }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*//).+[^/]$"
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetId",
+        "profile",
+        "path",
+        "mediaType",
+        "adapterId",
+        "adapterVersion",
+        "inputFingerprint",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "targetId": { "type": "string", "minLength": 1 },
+        "profile": { "type": "string", "minLength": 1 },
+        "path": { "$ref": "#/$defs/path" },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "adapterId": { "type": "string", "minLength": 1 },
+        "adapterVersion": { "type": "string", "minLength": 1 },
+        "inputFingerprint": { "$ref": "#/$defs/sha256" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "kind",
+        "compilerApiMajor",
+        "deterministic",
+        "offline",
+        "capabilities"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "version": { "type": "string", "minLength": 1 },
+        "kind": {
+          "enum": [
+            "token-transformer",
+            "vector-renderer",
+            "raster-renderer",
+            "font",
+            "metadata",
+            "archive",
+            "publication"
+          ]
+        },
+        "compilerApiMajor": { "const": 1 },
+        "deterministic": { "type": "boolean" },
+        "offline": { "type": "boolean" },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetId", "adapterId", "check", "status", "message"],
+      "properties": {
+        "targetId": { "type": "string", "minLength": 1 },
+        "adapterId": { "type": "string", "minLength": 1 },
+        "check": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["verified", "warning", "skipped"] },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

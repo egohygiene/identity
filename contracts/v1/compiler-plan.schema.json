@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/compiler-plan.schema.json",
+  "title": "Identity compiler plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "projectId",
+    "sourceDigest",
+    "planDigest",
+    "outputRoot",
+    "manifestPath",
+    "actions",
+    "compatibility",
+    "diagnostics",
+    "requiredApprovals"
+  ],
+  "properties": {
+    "schema": { "const": "identity.compiler-plan/v1" },
+    "projectId": { "$ref": "#/$defs/identifier" },
+    "sourceDigest": { "$ref": "#/$defs/sha256" },
+    "planDigest": { "$ref": "#/$defs/sha256" },
+    "outputRoot": { "$ref": "#/$defs/path" },
+    "manifestPath": { "$ref": "#/$defs/path" },
+    "actions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/action" }
+    },
+    "compatibility": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/compatibility" }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/diagnostic" }
+    },
+    "requiredApprovals": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*//).+[^/]$"
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "targetId",
+        "path",
+        "adapterId",
+        "adapterVersion",
+        "operation",
+        "inputFingerprint",
+        "currentSha256",
+        "currentBytes",
+        "previousSha256",
+        "requiredApprovals",
+        "warnings"
+      ],
+      "properties": {
+        "scope": { "enum": ["artifact", "manifest"] },
+        "targetId": { "type": "string", "minLength": 1 },
+        "path": { "$ref": "#/$defs/path" },
+        "adapterId": { "type": "string", "minLength": 1 },
+        "adapterVersion": { "type": "string" },
+        "operation": { "enum": ["create", "replace", "remove", "unchanged", "blocked"] },
+        "inputFingerprint": { "type": "string" },
+        "currentSha256": {
+          "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        },
+        "currentBytes": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "previousSha256": {
+          "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        },
+        "requiredApprovals": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetId", "adapterId", "adapterVersion", "compatible", "reasons"],
+      "properties": {
+        "targetId": { "type": "string", "minLength": 1 },
+        "adapterId": { "type": "string", "minLength": 1 },
+        "adapterVersion": { "type": ["string", "null"] },
+        "compatible": { "type": "boolean" },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "failure", "path", "message", "recovery"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^IDN[0-9]{4}$" },
+        "severity": { "enum": ["warning", "error"] },
+        "failure": { "enum": ["invalid", "unsupported", "blocked", "partial", "failed", "drifted"] },
+        "path": { "type": ["string", "null"] },
+        "message": { "type": "string", "minLength": 1 },
+        "recovery": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

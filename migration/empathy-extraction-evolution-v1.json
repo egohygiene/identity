@@ -1,0 +1,13 @@
+{
+  "schema": "identity.extraction-evolution/v1",
+  "baseline_manifest": "migration/empathy-extraction-v1.json",
+  "entries": [
+    {
+      "destination": "src/lib.rs",
+      "baseline_sha256": "696dfac6faa771c3068c38d45893f19b0ea6e6f9301be0e627a1aff4c9f3eb11",
+      "current_sha256": "b70a9c43d77a813545effea4dc3c3104a8cc5c49853afc3cda5e18aba673a842",
+      "issue": "https://github.com/egohygiene/identity/issues/10",
+      "reason": "Export the standalone compiler module from the canonical Identity library entrypoint while preserving the original extraction digest and CLI parity evidence."
+    }
+  ]
+}
