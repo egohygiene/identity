@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "missing-approval",
+  "mutations": [
+    {
+      "document": ".identity/overrides/product.tokens.json",
+      "operation": "replace",
+      "pointer": "/color/brand/primary/$extensions/org.egohygiene.identity/override/approval",
+      "value": "missing-approval"
+    }
+  ],
+  "expectedCodes": ["IDN1404"]
+}

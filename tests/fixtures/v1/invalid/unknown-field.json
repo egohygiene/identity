@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "unknown-field",
+  "mutations": [
+    {
+      "document": ".identity/identity.json",
+      "operation": "add",
+      "pointer": "/mutableDefaultBranch",
+      "value": "main"
+    }
+  ],
+  "expectedCodes": ["IDN1101"]
+}

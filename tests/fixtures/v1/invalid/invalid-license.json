@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "invalid-license",
+  "mutations": [
+    {
+      "document": ".identity/governance/provenance.json",
+      "operation": "replace",
+      "pointer": "/assets/0/license/status",
+      "value": "unknown"
+    }
+  ],
+  "expectedCodes": ["IDN1402"]
+}

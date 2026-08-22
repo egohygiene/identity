@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "name": "alias-cycle",
+  "mutations": [
+    {
+      "document": ".identity/overrides/product.tokens.json",
+      "operation": "replace",
+      "pointer": "/color/brand/primary/$value",
+      "value": "{color.action.primary}"
+    }
+  ],
+  "expectedCodes": ["IDN1306"]
+}

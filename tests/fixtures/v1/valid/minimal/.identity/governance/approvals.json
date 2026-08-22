@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../../../../contracts/v1/approvals.schema.json",
+  "schema": "identity.approvals/v1",
+  "decisions": [
+    {
+      "id": "approve-primary-mark",
+      "subject": "primary-mark",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-21T12:00:00Z",
+      "evidence": "https://example.invalid/reviews/primary-mark",
+      "notes": "Approved as the canonical minimal fixture mark."
+    },
+    {
+      "id": "approve-product-primary",
+      "subject": "token:color.brand.primary",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-21T12:05:00Z",
+      "evidence": "https://example.invalid/reviews/product-primary",
+      "notes": "Approved product distinction."
+    }
+  ]
+}

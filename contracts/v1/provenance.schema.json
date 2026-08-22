@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/provenance.schema.json",
+  "title": "Identity v1 asset provenance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "assets"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)provenance.schema.json$" },
+    "schema": { "const": "identity.provenance/v1" },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "path",
+        "kind",
+        "sha256",
+        "license",
+        "origin",
+        "accessibility",
+        "usage",
+        "approval"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "path": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["mark", "imagery", "illustration", "font", "reference"] },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "license": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["spdx", "status", "attribution"],
+          "properties": {
+            "spdx": { "type": "string", "minLength": 1 },
+            "status": { "const": "approved" },
+            "attribution": { "type": "string" }
+          }
+        },
+        "origin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["creator", "method", "source", "capturedAt"],
+          "properties": {
+            "creator": { "type": "string", "minLength": 1 },
+            "method": { "enum": ["first-party", "commissioned", "licensed", "generated"] },
+            "source": { "type": "string", "minLength": 1 },
+            "capturedAt": { "type": "string", "format": "date-time" }
+          }
+        },
+        "accessibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["altText"],
+          "properties": {
+            "altText": { "type": "string", "minLength": 1 }
+          }
+        },
+        "usage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["safeZone", "minimumSize", "restrictions"],
+          "properties": {
+            "safeZone": { "type": "string", "minLength": 1 },
+            "minimumSize": { "type": "string", "minLength": 1 },
+            "restrictions": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "approval": { "$ref": "#/$defs/identifier" }
+      }
+    }
+  }
+}

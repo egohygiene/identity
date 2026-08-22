@@ -1,0 +1,109 @@
+{
+  "$schema": "../../../../../../../contracts/v1/tokens.schema.json",
+  "$description": "Example organization semantic defaults.",
+  "$extensions": {
+    "org.egohygiene.identity": {
+      "schema": "identity.tokens/v1",
+      "layer": {
+        "id": "example-organization",
+        "kind": "organization-defaults",
+        "priority": 0
+      }
+    }
+  },
+  "color": {
+    "$type": "color",
+    "brand": {
+      "primary": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.16, 0.24, 0.58],
+          "alpha": 1
+        },
+        "$description": "Organization family accent.",
+        "$extensions": {
+          "org.egohygiene.identity": {
+            "contrast": {
+              "intent": "decorative",
+              "pairedWith": [],
+              "minimumRatio": 1
+            }
+          }
+        }
+      }
+    },
+    "canvas": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.98, 0.98, 1],
+        "alpha": 1
+      },
+      "$extensions": {
+        "org.egohygiene.identity": {
+          "contrast": {
+            "intent": "background",
+            "pairedWith": ["color.text"],
+            "minimumRatio": 7
+          }
+        }
+      }
+    },
+    "text": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.05, 0.06, 0.1],
+        "alpha": 1
+      },
+      "$extensions": {
+        "org.egohygiene.identity": {
+          "contrast": {
+            "intent": "foreground",
+            "pairedWith": ["color.canvas"],
+            "minimumRatio": 7
+          }
+        }
+      }
+    }
+  },
+  "typography": {
+    "body": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": ["Inter", "system-ui", "sans-serif"],
+        "$extensions": {
+          "org.egohygiene.identity": {
+            "typography": {
+              "license": "OFL-1.1",
+              "languages": ["en"],
+              "legibility": "Prefer open counters and a minimum 16px body size."
+            }
+          }
+        }
+      }
+    }
+  },
+  "motion": {
+    "$type": "duration",
+    "duration": {
+      "standard": {
+        "$value": {
+          "value": 180,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "org.egohygiene.identity": {
+            "motion": {
+              "reducedMotion": "motion.duration.reduced"
+            }
+          }
+        }
+      },
+      "reduced": {
+        "$value": {
+          "value": 0,
+          "unit": "ms"
+        }
+      }
+    }
+  }
+}

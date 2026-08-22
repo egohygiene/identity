@@ -53,8 +53,9 @@ They close only when the refining issues below provide implementation and valida
 
 ## Current wave
 
-Wave 0 is complete. Wave 1 begins with the independently extracted CLI in #8;
-the v1 canonical source contract and migration work remain in #9.
+Wave 0 is complete. Wave 1 now has an independently extracted CLI from #8 and
+the implemented v1 source/schema/validation boundary from #9. Empathy's pinned
+consumer transition remains the final extraction gate.
 
 Wave 0 establishes decisions that constrain every implementation PR:
 

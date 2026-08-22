@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/targets.schema.json",
+  "title": "Identity v1 target profile selection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "enabled", "inapplicable"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)targets.schema.json$" },
+    "schema": { "const": "identity.targets/v1" },
+    "enabled": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/profile" }
+    },
+    "inapplicable": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      }
+    }
+  }
+}

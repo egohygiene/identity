@@ -1,0 +1,86 @@
+schema = "identity.project/v0"
+
+[project]
+id = "empathy"
+display_name = "Empathy"
+repository = "https://github.com/egohygiene/empathy"
+tagline = "A humane foundation for people, automation, and AI agents."
+
+[paths]
+output_root = "assets/identity"
+source_root = ".identity/sources"
+brief = ".identity/brief.md"
+
+[profiles]
+enabled = [
+  "core",
+  "web",
+  "pwa",
+  "github",
+  "docs",
+  "social",
+  "tokens",
+  "metadata",
+]
+inapplicable = []
+
+[sources]
+approval = "human"
+
+[[sources.required]]
+role = "mark"
+path = "mark.svg"
+format = "svg"
+description = "Primary scalable symbol with editable vector geometry."
+
+[[sources.required]]
+role = "wordmark"
+path = "wordmark.svg"
+format = "svg"
+description = "Lowercase Empathy wordmark using outlined custom lettering or licensed fonts."
+
+[[sources.required]]
+role = "lockup-horizontal"
+path = "lockup-horizontal.svg"
+format = "svg"
+description = "Horizontal mark-and-wordmark composition with generous clear space."
+
+[[sources.required]]
+role = "lockup-stacked"
+path = "lockup-stacked.svg"
+format = "svg"
+description = "Stacked mark-and-wordmark composition."
+
+[[sources.required]]
+role = "mark-monochrome"
+path = "mark-monochrome.svg"
+format = "svg"
+description = "Single-color symbol that remains recognizable at favicon size."
+
+[[sources.required]]
+role = "mark-maskable"
+path = "mark-maskable.svg"
+format = "svg"
+description = "Full-bleed square source with essential geometry inside the maskable safe zone."
+
+[[sources.required]]
+role = "social-background"
+path = "social-background.svg"
+format = "svg"
+description = "Editable calm, spacious background composition without platform-specific copy."
+
+[[sources.required]]
+role = "palette"
+path = "palette.json"
+format = "json"
+description = "Named canonical colors with semantic intent, theme pairings, and contrast notes."
+
+[context]
+files = [
+  "README.md",
+  "PURPOSE.md",
+  "VISION.md",
+  "PRINCIPLES.md",
+  "DESIGN.md",
+  "DESIGN_SYSTEM.md",
+]

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/tokens.schema.json",
+  "title": "Identity v1 DTCG token layer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "$extensions"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "(^|/)tokens.schema.json$"
+    },
+    "$description": { "type": "string" },
+    "$extensions": { "$ref": "#/$defs/extensions" }
+  },
+  "patternProperties": {
+    "^[^$].*$": { "$ref": "#/$defs/groupOrToken" }
+  },
+  "$defs": {
+    "groupOrToken": {
+      "oneOf": [
+        { "$ref": "#/$defs/token" },
+        { "$ref": "#/$defs/group" }
+      ]
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$type": { "$ref": "#/$defs/tokenType" },
+        "$description": { "type": "string" },
+        "$extensions": { "$ref": "#/$defs/extensions" },
+        "$deprecated": { "oneOf": [{ "type": "boolean" }, { "type": "string" }] }
+      },
+      "patternProperties": {
+        "^[^$].*$": { "$ref": "#/$defs/groupOrToken" }
+      }
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$value"],
+      "properties": {
+        "$value": {},
+        "$type": { "$ref": "#/$defs/tokenType" },
+        "$description": { "type": "string" },
+        "$extensions": { "$ref": "#/$defs/extensions" },
+        "$deprecated": { "oneOf": [{ "type": "boolean" }, { "type": "string" }] }
+      }
+    },
+    "tokenType": {
+      "enum": [
+        "color",
+        "dimension",
+        "fontFamily",
+        "fontWeight",
+        "duration",
+        "cubicBezier",
+        "number",
+        "strokeStyle",
+        "border",
+        "transition",
+        "shadow",
+        "gradient",
+        "typography"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(?:\\.[a-z0-9-]+)+$"
+      },
+      "additionalProperties": { "type": "object" },
+      "properties": {
+        "org.egohygiene.identity": { "$ref": "#/$defs/identityExtension" }
+      }
+    },
+    "identityExtension": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema": { "enum": ["identity.tokens/v1", "identity.token-extension/v1"] },
+        "layer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "priority"],
+          "properties": {
+            "id": { "type": "string", "minLength": 1 },
+            "kind": { "enum": ["organization-defaults", "product-override"] },
+            "priority": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "override": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reason", "approval"],
+          "properties": {
+            "reason": { "type": "string", "minLength": 1 },
+            "approval": { "type": "string", "minLength": 1 }
+          }
+        },
+        "contrast": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["intent", "pairedWith", "minimumRatio"],
+          "properties": {
+            "intent": { "enum": ["background", "foreground", "decorative"] },
+            "pairedWith": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "minimumRatio": { "type": "number", "minimum": 1, "maximum": 21 }
+          }
+        },
+        "typography": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["license", "languages", "legibility"],
+          "properties": {
+            "license": { "type": "string", "minLength": 1 },
+            "languages": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 2 }
+            },
+            "legibility": { "type": "string", "minLength": 1 }
+          }
+        },
+        "motion": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reducedMotion"],
+          "properties": {
+            "reducedMotion": { "type": "string", "minLength": 1 }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["record", "approval"],
+          "properties": {
+            "record": { "type": "string", "minLength": 1 },
+            "approval": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}
