@@ -1,0 +1,10 @@
+/* Generated Identity brand palette projection. Canonical source will move to `.identity/` after the v1 source contract lands. */
+:root {
+  --identity-color-obsidian: #0a0a0e;
+  --identity-color-ivory: #f2efe9;
+  --identity-color-aureus: #d4af6a;
+  --identity-color-champagne: #cdba9a;
+  --identity-color-lavender-spectrum: #bca9ff;
+  --identity-color-deep-violet: #6a4cff;
+  --identity-color-luminous-blue: #6ea8ff;
+}

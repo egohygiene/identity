@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/identity/brand/banner-readme.webp" alt="identity — brand kit generator" width="100%" />
+</p>
+
 # Identity
 
 🪪 Identity is an open-source Brand Kit generator that turns reviewed brand intent into reproducible design tokens, creative guidance, platform assets, distributable packages, and a public Brand Kit.
@@ -17,6 +21,20 @@ product consumers + public Brand Kit
 ```
 
 The canonical Ego Hygiene Brand Kit will be published at `https://egohygiene.io/identity`. The descriptive `/brand-kit` route will redirect to the canonical `/identity` route.
+
+## Brand Kit preview
+
+The first human-approved self-hosting visual direction now lives under [`assets/identity/`](assets/identity/README.md). These are generated projections—not a replacement for the future canonical `.identity/` source contract.
+
+<p align="center">
+  <img src="assets/identity/guidelines/color-palette.svg" alt="identity color palette" width="92%" />
+</p>
+
+<p align="center">
+  <a href="assets/identity/guidelines/design-system.svg">design system board</a> ·
+  <a href="assets/identity/guidelines/usage-guidelines.svg">usage guidelines</a> ·
+  <a href="assets/identity/manifest.json">asset manifest</a>
+</p>
 
 ## The three product layers
 
