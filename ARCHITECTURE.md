@@ -80,7 +80,7 @@ Dependencies point inward toward stable contracts and domain behavior. External 
 - **Renderer contract:** replaceable presentation of the view model.
 - **Consumer contract:** pinned installation without access to repository internals.
 - **Publication handoff:** explicit promotion and rollback metadata for an immutable release.
-- **Evidence contract:** stable diagnostics and reports consumable by CI and Observatory.
+- **Evidence contract:** `identity.quality-report/v1` with stable statuses, coverage/skips, human-review boundaries, source/generated context, and release decisions as documented by [`docs/contracts/QUALITY_GATES_V1.md`](docs/contracts/QUALITY_GATES_V1.md).
 
 Exact fields, commands, and package formats belong to their versioned specifications and roadmap issues.
 
@@ -116,7 +116,7 @@ defined by the [dependency policy](docs/DEPENDENCY_POLICY.md).
 - The compiler is deterministic and offline by default; networked generation is an explicit provider handoff.
 - Transient state is ignored, disposable, and never promoted implicitly.
 
-## Implemented compiler and package boundary
+## Implemented compiler, package, and quality boundary
 
 The v1 compiler core is a public Rust library boundary described by
 [`docs/contracts/COMPILER_V1.md`](docs/contracts/COMPILER_V1.md). It owns
@@ -144,9 +144,21 @@ Identity-owned deterministic ZIP32 writer.
 
 The compiler still rejects network-dependent or nondeterministic adapters. The
 package layer does not make its output canonical, does not publish implicitly,
-and does not add a generation CLI command. Broader accessibility, provenance,
-visual-regression, and motion consistency gates remain the validation layer
-owned by #12 and umbrella #3.
+and does not add a generation CLI command.
+
+The #12 quality layer sits downstream of the resolved Brand Kit and compiler
+manifest. It owns `identity.quality-report/v1`, package/publication scopes,
+release-blocking accessibility/provenance/license/reproducibility/visual checks,
+explicit skipped coverage, visual-baseline comparison, and human-review
+evidence. Source asset bytes remain separate from resolved source-governance
+metadata so creative content and approval/license lineage do not collapse into
+one authority object. Quality evaluation is read-only and cannot repair source,
+rewrite generated artifacts, approve creative changes, or publish a release.
+
+Renderer interaction checks are deliberately skipped in package scope and become
+blocking review requirements in publication scope until #14 supplies browser
+evidence. Astryx/motion-specific consistency remains #3 work and must extend the
+same report/release-decision contract rather than create a parallel validator.
 
 ## Trust boundaries
 
@@ -160,7 +172,8 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | CLI foundation | Extracted workspace with `init`, `validate`, `plan`, and `handoff` parity evidence | Evolve through versioned contracts without losing the local-first authority boundary |
 | Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while package and consumer layers consume the resolved model |
 | Compiler pipeline | Deterministic Rust core, adapter registry, mutation-free plan, plan/manifest schemas, checksum evidence, transactional local store, recovery tests, and offline/compatibility gates | Preserve authority boundaries while downstream validation and interfaces evolve |
-| Packages and projection validation | Nine versioned profiles, built-in offline adapters, DTCG/web/document/metadata/raster/archive projections, deterministic package/checksum schemas, cross-repository byte-identity tests, incremental tests, and subset-selection tests | Release-blocking accessibility/provenance/visual gates plus immutable consumer/release proof |
+| Packages and projection validation | Nine versioned profiles, built-in offline adapters, DTCG/web/document/metadata/raster/archive projections, deterministic package/checksum schemas, cross-repository byte-identity tests, incremental tests, and subset-selection tests | Preserve package compatibility through real consumer/release proof |
+| Quality and release evidence | `identity.quality-report/v1`, package/publication scopes, WCAG/reduced-motion/source-governance/SVG/PNG/manifest/budget checks, visual baselines, explicit skips, and human-review tests | Extend with #3 motion consistency and #14 browser evidence without changing authority boundaries |
 | Renderer and studio | Proposed | Accessible framework-replaceable reference experience |
 | Public route | Deferred pending released artifacts and website work | Immutable `/identity` deployment with `/brand-kit` redirect |
 

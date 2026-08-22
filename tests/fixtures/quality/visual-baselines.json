@@ -1,0 +1,23 @@
+{
+  "schema": "identity.visual-baselines/v1",
+  "baselines": [
+    {
+      "targetId": "fixture-mark-normal",
+      "sha256": "55eb27ee07273090fab1fdad1558efbf0a345cbcc0d76d234594f6fabae53a18",
+      "sourceContext": "tests/fixtures/quality/mark-normal.svg",
+      "generatedContext": "fixture/mark-normal.svg"
+    },
+    {
+      "targetId": "fixture-mark-extreme-wide",
+      "sha256": "89db4038562d070f6ac0a24ebeea0ef5f33807193762c14295ed0d243875aed0",
+      "sourceContext": "tests/fixtures/quality/mark-extreme-wide.svg",
+      "generatedContext": "fixture/mark-extreme-wide.svg"
+    },
+    {
+      "targetId": "fixture-mark-transparent",
+      "sha256": "06432fe6429588e6c0f4637d64ff1659012384f2c4b2fc4b6463161650462135",
+      "sourceContext": "tests/fixtures/quality/mark-transparent.svg",
+      "generatedContext": "fixture/mark-transparent.svg"
+    }
+  ]
+}

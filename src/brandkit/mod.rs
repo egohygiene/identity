@@ -26,8 +26,8 @@ use crate::compiler::{
 };
 
 pub use model::{
-    BRAND_KIT_MODEL_SCHEMA, BrandKitGuidance, BrandKitModel, BrandKitProject, BrandKitSourceAsset,
-    BrandKitToken,
+    BRAND_KIT_MODEL_SCHEMA, BrandKitGuidance, BrandKitLicense, BrandKitModel, BrandKitOrigin,
+    BrandKitProject, BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken,
 };
 pub use profiles::{
     BRAND_KIT_PROFILE_VERSION, ProfileDescriptor, ProfileSelection, all_profiles, compiler_request,

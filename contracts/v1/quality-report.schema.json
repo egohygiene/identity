@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/quality-report.schema.json",
+  "title": "Identity Brand Kit quality report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "projectId",
+    "sourceDigest",
+    "scope",
+    "releaseAllowed",
+    "coverage",
+    "checks"
+  ],
+  "properties": {
+    "schema": { "const": "identity.quality-report/v1" },
+    "projectId": { "$ref": "#/$defs/identifier" },
+    "sourceDigest": { "$ref": "#/$defs/sha256" },
+    "scope": { "enum": ["package", "publication"] },
+    "releaseAllowed": { "type": "boolean" },
+    "coverage": { "$ref": "#/$defs/coverage" },
+    "checks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/check" }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "automated",
+        "passed",
+        "warnings",
+        "failed",
+        "skipped",
+        "reviewRequired"
+      ],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "automated": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 },
+        "reviewRequired": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "category",
+        "status",
+        "blocking",
+        "automated",
+        "subject",
+        "sourceContext",
+        "generatedContext",
+        "message",
+        "recovery"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "category": {
+          "enum": [
+            "accessibility",
+            "visual-integrity",
+            "provenance",
+            "licensing",
+            "performance",
+            "reproducibility",
+            "renderer"
+          ]
+        },
+        "status": {
+          "enum": ["passed", "warning", "failed", "skipped", "review-required"]
+        },
+        "blocking": { "type": "boolean" },
+        "automated": { "type": "boolean" },
+        "subject": { "type": ["string", "null"] },
+        "sourceContext": { "type": ["string", "null"] },
+        "generatedContext": { "type": ["string", "null"] },
+        "message": { "type": "string", "minLength": 1 },
+        "recovery": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

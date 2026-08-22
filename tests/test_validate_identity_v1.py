@@ -143,6 +143,7 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "compiler-plan.schema.json",
                 "diagnostics.schema.json",
                 "project.schema.json",
+                "quality-report.schema.json",
                 "provenance.schema.json",
                 "targets.schema.json",
                 "tokens.schema.json",
@@ -171,6 +172,10 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["brand-kit-checksums.schema.json"]["properties"]["schema"]["const"],
             "identity.brand-kit-checksums/v1",
+        )
+        self.assertEqual(
+            schemas["quality-report.schema.json"]["properties"]["schema"]["const"],
+            "identity.quality-report/v1",
         )
 
     def test_cli_returns_stable_json_and_process_status(self) -> None:

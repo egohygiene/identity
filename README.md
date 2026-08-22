@@ -144,6 +144,28 @@ and evidence record for the exact selected build. The
 defines the stable generated interface, compatibility rules, archive semantics,
 and consumer boundary.
 
+## Quality and release evidence
+
+The shared quality layer evaluates a resolved Brand Kit and its compiler manifest
+without mutating canonical or generated state. It emits the versioned
+`identity.quality-report/v1` contract with one deterministic release decision,
+coverage counts, stable check identifiers, source/generated context, and
+recovery guidance.
+
+`package` scope validates distributable output while explicitly recording
+renderer-only interaction checks as skipped. `publication` scope turns those
+same checks into blocking review requirements until the reference renderer owns
+real browser evidence. Automated checks cover semantic contrast, reduced-motion
+budgets, source integrity, licenses and provenance, SVG structure, target file
+budgets, raster dimensions, manifest drift, maskable safe-zone evidence, and
+visual baselines. Creative baseline changes and small-size legibility remain
+explicit human decisions rather than automated approval.
+
+The [quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md) defines the
+status vocabulary, default budgets, review evidence, failure/recovery semantics,
+and the extension boundary for #3. Astryx/motion-specific validation remains
+#3 work and must extend this harness rather than create a second release gate.
+
 ## State and authority
 
 | State | Owner | Meaning |
@@ -173,10 +195,10 @@ and consumer boundary.
 ## Current capability state
 
 The Brand Kit product contract and toolchain decisions are accepted. The
-extracted CLI, v1 source contract, and deterministic compiler core are
-implemented. This change adds the concrete built-in projection adapters and
-versioned distributable package layer; quality/governance and public-product
-layers remain the next gates.
+extracted CLI, v1 source contract, deterministic compiler core, built-in
+projection/package layer, and shared quality/evidence harness are implemented.
+Astryx/motion validation (#3), voice/usage/approval guidance (#13), and the
+public renderer/studio remain the next gates.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
@@ -185,8 +207,10 @@ layers remain the next gates.
 | Independent CLI | Implemented | [#8](https://github.com/egohygiene/identity/issues/8) |
 | v1 identity schema | Implemented | [#9](https://github.com/egohygiene/identity/issues/9), [contract](docs/contracts/IDENTITY_V1.md) |
 | Compiler core | Implemented | [#10](https://github.com/egohygiene/identity/issues/10), [contract](docs/contracts/COMPILER_V1.md) |
-| Projection adapters and packages | Implemented in this change | [#11](https://github.com/egohygiene/identity/issues/11), [contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md) |
-| Quality and governance | Proposed | [#12](https://github.com/egohygiene/identity/issues/12), [#13](https://github.com/egohygiene/identity/issues/13) |
+| Projection adapters and packages | Implemented | [#11](https://github.com/egohygiene/identity/issues/11), [contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md) |
+| Quality and release evidence | Implemented in this change | [#12](https://github.com/egohygiene/identity/issues/12), [contract](docs/contracts/QUALITY_GATES_V1.md) |
+| Visual-motion validation | Proposed | [#3](https://github.com/egohygiene/identity/issues/3) |
+| Voice, usage, and approval guidance | Proposed | [#13](https://github.com/egohygiene/identity/issues/13) |
 | Renderer and asset studio | Proposed | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public `/identity` route | Deferred until its dependencies land | [#16](https://github.com/egohygiene/identity/issues/16) |
 | Stable v1.0.0 release | Deferred until all v1 gates pass | [#18](https://github.com/egohygiene/identity/issues/18) |
@@ -209,6 +233,7 @@ until the required Empathy and OptiFlow consumer proof lands through #17.
 - [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)
 - [Compiler v1 contract](docs/contracts/COMPILER_V1.md)
 - [Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
+- [Quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md)
 - [Roadmap](ROADMAP.md)
 
 The [roadmap issue](https://github.com/egohygiene/identity/issues/5) is the execution source of truth. Architecture documents define durable intent and boundaries; individual issues own implementation detail and evidence.

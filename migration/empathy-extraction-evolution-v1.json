@@ -5,9 +5,9 @@
     {
       "destination": "src/lib.rs",
       "baseline_sha256": "696dfac6faa771c3068c38d45893f19b0ea6e6f9301be0e627a1aff4c9f3eb11",
-      "current_sha256": "3929a5a0845c4a5cee8fc562603549a931fdea12f6c818cd6b2b2f9d42aaa1b0",
-      "issue": "https://github.com/egohygiene/identity/issues/11",
-      "reason": "Continue the intentional post-extraction evolution begun by #10: export the deterministic Brand Kit package/profile module from the canonical Identity library while preserving the original Empathy extraction digest and the existing CLI parity evidence."
+      "current_sha256": "005f09de50868310d6ee98c54346954c9ecf69f498342bc9b74c2fd7ce16895e",
+      "issue": "https://github.com/egohygiene/identity/issues/12",
+      "reason": "Continue the intentional post-extraction evolution from #10 and #11 by exporting the shared Brand Kit quality/evidence harness while preserving the original Empathy extraction digest and existing CLI parity evidence."
     }
   ]
 }

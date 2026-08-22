@@ -1,7 +1,7 @@
 // Copyright 2026 Ego Hygiene
 // SPDX-License-Identifier: MIT
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -29,6 +29,32 @@ pub struct BrandKitToken {
     pub override_reason: Option<String>,
     #[serde(default)]
     pub approval: Option<String>,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct BrandKitLicense {
+    pub spdx: String,
+    pub status: String,
+    #[serde(default)]
+    pub attribution: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct BrandKitOrigin {
+    pub creator: String,
+    pub method: String,
+    pub source: String,
+    pub captured_at: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct BrandKitSourceGovernance {
+    pub license: BrandKitLicense,
+    pub origin: BrandKitOrigin,
+    pub approval: String,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -61,6 +87,10 @@ pub struct BrandKitModel {
     pub tokens: BTreeMap<String, BrandKitToken>,
     pub sources: BTreeMap<String, BrandKitSourceAsset>,
     #[serde(default)]
+    pub source_governance: BTreeMap<String, BrandKitSourceGovernance>,
+    #[serde(default)]
+    pub approvals: BTreeSet<String>,
+    #[serde(default)]
     pub guidance: BrandKitGuidance,
 }
 
@@ -69,14 +99,13 @@ impl BrandKitModel {
         let project = parse_value::<BrandKitProject>(identity, "project")?;
         let tokens = parse_value::<BTreeMap<String, BrandKitToken>>(identity, "tokens")?;
         let sources = parse_value::<BTreeMap<String, BrandKitSourceAsset>>(identity, "sources")?;
-        let guidance = identity
-            .values
-            .get("guidance")
-            .cloned()
-            .map(serde_json::from_value)
-            .transpose()
-            .map_err(|error| model_error("guidance", error.to_string()))?
-            .unwrap_or_default();
+        let source_governance = optional_value::<BTreeMap<String, BrandKitSourceGovernance>>(
+            identity,
+            "sourceGovernance",
+        )?
+        .unwrap_or_default();
+        let guidance =
+            optional_value::<BrandKitGuidance>(identity, "guidance")?.unwrap_or_default();
 
         if tokens.is_empty() {
             return Err(model_error(
@@ -98,6 +127,8 @@ impl BrandKitModel {
             project,
             tokens,
             sources,
+            source_governance,
+            approvals: identity.approvals.clone(),
             guidance,
         })
     }
@@ -134,6 +165,19 @@ where
         )
     })?;
     serde_json::from_value(value).map_err(|error| model_error(key, error.to_string()))
+}
+
+fn optional_value<T>(identity: &ResolvedIdentity, key: &str) -> CompilerResult<Option<T>>
+where
+    T: for<'de> Deserialize<'de>,
+{
+    identity
+        .values
+        .get(key)
+        .cloned()
+        .map(serde_json::from_value)
+        .transpose()
+        .map_err(|error| model_error(key, error.to_string()))
 }
 
 fn model_error(path: &str, message: String) -> CompilerError {
