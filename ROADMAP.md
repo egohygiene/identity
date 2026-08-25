@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-22
+updated: 2026-08-24
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -25,6 +25,176 @@ supersedes: []
 ---
 
 # Identity Roadmap
+
+<!-- BEGIN ROADMAP EXECUTION SNAPSHOT -->
+<!-- roadmap-manifest
+schema: hygiene.roadmap/v1alpha1
+repository: egohygiene/identity
+visibility: public
+publication: central
+route: /roadmap/identity/
+updated: 2026-08-24
+-->
+## 2026-08-24 execution snapshot
+
+> This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
+
+**Lifecycle:** strong pre-release alpha  
+**Current gate:** Complete voice and approval evidence in issues #13 and #8 before building the renderer and studio.  
+**North-star outcome:** A deterministic, governed Brand Kit v1 whose source decisions, generated assets, and approvals remain traceable.
+
+### Visual roadmap publication
+
+**Mode:** `central`  
+**Route:** `/roadmap/identity/`  
+**Current publication evidence:** Generated artifacts through CI; no Pages site or public product route observed.
+
+Publish the public-safe projection through egohygiene.io at /roadmap/identity/. This repository owns intent and acceptance evidence; it does not add a second site deployment.
+
+### Quest line
+
+<!-- roadmap-step
+id: IDN-Q01
+status: complete
+depends_on: []
+issues: []
+-->
+#### IDN-Q01 — Establish deterministic brand compilation
+
+**State:** `complete`  
+**Depends on:** None
+
+**Outcome:** A compiler and nine profiles generate validated brand artifacts.
+
+**Exit criteria:**
+
+- [x] All declared profiles compile deterministically.
+- [x] Quality checks are green.
+
+**Current evidence:**
+
+- The audit observed a working compiler, nine profiles, and green quality checks.
+
+<!-- roadmap-step
+id: IDN-Q02
+status: active
+depends_on: [IDN-Q01]
+issues: [8, 13]
+-->
+#### IDN-Q02 — Complete voice and approval evidence
+
+**State:** `active`  
+**Depends on:** `IDN-Q01`
+
+**Outcome:** Brand decisions include approved voice guidance and evidence rather than generated assets alone.
+
+**Exit criteria:**
+
+- [ ] Issues #13 and #8 meet their acceptance criteria.
+- [ ] Approvals link to the exact source and generated artifact versions.
+
+**Current evidence:**
+
+- Issues #13 and #8 form the current evidence gate.
+
+<!-- roadmap-step
+id: IDN-Q03
+status: planned
+depends_on: [IDN-Q02]
+issues: [14, 15]
+-->
+#### IDN-Q03 — Build the renderer and studio
+
+**State:** `planned`  
+**Depends on:** `IDN-Q02`
+
+**Outcome:** Issues #14 and #15 provide a usable way to inspect and generate the Brand Kit.
+
+**Exit criteria:**
+
+- [ ] The renderer covers all nine profiles.
+- [ ] Studio changes round-trip through governed source files.
+
+**Current evidence:**
+
+- Issues #14 and #15 define the renderer and studio backlog.
+
+<!-- roadmap-step
+id: IDN-Q04
+status: planned
+depends_on: [IDN-Q03]
+issues: [16]
+-->
+#### IDN-Q04 — Publish the public identity route
+
+**State:** `planned`  
+**Depends on:** `IDN-Q03`
+
+**Outcome:** Issue #16 exposes an accessible, version-aware identity surface.
+
+**Exit criteria:**
+
+- [ ] The public route is deployed and linked from the organization portal.
+- [ ] Generated assets link back to source evidence.
+
+**Current evidence:**
+
+- Issue #16 tracks the public route.
+- No Pages deployment was observed.
+
+<!-- roadmap-step
+id: IDN-Q05
+status: planned
+depends_on: [IDN-Q04]
+issues: [17, 18]
+-->
+#### IDN-Q05 — Pilot and release Brand Kit v1
+
+**State:** `planned`  
+**Depends on:** `IDN-Q04`
+
+**Outcome:** Real consumers validate the kit before a stable v1 release.
+
+**Exit criteria:**
+
+- [ ] Issue #17 records representative pilots and fixes.
+- [ ] Issue #18 closes with a tagged, provenance-rich v1 release.
+
+**Current evidence:**
+
+- Issues #17 and #18 define pilots and the v1 milestone.
+
+<!-- roadmap-step
+id: IDN-Q06
+status: planned
+depends_on: [IDN-Q02]
+issues: []
+-->
+#### IDN-Q06 — Publish the roadmap visual token profile
+
+**State:** `planned`  
+**Depends on:** `IDN-Q02`
+
+**Outcome:** The quest-line renderer consumes a versioned Identity profile for color, typography, motion, icons, focus, and reduced-motion behavior.
+
+**Exit criteria:**
+
+- [ ] Complete, active, ready, blocked, planned, and deferred states remain distinguishable without color alone.
+- [ ] The token package passes contrast, reduced-motion, and deterministic compilation checks.
+
+**Current evidence:**
+
+- Identity already has the strongest compiler and package foundation; the roadmap profile is not yet published.
+
+### Roadmap-to-issue handoff
+
+- A step is complete only when its exit criteria and required evidence are satisfied; commit count never determines progress.
+- Ready steps without an issue are candidates for the private, duplicate-aware roadmap.issue-plan.json dry run. Planned steps remain preview-only unless a reviewer explicitly opts them in with issue_policy: propose.
+- Issue creation or reconciliation requires human approval or an explicitly authorized Pace operation and returns issue references through a reviewable roadmap pull request.
+- Pull requests and commits should include Roadmap-Step: <ID>; historical evidence may be linked through existing issue and pull-request relationships.
+- Public rendering uses only allowlisted build-time evidence and never places a GitHub token or private issue plan in the browser artifact.
+
+<!-- END ROADMAP EXECUTION SNAPSHOT -->
 
 ## Strategic context
 
