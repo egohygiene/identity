@@ -1,0 +1,268 @@
+{
+  "$schema": "../../../../../../../contracts/v1/voice.schema.json",
+  "schema": "identity.voice/v1",
+  "foundation": {
+    "purpose": "Help maintainers make governed brand choices with confidence.",
+    "positioning": "A transparent, local-first system for turning reviewed intent into reusable identity guidance.",
+    "audience": ["repository maintainers", "product contributors", "downstream integrators"],
+    "personality": ["clear", "considerate", "grounded", "quietly playful"],
+    "governance": {
+      "subject": "voice:core-guidance",
+      "state": "approved",
+      "visibility": "public",
+      "provenance": {
+        "method": "human-authored",
+        "source": ".identity/brief.md",
+        "capturedAt": "2026-08-21T12:10:00Z"
+      },
+      "approval": "approve-voice-core"
+    }
+  },
+  "characteristics": [
+    {
+      "id": "clear",
+      "label": "Clear",
+      "description": "Lead with the useful outcome and make recovery paths concrete.",
+      "governance": {
+        "subject": "voice:core-guidance",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-21T12:10:00Z"
+        },
+        "approval": "approve-voice-core"
+      }
+    },
+    {
+      "id": "grounded",
+      "label": "Grounded",
+      "description": "Prefer evidence and precise limits over hype or vague certainty.",
+      "governance": {
+        "subject": "voice:core-guidance",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-21T12:10:00Z"
+        },
+        "approval": "approve-voice-core"
+      }
+    },
+    {
+      "id": "considerate",
+      "label": "Considerate",
+      "description": "Treat constraints and mistakes as shared design problems, never personal failures.",
+      "governance": {
+        "subject": "voice:core-guidance",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-21T12:10:00Z"
+        },
+        "approval": "approve-voice-core"
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "id": "repository-readme",
+      "label": "Repository README",
+      "audience": "A contributor deciding whether and how to use the repository.",
+      "intent": "Orient quickly, establish trust, and make the next action obvious.",
+      "tone": "Concise, capable, welcoming, and specific.",
+      "characteristics": ["clear", "grounded", "considerate"],
+      "preferredVocabulary": ["reviewed", "local", "deterministic", "evidence", "recovery"],
+      "avoidedLanguage": ["magic", "revolutionary", "effortless", "guaranteed"],
+      "naming": "Use the complete product name on first mention and the approved short name afterward.",
+      "capitalization": "Use sentence case for headings and preserve registered product casing.",
+      "punctuation": "Prefer short declarative sentences; use exclamation points only for genuine celebration.",
+      "examples": [
+        {
+          "id": "readme-opening",
+          "text": "Generate a reviewed Brand Kit locally, then inspect exactly what changed.",
+          "rationale": "It states the outcome, authority boundary, and recovery affordance without hype.",
+          "governance": {
+            "subject": "voice:core-guidance",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-08-21T12:10:00Z"
+            },
+            "approval": "approve-voice-core"
+          }
+        },
+        {
+          "id": "friendly-candidate",
+          "text": "Your brand system, ready when you are.",
+          "rationale": "A warmer option proposed through the creative handoff and awaiting review.",
+          "governance": {
+            "subject": "voice-example:friendly-candidate",
+            "state": "candidate",
+            "visibility": "internal",
+            "provenance": {
+              "method": "handoff-candidate",
+              "source": "handoff:voice-friendly-candidate/v1",
+              "capturedAt": "2026-08-21T12:18:00Z"
+            },
+            "approval": null
+          }
+        },
+        {
+          "id": "old-tagline",
+          "text": "Branding solved forever.",
+          "rationale": "Retained as superseded migration history and excluded from current public copy.",
+          "governance": {
+            "subject": "voice-example:old-tagline",
+            "state": "superseded",
+            "visibility": "internal",
+            "provenance": {
+              "method": "imported",
+              "source": "guidance:old-tagline/v0",
+              "capturedAt": "2025-02-01T10:00:00Z"
+            },
+            "approval": "supersede-old-tagline"
+          }
+        }
+      ],
+      "antiExamples": [
+        {
+          "id": "readme-vagueness",
+          "text": "A flexible solution for all your branding needs.",
+          "rationale": "It names neither a concrete outcome nor the system's review boundary.",
+          "governance": {
+            "subject": "voice:core-guidance",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-08-21T12:10:00Z"
+            },
+            "approval": "approve-voice-core"
+          }
+        },
+        {
+          "id": "hype-claim",
+          "text": "The world's most revolutionary brand generator.",
+          "rationale": "Unprovable superlatives undermine the grounded voice.",
+          "governance": {
+            "subject": "voice-example:hype-claim",
+            "state": "rejected",
+            "visibility": "internal",
+            "provenance": {
+              "method": "handoff-candidate",
+              "source": "handoff:voice-hype-claim/v1",
+              "capturedAt": "2026-08-21T12:19:00Z"
+            },
+            "approval": "reject-hype-claim"
+          }
+        }
+      ],
+      "governance": {
+        "subject": "voice:core-guidance",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-21T12:10:00Z"
+        },
+        "approval": "approve-voice-core"
+      }
+    },
+    {
+      "id": "incident-update",
+      "label": "Incident update",
+      "audience": "A user affected by a service or release problem.",
+      "intent": "State impact, known facts, next update, and recovery without deflection.",
+      "tone": "Calm, direct, accountable, and time-specific.",
+      "characteristics": ["clear", "grounded", "considerate"],
+      "preferredVocabulary": ["impact", "confirmed", "investigating", "next update", "recovery"],
+      "avoidedLanguage": ["minor issue", "user error", "obviously", "soon"],
+      "naming": "Name the affected capability exactly as it appears in the product.",
+      "capitalization": "Use sentence case and avoid all-caps urgency.",
+      "punctuation": "Use periods and timestamps; avoid exclamation points and rhetorical questions.",
+      "examples": [
+        {
+          "id": "incident-facts",
+          "text": "Exports are delayed. Existing Brand Kits remain available. The next update is at 15:00 UTC.",
+          "rationale": "It separates impact, continuity, and the next commitment.",
+          "governance": {
+            "subject": "voice:core-guidance",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-08-21T12:10:00Z"
+            },
+            "approval": "approve-voice-core"
+          }
+        }
+      ],
+      "antiExamples": [
+        {
+          "id": "incident-dismissal",
+          "text": "A few users may notice a minor issue; everything should be fine soon.",
+          "rationale": "It minimizes impact and makes no verifiable commitment.",
+          "governance": {
+            "subject": "voice:core-guidance",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-08-21T12:10:00Z"
+            },
+            "approval": "approve-voice-core"
+          }
+        }
+      ],
+      "governance": {
+        "subject": "voice:core-guidance",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-21T12:10:00Z"
+        },
+        "approval": "approve-voice-core"
+      }
+    }
+  ],
+  "localization": {
+    "sourceLanguage": "en-US",
+    "supportedLanguages": [
+      {
+        "tag": "en-US",
+        "coverage": "reviewed",
+        "notes": "Canonical source guidance."
+      },
+      {
+        "tag": "es",
+        "coverage": "partial",
+        "notes": "Product naming is reviewed; full messaging review remains required."
+      }
+    ],
+    "fallback": "Keep product names unchanged and request human review when a locale is not covered.",
+    "governance": {
+      "subject": "voice:core-guidance",
+      "state": "approved",
+      "visibility": "public",
+      "provenance": {
+        "method": "human-authored",
+        "source": ".identity/brief.md",
+        "capturedAt": "2026-08-21T12:10:00Z"
+      },
+      "approval": "approve-voice-core"
+    }
+  }
+}

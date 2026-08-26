@@ -27,6 +27,32 @@
         "restrictions": ["Do not stretch, rotate, or recolor outside approved tokens."]
       },
       "approval": "approve-primary-mark"
+    },
+    {
+      "id": "legacy-wordmark",
+      "path": ".identity/sources/legacy-wordmark.svg",
+      "kind": "mark",
+      "sha256": "9313a860eb179176e7c4d7603d7720b270bd51dd7287e14b4d8f55213621dd41",
+      "license": {
+        "spdx": "MIT",
+        "status": "approved",
+        "attribution": "Copyright 2025 Example"
+      },
+      "origin": {
+        "creator": "Example",
+        "method": "first-party",
+        "source": "https://example.invalid/source/legacy-wordmark",
+        "capturedAt": "2025-02-01T09:00:00Z"
+      },
+      "accessibility": {
+        "altText": "The retired Example Product name in white on a violet rectangle."
+      },
+      "usage": {
+        "safeZone": "Retain original padding when reproducing historical material.",
+        "minimumSize": "Do not use in new production work.",
+        "restrictions": ["Internal migration and historical reference only."]
+      },
+      "approval": "approve-legacy-wordmark-source"
     }
   ]
 }

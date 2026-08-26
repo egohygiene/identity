@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "description": "Voice governance cannot claim a decision for a different subject and status.",
+  "mutations": [
+    {
+      "document": ".identity/guidance/voice.json",
+      "operation": "replace",
+      "pointer": "/foundation/governance/approval",
+      "value": "reject-hype-claim"
+    }
+  ],
+  "expectedCodes": ["IDN1602"]
+}

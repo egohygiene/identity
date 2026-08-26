@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "description": "An unapproved candidate must retain the explicit creative handoff boundary.",
+  "mutations": [
+    {
+      "document": ".identity/guidance/voice.json",
+      "operation": "replace",
+      "pointer": "/contexts/0/examples/1/governance/provenance/method",
+      "value": "human-authored"
+    }
+  ],
+  "expectedCodes": ["IDN1602"]
+}

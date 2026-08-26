@@ -30,8 +30,8 @@
     "provenance": ".identity/governance/provenance.json",
     "approvals": ".identity/governance/approvals.json",
     "guidance": {
-      "voice": null,
-      "usage": null
+      "voice": ".identity/guidance/voice.json",
+      "usage": ".identity/guidance/usage.json"
     }
   },
   "directories": {

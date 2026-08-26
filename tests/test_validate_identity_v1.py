@@ -149,7 +149,22 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "targets.schema.json",
                 "tokens.schema.json",
                 "visual-motion-manifest.schema.json",
+                "brand-guidance.schema.json",
+                "usage.schema.json",
+                "voice.schema.json",
             },
+        )
+        self.assertEqual(
+            schemas["voice.schema.json"]["properties"]["schema"]["const"],
+            validator.VOICE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["usage.schema.json"]["properties"]["schema"]["const"],
+            validator.USAGE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],
+            "identity.brand-guidance/v1",
         )
         self.assertEqual(
             schemas["project.schema.json"]["properties"]["schema"]["const"],
