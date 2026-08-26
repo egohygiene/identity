@@ -1,0 +1,178 @@
+---
+name: Refine guidance documentation
+
+on:
+  push:
+    branches:
+      - feat/13-brand-guidance-v1
+    paths:
+      - .github/workflows/refine-guidance-docs.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out guidance branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: feat/13-brand-guidance-v1
+
+      - name: Update current-state guidance documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          readme_path = Path("README.md")
+          readme = readme_path.read_text(encoding="utf-8")
+
+          source_anchor = '''Both tools are standard-library-only, offline, and non-mutating. The complete
+          [v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
+          aliases, compatibility, diagnostics, migration, and rollback.
+
+          ## Compiler core
+          '''
+          guidance_section = '''Both tools are standard-library-only, offline, and non-mutating. The complete
+          [v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
+          aliases, compatibility, diagnostics, migration, and rollback.
+
+          ## Governed brand guidance
+
+          Voice, contextual tone, vocabulary, examples, anti-examples, usage rules,
+          accessibility, legal notes, localization, legacy assets, and approval state are
+          first-class Identity v1 source. Public output includes only approved public
+          records; the review projection preserves candidate, approved, rejected, and
+          superseded decisions with their human-review evidence.
+
+          ```bash
+          python3 scripts/render_guidance.py \\
+            --repository-root "tests/fixtures/v1/valid/minimal" \\
+            --audience "public" \\
+            --format "html" \\
+            --output "build/brand-guidance.html"
+
+          python3 scripts/render_guidance.py \\
+            --repository-root "tests/fixtures/v1/valid/minimal" \\
+            --audience "review" \\
+            --context "support" \\
+            --format "json"
+          ```
+
+          The renderer validates source before projection, never invents brand prose,
+          and refuses to write beneath canonical `.identity/`. The
+          [guidance v1 contract](docs/contracts/GUIDANCE_V1.md) defines authority,
+          lifecycle, context retrieval, deterministic JSON/Markdown/HTML outputs, and
+          legacy-asset publication policy.
+
+          ## Compiler core
+          '''
+          if readme.count(source_anchor) != 1:
+              raise SystemExit("README Identity v1 insertion anchor drifted")
+          readme = readme.replace(source_anchor, guidance_section)
+
+          capability_anchor = '''The Brand Kit product contract and toolchain decisions are accepted. The
+          extracted CLI, v1 source contract, deterministic compiler core, built-in
+          projection/package layer, shared quality/evidence harness, and governed
+          visual-motion validation are implemented. Voice/usage/approval guidance (#13)
+          and the public renderer/studio remain the next gates.
+          '''
+          capability_replacement = '''The Brand Kit product contract and toolchain decisions are accepted. The
+          extracted CLI, v1 source contract, deterministic compiler core, built-in
+          projection/package layer, shared quality/evidence harness, governed
+          visual-motion validation, and voice/usage/approval guidance are implemented.
+          Empathy's immutable consumer transition (#8) is the remaining extraction gate
+          before the public renderer and studio.
+          '''
+          if readme.count(capability_anchor) != 1:
+              raise SystemExit("README capability-state anchor drifted")
+          readme = readme.replace(capability_anchor, capability_replacement)
+
+          guidance_row = '| Voice, usage, and approval guidance | Proposed | [#13](https://github.com/egohygiene/identity/issues/13) |'
+          guidance_row_replacement = '| Voice, usage, and approval guidance | Implemented | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |'
+          if readme.count(guidance_row) != 1:
+              raise SystemExit("README guidance capability row drifted")
+          readme = readme.replace(guidance_row, guidance_row_replacement)
+
+          contract_link = '- [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)'
+          contract_link_replacement = contract_link + '\n- [Guidance v1 contract](docs/contracts/GUIDANCE_V1.md)'
+          if readme.count(contract_link) != 1:
+              raise SystemExit("README contract-link anchor drifted")
+          readme = readme.replace(contract_link, contract_link_replacement)
+          readme_path.write_text(readme, encoding="utf-8")
+
+          roadmap_path = Path("ROADMAP.md")
+          roadmap = roadmap_path.read_text(encoding="utf-8")
+          roadmap = roadmap.replace("updated: 2026-08-24", "updated: 2026-08-26")
+          roadmap = roadmap.replace(
+              "## 2026-08-24 execution snapshot",
+              "## 2026-08-26 execution snapshot",
+          )
+          roadmap = roadmap.replace(
+              "**Current gate:** Complete voice and approval evidence in issues #13 and #8 before building the renderer and studio.",
+              "**Current gate:** Complete Empathy's immutable Identity consumer transition in issue #8 before building the renderer and studio.",
+          )
+
+          q02_criteria = '''- [ ] Issues #13 and #8 meet their acceptance criteria.
+          - [ ] Approvals link to the exact source and generated artifact versions.
+          '''
+          q02_criteria_replacement = '''- [x] Issue #13 provides governed voice, usage, approval, and deterministic projection evidence.
+          - [ ] Issue #8 completes Empathy's immutable consumer transition.
+          - [x] Approvals link to exact reviewed subjects, provenance, and lifecycle decisions.
+          '''
+          if roadmap.count(q02_criteria) != 1:
+              raise SystemExit("ROADMAP Q02 criteria anchor drifted")
+          roadmap = roadmap.replace(q02_criteria, q02_criteria_replacement)
+          roadmap = roadmap.replace(
+              "- Issues #13 and #8 form the current evidence gate.",
+              "- Issue #13 is implemented through versioned guidance contracts, approval-aware validation, context retrieval, and deterministic JSON/Markdown/HTML projections.\n- Issue #8 remains the final cross-repository extraction gate.",
+          )
+
+          wave3_anchor = '''Wave 3 is now substantially implemented. #12 established the shared
+          `identity.quality-report/v1` evidence harness, package/publication scopes,
+          release-blocking accessibility/provenance/license/reproducibility/visual checks,
+          visual baselines, explicit skipped coverage, and human-review evidence. This #3
+          change adds framework-neutral visual-motion governance to that same release
+          decision: Astryx-informed adopt/adapt/reject rules, purpose budgets,
+          reduced-motion fallbacks, deterministic capture/provenance contracts, motion
+          fixtures, and semantic human-review boundaries. #13 is now the remaining Wave 3
+          gate before the public renderer and consumer pilots.
+          '''
+          wave3_replacement = '''Wave 3 implementation is complete in Identity. #12 established the shared
+          `identity.quality-report/v1` evidence harness, package/publication scopes,
+          release-blocking accessibility/provenance/license/reproducibility/visual checks,
+          visual baselines, explicit skipped coverage, and human-review evidence. #3 adds
+          framework-neutral visual-motion governance to that same release decision:
+          Astryx-informed adopt/adapt/reject rules, purpose budgets, reduced-motion
+          fallbacks, deterministic capture/provenance contracts, motion fixtures, and
+          semantic human-review boundaries. #13 adds governed voice, contextual tone,
+          usage, legal/accessibility/localization guidance, approval lifecycle, public and
+          review projections, and deterministic JSON/Markdown/HTML output. Issue #8 now
+          remains the final pre-renderer cross-repository gate.
+          '''
+          if roadmap.count(wave3_anchor) != 1:
+              raise SystemExit("ROADMAP Wave 3 anchor drifted")
+          roadmap = roadmap.replace(wave3_anchor, wave3_replacement)
+          roadmap = roadmap.replace(
+              "#12 quality-report/accessibility/provenance/license/visual/reproducibility gates and #3 visual-motion/capture/provenance gates are implemented; #13 guidance/approval integration remains",
+              "#12 quality-report/accessibility/provenance/license/visual/reproducibility gates, #3 visual-motion/capture/provenance gates, and #13 guidance/approval projections are implemented",
+          )
+          roadmap_path.write_text(roadmap, encoding="utf-8")
+          PY
+
+          git diff --check
+          python3 -m unittest discover \
+            --start-directory "tests" \
+            --pattern "test_*.py" \
+            --verbose
+
+          git add -- "README.md" "ROADMAP.md"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --message "docs(guidance): document governed projection lifecycle"
+          git push origin HEAD:feat/13-brand-guidance-v1
