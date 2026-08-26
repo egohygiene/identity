@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-24
+updated: 2026-08-26
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -33,14 +33,14 @@ repository: egohygiene/identity
 visibility: public
 publication: central
 route: /roadmap/identity/
-updated: 2026-08-24
+updated: 2026-08-26
 -->
-## 2026-08-24 execution snapshot
+## 2026-08-26 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
 
 **Lifecycle:** strong pre-release alpha  
-**Current gate:** Complete voice and approval evidence in issues #13 and #8 before building the renderer and studio.  
+**Current gate:** Complete Empathy's immutable Identity consumer transition in issue #8 before building the renderer and studio.
 **North-star outcome:** A deterministic, governed Brand Kit v1 whose source decisions, generated assets, and approvals remain traceable.
 
 ### Visual roadmap publication
@@ -90,12 +90,14 @@ issues: [8, 13]
 
 **Exit criteria:**
 
-- [ ] Issues #13 and #8 meet their acceptance criteria.
-- [ ] Approvals link to the exact source and generated artifact versions.
+- [x] Issue #13 provides governed voice, usage, approval, and deterministic projection evidence.
+- [ ] Issue #8 completes Empathy's immutable consumer transition.
+- [x] Approvals link to exact reviewed subjects, provenance, and lifecycle decisions.
 
 **Current evidence:**
 
-- Issues #13 and #8 form the current evidence gate.
+- Issue #13 is implemented through versioned guidance contracts, approval-aware validation, context retrieval, and deterministic JSON/Markdown/HTML projections.
+- Issue #8 remains the final cross-repository extraction gate.
 
 <!-- roadmap-step
 id: IDN-Q03
@@ -242,8 +244,10 @@ visual baselines, explicit skipped coverage, and human-review evidence. This #3
 change adds framework-neutral visual-motion governance to that same release
 decision: Astryx-informed adopt/adapt/reject rules, purpose budgets,
 reduced-motion fallbacks, deterministic capture/provenance contracts, motion
-fixtures, and semantic human-review boundaries. #13 is now the remaining Wave 3
-gate before the public renderer and consumer pilots.
+fixtures, and semantic human-review boundaries. #13 adds governed voice,
+contextual tone, usage, accessibility/legal/localization guidance, approval
+lifecycle, and deterministic public/review projections. Issue #8 remains the
+final pre-renderer cross-repository gate.
 
 The umbrella #2 remains open despite the Wave 2 implementation milestone. Its
 remaining acceptance evidence is the real Empathy and OptiFlow consumer proof
@@ -289,7 +293,7 @@ Wave 0 establishes decisions that constrain every implementation PR:
 | Resolve organization defaults and product overrides | #9, #17 | Merge/conflict diagnostics and contrasting consumer snapshots |
 | Plan before mutation | #10 | Mutation-free plan tests covering writes, replacements, removals, warnings, and approvals |
 | Generate deterministic target profiles | #10, #11 | Offline unit/integration tests, adapter contracts, byte-identical outputs/manifests, checksum stability |
-| Block inaccessible, unlicensed, or untraceable releases | #3, #12, #13 | #12 quality-report/accessibility/provenance/license/visual/reproducibility gates and #3 visual-motion/capture/provenance gates are implemented; #13 guidance/approval integration remains |
+| Block inaccessible, unlicensed, or untraceable releases | #3, #12, #13 | #12 quality-report/accessibility/provenance/license/visual/reproducibility gates, #3 visual-motion/capture/provenance gates, and #13 guidance/approval projections are implemented |
 | Distribute portable Brand Kit packages | #11, #18 | Versioned profile/package contracts, checksums, deterministic archive, consumer installation, clean-room build, and release provenance |
 | Render and preview an understandable Brand Kit | #14, #15 | Accessibility, responsive, link, download, visual regression, and mutation-isolation tests |
 | Publish the organization Brand Kit at `/identity` | #16 | Immutable handoff, metadata, redirect, deployment smoke test, and rollback evidence |
