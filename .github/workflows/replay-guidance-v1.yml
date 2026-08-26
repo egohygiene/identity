@@ -74,11 +74,14 @@ jobs:
               raise SystemExit("expected one current schema inventory item")
           source = source.replace(inventory_anchor, inventory_replacement)
 
-          assertion_anchor = '''        self.assertEqual(
-              schemas["project.schema.json"]["properties"]["schema"]["const"],
-              validator.PROJECT_SCHEMA,
-          )
-          '''
+          project_item = 'schemas["project.schema.json"]["properties"]["schema"]["const"]'
+          project_item_index = source.find(project_item)
+          if project_item_index < 0:
+              raise SystemExit("expected current project schema assertion")
+          assertion_index = source.rfind("        self.assertEqual(\n", 0, project_item_index)
+          if assertion_index < 0:
+              raise SystemExit("could not locate project assertion boundary")
+
           guidance_assertions = '''        self.assertEqual(
               schemas["voice.schema.json"]["properties"]["schema"]["const"],
               validator.VOICE_SCHEMA,
@@ -92,9 +95,7 @@ jobs:
               "identity.brand-guidance/v1",
           )
           '''
-          if source.count(assertion_anchor) != 1:
-              raise SystemExit("expected one current project schema assertion")
-          source = source.replace(assertion_anchor, guidance_assertions + assertion_anchor)
+          source = source[:assertion_index] + guidance_assertions + source[assertion_index:]
           path.write_text(source, encoding="utf-8")
           PY
 
