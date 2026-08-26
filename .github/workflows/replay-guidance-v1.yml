@@ -109,7 +109,7 @@ jobs:
           python3 "scripts/validate_identity.py" \
             --repository-root "tests/fixtures/v1/valid/minimal" \
             --format "human"
-          python3 -m compileall --quiet "scripts" "tests"
+          python3 -m compileall -q "scripts" "tests"
 
           git add -- "${reviewed_files[@]}" "tests/test_validate_identity_v1.py"
           git config user.name "github-actions[bot]"
