@@ -66,10 +66,12 @@ jobs:
           source = path.read_text(encoding="utf-8")
 
           inventory_anchor = '                "visual-motion-manifest.schema.json",'
-          inventory_replacement = '''                "visual-motion-manifest.schema.json",
-                  "brand-guidance.schema.json",
-                  "usage.schema.json",
-                  "voice.schema.json",'''
+          inventory_replacement = (
+              '                "visual-motion-manifest.schema.json",\n'
+              '                "brand-guidance.schema.json",\n'
+              '                "usage.schema.json",\n'
+              '                "voice.schema.json",'
+          )
           if source.count(inventory_anchor) != 1:
               raise SystemExit("expected one current schema inventory item")
           source = source.replace(inventory_anchor, inventory_replacement)
@@ -82,19 +84,20 @@ jobs:
           if assertion_index < 0:
               raise SystemExit("could not locate project assertion boundary")
 
-          guidance_assertions = '''        self.assertEqual(
-              schemas["voice.schema.json"]["properties"]["schema"]["const"],
-              validator.VOICE_SCHEMA,
+          guidance_assertions = (
+              "        self.assertEqual(\n"
+              '            schemas["voice.schema.json"]["properties"]["schema"]["const"],\n'
+              "            validator.VOICE_SCHEMA,\n"
+              "        )\n"
+              "        self.assertEqual(\n"
+              '            schemas["usage.schema.json"]["properties"]["schema"]["const"],\n'
+              "            validator.USAGE_SCHEMA,\n"
+              "        )\n"
+              "        self.assertEqual(\n"
+              '            schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],\n'
+              '            "identity.brand-guidance/v1",\n'
+              "        )\n"
           )
-          self.assertEqual(
-              schemas["usage.schema.json"]["properties"]["schema"]["const"],
-              validator.USAGE_SCHEMA,
-          )
-          self.assertEqual(
-              schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],
-              "identity.brand-guidance/v1",
-          )
-          '''
           source = source[:assertion_index] + guidance_assertions + source[assertion_index:]
           path.write_text(source, encoding="utf-8")
           PY
