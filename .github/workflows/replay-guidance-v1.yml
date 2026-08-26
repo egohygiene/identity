@@ -65,17 +65,13 @@ jobs:
           path = Path("tests/test_validate_identity_v1.py")
           source = path.read_text(encoding="utf-8")
 
-          inventory_anchor = '''                "visual-motion-manifest.schema.json",
-              },
-          '''
+          inventory_anchor = '                "visual-motion-manifest.schema.json",'
           inventory_replacement = '''                "visual-motion-manifest.schema.json",
                   "brand-guidance.schema.json",
                   "usage.schema.json",
-                  "voice.schema.json",
-              },
-          '''
+                  "voice.schema.json",'''
           if source.count(inventory_anchor) != 1:
-              raise SystemExit("expected one current schema inventory anchor")
+              raise SystemExit("expected one current schema inventory item")
           source = source.replace(inventory_anchor, inventory_replacement)
 
           assertion_anchor = '''        self.assertEqual(
