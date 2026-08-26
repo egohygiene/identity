@@ -55,10 +55,52 @@ jobs:
             "tests/fixtures/v1/valid/minimal/expected/brand-guidance.json"
             "tests/fixtures/v1/valid/minimal/expected/brand-guidance.md"
             "tests/test_render_guidance.py"
-            "tests/test_validate_identity_v1.py"
           )
 
           git checkout "${reviewed_commit}" -- "${reviewed_files[@]}"
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("tests/test_validate_identity_v1.py")
+          source = path.read_text(encoding="utf-8")
+
+          inventory_anchor = '''                "visual-motion-manifest.schema.json",
+              },
+          '''
+          inventory_replacement = '''                "visual-motion-manifest.schema.json",
+                  "brand-guidance.schema.json",
+                  "usage.schema.json",
+                  "voice.schema.json",
+              },
+          '''
+          if source.count(inventory_anchor) != 1:
+              raise SystemExit("expected one current schema inventory anchor")
+          source = source.replace(inventory_anchor, inventory_replacement)
+
+          assertion_anchor = '''        self.assertEqual(
+              schemas["project.schema.json"]["properties"]["schema"]["const"],
+              validator.PROJECT_SCHEMA,
+          )
+          '''
+          guidance_assertions = '''        self.assertEqual(
+              schemas["voice.schema.json"]["properties"]["schema"]["const"],
+              validator.VOICE_SCHEMA,
+          )
+          self.assertEqual(
+              schemas["usage.schema.json"]["properties"]["schema"]["const"],
+              validator.USAGE_SCHEMA,
+          )
+          self.assertEqual(
+              schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],
+              "identity.brand-guidance/v1",
+          )
+          '''
+          if source.count(assertion_anchor) != 1:
+              raise SystemExit("expected one current project schema assertion")
+          source = source.replace(assertion_anchor, guidance_assertions + assertion_anchor)
+          path.write_text(source, encoding="utf-8")
+          PY
 
           python3 -m unittest discover \
             --start-directory "tests" \
@@ -69,7 +111,7 @@ jobs:
             --format "human"
           python3 -m compileall --quiet "scripts" "tests"
 
-          git add -- "${reviewed_files[@]}"
+          git add -- "${reviewed_files[@]}" "tests/test_validate_identity_v1.py"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit --message "feat(guidance): add governed voice and usage projections"
