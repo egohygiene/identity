@@ -100,9 +100,12 @@ def plan_migration(repository_root: Path) -> dict[str, Any]:
             },
             {
                 "id": "structure-voice-and-usage",
-                "status": "deferred-to-idn-11",
+                "status": "requires-human-review",
                 "authority": "consumer-maintainer",
-                "reason": "v1 reserves explicit guidance paths without inventing reviewed content.",
+                "reason": (
+                    "v0 narrative intent requires human structuring into versioned voice "
+                    "and usage guidance."
+                ),
             },
             {
                 "id": "validate-and-compare",

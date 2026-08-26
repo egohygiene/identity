@@ -22,6 +22,8 @@ TARGETS_SCHEMA = "identity.targets/v1"
 PROVENANCE_SCHEMA = "identity.provenance/v1"
 APPROVALS_SCHEMA = "identity.approvals/v1"
 DIAGNOSTICS_SCHEMA = "identity.diagnostics/v1"
+VOICE_SCHEMA = "identity.voice/v1"
+USAGE_SCHEMA = "identity.usage/v1"
 IDENTITY_EXTENSION = "org.egohygiene.identity"
 TOKEN_TYPES = {
     "border",
@@ -73,7 +75,17 @@ PROVENANCE_EXTENSION_KEYS = {"record", "approval"}
 TARGET_KEYS = {"$schema", "schema", "enabled", "inapplicable"}
 TARGET_PROFILE_KEYS = {"id", "version"}
 APPROVAL_ROOT_KEYS = {"$schema", "schema", "decisions"}
-APPROVAL_KEYS = {"id", "subject", "status", "reviewedBy", "reviewedAt", "evidence", "notes"}
+APPROVAL_KEYS = {
+    "id",
+    "subject",
+    "candidate",
+    "status",
+    "reviewedBy",
+    "reviewedAt",
+    "evidence",
+    "supersedes",
+    "notes",
+}
 PROVENANCE_ROOT_KEYS = {"$schema", "schema", "assets"}
 ASSET_KEYS = {
     "id",
@@ -90,12 +102,101 @@ LICENSE_KEYS = {"spdx", "status", "attribution"}
 ORIGIN_KEYS = {"creator", "method", "source", "capturedAt"}
 ACCESSIBILITY_KEYS = {"altText"}
 USAGE_KEYS = {"safeZone", "minimumSize", "restrictions"}
+VOICE_ROOT_KEYS = {
+    "$schema",
+    "schema",
+    "foundation",
+    "characteristics",
+    "contexts",
+    "localization",
+}
+VOICE_FOUNDATION_KEYS = {
+    "purpose",
+    "positioning",
+    "audience",
+    "personality",
+    "governance",
+}
+VOICE_CHARACTERISTIC_KEYS = {"id", "label", "description", "governance"}
+VOICE_CONTEXT_KEYS = {
+    "id",
+    "label",
+    "audience",
+    "intent",
+    "tone",
+    "characteristics",
+    "preferredVocabulary",
+    "avoidedLanguage",
+    "naming",
+    "capitalization",
+    "punctuation",
+    "examples",
+    "antiExamples",
+    "governance",
+}
+VOICE_MESSAGE_KEYS = {"id", "text", "rationale", "governance"}
+VOICE_LOCALIZATION_KEYS = {
+    "sourceLanguage",
+    "supportedLanguages",
+    "fallback",
+    "governance",
+}
+VOICE_LANGUAGE_KEYS = {"tag", "coverage", "notes"}
+GOVERNANCE_KEYS = {"subject", "state", "visibility", "provenance", "approval"}
+GUIDANCE_PROVENANCE_KEYS = {"method", "source", "capturedAt"}
+USAGE_ROOT_KEYS = {"$schema", "schema", "sections", "assets", "accessibility", "legal"}
+USAGE_SECTION_KEYS = {"id", "title", "description", "rules"}
+USAGE_RULE_KEYS = {
+    "id",
+    "kind",
+    "category",
+    "instruction",
+    "rationale",
+    "details",
+    "contexts",
+    "governance",
+}
+USAGE_ASSET_KEYS = {
+    "id",
+    "label",
+    "kind",
+    "path",
+    "status",
+    "availability",
+    "replacement",
+    "downloadName",
+    "notes",
+    "governance",
+}
+USAGE_ACCESSIBILITY_KEYS = {"summary", "rules", "governance"}
+USAGE_LEGAL_KEYS = {
+    "trademark",
+    "copyright",
+    "attribution",
+    "thirdPartyLicenses",
+    "governance",
+}
+USAGE_LICENSE_KEYS = {"name", "spdx", "attribution"}
+GUIDANCE_STATES = {"candidate", "approved", "rejected", "superseded"}
+GUIDANCE_CATEGORIES = {
+    "mark",
+    "color",
+    "typography",
+    "imagery",
+    "illustration",
+    "mascot",
+    "motion",
+    "accessibility",
+    "legal",
+    "localization",
+}
 IDENTIFIER = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 SEMVER = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
 HTTPS_URL = re.compile(r"^https://[^\s]+$")
 ALIAS = re.compile(r"^\{([A-Za-z0-9_.-]+)\}$")
 EXTENSION_NAME = re.compile(r"^[a-z0-9]+(?:\.[a-z0-9-]+)+$")
+LANGUAGE_TAG = re.compile(r"^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$")
 
 
 class DuplicateKeyError(ValueError):
@@ -389,13 +490,12 @@ def validate_project(
         )
         if guidance is not None:
             for field in ("voice", "usage"):
-                if guidance.get(field) is not None:
-                    resolve_local_path(
-                        repository_root,
-                        guidance[field],
-                        f"/documents/guidance/{field}",
-                        diagnostics,
-                    )
+                resolve_local_path(
+                    repository_root,
+                    guidance.get(field),
+                    f"/documents/guidance/{field}",
+                    diagnostics,
+                )
 
     directories = require_closed(
         project.get("directories"), DIRECTORY_KEYS, DIRECTORY_KEYS, "/directories", diagnostics
@@ -1041,7 +1141,7 @@ def validate_approvals(
                 "approval status is unsupported",
                 "Use approved, rejected, or superseded.",
             )
-        for field in ("subject", "reviewedBy", "evidence"):
+        for field in ("subject", "candidate", "reviewedBy", "evidence"):
             if not isinstance(value.get(field), str) or not value[field].strip():
                 diagnostic(
                     diagnostics,
@@ -1059,6 +1159,48 @@ def validate_approvals(
                 f"{pointer}/reviewedAt",
                 "reviewedAt must be an RFC 3339 timestamp",
                 "Record the review time with an explicit UTC offset.",
+            )
+        supersedes = value.get("supersedes")
+        if supersedes is not None and (
+            not isinstance(supersedes, str)
+            or IDENTIFIER.fullmatch(supersedes) is None
+            or supersedes == identifier
+        ):
+            diagnostic(
+                diagnostics,
+                "IDN1404",
+                f"{pointer}/supersedes",
+                "supersedes must reference a different stable approval id",
+                "Use null or the stable ID of the earlier decision.",
+            )
+    for identifier, value in result.items():
+        supersedes = value.get("supersedes")
+        if value.get("status") == "superseded" and not isinstance(supersedes, str):
+            diagnostic(
+                diagnostics,
+                "IDN1404",
+                f"approval:{identifier}/supersedes",
+                "superseded decision must name the earlier decision",
+                "Link the exact earlier approval for the same subject.",
+            )
+        if isinstance(supersedes, str) and supersedes not in result:
+            diagnostic(
+                diagnostics,
+                "IDN1404",
+                f"approval:{identifier}/supersedes",
+                "superseded decision does not exist",
+                "Restore the earlier decision or remove the stale reference.",
+            )
+        elif (
+            isinstance(supersedes, str)
+            and result[supersedes].get("subject") != value.get("subject")
+        ):
+            diagnostic(
+                diagnostics,
+                "IDN1404",
+                f"approval:{identifier}/supersedes",
+                "decision chain changes subject",
+                "Reference an earlier decision for the exact same subject.",
             )
     return result
 
@@ -1362,6 +1504,922 @@ def validate_targets(
         )
 
 
+def validate_guidance_strings(
+    value: Any,
+    pointer: str,
+    diagnostics: list[Diagnostic],
+) -> list[str]:
+    """Validate a unique, non-empty list of non-empty strings."""
+
+    if (
+        not isinstance(value, list)
+        or not value
+        or any(not isinstance(item, str) or not item.strip() for item in value)
+        or len(value) != len(set(value))
+    ):
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            pointer,
+            "guidance list must contain unique non-empty strings",
+            "Provide at least one reviewed, non-empty value without duplicates.",
+        )
+        return []
+    return value
+
+
+def validate_guidance_text_fields(
+    value: dict[str, Any],
+    fields: Sequence[str],
+    pointer: str,
+    diagnostics: list[Diagnostic],
+) -> None:
+    """Validate required authored guidance strings."""
+
+    for field in fields:
+        if not isinstance(value.get(field), str) or not value[field].strip():
+            diagnostic(
+                diagnostics,
+                "IDN1601",
+                f"{pointer}/{field}",
+                "guidance text must be a non-empty string",
+                "Provide reviewed guidance text.",
+            )
+
+
+def validate_guidance_governance(
+    value: Any,
+    pointer: str,
+    approvals: dict[str, dict[str, Any]],
+    diagnostics: list[Diagnostic],
+) -> dict[str, Any] | None:
+    """Validate lifecycle state, provenance, visibility, and human authority."""
+
+    governance = require_closed(
+        value,
+        GOVERNANCE_KEYS,
+        GOVERNANCE_KEYS,
+        pointer,
+        diagnostics,
+    )
+    if governance is None:
+        return None
+    subject = governance.get("subject")
+    if not isinstance(subject, str) or not subject.strip():
+        diagnostic(
+            diagnostics,
+            "IDN1602",
+            f"{pointer}/subject",
+            "governance subject must be non-empty",
+            "Name the exact content or bundle reviewed by the decision.",
+        )
+    state = governance.get("state")
+    if state not in GUIDANCE_STATES:
+        diagnostic(
+            diagnostics,
+            "IDN1602",
+            f"{pointer}/state",
+            "guidance state is unsupported",
+            "Use candidate, approved, rejected, or superseded.",
+        )
+    visibility = governance.get("visibility")
+    if visibility not in {"public", "internal"}:
+        diagnostic(
+            diagnostics,
+            "IDN1602",
+            f"{pointer}/visibility",
+            "guidance visibility is unsupported",
+            "Use public or internal.",
+        )
+    if state != "approved" and visibility == "public":
+        diagnostic(
+            diagnostics,
+            "IDN1602",
+            f"{pointer}/visibility",
+            "unapproved guidance cannot be public",
+            "Keep candidate, rejected, and superseded content internal.",
+        )
+
+    provenance = require_closed(
+        governance.get("provenance"),
+        GUIDANCE_PROVENANCE_KEYS,
+        GUIDANCE_PROVENANCE_KEYS,
+        f"{pointer}/provenance",
+        diagnostics,
+    )
+    if provenance is not None:
+        validate_guidance_text_fields(
+            provenance,
+            ("source",),
+            f"{pointer}/provenance",
+            diagnostics,
+        )
+        if provenance.get("method") not in {
+            "human-authored",
+            "handoff-candidate",
+            "imported",
+        }:
+            diagnostic(
+                diagnostics,
+                "IDN1602",
+                f"{pointer}/provenance/method",
+                "guidance provenance method is unsupported",
+                "Use human-authored, handoff-candidate, or imported.",
+            )
+        try:
+            datetime.fromisoformat(
+                str(provenance.get("capturedAt", "")).replace("Z", "+00:00")
+            )
+        except ValueError:
+            diagnostic(
+                diagnostics,
+                "IDN1602",
+                f"{pointer}/provenance/capturedAt",
+                "capturedAt must be an RFC 3339 timestamp",
+                "Record the source capture time with an explicit UTC offset.",
+            )
+
+    approval_id = governance.get("approval")
+    if state == "candidate":
+        if provenance is not None and provenance.get("method") != "handoff-candidate":
+            diagnostic(
+                diagnostics,
+                "IDN1602",
+                f"{pointer}/provenance/method",
+                "candidate guidance must enter through the handoff boundary",
+                "Use handoff-candidate and record the explicit candidate source.",
+            )
+        if approval_id is not None:
+            diagnostic(
+                diagnostics,
+                "IDN1602",
+                f"{pointer}/approval",
+                "candidate guidance cannot claim an approval decision",
+                "Use null until a human decision is recorded.",
+            )
+        return governance
+    decision = approvals.get(approval_id) if isinstance(approval_id, str) else None
+    if (
+        decision is None
+        or decision.get("status") != state
+        or decision.get("subject") != subject
+    ):
+        diagnostic(
+            diagnostics,
+            "IDN1602",
+            f"{pointer}/approval",
+            "guidance state does not resolve to a matching human decision",
+            "Link the reviewed subject to a decision with the same lifecycle state.",
+        )
+    return governance
+
+
+def validate_voice_message(
+    value: Any,
+    pointer: str,
+    approvals: dict[str, dict[str, Any]],
+    diagnostics: list[Diagnostic],
+) -> str | None:
+    """Validate one voice example or anti-example."""
+
+    message = require_closed(
+        value,
+        VOICE_MESSAGE_KEYS,
+        VOICE_MESSAGE_KEYS,
+        pointer,
+        diagnostics,
+    )
+    if message is None:
+        return None
+    validate_guidance_text_fields(
+        message,
+        ("id", "text", "rationale"),
+        pointer,
+        diagnostics,
+    )
+    identifier = message.get("id")
+    if not isinstance(identifier, str) or IDENTIFIER.fullmatch(identifier) is None:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{pointer}/id",
+            "voice example id is invalid",
+            "Use a stable lowercase identifier.",
+        )
+        identifier = None
+    validate_guidance_governance(
+        message.get("governance"),
+        f"{pointer}/governance",
+        approvals,
+        diagnostics,
+    )
+    return identifier
+
+
+def validate_voice(
+    project: dict[str, Any],
+    repository_root: Path,
+    approvals: dict[str, dict[str, Any]],
+    diagnostics: list[Diagnostic],
+) -> set[str]:
+    """Validate structured voice, contextual tone, examples, and localization."""
+
+    documents = project.get("documents")
+    guidance = documents.get("guidance") if isinstance(documents, dict) else None
+    if not isinstance(guidance, dict):
+        return set()
+    path_value = guidance.get("voice")
+    path = resolve_local_path(
+        repository_root,
+        path_value,
+        "/documents/guidance/voice",
+        diagnostics,
+    )
+    if path is None:
+        return set()
+    document = load_json(path, str(path_value), diagnostics)
+    if document is None:
+        return set()
+    require_closed(document, VOICE_ROOT_KEYS, VOICE_ROOT_KEYS, "/", diagnostics)
+    schema_reference = document.get("$schema")
+    if not isinstance(schema_reference, str) or not schema_reference.endswith(
+        "/voice.schema.json"
+    ):
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/$schema",
+            "voice schema reference must end in /voice.schema.json",
+            "Reference the checked-in Identity v1 voice schema.",
+        )
+    if document.get("schema") != VOICE_SCHEMA:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/schema",
+            f"voice schema must be {VOICE_SCHEMA}",
+            "Migrate voice guidance to the v1 contract.",
+        )
+
+    foundation = require_closed(
+        document.get("foundation"),
+        VOICE_FOUNDATION_KEYS,
+        VOICE_FOUNDATION_KEYS,
+        f"{path_value}#/foundation",
+        diagnostics,
+    )
+    if foundation is not None:
+        validate_guidance_text_fields(
+            foundation,
+            ("purpose", "positioning"),
+            f"{path_value}#/foundation",
+            diagnostics,
+        )
+        validate_guidance_strings(
+            foundation.get("audience"),
+            f"{path_value}#/foundation/audience",
+            diagnostics,
+        )
+        validate_guidance_strings(
+            foundation.get("personality"),
+            f"{path_value}#/foundation/personality",
+            diagnostics,
+        )
+        validate_guidance_governance(
+            foundation.get("governance"),
+            f"{path_value}#/foundation/governance",
+            approvals,
+            diagnostics,
+        )
+
+    characteristic_ids: set[str] = set()
+    characteristics = document.get("characteristics")
+    if not isinstance(characteristics, list) or not characteristics:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/characteristics",
+            "voice requires at least one characteristic",
+            "Add reviewed voice characteristics.",
+        )
+    else:
+        for index, item in enumerate(characteristics):
+            pointer = f"{path_value}#/characteristics/{index}"
+            value = require_closed(
+                item,
+                VOICE_CHARACTERISTIC_KEYS,
+                VOICE_CHARACTERISTIC_KEYS,
+                pointer,
+                diagnostics,
+            )
+            if value is None:
+                continue
+            validate_guidance_text_fields(
+                value,
+                ("id", "label", "description"),
+                pointer,
+                diagnostics,
+            )
+            identifier = value.get("id")
+            if (
+                not isinstance(identifier, str)
+                or IDENTIFIER.fullmatch(identifier) is None
+                or identifier in characteristic_ids
+            ):
+                diagnostic(
+                    diagnostics,
+                    "IDN1601",
+                    f"{pointer}/id",
+                    "voice characteristic id is invalid or duplicated",
+                    "Use each stable lowercase identifier once.",
+                )
+            else:
+                characteristic_ids.add(identifier)
+            validate_guidance_governance(
+                value.get("governance"),
+                f"{pointer}/governance",
+                approvals,
+                diagnostics,
+            )
+
+    context_ids: set[str] = set()
+    message_ids: set[str] = set()
+    contexts = document.get("contexts")
+    if not isinstance(contexts, list) or not contexts:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/contexts",
+            "voice requires at least one context",
+            "Add a retrievable tone context.",
+        )
+    else:
+        for index, item in enumerate(contexts):
+            pointer = f"{path_value}#/contexts/{index}"
+            value = require_closed(
+                item,
+                VOICE_CONTEXT_KEYS,
+                VOICE_CONTEXT_KEYS,
+                pointer,
+                diagnostics,
+            )
+            if value is None:
+                continue
+            validate_guidance_text_fields(
+                value,
+                (
+                    "id",
+                    "label",
+                    "audience",
+                    "intent",
+                    "tone",
+                    "naming",
+                    "capitalization",
+                    "punctuation",
+                ),
+                pointer,
+                diagnostics,
+            )
+            identifier = value.get("id")
+            if (
+                not isinstance(identifier, str)
+                or IDENTIFIER.fullmatch(identifier) is None
+                or identifier in context_ids
+            ):
+                diagnostic(
+                    diagnostics,
+                    "IDN1601",
+                    f"{pointer}/id",
+                    "voice context id is invalid or duplicated",
+                    "Use each stable lowercase context identifier once.",
+                )
+            else:
+                context_ids.add(identifier)
+            referenced = validate_guidance_strings(
+                value.get("characteristics"),
+                f"{pointer}/characteristics",
+                diagnostics,
+            )
+            unknown = sorted(set(referenced) - characteristic_ids)
+            if unknown:
+                diagnostic(
+                    diagnostics,
+                    "IDN1604",
+                    f"{pointer}/characteristics",
+                    f"unknown voice characteristics: {', '.join(unknown)}",
+                    "Reference a declared characteristic ID.",
+                )
+            for field in ("preferredVocabulary", "avoidedLanguage"):
+                validate_guidance_strings(
+                    value.get(field),
+                    f"{pointer}/{field}",
+                    diagnostics,
+                )
+            for field in ("examples", "antiExamples"):
+                messages = value.get(field)
+                if not isinstance(messages, list) or not messages:
+                    diagnostic(
+                        diagnostics,
+                        "IDN1601",
+                        f"{pointer}/{field}",
+                        "each context needs at least one example and anti-example",
+                        "Add reviewed messaging evidence.",
+                    )
+                    continue
+                for message_index, message in enumerate(messages):
+                    message_id = validate_voice_message(
+                        message,
+                        f"{pointer}/{field}/{message_index}",
+                        approvals,
+                        diagnostics,
+                    )
+                    if message_id in message_ids:
+                        diagnostic(
+                            diagnostics,
+                            "IDN1601",
+                            f"{pointer}/{field}/{message_index}/id",
+                            "voice message id is duplicated",
+                            "Use one stable ID per example or anti-example.",
+                        )
+                    elif message_id is not None:
+                        message_ids.add(message_id)
+            validate_guidance_governance(
+                value.get("governance"),
+                f"{pointer}/governance",
+                approvals,
+                diagnostics,
+            )
+
+    localization = require_closed(
+        document.get("localization"),
+        VOICE_LOCALIZATION_KEYS,
+        VOICE_LOCALIZATION_KEYS,
+        f"{path_value}#/localization",
+        diagnostics,
+    )
+    if localization is not None:
+        validate_guidance_text_fields(
+            localization,
+            ("sourceLanguage", "fallback"),
+            f"{path_value}#/localization",
+            diagnostics,
+        )
+        if (
+            not isinstance(localization.get("sourceLanguage"), str)
+            or LANGUAGE_TAG.fullmatch(localization["sourceLanguage"]) is None
+        ):
+            diagnostic(
+                diagnostics,
+                "IDN1601",
+                f"{path_value}#/localization/sourceLanguage",
+                "source language tag is invalid",
+                "Use a BCP 47-style language tag such as en-US.",
+            )
+        languages = localization.get("supportedLanguages")
+        language_tags: set[str] = set()
+        if not isinstance(languages, list) or not languages:
+            diagnostic(
+                diagnostics,
+                "IDN1601",
+                f"{path_value}#/localization/supportedLanguages",
+                "at least one language coverage record is required",
+                "Record the source language and every reviewed coverage level.",
+            )
+        else:
+            for index, item in enumerate(languages):
+                pointer = f"{path_value}#/localization/supportedLanguages/{index}"
+                value = require_closed(
+                    item,
+                    VOICE_LANGUAGE_KEYS,
+                    VOICE_LANGUAGE_KEYS,
+                    pointer,
+                    diagnostics,
+                )
+                if value is None:
+                    continue
+                tag = value.get("tag")
+                if (
+                    not isinstance(tag, str)
+                    or LANGUAGE_TAG.fullmatch(tag) is None
+                    or tag in language_tags
+                ):
+                    diagnostic(
+                        diagnostics,
+                        "IDN1601",
+                        f"{pointer}/tag",
+                        "language tag is invalid or duplicated",
+                        "Use each BCP 47-style language tag once.",
+                    )
+                else:
+                    language_tags.add(tag)
+                if value.get("coverage") not in {"reviewed", "partial", "unsupported"}:
+                    diagnostic(
+                        diagnostics,
+                        "IDN1601",
+                        f"{pointer}/coverage",
+                        "language coverage is unsupported",
+                        "Use reviewed, partial, or unsupported.",
+                    )
+                if not isinstance(value.get("notes"), str):
+                    diagnostic(
+                        diagnostics,
+                        "IDN1601",
+                        f"{pointer}/notes",
+                        "language notes must be a string",
+                        "Use an empty or reviewed explanatory string.",
+                    )
+        validate_guidance_governance(
+            localization.get("governance"),
+            f"{path_value}#/localization/governance",
+            approvals,
+            diagnostics,
+        )
+    return context_ids
+
+
+def validate_usage_rule(
+    value: Any,
+    pointer: str,
+    approvals: dict[str, dict[str, Any]],
+    diagnostics: list[Diagnostic],
+) -> str | None:
+    """Validate one renderer-ready do/don't usage rule."""
+
+    rule = require_closed(
+        value,
+        USAGE_RULE_KEYS,
+        USAGE_RULE_KEYS,
+        pointer,
+        diagnostics,
+    )
+    if rule is None:
+        return None
+    validate_guidance_text_fields(
+        rule,
+        ("id", "instruction", "rationale"),
+        pointer,
+        diagnostics,
+    )
+    identifier = rule.get("id")
+    if not isinstance(identifier, str) or IDENTIFIER.fullmatch(identifier) is None:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{pointer}/id",
+            "usage rule id is invalid",
+            "Use a stable lowercase identifier.",
+        )
+        identifier = None
+    if rule.get("kind") not in {"do", "dont"}:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{pointer}/kind",
+            "usage rule kind is unsupported",
+            "Use do or dont.",
+        )
+    if rule.get("category") not in GUIDANCE_CATEGORIES:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{pointer}/category",
+            "usage rule category is unsupported",
+            "Use a category declared by the v1 usage schema.",
+        )
+    validate_guidance_strings(rule.get("details"), f"{pointer}/details", diagnostics)
+    validate_guidance_strings(rule.get("contexts"), f"{pointer}/contexts", diagnostics)
+    validate_guidance_governance(
+        rule.get("governance"),
+        f"{pointer}/governance",
+        approvals,
+        diagnostics,
+    )
+    return identifier
+
+
+def validate_usage(
+    project: dict[str, Any],
+    repository_root: Path,
+    approvals: dict[str, dict[str, Any]],
+    diagnostics: list[Diagnostic],
+) -> None:
+    """Validate usage rules, legacy policy, accessibility, and legal notes."""
+
+    documents = project.get("documents")
+    guidance = documents.get("guidance") if isinstance(documents, dict) else None
+    if not isinstance(guidance, dict):
+        return
+    path_value = guidance.get("usage")
+    path = resolve_local_path(
+        repository_root,
+        path_value,
+        "/documents/guidance/usage",
+        diagnostics,
+    )
+    if path is None:
+        return
+    document = load_json(path, str(path_value), diagnostics)
+    if document is None:
+        return
+    require_closed(document, USAGE_ROOT_KEYS, USAGE_ROOT_KEYS, "/", diagnostics)
+    schema_reference = document.get("$schema")
+    if not isinstance(schema_reference, str) or not schema_reference.endswith(
+        "/usage.schema.json"
+    ):
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/$schema",
+            "usage schema reference must end in /usage.schema.json",
+            "Reference the checked-in Identity v1 usage schema.",
+        )
+    if document.get("schema") != USAGE_SCHEMA:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/schema",
+            f"usage schema must be {USAGE_SCHEMA}",
+            "Migrate usage guidance to the v1 contract.",
+        )
+
+    section_ids: set[str] = set()
+    rule_ids: set[str] = set()
+    sections = document.get("sections")
+    if not isinstance(sections, list) or not sections:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/sections",
+            "usage guidance requires at least one section",
+            "Add reviewed do/don't rules grouped for human readers.",
+        )
+    else:
+        for index, item in enumerate(sections):
+            pointer = f"{path_value}#/sections/{index}"
+            section = require_closed(
+                item,
+                USAGE_SECTION_KEYS,
+                USAGE_SECTION_KEYS,
+                pointer,
+                diagnostics,
+            )
+            if section is None:
+                continue
+            validate_guidance_text_fields(
+                section,
+                ("id", "title", "description"),
+                pointer,
+                diagnostics,
+            )
+            identifier = section.get("id")
+            if (
+                not isinstance(identifier, str)
+                or IDENTIFIER.fullmatch(identifier) is None
+                or identifier in section_ids
+            ):
+                diagnostic(
+                    diagnostics,
+                    "IDN1601",
+                    f"{pointer}/id",
+                    "usage section id is invalid or duplicated",
+                    "Use each stable lowercase section identifier once.",
+                )
+            else:
+                section_ids.add(identifier)
+            rules = section.get("rules")
+            if not isinstance(rules, list) or not rules:
+                diagnostic(
+                    diagnostics,
+                    "IDN1601",
+                    f"{pointer}/rules",
+                    "usage section requires at least one rule",
+                    "Add one or more reviewed do/don't rules.",
+                )
+                continue
+            for rule_index, rule in enumerate(rules):
+                rule_id = validate_usage_rule(
+                    rule,
+                    f"{pointer}/rules/{rule_index}",
+                    approvals,
+                    diagnostics,
+                )
+                if rule_id in rule_ids:
+                    diagnostic(
+                        diagnostics,
+                        "IDN1601",
+                        f"{pointer}/rules/{rule_index}/id",
+                        "usage rule id is duplicated",
+                        "Use one stable ID per usage rule.",
+                    )
+                elif rule_id is not None:
+                    rule_ids.add(rule_id)
+
+    asset_ids: set[str] = set()
+    legacy_replacements: list[tuple[str, str]] = []
+    assets = document.get("assets")
+    if not isinstance(assets, list) or not assets:
+        diagnostic(
+            diagnostics,
+            "IDN1601",
+            f"{path_value}#/assets",
+            "usage guidance requires at least one governed asset",
+            "Expose current downloads and any permitted legacy records.",
+        )
+    else:
+        for index, item in enumerate(assets):
+            pointer = f"{path_value}#/assets/{index}"
+            asset = require_closed(
+                item,
+                USAGE_ASSET_KEYS,
+                USAGE_ASSET_KEYS,
+                pointer,
+                diagnostics,
+            )
+            if asset is None:
+                continue
+            validate_guidance_text_fields(
+                asset,
+                ("id", "label", "kind", "path", "status", "availability", "notes"),
+                pointer,
+                diagnostics,
+            )
+            identifier = asset.get("id")
+            if (
+                not isinstance(identifier, str)
+                or IDENTIFIER.fullmatch(identifier) is None
+                or identifier in asset_ids
+            ):
+                diagnostic(
+                    diagnostics,
+                    "IDN1601",
+                    f"{pointer}/id",
+                    "usage asset id is invalid or duplicated",
+                    "Use each stable lowercase asset identifier once.",
+                )
+            else:
+                asset_ids.add(identifier)
+            resolve_local_path(
+                repository_root,
+                asset.get("path"),
+                f"{pointer}/path",
+                diagnostics,
+            )
+            status = asset.get("status")
+            availability = asset.get("availability")
+            replacement = asset.get("replacement")
+            download_name = asset.get("downloadName")
+            governance = validate_guidance_governance(
+                asset.get("governance"),
+                f"{pointer}/governance",
+                approvals,
+                diagnostics,
+            )
+            if status == "legacy":
+                if (
+                    not isinstance(replacement, str)
+                    or IDENTIFIER.fullmatch(replacement) is None
+                    or replacement == identifier
+                ):
+                    diagnostic(
+                        diagnostics,
+                        "IDN1603",
+                        pointer,
+                        "legacy asset policy is incomplete or unsafe",
+                        "Name a different active replacement through reviewed policy.",
+                    )
+                else:
+                    legacy_replacements.append((pointer, replacement))
+                if availability == "public":
+                    if (
+                        not isinstance(download_name, str)
+                        or not download_name.strip()
+                        or governance is None
+                        or governance.get("state") != "approved"
+                        or governance.get("visibility") != "public"
+                    ):
+                        diagnostic(
+                            diagnostics,
+                            "IDN1603",
+                            pointer,
+                            "public legacy asset lacks an explicit approved policy",
+                            (
+                                "Approve public visibility and a stable download name, "
+                                "or keep it internal."
+                            ),
+                        )
+                elif download_name is not None:
+                    diagnostic(
+                        diagnostics,
+                        "IDN1603",
+                        f"{pointer}/downloadName",
+                        "non-public legacy asset cannot expose a download name",
+                        "Use null until a new decision permits public download.",
+                    )
+            elif status == "active":
+                if replacement is not None:
+                    diagnostic(
+                        diagnostics,
+                        "IDN1603",
+                        f"{pointer}/replacement",
+                        "active asset cannot declare a replacement",
+                        "Use null until the asset enters a reviewed legacy state.",
+                    )
+                if availability == "public" and (
+                    not isinstance(download_name, str) or not download_name.strip()
+                ):
+                    diagnostic(
+                        diagnostics,
+                        "IDN1603",
+                        f"{pointer}/downloadName",
+                        "public active asset requires a download name",
+                        "Provide a stable downloadable filename.",
+                    )
+            else:
+                diagnostic(
+                    diagnostics,
+                    "IDN1603",
+                    f"{pointer}/status",
+                    "usage asset status is unsupported",
+                    "Use active or legacy.",
+                )
+            if availability not in {"public", "internal", "blocked"}:
+                diagnostic(
+                    diagnostics,
+                    "IDN1603",
+                    f"{pointer}/availability",
+                    "asset availability is unsupported",
+                    "Use public, internal, or blocked.",
+                )
+        for pointer, replacement in legacy_replacements:
+            if replacement not in asset_ids:
+                diagnostic(
+                    diagnostics,
+                    "IDN1603",
+                    f"{pointer}/replacement",
+                    "legacy replacement does not name a declared usage asset",
+                    "Reference an active governed asset ID.",
+                )
+
+    for field, keys, text_fields in (
+        (
+            "accessibility",
+            USAGE_ACCESSIBILITY_KEYS,
+            ("summary",),
+        ),
+        (
+            "legal",
+            USAGE_LEGAL_KEYS,
+            ("trademark", "copyright", "attribution"),
+        ),
+    ):
+        pointer = f"{path_value}#/{field}"
+        value = require_closed(
+            document.get(field),
+            keys,
+            keys,
+            pointer,
+            diagnostics,
+        )
+        if value is None:
+            continue
+        validate_guidance_text_fields(value, text_fields, pointer, diagnostics)
+        validate_guidance_governance(
+            value.get("governance"),
+            f"{pointer}/governance",
+            approvals,
+            diagnostics,
+        )
+        if field == "accessibility":
+            validate_guidance_strings(value.get("rules"), f"{pointer}/rules", diagnostics)
+            continue
+        licenses = value.get("thirdPartyLicenses")
+        if not isinstance(licenses, list):
+            diagnostic(
+                diagnostics,
+                "IDN1601",
+                f"{pointer}/thirdPartyLicenses",
+                "third-party licenses must be an array",
+                "Use an empty list or add reviewed license notes.",
+            )
+            continue
+        for index, item in enumerate(licenses):
+            license_pointer = f"{pointer}/thirdPartyLicenses/{index}"
+            license_value = require_closed(
+                item,
+                USAGE_LICENSE_KEYS,
+                USAGE_LICENSE_KEYS,
+                license_pointer,
+                diagnostics,
+            )
+            if license_value is not None:
+                validate_guidance_text_fields(
+                    license_value,
+                    ("name", "spdx", "attribution"),
+                    license_pointer,
+                    diagnostics,
+                )
+
+
 def validate_identity(repository_root: Path) -> list[Diagnostic]:
     """Return all v1 source violations without mutating repository state."""
 
@@ -1389,6 +2447,8 @@ def validate_identity(repository_root: Path) -> list[Diagnostic]:
             )
     validate_provenance(project, repository_root, approvals, diagnostics)
     validate_targets(project, repository_root, diagnostics)
+    validate_voice(project, repository_root, approvals, diagnostics)
+    validate_usage(project, repository_root, approvals, diagnostics)
     return sorted(set(diagnostics))
 
 

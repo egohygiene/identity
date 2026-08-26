@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/voice.schema.json",
+  "title": "Identity v1 brand voice guidance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "foundation",
+    "characteristics",
+    "contexts",
+    "localization"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)voice.schema.json$" },
+    "schema": { "const": "identity.voice/v1" },
+    "foundation": { "$ref": "#/$defs/foundation" },
+    "characteristics": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/characteristic" }
+    },
+    "contexts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/context" }
+    },
+    "localization": { "$ref": "#/$defs/localization" }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "source", "capturedAt"],
+      "properties": {
+        "method": {
+          "enum": ["human-authored", "handoff-candidate", "imported"]
+        },
+        "source": { "type": "string", "minLength": 1 },
+        "capturedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "state", "visibility", "provenance", "approval"],
+      "properties": {
+        "subject": { "type": "string", "minLength": 1 },
+        "state": {
+          "enum": ["candidate", "approved", "rejected", "superseded"]
+        },
+        "visibility": { "enum": ["public", "internal"] },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "approval": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/identifier" }
+          ]
+        }
+      }
+    },
+    "foundation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "positioning",
+        "audience",
+        "personality",
+        "governance"
+      ],
+      "properties": {
+        "purpose": { "type": "string", "minLength": 1 },
+        "positioning": { "type": "string", "minLength": 1 },
+        "audience": { "$ref": "#/$defs/nonEmptyStrings" },
+        "personality": { "$ref": "#/$defs/nonEmptyStrings" },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "characteristic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "description", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "rationale", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "text": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "audience",
+        "intent",
+        "tone",
+        "characteristics",
+        "preferredVocabulary",
+        "avoidedLanguage",
+        "naming",
+        "capitalization",
+        "punctuation",
+        "examples",
+        "antiExamples",
+        "governance"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "audience": { "type": "string", "minLength": 1 },
+        "intent": { "type": "string", "minLength": 1 },
+        "tone": { "type": "string", "minLength": 1 },
+        "characteristics": { "$ref": "#/$defs/nonEmptyStrings" },
+        "preferredVocabulary": { "$ref": "#/$defs/nonEmptyStrings" },
+        "avoidedLanguage": { "$ref": "#/$defs/nonEmptyStrings" },
+        "naming": { "type": "string", "minLength": 1 },
+        "capitalization": { "type": "string", "minLength": 1 },
+        "punctuation": { "type": "string", "minLength": 1 },
+        "examples": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/message" }
+        },
+        "antiExamples": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/message" }
+        },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "localization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceLanguage", "supportedLanguages", "fallback", "governance"],
+      "properties": {
+        "sourceLanguage": { "type": "string", "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$" },
+        "supportedLanguages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["tag", "coverage", "notes"],
+            "properties": {
+              "tag": { "type": "string", "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$" },
+              "coverage": { "enum": ["reviewed", "partial", "unsupported"] },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "fallback": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    }
+  }
+}

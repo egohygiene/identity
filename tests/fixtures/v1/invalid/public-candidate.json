@@ -1,0 +1,13 @@
+{
+  "schema": "identity.invalid-fixture/v1",
+  "description": "An unreviewed voice candidate cannot be exposed as public guidance.",
+  "mutations": [
+    {
+      "document": ".identity/guidance/voice.json",
+      "operation": "replace",
+      "pointer": "/contexts/0/examples/1/governance/visibility",
+      "value": "public"
+    }
+  ],
+  "expectedCodes": ["IDN1602"]
+}

@@ -1,0 +1,177 @@
+---
+name: Refine guidance documentation v2
+
+on:
+  push:
+    branches:
+      - feat/13-brand-guidance-v1
+    paths:
+      - .github/workflows/refine-guidance-docs-v2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out guidance branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: feat/13-brand-guidance-v1
+
+      - name: Update current-state guidance documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source: str, old: str, new: str, label: str) -> str:
+              if source.count(old) != 1:
+                  raise SystemExit(f"{label} anchor drifted")
+              return source.replace(old, new)
+
+          readme_path = Path("README.md")
+          readme = readme_path.read_text(encoding="utf-8")
+          readme = replace_once(
+              readme,
+              """Both tools are standard-library-only, offline, and non-mutating. The complete
+          [v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
+          aliases, compatibility, diagnostics, migration, and rollback.
+
+          ## Compiler core
+          """,
+              """Both tools are standard-library-only, offline, and non-mutating. The complete
+          [v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
+          aliases, compatibility, diagnostics, migration, and rollback.
+
+          ## Governed brand guidance
+
+          Voice, contextual tone, vocabulary, examples, anti-examples, usage rules,
+          accessibility, legal notes, localization, legacy assets, and approval state are
+          first-class Identity v1 source. Public output includes only approved public
+          records; the review projection preserves candidate, approved, rejected, and
+          superseded decisions with their human-review evidence.
+
+          ```bash
+          python3 scripts/render_guidance.py \\
+            --repository-root "tests/fixtures/v1/valid/minimal" \\
+            --audience "public" \\
+            --format "html" \\
+            --output "build/brand-guidance.html"
+
+          python3 scripts/render_guidance.py \\
+            --repository-root "tests/fixtures/v1/valid/minimal" \\
+            --audience "review" \\
+            --context "support" \\
+            --format "json"
+          ```
+
+          The renderer validates source before projection, never invents brand prose,
+          and refuses to write beneath canonical `.identity/`. The
+          [guidance v1 contract](docs/contracts/GUIDANCE_V1.md) defines authority,
+          lifecycle, context retrieval, deterministic JSON/Markdown/HTML outputs, and
+          legacy-asset publication policy.
+
+          ## Compiler core
+          """,
+              "README guidance section",
+          )
+          readme = replace_once(
+              readme,
+              """The Brand Kit product contract and toolchain decisions are accepted. The
+          extracted CLI, v1 source contract, deterministic compiler core, built-in
+          projection/package layer, shared quality/evidence harness, and governed
+          visual-motion validation are implemented. Voice/usage/approval guidance (#13)
+          and the public renderer/studio remain the next gates.
+          """,
+              """The Brand Kit product contract and toolchain decisions are accepted. The
+          extracted CLI, v1 source contract, deterministic compiler core, built-in
+          projection/package layer, shared quality/evidence harness, governed
+          visual-motion validation, and voice/usage/approval guidance are implemented.
+          Empathy's immutable consumer transition (#8) is the remaining extraction gate
+          before the public renderer and studio.
+          """,
+              "README capability state",
+          )
+          readme = replace_once(
+              readme,
+              "| Voice, usage, and approval guidance | Proposed | [#13](https://github.com/egohygiene/identity/issues/13) |",
+              "| Voice, usage, and approval guidance | Implemented | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |",
+              "README capability row",
+          )
+          readme = replace_once(
+              readme,
+              "- [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)",
+              "- [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)\n- [Guidance v1 contract](docs/contracts/GUIDANCE_V1.md)",
+              "README contract link",
+          )
+          readme_path.write_text(readme, encoding="utf-8")
+
+          roadmap_path = Path("ROADMAP.md")
+          roadmap = roadmap_path.read_text(encoding="utf-8")
+          roadmap = roadmap.replace("updated: 2026-08-24", "updated: 2026-08-26")
+          roadmap = replace_once(
+              roadmap,
+              "## 2026-08-24 execution snapshot",
+              "## 2026-08-26 execution snapshot",
+              "ROADMAP snapshot date",
+          )
+          roadmap = replace_once(
+              roadmap,
+              "**Current gate:** Complete voice and approval evidence in issues #13 and #8 before building the renderer and studio.  ",
+              "**Current gate:** Complete Empathy's immutable Identity consumer transition in issue #8 before building the renderer and studio.",
+              "ROADMAP current gate",
+          )
+          roadmap = replace_once(
+              roadmap,
+              """- [ ] Issues #13 and #8 meet their acceptance criteria.
+          - [ ] Approvals link to the exact source and generated artifact versions.
+          """,
+              """- [x] Issue #13 provides governed voice, usage, approval, and deterministic projection evidence.
+          - [ ] Issue #8 completes Empathy's immutable consumer transition.
+          - [x] Approvals link to exact reviewed subjects, provenance, and lifecycle decisions.
+          """,
+              "ROADMAP Q02 criteria",
+          )
+          roadmap = replace_once(
+              roadmap,
+              "- Issues #13 and #8 form the current evidence gate.",
+              "- Issue #13 is implemented through versioned guidance contracts, approval-aware validation, context retrieval, and deterministic JSON/Markdown/HTML projections.\n- Issue #8 remains the final cross-repository extraction gate.",
+              "ROADMAP Q02 evidence",
+          )
+          roadmap = replace_once(
+              roadmap,
+              """fixtures, and semantic human-review boundaries. #13 is now the remaining Wave 3
+          gate before the public renderer and consumer pilots.
+          """,
+              """fixtures, and semantic human-review boundaries. #13 adds governed voice,
+          contextual tone, usage, accessibility/legal/localization guidance, approval
+          lifecycle, and deterministic public/review projections. Issue #8 remains the
+          final pre-renderer cross-repository gate.
+          """,
+              "ROADMAP Wave 3 status",
+          )
+          roadmap = replace_once(
+              roadmap,
+              "#12 quality-report/accessibility/provenance/license/visual/reproducibility gates and #3 visual-motion/capture/provenance gates are implemented; #13 guidance/approval integration remains",
+              "#12 quality-report/accessibility/provenance/license/visual/reproducibility gates, #3 visual-motion/capture/provenance gates, and #13 guidance/approval projections are implemented",
+              "ROADMAP capability map",
+          )
+          roadmap_path.write_text(roadmap, encoding="utf-8")
+          PY
+
+          git diff --check
+          python3 -m unittest discover \
+            --start-directory "tests" \
+            --pattern "test_*.py" \
+            --verbose
+
+          git add -- "README.md" "ROADMAP.md"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --message "docs(guidance): document governed projection lifecycle"
+          git push origin HEAD:feat/13-brand-guidance-v1

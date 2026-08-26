@@ -97,6 +97,34 @@ Both tools are standard-library-only, offline, and non-mutating. The complete
 [v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
 aliases, compatibility, diagnostics, migration, and rollback.
 
+## Governed brand guidance
+
+Voice, contextual tone, vocabulary, examples, anti-examples, usage rules,
+accessibility, legal notes, localization, legacy assets, and approval state are
+first-class Identity v1 source. Public output includes only approved public
+records; the review projection preserves candidate, approved, rejected, and
+superseded decisions with their human-review evidence.
+
+```bash
+python3 scripts/render_guidance.py \
+  --repository-root "tests/fixtures/v1/valid/minimal" \
+  --audience "public" \
+  --format "html" \
+  --output "build/brand-guidance.html"
+
+python3 scripts/render_guidance.py \
+  --repository-root "tests/fixtures/v1/valid/minimal" \
+  --audience "review" \
+  --context "support" \
+  --format "json"
+```
+
+The renderer validates source before projection, never invents brand prose,
+and refuses to write beneath canonical `.identity/`. The
+[guidance v1 contract](docs/contracts/GUIDANCE_V1.md) defines authority,
+lifecycle, context retrieval, deterministic JSON/Markdown/HTML outputs, and
+legacy-asset publication policy.
+
 ## Compiler core
 
 The Rust library exposes the deterministic framework-neutral compiler boundary
@@ -217,9 +245,10 @@ Identity-owned provenance contract; Relay does not become motion-policy owner.
 
 The Brand Kit product contract and toolchain decisions are accepted. The
 extracted CLI, v1 source contract, deterministic compiler core, built-in
-projection/package layer, shared quality/evidence harness, and governed
-visual-motion validation are implemented. Voice/usage/approval guidance (#13)
-and the public renderer/studio remain the next gates.
+projection/package layer, shared quality/evidence harness, governed
+visual-motion validation, and voice/usage/approval guidance are implemented.
+Empathy's immutable consumer transition (#8) is the remaining extraction gate
+before the public renderer and studio.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
@@ -231,7 +260,7 @@ and the public renderer/studio remain the next gates.
 | Projection adapters and packages | Implemented | [#11](https://github.com/egohygiene/identity/issues/11), [contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md) |
 | Quality and release evidence | Implemented | [#12](https://github.com/egohygiene/identity/issues/12), [contract](docs/contracts/QUALITY_GATES_V1.md) |
 | Visual-motion validation | Implemented in this change | [#3](https://github.com/egohygiene/identity/issues/3), [contract](docs/contracts/VISUAL_MOTION_V1.md), [Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) |
-| Voice, usage, and approval guidance | Proposed | [#13](https://github.com/egohygiene/identity/issues/13) |
+| Voice, usage, and approval guidance | Implemented | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |
 | Renderer and asset studio | Proposed | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public `/identity` route | Deferred until its dependencies land | [#16](https://github.com/egohygiene/identity/issues/16) |
 | Stable v1.0.0 release | Deferred until all v1 gates pass | [#18](https://github.com/egohygiene/identity/issues/18) |
@@ -252,6 +281,7 @@ until the required Empathy and OptiFlow consumer proof lands through #17.
 - [Brand Kit foundations evaluation](docs/evaluations/brand-kit-foundations.md)
 - [Dependency policy](docs/DEPENDENCY_POLICY.md)
 - [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)
+- [Guidance v1 contract](docs/contracts/GUIDANCE_V1.md)
 - [Compiler v1 contract](docs/contracts/COMPILER_V1.md)
 - [Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
 - [Quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md)

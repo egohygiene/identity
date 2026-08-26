@@ -1,0 +1,1010 @@
+{
+  "accessibility": {
+    "governance": {
+      "approval": "approve-usage-core",
+      "provenance": {
+        "capturedAt": "2026-08-21T12:15:00Z",
+        "method": "human-authored",
+        "source": ".identity/brief.md"
+      },
+      "state": "approved",
+      "subject": "usage:core-guidance",
+      "visibility": "public"
+    },
+    "rules": [
+      "Use reviewed contrast pairings",
+      "Provide contextual alternative text",
+      "Honor reduced motion",
+      "Never encode state by color alone"
+    ],
+    "summary": "Identity expression must preserve perceivable content, readable text, operable controls, and understandable status without relying on brand styling alone."
+  },
+  "audience": "review",
+  "characteristics": [
+    {
+      "description": "Lead with the useful outcome and make recovery paths concrete.",
+      "governance": {
+        "approval": "approve-voice-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:10:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "voice:core-guidance",
+        "visibility": "public"
+      },
+      "id": "clear",
+      "label": "Clear"
+    },
+    {
+      "description": "Prefer evidence and precise limits over hype or vague certainty.",
+      "governance": {
+        "approval": "approve-voice-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:10:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "voice:core-guidance",
+        "visibility": "public"
+      },
+      "id": "grounded",
+      "label": "Grounded"
+    },
+    {
+      "description": "Treat constraints and mistakes as shared design problems, never personal failures.",
+      "governance": {
+        "approval": "approve-voice-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:10:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "voice:core-guidance",
+        "visibility": "public"
+      },
+      "id": "considerate",
+      "label": "Considerate"
+    }
+  ],
+  "contexts": [
+    {
+      "antiExamples": [
+        {
+          "governance": {
+            "approval": "approve-voice-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:10:00Z",
+              "method": "human-authored",
+              "source": ".identity/brief.md"
+            },
+            "state": "approved",
+            "subject": "voice:core-guidance",
+            "visibility": "public"
+          },
+          "id": "readme-vagueness",
+          "rationale": "It names neither a concrete outcome nor the system's review boundary.",
+          "text": "A flexible solution for all your branding needs."
+        },
+        {
+          "governance": {
+            "approval": "reject-hype-claim",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:19:00Z",
+              "method": "handoff-candidate",
+              "source": "handoff:voice-hype-claim/v1"
+            },
+            "state": "rejected",
+            "subject": "voice-example:hype-claim",
+            "visibility": "internal"
+          },
+          "id": "hype-claim",
+          "rationale": "Unprovable superlatives undermine the grounded voice.",
+          "text": "The world's most revolutionary brand generator."
+        }
+      ],
+      "audience": "A contributor deciding whether and how to use the repository.",
+      "avoidedLanguage": [
+        "magic",
+        "revolutionary",
+        "effortless",
+        "guaranteed"
+      ],
+      "capitalization": "Use sentence case for headings and preserve registered product casing.",
+      "characteristics": [
+        "clear",
+        "grounded",
+        "considerate"
+      ],
+      "examples": [
+        {
+          "governance": {
+            "approval": "approve-voice-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:10:00Z",
+              "method": "human-authored",
+              "source": ".identity/brief.md"
+            },
+            "state": "approved",
+            "subject": "voice:core-guidance",
+            "visibility": "public"
+          },
+          "id": "readme-opening",
+          "rationale": "It states the outcome, authority boundary, and recovery affordance without hype.",
+          "text": "Generate a reviewed Brand Kit locally, then inspect exactly what changed."
+        },
+        {
+          "governance": {
+            "approval": null,
+            "provenance": {
+              "capturedAt": "2026-08-21T12:18:00Z",
+              "method": "handoff-candidate",
+              "source": "handoff:voice-friendly-candidate/v1"
+            },
+            "state": "candidate",
+            "subject": "voice-example:friendly-candidate",
+            "visibility": "internal"
+          },
+          "id": "friendly-candidate",
+          "rationale": "A warmer option proposed through the creative handoff and awaiting review.",
+          "text": "Your brand system, ready when you are."
+        },
+        {
+          "governance": {
+            "approval": "supersede-old-tagline",
+            "provenance": {
+              "capturedAt": "2025-02-01T10:00:00Z",
+              "method": "imported",
+              "source": "guidance:old-tagline/v0"
+            },
+            "state": "superseded",
+            "subject": "voice-example:old-tagline",
+            "visibility": "internal"
+          },
+          "id": "old-tagline",
+          "rationale": "Retained as superseded migration history and excluded from current public copy.",
+          "text": "Branding solved forever."
+        }
+      ],
+      "governance": {
+        "approval": "approve-voice-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:10:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "voice:core-guidance",
+        "visibility": "public"
+      },
+      "id": "repository-readme",
+      "intent": "Orient quickly, establish trust, and make the next action obvious.",
+      "label": "Repository README",
+      "naming": "Use the complete product name on first mention and the approved short name afterward.",
+      "preferredVocabulary": [
+        "reviewed",
+        "local",
+        "deterministic",
+        "evidence",
+        "recovery"
+      ],
+      "punctuation": "Prefer short declarative sentences; use exclamation points only for genuine celebration.",
+      "tone": "Concise, capable, welcoming, and specific."
+    },
+    {
+      "antiExamples": [
+        {
+          "governance": {
+            "approval": "approve-voice-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:10:00Z",
+              "method": "human-authored",
+              "source": ".identity/brief.md"
+            },
+            "state": "approved",
+            "subject": "voice:core-guidance",
+            "visibility": "public"
+          },
+          "id": "incident-dismissal",
+          "rationale": "It minimizes impact and makes no verifiable commitment.",
+          "text": "A few users may notice a minor issue; everything should be fine soon."
+        }
+      ],
+      "audience": "A user affected by a service or release problem.",
+      "avoidedLanguage": [
+        "minor issue",
+        "user error",
+        "obviously",
+        "soon"
+      ],
+      "capitalization": "Use sentence case and avoid all-caps urgency.",
+      "characteristics": [
+        "clear",
+        "grounded",
+        "considerate"
+      ],
+      "examples": [
+        {
+          "governance": {
+            "approval": "approve-voice-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:10:00Z",
+              "method": "human-authored",
+              "source": ".identity/brief.md"
+            },
+            "state": "approved",
+            "subject": "voice:core-guidance",
+            "visibility": "public"
+          },
+          "id": "incident-facts",
+          "rationale": "It separates impact, continuity, and the next commitment.",
+          "text": "Exports are delayed. Existing Brand Kits remain available. The next update is at 15:00 UTC."
+        }
+      ],
+      "governance": {
+        "approval": "approve-voice-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:10:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "voice:core-guidance",
+        "visibility": "public"
+      },
+      "id": "incident-update",
+      "intent": "State impact, known facts, next update, and recovery without deflection.",
+      "label": "Incident update",
+      "naming": "Name the affected capability exactly as it appears in the product.",
+      "preferredVocabulary": [
+        "impact",
+        "confirmed",
+        "investigating",
+        "next update",
+        "recovery"
+      ],
+      "punctuation": "Use periods and timestamps; avoid exclamation points and rhetorical questions.",
+      "tone": "Calm, direct, accountable, and time-specific."
+    }
+  ],
+  "decisions": [
+    {
+      "candidate": ".identity/sources/legacy-wordmark.svg",
+      "evidence": "https://example.invalid/reviews/legacy-wordmark-source",
+      "id": "approve-legacy-wordmark-source",
+      "notes": "The source remains governed for migration and internal historical use.",
+      "reviewedAt": "2025-02-01T10:00:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "legacy-wordmark",
+      "supersedes": null
+    },
+    {
+      "candidate": "asset:legacy-wordmark/v0",
+      "evidence": "https://example.invalid/reviews/legacy-wordmark-v0",
+      "id": "approve-legacy-wordmark-usage",
+      "notes": "Historical use approval retained for the deprecation ledger.",
+      "reviewedAt": "2025-02-01T10:05:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "usage-asset:legacy-wordmark",
+      "supersedes": null
+    },
+    {
+      "candidate": "guidance:old-tagline/v0",
+      "evidence": "https://example.invalid/reviews/old-tagline-v0",
+      "id": "approve-old-tagline",
+      "notes": "Historical approval retained to explain the later replacement.",
+      "reviewedAt": "2025-02-01T10:00:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "voice-example:old-tagline",
+      "supersedes": null
+    },
+    {
+      "candidate": ".identity/sources/mark.svg",
+      "evidence": "https://example.invalid/reviews/primary-mark",
+      "id": "approve-primary-mark",
+      "notes": "Approved as the canonical minimal fixture mark.",
+      "reviewedAt": "2026-08-21T12:00:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "primary-mark",
+      "supersedes": null
+    },
+    {
+      "candidate": "token:color.brand.primary@product-override",
+      "evidence": "https://example.invalid/reviews/product-primary",
+      "id": "approve-product-primary",
+      "notes": "Approved product distinction.",
+      "reviewedAt": "2026-08-21T12:05:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "token:color.brand.primary",
+      "supersedes": null
+    },
+    {
+      "candidate": "guidance:usage-core/v1",
+      "evidence": "https://example.invalid/reviews/usage-core",
+      "id": "approve-usage-core",
+      "notes": "Approved usage, accessibility, and legal guidance.",
+      "reviewedAt": "2026-08-21T12:15:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "usage:core-guidance",
+      "supersedes": null
+    },
+    {
+      "candidate": "guidance:voice-core/v1",
+      "evidence": "https://example.invalid/reviews/voice-core",
+      "id": "approve-voice-core",
+      "notes": "Approved foundation, mechanics, contexts, and public examples.",
+      "reviewedAt": "2026-08-21T12:10:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "voice:core-guidance",
+      "supersedes": null
+    },
+    {
+      "candidate": "handoff:voice-hype-claim/v1",
+      "evidence": "https://example.invalid/reviews/hype-claim",
+      "id": "reject-hype-claim",
+      "notes": "Rejected because the unprovable superlative conflicts with the honest voice.",
+      "reviewedAt": "2026-08-21T12:20:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "rejected",
+      "subject": "voice-example:hype-claim",
+      "supersedes": null
+    },
+    {
+      "candidate": "asset:legacy-wordmark/v0",
+      "evidence": "https://example.invalid/reviews/legacy-wordmark",
+      "id": "supersede-legacy-wordmark",
+      "notes": "Internal migration access only; use the primary mark for new work.",
+      "reviewedAt": "2026-08-21T12:30:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "superseded",
+      "subject": "usage-asset:legacy-wordmark",
+      "supersedes": "approve-legacy-wordmark-usage"
+    },
+    {
+      "candidate": "guidance:old-tagline/v0",
+      "evidence": "https://example.invalid/reviews/old-tagline",
+      "id": "supersede-old-tagline",
+      "notes": "Retained internally as migration history, not current copy.",
+      "reviewedAt": "2026-08-21T12:25:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "superseded",
+      "subject": "voice-example:old-tagline",
+      "supersedes": "approve-old-tagline"
+    }
+  ],
+  "doDont": [
+    {
+      "category": "mark",
+      "contexts": [
+        "repository-readme",
+        "product-ui",
+        "social-card"
+      ],
+      "details": [
+        "Minimum standalone size: 16 CSS pixels",
+        "Preferred backgrounds: surface canvas or brand primary"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/governance/provenance.json#primary-mark"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "mark-clear-space",
+      "instruction": "Keep one quarter of the mark width clear on every side and use an approved high-contrast background.",
+      "kind": "do",
+      "rationale": "Clear space and contrast preserve recognition at small sizes."
+    },
+    {
+      "category": "mark",
+      "contexts": [
+        "all"
+      ],
+      "details": [
+        "Do not add shadows",
+        "Do not place the mark over busy imagery"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/governance/provenance.json#primary-mark"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "mark-transformations",
+      "instruction": "Do not stretch, rotate, crop, outline, or recolor the mark outside approved semantic tokens.",
+      "kind": "dont",
+      "rationale": "Unreviewed transformations fragment the identity and can reduce legibility."
+    },
+    {
+      "category": "color",
+      "contexts": [
+        "product-ui",
+        "documentation",
+        "social-card"
+      ],
+      "details": [
+        "Meet the declared minimum ratio",
+        "Do not infer contrast from hue names"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/defaults/organization.tokens.json"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "semantic-color",
+      "instruction": "Choose semantic foreground and background pairs with their declared contrast intent.",
+      "kind": "do",
+      "rationale": "Semantic pairs preserve meaning and measurable readability across themes."
+    },
+    {
+      "category": "typography",
+      "contexts": [
+        "product-ui",
+        "documentation"
+      ],
+      "details": [
+        "Preserve fallback order",
+        "Test long translated labels before release"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/defaults/organization.tokens.json"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "readable-type",
+      "instruction": "Use the licensed family, supported language coverage, and documented legibility constraints.",
+      "kind": "do",
+      "rationale": "A brand typeface is not usable where its license, glyphs, or reading size fail."
+    },
+    {
+      "category": "motion",
+      "contexts": [
+        "product-ui",
+        "brand-kit-renderer"
+      ],
+      "details": [
+        "Honor prefers-reduced-motion",
+        "Keep state changes understandable without animation"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/defaults/organization.tokens.json"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "reduced-motion",
+      "instruction": "Pair every branded transition with its declared reduced-motion alternative.",
+      "kind": "do",
+      "rationale": "Motion is expressive only when users can safely reduce it."
+    },
+    {
+      "category": "imagery",
+      "contexts": [
+        "documentation",
+        "social-card"
+      ],
+      "details": [
+        "Record creator and source",
+        "Avoid decorative alt text that repeats nearby copy"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "imagery-provenance",
+      "instruction": "Use imagery with approved licensing, source provenance, and context-specific alternative text.",
+      "kind": "do",
+      "rationale": "Visual polish never replaces lawful, accessible use."
+    },
+    {
+      "category": "illustration",
+      "contexts": [
+        "documentation",
+        "marketing"
+      ],
+      "details": [
+        "Prefer one clear focal idea",
+        "Keep visual metaphors culturally reviewable"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "illustration-purpose",
+      "instruction": "Do not add illustration solely to fill space or obscure an incomplete explanation.",
+      "kind": "dont",
+      "rationale": "Illustration should clarify a concept or add deliberate warmth."
+    },
+    {
+      "category": "mascot",
+      "contexts": [
+        "product-ui",
+        "documentation"
+      ],
+      "details": [
+        "Pair expression with text",
+        "Avoid emotional reactions that blame the user"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/brief.md"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "mascot-behavior",
+      "instruction": "Use the mascot as a supportive guide, never as the sole carrier of warnings or required instructions.",
+      "kind": "do",
+      "rationale": "Personality can reinforce understanding but must not gate it."
+    },
+    {
+      "category": "localization",
+      "contexts": [
+        "all"
+      ],
+      "details": [
+        "Expose coverage status",
+        "Never label machine translation as reviewed"
+      ],
+      "governance": {
+        "approval": "approve-usage-core",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:15:00Z",
+          "method": "human-authored",
+          "source": ".identity/guidance/voice.json#localization"
+        },
+        "state": "approved",
+        "subject": "usage:core-guidance",
+        "visibility": "public"
+      },
+      "id": "localization-review",
+      "instruction": "Keep approved product names stable and request human review for uncovered language contexts.",
+      "kind": "do",
+      "rationale": "Literal translation can alter tone, meaning, or trademark use."
+    }
+  ],
+  "downloads": [
+    {
+      "availability": "public",
+      "downloadName": "example-product-mark.svg",
+      "governance": {
+        "approval": "approve-primary-mark",
+        "provenance": {
+          "capturedAt": "2026-08-21T12:00:00Z",
+          "method": "human-authored",
+          "source": ".identity/governance/provenance.json#primary-mark"
+        },
+        "state": "approved",
+        "subject": "primary-mark",
+        "visibility": "public"
+      },
+      "id": "primary-mark",
+      "kind": "mark",
+      "label": "Primary mark",
+      "notes": "Approved for current product, documentation, and repository use.",
+      "path": ".identity/sources/mark.svg",
+      "replacement": null,
+      "status": "active"
+    }
+  ],
+  "foundation": {
+    "audience": [
+      "repository maintainers",
+      "product contributors",
+      "downstream integrators"
+    ],
+    "governance": {
+      "approval": "approve-voice-core",
+      "provenance": {
+        "capturedAt": "2026-08-21T12:10:00Z",
+        "method": "human-authored",
+        "source": ".identity/brief.md"
+      },
+      "state": "approved",
+      "subject": "voice:core-guidance",
+      "visibility": "public"
+    },
+    "personality": [
+      "clear",
+      "considerate",
+      "grounded",
+      "quietly playful"
+    ],
+    "positioning": "A transparent, local-first system for turning reviewed intent into reusable identity guidance.",
+    "purpose": "Help maintainers make governed brand choices with confidence."
+  },
+  "legacyAssets": [
+    {
+      "availability": "internal",
+      "downloadName": null,
+      "governance": {
+        "approval": "supersede-legacy-wordmark",
+        "provenance": {
+          "capturedAt": "2025-02-01T10:00:00Z",
+          "method": "imported",
+          "source": ".identity/governance/provenance.json#legacy-wordmark"
+        },
+        "state": "superseded",
+        "subject": "usage-asset:legacy-wordmark",
+        "visibility": "internal"
+      },
+      "id": "legacy-wordmark",
+      "kind": "wordmark",
+      "label": "Legacy wordmark",
+      "notes": "Retained for historical migrations only; do not use in new work.",
+      "path": ".identity/sources/legacy-wordmark.svg",
+      "replacement": "primary-mark",
+      "status": "legacy"
+    }
+  ],
+  "legal": {
+    "attribution": "Preserve attribution from the governed provenance record when distributing an asset.",
+    "copyright": "Copyright 2026 Example. Source assets retain their recorded copyright and license terms.",
+    "governance": {
+      "approval": "approve-usage-core",
+      "provenance": {
+        "capturedAt": "2026-08-21T12:15:00Z",
+        "method": "human-authored",
+        "source": ".identity/governance/provenance.json"
+      },
+      "state": "approved",
+      "subject": "usage:core-guidance",
+      "visibility": "public"
+    },
+    "thirdPartyLicenses": [
+      {
+        "attribution": "Copyright 2026 Example",
+        "name": "Example Product fixture assets",
+        "spdx": "MIT"
+      }
+    ],
+    "trademark": "Example Product names and marks may be used only to identify the project without implying endorsement."
+  },
+  "localization": {
+    "fallback": "Keep product names unchanged and request human review when a locale is not covered.",
+    "governance": {
+      "approval": "approve-voice-core",
+      "provenance": {
+        "capturedAt": "2026-08-21T12:10:00Z",
+        "method": "human-authored",
+        "source": ".identity/brief.md"
+      },
+      "state": "approved",
+      "subject": "voice:core-guidance",
+      "visibility": "public"
+    },
+    "sourceLanguage": "en-US",
+    "supportedLanguages": [
+      {
+        "coverage": "reviewed",
+        "notes": "Canonical source guidance.",
+        "tag": "en-US"
+      },
+      {
+        "coverage": "partial",
+        "notes": "Product naming is reviewed; full messaging review remains required.",
+        "tag": "es"
+      }
+    ]
+  },
+  "project": {
+    "displayName": "Example Product",
+    "id": "example-product",
+    "repository": "https://example.invalid/example-product",
+    "tagline": "A complete, governed Identity v1 fixture."
+  },
+  "schema": "identity.brand-guidance/v1",
+  "sections": [
+    {
+      "description": "Keep approved marks legible, proportionate, and visually independent.",
+      "id": "marks",
+      "rules": [
+        {
+          "category": "mark",
+          "contexts": [
+            "repository-readme",
+            "product-ui",
+            "social-card"
+          ],
+          "details": [
+            "Minimum standalone size: 16 CSS pixels",
+            "Preferred backgrounds: surface canvas or brand primary"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/governance/provenance.json#primary-mark"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "mark-clear-space",
+          "instruction": "Keep one quarter of the mark width clear on every side and use an approved high-contrast background.",
+          "kind": "do",
+          "rationale": "Clear space and contrast preserve recognition at small sizes."
+        },
+        {
+          "category": "mark",
+          "contexts": [
+            "all"
+          ],
+          "details": [
+            "Do not add shadows",
+            "Do not place the mark over busy imagery"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/governance/provenance.json#primary-mark"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "mark-transformations",
+          "instruction": "Do not stretch, rotate, crop, outline, or recolor the mark outside approved semantic tokens.",
+          "kind": "dont",
+          "rationale": "Unreviewed transformations fragment the identity and can reduce legibility."
+        }
+      ],
+      "title": "Marks and backgrounds"
+    },
+    {
+      "description": "Use semantic intent, readable type, and respectful movement across surfaces.",
+      "id": "visual-system",
+      "rules": [
+        {
+          "category": "color",
+          "contexts": [
+            "product-ui",
+            "documentation",
+            "social-card"
+          ],
+          "details": [
+            "Meet the declared minimum ratio",
+            "Do not infer contrast from hue names"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/defaults/organization.tokens.json"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "semantic-color",
+          "instruction": "Choose semantic foreground and background pairs with their declared contrast intent.",
+          "kind": "do",
+          "rationale": "Semantic pairs preserve meaning and measurable readability across themes."
+        },
+        {
+          "category": "typography",
+          "contexts": [
+            "product-ui",
+            "documentation"
+          ],
+          "details": [
+            "Preserve fallback order",
+            "Test long translated labels before release"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/defaults/organization.tokens.json"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "readable-type",
+          "instruction": "Use the licensed family, supported language coverage, and documented legibility constraints.",
+          "kind": "do",
+          "rationale": "A brand typeface is not usable where its license, glyphs, or reading size fail."
+        },
+        {
+          "category": "motion",
+          "contexts": [
+            "product-ui",
+            "brand-kit-renderer"
+          ],
+          "details": [
+            "Honor prefers-reduced-motion",
+            "Keep state changes understandable without animation"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/defaults/organization.tokens.json"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "reduced-motion",
+          "instruction": "Pair every branded transition with its declared reduced-motion alternative.",
+          "kind": "do",
+          "rationale": "Motion is expressive only when users can safely reduce it."
+        }
+      ],
+      "title": "Color, typography, and motion"
+    },
+    {
+      "description": "Make expressive assets purposeful, attributable, and secondary to meaning.",
+      "id": "expression",
+      "rules": [
+        {
+          "category": "imagery",
+          "contexts": [
+            "documentation",
+            "social-card"
+          ],
+          "details": [
+            "Record creator and source",
+            "Avoid decorative alt text that repeats nearby copy"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/brief.md"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "imagery-provenance",
+          "instruction": "Use imagery with approved licensing, source provenance, and context-specific alternative text.",
+          "kind": "do",
+          "rationale": "Visual polish never replaces lawful, accessible use."
+        },
+        {
+          "category": "illustration",
+          "contexts": [
+            "documentation",
+            "marketing"
+          ],
+          "details": [
+            "Prefer one clear focal idea",
+            "Keep visual metaphors culturally reviewable"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/brief.md"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "illustration-purpose",
+          "instruction": "Do not add illustration solely to fill space or obscure an incomplete explanation.",
+          "kind": "dont",
+          "rationale": "Illustration should clarify a concept or add deliberate warmth."
+        },
+        {
+          "category": "mascot",
+          "contexts": [
+            "product-ui",
+            "documentation"
+          ],
+          "details": [
+            "Pair expression with text",
+            "Avoid emotional reactions that blame the user"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/brief.md"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "mascot-behavior",
+          "instruction": "Use the mascot as a supportive guide, never as the sole carrier of warnings or required instructions.",
+          "kind": "do",
+          "rationale": "Personality can reinforce understanding but must not gate it."
+        },
+        {
+          "category": "localization",
+          "contexts": [
+            "all"
+          ],
+          "details": [
+            "Expose coverage status",
+            "Never label machine translation as reviewed"
+          ],
+          "governance": {
+            "approval": "approve-usage-core",
+            "provenance": {
+              "capturedAt": "2026-08-21T12:15:00Z",
+              "method": "human-authored",
+              "source": ".identity/guidance/voice.json#localization"
+            },
+            "state": "approved",
+            "subject": "usage:core-guidance",
+            "visibility": "public"
+          },
+          "id": "localization-review",
+          "instruction": "Keep approved product names stable and request human review for uncovered language contexts.",
+          "kind": "do",
+          "rationale": "Literal translation can alter tone, meaning, or trademark use."
+        }
+      ],
+      "title": "Imagery, illustration, and mascot"
+    }
+  ],
+  "selectedContext": null
+}
