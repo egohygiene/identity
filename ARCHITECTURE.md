@@ -143,8 +143,9 @@ the accepted `resvg` adapter boundary; archive bytes are produced by an
 Identity-owned deterministic ZIP32 writer.
 
 The compiler still rejects network-dependent or nondeterministic adapters. The
-package layer does not make its output canonical, does not publish implicitly,
-and does not add a generation CLI command.
+package layer does not make its output canonical or publish implicitly. Its
+narrow `v1-generate` command is a consumer-owned transactional build boundary,
+and `v1-verify` detects missing or drifted generated state without mutation.
 
 The #12 quality layer sits downstream of the resolved Brand Kit and compiler
 manifest. It owns `identity.quality-report/v1`, package/publication scopes,

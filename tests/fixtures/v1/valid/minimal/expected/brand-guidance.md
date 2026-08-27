@@ -163,7 +163,7 @@ Clear space and contrast preserve recognition at small sizes.
 - Contexts: repository-readme, product-ui, social-card
 - State: **approved · public**
 - Approval: `approve-usage-core`
-- Provenance: `human-authored` from `.identity/governance/provenance.json#primary-mark` at `2026-08-21T12:15:00Z`
+- Provenance: `human-authored` from `.identity/governance/provenance.json#mark` at `2026-08-21T12:15:00Z`
 
 #### Don’t: Do not stretch, rotate, crop, outline, or recolor the mark outside approved semantic tokens.
 
@@ -174,7 +174,7 @@ Unreviewed transformations fragment the identity and can reduce legibility.
 - Contexts: all
 - State: **approved · public**
 - Approval: `approve-usage-core`
-- Provenance: `human-authored` from `.identity/governance/provenance.json#primary-mark` at `2026-08-21T12:15:00Z`
+- Provenance: `human-authored` from `.identity/governance/provenance.json#mark` at `2026-08-21T12:15:00Z`
 
 ### Color, typography, and motion
 
@@ -273,7 +273,7 @@ Literal translation can alter tone, meaning, or trademark use.
 
 Retained for historical migrations only; do not use in new work.
 
-Replacement: `primary-mark`
+Replacement: `mark`
 
 - State: **superseded · internal**
 - Approval: `supersede-legacy-wordmark`
@@ -301,7 +301,7 @@ Identity expression must preserve perceivable content, readable text, operable c
 | `approve-legacy-wordmark-source` | `legacy-wordmark` | `.identity/sources/legacy-wordmark.svg` | **approved** | example-maintainer | https://example.invalid/reviews/legacy-wordmark-source |
 | `approve-legacy-wordmark-usage` | `usage-asset:legacy-wordmark` | `asset:legacy-wordmark/v0` | **approved** | example-maintainer | https://example.invalid/reviews/legacy-wordmark-v0 |
 | `approve-old-tagline` | `voice-example:old-tagline` | `guidance:old-tagline/v0` | **approved** | example-maintainer | https://example.invalid/reviews/old-tagline-v0 |
-| `approve-primary-mark` | `primary-mark` | `.identity/sources/mark.svg` | **approved** | example-maintainer | https://example.invalid/reviews/primary-mark |
+| `approve-primary-mark` | `mark` | `.identity/sources/mark.svg` | **approved** | example-maintainer | https://example.invalid/reviews/primary-mark |
 | `approve-product-primary` | `token:color.brand.primary` | `token:color.brand.primary@product-override` | **approved** | example-maintainer | https://example.invalid/reviews/product-primary |
 | `approve-usage-core` | `usage:core-guidance` | `guidance:usage-core/v1` | **approved** | example-maintainer | https://example.invalid/reviews/usage-core |
 | `approve-voice-core` | `voice:core-guidance` | `guidance:voice-core/v1` | **approved** | example-maintainer | https://example.invalid/reviews/voice-core |

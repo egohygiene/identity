@@ -4,21 +4,25 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt::Write as _;
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result, bail};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
+use crate::brandkit::{compiler_request, register_builtin_adapters};
 use crate::cli::{
     HandoffArguments, InitArguments, PlanArguments, PlanFormat, RepositoryArguments,
-    StudioReviewArguments,
+    StudioReviewArguments, V1CompilationArguments,
 };
+use crate::compiler::{AdapterRegistry, Compiler, LocalArtifactStore};
 use crate::contract::{
     ProjectSpec, ResolvedPlan, ValidatedProject, reject_symlink_components, resolve_plan,
     valid_identifier, validate_relative_path, validate_repository,
 };
 use crate::output::render_plan_markdown;
+use crate::reference_renderer::{register_reference_renderer_adapter, with_reference_renderer};
+use crate::v1_consumer::V1ConsumerPipeline;
 
 pub fn init(arguments: &InitArguments) -> Result<()> {
     if !valid_identifier(&arguments.project_id) {
@@ -183,6 +187,76 @@ pub fn studio_review(arguments: &StudioReviewArguments) -> Result<()> {
         print!("{rendered}");
     }
     Ok(())
+}
+
+pub fn v1_generate(arguments: &V1CompilationArguments) -> Result<()> {
+    let repository_root = v1_repository_root(arguments)?;
+    let pipeline = V1ConsumerPipeline::load(&repository_root).map_err(compiler_error)?;
+    let request = v1_request(arguments, &pipeline)?;
+    let mut registry = AdapterRegistry::new();
+    register_builtin_adapters(&mut registry).map_err(compiler_error)?;
+    register_reference_renderer_adapter(&mut registry).map_err(compiler_error)?;
+    let mut store = LocalArtifactStore::new(&repository_root).map_err(compiler_error)?;
+    let mut compiler = Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
+    let prepared = compiler.prepare(request).map_err(compiler_error)?;
+    let manifest = compiler
+        .execute(&prepared, &BTreeSet::new())
+        .map_err(compiler_error)?;
+    println!(
+        "Generated {} v1 Identity projections for {}",
+        manifest.outputs.len(),
+        manifest.project_id
+    );
+    Ok(())
+}
+
+pub fn v1_verify(arguments: &V1CompilationArguments) -> Result<()> {
+    let repository_root = v1_repository_root(arguments)?;
+    let pipeline = V1ConsumerPipeline::load(&repository_root).map_err(compiler_error)?;
+    let request = v1_request(arguments, &pipeline)?;
+    let mut registry = AdapterRegistry::new();
+    register_builtin_adapters(&mut registry).map_err(compiler_error)?;
+    register_reference_renderer_adapter(&mut registry).map_err(compiler_error)?;
+    let mut store = LocalArtifactStore::new(&repository_root).map_err(compiler_error)?;
+    let mut compiler = Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
+    let prepared = compiler.prepare(request).map_err(compiler_error)?;
+    if prepared.plan.has_mutations() {
+        bail!(
+            "Identity v1 output is missing or drifted; run `identity v1-generate` after reviewing the plan"
+        );
+    }
+    println!(
+        "Verified v1 Identity projections for {}",
+        prepared.plan.project_id
+    );
+    Ok(())
+}
+
+fn v1_repository_root(arguments: &V1CompilationArguments) -> Result<PathBuf> {
+    arguments.repository_root.canonicalize().with_context(|| {
+        format!(
+            "repository root does not exist: {}",
+            arguments.repository_root.display()
+        )
+    })
+}
+
+fn v1_request(
+    arguments: &V1CompilationArguments,
+    pipeline: &V1ConsumerPipeline,
+) -> Result<crate::compiler::CompilerRequest> {
+    validate_relative_path(&arguments.output_root, "v1 output root")?;
+    if arguments.output_root.starts_with(".identity") {
+        bail!("v1 output root must not write canonical .identity source");
+    }
+    let output_root = arguments.output_root.to_string_lossy().replace('\\', "/");
+    Ok(with_reference_renderer(
+        compiler_request(output_root, pipeline.profiles()).map_err(compiler_error)?,
+    ))
+}
+
+fn compiler_error(error: crate::compiler::CompilerError) -> anyhow::Error {
+    anyhow::Error::new(error)
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

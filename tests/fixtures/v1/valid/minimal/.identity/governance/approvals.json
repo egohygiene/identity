@@ -4,7 +4,7 @@
   "decisions": [
     {
       "id": "approve-primary-mark",
-      "subject": "primary-mark",
+      "subject": "mark",
       "candidate": ".identity/sources/mark.svg",
       "status": "approved",
       "reviewedBy": "example-maintainer",

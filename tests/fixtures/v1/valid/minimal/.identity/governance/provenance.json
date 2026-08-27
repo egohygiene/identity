@@ -3,7 +3,7 @@
   "schema": "identity.provenance/v1",
   "assets": [
     {
-      "id": "primary-mark",
+      "id": "mark",
       "path": ".identity/sources/mark.svg",
       "kind": "mark",
       "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
