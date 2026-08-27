@@ -6,6 +6,7 @@ import { hydrateRoot } from "react-dom/client";
 
 import { BrandKitPage } from "./app.js";
 import { assertBrandKitViewModel } from "./model.js";
+import { createApprovedHandoff, inspectCandidateBundle } from "./studio.js";
 import "./section-states.css";
 import "./styles.css";
 
@@ -23,6 +24,30 @@ hydrateRoot(
   rootElement,
   React.createElement(BrandKitPage, { model, assetBaseUrl }),
 );
+
+let studioPlan = null;
+const studio = document.querySelector("[data-studio]");
+if (studio) {
+  const input = studio.querySelector("#candidate-bundle");
+  const result = studio.querySelector("[data-studio-result]");
+  const approval = studio.querySelector("[data-studio-approval]");
+  const exportButton = studio.querySelector("[data-studio-export]");
+  studio.querySelector("[data-studio-preview]").addEventListener("click", () => {
+    try {
+      const inspected = inspectCandidateBundle(JSON.parse(input.value), model);
+      studioPlan = inspected.plan;
+      result.textContent = inspected.errors.length ? inspected.errors.join("\n") : JSON.stringify(studioPlan, null, 2);
+      exportButton.disabled = !studioPlan || !approval.checked;
+    } catch (error) { studioPlan = null; result.textContent = `Invalid JSON: ${error.message}`; exportButton.disabled = true; }
+  });
+  approval.addEventListener("change", () => { exportButton.disabled = !studioPlan || !approval.checked; });
+  exportButton.addEventListener("click", () => {
+    const handoff = createApprovedHandoff(studioPlan, "local-studio-review");
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([JSON.stringify(handoff, null, 2)], { type: "application/json" }));
+    link.download = "identity-approved-handoff.json"; link.click(); URL.revokeObjectURL(link.href);
+  });
+}
 
 document.addEventListener("click", async (event) => {
   const copyButton = event.target.closest("[data-copy-value]");

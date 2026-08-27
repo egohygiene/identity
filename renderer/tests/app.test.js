@@ -49,6 +49,7 @@ describe("BrandKitPage", () => {
       "Voice and personality",
       "Usage rules",
       "Motion, imagery, and mascot guidance",
+      "Review candidate assets",
       "Downloads and package installation",
       "Provenance, licenses, changelog, and support",
     ]);
@@ -177,6 +178,7 @@ describe("BrandKitPage", () => {
         { id: "voice", panels: 3, emptyStates: 0 },
         { id: "usage", panels: 2, emptyStates: 0 },
         { id: "creative-direction", panels: 3, emptyStates: 0 },
+        { id: "studio", panels: 1, emptyStates: 0 },
         { id: "downloads", panels: 0, emptyStates: 0 },
         { id: "provenance", panels: 3, emptyStates: 0 },
       ],
