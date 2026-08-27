@@ -11,7 +11,9 @@ use std::collections::{BTreeMap, BTreeSet};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::brandkit::{BrandKitLicense, BrandKitModel, BrandKitOrigin};
+use crate::brandkit::{
+    BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitSourceAsset,
+};
 use crate::compiler::{
     AdapterDescriptor, AdapterKind, AdapterPlan, AdapterRegistry, COMPILER_API_MAJOR,
     CompilerError, CompilerRequest, CompilerResult, Diagnostic, DiagnosticSeverity, EvidenceRecord,
@@ -58,6 +60,8 @@ pub struct BrandKitViewAsset {
     pub media_type: String,
     pub sha256: String,
     pub alt_text: String,
+    pub dimensions: String,
+    pub intended_use: String,
     #[serde(default)]
     pub safe_zone: Option<f64>,
     pub text: String,
@@ -154,6 +158,8 @@ impl BrandKitViewModel {
                     media_type: source.media_type.clone(),
                     sha256: source.sha256.clone(),
                     alt_text: source.alt_text.clone(),
+                    dimensions: asset_dimensions(source),
+                    intended_use: asset_intended_use(role),
                     safe_zone: source.safe_zone,
                     text: source.text.clone(),
                     availability: if download_path.is_some() {
@@ -351,6 +357,53 @@ fn projected_source_path(role: &str) -> Option<String> {
         "mark" => Some("brand/mark.svg".to_owned()),
         _ => None,
     }
+}
+
+fn asset_dimensions(source: &BrandKitSourceAsset) -> String {
+    if source.media_type != "image/svg+xml" {
+        return "Not declared".to_owned();
+    }
+
+    let Some(view_box) = attribute_value(&source.text, "viewBox") else {
+        return "Scalable vector; viewBox not declared".to_owned();
+    };
+    let components = view_box.split_whitespace().collect::<Vec<_>>();
+    if components.len() != 4
+        || components
+            .iter()
+            .any(|component| component.parse::<f64>().is_err())
+    {
+        return "Scalable vector; viewBox is not machine-readable".to_owned();
+    }
+
+    format!(
+        "{} × {} SVG viewBox units",
+        components[2], components[3]
+    )
+}
+
+fn asset_intended_use(role: &str) -> String {
+    match role {
+        "mark" => "Primary scalable brand mark for approved product surfaces.",
+        "wordmark" => "Primary brand name treatment for approved product surfaces.",
+        "lockup-horizontal" => "Horizontal mark-and-wordmark composition.",
+        "lockup-stacked" => "Stacked mark-and-wordmark composition.",
+        _ => "Approved source asset for Identity-generated brand projections.",
+    }
+    .to_owned()
+}
+
+fn attribute_value<'a>(text: &'a str, name: &str) -> Option<&'a str> {
+    for quote in ['"', '\''] {
+        let marker = format!("{name}={quote}");
+        if let Some(attribute_start) = text.find(&marker) {
+            let value_start = attribute_start + marker.len();
+            if let Some(value_length) = text[value_start..].find(quote) {
+                return Some(&text[value_start..value_start + value_length]);
+            }
+        }
+    }
+    None
 }
 
 fn humanize_identifier(value: &str) -> String {
