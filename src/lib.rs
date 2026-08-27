@@ -5,6 +5,7 @@ pub mod brandkit;
 pub mod compiler;
 pub mod motion;
 pub mod quality;
+pub mod reference_renderer;
 
 mod cli;
 mod commands;

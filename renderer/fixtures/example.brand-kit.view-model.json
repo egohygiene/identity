@@ -1,0 +1,259 @@
+{
+  "schema": "identity.brand-kit-view-model/v1",
+  "projectId": "example-product",
+  "project": {
+    "displayName": "Example Product",
+    "repository": "https://example.invalid/example-product",
+    "tagline": "A governed reference-renderer fixture."
+  },
+  "release": {
+    "version": "1.0.0",
+    "profileVersion": "1.0.0",
+    "sourceDigest": "545e54ad462fa84807ef594110a6742bf861bdf90a7e71fd60e1729b05d58516",
+    "immutableId": "sha256:545e54ad462fa84807ef594110a6742bf861bdf90a7e71fd60e1729b05d58516",
+    "status": "generated"
+  },
+  "tokens": [
+    {
+      "path": "color.brand.primary",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.42,
+          0.2,
+          0.72
+        ],
+        "alpha": 1
+      },
+      "sourceLayer": "example-product",
+      "overrideReason": "Give the product a distinct violet technical accent.",
+      "approval": "approve-product-primary"
+    },
+    {
+      "path": "color.brand.secondary",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.18,
+          0.64,
+          0.48
+        ],
+        "alpha": 1
+      },
+      "sourceLayer": "example-product"
+    },
+    {
+      "path": "color.canvas",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.98,
+          0.98,
+          1.0
+        ],
+        "alpha": 1
+      },
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "color.surface",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "alpha": 1
+      },
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "color.text",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.05,
+          0.06,
+          0.1
+        ],
+        "alpha": 1
+      },
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "color.text.muted",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.35,
+          0.37,
+          0.44
+        ],
+        "alpha": 1
+      },
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "color.border",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.82,
+          0.82,
+          0.88
+        ],
+        "alpha": 1
+      },
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "typography.body.family",
+      "type": "fontFamily",
+      "value": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ],
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "typography.heading.family",
+      "type": "fontFamily",
+      "value": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ],
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "motion.duration.standard",
+      "type": "duration",
+      "value": {
+        "value": 180,
+        "unit": "ms"
+      },
+      "sourceLayer": "example-organization"
+    },
+    {
+      "path": "motion.duration.reduced",
+      "type": "duration",
+      "value": {
+        "value": 0,
+        "unit": "ms"
+      },
+      "sourceLayer": "example-organization"
+    }
+  ],
+  "assets": [
+    {
+      "id": "mark",
+      "label": "Mark",
+      "mediaType": "image/svg+xml",
+      "sha256": "e35e3b2ab6ae457e3b7a2522e81142d26031e526de06c6bd541b1c97208e3f4b",
+      "altText": "A violet diamond nested inside a rounded square.",
+      "dimensions": "64 × 64 SVG viewBox units",
+      "intendedUse": "Primary scalable brand mark for approved product surfaces.",
+      "safeZone": 0.54,
+      "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-labelledby=\"mark-title\">\n  <title id=\"mark-title\">Example Product mark</title>\n  <rect width=\"64\" height=\"64\" rx=\"16\" fill=\"#f7f5ff\"/>\n  <path d=\"M32 10 54 32 32 54 10 32Z\" fill=\"#6b33b8\"/>\n  <path d=\"M32 20 44 32 32 44 20 32Z\" fill=\"#ffffff\"/>\n</svg>\n",
+      "availability": "generated-download",
+      "downloadPath": "brand/mark.svg",
+      "license": {
+        "spdx": "MIT",
+        "status": "approved",
+        "attribution": "Example Product contributors"
+      },
+      "origin": {
+        "creator": "Example Product design team",
+        "method": "vector",
+        "source": ".identity/sources/mark.svg",
+        "capturedAt": "2026-08-20"
+      },
+      "approval": "approve-example-mark"
+    }
+  ],
+  "guidance": {
+    "voice": {
+      "status": "declared",
+      "canonical": true,
+      "value": {
+        "personality": [
+          "clear",
+          "warm",
+          "grounded"
+        ],
+        "principles": [
+          "Explain the reason before the mechanism.",
+          "Prefer direct language over performance."
+        ],
+        "avoid": [
+          "Manufactured urgency",
+          "Unreviewed claims"
+        ]
+      }
+    },
+    "usage": {
+      "status": "declared",
+      "canonical": true,
+      "value": {
+        "do": [
+          "Use semantic tokens instead of copied color values.",
+          "Preserve clear space around the mark."
+        ],
+        "dont": [
+          "Stretch or recolor approved marks.",
+          "Present generated previews as canonical guidance."
+        ]
+      }
+    }
+  },
+  "support": {
+    "motion": {
+      "status": "declared"
+    },
+    "imagery": {
+      "status": "not-declared"
+    },
+    "mascot": {
+      "status": "not-declared"
+    }
+  },
+  "packages": [
+    {
+      "id": "brand-kit-archive",
+      "label": "Complete Brand Kit",
+      "path": "packages/brand-kit/brand-kit.zip",
+      "mediaType": "application/zip",
+      "intendedUse": "Versioned offline archive of approved generated assets."
+    },
+    {
+      "id": "design-tokens",
+      "label": "Design tokens",
+      "path": "packages/tokens/tokens.json",
+      "mediaType": "application/json",
+      "intendedUse": "DTCG-compatible semantic token projection."
+    },
+    {
+      "id": "public-metadata",
+      "label": "Public metadata",
+      "path": "packages/metadata/metadata.json",
+      "mediaType": "application/json",
+      "intendedUse": "Project metadata for public integrations."
+    },
+    {
+      "id": "guidance",
+      "label": "Voice and usage guidance",
+      "path": "packages/guidance/README.md",
+      "mediaType": "text/markdown",
+      "intendedUse": "Human-readable projection of canonical guidance."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@egohygiene/identity-reference-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Accessible static reference renderer for immutable Identity Brand Kit view models.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": "11.21.0"
+  },
+  "scripts": {
+    "check": "node scripts/check-source.mjs",
+    "render": "node scripts/render-static.mjs",
+    "build": "pnpm run render && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:update": "playwright test --update-snapshots",
+    "validate": "pnpm run check && pnpm run test && pnpm run build && pnpm run test:e2e"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "axe-core": "4.11.0",
+    "jsdom": "30.0.1",
+    "vite": "8.2.0",
+    "vitest": "4.1.10"
+  }
+}

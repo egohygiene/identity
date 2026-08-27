@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.egohygiene.io/identity/brand-kit-view-model/v1.json",
+  "title": "Identity Brand Kit reference-renderer view model v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "projectId",
+    "project",
+    "release",
+    "tokens",
+    "assets",
+    "guidance",
+    "support",
+    "packages"
+  ],
+  "properties": {
+    "schema": {
+      "const": "identity.brand-kit-view-model/v1"
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project": {
+      "$ref": "#/$defs/project"
+    },
+    "release": {
+      "$ref": "#/$defs/release"
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/token"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    },
+    "guidance": {
+      "$ref": "#/$defs/guidance"
+    },
+    "support": {
+      "$ref": "#/$defs/support"
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/package"
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "declared",
+        "not-declared",
+        "unsupported"
+      ]
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "displayName",
+        "repository",
+        "tagline"
+      ],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string",
+          "format": "uri"
+        },
+        "tagline": {
+          "type": "string"
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "profileVersion",
+        "sourceDigest",
+        "immutableId",
+        "status"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "profileVersion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "sourceDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "immutableId": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "generated",
+            "approved",
+            "published",
+            "superseded"
+          ]
+        }
+      }
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "type",
+        "value",
+        "sourceLayer"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {},
+        "sourceLayer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "overrideReason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approval": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx",
+        "status",
+        "attribution"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attribution": {
+          "type": "string"
+        }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "creator",
+        "method",
+        "source",
+        "capturedAt"
+      ],
+      "properties": {
+        "creator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capturedAt": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "mediaType",
+        "sha256",
+        "altText",
+        "dimensions",
+        "intendedUse",
+        "text",
+        "availability"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "altText": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimensions": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intendedUse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "safeZone": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text": {
+          "type": "string"
+        },
+        "availability": {
+          "type": "string",
+          "enum": [
+            "generated-download",
+            "embedded-source"
+          ]
+        },
+        "downloadPath": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "license": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/license"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "origin": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/origin"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "approval": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "guidanceSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "canonical"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "canonical": {
+          "const": true
+        },
+        "value": {}
+      }
+    },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "voice",
+        "usage"
+      ],
+      "properties": {
+        "voice": {
+          "$ref": "#/$defs/guidanceSection"
+        },
+        "usage": {
+          "$ref": "#/$defs/guidanceSection"
+        }
+      }
+    },
+    "supportSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        }
+      }
+    },
+    "support": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "motion",
+        "imagery",
+        "mascot"
+      ],
+      "properties": {
+        "motion": {
+          "$ref": "#/$defs/supportSection"
+        },
+        "imagery": {
+          "$ref": "#/$defs/supportSection"
+        },
+        "mascot": {
+          "$ref": "#/$defs/supportSection"
+        }
+      }
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "path",
+        "mediaType",
+        "intendedUse"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intendedUse": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
