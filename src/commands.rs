@@ -1,16 +1,19 @@
 // Copyright 2026 Ego Hygiene
 // SPDX-License-Identifier: MIT
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fmt::Write as _;
 use std::fs;
 use std::path::Path;
 
 use anyhow::{Context, Result, bail};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
-use crate::cli::{HandoffArguments, InitArguments, PlanArguments, PlanFormat, RepositoryArguments};
+use crate::cli::{
+    HandoffArguments, InitArguments, PlanArguments, PlanFormat, RepositoryArguments,
+    StudioReviewArguments,
+};
 use crate::contract::{
     ProjectSpec, ResolvedPlan, ValidatedProject, reject_symlink_components, resolve_plan,
     valid_identifier, validate_relative_path, validate_repository,
@@ -114,6 +117,293 @@ pub fn handoff(arguments: &HandoffArguments) -> Result<()> {
 
     println!("Wrote identity handoff to {}", output_directory.display());
     Ok(())
+}
+
+pub fn studio_review(arguments: &StudioReviewArguments) -> Result<()> {
+    for (path, label) in [
+        (&arguments.handoff, "studio handoff"),
+        (&arguments.release_view_model, "release view model"),
+    ] {
+        validate_relative_path(path, label)?;
+    }
+    if let Some(output) = &arguments.output {
+        validate_relative_path(output, "studio review output")?;
+    }
+
+    let project = validate_repository(&arguments.repository_root)?;
+    if let Some(output) = &arguments.output {
+        validate_studio_review_output(output, &project)?;
+    }
+    for (path, label) in [
+        (&arguments.handoff, "studio handoff"),
+        (&arguments.release_view_model, "release view model"),
+    ] {
+        reject_symlink_components(&project.repository_root, path, label)?;
+    }
+    if let Some(output) = &arguments.output {
+        reject_symlink_components(&project.repository_root, output, "studio review output")?;
+    }
+
+    let handoff = read_json::<StudioHandoff>(
+        &project.repository_root.join(&arguments.handoff),
+        "studio handoff",
+    )?;
+    let release = read_json::<StudioReleaseViewModel>(
+        &project.repository_root.join(&arguments.release_view_model),
+        "release view model",
+    )?;
+    validate_studio_handoff(&handoff, &release, &project)?;
+
+    let mut plan = resolve_plan(&project);
+    let selected_profiles = handoff
+        .profiles
+        .iter()
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    plan.profiles
+        .retain(|profile| selected_profiles.contains(&profile.id));
+    plan.targets
+        .retain(|target| selected_profiles.contains(&target.profile));
+
+    let canonical_handoff = serde_json::to_vec(&handoff)?;
+    let review = StudioReviewPlan {
+        schema: "identity.studio-review-plan/v1",
+        project_id: project.spec.project.id.clone(),
+        source_digest: handoff.source_digest.clone(),
+        handoff_digest: sha256_hex(&canonical_handoff),
+        approval: handoff.approval.clone(),
+        plan,
+    };
+    let rendered = match arguments.format {
+        PlanFormat::Json => format!("{}\n", serde_json::to_string_pretty(&review)?),
+        PlanFormat::Markdown => render_studio_review_markdown(&review),
+    };
+
+    if let Some(output) = &arguments.output {
+        let destination = project.repository_root.join(output);
+        write_file(&destination, &rendered)?;
+        println!("Wrote {}", destination.display());
+    } else {
+        print!("{rendered}");
+    }
+    Ok(())
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct StudioHandoff {
+    schema: String,
+    project_id: String,
+    source_digest: String,
+    profiles: Vec<String>,
+    status: String,
+    decisions: Vec<StudioDecision>,
+    writes: Vec<StudioWrite>,
+    #[serde(default, rename = "warnings")]
+    _warnings: Vec<String>,
+    approval: StudioApproval,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct StudioDecision {
+    id: String,
+    kind: String,
+    state: String,
+    action: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct StudioWrite {
+    id: String,
+    kind: String,
+    action: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct StudioApproval {
+    reviewer: String,
+    method: String,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct StudioReleaseViewModel {
+    schema: String,
+    project_id: String,
+    release: StudioRelease,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct StudioRelease {
+    source_digest: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct StudioReviewPlan {
+    schema: &'static str,
+    project_id: String,
+    source_digest: String,
+    handoff_digest: String,
+    approval: StudioApproval,
+    plan: ResolvedPlan,
+}
+
+fn read_json<T: for<'de> Deserialize<'de>>(path: &Path, label: &str) -> Result<T> {
+    let contents = fs::read_to_string(path)
+        .with_context(|| format!("cannot read {label}: {}", path.display()))?;
+    serde_json::from_str(&contents)
+        .with_context(|| format!("invalid JSON in {label}: {}", path.display()))
+}
+
+fn validate_studio_review_output(output: &Path, project: &ValidatedProject) -> Result<()> {
+    if output.starts_with(".identity") {
+        bail!("studio review output must not write canonical .identity source");
+    }
+    if output.starts_with(&project.spec.paths.output_root) {
+        bail!("studio review output must not write generated identity assets");
+    }
+    Ok(())
+}
+
+fn validate_studio_handoff(
+    handoff: &StudioHandoff,
+    release: &StudioReleaseViewModel,
+    project: &ValidatedProject,
+) -> Result<()> {
+    if handoff.schema != "identity.studio-plan/v1" {
+        bail!("studio handoff schema must be identity.studio-plan/v1");
+    }
+    if handoff.status != "approved-for-compiler-handoff" {
+        bail!("studio handoff must have approved-for-compiler-handoff status");
+    }
+    if handoff.approval.reviewer.trim().is_empty()
+        || handoff.approval.method != "explicit-local-studio"
+    {
+        bail!("studio handoff requires explicit local approval by a named reviewer");
+    }
+    if release.schema != "identity.brand-kit-view-model/v1" {
+        bail!("release view model schema must be identity.brand-kit-view-model/v1");
+    }
+    if handoff.project_id != project.spec.project.id
+        || release.project_id != project.spec.project.id
+    {
+        bail!("studio handoff and release view model must match the repository project id");
+    }
+    if handoff.source_digest != release.release.source_digest {
+        bail!("studio handoff source digest does not match the immutable release view model");
+    }
+    if !is_sha256(&handoff.source_digest) {
+        bail!("studio handoff source digest must be a lowercase SHA-256 digest");
+    }
+    if handoff.profiles.is_empty() {
+        bail!("studio handoff must select at least one output profile");
+    }
+    let known_profiles = project
+        .profiles
+        .iter()
+        .map(|profile| profile.id.clone())
+        .collect::<BTreeSet<_>>();
+    let selected_profiles = handoff
+        .profiles
+        .iter()
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    if selected_profiles.len() != handoff.profiles.len() {
+        bail!("studio handoff output profiles must not contain duplicates");
+    }
+    if handoff.profiles.windows(2).any(|pair| pair[0] >= pair[1]) {
+        bail!("studio handoff output profiles must be sorted deterministically");
+    }
+    for profile in &handoff.profiles {
+        if !known_profiles.contains(profile) {
+            bail!("studio handoff selects unavailable output profile {profile:?}");
+        }
+    }
+
+    let mut candidate_ids = BTreeSet::new();
+    let mut staged_ids = BTreeSet::new();
+    for decision in &handoff.decisions {
+        if decision.id.trim().is_empty() || decision.kind.trim().is_empty() {
+            bail!("studio handoff decisions require non-empty id and kind");
+        }
+        if !matches!(
+            decision.state.as_str(),
+            "candidate" | "approved" | "rejected" | "superseded"
+        ) {
+            bail!(
+                "studio handoff decision {:?} has an unsupported lifecycle state",
+                decision.id
+            );
+        }
+        if !candidate_ids.insert(decision.id.as_str()) {
+            bail!("studio handoff contains duplicate decision id {:?}", decision.id);
+        }
+        let expected_action = if decision.state == "candidate" {
+            "stage-for-compiler-review"
+        } else {
+            "preserve-review-history"
+        };
+        if decision.action != expected_action {
+            bail!(
+                "studio handoff decision {:?} has an invalid lifecycle action",
+                decision.id
+            );
+        }
+    }
+    for write in &handoff.writes {
+        if write.action != "stage-for-compiler-review" {
+            bail!("studio handoff write {:?} has an invalid compiler action", write.id);
+        }
+        let decision = handoff
+            .decisions
+            .iter()
+            .find(|decision| decision.id == write.id)
+            .ok_or_else(|| {
+                anyhow::anyhow!("studio handoff write {:?} has no decision", write.id)
+            })?;
+        if decision.state != "candidate" || decision.kind != write.kind {
+            bail!("studio handoff may stage only current candidate assets");
+        }
+        if !staged_ids.insert(write.id.as_str()) {
+            bail!("studio handoff contains duplicate staged candidate id {:?}", write.id);
+        }
+    }
+    let expected_staged_ids = handoff
+        .decisions
+        .iter()
+        .filter(|decision| decision.state == "candidate")
+        .map(|decision| decision.id.as_str())
+        .collect::<BTreeSet<_>>();
+    if staged_ids.is_empty() || staged_ids != expected_staged_ids {
+        bail!("studio handoff must stage every and only current candidate asset");
+    }
+    Ok(())
+}
+
+fn is_sha256(value: &str) -> bool {
+    value.len() == 64
+        && value
+            .bytes()
+            .all(|byte| byte.is_ascii_digit() || matches!(byte, b'a'..=b'f'))
+}
+
+fn render_studio_review_markdown(review: &StudioReviewPlan) -> String {
+    let mut output = String::new();
+    writeln!(output, "# Approved studio review\n").expect("writing to String cannot fail");
+    writeln!(output, "- Project: `{}`", review.project_id).expect("writing to String cannot fail");
+    writeln!(output, "- Source digest: `{}`", review.source_digest)
+        .expect("writing to String cannot fail");
+    writeln!(output, "- Handoff digest: `{}`", review.handoff_digest)
+        .expect("writing to String cannot fail");
+    writeln!(output, "- Reviewer: `{}`\n", review.approval.reviewer)
+        .expect("writing to String cannot fail");
+    output.push_str(&render_plan_markdown(&review.plan));
+    output
 }
 
 fn render_handoff(project: &ValidatedProject, plan: &ResolvedPlan) -> Result<String> {

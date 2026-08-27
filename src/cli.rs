@@ -26,6 +26,8 @@ pub enum Command {
     Plan(PlanArguments),
     /// Build a deterministic creative handoff for a human or external tool.
     Handoff(HandoffArguments),
+    /// Verify an approved local studio handoff against an immutable release and resolve its CLI plan.
+    StudioReview(StudioReviewArguments),
 }
 
 #[derive(Debug, Args)]
@@ -78,4 +80,23 @@ pub struct HandoffArguments {
     /// Repository-relative destination for generated handoff files.
     #[arg(long, default_value = ".cache/identity/handoff")]
     pub output_directory: PathBuf,
+}
+
+#[derive(Debug, Args)]
+pub struct StudioReviewArguments {
+    /// Root of the consumer repository.
+    #[arg(long, default_value = ".")]
+    pub repository_root: PathBuf,
+    /// Repository-relative approved handoff exported by the local Brand Kit studio.
+    #[arg(long)]
+    pub handoff: PathBuf,
+    /// Repository-relative immutable Brand Kit view model loaded by the studio.
+    #[arg(long)]
+    pub release_view_model: PathBuf,
+    /// Serialization used for the reconciled plan.
+    #[arg(long, value_enum, default_value = "json")]
+    pub format: PlanFormat,
+    /// Optional repository-relative output file. Stdout is used when omitted.
+    #[arg(long)]
+    pub output: Option<PathBuf>,
 }

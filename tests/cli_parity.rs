@@ -5,7 +5,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Output};
 
-use serde_json::Value;
+use serde_json::{Value, json};
 use tempfile::TempDir;
 
 fn identity_command() -> Command {
@@ -42,6 +42,58 @@ fn initialized_project() -> TempDir {
 
 fn read(path: impl AsRef<Path>) -> Vec<u8> {
     fs::read(path).expect("generated file must be readable")
+}
+
+const STUDIO_SOURCE_DIGEST: &str = "545e54ad462fa84807ef594110a6742bf861bdf90a7e71fd60e1729b05d58516";
+
+fn approved_studio_handoff(source_digest: &str) -> Value {
+    json!({
+        "schema": "identity.studio-plan/v1",
+        "projectId": "example-project",
+        "sourceDigest": source_digest,
+        "profiles": ["pwa", "social"],
+        "status": "approved-for-compiler-handoff",
+        "decisions": [
+            {
+                "id": "candidate-mark",
+                "kind": "mark",
+                "state": "candidate",
+                "action": "stage-for-compiler-review"
+            },
+            {
+                "id": "rejected-mark",
+                "kind": "mark",
+                "state": "rejected",
+                "action": "preserve-review-history"
+            }
+        ],
+        "writes": [{
+            "id": "candidate-mark",
+            "kind": "mark",
+            "action": "stage-for-compiler-review"
+        }],
+        "warnings": [],
+        "approval": {
+            "reviewer": "local reviewer",
+            "method": "explicit-local-studio"
+        }
+    })
+}
+
+fn studio_release_view_model(source_digest: &str) -> Value {
+    json!({
+        "schema": "identity.brand-kit-view-model/v1",
+        "projectId": "example-project",
+        "release": { "sourceDigest": source_digest }
+    })
+}
+
+fn write_json(path: impl AsRef<Path>, value: &Value) {
+    fs::write(
+        path,
+        serde_json::to_vec_pretty(value).expect("test JSON must serialize"),
+    )
+    .expect("test JSON must be written");
 }
 
 #[test]
@@ -149,4 +201,154 @@ fn handoff_is_complete_and_byte_stable() {
         manifest["profiles"].as_object().map(serde_json::Map::len),
         Some(8)
     );
+}
+
+#[test]
+fn approved_studio_handoff_resolves_the_selected_cli_plan() {
+    let repository = initialized_project();
+    write_json(
+        repository.path().join("identity-approved-handoff.json"),
+        &approved_studio_handoff(STUDIO_SOURCE_DIGEST),
+    );
+    write_json(
+        repository.path().join("brand-kit-view-model.json"),
+        &studio_release_view_model(STUDIO_SOURCE_DIGEST),
+    );
+
+    let output = run(identity_command().args([
+        "studio-review",
+        "--repository-root",
+        repository
+            .path()
+            .to_str()
+            .expect("temporary path must be UTF-8"),
+        "--handoff",
+        "identity-approved-handoff.json",
+        "--release-view-model",
+        "brand-kit-view-model.json",
+    ]));
+    let review: Value = serde_json::from_slice(&output.stdout).expect("review must be valid JSON");
+    let profiles = review["plan"]["profiles"]
+        .as_array()
+        .expect("review plan profiles must be an array");
+    let target_profiles = review["plan"]["targets"]
+        .as_array()
+        .expect("review plan targets must be an array")
+        .iter()
+        .map(|target| target["profile"].as_str().expect("profile must be a string"))
+        .collect::<Vec<_>>();
+
+    assert_eq!(review["schema"], "identity.studio-review-plan/v1");
+    assert_eq!(review["sourceDigest"], STUDIO_SOURCE_DIGEST);
+    assert_eq!(review["approval"]["reviewer"], "local reviewer");
+    assert_eq!(profiles.len(), 2);
+    assert!(target_profiles.iter().all(|profile| matches!(*profile, "pwa" | "social")));
+}
+
+#[test]
+fn studio_review_rejects_historical_assets_as_staged_writes() {
+    let repository = initialized_project();
+    let mut handoff = approved_studio_handoff(STUDIO_SOURCE_DIGEST);
+    handoff["writes"] = json!([{
+        "id": "rejected-mark",
+        "kind": "mark",
+        "action": "stage-for-compiler-review"
+    }]);
+    write_json(repository.path().join("identity-approved-handoff.json"), &handoff);
+    write_json(
+        repository.path().join("brand-kit-view-model.json"),
+        &studio_release_view_model(STUDIO_SOURCE_DIGEST),
+    );
+
+    let output = identity_command()
+        .args([
+            "studio-review",
+            "--repository-root",
+            repository
+                .path()
+                .to_str()
+                .expect("temporary path must be UTF-8"),
+            "--handoff",
+            "identity-approved-handoff.json",
+            "--release-view-model",
+            "brand-kit-view-model.json",
+        ])
+        .output()
+        .expect("identity command must start");
+
+    assert!(!output.status.success());
+    assert!(String::from_utf8_lossy(&output.stderr).contains("only current candidate assets"));
+}
+
+#[test]
+fn studio_review_rejects_a_handoff_from_a_different_immutable_release() {
+    let repository = initialized_project();
+    write_json(
+        repository.path().join("identity-approved-handoff.json"),
+        &approved_studio_handoff(STUDIO_SOURCE_DIGEST),
+    );
+    write_json(
+        repository.path().join("brand-kit-view-model.json"),
+        &studio_release_view_model(&"a".repeat(64)),
+    );
+
+    let output = identity_command()
+        .args([
+            "studio-review",
+            "--repository-root",
+            repository
+                .path()
+                .to_str()
+                .expect("temporary path must be UTF-8"),
+            "--handoff",
+            "identity-approved-handoff.json",
+            "--release-view-model",
+            "brand-kit-view-model.json",
+        ])
+        .output()
+        .expect("identity command must start");
+
+    assert!(!output.status.success());
+    assert!(String::from_utf8_lossy(&output.stderr).contains("does not match the immutable release"));
+}
+
+#[test]
+fn studio_review_refuses_to_write_canonical_or_generated_identity_paths() {
+    let repository = initialized_project();
+    let canonical_specification = read(repository.path().join(".identity/identity.toml"));
+    write_json(
+        repository.path().join("identity-approved-handoff.json"),
+        &approved_studio_handoff(STUDIO_SOURCE_DIGEST),
+    );
+    write_json(
+        repository.path().join("brand-kit-view-model.json"),
+        &studio_release_view_model(STUDIO_SOURCE_DIGEST),
+    );
+
+    for (output_path, expected_error) in [
+        (".identity/identity.toml", "canonical .identity source"),
+        ("assets/identity/studio-review.json", "generated identity assets"),
+    ] {
+        let output = identity_command()
+            .args([
+                "studio-review",
+                "--repository-root",
+                repository
+                    .path()
+                    .to_str()
+                    .expect("temporary path must be UTF-8"),
+                "--handoff",
+                "identity-approved-handoff.json",
+                "--release-view-model",
+                "brand-kit-view-model.json",
+                "--output",
+                output_path,
+            ])
+            .output()
+            .expect("identity command must start");
+
+        assert!(!output.status.success());
+        assert!(String::from_utf8_lossy(&output.stderr).contains(expected_error));
+    }
+    assert_eq!(read(repository.path().join(".identity/identity.toml")), canonical_specification);
 }

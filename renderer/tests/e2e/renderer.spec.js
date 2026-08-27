@@ -87,6 +87,28 @@ test("studio imports a local review bundle without mutating the release", async 
   await expect(page.getByRole("button", { name: "Export approved handoff" })).toBeEnabled();
 });
 
+test("studio preserves historical review records without staging them", async ({ page }) => {
+  const candidateBundle = {
+    schema: "identity.brand-kit-candidate/v1",
+    projectId: "example-product",
+    sourceDigest: "545e54ad462fa84807ef594110a6742bf861bdf90a7e71fd60e1729b05d58516",
+    profiles: ["pwa"],
+    candidates: [{
+      id: "rejected-mark",
+      kind: "mark",
+      state: "rejected",
+      provenance: { source: "local-review" },
+      approvedAssetId: "mark",
+    }],
+  };
+  await page.getByLabel("Candidate bundle JSON").fill(JSON.stringify(candidateBundle));
+  await page.getByRole("button", { name: "Validate and preview plan" }).click();
+  await page.getByLabel("Reviewer identity").fill("local reviewer");
+  await page.getByLabel(/I reviewed this plan/u).check();
+  await expect(page.getByRole("button", { name: "Export review bundle" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Export approved handoff" })).toBeDisabled();
+});
+
 test("honors reduced motion and remains responsive on a narrow viewport", async ({
   page,
 }) => {

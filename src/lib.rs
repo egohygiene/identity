@@ -24,5 +24,6 @@ pub fn run() -> Result<()> {
         Command::Validate(arguments) => commands::validate(&arguments),
         Command::Plan(arguments) => commands::plan(&arguments),
         Command::Handoff(arguments) => commands::handoff(&arguments),
+        Command::StudioReview(arguments) => commands::studio_review(&arguments),
     }
 }
