@@ -6,6 +6,7 @@ import { hydrateRoot } from "react-dom/client";
 
 import { BrandKitPage } from "./app.js";
 import { assertBrandKitViewModel } from "./model.js";
+import "./section-states.css";
 import "./styles.css";
 
 const modelElement = document.querySelector("#identity-brand-kit-model");
