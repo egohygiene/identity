@@ -5,24 +5,22 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 
 use identity::brandkit::{
-    BrandKitGuidance, BrandKitLicense, BrandKitOrigin, BrandKitProject,
-    BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken, all_profiles,
-    compiler_request, register_builtin_adapters,
+    BrandKitGuidance, BrandKitLicense, BrandKitOrigin, BrandKitProject, BrandKitSourceAsset,
+    BrandKitSourceGovernance, BrandKitToken, all_profiles, compiler_request,
+    register_builtin_adapters,
 };
 use identity::compiler::{
-    AdapterRegistry, Compiler, CompilerResult, IdentityIntent, IdentityReader,
-    IdentityResolver, IdentityValidator, LocalArtifactStore, ResolvedIdentity,
-    ValidationReport, sha256_hex,
+    AdapterRegistry, Compiler, CompilerResult, IdentityIntent, IdentityReader, IdentityResolver,
+    IdentityValidator, LocalArtifactStore, ResolvedIdentity, ValidationReport, sha256_hex,
 };
 use identity::reference_renderer::{
-    BRAND_KIT_VIEW_MODEL_SCHEMA, BrandKitViewModel,
-    register_reference_renderer_adapter, with_reference_renderer,
+    BRAND_KIT_VIEW_MODEL_SCHEMA, BrandKitViewModel, register_reference_renderer_adapter,
+    with_reference_renderer,
 };
 use serde_json::json;
 use tempfile::TempDir;
 
-const MARK_SVG: &str =
-    include_str!("fixtures/v1/valid/minimal/.identity/sources/mark.svg");
+const MARK_SVG: &str = include_str!("fixtures/v1/valid/minimal/.identity/sources/mark.svg");
 
 #[derive(Clone)]
 struct FixtureReader {
@@ -76,7 +74,10 @@ fn compiler_generates_an_immutable_reference_renderer_view_model() {
     assert_eq!(view_model.support.imagery.status, "not-declared");
     assert_eq!(view_model.support.mascot.status, "not-declared");
     assert_eq!(view_model.assets.len(), 1);
-    assert_eq!(view_model.assets[0].download_path.as_deref(), Some("brand/mark.svg"));
+    assert_eq!(
+        view_model.assets[0].download_path.as_deref(),
+        Some("brand/mark.svg")
+    );
     assert_eq!(
         view_model.assets[0]
             .license
@@ -104,7 +105,12 @@ fn renderer_fixture_conforms_to_the_rust_contract() {
     assert_eq!(model.schema, BRAND_KIT_VIEW_MODEL_SCHEMA);
     assert_eq!(model.project_id, "example-product");
     assert_eq!(model.release.profile_version, "1.0.0");
-    assert!(model.tokens.iter().any(|token| token.path == "color.canvas"));
+    assert!(
+        model
+            .tokens
+            .iter()
+            .any(|token| token.path == "color.canvas")
+    );
     assert!(model.assets.iter().any(|asset| asset.id == "mark"));
 }
 
@@ -121,9 +127,10 @@ fn generate_view_model(temporary: &TempDir) -> Vec<u8> {
         .expect("register reference renderer adapter");
 
     let mut store = LocalArtifactStore::new(temporary.path()).expect("create artifact store");
-    let mut compiler =
-        Compiler::new(&reader, &validator, &resolver, &registry, &mut store);
-    let prepared = compiler.prepare(request).expect("prepare complete Brand Kit");
+    let mut compiler = Compiler::new(&reader, &validator, &resolver, &registry, &mut store);
+    let prepared = compiler
+        .prepare(request)
+        .expect("prepare complete Brand Kit");
     let manifest = compiler
         .execute(&prepared, &BTreeSet::new())
         .expect("generate complete Brand Kit");
