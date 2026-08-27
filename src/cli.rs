@@ -28,6 +28,10 @@ pub enum Command {
     Handoff(HandoffArguments),
     /// Verify an approved local studio handoff against an immutable release and resolve its CLI plan.
     StudioReview(StudioReviewArguments),
+    /// Generate selected v1 Brand Kit projections from validated consumer-owned source.
+    V1Generate(V1CompilationArguments),
+    /// Verify that selected v1 Brand Kit projections are present and free of drift.
+    V1Verify(V1CompilationArguments),
 }
 
 #[derive(Debug, Args)]
@@ -99,4 +103,14 @@ pub struct StudioReviewArguments {
     /// Optional repository-relative output file. Stdout is used when omitted.
     #[arg(long)]
     pub output: Option<PathBuf>,
+}
+
+#[derive(Debug, Args)]
+pub struct V1CompilationArguments {
+    /// Root of the consumer repository.
+    #[arg(long, default_value = ".")]
+    pub repository_root: PathBuf,
+    /// Repository-relative root for generated Identity projections.
+    #[arg(long, default_value = "assets/identity")]
+    pub output_root: PathBuf,
 }

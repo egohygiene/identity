@@ -6,6 +6,7 @@ pub mod compiler;
 pub mod motion;
 pub mod quality;
 pub mod reference_renderer;
+pub mod v1_consumer;
 
 mod cli;
 mod commands;
@@ -25,5 +26,7 @@ pub fn run() -> Result<()> {
         Command::Plan(arguments) => commands::plan(&arguments),
         Command::Handoff(arguments) => commands::handoff(&arguments),
         Command::StudioReview(arguments) => commands::studio_review(&arguments),
+        Command::V1Generate(arguments) => commands::v1_generate(&arguments),
+        Command::V1Verify(arguments) => commands::v1_verify(&arguments),
     }
 }

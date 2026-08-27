@@ -24,6 +24,17 @@ APPROVALS_SCHEMA = "identity.approvals/v1"
 DIAGNOSTICS_SCHEMA = "identity.diagnostics/v1"
 VOICE_SCHEMA = "identity.voice/v1"
 USAGE_SCHEMA = "identity.usage/v1"
+V1_PROFILE_VERSIONS = {
+    "archive": "1.0.0",
+    "core": "1.0.0",
+    "docs": "1.0.0",
+    "github": "1.0.0",
+    "metadata": "1.0.0",
+    "pwa": "1.0.0",
+    "social": "1.0.0",
+    "tokens": "1.0.0",
+    "web": "1.0.0",
+}
 IDENTITY_EXTENSION = "org.egohygiene.identity"
 TOKEN_TYPES = {
     "border",
@@ -1427,7 +1438,6 @@ def validate_targets(
         )
         return
     seen: set[str] = set()
-    profile_root = Path(__file__).resolve().parents[1] / "profiles"
     for index, profile in enumerate(enabled):
         pointer = f"{path_value}#/enabled/{index}"
         value = require_closed(
@@ -1464,23 +1474,22 @@ def validate_targets(
                 "Pin an available semantic profile version.",
             )
             continue
-        profile_path = profile_root / f"{identifier}.json"
-        if not profile_path.is_file():
+        available_version = V1_PROFILE_VERSIONS.get(identifier)
+        if available_version is None:
             diagnostic(
                 diagnostics,
                 "IDN1501",
                 pointer,
                 f"profile is not available: {identifier}@{version}",
-                "Install or select a profile shipped by this Identity version.",
+                "Select a profile shipped by this Identity v1 package catalog.",
             )
             continue
-        available = load_json(profile_path, str(profile_path), diagnostics)
-        if available is not None and available.get("version") != version:
+        if available_version != version:
             diagnostic(
                 diagnostics,
                 "IDN1501",
                 f"{pointer}/version",
-                f"selected {version}, available {available.get('version')}",
+                f"selected {version}, available {available_version}",
                 "Pin the available profile version or update Identity explicitly.",
             )
     inapplicable = document.get("inapplicable")

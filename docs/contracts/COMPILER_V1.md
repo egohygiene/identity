@@ -12,7 +12,13 @@ read → validate → resolve → plan → render → verify → manifest
                                       └─ apply only after explicit approval
 ```
 
-`init`, `validate`, `plan`, and `handoff` remain the existing CLI surface. This compiler slice intentionally exposes a Rust library contract first; #11 supplies real projection adapters and package profiles before generation commands become a supported CLI promise.
+`init`, `validate`, `plan`, and `handoff` remain the existing v0 CLI surface.
+The v1 consumer boundary adds `v1-generate` and `v1-verify`: the former uses
+the published source adapter and selected versioned profiles to apply one
+transactional package build, while the latter is read-only and fails on missing
+or drifted generated state. Full source diagnostics remain owned by the
+standalone standard-library validator, so consumers do not acquire a second
+schema implementation.
 
 ## Core ownership
 

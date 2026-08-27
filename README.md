@@ -109,6 +109,20 @@ Both tools are standard-library-only, offline, and non-mutating. The complete
 [v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
 aliases, compatibility, diagnostics, migration, and rollback.
 
+Validated v1 consumers can use the explicit package boundary without importing
+compiler internals:
+
+```bash
+cargo run -- v1-generate --repository-root "path/to/consumer"
+cargo run -- v1-verify --repository-root "path/to/consumer"
+```
+
+`v1-generate` resolves the selected versioned profiles, writes a transactional
+package and compiler manifest beneath `assets/identity/`, and never writes
+canonical `.identity/` source. `v1-verify` is read-only; it fails when the
+selected package is missing, stale, or drifted. Consumers run the standalone
+validator first to obtain the complete stable source diagnostics.
+
 ## Governed brand guidance
 
 Voice, contextual tone, vocabulary, examples, anti-examples, usage rules,
@@ -156,9 +170,9 @@ projection adapters are rejected from the compiler-owned path.
 
 The [compiler v1 contract](docs/contracts/COMPILER_V1.md) documents the public
 Rust ports plus `identity.compiler-plan/v1` and
-`identity.compiler-manifest/v1`. Generation remains a library/application
-boundary until a later CLI design explicitly exposes it; the existing four CLI
-commands keep their extraction-parity contract.
+`identity.compiler-manifest/v1`. The `v1-generate` and `v1-verify` commands
+are the narrow consumer boundary for this package flow; the existing v0 CLI
+commands retain their extraction-parity contract.
 
 ## Brand Kit packages
 

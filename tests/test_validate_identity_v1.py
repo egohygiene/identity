@@ -207,6 +207,20 @@ class IdentityV1ValidatorTests(unittest.TestCase):
             schemas["visual-motion-manifest.schema.json"]["properties"]["schema"]["const"],
             "identity.visual-motion-manifest/v1",
         )
+        self.assertEqual(
+            validator.V1_PROFILE_VERSIONS,
+            {
+                "archive": "1.0.0",
+                "core": "1.0.0",
+                "docs": "1.0.0",
+                "github": "1.0.0",
+                "metadata": "1.0.0",
+                "pwa": "1.0.0",
+                "social": "1.0.0",
+                "tokens": "1.0.0",
+                "web": "1.0.0",
+            },
+        )
 
     def test_cli_returns_stable_json_and_process_status(self) -> None:
         valid = subprocess.run(

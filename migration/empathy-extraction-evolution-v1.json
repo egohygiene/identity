@@ -5,23 +5,23 @@
     {
       "destination": "src/cli.rs",
       "baseline_sha256": "af7594d834fae7c9f618bff2b06c08744ae12f598cade665e716b3c5191dd8dd",
-      "current_sha256": "8595323bd2c1aa74f44ff6b3f4dc0862ff6eb420c905f2ca2f40527e0b74bce2",
-      "issue": "https://github.com/egohygiene/identity/issues/15",
-      "reason": "Extend the extracted CLI with a fail-closed local studio review command that verifies an explicitly approved handoff against an immutable Brand Kit release without granting it asset or canonical-source write authority."
+      "current_sha256": "74685e44d1ed776fa5ba91e07c2694b1d5d68e9d16ed9514d5953237137b4a12",
+      "issue": "https://github.com/egohygiene/identity/issues/17",
+      "reason": "Add explicit v1 generation and read-only verification commands so pinned consumers can consume selected versioned packages without copying compiler internals or mutating canonical source."
     },
     {
       "destination": "src/commands.rs",
       "baseline_sha256": "01f0fe85a4fa1fa3c09db4db237b087912f8e73fe4d536cc24a87a56dbb87c32",
-      "current_sha256": "9d3f8d7cb4adcb8a0b82820729dea065fa0699e6982ac45abc7844c74798c49c",
-      "issue": "https://github.com/egohygiene/identity/issues/15",
-      "reason": "Add the fail-closed local studio review boundary: it records named approval, binds the handoff to an immutable release, reconciles deterministic profiles, preserves review lifecycle history, and rejects canonical or generated-state mutation."
+      "current_sha256": "6491f0ea11a36e36de5aa3baf9747440d6fd8b783f6e0013bff77cff283563dc",
+      "issue": "https://github.com/egohygiene/identity/issues/17",
+      "reason": "Wire the reusable v1 consumer source adapter into the compiler and reference renderer, keeping generation transactional and verification read-only at the immutable consumer boundary."
     },
     {
       "destination": "src/lib.rs",
       "baseline_sha256": "696dfac6faa771c3068c38d45893f19b0ea6e6f9301be0e627a1aff4c9f3eb11",
-      "current_sha256": "dceae168af710f0265694daa1727b006c52318179eb8a5b21a87c76c7ee5f9cc",
-      "issue": "https://github.com/egohygiene/identity/issues/15",
-      "reason": "Continue the intentional post-extraction evolution from #10, #11, #12, and #14 by exporting governed visual-motion validation and the framework-neutral reference-renderer adapter, then register the local studio review command from #15 while preserving the original Empathy extraction digest, standalone CLI behavior, and existing profile inventory."
+      "current_sha256": "cae040924bbf740a2ab3dd7f7e7c2d4eb4de4c958f058918221b44f7caf10fbd",
+      "issue": "https://github.com/egohygiene/identity/issues/17",
+      "reason": "Export the v1 consumer adapter and register the bounded generation and verification commands while preserving the original Empathy extraction digest and v0 CLI behavior."
     }
   ]
 }

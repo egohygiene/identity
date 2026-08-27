@@ -2,9 +2,9 @@
   "$schema": "../../../../../../../contracts/v1/targets.schema.json",
   "schema": "identity.targets/v1",
   "enabled": [
-    { "id": "core", "version": "0.1.0" },
-    { "id": "metadata", "version": "0.1.0" },
-    { "id": "tokens", "version": "0.1.0" }
+    { "id": "core", "version": "1.0.0" },
+    { "id": "metadata", "version": "1.0.0" },
+    { "id": "tokens", "version": "1.0.0" }
   ],
   "inapplicable": []
 }
