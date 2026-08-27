@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="{{LANGUAGE}}" data-theme="system">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{PAGE_DESCRIPTION}}" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{{PAGE_TITLE}}</title>
+    <style id="identity-brand-vars">
+{{THEME_VARIABLES}}
+    </style>
+  </head>
+  <body>
+    <div
+      id="identity-brand-kit-root"
+      data-asset-base-url="{{ASSET_BASE_URL}}"
+    >{{STATIC_MARKUP}}</div>
+    <script id="identity-brand-kit-model" type="application/json">{{MODEL_JSON}}</script>
+    <noscript>
+      <p>
+        Interactive copy and theme controls require JavaScript. All guidance,
+        provenance, and download links remain available in the static document.
+      </p>
+    </noscript>
+    <script type="module" src="./src/client.js"></script>
+  </body>
+</html>
