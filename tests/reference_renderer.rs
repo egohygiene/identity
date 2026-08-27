@@ -75,10 +75,7 @@ fn compiler_generates_an_immutable_reference_renderer_view_model() {
     assert_eq!(view_model.support.imagery.status, "not-declared");
     assert_eq!(view_model.support.mascot.status, "not-declared");
     assert_eq!(view_model.assets.len(), 1);
-    assert_eq!(
-        view_model.assets[0].dimensions,
-        "64 × 64 SVG viewBox units"
-    );
+    assert_eq!(view_model.assets[0].dimensions, "64 × 64 SVG viewBox units");
     assert_eq!(
         view_model.assets[0].intended_use,
         "Primary scalable brand mark for approved product surfaces."
@@ -123,8 +120,7 @@ fn renderer_fixture_conforms_to_the_rust_contract() {
     assert!(model.assets.iter().any(|asset| {
         asset.id == "mark"
             && asset.dimensions == "64 × 64 SVG viewBox units"
-            && asset.intended_use
-                == "Primary scalable brand mark for approved product surfaces."
+            && asset.intended_use == "Primary scalable brand mark for approved product surfaces."
     }));
 }
 
