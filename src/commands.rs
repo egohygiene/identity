@@ -317,6 +317,10 @@ fn validate_studio_handoff(
         }
     }
 
+    validate_studio_lifecycle(handoff)
+}
+
+fn validate_studio_lifecycle(handoff: &StudioHandoff) -> Result<()> {
     let mut candidate_ids = BTreeSet::new();
     let mut staged_ids = BTreeSet::new();
     for decision in &handoff.decisions {
