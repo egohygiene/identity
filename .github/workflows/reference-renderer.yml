@@ -1,0 +1,95 @@
+---
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Validate reference renderer
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/reference-renderer.yml"
+      - "assets/identity/**"
+      - "contracts/v1/brand-kit-view-model.schema.json"
+      - "docs/contracts/BRAND_KIT_RENDERER_V1.md"
+      - "renderer/**"
+      - "src/lib.rs"
+      - "src/reference_renderer.rs"
+      - "tests/reference_renderer.rs"
+      - "tests/test_validate_identity_v1.py"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/reference-renderer.yml"
+      - "assets/identity/**"
+      - "contracts/v1/brand-kit-view-model.schema.json"
+      - "docs/contracts/BRAND_KIT_RENDERER_V1.md"
+      - "renderer/**"
+      - "src/lib.rs"
+      - "src/reference_renderer.rs"
+      - "tests/reference_renderer.rs"
+      - "tests/test_validate_identity_v1.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "identity-reference-renderer-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate static Brand Kit renderer
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+
+      - name: Checkout Identity
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        # actions/setup-node v6.5.0
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: "24"
+
+      - name: Activate pinned pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare "pnpm@11.21.0" --activate
+          pnpm --version
+
+      - name: Install frozen renderer dependencies
+        working-directory: renderer
+        run: pnpm install --frozen-lockfile
+
+      - name: Install pinned Chromium
+        working-directory: renderer
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Validate renderer
+        working-directory: renderer
+        run: pnpm run validate
+
+      - name: Upload renderer evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: reference-renderer-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            renderer/dist/
+            renderer/playwright-report/
+            renderer/test-results/
+          if-no-files-found: warn
+          retention-days: 14
