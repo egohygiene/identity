@@ -44,7 +44,8 @@ fn read(path: impl AsRef<Path>) -> Vec<u8> {
     fs::read(path).expect("generated file must be readable")
 }
 
-const STUDIO_SOURCE_DIGEST: &str = "545e54ad462fa84807ef594110a6742bf861bdf90a7e71fd60e1729b05d58516";
+const STUDIO_SOURCE_DIGEST: &str =
+    "545e54ad462fa84807ef594110a6742bf861bdf90a7e71fd60e1729b05d58516";
 
 fn approved_studio_handoff(source_digest: &str) -> Value {
     json!({
@@ -235,14 +236,22 @@ fn approved_studio_handoff_resolves_the_selected_cli_plan() {
         .as_array()
         .expect("review plan targets must be an array")
         .iter()
-        .map(|target| target["profile"].as_str().expect("profile must be a string"))
+        .map(|target| {
+            target["profile"]
+                .as_str()
+                .expect("profile must be a string")
+        })
         .collect::<Vec<_>>();
 
     assert_eq!(review["schema"], "identity.studio-review-plan/v1");
     assert_eq!(review["sourceDigest"], STUDIO_SOURCE_DIGEST);
     assert_eq!(review["approval"]["reviewer"], "local reviewer");
     assert_eq!(profiles.len(), 2);
-    assert!(target_profiles.iter().all(|profile| matches!(*profile, "pwa" | "social")));
+    assert!(
+        target_profiles
+            .iter()
+            .all(|profile| matches!(*profile, "pwa" | "social"))
+    );
 }
 
 #[test]
@@ -254,7 +263,10 @@ fn studio_review_rejects_historical_assets_as_staged_writes() {
         "kind": "mark",
         "action": "stage-for-compiler-review"
     }]);
-    write_json(repository.path().join("identity-approved-handoff.json"), &handoff);
+    write_json(
+        repository.path().join("identity-approved-handoff.json"),
+        &handoff,
+    );
     write_json(
         repository.path().join("brand-kit-view-model.json"),
         &studio_release_view_model(STUDIO_SOURCE_DIGEST),
@@ -309,7 +321,9 @@ fn studio_review_rejects_a_handoff_from_a_different_immutable_release() {
         .expect("identity command must start");
 
     assert!(!output.status.success());
-    assert!(String::from_utf8_lossy(&output.stderr).contains("does not match the immutable release"));
+    assert!(
+        String::from_utf8_lossy(&output.stderr).contains("does not match the immutable release")
+    );
 }
 
 #[test]
@@ -327,7 +341,10 @@ fn studio_review_refuses_to_write_canonical_or_generated_identity_paths() {
 
     for (output_path, expected_error) in [
         (".identity/identity.toml", "canonical .identity source"),
-        ("assets/identity/studio-review.json", "generated identity assets"),
+        (
+            "assets/identity/studio-review.json",
+            "generated identity assets",
+        ),
     ] {
         let output = identity_command()
             .args([
@@ -350,5 +367,8 @@ fn studio_review_refuses_to_write_canonical_or_generated_identity_paths() {
         assert!(!output.status.success());
         assert!(String::from_utf8_lossy(&output.stderr).contains(expected_error));
     }
-    assert_eq!(read(repository.path().join(".identity/identity.toml")), canonical_specification);
+    assert_eq!(
+        read(repository.path().join(".identity/identity.toml")),
+        canonical_specification
+    );
 }

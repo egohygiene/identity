@@ -155,11 +155,7 @@ pub fn studio_review(arguments: &StudioReviewArguments) -> Result<()> {
     validate_studio_handoff(&handoff, &release, &project)?;
 
     let mut plan = resolve_plan(&project);
-    let selected_profiles = handoff
-        .profiles
-        .iter()
-        .cloned()
-        .collect::<BTreeSet<_>>();
+    let selected_profiles = handoff.profiles.iter().cloned().collect::<BTreeSet<_>>();
     plan.profiles
         .retain(|profile| selected_profiles.contains(&profile.id));
     plan.targets
@@ -308,11 +304,7 @@ fn validate_studio_handoff(
         .iter()
         .map(|profile| profile.id.clone())
         .collect::<BTreeSet<_>>();
-    let selected_profiles = handoff
-        .profiles
-        .iter()
-        .cloned()
-        .collect::<BTreeSet<_>>();
+    let selected_profiles = handoff.profiles.iter().cloned().collect::<BTreeSet<_>>();
     if selected_profiles.len() != handoff.profiles.len() {
         bail!("studio handoff output profiles must not contain duplicates");
     }
@@ -341,7 +333,10 @@ fn validate_studio_handoff(
             );
         }
         if !candidate_ids.insert(decision.id.as_str()) {
-            bail!("studio handoff contains duplicate decision id {:?}", decision.id);
+            bail!(
+                "studio handoff contains duplicate decision id {:?}",
+                decision.id
+            );
         }
         let expected_action = if decision.state == "candidate" {
             "stage-for-compiler-review"
@@ -357,7 +352,10 @@ fn validate_studio_handoff(
     }
     for write in &handoff.writes {
         if write.action != "stage-for-compiler-review" {
-            bail!("studio handoff write {:?} has an invalid compiler action", write.id);
+            bail!(
+                "studio handoff write {:?} has an invalid compiler action",
+                write.id
+            );
         }
         let decision = handoff
             .decisions
@@ -370,7 +368,10 @@ fn validate_studio_handoff(
             bail!("studio handoff may stage only current candidate assets");
         }
         if !staged_ids.insert(write.id.as_str()) {
-            bail!("studio handoff contains duplicate staged candidate id {:?}", write.id);
+            bail!(
+                "studio handoff contains duplicate staged candidate id {:?}",
+                write.id
+            );
         }
     }
     let expected_staged_ids = handoff
