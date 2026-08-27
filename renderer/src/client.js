@@ -5,7 +5,7 @@ import React from "react";
 import { hydrateRoot } from "react-dom/client";
 
 import { BrandKitPage } from "./app.js";
-import { assertBrandKitViewModel } from "./model.js";
+import { assertBrandKitViewModel, sourceDataUrl } from "./model.js";
 import { createApprovedHandoff, inspectCandidateBundle } from "./studio.js";
 import "./section-states.css";
 import "./styles.css";
@@ -26,27 +26,105 @@ hydrateRoot(
 );
 
 let studioPlan = null;
+let studioBundle = null;
 const studio = document.querySelector("[data-studio]");
 if (studio) {
   const input = studio.querySelector("#candidate-bundle");
+  const importInput = studio.querySelector("[data-studio-import]");
   const result = studio.querySelector("[data-studio-result]");
+  const comparison = studio.querySelector("[data-studio-comparison]");
   const approval = studio.querySelector("[data-studio-approval]");
+  const reviewer = studio.querySelector("[data-studio-reviewer]");
   const exportButton = studio.querySelector("[data-studio-export]");
+  const exportBundleButton = studio.querySelector("[data-studio-export-bundle]");
   studio.querySelector("[data-studio-preview]").addEventListener("click", () => {
     try {
       const inspected = inspectCandidateBundle(JSON.parse(input.value), model);
       studioPlan = inspected.plan;
+      studioBundle = inspected.bundle;
       result.textContent = inspected.errors.length ? inspected.errors.join("\n") : JSON.stringify(studioPlan, null, 2);
-      exportButton.disabled = !studioPlan || !approval.checked;
-    } catch (error) { studioPlan = null; result.textContent = `Invalid JSON: ${error.message}`; exportButton.disabled = true; }
+      renderCandidateComparisons(comparison, studioBundle, model);
+      updateStudioControls();
+    } catch (error) {
+      studioPlan = null;
+      studioBundle = null;
+      result.textContent = `Invalid JSON: ${error.message}`;
+      comparison.textContent = "No candidate comparison is available.";
+      updateStudioControls();
+    }
   });
-  approval.addEventListener("change", () => { exportButton.disabled = !studioPlan || !approval.checked; });
+  importInput.addEventListener("change", async () => {
+    const [file] = importInput.files;
+    if (!file) return;
+    input.value = await file.text();
+    result.textContent = `Loaded ${file.name}. Validate and preview the imported bundle.`;
+  });
+  approval.addEventListener("change", updateStudioControls);
+  reviewer.addEventListener("input", updateStudioControls);
   exportButton.addEventListener("click", () => {
-    const handoff = createApprovedHandoff(studioPlan, "local-studio-review");
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(new Blob([JSON.stringify(handoff, null, 2)], { type: "application/json" }));
-    link.download = "identity-approved-handoff.json"; link.click(); URL.revokeObjectURL(link.href);
+    downloadJson("identity-approved-handoff.json", createApprovedHandoff(studioPlan, reviewer.value));
   });
+  exportBundleButton.addEventListener("click", () => downloadJson("identity-candidate-review.json", studioBundle));
+
+  function updateStudioControls() {
+    exportBundleButton.disabled = !studioBundle;
+    exportButton.disabled = !studioPlan || !approval.checked || !reviewer.value.trim();
+  }
+}
+
+function renderCandidateComparisons(container, bundle, currentModel) {
+  container.replaceChildren();
+  if (!bundle) {
+    container.textContent = "No candidate comparison is available.";
+    return;
+  }
+  const heading = document.createElement("h3");
+  heading.textContent = `Candidate review · ${bundle.profiles.join(", ")}`;
+  container.append(heading);
+  for (const candidate of bundle.candidates) {
+    const card = document.createElement("article");
+    card.className = "studio__candidate";
+    const title = document.createElement("h4");
+    title.textContent = `${candidate.id} · ${candidate.state}`;
+    card.append(title);
+    const state = document.createElement("p");
+    state.textContent = `State: ${candidate.state}. Kind: ${candidate.kind}.`;
+    card.append(state);
+    const surfaces = document.createElement("div");
+    surfaces.className = "studio__surfaces";
+    appendStudioSurface(surfaces, "Candidate", candidate.preview?.dataUrl);
+    const approved = currentModel.assets.find((asset) => asset.id === candidate.approvedAssetId);
+    appendStudioSurface(surfaces, "Approved", approved ? sourceDataUrl(approved) : "");
+    card.append(surfaces);
+    container.append(card);
+  }
+}
+
+function appendStudioSurface(container, label, source) {
+  const surface = document.createElement("section");
+  const heading = document.createElement("h5");
+  heading.textContent = label;
+  surface.append(heading);
+  if (source) {
+    const image = document.createElement("img");
+    image.alt = `${label} asset comparison`;
+    image.src = source;
+    surface.append(image);
+  } else {
+    const absent = document.createElement("p");
+    absent.textContent = "No local preview supplied.";
+    surface.append(absent);
+  }
+  container.append(surface);
+}
+
+function downloadJson(fileName, value) {
+  const link = document.createElement("a");
+  const objectUrl = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type: "application/json" }));
+  link.href = objectUrl;
+  link.download = fileName;
+  link.click();
+  window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
 }
 
 document.addEventListener("click", async (event) => {
