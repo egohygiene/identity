@@ -224,6 +224,8 @@
         "mediaType",
         "sha256",
         "altText",
+        "dimensions",
+        "intendedUse",
         "text",
         "availability"
       ],
@@ -244,6 +246,14 @@
           "$ref": "#/$defs/digest"
         },
         "altText": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimensions": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intendedUse": {
           "type": "string",
           "minLength": 1
         },
