@@ -11,6 +11,7 @@ export const SECTION_DEFINITIONS = Object.freeze([
   ["voice", "Voice and personality"],
   ["usage", "Usage rules"],
   ["creative-direction", "Motion, imagery, and mascot"],
+  ["studio", "Review candidate assets"],
   ["downloads", "Downloads"],
   ["provenance", "Provenance and support"],
 ]);
