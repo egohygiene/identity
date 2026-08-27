@@ -182,17 +182,14 @@ function OverviewSection({ model }) {
         h("p", { className: "eyebrow" }, "Immutable release"),
         h("h3", null, model.project.displayName),
         h("p", null, model.project.tagline),
-        h(
-          DefinitionList,
-          {
-            entries: [
-              ["Version", model.release.version],
-              ["Profile", model.release.profileVersion],
-              ["Status", model.release.status],
-              ["Immutable ID", model.release.immutableId],
-            ],
-          },
-        ),
+        h(DefinitionList, {
+          entries: [
+            ["Version", model.release.version],
+            ["Profile", model.release.profileVersion],
+            ["Status", model.release.status],
+            ["Immutable ID", model.release.immutableId],
+          ],
+        }),
       ),
       h(
         "article",
@@ -237,28 +234,27 @@ function AssetsSection({ assets, assetBaseUrl }) {
                   : h("p", null, "Preview unavailable for this media type."),
               ),
               h("h3", null, asset.label),
-              h(
-                DefinitionList,
-                {
-                  entries: [
-                    ["Format", asset.mediaType],
-                    ["Availability", humanize(asset.availability)],
-                    ["SHA-256", asset.sha256],
-                    [
-                      "Safe zone",
-                      asset.safeZone === null || asset.safeZone === undefined
-                        ? "Not declared"
-                        : `${Math.round(asset.safeZone * 100)}%`,
-                    ],
-                    [
-                      "License",
-                      asset.license
-                        ? `${asset.license.spdx} · ${asset.license.status}`
-                        : "Not declared",
-                    ],
+              h(DefinitionList, {
+                entries: [
+                  ["Format", asset.mediaType],
+                  ["Dimensions", asset.dimensions],
+                  ["Intended use", asset.intendedUse],
+                  ["Availability", humanize(asset.availability)],
+                  ["SHA-256", asset.sha256],
+                  [
+                    "Safe zone",
+                    asset.safeZone === null || asset.safeZone === undefined
+                      ? "Not declared"
+                      : `${Math.round(asset.safeZone * 100)}%`,
                   ],
-                },
-              ),
+                  [
+                    "License",
+                    asset.license
+                      ? `${asset.license.spdx} · ${asset.license.status}`
+                      : "Not declared",
+                  ],
+                ],
+              }),
               asset.downloadPath
                 ? h(
                     "a",
@@ -292,38 +288,53 @@ function ColorSection({ tokens }) {
         })
       : h(
           "div",
-          { className: "color-grid" },
-          ...tokens.map((token) => {
-            const cssValue = colorValueToCss(token.value);
-            return h(
-              "article",
-              { className: "panel color-card", key: token.path },
-              h("div", {
-                className: "color-swatch",
-                role: "img",
-                style: cssValue ? { backgroundColor: cssValue } : undefined,
-                "aria-label": cssValue
-                  ? `${token.path} previewed as ${cssValue}`
-                  : `${token.path} cannot be previewed`,
-              }),
-              h("h3", null, token.path),
-              h("p", { className: "token-value" }, tokenValueToText(token)),
-              h(CopyControl, {
-                label: token.path,
-                value: tokenValueToText(token),
-              }),
-              h(
-                "p",
-                { className: "support-note" },
-                `Source layer: ${token.sourceLayer}`,
-              ),
-            );
+          { className: "section-stack" },
+          h(
+            "div",
+            { className: "color-grid" },
+            ...tokens.map((token) => {
+              const cssValue = colorValueToCss(token.value);
+              return h(
+                "article",
+                { className: "panel color-card", key: token.path },
+                h("div", {
+                  className: "color-swatch",
+                  role: "img",
+                  style: cssValue ? { backgroundColor: cssValue } : undefined,
+                  "aria-label": cssValue
+                    ? `${token.path} previewed as ${cssValue}`
+                    : `${token.path} cannot be previewed`,
+                }),
+                h("h3", null, token.path),
+                h("p", { className: "token-value" }, tokenValueToText(token)),
+                h(CopyControl, {
+                  label: token.path,
+                  value: tokenValueToText(token),
+                }),
+                h(
+                  "p",
+                  { className: "support-note" },
+                  `Source layer: ${token.sourceLayer}`,
+                ),
+              );
+            }),
+          ),
+          h(EmptyState, {
+            title: "Approved pairings not declared",
+            message:
+              "Semantic colors are previewed individually, but the current release does not declare canonical color pairings. The renderer does not infer combinations.",
           }),
         ),
   );
 }
 
 function TypographySection({ tokens }) {
+  const hasTypeScale = tokens.some((token) =>
+    [".size", ".lineHeight", ".line-height", ".weight", ".scale"].some(
+      (fragment) => token.path.includes(fragment),
+    ),
+  );
+
   return h(
     Section,
     { id: "typography", title: "Typography and type scale", preview: true },
@@ -335,30 +346,41 @@ function TypographySection({ tokens }) {
         })
       : h(
           "div",
-          { className: "typography-stack" },
-          ...tokens.map((token) =>
-            h(
-              "article",
-              { className: "panel typography-sample", key: token.path },
-              h("p", { className: "eyebrow" }, token.path),
+          { className: "section-stack" },
+          h(
+            "div",
+            { className: "typography-stack" },
+            ...tokens.map((token) =>
               h(
-                "p",
-                {
-                  className: "type-preview",
-                  style:
-                    token.type === "fontFamily" && Array.isArray(token.value)
-                      ? { fontFamily: token.value.join(", ") }
-                      : undefined,
-                },
-                "Clarity makes a system easier to trust.",
+                "article",
+                { className: "panel typography-sample", key: token.path },
+                h("p", { className: "eyebrow" }, token.path),
+                h(
+                  "p",
+                  {
+                    className: "type-preview",
+                    style:
+                      token.type === "fontFamily" && Array.isArray(token.value)
+                        ? { fontFamily: token.value.join(", ") }
+                        : undefined,
+                  },
+                  "Clarity makes a system easier to trust.",
+                ),
+                h("p", { className: "token-value" }, tokenValueToText(token)),
+                h(CopyControl, {
+                  label: token.path,
+                  value: tokenValueToText(token),
+                }),
               ),
-              h("p", { className: "token-value" }, tokenValueToText(token)),
-              h(CopyControl, {
-                label: token.path,
-                value: tokenValueToText(token),
-              }),
             ),
           ),
+          hasTypeScale
+            ? null
+            : h(EmptyState, {
+                title: "Type scale not declared",
+                message:
+                  "Font family tokens are available, but the current release does not declare canonical sizes, weights, or line-height relationships.",
+              }),
         ),
   );
 }
