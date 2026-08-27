@@ -54,11 +54,8 @@ impl V1ConsumerPipeline {
         let profiles = profile_selection(repository_root, &targets_path)?;
         let approvals = approved_decisions(repository_root, &approvals_path)?;
         let tokens = resolve_tokens(repository_root, project_object)?;
-        let (sources, source_governance) = source_assets(
-            repository_root,
-            &provenance_path,
-            &approvals,
-        )?;
+        let (sources, source_governance) =
+            source_assets(repository_root, &provenance_path, &approvals)?;
         let guidance = BrandKitGuidance {
             voice: Some(read_json(&repository_root.join(&voice_path), &voice_path)?),
             usage: Some(read_json(&repository_root.join(&usage_path), &usage_path)?),
@@ -74,19 +71,28 @@ impl V1ConsumerPipeline {
             (
                 "project".to_owned(),
                 serde_json::to_value(project_model).map_err(|error| {
-                    invalid("project", format!("cannot serialize project model: {error}"))
+                    invalid(
+                        "project",
+                        format!("cannot serialize project model: {error}"),
+                    )
                 })?,
             ),
             (
                 "tokens".to_owned(),
                 serde_json::to_value(tokens).map_err(|error| {
-                    invalid("tokens", format!("cannot serialize resolved tokens: {error}"))
+                    invalid(
+                        "tokens",
+                        format!("cannot serialize resolved tokens: {error}"),
+                    )
                 })?,
             ),
             (
                 "sources".to_owned(),
                 serde_json::to_value(sources).map_err(|error| {
-                    invalid("sources", format!("cannot serialize source assets: {error}"))
+                    invalid(
+                        "sources",
+                        format!("cannot serialize source assets: {error}"),
+                    )
                 })?,
             ),
             (
@@ -191,10 +197,7 @@ fn flatten_tokens(
     output: &mut BTreeMap<String, RawToken>,
 ) -> CompilerResult<()> {
     let node = object(value, prefix)?;
-    let current_type = node
-        .get("$type")
-        .and_then(Value::as_str)
-        .or(inherited_type);
+    let current_type = node.get("$type").and_then(Value::as_str).or(inherited_type);
     if let Some(token_value) = node.get("$value") {
         let token_type = current_type.ok_or_else(|| {
             invalid(
@@ -297,7 +300,10 @@ fn profile_selection(
     Ok(result)
 }
 
-fn approved_decisions(repository_root: &Path, approvals_path: &str) -> CompilerResult<BTreeSet<String>> {
+fn approved_decisions(
+    repository_root: &Path,
+    approvals_path: &str,
+) -> CompilerResult<BTreeSet<String>> {
     let approvals = read_json(&repository_root.join(approvals_path), approvals_path)?;
     let approvals = object(&approvals, approvals_path)?;
     let decisions = array_field(approvals, "decisions", approvals_path)?;
@@ -404,11 +410,16 @@ fn canonical_source_digest(repository_root: &Path) -> CompilerResult<String> {
     Ok(sha256_hex(&bytes))
 }
 
-fn collect_canonical_files(root: &Path, current: &Path, files: &mut Vec<PathBuf>) -> CompilerResult<()> {
+fn collect_canonical_files(
+    root: &Path,
+    current: &Path,
+    files: &mut Vec<PathBuf>,
+) -> CompilerResult<()> {
     for entry in fs::read_dir(current)
         .map_err(|error| invalid(current.display().to_string(), error.to_string()))?
     {
-        let entry = entry.map_err(|error| invalid(current.display().to_string(), error.to_string()))?;
+        let entry =
+            entry.map_err(|error| invalid(current.display().to_string(), error.to_string()))?;
         let path = entry.path();
         let relative = path
             .strip_prefix(root)
@@ -418,11 +429,12 @@ fn collect_canonical_files(root: &Path, current: &Path, files: &mut Vec<PathBuf>
         {
             continue;
         }
-        if relative
-            .components()
-            .next()
-            .is_some_and(|component| matches!(component.as_os_str().to_str(), Some("candidates" | "references")))
-        {
+        if relative.components().next().is_some_and(|component| {
+            matches!(
+                component.as_os_str().to_str(),
+                Some("candidates" | "references")
+            )
+        }) {
             continue;
         }
         if path.is_dir() {
@@ -483,7 +495,10 @@ fn string_field<'a>(
 fn path_field(object: &Map<String, Value>, field: &str, label: &str) -> CompilerResult<String> {
     let value = string_field(object, field, label)?;
     if value.starts_with('/') || value.contains("..") || value.contains('\\') {
-        return Err(invalid(format!("{label}.{field}"), "path must be repository-relative"));
+        return Err(invalid(
+            format!("{label}.{field}"),
+            "path must be repository-relative",
+        ));
     }
     Ok(value.to_owned())
 }
@@ -491,7 +506,10 @@ fn path_field(object: &Map<String, Value>, field: &str, label: &str) -> Compiler
 fn media_type(path: &str) -> CompilerResult<&'static str> {
     match Path::new(path).extension().and_then(|value| value.to_str()) {
         Some("svg") => Ok("image/svg+xml"),
-        _ => Err(invalid(path, "only canonical SVG source assets are packageable in v1")),
+        _ => Err(invalid(
+            path,
+            "only canonical SVG source assets are packageable in v1",
+        )),
     }
 }
 

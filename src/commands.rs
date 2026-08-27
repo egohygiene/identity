@@ -10,11 +10,11 @@ use anyhow::{Context, Result, bail};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
+use crate::brandkit::{compiler_request, register_builtin_adapters};
 use crate::cli::{
     HandoffArguments, InitArguments, PlanArguments, PlanFormat, RepositoryArguments,
     StudioReviewArguments, V1CompilationArguments,
 };
-use crate::brandkit::{compiler_request, register_builtin_adapters};
 use crate::compiler::{AdapterRegistry, Compiler, LocalArtifactStore};
 use crate::reference_renderer::{register_reference_renderer_adapter, with_reference_renderer};
 use crate::v1_consumer::V1ConsumerPipeline;
@@ -198,15 +198,14 @@ pub fn v1_generate(arguments: &V1CompilationArguments) -> Result<()> {
     register_reference_renderer_adapter(&mut registry).map_err(compiler_error)?;
     let mut store = LocalArtifactStore::new(&repository_root).map_err(compiler_error)?;
     let mut compiler = Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
-    let prepared = compiler
-        .prepare(request)
-        .map_err(compiler_error)?;
+    let prepared = compiler.prepare(request).map_err(compiler_error)?;
     let manifest = compiler
         .execute(&prepared, &BTreeSet::new())
         .map_err(compiler_error)?;
     println!(
         "Generated {} v1 Identity projections for {}",
-        manifest.outputs.len(), manifest.project_id
+        manifest.outputs.len(),
+        manifest.project_id
     );
     Ok(())
 }
@@ -220,15 +219,16 @@ pub fn v1_verify(arguments: &V1CompilationArguments) -> Result<()> {
     register_reference_renderer_adapter(&mut registry).map_err(compiler_error)?;
     let mut store = LocalArtifactStore::new(&repository_root).map_err(compiler_error)?;
     let mut compiler = Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
-    let prepared = compiler
-        .prepare(request)
-        .map_err(compiler_error)?;
+    let prepared = compiler.prepare(request).map_err(compiler_error)?;
     if prepared.plan.has_mutations() {
         bail!(
             "Identity v1 output is missing or drifted; run `identity v1-generate` after reviewing the plan"
         );
     }
-    println!("Verified v1 Identity projections for {}", prepared.plan.project_id);
+    println!(
+        "Verified v1 Identity projections for {}",
+        prepared.plan.project_id
+    );
     Ok(())
 }
 

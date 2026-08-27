@@ -43,14 +43,18 @@ fn published_v1_source_contract_drives_selected_package_profiles() {
         .execute(&prepared, &BTreeSet::new())
         .expect("generate selected v1 package");
     assert_eq!(manifest.outputs.len(), request.targets.len());
-    assert!(temporary
-        .path()
-        .join("assets/identity/packages/tokens/tokens.css")
-        .is_file());
-    assert!(temporary
-        .path()
-        .join("assets/identity/packages/renderer/brand-kit.view-model.json")
-        .is_file());
+    assert!(
+        temporary
+            .path()
+            .join("assets/identity/packages/tokens/tokens.css")
+            .is_file()
+    );
+    assert!(
+        temporary
+            .path()
+            .join("assets/identity/packages/renderer/brand-kit.view-model.json")
+            .is_file()
+    );
     let css = fs::read_to_string(
         temporary
             .path()
