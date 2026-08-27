@@ -89,17 +89,23 @@ describe("BrandKitPage", () => {
     const text = document.body.textContent;
 
     expect(text).toContain("No approved marks");
+    expect(text).toContain("Approved pairings not declared");
     expect(text).toContain("Typography not declared");
     expect(text).toContain("Voice and personality not declared");
     expect(text).toContain("Usage rules not declared");
     expect(text).toContain("The renderer does not infer or invent it.");
   });
 
-  test("exposes accessible copy controls and immutable downloads", () => {
+  test("exposes governed asset metadata, copy controls, and immutable downloads", () => {
     const document = renderDocument(fixture);
     const copyControls = [...document.querySelectorAll("[data-copy-value]")];
     const downloads = [...document.querySelectorAll("a[download]")];
+    const logoSectionText = document.querySelector("#logos")?.textContent || "";
 
+    expect(logoSectionText).toContain("64 × 64 SVG viewBox units");
+    expect(logoSectionText).toContain(
+      "Primary scalable brand mark for approved product surfaces.",
+    );
     expect(copyControls.length).toBeGreaterThan(0);
     expect(
       copyControls.every(
@@ -166,8 +172,8 @@ describe("BrandKitPage", () => {
       sections: [
         { id: "overview", panels: 2, emptyStates: 0 },
         { id: "logos", panels: 1, emptyStates: 0 },
-        { id: "colors", panels: 7, emptyStates: 0 },
-        { id: "typography", panels: 2, emptyStates: 0 },
+        { id: "colors", panels: 7, emptyStates: 1 },
+        { id: "typography", panels: 2, emptyStates: 1 },
         { id: "voice", panels: 3, emptyStates: 0 },
         { id: "usage", panels: 2, emptyStates: 0 },
         { id: "creative-direction", panels: 3, emptyStates: 0 },
@@ -185,6 +191,10 @@ describe("renderer stylesheet contract", () => {
       path.join(rendererRoot, "src/styles.css"),
       "utf8",
     );
+    const sectionStates = fs.readFileSync(
+      path.join(rendererRoot, "src/section-states.css"),
+      "utf8",
+    );
 
     for (const requiredPolicy of [
       "@media (prefers-color-scheme: dark)",
@@ -197,6 +207,7 @@ describe("renderer stylesheet contract", () => {
     ]) {
       expect(stylesheet).toContain(requiredPolicy);
     }
+    expect(sectionStates).toContain(".section-stack");
   });
 });
 
