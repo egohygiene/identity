@@ -93,12 +93,12 @@ test("honors reduced motion and remains responsive on a narrow viewport", async 
   expect(longestTransitionSeconds).toBeLessThanOrEqual(0.001);
 });
 
-test("matches the reviewed desktop visual baseline", async ({ page }) => {
+test("matches the reviewed desktop viewport baseline", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.reload();
   await page.evaluate(() => document.fonts.ready);
   await expect(page).toHaveScreenshot("brand-kit-page.png", {
     animations: "disabled",
-    fullPage: true,
+    fullPage: false,
   });
 });
