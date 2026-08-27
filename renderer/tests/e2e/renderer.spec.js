@@ -23,13 +23,7 @@ test("renders an accessible, linkable, downloadable static Brand Kit", async ({
   );
 
   await page.addScriptTag({ path: axePath });
-  const accessibility = await page.evaluate(async () =>
-    window.axe.run(document, {
-      rules: {
-        "color-contrast": { enabled: false },
-      },
-    }),
-  );
+  const accessibility = await page.evaluate(async () => window.axe.run(document));
   expect(accessibility.violations).toEqual([]);
 
   const downloads = await page.locator("a[download]").evaluateAll((links) =>
