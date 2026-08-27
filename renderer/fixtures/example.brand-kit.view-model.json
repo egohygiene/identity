@@ -160,6 +160,8 @@
       "mediaType": "image/svg+xml",
       "sha256": "e35e3b2ab6ae457e3b7a2522e81142d26031e526de06c6bd541b1c97208e3f4b",
       "altText": "A violet diamond nested inside a rounded square.",
+      "dimensions": "64 × 64 SVG viewBox units",
+      "intendedUse": "Primary scalable brand mark for approved product surfaces.",
       "safeZone": 0.54,
       "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-labelledby=\"mark-title\">\n  <title id=\"mark-title\">Example Product mark</title>\n  <rect width=\"64\" height=\"64\" rx=\"16\" fill=\"#f7f5ff\"/>\n  <path d=\"M32 10 54 32 32 54 10 32Z\" fill=\"#6b33b8\"/>\n  <path d=\"M32 20 44 32 32 44 20 32Z\" fill=\"#ffffff\"/>\n</svg>\n",
       "availability": "generated-download",
