@@ -49,7 +49,18 @@ describe("candidate studio contract", () => {
         { id: "approved", kind: "mark", state: "approved", provenance: { source: "local" } },
       ],
     };
-    expect(inspectCandidateBundle(historical, model).errors).toEqual([]);
+    const inspected = inspectCandidateBundle(historical, model);
+    expect(inspected.errors).toEqual([]);
+    expect(inspected.plan.writes).toEqual([{
+      id: "candidate",
+      kind: "mark",
+      action: "stage-for-compiler-review",
+    }]);
+    const historicalOnly = inspectCandidateBundle({
+      ...candidateBundle,
+      candidates: [{ id: "rejected", kind: "mark", state: "rejected", provenance: { source: "local" } }],
+    }, model).plan;
+    expect(() => createApprovedHandoff(historicalOnly, "reviewer")).toThrow("current candidate");
     const unsupported = inspectCandidateBundle({ ...candidateBundle, profiles: ["imaginary"] }, model);
     expect(unsupported.plan).toBeNull();
     expect(unsupported.errors.join(" ")).toContain("Unsupported deterministic output profile");

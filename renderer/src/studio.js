@@ -65,11 +65,13 @@ export function inspectCandidateBundle(value, model) {
         state: candidate.state,
         action: candidate.state === "candidate" ? "stage-for-compiler-review" : "preserve-review-history",
       })),
-      writes: candidates.map((candidate) => ({
-        id: candidate.id,
-        kind: candidate.kind,
-        action: "stage-for-compiler-review",
-      })),
+      writes: candidates
+        .filter((candidate) => candidate.state === "candidate")
+        .map((candidate) => ({
+          id: candidate.id,
+          kind: candidate.kind,
+          action: "stage-for-compiler-review",
+        })),
       warnings: [
         "No canonical .identity/ or generated asset files have been changed.",
         "Applying this review record requires the compiler and a separate explicit approval step.",
@@ -81,6 +83,9 @@ export function inspectCandidateBundle(value, model) {
 export function createApprovedHandoff(plan, reviewer) {
   if (!plan || plan.status !== "requires-human-approval") {
     throw new Error("A reviewable plan is required.");
+  }
+  if (!Array.isArray(plan.writes) || plan.writes.length === 0) {
+    throw new Error("At least one current candidate is required for compiler handoff.");
   }
   if (!reviewer?.trim()) throw new Error("Reviewer identity is required.");
   return {

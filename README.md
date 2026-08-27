@@ -66,12 +66,24 @@ cargo run -- plan \
 cargo run -- handoff \
   --repository-root "path/to/consumer" \
   --output-directory ".cache/identity/handoff"
+
+cargo run -- studio-review \
+  --repository-root "path/to/consumer" \
+  --handoff "review/identity-approved-handoff.json" \
+  --release-view-model "assets/identity/brand-kit-view-model.json" \
+  --output ".cache/identity/studio-review.json" \
+  --format "markdown"
 ```
 
 `init` creates consumer-owned `.identity/` intent. `validate` checks the v0
 project and profile contracts. `plan` resolves eight profiles and 45 targets
 without generating them. `handoff` creates a deterministic, provenance-aware
 creative source-pack request whose candidates remain unapproved by default.
+`studio-review` accepts only a named, explicitly approved local-studio handoff
+that matches an immutable Brand Kit release; it resolves the selected existing
+CLI profiles into a deterministic review plan. It does not write canonical
+`.identity/` source or generated assets; an optional saved review record must
+remain outside both locations.
 
 Raster/vector rendering, asset application, packaging, and publication remain
 outside this extracted CLI vertical slice. See the

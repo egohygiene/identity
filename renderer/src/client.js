@@ -68,7 +68,10 @@ if (studio) {
 
   function updateStudioControls() {
     exportBundleButton.disabled = !studioBundle;
-    exportButton.disabled = !studioPlan || !approval.checked || !reviewer.value.trim();
+    exportButton.disabled = !studioPlan
+      || studioPlan.writes.length === 0
+      || !approval.checked
+      || !reviewer.value.trim();
   }
 }
 
