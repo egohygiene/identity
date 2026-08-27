@@ -11,9 +11,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::brandkit::{
-    BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitSourceAsset,
-};
+use crate::brandkit::{BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitSourceAsset};
 use crate::compiler::{
     AdapterDescriptor, AdapterKind, AdapterPlan, AdapterRegistry, COMPILER_API_MAJOR,
     CompilerError, CompilerRequest, CompilerResult, Diagnostic, DiagnosticSeverity, EvidenceRecord,
@@ -376,10 +374,7 @@ fn asset_dimensions(source: &BrandKitSourceAsset) -> String {
         return "Scalable vector; viewBox is not machine-readable".to_owned();
     }
 
-    format!(
-        "{} × {} SVG viewBox units",
-        components[2], components[3]
-    )
+    format!("{} × {} SVG viewBox units", components[2], components[3])
 }
 
 fn asset_intended_use(role: &str) -> String {
