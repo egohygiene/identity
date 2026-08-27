@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-26
+updated: 2026-08-27
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -33,14 +33,14 @@ repository: egohygiene/identity
 visibility: public
 publication: central
 route: /roadmap/identity/
-updated: 2026-08-26
+updated: 2026-08-27
 -->
-## 2026-08-26 execution snapshot
+## 2026-08-27 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
 
-**Lifecycle:** strong pre-release alpha  
-**Current gate:** Complete Empathy's immutable Identity consumer transition in issue #8 before building the renderer and studio.
+**Lifecycle:** v1.0.0 release candidate
+**Current gate:** Verify the standalone release candidate on every supported source-install platform and cut a final tag only after the full release evidence is current.
 **North-star outcome:** A deterministic, governed Brand Kit v1 whose source decisions, generated assets, and approvals remain traceable.
 
 ### Visual roadmap publication
@@ -61,7 +61,7 @@ issues: []
 -->
 #### IDN-Q01 — Establish deterministic brand compilation
 
-**State:** `complete`  
+**State:** `complete`
 **Depends on:** None
 
 **Outcome:** A compiler and nine profiles generate validated brand artifacts.
@@ -77,13 +77,13 @@ issues: []
 
 <!-- roadmap-step
 id: IDN-Q02
-status: active
+status: complete
 depends_on: [IDN-Q01]
 issues: [8, 13]
 -->
 #### IDN-Q02 — Complete voice and approval evidence
 
-**State:** `active`  
+**State:** `complete`
 **Depends on:** `IDN-Q01`
 
 **Outcome:** Brand decisions include approved voice guidance and evidence rather than generated assets alone.
@@ -91,35 +91,37 @@ issues: [8, 13]
 **Exit criteria:**
 
 - [x] Issue #13 provides governed voice, usage, approval, and deterministic projection evidence.
-- [ ] Issue #8 completes Empathy's immutable consumer transition.
+- [x] Issue #8 completes Empathy's immutable consumer transition.
 - [x] Approvals link to exact reviewed subjects, provenance, and lifecycle decisions.
 
 **Current evidence:**
 
 - Issue #13 is implemented through versioned guidance contracts, approval-aware validation, context retrieval, and deterministic JSON/Markdown/HTML projections.
-- Issue #8 remains the final cross-repository extraction gate.
+- Identity's independent extraction and Empathy's immutable consumer transition
+  are complete.
 
 <!-- roadmap-step
 id: IDN-Q03
-status: planned
+status: complete
 depends_on: [IDN-Q02]
 issues: [14, 15]
 -->
 #### IDN-Q03 — Build the renderer and studio
 
-**State:** `planned`  
+**State:** `complete`
 **Depends on:** `IDN-Q02`
 
 **Outcome:** Issues #14 and #15 provide a usable way to inspect and generate the Brand Kit.
 
 **Exit criteria:**
 
-- [ ] The renderer covers all nine profiles.
-- [ ] Studio changes round-trip through governed source files.
+- [x] The renderer covers all nine profiles.
+- [x] Studio changes round-trip through governed source files.
 
 **Current evidence:**
 
-- Issues #14 and #15 define the renderer and studio backlog.
+- Issues #14 and #15 provide the static renderer, safe studio contract, and
+  browser evidence. They do not deploy the public website route.
 
 <!-- roadmap-step
 id: IDN-Q04
@@ -146,25 +148,27 @@ issues: [16]
 
 <!-- roadmap-step
 id: IDN-Q05
-status: planned
-depends_on: [IDN-Q04]
+status: active
+depends_on: [IDN-Q03]
 issues: [17, 18]
 -->
 #### IDN-Q05 — Pilot and release Brand Kit v1
 
-**State:** `planned`  
-**Depends on:** `IDN-Q04`
+**State:** `active`
+**Depends on:** `IDN-Q03`
 
 **Outcome:** Real consumers validate the kit before a stable v1 release.
 
 **Exit criteria:**
 
-- [ ] Issue #17 records representative pilots and fixes.
+- [x] Issue #17 records representative pilots and fixes.
 - [ ] Issue #18 closes with a tagged, provenance-rich v1 release.
 
 **Current evidence:**
 
-- Issues #17 and #18 define pilots and the v1 milestone.
+- Empathy and OptiFlow now pin immutable Identity consumer integrations.
+- Issue #18 prepares a cross-platform, provenance-rich release candidate; the
+  final stable tag remains gated on its release checklist.
 
 <!-- roadmap-step
 id: IDN-Q06

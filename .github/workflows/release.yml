@@ -1,0 +1,254 @@
+---
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Release Identity
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/release.yml"
+      - "Cargo.lock"
+      - "Cargo.toml"
+      - "rust-toolchain.toml"
+      - "renderer/package.json"
+      - "src/**"
+      - "tests/**"
+      - "scripts/release_smoke.py"
+      - "scripts/release_inventory.py"
+      - "scripts/verify_release.py"
+      - "scripts/verify_docs.py"
+      - "CHANGELOG.md"
+      - "SECURITY.md"
+      - "SUPPORT.md"
+      - "docs/releases/**"
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "identity-release-${{ github.ref }}"
+  cancel-in-progress: false
+
+jobs:
+  release-gate:
+    name: Release gate (${{ matrix.platform }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux
+          - os: macos-15
+            platform: macos
+          - os: windows-2025
+            platform: windows
+
+    steps:
+      - name: Checkout Identity
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Install pinned Python runtime
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install "1.97.1" --profile "minimal" --component "clippy,rustfmt"
+
+      - name: Verify release metadata and locked resolution
+        run: |
+          python scripts/verify_release.py --repository-root "."
+          python scripts/verify_docs.py --repository-root "."
+          cargo metadata --locked --format-version "1" --no-deps
+
+      - name: Test the supported source-install path
+        run: |
+          cargo fmt --all --check
+          cargo clippy --locked --all-targets --all-features -- -D warnings
+          cargo test --locked --all-features
+
+      - name: Test source contracts and release tools
+        run: |
+          python -m unittest discover --start-directory tests --pattern "test_*.py" --verbose
+          python scripts/validate_identity.py --repository-root "tests/fixtures/v1/valid/minimal" --format "human"
+          python scripts/verify_extraction.py
+
+      - name: Prove clean-room generation is reproducible
+        run: python scripts/release_smoke.py --repository-root "."
+
+  package-linux:
+    name: Package Linux release artifact
+    needs:
+      - release-gate
+      - validate-renderer
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Checkout Identity
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Install pinned Rust toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install "1.97.1" --profile "minimal"
+
+      - name: Verify exact release tag and build the CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_release.py \
+            --repository-root "." \
+            --tag "${GITHUB_REF_NAME}"
+          cargo build --locked --release
+
+      - name: Generate locked dependency license inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/release_inventory.py \
+            --repository-root "." \
+            --output "dist/identity-${GITHUB_REF_NAME#v}-license-inventory.json"
+
+      - name: Create deterministic Linux archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          mkdir --parents "dist"
+          install --mode "0755" "target/release/identity" "dist/identity"
+          tar \
+            --create \
+            --gzip \
+            --file "dist/identity-${version}-linux-x86_64-gnu.tar.gz" \
+            --directory "dist" \
+            --sort "name" \
+            --mtime "@0" \
+            --owner "0" \
+            --group "0" \
+            --numeric-owner \
+            "identity"
+
+      - name: Generate SPDX software bill of materials
+        uses: anchore/sbom-action@65f438523a6c695224053b36fa18a54cb7026ea3
+        with:
+          path: "."
+          artifact-name: "identity-${{ github.ref_name }}-sbom"
+          output-file: "dist/identity-${{ github.ref_name }}.spdx.json"
+          format: "spdx-json"
+          upload-artifact: false
+          upload-release-assets: false
+
+      - name: Record release checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "dist"
+          sha256sum --binary -- * > "SHA256SUMS"
+
+      - name: Attest Linux archive provenance
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
+        with:
+          subject-path: "dist/*.tar.gz"
+
+      - name: Upload release assets
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: "identity-${{ github.ref_name }}-release-assets"
+          path: "dist/"
+          if-no-files-found: error
+          retention-days: 14
+
+  publish-release:
+    name: Publish GitHub release
+    needs: package-linux
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download verified release assets
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: "identity-${{ github.ref_name }}-release-assets"
+          path: "release-assets"
+
+      - name: Create immutable GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          arguments=(
+            "${GITHUB_REF_NAME}"
+            --verify-tag
+            --title "Identity ${GITHUB_REF_NAME}"
+            --generate-notes
+          )
+          if [[ "${GITHUB_REF_NAME}" == *-* ]]; then
+            arguments+=(--prerelease)
+          fi
+          gh release create "${arguments[@]}" release-assets/*
+
+  validate-renderer:
+    name: Validate public Brand Kit smoke surface
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+
+      - name: Checkout Identity
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: "24"
+
+      - name: Activate pinned pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare "pnpm@11.21.0" --activate
+          pnpm --version
+
+      - name: Install frozen renderer dependencies
+        working-directory: renderer
+        run: pnpm install --frozen-lockfile
+
+      - name: Install pinned Chromium
+        working-directory: renderer
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Validate renderer and browser smoke surface
+        working-directory: renderer
+        run: pnpm run validate
