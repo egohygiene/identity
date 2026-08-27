@@ -16,13 +16,13 @@ use crate::cli::{
     StudioReviewArguments, V1CompilationArguments,
 };
 use crate::compiler::{AdapterRegistry, Compiler, LocalArtifactStore};
-use crate::reference_renderer::{register_reference_renderer_adapter, with_reference_renderer};
-use crate::v1_consumer::V1ConsumerPipeline;
 use crate::contract::{
     ProjectSpec, ResolvedPlan, ValidatedProject, reject_symlink_components, resolve_plan,
     valid_identifier, validate_relative_path, validate_repository,
 };
 use crate::output::render_plan_markdown;
+use crate::reference_renderer::{register_reference_renderer_adapter, with_reference_renderer};
+use crate::v1_consumer::V1ConsumerPipeline;
 
 pub fn init(arguments: &InitArguments) -> Result<()> {
     if !valid_identifier(&arguments.project_id) {
