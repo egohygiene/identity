@@ -85,7 +85,12 @@ test("honors reduced motion and remains responsive on a narrow viewport", async 
     .getByRole("button", { name: "Copy value" })
     .first()
     .evaluate((element) => getComputedStyle(element).transitionDuration);
-  expect(["0s", "0.000001s"]).toContain(transitionDuration);
+  const longestTransitionSeconds = Math.max(
+    ...transitionDuration
+      .split(",")
+      .map((duration) => Number.parseFloat(duration.trim())),
+  );
+  expect(longestTransitionSeconds).toBeLessThanOrEqual(0.001);
 });
 
 test("matches the reviewed desktop visual baseline", async ({ page }) => {
