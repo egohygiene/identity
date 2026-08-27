@@ -53,12 +53,16 @@ The page deliberately labels:
 
 - marks, colors, and typography as **generated previews**;
 - voice and usage as **canonical guidance**;
-- absent motion, imagery, mascot, license, and provenance data as
-  **not declared** instead of inventing content.
+- absent color pairings, type scales, motion, imagery, mascot, license, and
+  provenance data as **not declared** instead of inventing content.
+
+Approved assets expose their format, dimensions, intended use, availability,
+digest, safe zone, license, provenance, approval, and download status.
 
 ## Validation
 
-Vitest covers contract rendering, missing-data states, link/download structure,
-semantic accessibility, and the stable visual hierarchy. Playwright covers
-browser accessibility, keyboard behavior, deep links, real download responses,
-responsive/reduced-motion behavior, and a reviewed full-page screenshot.
+Vitest covers contract rendering, missing-data states, asset metadata,
+route-prefixed links, download structure, semantic accessibility, and the stable
+full-page visual hierarchy. Playwright covers browser accessibility including
+color contrast, keyboard behavior, deep links, real download responses,
+responsive/reduced-motion behavior, and a reviewed desktop viewport screenshot.
