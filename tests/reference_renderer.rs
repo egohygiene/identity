@@ -76,6 +76,14 @@ fn compiler_generates_an_immutable_reference_renderer_view_model() {
     assert_eq!(view_model.support.mascot.status, "not-declared");
     assert_eq!(view_model.assets.len(), 1);
     assert_eq!(
+        view_model.assets[0].dimensions,
+        "64 × 64 SVG viewBox units"
+    );
+    assert_eq!(
+        view_model.assets[0].intended_use,
+        "Primary scalable brand mark for approved product surfaces."
+    );
+    assert_eq!(
         view_model.assets[0].download_path.as_deref(),
         Some("brand/mark.svg")
     );
@@ -112,7 +120,12 @@ fn renderer_fixture_conforms_to_the_rust_contract() {
             .iter()
             .any(|token| token.path == "color.canvas")
     );
-    assert!(model.assets.iter().any(|asset| asset.id == "mark"));
+    assert!(model.assets.iter().any(|asset| {
+        asset.id == "mark"
+            && asset.dimensions == "64 × 64 SVG viewBox units"
+            && asset.intended_use
+                == "Primary scalable brand mark for approved product surfaces."
+    }));
 }
 
 fn generate_view_model(temporary: &TempDir) -> Vec<u8> {
