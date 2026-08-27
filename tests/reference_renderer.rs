@@ -11,13 +11,14 @@ use identity::brandkit::{
 };
 use identity::compiler::{
     AdapterRegistry, Compiler, CompilerResult, IdentityIntent, IdentityReader, IdentityResolver,
-    IdentityValidator, LocalArtifactStore, ResolvedIdentity, ValidationReport, sha256_hex,
+    IdentityValidator, LocalArtifactStore, ResolvedIdentity, ValidationReport,
 };
 use identity::reference_renderer::{
     BRAND_KIT_VIEW_MODEL_SCHEMA, BrandKitViewModel, register_reference_renderer_adapter,
     with_reference_renderer,
 };
 use serde_json::json;
+use sha2::{Digest, Sha256};
 use tempfile::TempDir;
 
 const MARK_SVG: &str = include_str!("fixtures/v1/valid/minimal/.identity/sources/mark.svg");
@@ -290,4 +291,8 @@ fn color_token(components: [f64; 3], source_layer: &str) -> BrandKitToken {
         override_reason: None,
         approval: None,
     }
+}
+
+fn sha256_hex(bytes: &[u8]) -> String {
+    format!("{:x}", Sha256::digest(bytes))
 }
