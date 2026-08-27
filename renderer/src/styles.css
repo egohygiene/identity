@@ -86,6 +86,13 @@ a {
 .studio textarea, .studio__result { inline-size: 100%; border: 1px solid var(--brand-border); border-radius: var(--radius-small); padding: 1rem; background: var(--brand-canvas); color: var(--brand-text); font: 0.9rem/1.5 ui-monospace, monospace; }
 .studio__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .studio__approval { display: flex; gap: 0.65rem; align-items: flex-start; }
+.studio__comparison { display: grid; gap: 1rem; }
+.studio__comparison > h3, .studio__candidate > h4, .studio__surfaces h5 { margin: 0; }
+.studio__candidate { display: grid; gap: 0.75rem; border: 1px solid var(--brand-border); border-radius: var(--radius-small); padding: 1rem; }
+.studio__candidate > p { margin: 0; }
+.studio__surfaces { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; }
+.studio__surfaces section { display: grid; gap: 0.5rem; }
+.studio__surfaces img { inline-size: 100%; min-block-size: 8rem; max-block-size: 16rem; border: 1px solid var(--brand-border); border-radius: var(--radius-small); object-fit: contain; }
 
 a {
   color: inherit;

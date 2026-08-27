@@ -14,7 +14,8 @@ const candidateBundle = {
   schema: "identity.brand-kit-candidate/v1",
   projectId: "example",
   sourceDigest: "sha256:example",
-  candidates: [{ id: "candidate-mark", kind: "mark", provenance: { source: "local" } }],
+  profiles: ["pwa", "social"],
+  candidates: [{ id: "candidate-mark", kind: "mark", state: "candidate", provenance: { source: "local" } }],
 };
 
 describe("candidate studio contract", () => {
@@ -22,6 +23,7 @@ describe("candidate studio contract", () => {
     const inspected = inspectCandidateBundle(candidateBundle, model);
     expect(inspected.errors).toEqual([]);
     expect(inspected.plan.status).toBe("requires-human-approval");
+    expect(inspected.plan.profiles).toEqual(["pwa", "social"]);
     expect(inspected.plan.writes[0].action).toBe("stage-for-compiler-review");
   });
 
@@ -35,5 +37,21 @@ describe("candidate studio contract", () => {
     const plan = inspectCandidateBundle(candidateBundle, model).plan;
     expect(() => createApprovedHandoff(plan, "")).toThrow("Reviewer identity");
     expect(createApprovedHandoff(plan, "reviewer").status).toBe("approved-for-compiler-handoff");
+  });
+
+  test("preserves candidate lifecycle states and rejects unsupported profiles", () => {
+    const historical = {
+      ...candidateBundle,
+      candidates: [
+        { id: "candidate", kind: "mark", state: "candidate", provenance: { source: "local" } },
+        { id: "rejected", kind: "mark", state: "rejected", provenance: { source: "local" } },
+        { id: "superseded", kind: "mark", state: "superseded", provenance: { source: "local" } },
+        { id: "approved", kind: "mark", state: "approved", provenance: { source: "local" } },
+      ],
+    };
+    expect(inspectCandidateBundle(historical, model).errors).toEqual([]);
+    const unsupported = inspectCandidateBundle({ ...candidateBundle, profiles: ["imaginary"] }, model);
+    expect(unsupported.plan).toBeNull();
+    expect(unsupported.errors.join(" ")).toContain("Unsupported deterministic output profile");
   });
 });

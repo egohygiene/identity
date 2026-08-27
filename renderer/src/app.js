@@ -143,14 +143,20 @@ export function BrandKitPage({ model, assetBaseUrl = "./" }) {
 function StudioSection({ model }) {
   return h(Section, { id: "studio", title: "Review candidate assets" },
     h("div", { className: "panel studio", "data-studio": true, "data-project-id": model.projectId, "data-source-digest": model.release.sourceDigest },
-      h("p", null, "Import a portable candidate bundle to preview its deterministic compiler handoff. Previewing never writes canonical or generated files."),
+      h("p", null, "Import a portable candidate bundle to compare local candidates against the immutable approved release. Previewing never writes canonical or generated files."),
+      h("label", { htmlFor: "candidate-bundle-file" }, "Import candidate bundle"),
+      h("input", { id: "candidate-bundle-file", type: "file", accept: "application/json", "data-studio-import": true }),
       h("label", { htmlFor: "candidate-bundle" }, "Candidate bundle JSON"),
-      h("textarea", { id: "candidate-bundle", rows: 8, spellCheck: false, placeholder: '{ "schema": "identity.brand-kit-candidate/v1", ... }' }),
+      h("textarea", { id: "candidate-bundle", rows: 12, spellCheck: false, placeholder: '{ "schema": "identity.brand-kit-candidate/v1", "profiles": ["social"], ... }' }),
       h("div", { className: "studio__actions" },
         h("button", { className: "button button--secondary", type: "button", "data-studio-preview": true }, "Validate and preview plan"),
-        h("button", { className: "button", type: "button", disabled: true, "data-studio-export": true }, "Export approved handoff")),
+        h("button", { className: "button button--secondary", type: "button", disabled: true, "data-studio-export-bundle": true }, "Export review bundle")),
       h("pre", { className: "studio__result", "data-studio-result": true, "aria-live": "polite" }, "No candidate bundle has been loaded."),
+      h("div", { className: "studio__comparison", "data-studio-comparison": true, "aria-live": "polite" }, "No candidate comparison is available."),
+      h("label", { htmlFor: "studio-reviewer" }, "Reviewer identity"),
+      h("input", { id: "studio-reviewer", type: "text", autoComplete: "name", "data-studio-reviewer": true }),
       h("label", { className: "studio__approval" }, h("input", { type: "checkbox", "data-studio-approval": true }), "I reviewed this plan and authorize a compiler handoff. This does not write files or publish assets."),
+      h("button", { className: "button", type: "button", disabled: true, "data-studio-export": true }, "Export approved handoff"),
     ));
 }
 
