@@ -256,7 +256,7 @@ fn v1_request(
 }
 
 fn compiler_error(error: crate::compiler::CompilerError) -> anyhow::Error {
-    anyhow::Error::msg(error.to_string())
+    anyhow::Error::new(error)
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

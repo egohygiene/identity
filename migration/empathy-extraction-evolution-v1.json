@@ -12,7 +12,7 @@
     {
       "destination": "src/commands.rs",
       "baseline_sha256": "01f0fe85a4fa1fa3c09db4db237b087912f8e73fe4d536cc24a87a56dbb87c32",
-      "current_sha256": "54062bb24e46d3b9118ae3e065d21e6c05c8cbc01f002e1a41f13ccede57310b",
+      "current_sha256": "d85b2e12dc30faaa5a26b5c95250bf8e3e7bdc62a00f7e655b6463f3dbb1764a",
       "issue": "https://github.com/egohygiene/identity/issues/17",
       "reason": "Wire the reusable v1 consumer source adapter into the compiler and reference renderer, keeping generation transactional and verification read-only at the immutable consumer boundary."
     },
