@@ -38,9 +38,20 @@ describe("BrandKitPage", () => {
       }),
     );
 
-    expect(sections).toEqual(
-      SECTION_DEFINITIONS.map(([id, heading]) => ({ id, heading })),
+    expect(sections.map(({ id }) => id)).toEqual(
+      SECTION_DEFINITIONS.map(([id]) => id),
     );
+    expect(sections.map(({ heading }) => heading)).toEqual([
+      "Overview and version",
+      "Logo and marks",
+      "Color palette and approved pairings",
+      "Typography and type scale",
+      "Voice and personality",
+      "Usage rules",
+      "Motion, imagery, and mascot guidance",
+      "Downloads and package installation",
+      "Provenance, licenses, changelog, and support",
+    ]);
     expect(document.querySelector("h1")?.textContent).toBe("Example Product");
     expect(document.body.textContent).not.toContain("Ego Hygiene");
   });
@@ -111,10 +122,13 @@ describe("BrandKitPage", () => {
         assetBaseUrl: "./",
       }),
     );
-    const dom = new JSDOM(`<!doctype html><html lang="en"><body>${markup}</body></html>`, {
-      runScripts: "outside-only",
-      url: "https://identity.invalid/",
-    });
+    const dom = new JSDOM(
+      `<!doctype html><html lang="en"><head><title>Example Product Brand Kit</title></head><body>${markup}</body></html>`,
+      {
+        runScripts: "outside-only",
+        url: "https://identity.invalid/",
+      },
+    );
     dom.window.eval(axe.source);
     const results = await dom.window.axe.run(dom.window.document, {
       rules: {
@@ -193,7 +207,10 @@ function renderDocument(model) {
       assetBaseUrl: "./",
     }),
   );
-  return new JSDOM(`<!doctype html><html lang="en"><body>${markup}</body></html>`, {
-    url: "https://identity.invalid/",
-  }).window.document;
+  return new JSDOM(
+    `<!doctype html><html lang="en"><head><title>Example Product Brand Kit</title></head><body>${markup}</body></html>`,
+    {
+      url: "https://identity.invalid/",
+    },
+  ).window.document;
 }
