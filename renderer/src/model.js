@@ -95,11 +95,14 @@ export function sourceDataUrl(asset) {
 }
 
 export function joinAssetUrl(assetBaseUrl, relativePath) {
-  const normalizedBase = assetBaseUrl.endsWith("/")
-    ? assetBaseUrl
-    : `${assetBaseUrl}/`;
-  return new URL(relativePath, new URL(normalizedBase, "https://identity.invalid/"))
-    .pathname;
+  const normalizedPath = relativePath.replace(/^\/+/, "");
+  const normalizedBase = ensureTrailingSlash(assetBaseUrl || "./");
+
+  if (/^https?:\/\//u.test(normalizedBase)) {
+    return new URL(normalizedPath, normalizedBase).toString();
+  }
+
+  return `${normalizedBase}${normalizedPath}`;
 }
 
 export function deriveThemeVariables(model) {
@@ -135,6 +138,10 @@ export function statusLabel(status) {
     default:
       return "Not declared";
   }
+}
+
+function ensureTrailingSlash(value) {
+  return value.endsWith("/") ? value : `${value}/`;
 }
 
 function fontFamilyValue(value) {
