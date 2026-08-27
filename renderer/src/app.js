@@ -104,6 +104,7 @@ export function BrandKitPage({ model, assetBaseUrl = "./" }) {
           guidance: model.guidance.usage,
         }),
         h(CreativeDirectionSection, { support: model.support }),
+        h(StudioSection, { model }),
         h(DownloadsSection, {
           packages: model.packages,
           assetBaseUrl,
@@ -137,6 +138,20 @@ export function BrandKitPage({ model, assetBaseUrl = "./" }) {
       "Copy controls are ready.",
     ),
   );
+}
+
+function StudioSection({ model }) {
+  return h(Section, { id: "studio", title: "Review candidate assets" },
+    h("div", { className: "panel studio", "data-studio": true, "data-project-id": model.projectId, "data-source-digest": model.release.sourceDigest },
+      h("p", null, "Import a portable candidate bundle to preview its deterministic compiler handoff. Previewing never writes canonical or generated files."),
+      h("label", { htmlFor: "candidate-bundle" }, "Candidate bundle JSON"),
+      h("textarea", { id: "candidate-bundle", rows: 8, spellCheck: false, placeholder: '{ "schema": "identity.brand-kit-candidate/v1", ... }' }),
+      h("div", { className: "studio__actions" },
+        h("button", { className: "button button--secondary", type: "button", "data-studio-preview": true }, "Validate and preview plan"),
+        h("button", { className: "button", type: "button", disabled: true, "data-studio-export": true }, "Export approved handoff")),
+      h("pre", { className: "studio__result", "data-studio-result": true, "aria-live": "polite" }, "No candidate bundle has been loaded."),
+      h("label", { className: "studio__approval" }, h("input", { type: "checkbox", "data-studio-approval": true }), "I reviewed this plan and authorize a compiler handoff. This does not write files or publish assets."),
+    ));
 }
 
 function SkipLink() {

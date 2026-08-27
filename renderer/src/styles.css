@@ -82,6 +82,11 @@ a {
   font: inherit;
 }
 
+.studio { display: grid; gap: 1rem; }
+.studio textarea, .studio__result { inline-size: 100%; border: 1px solid var(--brand-border); border-radius: var(--radius-small); padding: 1rem; background: var(--brand-canvas); color: var(--brand-text); font: 0.9rem/1.5 ui-monospace, monospace; }
+.studio__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.studio__approval { display: flex; gap: 0.65rem; align-items: flex-start; }
+
 a {
   color: inherit;
   text-underline-offset: 0.2em;
