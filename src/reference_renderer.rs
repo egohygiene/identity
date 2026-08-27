@@ -14,9 +14,9 @@ use serde_json::Value;
 use crate::brandkit::{BrandKitLicense, BrandKitModel, BrandKitOrigin};
 use crate::compiler::{
     AdapterDescriptor, AdapterKind, AdapterPlan, AdapterRegistry, COMPILER_API_MAJOR,
-    CompilerError, CompilerRequest, CompilerResult, Diagnostic, DiagnosticSeverity,
-    EvidenceRecord, EvidenceStatus, FailureKind, ProjectionAdapter, ProjectionTarget,
-    ResolvedIdentity, VerificationReport,
+    CompilerError, CompilerRequest, CompilerResult, Diagnostic, DiagnosticSeverity, EvidenceRecord,
+    EvidenceStatus, FailureKind, ProjectionAdapter, ProjectionTarget, ResolvedIdentity,
+    VerificationReport,
 };
 
 pub const BRAND_KIT_VIEW_MODEL_SCHEMA: &str = "identity.brand-kit-view-model/v1";
@@ -24,8 +24,7 @@ pub const REFERENCE_RENDERER_PROFILE_VERSION: &str = "1.0.0";
 
 const REFERENCE_RENDERER_ADAPTER_ID: &str = "identity-reference-renderer-model";
 const REFERENCE_RENDERER_ADAPTER_VERSION: &str = "1.0.0";
-const REFERENCE_RENDERER_OUTPUT_PATH: &str =
-    "packages/renderer/brand-kit.view-model.json";
+const REFERENCE_RENDERER_OUTPUT_PATH: &str = "packages/renderer/brand-kit.view-model.json";
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -189,11 +188,7 @@ impl BrandKitViewModel {
             },
             support: BrandKitViewSupport {
                 motion: BrandKitViewSupportSection {
-                    status: if model
-                        .tokens
-                        .keys()
-                        .any(|path| path.starts_with("motion."))
-                    {
+                    status: if model.tokens.keys().any(|path| path.starts_with("motion.")) {
                         "declared".to_owned()
                     } else {
                         "not-declared".to_owned()
@@ -237,9 +232,7 @@ pub fn with_reference_renderer(mut request: CompilerRequest) -> CompilerRequest 
     request
 }
 
-pub fn register_reference_renderer_adapter(
-    registry: &mut AdapterRegistry,
-) -> CompilerResult<()> {
+pub fn register_reference_renderer_adapter(registry: &mut AdapterRegistry) -> CompilerResult<()> {
     registry.register(ReferenceRendererAdapter)
 }
 
@@ -304,19 +297,16 @@ impl ProjectionAdapter for ReferenceRendererAdapter {
         target: &ProjectionTarget,
         bytes: &[u8],
     ) -> CompilerResult<VerificationReport> {
-        let view_model =
-            serde_json::from_slice::<BrandKitViewModel>(bytes).map_err(|error| {
-                renderer_error(
-                    &target.relative_path,
-                    format!("renderer view model is not valid contract JSON: {error}"),
-                )
-            })?;
+        let view_model = serde_json::from_slice::<BrandKitViewModel>(bytes).map_err(|error| {
+            renderer_error(
+                &target.relative_path,
+                format!("renderer view model is not valid contract JSON: {error}"),
+            )
+        })?;
         if view_model.schema != BRAND_KIT_VIEW_MODEL_SCHEMA {
             return Err(renderer_error(
                 &target.relative_path,
-                format!(
-                    "renderer view model schema must be {BRAND_KIT_VIEW_MODEL_SCHEMA:?}"
-                ),
+                format!("renderer view model schema must be {BRAND_KIT_VIEW_MODEL_SCHEMA:?}"),
             ));
         }
         if view_model.project_id != identity.project_id
@@ -372,10 +362,7 @@ fn humanize_identifier(value: &str) -> String {
             let Some(first) = characters.next() else {
                 return String::new();
             };
-            first
-                .to_uppercase()
-                .chain(characters)
-                .collect::<String>()
+            first.to_uppercase().chain(characters).collect::<String>()
         })
         .collect::<Vec<_>>()
         .join(" ")
