@@ -46,7 +46,8 @@ The view model contains only public, approved, renderer-relevant projections:
 - project display metadata;
 - immutable release and source digests;
 - ordered semantic tokens with lineage and approvals;
-- approved source assets with optional license/provenance records;
+- approved source assets with format, dimensions, intended use, download status,
+  and optional license/provenance records;
 - canonical voice and usage guidance with explicit declaration status;
 - explicit motion, imagery, and mascot support status;
 - versioned package/download paths.
@@ -96,8 +97,9 @@ The renderer labels generated marks, colors, and typography as
 **Generated preview**. It labels voice and usage as **Canonical guidance**.
 
 A required section whose data is absent remains visible and reports
-**Not declared** or **Unsupported**. The renderer never fabricates examples,
-licenses, provenance, motion rules, imagery direction, or mascot guidance.
+**Not declared** or **Unsupported**. This includes undeclared color pairings,
+type scales, motion rules, imagery direction, and mascot guidance. The renderer
+never fabricates examples, licenses, provenance, or creative rules.
 
 ## Theming
 
@@ -122,10 +124,10 @@ The v1 validation suite includes:
 - Rust compiler generation, strict deserialization, digest matching, and
   cross-repository byte identity;
 - fixture contract parsing;
-- semantic and automated accessibility checks;
+- semantic and automated accessibility checks, including browser color contrast;
 - explicit missing-data tests;
 - link and real download-response tests;
 - keyboard copy/theme interaction tests;
-- responsive and reduced-motion tests;
-- deterministic visual hierarchy assertions;
-- a reviewed Playwright full-page screenshot baseline.
+- route-prefix, responsive, and reduced-motion tests;
+- deterministic full-page visual hierarchy assertions;
+- a reviewed Playwright desktop viewport screenshot baseline.
