@@ -21,7 +21,7 @@
             "visibility": "public",
             "provenance": {
               "method": "human-authored",
-              "source": ".identity/governance/provenance.json#primary-mark",
+              "source": ".identity/governance/provenance.json#mark",
               "capturedAt": "2026-08-21T12:15:00Z"
             },
             "approval": "approve-usage-core"
@@ -41,7 +41,7 @@
             "visibility": "public",
             "provenance": {
               "method": "human-authored",
-              "source": ".identity/governance/provenance.json#primary-mark",
+              "source": ".identity/governance/provenance.json#mark",
               "capturedAt": "2026-08-21T12:15:00Z"
             },
             "approval": "approve-usage-core"
@@ -206,7 +206,7 @@
   ],
   "assets": [
     {
-      "id": "primary-mark",
+      "id": "mark",
       "label": "Primary mark",
       "kind": "mark",
       "path": ".identity/sources/mark.svg",
@@ -216,12 +216,12 @@
       "downloadName": "example-product-mark.svg",
       "notes": "Approved for current product, documentation, and repository use.",
       "governance": {
-        "subject": "primary-mark",
+        "subject": "mark",
         "state": "approved",
         "visibility": "public",
         "provenance": {
           "method": "human-authored",
-          "source": ".identity/governance/provenance.json#primary-mark",
+          "source": ".identity/governance/provenance.json#mark",
           "capturedAt": "2026-08-21T12:00:00Z"
         },
         "approval": "approve-primary-mark"
@@ -234,7 +234,7 @@
       "path": ".identity/sources/legacy-wordmark.svg",
       "status": "legacy",
       "availability": "internal",
-      "replacement": "primary-mark",
+      "replacement": "mark",
       "downloadName": null,
       "notes": "Retained for historical migrations only; do not use in new work.",
       "governance": {

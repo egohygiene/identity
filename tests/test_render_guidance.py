@@ -104,14 +104,14 @@ class BrandGuidanceRendererTests(unittest.TestCase):
 
     def test_download_and_legacy_policy_are_separate(self) -> None:
         model = renderer.build_view_model(VALID_FIXTURE)
-        self.assertEqual([item["id"] for item in model["downloads"]], ["primary-mark"])
+        self.assertEqual([item["id"] for item in model["downloads"]], ["mark"])
         self.assertEqual(
             [item["id"] for item in model["legacyAssets"]],
             ["legacy-wordmark"],
         )
         legacy = model["legacyAssets"][0]
         self.assertEqual(legacy["availability"], "internal")
-        self.assertEqual(legacy["replacement"], "primary-mark")
+        self.assertEqual(legacy["replacement"], "mark")
         self.assertIsNone(legacy["downloadName"])
 
     def test_rendering_does_not_mutate_canonical_sources(self) -> None:

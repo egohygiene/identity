@@ -312,7 +312,7 @@
       "reviewedAt": "2026-08-21T12:00:00Z",
       "reviewedBy": "example-maintainer",
       "status": "approved",
-      "subject": "primary-mark",
+      "subject": "mark",
       "supersedes": null
     },
     {
@@ -399,7 +399,7 @@
         "provenance": {
           "capturedAt": "2026-08-21T12:15:00Z",
           "method": "human-authored",
-          "source": ".identity/governance/provenance.json#primary-mark"
+          "source": ".identity/governance/provenance.json#mark"
         },
         "state": "approved",
         "subject": "usage:core-guidance",
@@ -424,7 +424,7 @@
         "provenance": {
           "capturedAt": "2026-08-21T12:15:00Z",
           "method": "human-authored",
-          "source": ".identity/governance/provenance.json#primary-mark"
+          "source": ".identity/governance/provenance.json#mark"
         },
         "state": "approved",
         "subject": "usage:core-guidance",
@@ -627,13 +627,13 @@
         "provenance": {
           "capturedAt": "2026-08-21T12:00:00Z",
           "method": "human-authored",
-          "source": ".identity/governance/provenance.json#primary-mark"
+          "source": ".identity/governance/provenance.json#mark"
         },
         "state": "approved",
-        "subject": "primary-mark",
+        "subject": "mark",
         "visibility": "public"
       },
-      "id": "primary-mark",
+      "id": "mark",
       "kind": "mark",
       "label": "Primary mark",
       "notes": "Approved for current product, documentation, and repository use.",
@@ -688,7 +688,7 @@
       "label": "Legacy wordmark",
       "notes": "Retained for historical migrations only; do not use in new work.",
       "path": ".identity/sources/legacy-wordmark.svg",
-      "replacement": "primary-mark",
+      "replacement": "mark",
       "status": "legacy"
     }
   ],
@@ -770,7 +770,7 @@
             "provenance": {
               "capturedAt": "2026-08-21T12:15:00Z",
               "method": "human-authored",
-              "source": ".identity/governance/provenance.json#primary-mark"
+              "source": ".identity/governance/provenance.json#mark"
             },
             "state": "approved",
             "subject": "usage:core-guidance",
@@ -795,7 +795,7 @@
             "provenance": {
               "capturedAt": "2026-08-21T12:15:00Z",
               "method": "human-authored",
-              "source": ".identity/governance/provenance.json#primary-mark"
+              "source": ".identity/governance/provenance.json#mark"
             },
             "state": "approved",
             "subject": "usage:core-guidance",
