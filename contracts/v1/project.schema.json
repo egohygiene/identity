@@ -56,6 +56,15 @@
             "voice": { "$ref": "#/$defs/optionalRelativePath" },
             "usage": { "$ref": "#/$defs/optionalRelativePath" }
           }
+        },
+        "handbook": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["designSystem", "references"],
+          "properties": {
+            "designSystem": { "$ref": "#/$defs/relativePath" },
+            "references": { "$ref": "#/$defs/relativePath" }
+          }
         }
       }
     },

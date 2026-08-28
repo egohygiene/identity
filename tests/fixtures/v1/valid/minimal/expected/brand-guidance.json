@@ -272,6 +272,28 @@
   ],
   "decisions": [
     {
+      "candidate": ".identity/guidance/design-system.json",
+      "evidence": "https://example.invalid/reviews/design-system-foundations",
+      "id": "approve-design-system-foundations",
+      "notes": "Approved design-system principles and capability boundaries.",
+      "reviewedAt": "2026-08-22T10:00:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "design-system:foundations",
+      "supersedes": null
+    },
+    {
+      "candidate": "https://www.greptile.com/design",
+      "evidence": "https://example.invalid/reviews/greptile-design-reference",
+      "id": "approve-greptile-design-reference",
+      "notes": "Approved as a pattern-study record only; no third-party assets are imported.",
+      "reviewedAt": "2026-08-22T10:05:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "reference:greptile-design",
+      "supersedes": null
+    },
+    {
       "candidate": ".identity/sources/legacy-wordmark.svg",
       "evidence": "https://example.invalid/reviews/legacy-wordmark-source",
       "id": "approve-legacy-wordmark-source",

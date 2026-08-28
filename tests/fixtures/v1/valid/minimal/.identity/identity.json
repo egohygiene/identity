@@ -32,6 +32,10 @@
     "guidance": {
       "voice": ".identity/guidance/voice.json",
       "usage": ".identity/guidance/usage.json"
+    },
+    "handbook": {
+      "designSystem": ".identity/guidance/design-system.json",
+      "references": ".identity/guidance/design-references.json"
     }
   },
   "directories": {

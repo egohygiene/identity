@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../../../../contracts/v1/design-references.schema.json",
+  "schema": "identity.design-reference-catalog/v1",
+  "references": [
+    {
+      "id": "greptile-design",
+      "url": "https://www.greptile.com/design",
+      "capturedAt": "2026-08-22T10:05:00Z",
+      "patterns": [
+        "Concise public guidance that combines visual assets, typography, color, and usage context.",
+        "Clear presentation of downloadable approved assets without making a website the source of truth."
+      ],
+      "decision": "adapt",
+      "notes": "Study the information architecture only. Identity keeps its source, renderer, accessibility, and provenance contracts independent.",
+      "rights": "Do not copy, download, redistribute, or imply permission to use Greptile trademarks, assets, or proprietary copy.",
+      "affectsCanonical": false,
+      "governance": {
+        "subject": "reference:greptile-design",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": "https://www.greptile.com/design",
+          "capturedAt": "2026-08-22T10:05:00Z"
+        },
+        "approval": "approve-greptile-design-reference"
+      }
+    }
+  ]
+}
