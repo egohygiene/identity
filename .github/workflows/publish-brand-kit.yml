@@ -6,6 +6,14 @@
 name: Publish Identity Brand Kit
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish-brand-kit.yml"
+      - "publication/**"
+      - "renderer/**"
+      - "scripts/package_public_brand_kit.py"
   release:
     types:
       - published
@@ -16,11 +24,6 @@ on:
         required: true
         default: "v1.0.0"
         type: string
-      verify_canonical_domain:
-        description: "Verify identity.egohygiene.io after Pages deploys"
-        required: true
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -36,7 +39,7 @@ jobs:
   build:
     name: Build immutable public Brand Kit
     if: >-
-      github.event_name == 'workflow_dispatch' ||
+      github.event_name != 'release' ||
       (!github.event.release.draft && !github.event.release.prerelease)
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -65,33 +68,51 @@ jobs:
         id: release
         env:
           GH_TOKEN: ${{ github.token }}
-          REQUESTED_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag }}
+          EVENT_NAME: ${{ github.event_name }}
+          RELEASE_EVENT_TAG: ${{ github.event.release.tag_name }}
+          MANUAL_RELEASE_TAG: ${{ inputs.release_tag }}
         shell: bash
         run: |
           set -euo pipefail
 
-          if [[ ! "${REQUESTED_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          case "${EVENT_NAME}" in
+            "release")
+              requested_tag="${RELEASE_EVENT_TAG}"
+              ;;
+            "workflow_dispatch")
+              requested_tag="${MANUAL_RELEASE_TAG}"
+              ;;
+            "push")
+              requested_tag="$(jq --raw-output '.release.defaultTag' "publication/identity-brand-kit.config.json")"
+              ;;
+            *)
+              echo "::error::Unsupported Pages publication event: ${EVENT_NAME}"
+              exit 1
+              ;;
+          esac
+
+          if [[ ! "${requested_tag}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "::error::Only stable semantic-version Identity releases may publish the public Brand Kit."
             exit 1
           fi
 
-          release="$(gh release view "${REQUESTED_TAG}" --json "isDraft,isPrerelease,url")"
+          release="$(gh release view "${requested_tag}" --json "isDraft,isPrerelease,url")"
           if [[ "$(jq --raw-output '.isDraft' <<<"${release}")" != "false" || "$(jq --raw-output '.isPrerelease' <<<"${release}")" != "false" ]]; then
-            echo "::error::${REQUESTED_TAG} is not a published stable GitHub release."
+            echo "::error::${requested_tag} is not a published stable GitHub release."
             exit 1
           fi
 
-          git fetch --force --tags origin "refs/tags/${REQUESTED_TAG}:refs/tags/${REQUESTED_TAG}"
-          if [[ "$(git cat-file --batch-check="%(objecttype)" <<<"${REQUESTED_TAG}")" != "tag" ]]; then
-            echo "::error::${REQUESTED_TAG} must be an annotated Git tag."
+          git fetch --force --tags origin "refs/tags/${requested_tag}:refs/tags/${requested_tag}"
+          if [[ "$(git cat-file --batch-check="%(objecttype)" <<<"${requested_tag}")" != "tag" ]]; then
+            echo "::error::${requested_tag} must be an annotated Git tag."
             exit 1
           fi
 
-          release_commit="$(git rev-parse "${REQUESTED_TAG}^{}")"
+          release_commit="$(git rev-parse "${requested_tag}^{}")"
           release_source="${RUNNER_TEMP}/identity-release-source"
           git worktree add --detach "${release_source}" "${release_commit}"
 
-          echo "tag=${REQUESTED_TAG}" >> "${GITHUB_OUTPUT}"
+          echo "tag=${requested_tag}" >> "${GITHUB_OUTPUT}"
           echo "commit=${release_commit}" >> "${GITHUB_OUTPUT}"
           echo "source=${release_source}" >> "${GITHUB_OUTPUT}"
 
@@ -166,45 +187,53 @@ jobs:
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
 
       - name: Verify the configured canonical domain
-        if: >-
-          github.event_name == 'workflow_dispatch' &&
-          inputs.verify_canonical_domain
         env:
           EXPECTED_RELEASE_TAG: ${{ needs.build.outputs.release_tag }}
+          EXPECTED_RELEASE_COMMIT: ${{ needs.build.outputs.release_commit }}
         shell: bash
         run: |
           set -euo pipefail
 
-          for attempt in {1..12}; do
+          verification_directory="$(mktemp --directory)"
+          trap 'rm --force --recursive "${verification_directory}"' EXIT
+          site_json="${verification_directory}/site.json"
+          page_html="${verification_directory}/index.html"
+
+          for attempt in {1..30}; do
             if curl \
               --fail \
               --location \
+              --max-time 30 \
               --proto "=https" \
               --proto-redir "=https" \
               --retry 2 \
               --retry-all-errors \
               --show-error \
               --silent \
-              --output "site.json" \
+              --output "${site_json}" \
               "${CANONICAL_URL}site.json?release=${EXPECTED_RELEASE_TAG}"
             then
-              if [[ "$(jq --raw-output '.release.tag' "site.json")" == "${EXPECTED_RELEASE_TAG}" ]]; then
+              if [[ "$(jq --raw-output '.release.tag' "${site_json}")" == "${EXPECTED_RELEASE_TAG}" && "$(jq --raw-output '.release.commit' "${site_json}")" == "${EXPECTED_RELEASE_COMMIT}" ]]; then
                 break
               fi
             fi
-            rm --force "site.json"
+            rm --force "${site_json}"
             sleep 10
           done
 
-          test -f "site.json"
-          test "$(jq --raw-output '.canonicalUrl' "site.json")" = "${CANONICAL_URL}"
-          test "$(jq --raw-output '.release.tag' "site.json")" = "${EXPECTED_RELEASE_TAG}"
+          test -s "${site_json}"
+          test "$(jq --raw-output '.canonicalUrl' "${site_json}")" = "${CANONICAL_URL}"
+          test "$(jq --raw-output '.release.tag' "${site_json}")" = "${EXPECTED_RELEASE_TAG}"
+          test "$(jq --raw-output '.release.commit' "${site_json}")" = "${EXPECTED_RELEASE_COMMIT}"
           curl \
             --fail \
             --location \
+            --max-time 30 \
             --proto "=https" \
             --proto-redir "=https" \
             --show-error \
             --silent \
-            "${CANONICAL_URL}" \
-            | rg --fixed-strings "${CANONICAL_URL}" >/dev/null
+            --output "${page_html}" \
+            "${CANONICAL_URL}"
+          grep --fixed-strings --quiet "${CANONICAL_URL}" "${page_html}"
+          grep --fixed-strings --quiet "Release ${EXPECTED_RELEASE_TAG#v}" "${page_html}"
