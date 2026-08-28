@@ -4,12 +4,13 @@
   "title": "Identity v1 generated design-system handbook",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "project", "source", "inheritance", "sections", "capabilities", "references"],
+  "required": ["schema", "project", "source", "inheritance", "profiles", "sections", "capabilities", "references"],
   "properties": {
     "schema": { "const": "identity.design-system-handbook/v1" },
     "project": { "$ref": "#/$defs/project" },
     "source": { "$ref": "#/$defs/source" },
     "inheritance": { "$ref": "#/$defs/inheritance" },
+    "profiles": { "type": "array", "items": { "$ref": "#/$defs/profile" } },
     "sections": { "type": "array", "items": { "$ref": "#/$defs/section" } },
     "capabilities": { "type": "array", "items": { "$ref": "#/$defs/capability" } },
     "references": { "type": "array", "items": { "$ref": "#/$defs/reference" } }
@@ -57,6 +58,15 @@
         "approval": { "type": "string", "minLength": 1 }
       }
     },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      }
+    },
     "section": {
       "type": "object",
       "additionalProperties": false,
@@ -87,7 +97,7 @@
       "required": ["id", "kind", "status", "content", "rationale", "sourceLayer"],
       "properties": {
         "id": { "type": "string", "minLength": 1 },
-        "kind": { "enum": ["token", "voice", "usage", "asset", "accessibility", "legal"] },
+        "kind": { "enum": ["token", "voice", "usage", "asset", "accessibility", "legal", "profile"] },
         "status": { "enum": ["declared", "not-declared", "unsupported"] },
         "content": {},
         "rationale": { "type": "string", "minLength": 1 },
@@ -113,6 +123,7 @@
       "properties": {
         "id": { "type": "string", "minLength": 1 },
         "url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "capturedAt": { "type": "string", "format": "date-time" },
         "patterns": { "type": "array", "items": { "type": "string", "minLength": 1 } },
         "decision": { "enum": ["adopt", "adapt", "reject", "observe"] },
         "notes": { "type": "string", "minLength": 1 },
