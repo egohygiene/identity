@@ -25,7 +25,7 @@ consumer repository.
 2. Run `python3 scripts/verify_release.py --repository-root "."` and the full
    validation suite before tagging.
 3. Create an annotated, immutable tag named exactly `v<package-version>`.
-   Example: `v1.0.0-rc.1` for package version `1.0.0-rc.1`.
+   Example: `v1.0.0-rc.2` for package version `1.0.0-rc.2`.
 4. Push the tag. The release workflow validates the exact tag/version pairing,
    builds the Linux archive, creates an SPDX SBOM, a locked-dependency license
    inventory, and checksums, attests the archive, and creates the GitHub
