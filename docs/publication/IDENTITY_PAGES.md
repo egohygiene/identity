@@ -57,24 +57,29 @@ paths outside `assets/identity/`, and invalid release-commit identifiers.
 ## Deployment
 
 `Publish Identity Brand Kit` runs whenever GitHub publishes a stable Identity
-release. It checks out the Pages publisher from `main`, creates a detached
-worktree at the released annotated tag, and builds the Pages artifact from that
-immutable worktree.
+release and after a relevant merge to `main` (the public-site publisher,
+publication configuration, renderer, or package generator). It checks out the
+Pages publisher from `main`, creates a detached worktree at the selected
+annotated stable tag, and builds the Pages artifact from that immutable
+worktree.
 
-The existing `v1.0.0` release predates this workflow. After the workflow PR is
-merged, run it once from the Actions tab with:
+Every deployment waits for the HTTPS canonical `site.json` to report the
+selected release tag and commit, then checks the canonical page metadata. A
+failed live-domain proof fails the deployment workflow rather than silently
+leaving a stale or misrouted site in place.
 
-- `release_tag`: `v1.0.0`
-- `verify_canonical_domain`: `false` until GitHub reports that DNS and HTTPS are
-  active for `identity.egohygiene.io`.
+The existing `v1.0.0` release predates this workflow. Merging the publisher
+enables the first deployment automatically: the `main` trigger reads
+`publication/identity-brand-kit.config.json` and selects its recorded stable
+release (`v1.0.0`).
 
 GitHub Pages must use **GitHub Actions** as its source. The published artifact
 contains `CNAME` with exactly `identity.egohygiene.io`; repository settings own
 the domain association and certificate issuance.
 
-Once GitHub has completed DNS verification and enabled HTTPS, run the workflow
-again with `verify_canonical_domain` enabled. That final step verifies the live
-canonical `site.json` and page content against the selected release tag.
+Use a manual dispatch only for recovery or rollback: select an earlier stable,
+published, annotated tag and the workflow deploys and verifies it exactly like
+an automatic run.
 
 ## Rollback and update
 
