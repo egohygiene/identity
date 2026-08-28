@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-20
+updated: 2026-08-28
 governed_by:
   - architecture-decisions
 depends_on:
@@ -57,6 +57,7 @@ the decision changes materially.
 - [ADR-012: Use local, layered Identity v1 source contracts](docs/decisions/ADR-012-local-layered-identity-v1.md)
 - [ADR-013: Preserve guidance lifecycle state in every projection](docs/decisions/ADR-013-preserve-guidance-lifecycle.md)
 - [ADR-014: Keep design-system handbooks as governed projections](docs/decisions/ADR-014-design-system-projection-boundary.md)
+- [ADR-015: Keep Press Kits as governed public projections](docs/decisions/ADR-015-press-kit-projection-boundary.md)
 
 ## ADR-001: Keep creative approval human-owned
 

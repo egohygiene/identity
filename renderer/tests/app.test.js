@@ -39,7 +39,9 @@ describe("BrandKitPage", () => {
     );
 
     expect(sections.map(({ id }) => id)).toEqual(
-      SECTION_DEFINITIONS.filter(([id]) => id !== "design-system").map(
+      SECTION_DEFINITIONS.filter(
+        ([id]) => id !== "design-system" && id !== "press-kit",
+      ).map(
         ([id]) => id,
       ),
     );

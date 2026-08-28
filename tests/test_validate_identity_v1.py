@@ -176,6 +176,9 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "design-system.schema.json",
                 "diagnostics.schema.json",
                 "motion-policy.schema.json",
+                "press-kit-package.schema.json",
+                "press-kit-projection.schema.json",
+                "press-kit.schema.json",
                 "project.schema.json",
                 "quality-report.schema.json",
                 "provenance.schema.json",
@@ -209,6 +212,18 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["design-context.schema.json"]["properties"]["schema"]["const"],
             "identity.design-context/v1",
+        )
+        self.assertEqual(
+            schemas["press-kit.schema.json"]["properties"]["schema"]["const"],
+            validator.PRESS_KIT_SOURCE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["press-kit-projection.schema.json"]["properties"]["schema"]["const"],
+            "identity.press-kit/v1",
+        )
+        self.assertEqual(
+            schemas["press-kit-package.schema.json"]["properties"]["schema"]["const"],
+            "identity.press-kit-package/v1",
         )
         self.assertEqual(
             schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],

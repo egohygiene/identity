@@ -156,6 +156,24 @@ and refuses to write beneath canonical `.identity/`. The
 lifecycle, context retrieval, deterministic JSON/Markdown/HTML outputs, and
 legacy-asset publication policy.
 
+## Press and Media Kits
+
+Consumers can opt into a governed Press Kit source without making publication
+or deployment part of their canonical identity contract. Identity projects only
+approved public boilerplate, facts, links, contacts, supplied team biographies,
+and explicitly selected approved assets into a deterministic package:
+
+```bash
+python3 scripts/render_press_kit.py \
+  --repository-root "path/to/consumer" \
+  --output-directory "assets/identity/press-kit"
+```
+
+The output includes JSON, Markdown, an integrity manifest, checksums, selected
+assets, and a deterministic ZIP. It is ready for a consumer-owned release or
+site deployment step, but does not publish anything itself. See the
+[Press Kit and Media Kit contract](docs/contracts/PRESS_KIT_V1.md).
+
 ## Compiler core
 
 The Rust library exposes the deterministic framework-neutral compiler boundary
@@ -299,6 +317,7 @@ deployed public website remains outside this CLI release transaction.
 | Consumer pilots | Implemented | [#17](https://github.com/egohygiene/identity/issues/17), [Empathy #77](https://github.com/egohygiene/empathy/pull/77), [OptiFlow #46](https://github.com/egohygiene/optiflow/pull/46) |
 | v1.0.0 release | Stable source prepared; final tag records the release evidence | [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
 | Design-system handbook and AI context | Implemented; consumer handoff remains next | [#35](https://github.com/egohygiene/identity/issues/35), [contract](docs/contracts/DESIGN_SYSTEM_V1.md) |
+| Press Kit and Media Kit | Implemented in this branch; review remains next | [#34](https://github.com/egohygiene/identity/issues/34), [contract](docs/contracts/PRESS_KIT_V1.md) |
 
 The umbrella [#2](https://github.com/egohygiene/identity/issues/2) records the
 compiler/package outcome. The Empathy and OptiFlow proof has landed through
@@ -328,6 +347,7 @@ compiler/package outcome. The Empathy and OptiFlow proof has landed through
 - [Quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md)
 - [Visual-motion v1 contract](docs/contracts/VISUAL_MOTION_V1.md)
 - [Design-system handbook and context contract](docs/contracts/DESIGN_SYSTEM_V1.md)
+- [Press Kit and Media Kit contract](docs/contracts/PRESS_KIT_V1.md)
 - [Astryx motion-pattern evaluation](docs/evaluations/astryx-motion-patterns.md)
 - [Roadmap](ROADMAP.md)
 

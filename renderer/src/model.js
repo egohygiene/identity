@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import { assertDesignSystemView } from "./design-system.js";
+import { assertPressKitView } from "./press-kit.js";
 
 export const BRAND_KIT_VIEW_MODEL_SCHEMA = "identity.brand-kit-view-model/v1";
 
@@ -14,6 +15,7 @@ export const SECTION_DEFINITIONS = Object.freeze([
   ["usage", "Usage rules"],
   ["creative-direction", "Motion, imagery, and mascot"],
   ["design-system", "Design system"],
+  ["press-kit", "Press and media kit"],
   ["studio", "Review candidate assets"],
   ["downloads", "Downloads"],
   ["provenance", "Provenance and support"],
@@ -56,6 +58,24 @@ export function assertBrandKitViewModel(model) {
     if (designSystem.handbook.project.displayName !== model.project.displayName) {
       throw new TypeError(
         "Design-system handbook display name must match the Brand Kit view model project.",
+      );
+    }
+  }
+  if (model.pressKit !== undefined) {
+    const pressKit = assertPressKitView(model.pressKit);
+    if (pressKit.pressKit.project.id !== model.projectId) {
+      throw new TypeError(
+        "Press Kit project must match the Brand Kit view model project.",
+      );
+    }
+    if (pressKit.pressKit.project.displayName !== model.project.displayName) {
+      throw new TypeError(
+        "Press Kit display name must match the Brand Kit view model project.",
+      );
+    }
+    if (pressKit.pressKit.source.digest !== model.release.sourceDigest) {
+      throw new TypeError(
+        "Press Kit source digest must match the Brand Kit immutable release.",
       );
     }
   }

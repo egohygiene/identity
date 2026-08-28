@@ -65,6 +65,9 @@
             "designSystem": { "$ref": "#/$defs/relativePath" },
             "references": { "$ref": "#/$defs/relativePath" }
           }
+        },
+        "pressKit": {
+          "$ref": "#/$defs/relativePath"
         }
       }
     },

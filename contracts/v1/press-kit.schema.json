@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/press-kit.schema.json",
+  "title": "Identity v1 reviewed Press Kit and Media Kit source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "boilerplates", "facts", "links", "contacts", "team", "assets"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)press-kit.schema.json$" },
+    "schema": { "const": "identity.press-kit-source/v1" },
+    "boilerplates": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/boilerplate" }
+    },
+    "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+    "links": { "type": "array", "items": { "$ref": "#/$defs/link" } },
+    "contacts": { "type": "array", "items": { "$ref": "#/$defs/contact" } },
+    "team": { "type": "array", "items": { "$ref": "#/$defs/teamMember" } },
+    "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" } }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "source", "capturedAt"],
+      "properties": {
+        "method": { "enum": ["human-authored", "handoff-candidate", "imported"] },
+        "source": { "type": "string", "minLength": 1 },
+        "capturedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "state", "visibility", "provenance", "approval"],
+      "properties": {
+        "subject": { "type": "string", "minLength": 1 },
+        "state": { "enum": ["candidate", "approved", "rejected", "superseded"] },
+        "visibility": { "enum": ["public", "internal"] },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "approval": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/identifier" }
+          ]
+        }
+      }
+    },
+    "boilerplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "text", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "kind": { "enum": ["short", "long"] },
+        "text": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "value", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "value": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "url", "kind", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "kind": { "enum": ["website", "product", "repository", "documentation", "support", "social", "other"] },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "kind", "value", "notes", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["email", "url", "other"] },
+        "value": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string" },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "teamMember": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "role", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "bio": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "assetId", "label", "notes", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "assetId": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    }
+  }
+}

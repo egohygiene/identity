@@ -9,6 +9,7 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 import { createDesignSystemView } from "../src/design-system.js";
+import { createPressKitView } from "../src/press-kit.js";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
@@ -32,6 +33,9 @@ const releaseVersion = assertStableRelease(releaseTag, releaseCommit);
 const designSystemDirectory = argumentsMap["design-system-directory"]
   ? path.resolve(argumentsMap["design-system-directory"])
   : null;
+const pressKitDirectory = argumentsMap["press-kit-directory"]
+  ? path.resolve(argumentsMap["press-kit-directory"])
+  : null;
 const sourceAssetRoot = path.resolve(sourceRoot, "assets/identity");
 const buildRoot = path.resolve(rendererRoot, ".identity-public-build");
 const publicDirectory = path.join(buildRoot, "public");
@@ -46,6 +50,9 @@ await copyPublicationFiles();
 const designSystem = designSystemDirectory
   ? await copyDesignSystemArtifacts(designSystemDirectory)
   : null;
+const pressKit = pressKitDirectory
+  ? await copyPressKitArtifacts(pressKitDirectory)
+  : null;
 
 runPythonPackager();
 const packageManifestPath = path.join(
@@ -55,7 +62,7 @@ const packageManifestPath = path.join(
 );
 const packageManifest = await readJson(packageManifestPath);
 const packageManifestSha256 = sha256(await fs.readFile(packageManifestPath));
-const model = await buildViewModel(packageManifest, designSystem);
+const model = await buildViewModel(packageManifest, designSystem, pressKit);
 const publication = {
   canonicalUrl: config.canonicalUrl,
   releaseTag,
@@ -147,6 +154,16 @@ async function copyDesignSystemArtifacts(directory) {
   });
 }
 
+async function copyPressKitArtifacts(directory) {
+  const destination = path.join(publicDirectory, "press-kit");
+  await assertDirectory(directory, "generated Press Kit artifact directory");
+  await fs.cp(directory, destination, { recursive: true });
+  return createPressKitView({
+    pressKit: await readJson(path.join(directory, "press-kit.json")),
+    artifactDirectory: "press-kit",
+  });
+}
+
 function runPythonPackager() {
   const result = spawnSync(
     "python3",
@@ -180,7 +197,7 @@ function runNode(argumentsList, environment) {
   }
 }
 
-async function buildViewModel(packageManifest, designSystem) {
+async function buildViewModel(packageManifest, designSystem, pressKit) {
   const assets = await Promise.all(
     config.assets.map(async (asset) => {
       const sourcePath = safeRelativePath(asset.sourcePath);
@@ -233,6 +250,7 @@ async function buildViewModel(packageManifest, designSystem) {
     guidance: config.guidance,
     support: config.support,
     ...(designSystem ? { designSystem } : {}),
+    ...(pressKit ? { pressKit } : {}),
     packages: [
       {
         id: "complete-brand-kit",
