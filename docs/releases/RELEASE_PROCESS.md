@@ -41,6 +41,8 @@ A `v1.0.0` tag is permitted only when all of the following evidence is current:
 
 - schema and migration contracts validate, including compatibility diagnostics;
 - deterministic compiler/package and clean-room double-generation checks pass;
+- the `.gitattributes` line-ending policy preserves identical source and visual
+  baseline digests on every supported platform;
 - Linux, macOS, and Windows source-install CLI checks pass;
 - the reference renderer's accessibility and visual/browser checks pass;
 - license/provenance checks, SPDX SBOM, archive checksums, and provenance
