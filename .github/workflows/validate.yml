@@ -47,6 +47,12 @@ jobs:
       - name: Verify locked dependency resolution
         run: cargo metadata --locked --format-version "1" --no-deps >/dev/null
 
+      - name: Verify release metadata and documentation contract
+        run: python3 scripts/verify_release.py --repository-root "."
+
+      - name: Verify repository documentation links
+        run: python3 scripts/verify_docs.py --repository-root "."
+
       - name: Verify Rust formatting
         run: cargo fmt --all --check
 
