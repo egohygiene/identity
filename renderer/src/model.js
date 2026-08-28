@@ -1,6 +1,8 @@
 // Copyright 2026 Ego Hygiene
 // SPDX-License-Identifier: MIT
 
+import { assertDesignSystemView } from "./design-system.js";
+
 export const BRAND_KIT_VIEW_MODEL_SCHEMA = "identity.brand-kit-view-model/v1";
 
 export const SECTION_DEFINITIONS = Object.freeze([
@@ -11,6 +13,7 @@ export const SECTION_DEFINITIONS = Object.freeze([
   ["voice", "Voice and personality"],
   ["usage", "Usage rules"],
   ["creative-direction", "Motion, imagery, and mascot"],
+  ["design-system", "Design system"],
   ["studio", "Review candidate assets"],
   ["downloads", "Downloads"],
   ["provenance", "Provenance and support"],
@@ -42,6 +45,19 @@ export function assertBrandKitViewModel(model) {
     throw new TypeError(
       "Brand Kit view model must declare guidance and support statuses.",
     );
+  }
+  if (model.designSystem !== undefined) {
+    const designSystem = assertDesignSystemView(model.designSystem);
+    if (designSystem.handbook.project.id !== model.projectId) {
+      throw new TypeError(
+        "Design-system handbook project must match the Brand Kit view model project.",
+      );
+    }
+    if (designSystem.handbook.project.displayName !== model.project.displayName) {
+      throw new TypeError(
+        "Design-system handbook display name must match the Brand Kit view model project.",
+      );
+    }
   }
   return model;
 }

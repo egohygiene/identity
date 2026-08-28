@@ -8,6 +8,8 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
+import { createDesignSystemView } from "../src/design-system.js";
+
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
 const repositoryRoot = path.resolve(rendererRoot, "..");
@@ -27,6 +29,9 @@ const config = await readJson(configPath);
 const releaseTag = argumentsMap["release-tag"] || config.release.defaultTag;
 const releaseCommit = argumentsMap["release-commit"] || config.release.defaultCommit;
 const releaseVersion = assertStableRelease(releaseTag, releaseCommit);
+const designSystemDirectory = argumentsMap["design-system-directory"]
+  ? path.resolve(argumentsMap["design-system-directory"])
+  : null;
 const sourceAssetRoot = path.resolve(sourceRoot, "assets/identity");
 const buildRoot = path.resolve(rendererRoot, ".identity-public-build");
 const publicDirectory = path.join(buildRoot, "public");
@@ -38,6 +43,9 @@ await fs.rm(buildRoot, { recursive: true, force: true });
 await fs.mkdir(buildRoot, { recursive: true });
 await fs.cp(sourceAssetRoot, publicDirectory, { recursive: true });
 await copyPublicationFiles();
+const designSystem = designSystemDirectory
+  ? await copyDesignSystemArtifacts(designSystemDirectory)
+  : null;
 
 runPythonPackager();
 const packageManifestPath = path.join(
@@ -47,7 +55,7 @@ const packageManifestPath = path.join(
 );
 const packageManifest = await readJson(packageManifestPath);
 const packageManifestSha256 = sha256(await fs.readFile(packageManifestPath));
-const model = await buildViewModel(packageManifest);
+const model = await buildViewModel(packageManifest, designSystem);
 const publication = {
   canonicalUrl: config.canonicalUrl,
   releaseTag,
@@ -124,6 +132,21 @@ async function copyPublicationFiles() {
   );
 }
 
+async function copyDesignSystemArtifacts(directory) {
+  const destination = path.join(publicDirectory, "design-system");
+  await assertDirectory(directory, "generated design-system artifact directory");
+  await fs.cp(directory, destination, { recursive: true });
+  const [handbook, context] = await Promise.all([
+    readJson(path.join(directory, "design-system-handbook.json")),
+    readJson(path.join(directory, "design-context.json")),
+  ]);
+  return createDesignSystemView({
+    handbook,
+    context,
+    artifactDirectory: "design-system",
+  });
+}
+
 function runPythonPackager() {
   const result = spawnSync(
     "python3",
@@ -157,7 +180,7 @@ function runNode(argumentsList, environment) {
   }
 }
 
-async function buildViewModel(packageManifest) {
+async function buildViewModel(packageManifest, designSystem) {
   const assets = await Promise.all(
     config.assets.map(async (asset) => {
       const sourcePath = safeRelativePath(asset.sourcePath);
@@ -209,6 +232,7 @@ async function buildViewModel(packageManifest) {
     assets,
     guidance: config.guidance,
     support: config.support,
+    ...(designSystem ? { designSystem } : {}),
     packages: [
       {
         id: "complete-brand-kit",

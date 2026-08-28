@@ -3,8 +3,9 @@
 ## Status and boundary
 
 This document defines the contract slice for [issue #35](https://github.com/egohygiene/identity/issues/35).
-It establishes approved local input and stable output shapes. It does **not**
-yet implement the handbook/context projection command or a component library.
+It establishes approved local input, stable output shapes, deterministic
+projection, and a public-renderer consumption boundary. It does **not** create
+a component library.
 
 Identity remains the source-and-projection boundary for reviewed brand intent.
 It does not take ownership of product UI implementation:
@@ -70,8 +71,8 @@ record to public guidance.
 
 ## Determinism and provenance
 
-The generated handbook and context must be reproducible from the same
-validated source. The future renderer will:
+The generated handbook and context are reproducible from the same validated
+source. The projection command and public renderer together:
 
 1. validate the complete Identity v1 source before resolving anything;
 2. include a stable SHA-256 source digest covering the resolved inputs;
@@ -134,6 +135,10 @@ This contract does not create:
 - automated approval of references or creative choices; or
 - a public website redesign.
 
-Those are separate implementation or consumer-owned decisions. The next
-follow-up is a real consumer handoff that uses these projections without
-claiming that a component implementation belongs to Identity.
+Those remain separate implementation or consumer-owned decisions. The reference
+renderer is a real downstream consumer of the projection pair: it accepts an
+explicit generated artifact directory, validates that handbook and context
+describe the same source, and renders only their approved principles,
+inheritance, capability boundaries, and download links. A separate product
+consumer may adopt the same framework-neutral JSON without depending on the
+public HTML.
