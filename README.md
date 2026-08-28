@@ -20,7 +20,12 @@ assets/identity/ + versioned packages + Brand Kit view model
 product consumers + public Brand Kit
 ```
 
-The canonical Ego Hygiene Brand Kit will be published at `https://egohygiene.io/identity`. The descriptive `/brand-kit` route will redirect to the canonical `/identity` route.
+The canonical Identity Brand Kit is published at
+[`https://identity.egohygiene.io/`](https://identity.egohygiene.io/). The
+identity repository owns that standalone tool surface; the main
+`egohygiene.io` website and Flutter application remain free to own their own
+subpaths and may add redirect-only aliases later. See the
+[public Brand Kit publication guide](docs/publication/IDENTITY_PAGES.md).
 
 ## Brand Kit preview
 
@@ -290,7 +295,7 @@ deployed public website remains outside this CLI release transaction.
 | Visual-motion validation | Implemented in this change | [#3](https://github.com/egohygiene/identity/issues/3), [contract](docs/contracts/VISUAL_MOTION_V1.md), [Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) |
 | Voice, usage, and approval guidance | Implemented | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |
 | Renderer and asset studio | Implemented | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
-| Public `/identity` route | Deferred until its dependencies land | [#16](https://github.com/egohygiene/identity/issues/16) |
+| Public Brand Kit site | Release-backed GitHub Pages deployment at `identity.egohygiene.io` | [#16](https://github.com/egohygiene/identity/issues/16), [publication guide](docs/publication/IDENTITY_PAGES.md) |
 | Consumer pilots | Implemented | [#17](https://github.com/egohygiene/identity/issues/17), [Empathy #77](https://github.com/egohygiene/empathy/pull/77), [OptiFlow #46](https://github.com/egohygiene/optiflow/pull/46) |
 | v1.0.0 release | Stable source prepared; final tag records the release evidence | [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
 
@@ -312,6 +317,7 @@ compiler/package outcome. The Empathy and OptiFlow proof has landed through
 - [Dependency policy](docs/DEPENDENCY_POLICY.md)
 - [v1 release guide](docs/releases/V1.md)
 - [release process](docs/releases/RELEASE_PROCESS.md)
+- [public Brand Kit publication](docs/publication/IDENTITY_PAGES.md)
 - [security policy](SECURITY.md)
 - [support policy](SUPPORT.md)
 - [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)

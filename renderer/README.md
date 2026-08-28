@@ -47,6 +47,23 @@ Set `IDENTITY_RENDERER_BASE` when the static bundle is mounted below a route
 prefix. Consumers may also change CSS variables or supply different generated
 tokens without modifying the JSON contract.
 
+## Identity public site
+
+The repository's own public Brand Kit is a release-backed projection at
+`https://identity.egohygiene.io/`. Build it locally with:
+
+```bash
+pnpm run build:public
+pnpm run verify:public
+```
+
+The public builder stages an immutable release's `assets/identity/` tree,
+generates the complete public archive, manifest, and checksums, and sends that
+staged tree through this renderer. It does not use a mutable default-branch
+asset tree as the public source. The full deployment and rollback procedure is
+documented in
+[`docs/publication/IDENTITY_PAGES.md`](../docs/publication/IDENTITY_PAGES.md).
+
 ## Authority labels
 
 The page deliberately labels:

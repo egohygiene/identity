@@ -15,11 +15,14 @@
     "check": "node scripts/check-source.mjs",
     "render": "node scripts/render-static.mjs",
     "build": "pnpm run render && vite build",
+    "build:public": "node scripts/build-public-site.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots",
-    "validate": "pnpm run check && pnpm run test && pnpm run build && pnpm run test:e2e"
+    "verify:public": "node scripts/verify-public-site.mjs",
+    "validate:public": "pnpm run build:public && pnpm run verify:public",
+    "validate": "pnpm run check && pnpm run test && pnpm run build && pnpm run test:e2e && pnpm run validate:public"
   },
   "dependencies": {
     "react": "19.2.8",

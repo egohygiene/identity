@@ -7,10 +7,13 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 
 const rendererRoot = path.dirname(fileURLToPath(import.meta.url));
+const publicDirectory = process.env.IDENTITY_RENDERER_PUBLIC_DIR
+  ? path.resolve(rendererRoot, process.env.IDENTITY_RENDERER_PUBLIC_DIR)
+  : path.resolve(rendererRoot, "../assets/identity");
 
 export default defineConfig({
   base: process.env.IDENTITY_RENDERER_BASE || "./",
-  publicDir: path.resolve(rendererRoot, "../assets/identity"),
+  publicDir: publicDirectory,
   build: {
     outDir: "dist",
     emptyOutDir: true,

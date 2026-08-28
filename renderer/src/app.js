@@ -15,7 +15,7 @@ import {
 
 const h = React.createElement;
 
-export function BrandKitPage({ model, assetBaseUrl = "./" }) {
+export function BrandKitPage({ model, assetBaseUrl = "./", publication = null }) {
   assertBrandKitViewModel(model);
   const colorTokens = model.tokens.filter((token) => token.type === "color");
   const typographyTokens = model.tokens.filter(
@@ -109,7 +109,7 @@ export function BrandKitPage({ model, assetBaseUrl = "./" }) {
           packages: model.packages,
           assetBaseUrl,
         }),
-        h(ProvenanceSection, { model }),
+        h(ProvenanceSection, { model, assetBaseUrl, publication }),
       ),
     ),
     h(
@@ -542,7 +542,7 @@ function DownloadsSection({ packages, assetBaseUrl }) {
   );
 }
 
-function ProvenanceSection({ model }) {
+function ProvenanceSection({ model, assetBaseUrl, publication }) {
   return h(
     Section,
     {
@@ -552,6 +552,42 @@ function ProvenanceSection({ model }) {
     h(
       "div",
       { className: "provenance-grid" },
+      publication
+        ? h(
+            "article",
+            { className: "panel" },
+            h("h3", null, "Published surface"),
+            h(
+              "p",
+              null,
+              `This page projects immutable Identity release ${publication.releaseTag}.`,
+            ),
+            h(
+              "p",
+              null,
+              h(
+                "a",
+                { className: "text-link", href: publication.releaseUrl },
+                "Inspect immutable release",
+              ),
+            ),
+            h(
+              "p",
+              null,
+              h(
+                "a",
+                {
+                  className: "text-link",
+                  href: joinAssetUrl(assetBaseUrl, publication.manifestPath),
+                  download: true,
+                },
+                "Download publication manifest",
+              ),
+            ),
+            h("p", { className: "support-note" }, "Manifest SHA-256"),
+            h("code", null, publication.manifestSha256),
+          )
+        : null,
       h(
         "article",
         { className: "panel" },

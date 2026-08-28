@@ -39,17 +39,19 @@ updated: 2026-08-28
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
 
-**Lifecycle:** v1.0.0 stable release preparation
-**Current gate:** Publish the final `v1.0.0` tag from this stable promotion after its pre-merge release gates pass.
+**Lifecycle:** v1.0.0 stable release published; public Brand Kit deployment active
+**Current gate:** Deploy and verify the immutable `v1.0.0` Brand Kit at `identity.egohygiene.io` after DNS and HTTPS finish provisioning.
 **North-star outcome:** A deterministic, governed Brand Kit v1 whose source decisions, generated assets, and approvals remain traceable.
 
 ### Visual roadmap publication
 
 **Mode:** `central`  
 **Route:** `/roadmap/identity/`  
-**Current publication evidence:** Generated artifacts through CI; no Pages site or public product route observed.
+**Current publication evidence:** Release-backed GitHub Pages publisher prepared for `identity.egohygiene.io`; deployment awaits the configured Pages workflow and DNS/HTTPS verification.
 
-Publish the public-safe projection through egohygiene.io at /roadmap/identity/. This repository owns intent and acceptance evidence; it does not add a second site deployment.
+Publish the public-safe Brand Kit projection at `identity.egohygiene.io`. The
+main `egohygiene.io` website/application may later offer redirect-only aliases,
+but it does not own this standalone tool's deployment.
 
 ### Quest line
 
@@ -144,7 +146,8 @@ issues: [16]
 **Current evidence:**
 
 - Issue #16 tracks the public route.
-- No Pages deployment was observed.
+- The release-backed GitHub Pages publisher and custom-domain artifact are
+  implemented; live verification waits for DNS and HTTPS provisioning.
 
 <!-- roadmap-step
 id: IDN-Q05
@@ -162,14 +165,14 @@ issues: [17, 18]
 **Exit criteria:**
 
 - [x] Issue #17 records representative pilots and fixes.
-- [ ] Issue #18 closes with a tagged, provenance-rich v1 release.
+- [x] Issue #18 closed with the tagged, provenance-rich `v1.0.0` release.
 
 **Current evidence:**
 
 - Empathy and OptiFlow now pin immutable Identity consumer integrations.
-- The `v1.0.0-rc.2` candidate passed all cross-platform, browser, provenance,
-  SBOM, checksum, and automated GitHub publication gates; this promotion prepares
-  the final stable tag.
+- `v1.0.0` passed the cross-platform, browser, provenance, SBOM, checksum, and
+  automated GitHub publication gates and is published as the stable source for
+  the first public Brand Kit deployment.
 
 <!-- roadmap-step
 id: IDN-Q06
@@ -301,7 +304,7 @@ Wave 0 establishes decisions that constrain every implementation PR:
 | Block inaccessible, unlicensed, or untraceable releases | #3, #12, #13 | #12 quality-report/accessibility/provenance/license/visual/reproducibility gates, #3 visual-motion/capture/provenance gates, and #13 guidance/approval projections are implemented |
 | Distribute portable Brand Kit packages | #11, #18 | Versioned profile/package contracts, checksums, deterministic archive, consumer installation, clean-room build, and release provenance |
 | Render and preview an understandable Brand Kit | #14, #15 | Accessibility, responsive, link, download, visual regression, and mutation-isolation tests |
-| Publish the organization Brand Kit at `/identity` | #16 | Immutable handoff, metadata, redirect, deployment smoke test, and rollback evidence |
+| Publish the Identity Brand Kit at `identity.egohygiene.io` | #16 | Immutable release projection, metadata, `/brand-kit/` compatibility redirect, deployment smoke test, and rollback evidence |
 | Preserve product variation within a family | #17 | Empathy and OptiFlow inheritance/override evidence |
 | Release a supportable v1.0.0 | #18 | Platform matrix, documentation, SBOM/license inventory, checksums, attestations, and all release gates |
 
