@@ -52,6 +52,23 @@ The view model contains only public, approved, renderer-relevant projections:
 - explicit motion, imagery, and mascot support status;
 - versioned package/download paths.
 
+When a consumer supplies the complete generated design-system projection
+directory, the renderer may additionally consume:
+
+```text
+design-system-handbook.json
+design-system-handbook.md
+design-context.json
+design-context.md
+```
+
+The renderer validates the handbook/context schemas, shared project identity,
+declared handbook schema, and SHA-256 source digest before adding the optional
+Design system section. That section presents approved principles, inheritance,
+capability ownership, and artifact downloads. It does not re-author source
+facts in renderer configuration, nor does its presence imply that Holon or a
+product consumer has implemented an undeclared capability.
+
 The renderer must not read `.identity/`, infer missing brand facts, or reach into
 a sibling repository.
 
@@ -87,6 +104,8 @@ The reference implementation in [`renderer/`](../../renderer) provides:
 - no dependency on client-side routing;
 - a route-relative Vite build configured through `IDENTITY_RENDERER_BASE`;
 - a public asset tree sourced only from the generated `assets/identity/` output.
+- optional generated handbook/context rendering through an explicit artifact
+  directory, suitable for release-backed static publication.
 
 A consumer may mount the `dist/` directory at any immutable route or adapt the
 same view model to another framework.
@@ -131,3 +150,5 @@ The v1 validation suite includes:
 - route-prefix, responsive, and reduced-motion tests;
 - deterministic full-page visual hierarchy assertions;
 - a reviewed Playwright desktop viewport screenshot baseline.
+- a cross-language handoff test that generates a consumer projection with
+  `render_design_system.py` and renders those exact artifacts into static HTML.

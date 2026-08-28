@@ -94,6 +94,41 @@ a {
 .studio__surfaces section { display: grid; gap: 0.5rem; }
 .studio__surfaces img { inline-size: 100%; min-block-size: 8rem; max-block-size: 16rem; border: 1px solid var(--brand-border); border-radius: var(--radius-small); object-fit: contain; }
 
+.handbook-grid,
+.capability-list,
+.handbook-principles {
+  display: grid;
+  gap: 1rem;
+}
+
+.handbook-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.handbook-card,
+.handbook-principles,
+.capability-row {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.handbook-principles section {
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--brand-border);
+}
+
+.capability-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  padding-block: 1rem;
+  border-block-start: 1px solid var(--brand-border);
+}
+
+.capability-row:first-child {
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+
 a {
   color: inherit;
   text-underline-offset: 0.2em;

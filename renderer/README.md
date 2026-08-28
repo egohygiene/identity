@@ -43,6 +43,26 @@ pnpm run render -- \
 pnpm run build
 ```
 
+Render a reviewed design-system projection alongside the immutable Brand Kit
+model:
+
+```bash
+python3 "../scripts/render_design_system.py" \
+  --repository-root "path/to/consumer" \
+  --output-directory "assets/identity/design-system"
+
+pnpm run render -- \
+  --model "../assets/identity/packages/renderer/brand-kit.view-model.json" \
+  --design-system-directory "../assets/identity/design-system" \
+  --design-system-artifact-directory "design-system" \
+  --asset-base-url "./"
+```
+
+The renderer validates that the handbook and AI context share a project,
+handbook schema, and source digest. It presents the approved principles,
+inheritance, and capability boundaries and links the four generated artifacts;
+it does not recreate handbook facts from renderer configuration.
+
 Set `IDENTITY_RENDERER_BASE` when the static bundle is mounted below a route
 prefix. Consumers may also change CSS variables or supply different generated
 tokens without modifying the JSON contract.
@@ -72,6 +92,8 @@ The page deliberately labels:
 - voice and usage as **canonical guidance**;
 - absent color pairings, type scales, motion, imagery, mascot, license, and
   provenance data as **not declared** instead of inventing content.
+- generated design-system handbooks and AI context as **canonical guidance**
+  only when the verified projection pair is supplied.
 
 Approved assets expose their format, dimensions, intended use, availability,
 digest, safe zone, license, provenance, approval, and download status.
@@ -80,6 +102,8 @@ digest, safe zone, license, provenance, approval, and download status.
 
 Vitest covers contract rendering, missing-data states, asset metadata,
 route-prefixed links, download structure, semantic accessibility, and the stable
-full-page visual hierarchy. Playwright covers browser accessibility including
+full-page visual hierarchy. It also runs a cross-language consumer handoff:
+the Python projection command generates a fixture consumer's artifacts and the
+static renderer consumes those exact files. Playwright covers browser accessibility including
 color contrast, keyboard behavior, deep links, real download responses,
 responsive/reduced-motion behavior, and a reviewed desktop viewport screenshot.

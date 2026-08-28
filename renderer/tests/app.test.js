@@ -39,7 +39,9 @@ describe("BrandKitPage", () => {
     );
 
     expect(sections.map(({ id }) => id)).toEqual(
-      SECTION_DEFINITIONS.map(([id]) => id),
+      SECTION_DEFINITIONS.filter(([id]) => id !== "design-system").map(
+        ([id]) => id,
+      ),
     );
     expect(sections.map(({ heading }) => heading)).toEqual([
       "Overview and version",

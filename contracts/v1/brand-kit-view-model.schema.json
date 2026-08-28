@@ -48,6 +48,9 @@
     "support": {
       "$ref": "#/$defs/support"
     },
+    "designSystem": {
+      "$ref": "#/$defs/designSystem"
+    },
     "packages": {
       "type": "array",
       "minItems": 1,
@@ -404,6 +407,56 @@
         "intendedUse": {
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    "designSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["handbook", "context", "artifacts"],
+      "properties": {
+        "handbook": {
+          "type": "object",
+          "required": ["schema", "project", "sections", "capabilities"],
+          "properties": {
+            "schema": { "const": "identity.design-system-handbook/v1" },
+            "project": {
+              "type": "object",
+              "required": ["id", "displayName"]
+            },
+            "sections": { "type": "array" },
+            "capabilities": { "type": "array" }
+          }
+        },
+        "context": {
+          "type": "object",
+          "required": ["schema", "project", "source", "tokens"],
+          "properties": {
+            "schema": { "const": "identity.design-context/v1" },
+            "project": {
+              "type": "object",
+              "required": ["id", "displayName"]
+            },
+            "source": {
+              "type": "object",
+              "required": ["digest", "handbookSchema"]
+            },
+            "tokens": { "type": "array" }
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "path", "mediaType"],
+            "properties": {
+              "id": { "type": "string" },
+              "label": { "type": "string" },
+              "path": { "type": "string" },
+              "mediaType": { "type": "string" }
+            }
+          }
         }
       }
     }

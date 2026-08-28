@@ -14,6 +14,7 @@ import {
   assertBrandKitViewModel,
   deriveThemeVariables,
 } from "../src/model.js";
+import { createDesignSystemView } from "../src/design-system.js";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
@@ -33,10 +34,24 @@ const openGraphImage = argumentsMap["open-graph-image"] || null;
 const publicationPath = argumentsMap.publication
   ? path.resolve(argumentsMap.publication)
   : null;
+const designSystemDirectory = argumentsMap["design-system-directory"]
+  ? path.resolve(argumentsMap["design-system-directory"])
+  : null;
+const designSystemArtifactDirectory =
+  argumentsMap["design-system-artifact-directory"] || "design-system";
 
-const model = assertBrandKitViewModel(
+const baseModel = assertBrandKitViewModel(
   JSON.parse(await fs.readFile(modelPath, "utf8")),
 );
+const model = designSystemDirectory
+  ? assertBrandKitViewModel({
+      ...baseModel,
+      designSystem: await loadDesignSystem(
+        designSystemDirectory,
+        designSystemArtifactDirectory,
+      ),
+    })
+  : baseModel;
 const publication = publicationPath
   ? JSON.parse(await fs.readFile(publicationPath, "utf8"))
   : null;
@@ -61,6 +76,22 @@ const rendered = template
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
 await fs.writeFile(outputPath, rendered, "utf8");
 process.stdout.write(`Rendered static Brand Kit: ${outputPath}\n`);
+
+async function loadDesignSystem(directory, artifactDirectory) {
+  const [handbook, context] = await Promise.all([
+    readJson(path.join(directory, "design-system-handbook.json")),
+    readJson(path.join(directory, "design-context.json")),
+  ]);
+  return createDesignSystemView({ handbook, context, artifactDirectory });
+}
+
+async function readJson(filePath) {
+  try {
+    return JSON.parse(await fs.readFile(filePath, "utf8"));
+  } catch (error) {
+    throw new Error(`Cannot read generated design-system artifact: ${filePath}: ${error.message}`);
+  }
+}
 
 function parseArguments(values) {
   const result = {};
