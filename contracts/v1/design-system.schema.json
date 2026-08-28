@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/design-system.schema.json",
+  "title": "Identity v1 reviewed design-system handbook source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "sections", "capabilities"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)design-system.schema.json$" },
+    "schema": { "const": "identity.design-system-source/v1" },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/section" }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/capability" }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "source", "capturedAt"],
+      "properties": {
+        "method": { "enum": ["human-authored", "handoff-candidate", "imported"] },
+        "source": { "type": "string", "minLength": 1 },
+        "capturedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "state", "visibility", "provenance", "approval"],
+      "properties": {
+        "subject": { "type": "string", "minLength": 1 },
+        "state": { "enum": ["candidate", "approved", "rejected", "superseded"] },
+        "visibility": { "enum": ["public", "internal"] },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "approval": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/identifier" }
+          ]
+        }
+      }
+    },
+    "principle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "guidance", "rationale", "appliesTo", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "title": { "type": "string", "minLength": 1 },
+        "guidance": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "appliesTo": { "$ref": "#/$defs/nonEmptyStrings" },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "summary", "principles"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "title": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "principles": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/principle" }
+        }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "status", "owner", "notes", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "label": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["declared", "not-declared", "unsupported"] },
+        "owner": { "enum": ["identity", "holon", "consumer"] },
+        "notes": { "type": "string", "minLength": 1 },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "../../../../../../../contracts/v1/design-system.schema.json",
+  "schema": "identity.design-system-source/v1",
+  "sections": [
+    {
+      "id": "foundations",
+      "title": "Reviewed foundations",
+      "summary": "Use semantic tokens and reviewed guidance as the shared starting point for every product surface.",
+      "principles": [
+        {
+          "id": "semantic-before-decorative",
+          "title": "Start with semantic intent",
+          "guidance": "Choose tokens by the role they serve before choosing a visual treatment.",
+          "rationale": "Semantic intent keeps product overrides reviewable and preserves accessibility across themes.",
+          "appliesTo": ["organization", "product", "repository"],
+          "governance": {
+            "subject": "design-system:foundations",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/defaults/organization.tokens.json",
+              "capturedAt": "2026-08-22T10:00:00Z"
+            },
+            "approval": "approve-design-system-foundations"
+          }
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Accessible expression",
+      "summary": "Brand character reinforces meaning without becoming the only way users can understand or operate a surface.",
+      "principles": [
+        {
+          "id": "meaning-survives-style",
+          "title": "Make meaning survive styling changes",
+          "guidance": "Pair visual distinction, motion, and mascot expression with readable content and supported accessibility alternatives.",
+          "rationale": "A recognizable system remains useful when motion is reduced, colors vary, or imagery is unavailable.",
+          "appliesTo": ["product", "repository"],
+          "governance": {
+            "subject": "design-system:foundations",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/guidance/usage.json",
+              "capturedAt": "2026-08-22T10:00:00Z"
+            },
+            "approval": "approve-design-system-foundations"
+          }
+        }
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "semantic-tokens",
+      "label": "Semantic token guidance",
+      "status": "declared",
+      "owner": "identity",
+      "notes": "Identity owns the reviewed DTCG token source, inheritance evidence, and generated platform projections.",
+      "governance": {
+        "subject": "design-system:foundations",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/defaults/organization.tokens.json",
+          "capturedAt": "2026-08-22T10:00:00Z"
+        },
+        "approval": "approve-design-system-foundations"
+      }
+    },
+    {
+      "id": "reusable-components",
+      "label": "Reusable application components",
+      "status": "not-declared",
+      "owner": "holon",
+      "notes": "Identity records component-facing constraints but does not define or distribute component implementations.",
+      "governance": {
+        "subject": "design-system:foundations",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/guidance/design-system.json",
+          "capturedAt": "2026-08-22T10:00:00Z"
+        },
+        "approval": "approve-design-system-foundations"
+      }
+    },
+    {
+      "id": "product-layout",
+      "label": "Product layout implementation",
+      "status": "not-declared",
+      "owner": "consumer",
+      "notes": "Each product owns layout decisions while consuming approved identity constraints and bounded overrides.",
+      "governance": {
+        "subject": "design-system:foundations",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/guidance/design-system.json",
+          "capturedAt": "2026-08-22T10:00:00Z"
+        },
+        "approval": "approve-design-system-foundations"
+      }
+    }
+  ]
+}

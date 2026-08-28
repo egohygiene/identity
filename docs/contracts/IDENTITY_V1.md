@@ -25,6 +25,8 @@ The v1 topology is:
 ├── guidance/
 │   ├── voice.json                   # optional until IDN-11 lands
 │   └── usage.json                   # optional until IDN-11 lands
+│   ├── design-system.json            # optional reviewed handbook source
+│   └── design-references.json        # optional reviewed reference catalog
 ├── sources/                         # approved canonical source assets
 ├── candidates/                      # unapproved work state
 └── references/                      # reviewed inspiration, never implicit license
@@ -34,6 +36,13 @@ The manifest may choose different normalized repository-relative paths, but it
 must name every boundary above. Voice and usage paths are nullable in the first
 v1 slice so #13 can stabilize their contents without pretending that v0 prose
 was already structured. Directories are never optional.
+
+`documents.handbook` is an optional additive v1 object. When a consumer adopts
+it, it names both local handbook source files. `design-system.json` records
+approved principles and explicit capability ownership; `design-references.json`
+records reviewed external observations and rights constraints. They validate
+under the same human approval model as voice and usage. See the
+[design-system handbook contract](DESIGN_SYSTEM_V1.md).
 
 ## Layer and merge model
 
@@ -115,6 +124,8 @@ message, and a concrete recovery action. The initial code families are:
 | `IDN1300`–`IDN1399` | layers, overrides, aliases, and conflicts |
 | `IDN1400`–`IDN1499` | license, provenance, source bytes, and approvals |
 | `IDN1500`–`IDN1599` | target profiles and compatibility |
+| `IDN1600`–`IDN1699` | voice, usage, and guidance lifecycle |
+| `IDN1700`–`IDN1799` | handbook source and reviewed references |
 
 JSON output is the automation contract. Human output renders the same records;
 it does not invent a second validation result.

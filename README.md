@@ -298,6 +298,7 @@ deployed public website remains outside this CLI release transaction.
 | Public Brand Kit site | Release-backed GitHub Pages deployment at `identity.egohygiene.io` | [#16](https://github.com/egohygiene/identity/issues/16), [publication guide](docs/publication/IDENTITY_PAGES.md) |
 | Consumer pilots | Implemented | [#17](https://github.com/egohygiene/identity/issues/17), [Empathy #77](https://github.com/egohygiene/empathy/pull/77), [OptiFlow #46](https://github.com/egohygiene/optiflow/pull/46) |
 | v1.0.0 release | Stable source prepared; final tag records the release evidence | [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
+| Design-system handbook and AI context | Contracted; deterministic projection implementation remains next | [#35](https://github.com/egohygiene/identity/issues/35), [contract](docs/contracts/DESIGN_SYSTEM_V1.md) |
 
 The umbrella [#2](https://github.com/egohygiene/identity/issues/2) records the
 compiler/package outcome. The Empathy and OptiFlow proof has landed through
@@ -326,6 +327,7 @@ compiler/package outcome. The Empathy and OptiFlow proof has landed through
 - [Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
 - [Quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md)
 - [Visual-motion v1 contract](docs/contracts/VISUAL_MOTION_V1.md)
+- [Design-system handbook and context contract](docs/contracts/DESIGN_SYSTEM_V1.md)
 - [Astryx motion-pattern evaluation](docs/evaluations/astryx-motion-patterns.md)
 - [Roadmap](ROADMAP.md)
 

@@ -111,6 +111,28 @@
       "evidence": "https://example.invalid/reviews/legacy-wordmark",
       "supersedes": "approve-legacy-wordmark-usage",
       "notes": "Internal migration access only; use the primary mark for new work."
+    },
+    {
+      "id": "approve-design-system-foundations",
+      "subject": "design-system:foundations",
+      "candidate": ".identity/guidance/design-system.json",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-22T10:00:00Z",
+      "evidence": "https://example.invalid/reviews/design-system-foundations",
+      "supersedes": null,
+      "notes": "Approved design-system principles and capability boundaries."
+    },
+    {
+      "id": "approve-greptile-design-reference",
+      "subject": "reference:greptile-design",
+      "candidate": "https://www.greptile.com/design",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-22T10:05:00Z",
+      "evidence": "https://example.invalid/reviews/greptile-design-reference",
+      "supersedes": null,
+      "notes": "Approved as a pattern-study record only; no third-party assets are imported."
     }
   ]
 }

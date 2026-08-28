@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/design-system-handbook.schema.json",
+  "title": "Identity v1 generated design-system handbook",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "project", "source", "inheritance", "sections", "capabilities", "references"],
+  "properties": {
+    "schema": { "const": "identity.design-system-handbook/v1" },
+    "project": { "$ref": "#/$defs/project" },
+    "source": { "$ref": "#/$defs/source" },
+    "inheritance": { "$ref": "#/$defs/inheritance" },
+    "sections": { "type": "array", "items": { "$ref": "#/$defs/section" } },
+    "capabilities": { "type": "array", "items": { "$ref": "#/$defs/capability" } },
+    "references": { "type": "array", "items": { "$ref": "#/$defs/reference" } }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "repository", "kind"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "repository": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "kind": { "enum": ["organization", "product", "repository"] }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digest", "guidanceSchema", "referenceCatalogSchema"],
+      "properties": {
+        "digest": { "$ref": "#/$defs/digest" },
+        "guidanceSchema": { "const": "identity.design-system-source/v1" },
+        "referenceCatalogSchema": { "const": "identity.design-reference-catalog/v1" }
+      }
+    },
+    "inheritance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["organizationLayers", "productLayer", "overrides"],
+      "properties": {
+        "organizationLayers": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "productLayer": { "type": "string", "minLength": 1 },
+        "overrides": { "type": "array", "items": { "$ref": "#/$defs/override" } }
+      }
+    },
+    "override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["token", "reason", "approval"],
+      "properties": {
+        "token": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "approval": { "type": "string", "minLength": 1 }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "summary", "principles", "entries"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "principles": { "type": "array", "items": { "$ref": "#/$defs/principle" } },
+        "entries": { "type": "array", "items": { "$ref": "#/$defs/entry" } }
+      }
+    },
+    "principle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "guidance", "rationale", "appliesTo"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "guidance": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "appliesTo": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "status", "content", "rationale", "sourceLayer"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["token", "voice", "usage", "asset", "accessibility", "legal"] },
+        "status": { "enum": ["declared", "not-declared", "unsupported"] },
+        "content": {},
+        "rationale": { "type": "string", "minLength": 1 },
+        "sourceLayer": { "type": ["string", "null"] }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "status", "owner", "notes"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["declared", "not-declared", "unsupported"] },
+        "owner": { "enum": ["identity", "holon", "consumer"] },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "url", "patterns", "decision", "notes", "rights", "affectsCanonical"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "patterns": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "decision": { "enum": ["adopt", "adapt", "reject", "observe"] },
+        "notes": { "type": "string", "minLength": 1 },
+        "rights": { "type": "string", "minLength": 1 },
+        "affectsCanonical": { "type": "boolean" }
+      }
+    }
+  }
+}

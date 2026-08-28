@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/design-context.schema.json",
+  "title": "Identity v1 compact AI-readable design context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "project", "source", "applicability", "tokens", "voice", "usage", "capabilities"],
+  "properties": {
+    "schema": { "const": "identity.design-context/v1" },
+    "project": { "$ref": "#/$defs/project" },
+    "source": { "$ref": "#/$defs/source" },
+    "applicability": { "$ref": "#/$defs/applicability" },
+    "tokens": { "type": "array", "items": { "$ref": "#/$defs/token" } },
+    "voice": { "type": "array", "items": { "$ref": "#/$defs/voice" } },
+    "usage": { "type": "array", "items": { "$ref": "#/$defs/usage" } },
+    "capabilities": { "type": "array", "items": { "$ref": "#/$defs/capability" } }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "kind"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["organization", "product", "repository"] }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digest", "handbookSchema", "projectionVersion"],
+      "properties": {
+        "digest": { "$ref": "#/$defs/digest" },
+        "handbookSchema": { "const": "identity.design-system-handbook/v1" },
+        "projectionVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "applicability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["organizationLayers", "productLayer", "contexts"],
+      "properties": {
+        "organizationLayers": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "productLayer": { "type": "string", "minLength": 1 },
+        "contexts": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "type", "value", "sourceLayer"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "value": {},
+        "sourceLayer": { "type": "string", "minLength": 1 },
+        "overrideReason": { "type": ["string", "null"] },
+        "approval": { "type": ["string", "null"] }
+      }
+    },
+    "voice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context", "tone", "preferredVocabulary", "avoidedLanguage"],
+      "properties": {
+        "context": { "type": "string", "minLength": 1 },
+        "tone": { "type": "string", "minLength": 1 },
+        "preferredVocabulary": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "avoidedLanguage": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "category", "instruction", "rationale", "contexts"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["do", "dont"] },
+        "category": { "type": "string", "minLength": 1 },
+        "instruction": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "contexts": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "owner", "notes"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["declared", "not-declared", "unsupported"] },
+        "owner": { "enum": ["identity", "holon", "consumer"] },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

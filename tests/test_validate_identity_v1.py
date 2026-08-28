@@ -128,6 +128,33 @@ class IdentityV1ValidatorTests(unittest.TestCase):
             diagnostics = validator.validate_identity(repository)
             self.assertIn("IDN1003", {value.code for value in diagnostics})
 
+    def test_handbook_source_is_governed_and_references_are_https(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            design_path = repository / ".identity/guidance/design-system.json"
+            design = json.loads(design_path.read_text(encoding="utf-8"))
+            design["sections"][0]["principles"][0]["governance"]["approval"] = "missing"
+            write_json(design_path, design)
+            reference_path = repository / ".identity/guidance/design-references.json"
+            references = json.loads(reference_path.read_text(encoding="utf-8"))
+            references["references"][0]["url"] = "http://example.invalid/design"
+            write_json(reference_path, references)
+
+            diagnostics = validator.validate_identity(repository)
+            self.assertTrue({"IDN1602", "IDN1702"}.issubset({item.code for item in diagnostics}))
+
+    def test_handbook_documents_are_an_additive_v1_extension(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            project_path = repository / ".identity/identity.json"
+            project = json.loads(project_path.read_text(encoding="utf-8"))
+            del project["documents"]["handbook"]
+            write_json(project_path, project)
+
+            self.assertEqual(validator.validate_identity(repository), [])
+
     def test_v1_schema_identities_and_diagnostic_contract_are_stable(self) -> None:
         schemas = {
             path.name: json.loads(path.read_text(encoding="utf-8"))
@@ -143,6 +170,10 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "brand-kit-view-model.schema.json",
                 "compiler-manifest.schema.json",
                 "compiler-plan.schema.json",
+                "design-context.schema.json",
+                "design-references.schema.json",
+                "design-system-handbook.schema.json",
+                "design-system.schema.json",
                 "diagnostics.schema.json",
                 "motion-policy.schema.json",
                 "project.schema.json",
@@ -162,6 +193,22 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["usage.schema.json"]["properties"]["schema"]["const"],
             validator.USAGE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["design-system.schema.json"]["properties"]["schema"]["const"],
+            validator.DESIGN_SYSTEM_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["design-references.schema.json"]["properties"]["schema"]["const"],
+            validator.DESIGN_REFERENCES_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["design-system-handbook.schema.json"]["properties"]["schema"]["const"],
+            "identity.design-system-handbook/v1",
+        )
+        self.assertEqual(
+            schemas["design-context.schema.json"]["properties"]["schema"]["const"],
+            "identity.design-context/v1",
         )
         self.assertEqual(
             schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],

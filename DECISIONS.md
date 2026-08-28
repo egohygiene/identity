@@ -55,6 +55,8 @@ the decision changes materially.
 - [ADR-010: Render from a framework-neutral immutable view model](docs/decisions/ADR-010-reference-renderer-boundary.md)
 - [ADR-011: Layer normative, exact, browser, and human quality evidence](docs/decisions/ADR-011-accessibility-and-visual-evidence.md)
 - [ADR-012: Use local, layered Identity v1 source contracts](docs/decisions/ADR-012-local-layered-identity-v1.md)
+- [ADR-013: Preserve guidance lifecycle state in every projection](docs/decisions/ADR-013-preserve-guidance-lifecycle.md)
+- [ADR-014: Keep design-system handbooks as governed projections](docs/decisions/ADR-014-design-system-projection-boundary.md)
 
 ## ADR-001: Keep creative approval human-owned
 

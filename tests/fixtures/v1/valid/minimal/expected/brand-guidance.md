@@ -298,6 +298,8 @@ Identity expression must preserve perceivable content, readable text, operable c
 
 | Decision | Subject | Candidate | Status | Reviewer | Evidence |
 | --- | --- | --- | --- | --- | --- |
+| `approve-design-system-foundations` | `design-system:foundations` | `.identity/guidance/design-system.json` | **approved** | example-maintainer | https://example.invalid/reviews/design-system-foundations |
+| `approve-greptile-design-reference` | `reference:greptile-design` | `https://www.greptile.com/design` | **approved** | example-maintainer | https://example.invalid/reviews/greptile-design-reference |
 | `approve-legacy-wordmark-source` | `legacy-wordmark` | `.identity/sources/legacy-wordmark.svg` | **approved** | example-maintainer | https://example.invalid/reviews/legacy-wordmark-source |
 | `approve-legacy-wordmark-usage` | `usage-asset:legacy-wordmark` | `asset:legacy-wordmark/v0` | **approved** | example-maintainer | https://example.invalid/reviews/legacy-wordmark-v0 |
 | `approve-old-tagline` | `voice-example:old-tagline` | `guidance:old-tagline/v0` | **approved** | example-maintainer | https://example.invalid/reviews/old-tagline-v0 |
