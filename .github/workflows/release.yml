@@ -202,7 +202,7 @@ jobs:
           name: "identity-${{ github.ref_name }}-release-assets"
           path: "release-assets"
 
-      - name: Create immutable GitHub release
+      - name: Create GitHub release from the annotated tag
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
