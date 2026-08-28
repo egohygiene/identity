@@ -53,15 +53,15 @@ effect, and governance. It stores no third-party assets or copied prose. A
 reference can influence canonical source only after a distinct approved source
 change; `affectsCanonical: false` is the safe default for observation.
 
-## Planned projections
+## Generated projections
 
-The next implementation slice will validate this source and derive two
-framework-neutral, generated artifacts outside `.identity/`.
+`scripts/render_design_system.py` validates this source and derives two
+framework-neutral artifacts outside `.identity/`.
 
 | Projection | Schema | Audience | Contents |
 | --- | --- | --- | --- |
-| Design-system handbook | `identity.design-system-handbook/v1` | Human reviewers and product teams | Resolved inheritance, approved principles, token/voice/usage/asset entries, capability boundaries, and reviewed references |
-| Compact design context | `identity.design-context/v1` | Aether and other automation/consumer tools | Project identity, source digest, applicability, concise tokens/voice/usage facts, and explicit capability states |
+| Design-system handbook | `identity.design-system-handbook/v1` plus Markdown | Human reviewers and product teams | Resolved inheritance, enabled profile versions, approved principles, token/voice/usage/asset entries, capability boundaries, and reviewed references |
+| Compact design context | `identity.design-context/v1` plus Markdown | Aether and other automation/consumer tools | Project identity, source digest, enabled profile versions, applicability, concise tokens/voice/usage facts, and explicit capability states |
 
 Neither projection is an authority to invent design decisions. They copy or
 normalize reviewed source; a renderer may choose presentation, but cannot
@@ -101,6 +101,29 @@ catalog, URL, decision, and rights-record errors in `design-references.json`.
 Existing `IDN1601`–`IDN1604` guidance diagnostics continue to enforce the
 shared governance envelope.
 
+## Commands
+
+Print one projection to standard output without writing files:
+
+```bash
+python3 scripts/render_design_system.py \
+  --repository-root "path/to/consumer" \
+  --format "handbook-markdown"
+```
+
+Write the complete generated set outside canonical source:
+
+```bash
+python3 scripts/render_design_system.py \
+  --repository-root "path/to/consumer" \
+  --output-directory "assets/identity/design-system"
+```
+
+The explicit output directory receives `design-system-handbook.json`,
+`design-system-handbook.md`, `design-context.json`, and `design-context.md`.
+It may not point into `.identity/`, traverse symbolic links, or cause an
+external reference URL to be retrieved.
+
 ## Deliberately deferred
 
 This contract does not create:
@@ -111,6 +134,6 @@ This contract does not create:
 - automated approval of references or creative choices; or
 - a public website redesign.
 
-Those are separate implementation or consumer-owned decisions. The immediate
-follow-up to this contract is a deterministic renderer and fixture that emits
-the two projection schemas above, then a real consumer proves the handoff.
+Those are separate implementation or consumer-owned decisions. The next
+follow-up is a real consumer handoff that uses these projections without
+claiming that a component implementation belongs to Identity.

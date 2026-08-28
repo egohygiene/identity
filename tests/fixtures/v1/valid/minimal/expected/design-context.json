@@ -1,0 +1,294 @@
+{
+  "applicability": {
+    "contexts": [
+      "incident-update",
+      "repository-readme"
+    ],
+    "organizationLayers": [
+      "example-organization"
+    ],
+    "productLayer": "example-product"
+  },
+  "capabilities": [
+    {
+      "id": "product-layout",
+      "notes": "Each product owns layout decisions while consuming approved identity constraints and bounded overrides.",
+      "owner": "consumer",
+      "status": "not-declared"
+    },
+    {
+      "id": "reusable-components",
+      "notes": "Identity records component-facing constraints but does not define or distribute component implementations.",
+      "owner": "holon",
+      "status": "not-declared"
+    },
+    {
+      "id": "semantic-tokens",
+      "notes": "Identity owns the reviewed DTCG token source, inheritance evidence, and generated platform projections.",
+      "owner": "identity",
+      "status": "declared"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "core",
+      "version": "1.0.0"
+    },
+    {
+      "id": "metadata",
+      "version": "1.0.0"
+    },
+    {
+      "id": "tokens",
+      "version": "1.0.0"
+    }
+  ],
+  "project": {
+    "displayName": "Example Product",
+    "id": "example-product",
+    "kind": "product"
+  },
+  "schema": "identity.design-context/v1",
+  "source": {
+    "digest": "83c439cd09b954f25c42c05191e7019bff7f41c9df79cf6e37e3cc1a4d75a7e8",
+    "handbookSchema": "identity.design-system-handbook/v1",
+    "projectionVersion": "1.0.0"
+  },
+  "tokens": [
+    {
+      "approval": null,
+      "overrideReason": null,
+      "path": "color.action.primary",
+      "sourceLayer": "example-product",
+      "type": "color",
+      "value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.42,
+          0.2,
+          0.72
+        ]
+      }
+    },
+    {
+      "approval": "approve-product-primary",
+      "overrideReason": "Give the product a distinct violet technical accent.",
+      "path": "color.brand.primary",
+      "sourceLayer": "example-product",
+      "type": "color",
+      "value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.42,
+          0.2,
+          0.72
+        ]
+      }
+    },
+    {
+      "approval": null,
+      "overrideReason": null,
+      "path": "color.canvas",
+      "sourceLayer": "example-organization",
+      "type": "color",
+      "value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.98,
+          0.98,
+          1
+        ]
+      }
+    },
+    {
+      "approval": null,
+      "overrideReason": null,
+      "path": "color.text",
+      "sourceLayer": "example-organization",
+      "type": "color",
+      "value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.05,
+          0.06,
+          0.1
+        ]
+      }
+    },
+    {
+      "approval": null,
+      "overrideReason": null,
+      "path": "motion.duration.reduced",
+      "sourceLayer": "example-organization",
+      "type": "duration",
+      "value": {
+        "unit": "ms",
+        "value": 0
+      }
+    },
+    {
+      "approval": null,
+      "overrideReason": null,
+      "path": "motion.duration.standard",
+      "sourceLayer": "example-organization",
+      "type": "duration",
+      "value": {
+        "unit": "ms",
+        "value": 180
+      }
+    },
+    {
+      "approval": null,
+      "overrideReason": null,
+      "path": "typography.body.family",
+      "sourceLayer": "example-organization",
+      "type": "fontFamily",
+      "value": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "category": "illustration",
+      "contexts": [
+        "documentation",
+        "marketing"
+      ],
+      "id": "illustration-purpose",
+      "instruction": "Do not add illustration solely to fill space or obscure an incomplete explanation.",
+      "kind": "dont",
+      "rationale": "Illustration should clarify a concept or add deliberate warmth."
+    },
+    {
+      "category": "imagery",
+      "contexts": [
+        "documentation",
+        "social-card"
+      ],
+      "id": "imagery-provenance",
+      "instruction": "Use imagery with approved licensing, source provenance, and context-specific alternative text.",
+      "kind": "do",
+      "rationale": "Visual polish never replaces lawful, accessible use."
+    },
+    {
+      "category": "localization",
+      "contexts": [
+        "all"
+      ],
+      "id": "localization-review",
+      "instruction": "Keep approved product names stable and request human review for uncovered language contexts.",
+      "kind": "do",
+      "rationale": "Literal translation can alter tone, meaning, or trademark use."
+    },
+    {
+      "category": "mark",
+      "contexts": [
+        "repository-readme",
+        "product-ui",
+        "social-card"
+      ],
+      "id": "mark-clear-space",
+      "instruction": "Keep one quarter of the mark width clear on every side and use an approved high-contrast background.",
+      "kind": "do",
+      "rationale": "Clear space and contrast preserve recognition at small sizes."
+    },
+    {
+      "category": "mark",
+      "contexts": [
+        "all"
+      ],
+      "id": "mark-transformations",
+      "instruction": "Do not stretch, rotate, crop, outline, or recolor the mark outside approved semantic tokens.",
+      "kind": "dont",
+      "rationale": "Unreviewed transformations fragment the identity and can reduce legibility."
+    },
+    {
+      "category": "mascot",
+      "contexts": [
+        "product-ui",
+        "documentation"
+      ],
+      "id": "mascot-behavior",
+      "instruction": "Use the mascot as a supportive guide, never as the sole carrier of warnings or required instructions.",
+      "kind": "do",
+      "rationale": "Personality can reinforce understanding but must not gate it."
+    },
+    {
+      "category": "typography",
+      "contexts": [
+        "product-ui",
+        "documentation"
+      ],
+      "id": "readable-type",
+      "instruction": "Use the licensed family, supported language coverage, and documented legibility constraints.",
+      "kind": "do",
+      "rationale": "A brand typeface is not usable where its license, glyphs, or reading size fail."
+    },
+    {
+      "category": "motion",
+      "contexts": [
+        "product-ui",
+        "brand-kit-renderer"
+      ],
+      "id": "reduced-motion",
+      "instruction": "Pair every branded transition with its declared reduced-motion alternative.",
+      "kind": "do",
+      "rationale": "Motion is expressive only when users can safely reduce it."
+    },
+    {
+      "category": "color",
+      "contexts": [
+        "product-ui",
+        "documentation",
+        "social-card"
+      ],
+      "id": "semantic-color",
+      "instruction": "Choose semantic foreground and background pairs with their declared contrast intent.",
+      "kind": "do",
+      "rationale": "Semantic pairs preserve meaning and measurable readability across themes."
+    }
+  ],
+  "voice": [
+    {
+      "avoidedLanguage": [
+        "minor issue",
+        "user error",
+        "obviously",
+        "soon"
+      ],
+      "context": "incident-update",
+      "preferredVocabulary": [
+        "impact",
+        "confirmed",
+        "investigating",
+        "next update",
+        "recovery"
+      ],
+      "tone": "Calm, direct, accountable, and time-specific."
+    },
+    {
+      "avoidedLanguage": [
+        "magic",
+        "revolutionary",
+        "effortless",
+        "guaranteed"
+      ],
+      "context": "repository-readme",
+      "preferredVocabulary": [
+        "reviewed",
+        "local",
+        "deterministic",
+        "evidence",
+        "recovery"
+      ],
+      "tone": "Concise, capable, welcoming, and specific."
+    }
+  ]
+}
