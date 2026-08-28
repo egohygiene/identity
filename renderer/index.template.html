@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="{{PAGE_DESCRIPTION}}" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#0A0A0E" />
+    <link rel="icon" href="./web/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./web/apple-touch-icon.png" />
+    <link rel="manifest" href="./web/site.webmanifest" />
+    {{CANONICAL_METADATA}}
     <title>{{PAGE_TITLE}}</title>
     <style id="identity-brand-vars">
 {{THEME_VARIABLES}}
@@ -14,6 +19,7 @@
     <div
       id="identity-brand-kit-root"
       data-asset-base-url="{{ASSET_BASE_URL}}"
+      data-publication="{{PUBLICATION_JSON}}"
     >{{STATIC_MARKUP}}</div>
     <script id="identity-brand-kit-model" type="application/json">{{MODEL_JSON}}</script>
     <noscript>

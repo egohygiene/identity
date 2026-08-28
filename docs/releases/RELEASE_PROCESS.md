@@ -1,8 +1,10 @@
 # Identity release process
 
 This procedure applies to release candidates and stable releases. It creates
-an immutable artifact boundary; it does not publish a website or mutate a
-consumer repository.
+an immutable artifact boundary; it does not mutate a consumer repository.
+Publishing a stable release also triggers the separate, release-backed Identity
+Brand Kit Pages projection described in
+[the public publication guide](../publication/IDENTITY_PAGES.md).
 
 ## Preconditions
 
@@ -34,6 +36,9 @@ consumer repository.
    inventory, and an available build-provenance attestation. Re-run the
    documented quickstart from the released source or archive before marking a
    stable release.
+6. Confirm `Publish Identity Brand Kit` deploys the static page from that same
+   annotated stable tag. The public site is a projection of the release, not a
+   second release artifact source.
 
 ## Final v1.0.0 gate
 

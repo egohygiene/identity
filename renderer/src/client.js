@@ -19,10 +19,11 @@ if (!(modelElement instanceof HTMLScriptElement) || !rootElement) {
 
 const model = assertBrandKitViewModel(JSON.parse(modelElement.textContent || "{}"));
 const assetBaseUrl = rootElement.dataset.assetBaseUrl || "./";
+const publication = readPublication(rootElement.dataset.publication);
 
 hydrateRoot(
   rootElement,
-  React.createElement(BrandKitPage, { model, assetBaseUrl }),
+  React.createElement(BrandKitPage, { model, assetBaseUrl, publication }),
 );
 
 let studioPlan = null;
@@ -189,4 +190,15 @@ function nextTheme(current) {
     return "dark";
   }
   return "system";
+}
+
+function readPublication(value) {
+  if (!value) {
+    return null;
+  }
+  const publication = JSON.parse(value);
+  if (!publication || Object.keys(publication).length === 0) {
+    return null;
+  }
+  return publication;
 }

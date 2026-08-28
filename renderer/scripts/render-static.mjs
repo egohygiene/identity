@@ -28,12 +28,20 @@ const outputPath = path.resolve(
 );
 const templatePath = path.resolve(rendererRoot, "index.template.html");
 const assetBaseUrl = argumentsMap["asset-base-url"] || "./";
+const canonicalUrl = argumentsMap["canonical-url"] || null;
+const openGraphImage = argumentsMap["open-graph-image"] || null;
+const publicationPath = argumentsMap.publication
+  ? path.resolve(argumentsMap.publication)
+  : null;
 
 const model = assertBrandKitViewModel(
   JSON.parse(await fs.readFile(modelPath, "utf8")),
 );
+const publication = publicationPath
+  ? JSON.parse(await fs.readFile(publicationPath, "utf8"))
+  : null;
 const markup = renderToStaticMarkup(
-  React.createElement(BrandKitPage, { model, assetBaseUrl }),
+  React.createElement(BrandKitPage, { model, assetBaseUrl, publication }),
 );
 const template = await fs.readFile(templatePath, "utf8");
 const rendered = template
@@ -42,6 +50,11 @@ const rendered = template
   .replaceAll("{{PAGE_DESCRIPTION}}", escapeHtml(model.project.tagline))
   .replaceAll("{{THEME_VARIABLES}}", deriveThemeVariables(model))
   .replaceAll("{{ASSET_BASE_URL}}", escapeHtmlAttribute(assetBaseUrl))
+  .replaceAll("{{PUBLICATION_JSON}}", escapeHtmlAttribute(JSON.stringify(publication || {})))
+  .replaceAll(
+    "{{CANONICAL_METADATA}}",
+    canonicalMetadata({ model, canonicalUrl, openGraphImage }),
+  )
   .replaceAll("{{STATIC_MARKUP}}", markup)
   .replaceAll("{{MODEL_JSON}}", escapeScriptJson(model));
 
@@ -85,4 +98,51 @@ function escapeScriptJson(value) {
     .replaceAll("&", "\\u0026")
     .replaceAll("\u2028", "\\u2028")
     .replaceAll("\u2029", "\\u2029");
+}
+
+function canonicalMetadata({ model, canonicalUrl: url, openGraphImage: image }) {
+  if (!url) {
+    return "";
+  }
+  const canonical = new URL(url);
+  if (canonical.protocol !== "https:" || canonical.pathname !== "/") {
+    throw new Error("The canonical Brand Kit URL must be an HTTPS origin URL ending in /.");
+  }
+  if (image) {
+    const openGraphUrl = new URL(image);
+    if (openGraphUrl.protocol !== "https:") {
+      throw new Error("The Open Graph image URL must use HTTPS.");
+    }
+  }
+
+  const title = `${model.project.displayName} Brand Kit`;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description: model.project.tagline,
+    url: canonical.toString(),
+    isBasedOn: model.project.repository,
+  };
+  const lines = [
+    `<link rel="canonical" href="${escapeHtmlAttribute(canonical.toString())}" />`,
+    `<meta property="og:type" content="website" />`,
+    `<meta property="og:title" content="${escapeHtmlAttribute(title)}" />`,
+    `<meta property="og:description" content="${escapeHtmlAttribute(model.project.tagline)}" />`,
+    `<meta property="og:url" content="${escapeHtmlAttribute(canonical.toString())}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${escapeHtmlAttribute(title)}" />`,
+    `<meta name="twitter:description" content="${escapeHtmlAttribute(model.project.tagline)}" />`,
+  ];
+  if (image) {
+    const openGraphUrl = new URL(image).toString();
+    lines.push(
+      `<meta property="og:image" content="${escapeHtmlAttribute(openGraphUrl)}" />`,
+      `<meta name="twitter:image" content="${escapeHtmlAttribute(openGraphUrl)}" />`,
+    );
+  }
+  lines.push(
+    `<script type="application/ld+json">${escapeScriptJson(structuredData)}</script>`,
+  );
+  return lines.join("\n    ");
 }

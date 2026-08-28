@@ -9,7 +9,10 @@ on:
   pull_request:
     paths:
       - ".github/workflows/reference-renderer.yml"
+      - ".github/workflows/publish-brand-kit.yml"
       - "assets/identity/**"
+      - "publication/**"
+      - "scripts/package_public_brand_kit.py"
       - "contracts/v1/brand-kit-view-model.schema.json"
       - "docs/contracts/BRAND_KIT_RENDERER_V1.md"
       - "renderer/**"
@@ -22,7 +25,10 @@ on:
       - main
     paths:
       - ".github/workflows/reference-renderer.yml"
+      - ".github/workflows/publish-brand-kit.yml"
       - "assets/identity/**"
+      - "publication/**"
+      - "scripts/package_public_brand_kit.py"
       - "contracts/v1/brand-kit-view-model.schema.json"
       - "docs/contracts/BRAND_KIT_RENDERER_V1.md"
       - "renderer/**"

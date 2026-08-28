@@ -1,0 +1,210 @@
+---
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Publish Identity Brand Kit
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Stable Identity release tag to project"
+        required: true
+        default: "v1.0.0"
+        type: string
+      verify_canonical_domain:
+        description: "Verify identity.egohygiene.io after Pages deploys"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "identity-brand-kit-pages"
+  cancel-in-progress: false
+
+env:
+  CANONICAL_URL: "https://identity.egohygiene.io/"
+
+jobs:
+  build:
+    name: Build immutable public Brand Kit
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (!github.event.release.draft && !github.event.release.prerelease)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pages: write
+
+    outputs:
+      release_tag: ${{ steps.release.outputs.tag }}
+      release_commit: ${{ steps.release.outputs.commit }}
+
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
+
+      - name: Check out the Pages publisher
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: "main"
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve immutable stable release source
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! "${REQUESTED_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Only stable semantic-version Identity releases may publish the public Brand Kit."
+            exit 1
+          fi
+
+          release="$(gh release view "${REQUESTED_TAG}" --json "isDraft,isPrerelease,url")"
+          if [[ "$(jq --raw-output '.isDraft' <<<"${release}")" != "false" || "$(jq --raw-output '.isPrerelease' <<<"${release}")" != "false" ]]; then
+            echo "::error::${REQUESTED_TAG} is not a published stable GitHub release."
+            exit 1
+          fi
+
+          git fetch --force --tags origin "refs/tags/${REQUESTED_TAG}:refs/tags/${REQUESTED_TAG}"
+          if [[ "$(git cat-file --batch-check="%(objecttype)" <<<"${REQUESTED_TAG}")" != "tag" ]]; then
+            echo "::error::${REQUESTED_TAG} must be an annotated Git tag."
+            exit 1
+          fi
+
+          release_commit="$(git rev-parse "${REQUESTED_TAG}^{}")"
+          release_source="${RUNNER_TEMP}/identity-release-source"
+          git worktree add --detach "${release_source}" "${release_commit}"
+
+          echo "tag=${REQUESTED_TAG}" >> "${GITHUB_OUTPUT}"
+          echo "commit=${release_commit}" >> "${GITHUB_OUTPUT}"
+          echo "source=${release_source}" >> "${GITHUB_OUTPUT}"
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24"
+
+      - name: Activate pinned pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare "pnpm@11.21.0" --activate
+          pnpm --version
+
+      - name: Install frozen renderer dependencies
+        working-directory: renderer
+        run: pnpm install --frozen-lockfile
+
+      - name: Build release-backed public site
+        working-directory: renderer
+        env:
+          RELEASE_SOURCE: ${{ steps.release.outputs.source }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_COMMIT: ${{ steps.release.outputs.commit }}
+        run: >-
+          pnpm run build:public --
+          --source-root "${RELEASE_SOURCE}"
+          --release-tag "${RELEASE_TAG}"
+          --release-commit "${RELEASE_COMMIT}"
+
+      - name: Verify public artifact contract
+        working-directory: renderer
+        run: pnpm run verify:public
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: renderer/dist
+
+  deploy:
+    name: Deploy Identity Brand Kit
+    needs:
+      - build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+
+      - name: Verify the configured canonical domain
+        if: >-
+          github.event_name == 'workflow_dispatch' &&
+          inputs.verify_canonical_domain
+        env:
+          EXPECTED_RELEASE_TAG: ${{ needs.build.outputs.release_tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for attempt in {1..12}; do
+            if curl \
+              --fail \
+              --location \
+              --proto "=https" \
+              --proto-redir "=https" \
+              --retry 2 \
+              --retry-all-errors \
+              --show-error \
+              --silent \
+              --output "site.json" \
+              "${CANONICAL_URL}site.json?release=${EXPECTED_RELEASE_TAG}"
+            then
+              if [[ "$(jq --raw-output '.release.tag' "site.json")" == "${EXPECTED_RELEASE_TAG}" ]]; then
+                break
+              fi
+            fi
+            rm --force "site.json"
+            sleep 10
+          done
+
+          test -f "site.json"
+          test "$(jq --raw-output '.canonicalUrl' "site.json")" = "${CANONICAL_URL}"
+          test "$(jq --raw-output '.release.tag' "site.json")" = "${EXPECTED_RELEASE_TAG}"
+          curl \
+            --fail \
+            --location \
+            --proto "=https" \
+            --proto-redir "=https" \
+            --show-error \
+            --silent \
+            "${CANONICAL_URL}" \
+            | rg --fixed-strings "${CANONICAL_URL}" >/dev/null
