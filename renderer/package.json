@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@egohygiene/identity-reference-renderer",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "private": true,
   "description": "Accessible static reference renderer for immutable Identity Brand Kit view models.",
   "license": "MIT",
