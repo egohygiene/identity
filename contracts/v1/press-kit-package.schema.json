@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/press-kit-package.schema.json",
+  "title": "Identity Press Kit package index v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "version", "projectionSchema", "projectId", "sourceDigest", "files"],
+  "properties": {
+    "schema": { "const": "identity.press-kit-package/v1" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "projectionSchema": { "const": "identity.press-kit/v1" },
+    "projectId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "sourceDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "files": {
+      "type": "object",
+      "propertyNames": { "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$" },
+      "additionalProperties": { "$ref": "#/$defs/file" }
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes"],
+      "properties": {
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

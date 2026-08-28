@@ -69,6 +69,15 @@ capability ownership, and artifact downloads. It does not re-author source
 facts in renderer configuration, nor does its presence imply that Holon or a
 product consumer has implemented an undeclared capability.
 
+When a consumer supplies a generated Press Kit directory, the renderer may
+also consume its `press-kit.json` projection and the packaged assets named by
+that projection. It validates the Press Kit schema, shared project identity,
+and the exact immutable source digest before adding an optional Press and media
+kit section. It presents only the approved boilerplate, facts, links, contacts,
+team biographies, selected assets, usage/legal guidance, and generated
+downloads present in the projection. It cannot discover or publish source
+facts from `.identity/`.
+
 The renderer must not read `.identity/`, infer missing brand facts, or reach into
 a sibling repository.
 
@@ -106,6 +115,8 @@ The reference implementation in [`renderer/`](../../renderer) provides:
 - a public asset tree sourced only from the generated `assets/identity/` output.
 - optional generated handbook/context rendering through an explicit artifact
   directory, suitable for release-backed static publication.
+- optional generated Press Kit rendering through an explicit artifact
+  directory, with paths constrained to that generated package.
 
 A consumer may mount the `dist/` directory at any immutable route or adapt the
 same view model to another framework.
@@ -134,6 +145,8 @@ variables without changing or forking the JSON contract.
 - No credentials, private source material, provider prompts, or mutable branch
   references enter the view model.
 - Download links are constrained to generated release-relative paths.
+- Press Kit assets and bundle links are constrained to their generated
+  Press Kit directory; a differing project ID or source digest fails closed.
 - Browser tests run against the built static bundle and generated artifacts.
 
 ## Validation evidence
@@ -152,3 +165,5 @@ The v1 validation suite includes:
 - a reviewed Playwright desktop viewport screenshot baseline.
 - a cross-language handoff test that generates a consumer projection with
   `render_design_system.py` and renders those exact artifacts into static HTML.
+- a cross-language handoff test that generates an approved Press Kit and
+  refuses a different project before static rendering.

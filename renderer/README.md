@@ -63,6 +63,24 @@ handbook schema, and source digest. It presents the approved principles,
 inheritance, and capability boundaries and links the four generated artifacts;
 it does not recreate handbook facts from renderer configuration.
 
+Render an approved Press Kit alongside the immutable Brand Kit model:
+
+```bash
+python3 "../scripts/render_press_kit.py" \
+  --repository-root "path/to/consumer" \
+  --output-directory "assets/identity/press-kit"
+
+pnpm run render -- \
+  --model "../assets/identity/packages/renderer/brand-kit.view-model.json" \
+  --press-kit-directory "../assets/identity/press-kit" \
+  --press-kit-artifact-directory "press-kit" \
+  --asset-base-url "./"
+```
+
+The Press Kit must have the same project identity and immutable source digest
+as the Brand Kit model. The renderer exposes only generated, approved content
+and keeps asset/download paths inside the supplied Press Kit directory.
+
 Set `IDENTITY_RENDERER_BASE` when the static bundle is mounted below a route
 prefix. Consumers may also change CSS variables or supply different generated
 tokens without modifying the JSON contract.
@@ -94,6 +112,8 @@ The page deliberately labels:
   provenance data as **not declared** instead of inventing content.
 - generated design-system handbooks and AI context as **canonical guidance**
   only when the verified projection pair is supplied.
+- generated Press Kit material as **approved Press Kit content** only when the
+  verified projection is supplied.
 
 Approved assets expose their format, dimensions, intended use, availability,
 digest, safe zone, license, provenance, approval, and download status.
@@ -104,6 +124,8 @@ Vitest covers contract rendering, missing-data states, asset metadata,
 route-prefixed links, download structure, semantic accessibility, and the stable
 full-page visual hierarchy. It also runs a cross-language consumer handoff:
 the Python projection command generates a fixture consumer's artifacts and the
-static renderer consumes those exact files. Playwright covers browser accessibility including
+static renderer consumes those exact files. It also generates a governed Press
+Kit from a fixture consumer and refuses a mismatched project before rendering.
+Playwright covers browser accessibility including
 color contrast, keyboard behavior, deep links, real download responses,
 responsive/reduced-motion behavior, and a reviewed desktop viewport screenshot.

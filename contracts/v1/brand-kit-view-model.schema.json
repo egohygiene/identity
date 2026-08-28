@@ -459,6 +459,62 @@
           }
         }
       }
+    },
+    "pressKit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pressKit", "artifacts"],
+      "properties": {
+        "pressKit": {
+          "type": "object",
+          "required": [
+            "schema",
+            "project",
+            "source",
+            "boilerplates",
+            "facts",
+            "links",
+            "contacts",
+            "team",
+            "assets",
+            "guidance",
+            "artifacts"
+          ],
+          "properties": {
+            "schema": { "const": "identity.press-kit/v1" },
+            "project": {
+              "type": "object",
+              "required": ["id", "displayName"]
+            },
+            "source": {
+              "type": "object",
+              "required": ["digest", "sourceSchema"]
+            },
+            "boilerplates": { "type": "array" },
+            "facts": { "type": "array" },
+            "links": { "type": "array" },
+            "contacts": { "type": "array" },
+            "team": { "type": "array" },
+            "assets": { "type": "array" },
+            "guidance": { "type": "object" },
+            "artifacts": { "type": "array", "minItems": 5 }
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "path", "mediaType"],
+            "properties": {
+              "id": { "type": "string" },
+              "label": { "type": "string" },
+              "path": { "type": "string" },
+              "mediaType": { "type": "string" }
+            }
+          }
+        }
+      }
     }
   }
 }

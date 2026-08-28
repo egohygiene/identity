@@ -6,7 +6,13 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-No unreleased changes.
+### Added
+
+- An optional, governed Press Kit and Media Kit source boundary with approved
+  boilerplate, facts, links, contacts, optional team bios, and explicit public
+  asset selection.
+- Deterministic JSON, Markdown, manifest, checksums, and ZIP Press Kit
+  projections, plus a verified static-renderer handoff.
 
 ## 1.0.0 — 2026-08-28
 

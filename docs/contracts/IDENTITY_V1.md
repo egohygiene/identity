@@ -24,9 +24,10 @@ The v1 topology is:
 │   └── approvals.json               # human decisions and evidence
 ├── guidance/
 │   ├── voice.json                   # optional until IDN-11 lands
-│   └── usage.json                   # optional until IDN-11 lands
+│   ├── usage.json                   # optional until IDN-11 lands
 │   ├── design-system.json            # optional reviewed handbook source
-│   └── design-references.json        # optional reviewed reference catalog
+│   ├── design-references.json        # optional reviewed reference catalog
+│   └── press-kit.json                # optional reviewed Press/Media Kit source
 ├── sources/                         # approved canonical source assets
 ├── candidates/                      # unapproved work state
 └── references/                      # reviewed inspiration, never implicit license
@@ -43,6 +44,13 @@ approved principles and explicit capability ownership; `design-references.json`
 records reviewed external observations and rights constraints. They validate
 under the same human approval model as voice and usage. See the
 [design-system handbook contract](DESIGN_SYSTEM_V1.md).
+
+`documents.pressKit` is an optional additive v1 path. It names one local,
+reviewed Press and Media Kit source document. The source can contain approved
+short and long boilerplate, facts, links, contacts, optional team bios, and
+explicit selections from already-approved public assets. It never makes a
+candidate record, unapproved fact, or unspecified asset public. See the
+[Press Kit contract](PRESS_KIT_V1.md).
 
 ## Layer and merge model
 
@@ -126,6 +134,7 @@ message, and a concrete recovery action. The initial code families are:
 | `IDN1500`–`IDN1599` | target profiles and compatibility |
 | `IDN1600`–`IDN1699` | voice, usage, and guidance lifecycle |
 | `IDN1700`–`IDN1799` | handbook source and reviewed references |
+| `IDN1800`–`IDN1899` | Press Kit source and public-selection boundary |
 
 JSON output is the automation contract. Human output renders the same records;
 it does not invent a second validation result.

@@ -15,6 +15,7 @@ import {
   deriveThemeVariables,
 } from "../src/model.js";
 import { createDesignSystemView } from "../src/design-system.js";
+import { createPressKitView } from "../src/press-kit.js";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
@@ -39,19 +40,31 @@ const designSystemDirectory = argumentsMap["design-system-directory"]
   : null;
 const designSystemArtifactDirectory =
   argumentsMap["design-system-artifact-directory"] || "design-system";
+const pressKitDirectory = argumentsMap["press-kit-directory"]
+  ? path.resolve(argumentsMap["press-kit-directory"])
+  : null;
+const pressKitArtifactDirectory =
+  argumentsMap["press-kit-artifact-directory"] || "press-kit";
 
 const baseModel = assertBrandKitViewModel(
   JSON.parse(await fs.readFile(modelPath, "utf8")),
 );
-const model = designSystemDirectory
-  ? assertBrandKitViewModel({
-      ...baseModel,
-      designSystem: await loadDesignSystem(
-        designSystemDirectory,
-        designSystemArtifactDirectory,
-      ),
-    })
-  : baseModel;
+let model = baseModel;
+if (designSystemDirectory) {
+  model = assertBrandKitViewModel({
+    ...model,
+    designSystem: await loadDesignSystem(
+      designSystemDirectory,
+      designSystemArtifactDirectory,
+    ),
+  });
+}
+if (pressKitDirectory) {
+  model = assertBrandKitViewModel({
+    ...model,
+    pressKit: await loadPressKit(pressKitDirectory, pressKitArtifactDirectory),
+  });
+}
 const publication = publicationPath
   ? JSON.parse(await fs.readFile(publicationPath, "utf8"))
   : null;
@@ -85,11 +98,18 @@ async function loadDesignSystem(directory, artifactDirectory) {
   return createDesignSystemView({ handbook, context, artifactDirectory });
 }
 
+async function loadPressKit(directory, artifactDirectory) {
+  return createPressKitView({
+    pressKit: await readJson(path.join(directory, "press-kit.json")),
+    artifactDirectory,
+  });
+}
+
 async function readJson(filePath) {
   try {
     return JSON.parse(await fs.readFile(filePath, "utf8"));
   } catch (error) {
-    throw new Error(`Cannot read generated design-system artifact: ${filePath}: ${error.message}`);
+    throw new Error(`Cannot read generated Identity artifact: ${filePath}: ${error.message}`);
   }
 }
 
