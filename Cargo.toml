@@ -3,7 +3,7 @@ resolver = "3"
 
 [package]
 name = "identity"
-version = "1.0.0-rc.2"
+version = "1.0.0"
 edition = "2024"
 rust-version = "1.97.1"
 description = "A local-first Brand Kit compiler and creative handoff tool."

@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -33,14 +33,14 @@ repository: egohygiene/identity
 visibility: public
 publication: central
 route: /roadmap/identity/
-updated: 2026-08-27
+updated: 2026-08-28
 -->
-## 2026-08-27 execution snapshot
+## 2026-08-28 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
 
-**Lifecycle:** v1.0.0 release candidate
-**Current gate:** Verify the standalone release candidate on every supported source-install platform and cut a final tag only after the full release evidence is current.
+**Lifecycle:** v1.0.0 stable release preparation
+**Current gate:** Publish the final `v1.0.0` tag from this stable promotion after its pre-merge release gates pass.
 **North-star outcome:** A deterministic, governed Brand Kit v1 whose source decisions, generated assets, and approvals remain traceable.
 
 ### Visual roadmap publication
@@ -167,8 +167,9 @@ issues: [17, 18]
 **Current evidence:**
 
 - Empathy and OptiFlow now pin immutable Identity consumer integrations.
-- Issue #18 prepares a cross-platform, provenance-rich release candidate; the
-  final stable tag remains gated on its release checklist.
+- The `v1.0.0-rc.2` candidate passed all cross-platform, browser, provenance,
+  SBOM, checksum, and automated GitHub publication gates; this promotion prepares
+  the final stable tag.
 
 <!-- roadmap-step
 id: IDN-Q06

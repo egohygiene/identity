@@ -274,9 +274,9 @@ extracted CLI, v1 source contract, deterministic compiler core, built-in
 projection/package layer, shared quality/evidence harness, governed
 visual-motion validation, voice/usage/approval guidance, reference renderer,
 asset studio, and Empathy/OptiFlow pilot integrations are implemented. The
-current work is a release candidate: it verifies the standalone CLI,
-cross-platform source installs, release provenance, and support documentation
-without treating the separately deployed website as already published.
+v1.0.0 source is prepared for final tagged publication after the full
+cross-platform, provenance, and support evidence passed. The separately
+deployed public website remains outside this CLI release transaction.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
@@ -292,7 +292,7 @@ without treating the separately deployed website as already published.
 | Renderer and asset studio | Implemented | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public `/identity` route | Deferred until its dependencies land | [#16](https://github.com/egohygiene/identity/issues/16) |
 | Consumer pilots | Implemented | [#17](https://github.com/egohygiene/identity/issues/17), [Empathy #77](https://github.com/egohygiene/empathy/pull/77), [OptiFlow #46](https://github.com/egohygiene/optiflow/pull/46) |
-| v1.0.0 release | Release candidate prepared; final tag remains gated | [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
+| v1.0.0 release | Stable source prepared; final tag records the release evidence | [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
 
 The umbrella [#2](https://github.com/egohygiene/identity/issues/2) records the
 compiler/package outcome. The Empathy and OptiFlow proof has landed through

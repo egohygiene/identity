@@ -8,6 +8,13 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 No unreleased changes.
 
+## 1.0.0 — 2026-08-28
+
+### Released
+
+- Publish the first stable, independently installable Identity Brand Kit generator after the full cross-platform, renderer, reproducibility, SBOM, checksum, license-inventory, and provenance release gates passed.
+- Retain `1.0.0-rc.2` as the final prerelease record that verified the end-to-end GitHub publication path.
+
 ## 1.0.0-rc.2 — 2026-08-28
 
 ### Fixed
