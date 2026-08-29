@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-28
+updated: 2026-08-29
 governed_by:
   - architecture-decisions
 depends_on:
@@ -58,6 +58,7 @@ the decision changes materially.
 - [ADR-013: Preserve guidance lifecycle state in every projection](docs/decisions/ADR-013-preserve-guidance-lifecycle.md)
 - [ADR-014: Keep design-system handbooks as governed projections](docs/decisions/ADR-014-design-system-projection-boundary.md)
 - [ADR-015: Keep Press Kits as governed public projections](docs/decisions/ADR-015-press-kit-projection-boundary.md)
+- [ADR-016: Project social surfaces from pinned external facts](docs/decisions/ADR-016-pinned-social-surface-projection-boundary.md)
 
 ## ADR-001: Keep creative approval human-owned
 

@@ -23,6 +23,8 @@ import validate_identity as validator
 PRESS_KIT_SCHEMA = "identity.press-kit/v1"
 PACKAGE_SCHEMA = "identity.press-kit-package/v1"
 PROJECTION_VERSION = "1.0.0"
+SOCIAL_HANDOFF_SCHEMA = "identity.social-surface-press-kit-handoff/v1"
+SOCIAL_MANIFEST_SCHEMA = "identity.social-surface-package-manifest/v1"
 OUTPUT_FILES = {
     "json": "press-kit.json",
     "markdown": "press-kit.md",
@@ -335,6 +337,131 @@ def build_projection(repository_root: Path) -> tuple[dict[str, Any], dict[str, b
     return model, asset_bytes
 
 
+def verified_social_package(
+    repository_root: Path,
+    model: dict[str, Any],
+    asset_bytes: dict[str, bytes],
+    directory: Path,
+) -> tuple[dict[str, Any], dict[str, bytes]]:
+    """Attach one integrity-checked social archive through its generated handoff."""
+
+    source_directory = generated_output_directory(repository_root, directory)
+    handoff_path = source_directory / "press-kit-handoff.json"
+    manifest_path = source_directory / "social-surfaces-manifest.json"
+    checksums_path = source_directory / "SHA256SUMS"
+    archive_path = source_directory / "social-surfaces.zip"
+    for path in (handoff_path, manifest_path, checksums_path, archive_path):
+        if not path.is_file() or path.is_symlink():
+            raise ProjectionError(f"social-surface handoff file is missing or unsafe: {path.name}")
+    handoff = load_json(handoff_path)
+    manifest = load_json(manifest_path)
+    if handoff.get("schema") != SOCIAL_HANDOFF_SCHEMA:
+        raise ProjectionError("social-surface handoff uses an unsupported schema")
+    if manifest.get("schema") != SOCIAL_MANIFEST_SCHEMA:
+        raise ProjectionError("social-surface manifest uses an unsupported schema")
+    if handoff.get("publicationAuthorized") is not False:
+        raise ProjectionError("social-surface handoff must not grant publication authority")
+    if handoff.get("projectId") != model["project"]["id"]:
+        raise ProjectionError("social-surface handoff belongs to a different project")
+    if handoff.get("sourceDigest") != model["source"]["digest"]:
+        raise ProjectionError("social-surface handoff is stale for the current Identity source")
+    if (
+        manifest.get("projectId") != handoff["projectId"]
+        or manifest.get("sourceDigest") != handoff["sourceDigest"]
+        or manifest.get("catalog") != handoff.get("catalog")
+    ):
+        raise ProjectionError("social-surface manifest and handoff disagree")
+    expected_package = {
+        "manifest": "social-surfaces-manifest.json",
+        "checksums": "SHA256SUMS",
+        "archive": "social-surfaces.zip",
+    }
+    if handoff.get("package") != expected_package:
+        raise ProjectionError("social-surface handoff package paths are unsupported")
+
+    archive_bytes = archive_path.read_bytes()
+    try:
+        archive_file = zipfile.ZipFile(BytesIO(archive_bytes))
+    except zipfile.BadZipFile as error:
+        raise ProjectionError("social-surface archive is not a valid ZIP") from error
+    with archive_file as archive:
+        names = archive.namelist()
+        if names != sorted(names) or len(names) != len(set(names)):
+            raise ProjectionError("social-surface archive paths are duplicated or unordered")
+        for name in names:
+            normalized = PurePosixPath(name)
+            if (
+                normalized.is_absolute()
+                or name != normalized.as_posix()
+                or any(part in {"", ".", ".."} for part in normalized.parts)
+            ):
+                raise ProjectionError(f"social-surface archive path is unsafe: {name!r}")
+        required_names = {
+            "press-kit-handoff.json",
+            "social-surfaces-manifest.json",
+            "SHA256SUMS",
+        }
+        if not required_names.issubset(names):
+            raise ProjectionError("social-surface archive omits required integrity files")
+        if archive.read("press-kit-handoff.json") != handoff_path.read_bytes():
+            raise ProjectionError("social-surface archive handoff differs from its sidecar")
+        if archive.read("social-surfaces-manifest.json") != manifest_path.read_bytes():
+            raise ProjectionError("social-surface archive manifest differs from its sidecar")
+        if archive.read("SHA256SUMS") != checksums_path.read_bytes():
+            raise ProjectionError("social-surface archive checksums differ from their sidecar")
+        expected_checksums = (
+            "\n".join(
+                f"{hashlib.sha256(archive.read(name)).hexdigest()}  {name}"
+                for name in names
+                if name != "SHA256SUMS"
+            )
+            + "\n"
+        ).encode("utf-8")
+        if archive.read("SHA256SUMS") != expected_checksums:
+            raise ProjectionError("social-surface checksums do not match archive contents")
+        files = manifest.get("files")
+        if not isinstance(files, dict):
+            raise ProjectionError("social-surface manifest has no file integrity map")
+        for name, evidence in files.items():
+            if not isinstance(name, str) or not isinstance(evidence, dict) or name not in names:
+                raise ProjectionError("social-surface manifest references a missing archive file")
+            value = archive.read(name)
+            if evidence.get("sha256") != hashlib.sha256(value).hexdigest():
+                raise ProjectionError(f"social-surface archive digest differs: {name}")
+            if evidence.get("bytes") != len(value):
+                raise ProjectionError(f"social-surface archive byte count differs: {name}")
+
+    target_records = handoff.get("targets")
+    if not isinstance(target_records, list) or not target_records:
+        raise ProjectionError("social-surface handoff has no selected targets")
+    social_path = "social/social-surfaces.zip"
+    if social_path in asset_bytes:
+        raise ProjectionError("Press Kit social-surface archive path is duplicated")
+    updated_assets = {**asset_bytes, social_path: archive_bytes}
+    updated_model = {
+        **model,
+        "socialSurfaces": {
+            "status": "included",
+            "archivePath": social_path,
+            "sha256": hashlib.sha256(archive_bytes).hexdigest(),
+            "catalog": handoff["catalog"],
+            "targets": target_records,
+            "publicationAuthorized": False,
+        },
+        "artifacts": model["artifacts"]
+        + [
+            {
+                "id": "social-surface-package",
+                "label": "Social-surface creative inputs",
+                "path": social_path,
+                "mediaType": "application/zip",
+                "intendedUse": "Pinned, renderer-neutral social targets and approved Identity inputs.",
+            }
+        ],
+    }
+    return updated_model, updated_assets
+
+
 def render_json(value: dict[str, Any]) -> str:
     """Render one stable JSON document."""
 
@@ -437,6 +564,19 @@ def render_markdown(model: dict[str, Any]) -> str:
         )
     else:
         lines.extend(["", "No public legal guidance is declared in the current source."])
+    social = model.get("socialSurfaces")
+    if isinstance(social, dict) and social.get("status") == "included":
+        lines.extend(
+            [
+                "",
+                "## Social-surface creative inputs",
+                "",
+                f"- [Download the pinned social package]({social['archivePath']})",
+                f"- Catalog: `{social['catalog']['id']}@{social['catalog']['version']}`",
+                f"- Selected targets: {len(social['targets'])}",
+                "- Publication authorized: no",
+            ]
+        )
     lines.extend(["", "## Downloads", ""])
     lines.extend(
         f"- [{value['label']}]({value['path']}) — {value['intendedUse']}"
@@ -572,6 +712,11 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Repository-relative generated directory for the complete Press Kit package.",
     )
+    parser.add_argument(
+        "--social-surfaces-directory",
+        type=Path,
+        help="Repository-relative generated social package to verify and include.",
+    )
     return parser
 
 
@@ -582,6 +727,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     repository_root = arguments.repository_root.resolve()
     try:
         model, assets = build_projection(repository_root)
+        if arguments.social_surfaces_directory is not None:
+            model, assets = verified_social_package(
+                repository_root,
+                model,
+                assets,
+                arguments.social_surfaces_directory,
+            )
         if arguments.output_directory is None:
             output = render_json(model) if arguments.format == "json" else render_markdown(model)
             print(output, end="")

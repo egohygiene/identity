@@ -13,6 +13,10 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   asset selection.
 - Deterministic JSON, Markdown, manifest, checksums, and ZIP Press Kit
   projections, plus a verified static-renderer handoff.
+- An opt-in social-surface source contract that maps approved Identity assets
+  onto exact records from a rights-approved, digest-pinned Aether catalog.
+- Deterministic social target files, approved input copies, provenance,
+  manifests, checksums, ZIP archives, and a verified Press Kit handoff.
 
 ## 1.0.0 — 2026-08-28
 
