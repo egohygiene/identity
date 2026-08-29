@@ -1,0 +1,28 @@
+{
+  "$schema": "../contracts/v1/approvals.schema.json",
+  "schema": "identity.approvals/v1",
+  "decisions": [
+    {
+      "id": "approve-kern-mascot",
+      "subject": "mascot:kern",
+      "candidate": "mascot/source/kern-master.png",
+      "status": "approved",
+      "reviewedBy": "szmyty",
+      "reviewedAt": "2026-08-29T08:12:00Z",
+      "evidence": "https://github.com/egohygiene/identity/issues/50#issuecomment-5463168075",
+      "supersedes": null,
+      "notes": "Approved the three-eye, glowing-eye version with no floating objects, particles, or orbit rings and with the identity kernel integrated into the outfit."
+    },
+    {
+      "id": "approve-kern-mascot-asset",
+      "subject": "mascot-kern-master",
+      "candidate": "mascot/source/kern-master.png",
+      "status": "approved",
+      "reviewedBy": "szmyty",
+      "reviewedAt": "2026-08-29T08:12:00Z",
+      "evidence": "https://github.com/egohygiene/identity/issues/50#issuecomment-5463168075",
+      "supersedes": null,
+      "notes": "Approved the selected transparent source bytes as Kern's canonical governed illustration."
+    }
+  ]
+}

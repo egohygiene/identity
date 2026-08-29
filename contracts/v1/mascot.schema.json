@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/mascot.schema.json",
+  "title": "Identity v1 mascot source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "id",
+    "name",
+    "pronouns",
+    "role",
+    "status",
+    "character",
+    "meanings",
+    "canonicalAsset",
+    "variants",
+    "accessibility",
+    "usage",
+    "motion",
+    "license",
+    "approval"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)mascot.schema.json$" },
+    "schema": { "const": "identity.mascot-source/v1" },
+    "id": { "$ref": "#/$defs/identifier" },
+    "name": { "type": "string", "minLength": 1 },
+    "pronouns": { "type": "string", "minLength": 1 },
+    "role": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["candidate", "approved", "rejected", "retired"] },
+    "character": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["archetype", "traits", "silhouette", "face", "eyes", "outfit", "emblem", "prohibitedElements"],
+      "properties": {
+        "archetype": { "type": "string", "minLength": 1 },
+        "traits": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "silhouette": { "type": "string", "minLength": 1 },
+        "face": { "type": "string", "minLength": 1 },
+        "eyes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["count", "treatment"],
+          "properties": {
+            "count": { "type": "integer", "minimum": 1, "maximum": 8 },
+            "treatment": { "type": "string", "minLength": 1 }
+          }
+        },
+        "outfit": { "type": "string", "minLength": 1 },
+        "emblem": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["placement", "integrated"],
+          "properties": {
+            "placement": { "type": "string", "minLength": 1 },
+            "integrated": { "const": true }
+          }
+        },
+        "prohibitedElements": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "meanings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "element", "meaning"],
+        "properties": {
+          "id": { "$ref": "#/$defs/identifier" },
+          "element": { "type": "string", "minLength": 1 },
+          "meaning": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "canonicalAsset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId", "path", "sha256", "mediaType"],
+      "properties": {
+        "assetId": { "$ref": "#/$defs/identifier" },
+        "path": { "$ref": "#/$defs/relativePath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "mediaType": { "enum": ["image/png", "image/svg+xml"] }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "role", "aspectRatio", "crop", "minimumWidth", "altText"],
+        "properties": {
+          "id": { "$ref": "#/$defs/identifier" },
+          "role": { "type": "string", "minLength": 1 },
+          "aspectRatio": { "type": "string", "pattern": "^[1-9][0-9]*:[1-9][0-9]*$" },
+          "crop": { "type": "string", "minLength": 1 },
+          "minimumWidth": { "type": "integer", "minimum": 1 },
+          "altText": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["altText", "decorativeAlt", "neverSoleCarrier"],
+      "properties": {
+        "altText": { "type": "string", "minLength": 1 },
+        "decorativeAlt": { "const": "" },
+        "neverSoleCarrier": { "const": true }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["safeZone", "backgrounds", "do", "dont"],
+      "properties": {
+        "safeZone": { "type": "string", "minLength": 1 },
+        "backgrounds": { "type": "string", "minLength": 1 },
+        "do": { "$ref": "#/$defs/nonEmptyStrings" },
+        "dont": { "$ref": "#/$defs/nonEmptyStrings" }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "default", "reducedMotion", "restrictions"],
+      "properties": {
+        "status": { "enum": ["not-declared", "optional", "declared"] },
+        "default": { "type": "string", "minLength": 1 },
+        "reducedMotion": { "type": "string", "minLength": 1 },
+        "restrictions": { "$ref": "#/$defs/nonEmptyStrings" }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdx", "attribution", "trademark"],
+      "properties": {
+        "spdx": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string", "minLength": 1 },
+        "trademark": { "type": "string", "minLength": 1 }
+      }
+    },
+    "approval": { "$ref": "#/$defs/identifier" }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

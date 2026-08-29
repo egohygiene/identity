@@ -1,0 +1,35 @@
+{
+  "$schema": "../contracts/v1/provenance.schema.json",
+  "schema": "identity.provenance/v1",
+  "assets": [
+    {
+      "id": "mascot-kern-master",
+      "path": "mascot/source/kern-master.png",
+      "kind": "illustration",
+      "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+      "license": {
+        "spdx": "CC-BY-4.0",
+        "status": "approved",
+        "attribution": "Kern character artwork © 2026 Ego Hygiene, created with AI assistance."
+      },
+      "origin": {
+        "creator": "Ego Hygiene with OpenAI image generation",
+        "method": "generated",
+        "source": "https://github.com/egohygiene/identity/issues/50#issuecomment-5463168075",
+        "capturedAt": "2026-08-29T08:10:00Z"
+      },
+      "accessibility": {
+        "altText": "Kern, Identity's hooded guide, floats with open hands, three warm-white glowing eyes, and a luminous diamond kernel set into his charcoal and violet robes."
+      },
+      "usage": {
+        "safeZone": "Keep clear space equal to at least one glowing-eye diameter around the visible silhouette.",
+        "minimumSize": "Use the full figure at 320 CSS pixels or wider; use the approved portrait or icon below that size.",
+        "restrictions": [
+          "Do not add floating objects, orbit rings, particles, facial features, or detached emblems.",
+          "Do not use the mascot as the sole carrier of meaning."
+        ]
+      },
+      "approval": "approve-kern-mascot-asset"
+    }
+  ]
+}

@@ -22,10 +22,9 @@ const outputDirectory = path.resolve(
   rendererRoot,
   argumentsMap["output-directory"] || "dist",
 );
-const configPath = path.resolve(
-  repositoryRoot,
-  argumentsMap.config || "publication/identity-brand-kit.config.json",
-);
+const configPath = argumentsMap.config
+  ? path.resolve(repositoryRoot, argumentsMap.config)
+  : path.resolve(sourceRoot, "publication/identity-brand-kit.config.json");
 const config = await readJson(configPath);
 const releaseTag = argumentsMap["release-tag"] || config.release.defaultTag;
 const releaseCommit = argumentsMap["release-commit"] || config.release.defaultCommit;
@@ -202,6 +201,9 @@ async function buildViewModel(packageManifest, designSystem, pressKit) {
     config.assets.map(async (asset) => {
       const sourcePath = safeRelativePath(asset.sourcePath);
       const contents = await fs.readFile(path.join(sourceAssetRoot, sourcePath));
+      const embeddedText = asset.mediaType === "image/svg+xml"
+        || asset.mediaType.startsWith("text/")
+        || asset.mediaType === "application/json";
       return {
         id: asset.id,
         label: asset.label,
@@ -211,21 +213,21 @@ async function buildViewModel(packageManifest, designSystem, pressKit) {
         dimensions: asset.dimensions,
         intendedUse: asset.intendedUse,
         safeZone: asset.safeZone,
-        text: contents.toString("utf8"),
+        text: embeddedText ? contents.toString("utf8") : "",
         availability: "generated-download",
         downloadPath: sourcePath,
-        license: {
+        license: asset.license || {
           spdx: "MIT",
           status: "approved",
           attribution: "Ego Hygiene contributors",
         },
-        origin: {
+        origin: asset.origin || {
           creator: "Ego Hygiene",
           method: "deterministic vector projection",
           source: `assets/identity/${sourcePath}`,
           capturedAt: "2026-08-22",
         },
-        approval: "human-approved-visual-direction",
+        approval: asset.approval || "human-approved-visual-direction",
       };
     }),
   );

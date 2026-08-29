@@ -294,6 +294,28 @@
       "supersedes": null
     },
     {
+      "candidate": ".identity/guidance/mascot.json",
+      "evidence": "https://example.invalid/reviews/mascot-kern",
+      "id": "approve-kern-mascot",
+      "notes": "Approved the complete mascot source and governed asset.",
+      "reviewedAt": "2026-08-22T11:05:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "mascot:kern",
+      "supersedes": null
+    },
+    {
+      "candidate": ".identity/sources/kern.svg",
+      "evidence": "https://example.invalid/reviews/mascot-kern-asset",
+      "id": "approve-kern-mascot-asset",
+      "notes": "Approved the governed mascot illustration bytes.",
+      "reviewedAt": "2026-08-22T11:05:00Z",
+      "reviewedBy": "example-maintainer",
+      "status": "approved",
+      "subject": "mascot-kern",
+      "supersedes": null
+    },
+    {
       "candidate": ".identity/sources/legacy-wordmark.svg",
       "evidence": "https://example.invalid/reviews/legacy-wordmark-source",
       "id": "approve-legacy-wordmark-source",

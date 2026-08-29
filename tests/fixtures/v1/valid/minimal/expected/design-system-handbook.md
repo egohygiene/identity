@@ -4,7 +4,7 @@ This is a deterministic projection of validated, reviewed local Identity source.
 
 Source: https://example.invalid/example-product
 
-Source digest: `83c439cd09b954f25c42c05191e7019bff7f41c9df79cf6e37e3cc1a4d75a7e8`
+Source digest: `1002ff75ea51f6e016929894ea30cc96565bdbbca749a0e7fff1ebd0d2f21353`
 
 ## Inheritance
 

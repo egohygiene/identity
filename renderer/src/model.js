@@ -124,9 +124,12 @@ export function colorValueToCss(value) {
   return `rgba(${channels.join(", ")}, ${alpha})`;
 }
 
-export function sourceDataUrl(asset) {
+export function sourceDataUrl(asset, assetBaseUrl = "./") {
   if (asset.mediaType === "image/svg+xml") {
     return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(asset.text)}`;
+  }
+  if (asset.mediaType.startsWith("image/") && asset.downloadPath) {
+    return joinAssetUrl(assetBaseUrl, asset.downloadPath);
   }
   return "";
 }

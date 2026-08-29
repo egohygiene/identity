@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../contracts/v1/mascot-package.schema.json",
+  "schema": "identity.mascot-package/v1",
+  "character": "kern",
+  "version": "1.0.0",
+  "derivedFrom": {
+    "path": "mascot/source/kern-master.png",
+    "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c"
+  },
+  "generation": {
+    "mode": "reviewed-byte-bound-projection",
+    "tool": "ImageMagick 6.9.12-98",
+    "record": "mascot/generation-record.md"
+  },
+  "guidance": {
+    "path": "assets/identity/mascot/README.md",
+    "sha256": "f416c2c66be67aa6545879efb70663ecaa9a6a75e48fdba9c570fe808e033f3f"
+  },
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "attribution": "Kern character artwork © 2026 Ego Hygiene, created with AI assistance."
+  },
+  "files": [
+    {
+      "id": "kern-full",
+      "path": "assets/identity/mascot/kern-full.png",
+      "mediaType": "image/png",
+      "width": 768,
+      "height": 1152,
+      "sizeBytes": 692047,
+      "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+      "role": "Full-figure hero and editorial art.",
+      "minimumWidth": 320
+    },
+    {
+      "id": "kern-portrait",
+      "path": "assets/identity/mascot/kern-portrait.png",
+      "mediaType": "image/png",
+      "width": 512,
+      "height": 512,
+      "sizeBytes": 288668,
+      "sha256": "bf3dad6ff9b75ef998f662b9cadd6bde9a5dffeaff54d01a1a1bec8681cefc99",
+      "role": "Square cards, documentation callouts, and profile introductions.",
+      "minimumWidth": 160
+    },
+    {
+      "id": "kern-icon",
+      "path": "assets/identity/mascot/kern-icon.png",
+      "mediaType": "image/png",
+      "width": 256,
+      "height": 256,
+      "sizeBytes": 92515,
+      "sha256": "e902dc0f264f94ae1a06b9020d3b07fae8e4a2ec0c09dab4d9ec35bc0f9089e7",
+      "role": "Compact avatars and small square identity surfaces.",
+      "minimumWidth": 96
+    }
+  ]
+}

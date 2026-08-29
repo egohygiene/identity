@@ -1,0 +1,115 @@
+{
+  "$schema": "../contracts/v1/mascot.schema.json",
+  "schema": "identity.mascot-source/v1",
+  "id": "kern",
+  "name": "Kern",
+  "pronouns": "he/him",
+  "role": "A calm guide who helps people observe context, align intent, and project identity consistently.",
+  "status": "approved",
+  "character": {
+    "archetype": "quiet identity guide",
+    "traits": ["clear", "considerate", "grounded", "quietly playful", "useful"],
+    "silhouette": "A compact floating figure in a deep charcoal hood and layered robe, shown with open hands.",
+    "face": "A featureless glossy dark face with no mouth, nose, pupils, or irises.",
+    "eyes": {
+      "count": 3,
+      "treatment": "Featureless warm-white glowing ovals arranged as one centered upper eye and two lower eyes."
+    },
+    "outfit": "Charcoal and obsidian fabric with restrained violet, luminous-blue, and soft-gold trim.",
+    "emblem": {
+      "placement": "The layered diamond identity kernel is fixed into the chest garment, never held or orbited as a detached object.",
+      "integrated": true
+    },
+    "prohibitedElements": [
+      "floating objects or tokens",
+      "orbit rings or circling lines",
+      "particle trails",
+      "a detached or hand-held identity kernel",
+      "extra eyes, facial features, pupils, or irises"
+    ]
+  },
+  "meanings": [
+    {
+      "id": "three-eyes",
+      "element": "Three glowing eyes",
+      "meaning": "Observe context, reflect intent, and verify the resulting projection."
+    },
+    {
+      "id": "integrated-kernel",
+      "element": "Chest-integrated identity kernel",
+      "meaning": "Identity is carried as governed intent rather than treated as a detached decoration."
+    },
+    {
+      "id": "open-hands",
+      "element": "Open hands",
+      "meaning": "Offer guidance and reusable tools without claiming creative authority from the human reviewer."
+    }
+  ],
+  "canonicalAsset": {
+    "assetId": "mascot-kern-master",
+    "path": "mascot/source/kern-master.png",
+    "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+    "mediaType": "image/png"
+  },
+  "variants": [
+    {
+      "id": "full",
+      "role": "Hero art, Brand Kit introductions, and spacious editorial layouts.",
+      "aspectRatio": "2:3",
+      "crop": "Complete floating figure with open hands and the full robe visible.",
+      "minimumWidth": 320,
+      "altText": "Kern, Identity's hooded guide, floats with open hands, three warm-white glowing eyes, and a luminous diamond kernel set into his charcoal and violet robes."
+    },
+    {
+      "id": "portrait",
+      "role": "Cards, documentation callouts, profile introductions, and square feature panels.",
+      "aspectRatio": "1:1",
+      "crop": "Head, open hands, and chest-integrated kernel remain visible.",
+      "minimumWidth": 160,
+      "altText": "Portrait of Kern with three glowing eyes, open hands, and the identity kernel integrated into his robe."
+    },
+    {
+      "id": "icon",
+      "role": "Compact avatars and small square identity surfaces.",
+      "aspectRatio": "1:1",
+      "crop": "The hood, all three eyes, hands, and chest kernel remain recognizable.",
+      "minimumWidth": 96,
+      "altText": "Kern's hooded three-eye silhouette with open hands and a luminous chest emblem."
+    }
+  ],
+  "accessibility": {
+    "altText": "Kern, Identity's hooded guide, floats with open hands, three warm-white glowing eyes, and a luminous diamond kernel set into his charcoal and violet robes.",
+    "decorativeAlt": "",
+    "neverSoleCarrier": true
+  },
+  "usage": {
+    "safeZone": "Keep clear space equal to at least one glowing-eye diameter around the visible silhouette.",
+    "backgrounds": "Prefer obsidian, charcoal, transparent, or quiet neutral fields that preserve the face, robe, and gold-edge contrast.",
+    "do": [
+      "Use Kern as a supportive guide beside clear headings, labels, or instructions.",
+      "Preserve all three glowing eyes and the chest-integrated identity kernel.",
+      "Use the supplied full, portrait, or icon crop instead of inventing an unreviewed crop."
+    ],
+    "dont": [
+      "Do not make Kern the sole carrier of meaning, status, or navigation.",
+      "Do not add floating props, orbit rings, particles, facial features, or extra emblems.",
+      "Do not recolor, stretch, mirror, rotate, or separate the chest kernel from the outfit.",
+      "Do not imply endorsement, autonomy, sentience, or human approval through the character."
+    ]
+  },
+  "motion": {
+    "status": "optional",
+    "default": "Static; motion is not required for recognition or meaning.",
+    "reducedMotion": "Show the approved static variant with no transition-dependent information.",
+    "restrictions": [
+      "If motion is later approved, limit it to a gentle eye glow or subtle breathing-scale shift.",
+      "Never animate orbiting objects, particles, detached emblems, rapid flashes, or perpetual rotation."
+    ]
+  },
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "attribution": "Kern character artwork © 2026 Ego Hygiene, created with AI assistance.",
+    "trademark": "The copyright license does not grant permission to use Ego Hygiene or Identity names, marks, or trade dress as source identifiers."
+  },
+  "approval": "approve-kern-mascot"
+}

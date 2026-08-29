@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Example three-eye guide</title>
+  <path fill="#17131f" d="M32 4C17 4 8 18 8 35c0 15 10 25 24 25s24-10 24-25C56 18 47 4 32 4Z"/>
+  <g fill="#fff4d6">
+    <circle cx="32" cy="22" r="4"/>
+    <circle cx="23" cy="33" r="4"/>
+    <circle cx="41" cy="33" r="4"/>
+  </g>
+  <path fill="#6a4cff" stroke="#d4af6a" stroke-width="2" d="m32 42 7 7-7 7-7-7Z"/>
+</svg>

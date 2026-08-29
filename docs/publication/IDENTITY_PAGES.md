@@ -15,12 +15,15 @@ out an annotated, stable Identity release tag, stages only that tag's
 
 - the static reference renderer;
 - individual approved asset downloads;
+- release-owned mascot assets and their byte-bound character-package manifest;
 - a deterministic `identity-brand-kit-v<version>.zip` archive;
 - a public manifest with release tag, commit, source digest, file inventory,
   and archive checksum; and
 - a matching checksum sidecar.
 
-The page visibly links its release and publication manifest. `site.json` carries
+The publisher reads `publication/identity-brand-kit.config.json` from the
+selected immutable release source. A newer default-branch configuration cannot
+claim an asset absent from that release. The page visibly links its release and publication manifest. `site.json` carries
 the same release, digest, canonical URL, and route-alias information for a
 machine check without scraping HTML.
 
@@ -53,6 +56,8 @@ pnpm run verify:public
 
 The build intentionally rejects prerelease tags, moving references, unapproved
 paths outside `assets/identity/`, and invalid release-commit identifiers.
+Approved raster assets use their immutable packaged download paths for previews;
+their binary bytes are never coerced into the renderer's text field.
 
 ## Deployment
 

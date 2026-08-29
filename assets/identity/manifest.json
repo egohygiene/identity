@@ -47,6 +47,20 @@
       {"path": "reference/design-system.webp", "git_blob": "7eb5e45da76d29ee6f96be7177e5c3c34f91b335"},
       {"path": "reference/usage-guidelines.webp", "git_blob": "7ae7e3399065eba80c06a67cf91c6da2203e55b4"}
     ],
+    "mascot": {
+      "character": "kern",
+      "source": "mascot/kern.character.json",
+      "approval": "mascot/approval.json",
+      "provenance": "mascot/provenance.json",
+      "license": "CC-BY-4.0",
+      "guidance": "mascot/README.md",
+      "manifest": "mascot/manifest.json",
+      "variants": [
+        {"path": "mascot/kern-full.png", "role": "full-figure hero", "dimensions": "768x1152"},
+        {"path": "mascot/kern-portrait.png", "role": "square portrait", "dimensions": "512x512"},
+        {"path": "mascot/kern-icon.png", "role": "compact square icon", "dimensions": "256x256"}
+      ]
+    },
     "web": [
       "web/icon.svg",
       "web/maskable-icon.svg",

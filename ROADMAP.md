@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-28
+updated: 2026-08-29
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -35,7 +35,7 @@ publication: central
 route: /roadmap/identity/
 updated: 2026-08-28
 -->
-## 2026-08-28 execution snapshot
+## 2026-08-29 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
 
@@ -196,6 +196,35 @@ issues: []
 
 - Identity already has the strongest compiler and package foundation; the roadmap profile is not yet published.
 
+<!-- roadmap-step
+id: IDN-Q07
+status: complete
+depends_on: [IDN-Q02]
+issues: [50]
+-->
+#### IDN-Q07 — Establish the mascot and character system
+
+**State:** `complete`
+**Depends on:** `IDN-Q02`
+
+**Outcome:** Identity has one human-approved, rights-aware mascot whose source,
+meaning, responsive variants, accessibility, motion limits, and public package
+are reusable without transferring creative authority to a renderer.
+
+**Exit criteria:**
+
+- [x] Issue #50 records the selected character and exact human approval evidence.
+- [x] Canonical art and full, portrait, and icon variants are content-addressed and licensed.
+- [x] Consumer source and package schemas fail closed on ungoverned mascot declarations.
+- [x] The public Brand Kit can preview raster variants without embedding binary bytes as text.
+
+**Current evidence:**
+
+- Kern's approved character source binds exactly three glowing eyes, an
+  outfit-integrated identity kernel, prohibited elements, and authored meaning.
+- Standard-library verification checks approval, provenance, license, digests,
+  dimensions, PNG structure, and real RGBA transparency offline.
+
 ### Roadmap-to-issue handoff
 
 - A step is complete only when its exit criteria and required evidence are satisfied; commit count never determines progress.
@@ -305,6 +334,7 @@ Wave 0 establishes decisions that constrain every implementation PR:
 | Distribute portable Brand Kit packages | #11, #18 | Versioned profile/package contracts, checksums, deterministic archive, consumer installation, clean-room build, and release provenance |
 | Render and preview an understandable Brand Kit | #14, #15 | Accessibility, responsive, link, download, visual regression, and mutation-isolation tests |
 | Publish the Identity Brand Kit at `identity.egohygiene.io` | #16 | Immutable release projection, metadata, `/brand-kit/` compatibility redirect, deployment smoke test, and rollback evidence |
+| Reuse an approved mascot without losing human authority | #50 | Character/variant schemas, approval and provenance links, licensed exact bytes, accessibility and motion guidance, Brand Kit package verification |
 | Preserve product variation within a family | #17 | Empathy and OptiFlow inheritance/override evidence |
 | Release a supportable v1.0.0 | #18 | Platform matrix, documentation, SBOM/license inventory, checksums, attestations, and all release gates |
 

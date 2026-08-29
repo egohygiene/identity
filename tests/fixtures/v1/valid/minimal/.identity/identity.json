@@ -36,7 +36,8 @@
     "handbook": {
       "designSystem": ".identity/guidance/design-system.json",
       "references": ".identity/guidance/design-references.json"
-    }
+    },
+    "mascot": ".identity/guidance/mascot.json"
   },
   "directories": {
     "sources": ".identity/sources",

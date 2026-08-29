@@ -28,7 +28,8 @@ The v1 topology is:
 │   ├── design-system.json            # optional reviewed handbook source
 │   ├── design-references.json        # optional reviewed reference catalog
 │   ├── press-kit.json                # optional reviewed Press/Media Kit source
-│   └── social-surfaces.json          # optional pinned surface selections
+│   ├── social-surfaces.json          # optional pinned surface selections
+│   └── mascot.json                   # optional reviewed character system
 ├── sources/                         # approved canonical source assets
 ├── candidates/                      # unapproved work state
 └── references/                      # reviewed inspiration, never implicit license
@@ -59,6 +60,11 @@ to existing approved public Identity assets and closed project metadata
 selectors. Projects explicitly adopt every organization default and can record
 reviewed product exclusions or bounded overrides. See the
 [social-surface projection contract](SOCIAL_SURFACES_V1.md).
+
+`documents.mascot` is an optional additive v1 path. It binds one reviewed
+character system to a governed canonical asset, semantic visual invariants,
+responsive variants, accessibility guidance, motion limits, a license, and a
+human approval. See the [mascot and character-system contract](MASCOT_SYSTEM_V1.md).
 
 ## Layer and merge model
 
@@ -144,6 +150,7 @@ message, and a concrete recovery action. The initial code families are:
 | `IDN1700`–`IDN1799` | handbook source and reviewed references |
 | `IDN1800`–`IDN1899` | Press Kit source and public-selection boundary |
 | `IDN1900`–`IDN1999` | pinned social catalog, selection, and projection boundary |
+| `IDN2000`–`IDN2099` | mascot source, approval, provenance, and variant boundary |
 
 JSON output is the automation contract. Human output renders the same records;
 it does not invent a second validation result.

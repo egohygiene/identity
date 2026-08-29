@@ -8,6 +8,10 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- The approved Kern mascot and reusable v1 character-system contract, with a
+  governed transparent master, full/portrait/icon projections, accessibility
+  and motion rules, CC-BY-4.0 rights metadata, public Brand Kit integration,
+  and offline byte/transparency verification.
 - An optional, governed Press Kit and Media Kit source boundary with approved
   boilerplate, facts, links, contacts, optional team bios, and explicit public
   asset selection.

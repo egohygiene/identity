@@ -53,6 +53,32 @@
         "restrictions": ["Internal migration and historical reference only."]
       },
       "approval": "approve-legacy-wordmark-source"
+    },
+    {
+      "id": "mascot-kern",
+      "path": ".identity/sources/kern.svg",
+      "kind": "illustration",
+      "sha256": "c1d0d2acc3f516d09db95e3f02ff9631ff0f5f476970b1194f0981396c1cc637",
+      "license": {
+        "spdx": "MIT",
+        "status": "approved",
+        "attribution": "Copyright 2026 Example"
+      },
+      "origin": {
+        "creator": "Example",
+        "method": "first-party",
+        "source": "https://example.invalid/source/mascot-kern",
+        "capturedAt": "2026-08-22T11:00:00Z"
+      },
+      "accessibility": {
+        "altText": "Kern, a hooded guide with three glowing eyes and a chest emblem."
+      },
+      "usage": {
+        "safeZone": "Keep one eye diameter clear around the silhouette.",
+        "minimumSize": "Use at 128 CSS pixels or wider.",
+        "restrictions": ["Do not use the mascot as the sole carrier of meaning."]
+      },
+      "approval": "approve-kern-mascot-asset"
     }
   ]
 }
