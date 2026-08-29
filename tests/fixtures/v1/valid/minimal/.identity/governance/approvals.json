@@ -133,6 +133,28 @@
       "evidence": "https://example.invalid/reviews/greptile-design-reference",
       "supersedes": null,
       "notes": "Approved as a pattern-study record only; no third-party assets are imported."
+    },
+    {
+      "id": "approve-kern-mascot",
+      "subject": "mascot:kern",
+      "candidate": ".identity/guidance/mascot.json",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-22T11:05:00Z",
+      "evidence": "https://example.invalid/reviews/mascot-kern",
+      "supersedes": null,
+      "notes": "Approved the complete mascot source and governed asset."
+    },
+    {
+      "id": "approve-kern-mascot-asset",
+      "subject": "mascot-kern",
+      "candidate": ".identity/sources/kern.svg",
+      "status": "approved",
+      "reviewedBy": "example-maintainer",
+      "reviewedAt": "2026-08-22T11:05:00Z",
+      "evidence": "https://example.invalid/reviews/mascot-kern-asset",
+      "supersedes": null,
+      "notes": "Approved the governed mascot illustration bytes."
     }
   ]
 }

@@ -31,6 +31,15 @@ subpaths and may add redirect-only aliases later. See the
 
 The first human-approved self-hosting visual direction now lives under [`assets/identity/`](assets/identity/README.md). These are generated projections—not a replacement for the future canonical `.identity/` source contract.
 
+Kern, the approved Identity guide, now dogfoods the v1
+[mascot and character-system contract](docs/contracts/MASCOT_SYSTEM_V1.md).
+His three glowing eyes represent context, intent, and verified projection; the
+identity kernel is integrated into his outfit rather than floating as a prop.
+
+<p align="center">
+  <img src="assets/identity/mascot/kern-portrait.png" alt="Portrait of Kern with three glowing eyes, open hands, and the identity kernel integrated into his robe." width="360" />
+</p>
+
 <p align="center">
   <img src="assets/identity/guidelines/color-palette.svg" alt="identity color palette" width="92%" />
 </p>
@@ -38,6 +47,7 @@ The first human-approved self-hosting visual direction now lives under [`assets/
 <p align="center">
   <a href="assets/identity/guidelines/design-system.svg">design system board</a> ·
   <a href="assets/identity/guidelines/usage-guidelines.svg">usage guidelines</a> ·
+  <a href="assets/identity/mascot/manifest.json">mascot package</a> ·
   <a href="assets/identity/manifest.json">asset manifest</a>
 </p>
 

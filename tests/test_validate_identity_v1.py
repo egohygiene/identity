@@ -155,6 +155,36 @@ class IdentityV1ValidatorTests(unittest.TestCase):
 
             self.assertEqual(validator.validate_identity(repository), [])
 
+    def test_mascot_source_is_additive_and_governed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            mascot_path = repository / ".identity/guidance/mascot.json"
+            mascot = json.loads(mascot_path.read_text(encoding="utf-8"))
+            mascot["character"]["eyes"]["count"] = 0
+            mascot["canonicalAsset"]["sha256"] = "0" * 64
+            mascot["approval"] = "missing-mascot-approval"
+            write_json(mascot_path, mascot)
+
+            diagnostics = validator.validate_identity(repository)
+
+        self.assertTrue(
+            {"IDN2001", "IDN2002", "IDN2003"}.issubset(
+                {item.code for item in diagnostics}
+            )
+        )
+
+    def test_mascot_document_is_an_additive_v1_extension(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            project_path = repository / ".identity/identity.json"
+            project = json.loads(project_path.read_text(encoding="utf-8"))
+            del project["documents"]["mascot"]
+            write_json(project_path, project)
+
+            self.assertEqual(validator.validate_identity(repository), [])
+
     def test_v1_schema_identities_and_diagnostic_contract_are_stable(self) -> None:
         schemas = {
             path.name: json.loads(path.read_text(encoding="utf-8"))
@@ -176,6 +206,8 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "design-system.schema.json",
                 "diagnostics.schema.json",
                 "motion-policy.schema.json",
+                "mascot-package.schema.json",
+                "mascot.schema.json",
                 "press-kit-package.schema.json",
                 "press-kit-projection.schema.json",
                 "press-kit.schema.json",
@@ -244,6 +276,14 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["social-surface-press-kit-handoff.schema.json"]["properties"]["schema"]["const"],
             "identity.social-surface-press-kit-handoff/v1",
+        )
+        self.assertEqual(
+            schemas["mascot.schema.json"]["properties"]["schema"]["const"],
+            validator.MASCOT_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["mascot-package.schema.json"]["properties"]["schema"]["const"],
+            "identity.mascot-package/v1",
         )
         self.assertEqual(
             schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],

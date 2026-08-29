@@ -126,6 +126,72 @@
       "dimensions": "1280 × 640 SVG viewBox units",
       "intendedUse": "Social and link-preview surfaces.",
       "safeZone": 0.08
+    },
+    {
+      "id": "mascot-kern-full",
+      "label": "Kern full figure",
+      "sourcePath": "mascot/kern-full.png",
+      "mediaType": "image/png",
+      "altText": "Kern, Identity's hooded guide, floats with open hands, three warm-white glowing eyes, and a luminous diamond kernel set into his charcoal and violet robes.",
+      "dimensions": "768 × 1152 pixels",
+      "intendedUse": "Hero art, Brand Kit introductions, and spacious editorial layouts at 320 CSS pixels or wider.",
+      "safeZone": 0.1,
+      "license": {
+        "spdx": "CC-BY-4.0",
+        "status": "approved",
+        "attribution": "Kern character artwork © 2026 Ego Hygiene, created with AI assistance."
+      },
+      "origin": {
+        "creator": "Ego Hygiene with OpenAI image generation",
+        "method": "reviewed AI-assisted illustration",
+        "source": "mascot/source/kern-master.png",
+        "capturedAt": "2026-08-29"
+      },
+      "approval": "approve-kern-mascot"
+    },
+    {
+      "id": "mascot-kern-portrait",
+      "label": "Kern portrait",
+      "sourcePath": "mascot/kern-portrait.png",
+      "mediaType": "image/png",
+      "altText": "Portrait of Kern with three glowing eyes, open hands, and the identity kernel integrated into his robe.",
+      "dimensions": "512 × 512 pixels",
+      "intendedUse": "Cards, documentation callouts, profile introductions, and square feature panels at 160 CSS pixels or wider.",
+      "safeZone": 0.1,
+      "license": {
+        "spdx": "CC-BY-4.0",
+        "status": "approved",
+        "attribution": "Kern character artwork © 2026 Ego Hygiene, created with AI assistance."
+      },
+      "origin": {
+        "creator": "Ego Hygiene with OpenAI image generation",
+        "method": "reviewed AI-assisted illustration",
+        "source": "mascot/source/kern-master.png",
+        "capturedAt": "2026-08-29"
+      },
+      "approval": "approve-kern-mascot"
+    },
+    {
+      "id": "mascot-kern-icon",
+      "label": "Kern compact icon",
+      "sourcePath": "mascot/kern-icon.png",
+      "mediaType": "image/png",
+      "altText": "Kern's hooded three-eye silhouette with open hands and a luminous chest emblem.",
+      "dimensions": "256 × 256 pixels",
+      "intendedUse": "Compact avatars and small square identity surfaces at 96 CSS pixels or wider.",
+      "safeZone": 0.1,
+      "license": {
+        "spdx": "CC-BY-4.0",
+        "status": "approved",
+        "attribution": "Kern character artwork © 2026 Ego Hygiene, created with AI assistance."
+      },
+      "origin": {
+        "creator": "Ego Hygiene with OpenAI image generation",
+        "method": "reviewed AI-assisted illustration",
+        "source": "mascot/source/kern-master.png",
+        "capturedAt": "2026-08-29"
+      },
+      "approval": "approve-kern-mascot"
     }
   ],
   "guidance": {
@@ -164,7 +230,7 @@
       "status": "not-declared"
     },
     "mascot": {
-      "status": "not-declared"
+      "status": "declared"
     }
   }
 }

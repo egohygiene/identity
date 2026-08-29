@@ -1,0 +1,71 @@
+{
+  "$schema": "../../../../../../../contracts/v1/mascot.schema.json",
+  "schema": "identity.mascot-source/v1",
+  "id": "kern",
+  "name": "Kern",
+  "pronouns": "he/him",
+  "role": "A calm guide for reviewed identity decisions.",
+  "status": "approved",
+  "character": {
+    "archetype": "quiet guide",
+    "traits": ["clear", "considerate", "grounded"],
+    "silhouette": "A compact hooded guide.",
+    "face": "A featureless dark face.",
+    "eyes": {
+      "count": 3,
+      "treatment": "Three featureless warm-white lights."
+    },
+    "outfit": "A charcoal robe with violet and gold accents.",
+    "emblem": {
+      "placement": "The identity kernel is fixed into the chest garment.",
+      "integrated": true
+    },
+    "prohibitedElements": ["floating props", "orbit rings", "detached emblems"]
+  },
+  "meanings": [
+    {
+      "id": "three-eyes",
+      "element": "Three eyes",
+      "meaning": "Observe context, reflect intent, and verify the projection."
+    }
+  ],
+  "canonicalAsset": {
+    "assetId": "mascot-kern",
+    "path": ".identity/sources/kern.svg",
+    "sha256": "c1d0d2acc3f516d09db95e3f02ff9631ff0f5f476970b1194f0981396c1cc637",
+    "mediaType": "image/svg+xml"
+  },
+  "variants": [
+    {
+      "id": "full",
+      "role": "Spacious introductions.",
+      "aspectRatio": "1:1",
+      "crop": "Complete figure.",
+      "minimumWidth": 128,
+      "altText": "Kern, a hooded guide with three glowing eyes and a chest emblem."
+    }
+  ],
+  "accessibility": {
+    "altText": "Kern, a hooded guide with three glowing eyes and a chest emblem.",
+    "decorativeAlt": "",
+    "neverSoleCarrier": true
+  },
+  "usage": {
+    "safeZone": "Keep one eye diameter clear around the silhouette.",
+    "backgrounds": "Use on quiet, high-contrast fields.",
+    "do": ["Pair the mascot with visible text."],
+    "dont": ["Do not use the mascot as the sole carrier of meaning."]
+  },
+  "motion": {
+    "status": "optional",
+    "default": "Static.",
+    "reducedMotion": "Use the static asset.",
+    "restrictions": ["Do not use perpetual rotation."]
+  },
+  "license": {
+    "spdx": "MIT",
+    "attribution": "Copyright 2026 Example",
+    "trademark": "No trademark permission is granted."
+  },
+  "approval": "approve-kern-mascot"
+}

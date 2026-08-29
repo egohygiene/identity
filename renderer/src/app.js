@@ -667,7 +667,7 @@ function AssetsSection({ assets, assetBaseUrl }) {
                 { className: "asset-preview" },
                 asset.mediaType.startsWith("image/")
                   ? h("img", {
-                      src: sourceDataUrl(asset),
+                      src: sourceDataUrl(asset, assetBaseUrl),
                       alt: asset.altText,
                     })
                   : h("p", null, "Preview unavailable for this media type."),

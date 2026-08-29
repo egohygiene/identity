@@ -71,6 +71,9 @@
         },
         "socialSurfaces": {
           "$ref": "#/$defs/relativePath"
+        },
+        "mascot": {
+          "$ref": "#/$defs/relativePath"
         }
       }
     },

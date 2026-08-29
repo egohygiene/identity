@@ -3,7 +3,7 @@
 
 import { describe, expect, test } from "vitest";
 
-import { joinAssetUrl } from "../src/model.js";
+import { joinAssetUrl, sourceDataUrl } from "../src/model.js";
 
 describe("joinAssetUrl", () => {
   test("preserves route-relative generated downloads", () => {
@@ -27,5 +27,20 @@ describe("joinAssetUrl", () => {
     ).toBe(
       "https://cdn.example.invalid/identity/v1/packages/metadata/metadata.json",
     );
+  });
+});
+
+describe("sourceDataUrl", () => {
+  test("uses immutable download paths for approved raster previews", () => {
+    expect(
+      sourceDataUrl(
+        {
+          mediaType: "image/png",
+          downloadPath: "mascot/kern-icon.png",
+          text: "",
+        },
+        "./",
+      ),
+    ).toBe("./mascot/kern-icon.png");
   });
 });
