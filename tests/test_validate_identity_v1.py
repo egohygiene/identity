@@ -181,6 +181,10 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "press-kit.schema.json",
                 "project.schema.json",
                 "quality-report.schema.json",
+                "social-surface-package-manifest.schema.json",
+                "social-surface-package.schema.json",
+                "social-surface-press-kit-handoff.schema.json",
+                "social-surfaces.schema.json",
                 "provenance.schema.json",
                 "targets.schema.json",
                 "tokens.schema.json",
@@ -224,6 +228,22 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["press-kit-package.schema.json"]["properties"]["schema"]["const"],
             "identity.press-kit-package/v1",
+        )
+        self.assertEqual(
+            schemas["social-surfaces.schema.json"]["properties"]["schema"]["const"],
+            validator.SOCIAL_SURFACE_SOURCE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["social-surface-package.schema.json"]["properties"]["schema"]["const"],
+            "identity.social-surface-package/v1",
+        )
+        self.assertEqual(
+            schemas["social-surface-package-manifest.schema.json"]["properties"]["schema"]["const"],
+            "identity.social-surface-package-manifest/v1",
+        )
+        self.assertEqual(
+            schemas["social-surface-press-kit-handoff.schema.json"]["properties"]["schema"]["const"],
+            "identity.social-surface-press-kit-handoff/v1",
         )
         self.assertEqual(
             schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],

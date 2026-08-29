@@ -27,7 +27,8 @@ The v1 topology is:
 │   ├── usage.json                   # optional until IDN-11 lands
 │   ├── design-system.json            # optional reviewed handbook source
 │   ├── design-references.json        # optional reviewed reference catalog
-│   └── press-kit.json                # optional reviewed Press/Media Kit source
+│   ├── press-kit.json                # optional reviewed Press/Media Kit source
+│   └── social-surfaces.json          # optional pinned surface selections
 ├── sources/                         # approved canonical source assets
 ├── candidates/                      # unapproved work state
 └── references/                      # reviewed inspiration, never implicit license
@@ -51,6 +52,13 @@ short and long boilerplate, facts, links, contacts, optional team bios, and
 explicit selections from already-approved public assets. It never makes a
 candidate record, unapproved fact, or unspecified asset public. See the
 [Press Kit contract](PRESS_KIT_V1.md).
+
+`documents.socialSurfaces` is an optional additive v1 path. It selects exact
+records from a repository-local, digest-pinned Aether catalog, then maps them
+to existing approved public Identity assets and closed project metadata
+selectors. Projects explicitly adopt every organization default and can record
+reviewed product exclusions or bounded overrides. See the
+[social-surface projection contract](SOCIAL_SURFACES_V1.md).
 
 ## Layer and merge model
 
@@ -135,6 +143,7 @@ message, and a concrete recovery action. The initial code families are:
 | `IDN1600`–`IDN1699` | voice, usage, and guidance lifecycle |
 | `IDN1700`–`IDN1799` | handbook source and reviewed references |
 | `IDN1800`–`IDN1899` | Press Kit source and public-selection boundary |
+| `IDN1900`–`IDN1999` | pinned social catalog, selection, and projection boundary |
 
 JSON output is the automation contract. Human output renders the same records;
 it does not invent a second validation result.

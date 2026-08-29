@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/social-surface-press-kit-handoff.schema.json",
+  "title": "Identity v1 social-surface Press Kit handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "projectId", "sourceDigest", "catalog", "package", "targets", "publicationAuthorized"],
+  "properties": {
+    "schema": { "const": "identity.social-surface-press-kit-handoff/v1" },
+    "projectId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "sourceDigest": { "$ref": "#/$defs/digest" },
+    "catalog": { "$ref": "#/$defs/catalog" },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifest", "checksums", "archive"],
+      "properties": {
+        "manifest": { "const": "social-surfaces-manifest.json" },
+        "checksums": { "const": "SHA256SUMS" },
+        "archive": { "const": "social-surfaces.zip" }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "platform", "placement", "path"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "platform": { "type": "string", "minLength": 1 },
+          "placement": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "pattern": "^targets/[a-z0-9]+(?:-[a-z0-9]+)*\\.json$" }
+        }
+      }
+    },
+    "publicationAuthorized": { "const": false }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "digest"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}

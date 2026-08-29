@@ -87,6 +87,22 @@ The package directory is explicit so a downstream site or release process can
 copy it as a single immutable unit. A caller that needs a different static
 route owns that routing and deployment configuration.
 
+When a social package has already been generated from the same canonical
+Identity source, the Press Kit can verify and include it:
+
+```bash
+python3 "scripts/render_press_kit.py" \
+  --repository-root "path/to/consumer" \
+  --social-surfaces-directory "assets/identity/social-surfaces" \
+  --output-directory "assets/identity/press-kit"
+```
+
+The consumer checks the social handoff, manifest, source digest, catalog lock,
+archive paths, and manifested contents before adding
+`social/social-surfaces.zip`. It does not reconstruct social facts or read a
+second manual brand source. See the
+[social-surface projection contract](SOCIAL_SURFACES_V1.md).
+
 ## Renderer handoff
 
 The reference renderer accepts an explicit generated Press Kit directory. It

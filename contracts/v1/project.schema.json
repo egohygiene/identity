@@ -68,6 +68,9 @@
         },
         "pressKit": {
           "$ref": "#/$defs/relativePath"
+        },
+        "socialSurfaces": {
+          "$ref": "#/$defs/relativePath"
         }
       }
     },

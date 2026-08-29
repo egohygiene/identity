@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/social-surfaces.schema.json",
+  "title": "Identity v1 social-surface projection source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "catalog", "organizationDefaults", "project"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "(^|/)social-surfaces.schema.json$"
+    },
+    "schema": { "const": "identity.social-surface-source/v1" },
+    "catalog": { "$ref": "#/$defs/catalogLock" },
+    "organizationDefaults": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/defaultSelection" }
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adopt", "exclude", "overrides"],
+      "properties": {
+        "adopt": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/adoption" }
+        },
+        "exclude": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/exclusion" }
+        },
+        "overrides": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/override" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "catalogLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "id", "version", "digest"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relativePath" },
+        "id": {
+          "type": "string",
+          "pattern": "^catalog/[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"
+        },
+        "digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": { "const": "sha256-utf8-lf" },
+            "value": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "state", "visibility", "provenance", "approval"],
+      "properties": {
+        "subject": { "type": "string", "minLength": 1 },
+        "state": { "const": "approved" },
+        "visibility": { "const": "public" },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["method", "source", "capturedAt"],
+          "properties": {
+            "method": { "enum": ["human-authored", "imported"] },
+            "source": { "type": "string", "minLength": 1 },
+            "capturedAt": { "type": "string", "format": "date-time" }
+          }
+        },
+        "approval": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "copySource": {
+      "type": ["string", "null"],
+      "enum": [null, "project.displayName", "project.tagline"]
+    },
+    "linkSource": {
+      "type": ["string", "null"],
+      "enum": [null, "project.repository"]
+    },
+    "defaultSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "surfaceId", "sourceAssetId", "copySource", "linkSource", "governance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "surfaceId": {
+          "type": "string",
+          "pattern": "^surface/[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "sourceAssetId": { "$ref": "#/$defs/identifier" },
+        "copySource": { "$ref": "#/$defs/copySource" },
+        "linkSource": { "$ref": "#/$defs/linkSource" },
+        "governance": { "$ref": "#/$defs/governance" }
+      }
+    },
+    "adoption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "approval"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "approval": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "exclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "reason", "approval"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "reason": { "type": "string", "minLength": 1 },
+        "approval": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "reason", "approval"],
+      "anyOf": [
+        { "required": ["sourceAssetId"] },
+        { "required": ["copySource"] },
+        { "required": ["linkSource"] }
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "sourceAssetId": { "$ref": "#/$defs/identifier" },
+        "copySource": { "$ref": "#/$defs/copySource" },
+        "linkSource": { "$ref": "#/$defs/linkSource" },
+        "reason": { "type": "string", "minLength": 1 },
+        "approval": { "$ref": "#/$defs/identifier" }
+      }
+    }
+  }
+}

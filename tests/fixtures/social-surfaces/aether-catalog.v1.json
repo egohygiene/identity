@@ -1,0 +1,172 @@
+{
+  "schema_version": "aether.social-surface-catalog/v1",
+  "catalog": {
+    "id": "catalog/social-surface-specs",
+    "version": "9.0.0-test",
+    "lifecycle": {
+      "state": "stable"
+    },
+    "source_candidates": [
+      "external/example-official-sources"
+    ],
+    "source_snapshot": {
+      "source_url": "https://example.invalid/platform-documentation",
+      "captured_at": "2026-08-29T00:00:00Z",
+      "digest": {
+        "algorithm": "sha256-bytes",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "platform_count": 1,
+      "record_count": 3,
+      "template_count": 0
+    },
+    "rights_review": {
+      "state": "approved",
+      "reviewed_at": "2026-08-29",
+      "decision_reference": "https://example.invalid/reviews/social-surface-fixture",
+      "notes": "Synthetic first-party fixture records for deterministic Identity tests."
+    },
+    "release": {
+      "included": true,
+      "reason": "Stable synthetic fixture approved for test redistribution."
+    }
+  },
+  "records": [
+    {
+      "id": "surface/example-network-organic-post",
+      "platform": "Example Network",
+      "placement": "Organic square post",
+      "use": "organic",
+      "content_type": "post",
+      "media_format": "image",
+      "dimensions": {
+        "width_px": 1080,
+        "height_px": 1080
+      },
+      "aspect_ratio": "1:1",
+      "file_types": [
+        "png",
+        "jpg"
+      ],
+      "file_size_limit_bytes": 8388608,
+      "duration_limit_seconds": null,
+      "safe_zone": {
+        "state": "unknown",
+        "insets_px": null,
+        "notes": "No official safe-zone measurement is available in this fixture."
+      },
+      "verification": {
+        "state": "official",
+        "reviewed_at": "2026-08-29T00:00:00Z",
+        "note": "Synthetic official-source fixture."
+      },
+      "source": {
+        "candidate_id": "external/example-official-sources",
+        "url": "https://example.invalid/platform-documentation/organic-post",
+        "label": "Example Network organic post documentation",
+        "captured_at": "2026-08-29T00:00:00Z",
+        "snapshot_digest": {
+          "algorithm": "sha256-bytes",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "lifecycle": {
+        "state": "stable"
+      }
+    },
+    {
+      "id": "surface/example-network-profile-header",
+      "platform": "Example Network",
+      "placement": "Profile header",
+      "use": "organic",
+      "content_type": "profile-header",
+      "media_format": "image",
+      "dimensions": {
+        "width_px": 1500,
+        "height_px": 500
+      },
+      "aspect_ratio": "3:1",
+      "file_types": [
+        "png",
+        "jpg"
+      ],
+      "file_size_limit_bytes": 5242880,
+      "duration_limit_seconds": null,
+      "safe_zone": {
+        "state": "known",
+        "insets_px": {
+          "top": 48,
+          "right": 96,
+          "bottom": 48,
+          "left": 320
+        },
+        "notes": "Keep essential content outside the profile-avatar overlap."
+      },
+      "verification": {
+        "state": "official",
+        "reviewed_at": "2026-08-29T00:00:00Z",
+        "note": "Synthetic official-source fixture."
+      },
+      "source": {
+        "candidate_id": "external/example-official-sources",
+        "url": "https://example.invalid/platform-documentation/profile-header",
+        "label": "Example Network profile header documentation",
+        "captured_at": "2026-08-29T00:00:00Z",
+        "snapshot_digest": {
+          "algorithm": "sha256-bytes",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "lifecycle": {
+        "state": "stable"
+      }
+    },
+    {
+      "id": "surface/example-network-profile-image",
+      "platform": "Example Network",
+      "placement": "Profile image",
+      "use": "organic",
+      "content_type": "profile-image",
+      "media_format": "image",
+      "dimensions": {
+        "width_px": 512,
+        "height_px": 512
+      },
+      "aspect_ratio": "1:1",
+      "file_types": [
+        "png",
+        "jpg"
+      ],
+      "file_size_limit_bytes": 2097152,
+      "duration_limit_seconds": null,
+      "safe_zone": {
+        "state": "known",
+        "insets_px": {
+          "top": 64,
+          "right": 64,
+          "bottom": 64,
+          "left": 64
+        },
+        "notes": "Keep the primary mark inside the centered square."
+      },
+      "verification": {
+        "state": "official",
+        "reviewed_at": "2026-08-29T00:00:00Z",
+        "note": "Synthetic official-source fixture."
+      },
+      "source": {
+        "candidate_id": "external/example-official-sources",
+        "url": "https://example.invalid/platform-documentation/profile-image",
+        "label": "Example Network profile image documentation",
+        "captured_at": "2026-08-29T00:00:00Z",
+        "snapshot_digest": {
+          "algorithm": "sha256-bytes",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "lifecycle": {
+        "state": "stable"
+      }
+    }
+  ]
+}

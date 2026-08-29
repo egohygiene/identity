@@ -1,0 +1,87 @@
+{
+  "$schema": "../../../../../contracts/v1/social-surfaces.schema.json",
+  "schema": "identity.social-surface-source/v1",
+  "catalog": {
+    "path": "vendor/aether/social-surface-specs/catalog.v1.json",
+    "id": "catalog/social-surface-specs",
+    "version": "9.0.0-test",
+    "digest": {
+      "algorithm": "sha256-utf8-lf",
+      "value": "479f86bf1878338db67265ca806dea269ed4898169ea1b12b41ff6b4359b2fac"
+    }
+  },
+  "organizationDefaults": [
+    {
+      "id": "organic-post",
+      "surfaceId": "surface/example-network-organic-post",
+      "sourceAssetId": "mark",
+      "copySource": "project.tagline",
+      "linkSource": "project.repository",
+      "governance": {
+        "subject": "social-surface-default:organic-post",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-29T01:00:00Z"
+        },
+        "approval": "approve-social-default-organic-post"
+      }
+    },
+    {
+      "id": "profile-header",
+      "surfaceId": "surface/example-network-profile-header",
+      "sourceAssetId": "mark",
+      "copySource": "project.displayName",
+      "linkSource": "project.repository",
+      "governance": {
+        "subject": "social-surface-default:profile-header",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-29T01:00:00Z"
+        },
+        "approval": "approve-social-default-profile-header"
+      }
+    },
+    {
+      "id": "profile-image",
+      "surfaceId": "surface/example-network-profile-image",
+      "sourceAssetId": "mark",
+      "copySource": null,
+      "linkSource": null,
+      "governance": {
+        "subject": "social-surface-default:profile-image",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-08-29T01:00:00Z"
+        },
+        "approval": "approve-social-default-profile-image"
+      }
+    }
+  ],
+  "project": {
+    "adopt": [
+      {
+        "id": "organic-post",
+        "approval": "approve-social-adoption-organic-post"
+      },
+      {
+        "id": "profile-header",
+        "approval": "approve-social-adoption-profile-header"
+      },
+      {
+        "id": "profile-image",
+        "approval": "approve-social-adoption-profile-image"
+      }
+    ],
+    "exclude": [],
+    "overrides": []
+  }
+}

@@ -17,6 +17,7 @@
     "team": { "type": "array", "items": { "$ref": "#/$defs/teamMember" } },
     "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" } },
     "guidance": { "$ref": "#/$defs/guidance" },
+    "socialSurfaces": { "$ref": "#/$defs/socialSurfaces" },
     "artifacts": { "type": "array", "minItems": 5, "items": { "$ref": "#/$defs/artifact" } }
   },
   "$defs": {
@@ -195,6 +196,42 @@
             "value": {}
           }
         }
+      }
+    },
+    "socialSurfaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "archivePath", "sha256", "catalog", "targets", "publicationAuthorized"],
+      "properties": {
+        "status": { "const": "included" },
+        "archivePath": { "const": "social/social-surfaces.zip" },
+        "sha256": { "$ref": "#/$defs/digest" },
+        "catalog": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version", "digest"],
+          "properties": {
+            "id": { "type": "string", "minLength": 1 },
+            "version": { "type": "string", "minLength": 1 },
+            "digest": { "$ref": "#/$defs/digest" }
+          }
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "platform", "placement", "path"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "platform": { "type": "string", "minLength": 1 },
+              "placement": { "type": "string", "minLength": 1 },
+              "path": { "type": "string", "pattern": "^targets/[a-z0-9]+(?:-[a-z0-9]+)*\\.json$" }
+            }
+          }
+        },
+        "publicationAuthorized": { "const": false }
       }
     },
     "artifact": {

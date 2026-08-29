@@ -1,0 +1,318 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/social-surface-package.schema.json",
+  "title": "Identity v1 generated social-surface package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "project", "source", "catalog", "inheritance", "targets", "artifacts", "handoff"],
+  "properties": {
+    "schema": { "const": "identity.social-surface-package/v1" },
+    "project": { "$ref": "#/$defs/project" },
+    "source": { "$ref": "#/$defs/source" },
+    "catalog": { "$ref": "#/$defs/catalog" },
+    "inheritance": { "$ref": "#/$defs/inheritance" },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/target" }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 6,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "publicationAuthorized", "publisher", "freshnessWarning"],
+      "properties": {
+        "state": { "const": "publish-ready-input" },
+        "publicationAuthorized": { "const": false },
+        "publisher": { "const": "human-or-external-tool" },
+        "freshnessWarning": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "repository", "tagline", "kind"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "repository": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "tagline": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["organization", "product", "repository"] }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digest", "sourceSchema", "projectionVersion"],
+      "properties": {
+        "digest": { "$ref": "#/$defs/sha256" },
+        "sourceSchema": { "const": "identity.social-surface-source/v1" },
+        "projectionVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "digest", "lifecycle", "rightsReview", "sourceSnapshot"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": { "const": "sha256-utf8-lf" },
+            "value": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "lifecycle": { "const": "stable" },
+        "rightsReview": { "const": "approved" },
+        "sourceSnapshot": { "$ref": "#/$defs/sourceSnapshot" }
+      }
+    },
+    "inheritance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["availableOrganizationDefaults", "adopted", "excluded", "overrides"],
+      "properties": {
+        "availableOrganizationDefaults": { "type": "array", "items": { "type": "string" } },
+        "adopted": { "type": "array", "items": { "type": "string" } },
+        "excluded": { "type": "array", "items": { "type": "string" } },
+        "overrides": { "type": "array", "items": { "$ref": "#/$defs/override" } }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "surface", "content", "constraints", "approvals", "status"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "surface": { "$ref": "#/$defs/surface" },
+        "content": { "$ref": "#/$defs/content" },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "unknownFields"],
+          "properties": {
+            "state": { "enum": ["complete", "partial"] },
+            "unknownFields": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "approvals": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["organizationDefault", "projectAdoption", "override"],
+          "properties": {
+            "organizationDefault": { "type": "string", "minLength": 1 },
+            "projectAdoption": { "type": "string", "minLength": 1 },
+            "override": { "type": ["string", "null"] }
+          }
+        },
+        "status": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "notes"],
+          "properties": {
+            "state": { "const": "ready-for-rendering" },
+            "notes": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "platform", "placement", "use", "contentType", "mediaFormat", "dimensions", "aspectRatio", "fileTypes", "fileSizeLimitBytes", "durationLimitSeconds", "safeZone", "verification", "source", "lifecycle"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "platform": { "type": "string", "minLength": 1 },
+        "placement": { "type": "string", "minLength": 1 },
+        "use": { "enum": ["organic", "advertising"] },
+        "contentType": { "type": ["string", "null"] },
+        "mediaFormat": { "type": ["string", "null"] },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthPx", "heightPx"],
+          "properties": {
+            "widthPx": { "type": "integer", "minimum": 1 },
+            "heightPx": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "aspectRatio": { "type": ["string", "null"] },
+        "fileTypes": { "type": ["array", "null"], "items": { "type": "string" } },
+        "fileSizeLimitBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "durationLimitSeconds": { "type": ["number", "null"], "minimum": 0 },
+        "safeZone": { "$ref": "#/$defs/safeZone" },
+        "verification": { "$ref": "#/$defs/verification" },
+        "source": { "$ref": "#/$defs/catalogSource" },
+        "lifecycle": { "const": "stable" }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId", "inputPath", "mediaType", "sha256", "altText", "license", "origin", "copy", "link"],
+      "properties": {
+        "assetId": { "type": "string", "minLength": 1 },
+        "inputPath": { "type": "string", "minLength": 1 },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "altText": { "type": "string", "minLength": 1 },
+        "license": { "$ref": "#/$defs/license" },
+        "origin": { "$ref": "#/$defs/origin" },
+        "copy": { "$ref": "#/$defs/selectedValue" },
+        "link": { "$ref": "#/$defs/selectedValue" }
+      }
+    },
+    "selectedValue": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "value"],
+          "properties": {
+            "source": { "type": "string", "minLength": 1 },
+            "value": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "sourceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url", "captured_at", "digest", "platform_count", "record_count", "template_count"],
+      "properties": {
+        "source_url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "captured_at": { "type": "string", "minLength": 1 },
+        "digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": { "type": "string", "minLength": 1 },
+            "value": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "platform_count": { "type": "integer", "minimum": 0 },
+        "record_count": { "type": "integer", "minimum": 0 },
+        "template_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "override": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "reason", "approval"],
+      "anyOf": [
+        { "required": ["sourceAssetId"] },
+        { "required": ["copySource"] },
+        { "required": ["linkSource"] }
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "sourceAssetId": { "type": "string", "minLength": 1 },
+        "copySource": { "type": ["string", "null"], "enum": [null, "project.displayName", "project.tagline"] },
+        "linkSource": { "type": ["string", "null"], "enum": [null, "project.repository"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "approval": { "type": "string", "minLength": 1 }
+      }
+    },
+    "safeZone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "insets_px", "notes"],
+      "properties": {
+        "state": { "enum": ["known", "unknown"] },
+        "insets_px": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["top", "right", "bottom", "left"],
+              "properties": {
+                "top": { "type": "integer", "minimum": 0 },
+                "right": { "type": "integer", "minimum": 0 },
+                "bottom": { "type": "integer", "minimum": 0 },
+                "left": { "type": "integer", "minimum": 0 }
+              }
+            }
+          ]
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reviewed_at", "note"],
+      "properties": {
+        "state": { "type": "string", "minLength": 1 },
+        "reviewed_at": { "type": ["string", "null"] },
+        "note": { "type": "string" }
+      }
+    },
+    "catalogSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_id", "url", "label", "captured_at", "snapshot_digest"],
+      "properties": {
+        "candidate_id": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "label": { "type": "string", "minLength": 1 },
+        "captured_at": { "type": "string", "minLength": 1 },
+        "snapshot_digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": { "type": "string", "minLength": 1 },
+            "value": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdx", "status", "attribution"],
+      "properties": {
+        "spdx": { "type": "string", "minLength": 1 },
+        "status": { "const": "approved" },
+        "attribution": { "type": "string" }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["creator", "method", "source", "capturedAt"],
+      "properties": {
+        "creator": { "type": "string", "minLength": 1 },
+        "method": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "capturedAt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "path", "mediaType", "intendedUse"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "intendedUse": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
