@@ -23,8 +23,10 @@ product consumers + public Brand Kit
 The canonical Identity Brand Kit is published at
 [`https://identity.egohygiene.io/`](https://identity.egohygiene.io/). The
 identity repository owns that standalone tool surface; the main
-`egohygiene.io` website and Flutter application remain free to own their own
-subpaths and may add redirect-only aliases later. See the
+`egohygiene.io` website and Flutter application retain host and homepage
+ownership. Identity now defines a content-addressed LaunchKit and Zensical
+dogfood artifact for `https://egohygiene.io/identity/` without transferring
+brand authority into either framework. See the
 [public Brand Kit publication guide](docs/publication/IDENTITY_PAGES.md).
 
 ## Brand Kit preview

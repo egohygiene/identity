@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: identity-decisions
 title: Identity Decisions
 kind: architecture-document
-version: 1.0.0
+version: 1.1.0
 status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-29
+updated: 2026-08-30
 governed_by:
   - architecture-decisions
 depends_on:
@@ -59,6 +59,7 @@ the decision changes materially.
 - [ADR-014: Keep design-system handbooks as governed projections](docs/decisions/ADR-014-design-system-projection-boundary.md)
 - [ADR-015: Keep Press Kits as governed public projections](docs/decisions/ADR-015-press-kit-projection-boundary.md)
 - [ADR-016: Project social surfaces from pinned external facts](docs/decisions/ADR-016-pinned-social-surface-projection-boundary.md)
+- [ADR-017: Compose Identity's dogfood experience without moving brand authority](docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md)
 
 ## ADR-001: Keep creative approval human-owned
 
@@ -90,12 +91,13 @@ the decision changes materially.
 ## Open decisions
 
 - Release and compatibility policy for the first stable version.
-- Exact self-hosted, managed, and organization-integrated deployment boundaries.
+- Exact self-hosted and managed deployment boundaries beyond the accepted
+  organization-integrated `/identity/` artifact handoff.
 - Which target systems must exist before the runtime architecture may be called implemented.
 
 ## Evidence and uncertainty
 
 - **Observed:** The repository defines an Identity compiler that turns a repository-specific brand specification into coherent visual, textual, and platform assets; significant implementation remains incomplete.
-- **Accepted:** The Brand Kit product contract and ADR-001 through ADR-012 constrain future implementation.
+- **Accepted:** The Brand Kit product contract and ADR-001 through ADR-017 constrain future implementation.
 - **Proposed:** Runtime capabilities and later roadmap phases remain proposals until their owning issues provide implementation evidence.
 - **Open question:** Which optional adapter profiles belong in the first independently versioned release?

@@ -212,6 +212,7 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "press-kit-projection.schema.json",
                 "press-kit.schema.json",
                 "project.schema.json",
+                "publication-architecture.schema.json",
                 "quality-report.schema.json",
                 "social-surface-package-manifest.schema.json",
                 "social-surface-package.schema.json",
@@ -284,6 +285,10 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["mascot-package.schema.json"]["properties"]["schema"]["const"],
             "identity.mascot-package/v1",
+        )
+        self.assertEqual(
+            schemas["publication-architecture.schema.json"]["properties"]["schema"]["const"],
+            "identity.publication-architecture/v1",
         )
         self.assertEqual(
             schemas["brand-guidance.schema.json"]["properties"]["schema"]["const"],

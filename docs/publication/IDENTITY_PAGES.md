@@ -1,13 +1,56 @@
-# Identity public Brand Kit publication
+# Identity public publication surfaces
+
+The accepted publication architecture has two public surfaces with separate
+deployment and rollback authority:
+
+| Surface | Purpose | Canonical URL |
+| --- | --- | --- |
+| Dogfooded product experience | LaunchKit product landing plus Zensical documentation | `https://egohygiene.io/identity/` |
+| Release-backed Brand Kit | Immutable previews, downloads, manifests, and checksums | `https://identity.egohygiene.io/` |
+
+The machine-readable route and lifecycle contract is
+[`publication/identity-experience.architecture.json`](../../publication/identity-experience.architecture.json).
+The rationale and framework boundary are accepted in
+[ADR-017](../decisions/ADR-017-zensical-launchkit-publication-architecture.md).
+
+## Dogfooded product experience
+
+`/identity/` is a content-addressed composite. A pinned Holon LaunchKit profile
+owns the landing page, and a pinned Zensical release owns `/identity/docs/`.
+Identity builds and verifies the composite; the `egohygiene.io` route owner
+installs the exact reviewed bytes without rebuilding them. This repository does
+not own the organization homepage.
+
+Both adapters consume reviewed Identity release outputs read-only. Product copy
+and documentation remain reviewed authored content. Adapter configuration may
+select sections, navigation, and layout but may not restate tokens, asset bytes,
+Kern's character facts, provenance, or approvals.
+
+The composite's `/identity/publication.json` must expose the selected Identity
+release tag and commit, source digest, asset provenance, approval evidence,
+framework pins, file inventory, and artifact digest. Deployment verification
+compares that release binding to the canonical Brand Kit's `/site.json` and
+fails closed if they disagree.
+
+Implementation, local preview, deployment, and live verification belong to
+[issue #57](https://github.com/egohygiene/identity/issues/57). The accepted
+architecture itself does not build or deploy the page.
+
+## Compatibility routes
+
+The organization route owner redirects `/identity/brand-kit/`, `/brand/`,
+`/design/`, and `/brand-kit/` to `https://identity.egohygiene.io/`. It also
+normalizes `/identity` to `/identity/`. The Brand Kit host retains its existing
+local `/brand-kit/` compatibility redirect to the canonical root.
 
 ## Public boundary
 
 The canonical public Brand Kit is `https://identity.egohygiene.io/`.
 
-`egohygiene.io` remains the public website and application surface. Its future
-`/identity`, `/brand`, `/design`, and `/brand-kit` routes may redirect here, but
-they are not implemented in this repository. The local `/brand-kit/` route is a
-compatibility redirect to this site's root.
+`egohygiene.io` remains the public website and application surface. Identity
+owns the verified `/identity/` artifact but not the host's homepage or route
+installation. The local `/brand-kit/` route is a compatibility redirect to this
+site's root.
 
 The public page is not a hand-maintained second Brand Kit. The publisher checks
 out an annotated, stable Identity release tag, stages only that tag's
@@ -23,9 +66,10 @@ out an annotated, stable Identity release tag, stages only that tag's
 
 The publisher reads `publication/identity-brand-kit.config.json` from the
 selected immutable release source. A newer default-branch configuration cannot
-claim an asset absent from that release. The page visibly links its release and publication manifest. `site.json` carries
-the same release, digest, canonical URL, and route-alias information for a
-machine check without scraping HTML.
+claim an asset absent from that release. The page visibly links its release and
+publication manifest. `site.json` carries the same release, digest, canonical
+URL, and route-alias information for a machine check without scraping HTML and
+for the `/identity/` composite's cross-host release proof.
 
 ## Local preview and verification
 
@@ -95,3 +139,20 @@ that tag; no default-branch source is substituted.
 To update the public Brand Kit, publish a new stable Identity release. The
 workflow creates a new release-backed Pages artifact automatically. Do not edit
 the live Pages artifact or upload generated files by hand.
+
+The `/identity/` experience rolls back independently by re-promoting its
+preceding verified composite. Rolling back one surface does not silently change
+the other: post-deployment verification must still report an exact shared
+Identity release binding before the pair is considered current.
+
+## Framework updates
+
+LaunchKit and Zensical pins change one at a time in dedicated review. Update
+the pin, license/provenance evidence, frozen dependency resolution, migration
+notes, visual evidence, and deterministic file inventory together. Do not track
+a moving branch or let an adapter update pull new brand source from the web.
+
+Identity owns only the initial Zensical dogfood adapter. Reusable
+multi-repository generalization belongs to
+[Holon issue #4](https://github.com/egohygiene/holon/issues/4) after issue #57
+provides a working consumer and upgrade evidence.

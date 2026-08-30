@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://identity.egohygiene.io/contracts/v1/publication-architecture.schema.json",
+  "title": "Identity publication architecture v1",
+  "description": "Accepted route, adapter, source-authority, evidence, and lifecycle boundaries for Identity's dogfooded public experience.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "status",
+    "decision",
+    "scope",
+    "adapters",
+    "artifacts",
+    "contentSources",
+    "routes",
+    "releaseEvidence",
+    "qualityRequirements",
+    "lifecycle",
+    "futureExpansion"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schema": { "const": "identity.publication-architecture/v1" },
+    "status": { "const": "accepted" },
+    "decision": { "$ref": "#/$defs/repositoryPath" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "experienceCanonicalUrl",
+        "brandKitCanonicalUrl",
+        "organizationHomepageOwnedHere"
+      ],
+      "properties": {
+        "repository": { "const": "https://github.com/egohygiene/identity" },
+        "experienceCanonicalUrl": { "const": "https://egohygiene.io/identity/" },
+        "brandKitCanonicalUrl": { "const": "https://identity.egohygiene.io/" },
+        "organizationHomepageOwnedHere": { "const": false }
+      }
+    },
+    "adapters": {
+      "type": "array",
+      "minItems": 4,
+      "items": { "$ref": "#/$defs/adapter" }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "contentSources": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "$ref": "#/$defs/contentSource" }
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 10,
+      "items": { "$ref": "#/$defs/route" }
+    },
+    "releaseEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredFields", "experienceManifestRoute", "brandKitManifestRoute", "comparison"],
+      "properties": {
+        "requiredFields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "releaseTag",
+              "releaseCommit",
+              "sourceDigest",
+              "assetProvenance",
+              "approvalEvidence"
+            ]
+          }
+        },
+        "experienceManifestRoute": { "$ref": "#/$defs/identifier" },
+        "brandKitManifestRoute": { "$ref": "#/$defs/identifier" },
+        "comparison": { "enum": ["exact-release-binding", "fail-closed"] }
+      }
+    },
+    "qualityRequirements": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    },
+    "lifecycle": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["stage", "owner", "requirements"],
+        "properties": {
+          "stage": { "enum": ["preview", "build", "verify", "handoff", "publish", "rollback", "upgrade"] },
+          "owner": { "$ref": "#/$defs/identifier" },
+          "requirements": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "futureExpansion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dogfoodIssue", "implementationIssue", "generalizationOwner", "universalGeneratorOwnedHere"],
+      "properties": {
+        "dogfoodIssue": { "const": "https://github.com/egohygiene/identity/issues/56" },
+        "implementationIssue": { "const": "https://github.com/egohygiene/identity/issues/57" },
+        "generalizationOwner": { "const": "https://github.com/egohygiene/holon/issues/4" },
+        "universalGeneratorOwnedHere": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*\\.\\./).+$"
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role", "implementationOwner", "status", "canonicalBrandSource", "pin"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "role": { "enum": ["landing", "documentation", "brand-kit-renderer", "publication-composer"] },
+        "implementationOwner": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["available", "dogfood-adapter", "existing", "contract"] },
+        "canonicalBrandSource": { "const": false },
+        "pin": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": ["string", "boolean"] }
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "owner", "host", "basePath", "inputs", "rollback"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "owner": { "$ref": "#/$defs/identifier" },
+        "host": { "enum": ["organization", "brand-kit"] },
+        "basePath": { "type": "string", "pattern": "^/" },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "rollback": { "type": "string", "minLength": 1 }
+      }
+    },
+    "contentSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "class", "authority", "paths", "consumption", "mustExist"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "class": { "enum": ["compiled-identity", "authored-documentation", "authored-product-copy", "adapter-configuration"] },
+        "authority": { "enum": ["identity-contracts", "identity-maintainers", "adapter-only"] },
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/repositoryPath" }
+        },
+        "consumption": { "enum": ["read-only", "render-markdown", "reviewed-input", "references-only"] },
+        "mustExist": { "type": "boolean" }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "host", "path", "kind", "owner"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "host": { "enum": ["organization", "brand-kit"] },
+        "path": { "type": "string", "pattern": "^/" },
+        "kind": { "enum": ["page", "manifest", "download", "redirect"] },
+        "owner": { "$ref": "#/$defs/identifier" },
+        "adapter": { "$ref": "#/$defs/identifier" },
+        "artifact": { "$ref": "#/$defs/identifier" },
+        "target": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["planned", "existing"] }
+      }
+    }
+  }
+}
