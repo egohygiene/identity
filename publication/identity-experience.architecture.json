@@ -1,0 +1,371 @@
+{
+  "$schema": "../contracts/v1/publication-architecture.schema.json",
+  "schema": "identity.publication-architecture/v1",
+  "status": "accepted",
+  "decision": "docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md",
+  "scope": {
+    "repository": "https://github.com/egohygiene/identity",
+    "experienceCanonicalUrl": "https://egohygiene.io/identity/",
+    "brandKitCanonicalUrl": "https://identity.egohygiene.io/",
+    "organizationHomepageOwnedHere": false
+  },
+  "adapters": [
+    {
+      "id": "launchkit",
+      "role": "landing",
+      "implementationOwner": "egohygiene/holon",
+      "status": "available",
+      "canonicalBrandSource": false,
+      "pin": {
+        "repository": "https://github.com/egohygiene/holon",
+        "commit": "93364d7461e537bc2fbe1beaf7b812b2b290feda",
+        "profile": "landing-launchkit",
+        "version": "1.0.0",
+        "path": "blueprints/launchkit/blueprint.json",
+        "gitBlob": "6f87ad486fe92ab0ee40f8116a4427ccf7ff7989"
+      }
+    },
+    {
+      "id": "zensical",
+      "role": "documentation",
+      "implementationOwner": "egohygiene/identity",
+      "status": "dogfood-adapter",
+      "canonicalBrandSource": false,
+      "pin": {
+        "repository": "https://github.com/zensical/zensical",
+        "version": "0.0.57",
+        "tag": "v0.0.57",
+        "tagObject": "ad8188ee60ae9187d64a4fe7c4970d3a1947028d",
+        "commit": "f18bb9957cb2740e5dd66d4a438c780b4e15d64c",
+        "license": "MIT",
+        "developmentStatus": "alpha"
+      }
+    },
+    {
+      "id": "reference-renderer",
+      "role": "brand-kit-renderer",
+      "implementationOwner": "egohygiene/identity",
+      "status": "existing",
+      "canonicalBrandSource": false,
+      "pin": {
+        "source": "renderer/",
+        "configuration": "publication/identity-brand-kit.config.json",
+        "releaseBacked": true
+      }
+    },
+    {
+      "id": "route-composer",
+      "role": "publication-composer",
+      "implementationOwner": "egohygiene/relay-and-organization-site",
+      "status": "contract",
+      "canonicalBrandSource": false,
+      "pin": {
+        "input": "content-addressed-identity-experience-artifact",
+        "deployment": "review-gated",
+        "networkAtBuild": false
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "identity-landing",
+      "owner": "launchkit",
+      "host": "organization",
+      "basePath": "/identity/",
+      "inputs": ["compiled-identity", "authored-product-copy", "adapter-configuration"],
+      "rollback": "Promote the preceding verified landing artifact without rebuilding it."
+    },
+    {
+      "id": "identity-documentation",
+      "owner": "zensical",
+      "host": "organization",
+      "basePath": "/identity/docs/",
+      "inputs": ["compiled-identity", "authored-documentation", "adapter-configuration"],
+      "rollback": "Promote the preceding verified documentation artifact without rebuilding it."
+    },
+    {
+      "id": "identity-experience",
+      "owner": "route-composer",
+      "host": "organization",
+      "basePath": "/identity/",
+      "inputs": ["identity-landing", "identity-documentation"],
+      "rollback": "Reinstall the preceding content-addressed composite and verify its publication manifest."
+    },
+    {
+      "id": "identity-brand-kit",
+      "owner": "reference-renderer",
+      "host": "brand-kit",
+      "basePath": "/",
+      "inputs": ["compiled-identity"],
+      "rollback": "Run the Brand Kit publisher for an earlier published stable annotated Identity tag."
+    }
+  ],
+  "contentSources": [
+    {
+      "id": "compiled-identity",
+      "class": "compiled-identity",
+      "authority": "identity-contracts",
+      "paths": [
+        "assets/identity/manifest.json",
+        "assets/identity/mascot/manifest.json",
+        "assets/identity/web/identity-palette.css"
+      ],
+      "consumption": "read-only",
+      "mustExist": true
+    },
+    {
+      "id": "authored-documentation",
+      "class": "authored-documentation",
+      "authority": "identity-maintainers",
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "docs/contracts/",
+        "docs/publication/",
+        "docs/releases/"
+      ],
+      "consumption": "render-markdown",
+      "mustExist": true
+    },
+    {
+      "id": "authored-product-copy",
+      "class": "authored-product-copy",
+      "authority": "identity-maintainers",
+      "paths": [
+        "publication/identity-experience.content.json"
+      ],
+      "consumption": "reviewed-input",
+      "mustExist": false
+    },
+    {
+      "id": "adapter-configuration",
+      "class": "adapter-configuration",
+      "authority": "adapter-only",
+      "paths": [
+        "publication/identity-experience/"
+      ],
+      "consumption": "references-only",
+      "mustExist": false
+    }
+  ],
+  "routes": [
+    {
+      "id": "organization-identity",
+      "host": "organization",
+      "path": "/identity/",
+      "kind": "page",
+      "owner": "launchkit",
+      "adapter": "launchkit",
+      "artifact": "identity-landing",
+      "status": "planned"
+    },
+    {
+      "id": "organization-identity-noslash",
+      "host": "organization",
+      "path": "/identity",
+      "kind": "redirect",
+      "owner": "route-composer",
+      "target": "https://egohygiene.io/identity/",
+      "status": "planned"
+    },
+    {
+      "id": "organization-identity-docs",
+      "host": "organization",
+      "path": "/identity/docs/",
+      "kind": "page",
+      "owner": "zensical",
+      "adapter": "zensical",
+      "artifact": "identity-documentation",
+      "status": "planned"
+    },
+    {
+      "id": "organization-identity-manifest",
+      "host": "organization",
+      "path": "/identity/publication.json",
+      "kind": "manifest",
+      "owner": "route-composer",
+      "artifact": "identity-experience",
+      "status": "planned"
+    },
+    {
+      "id": "organization-identity-brand-kit",
+      "host": "organization",
+      "path": "/identity/brand-kit/",
+      "kind": "redirect",
+      "owner": "route-composer",
+      "target": "https://identity.egohygiene.io/",
+      "status": "planned"
+    },
+    {
+      "id": "organization-brand-alias",
+      "host": "organization",
+      "path": "/brand/",
+      "kind": "redirect",
+      "owner": "route-composer",
+      "target": "https://identity.egohygiene.io/",
+      "status": "planned"
+    },
+    {
+      "id": "organization-design-alias",
+      "host": "organization",
+      "path": "/design/",
+      "kind": "redirect",
+      "owner": "route-composer",
+      "target": "https://identity.egohygiene.io/",
+      "status": "planned"
+    },
+    {
+      "id": "organization-brand-kit-alias",
+      "host": "organization",
+      "path": "/brand-kit/",
+      "kind": "redirect",
+      "owner": "route-composer",
+      "target": "https://identity.egohygiene.io/",
+      "status": "planned"
+    },
+    {
+      "id": "brand-kit-root",
+      "host": "brand-kit",
+      "path": "/",
+      "kind": "page",
+      "owner": "reference-renderer",
+      "adapter": "reference-renderer",
+      "artifact": "identity-brand-kit",
+      "status": "existing"
+    },
+    {
+      "id": "brand-kit-site-manifest",
+      "host": "brand-kit",
+      "path": "/site.json",
+      "kind": "manifest",
+      "owner": "reference-renderer",
+      "artifact": "identity-brand-kit",
+      "status": "existing"
+    },
+    {
+      "id": "brand-kit-release-manifest",
+      "host": "brand-kit",
+      "path": "/packages/identity-brand-kit-v{version}.manifest.json",
+      "kind": "manifest",
+      "owner": "reference-renderer",
+      "artifact": "identity-brand-kit",
+      "status": "existing"
+    },
+    {
+      "id": "brand-kit-release-download",
+      "host": "brand-kit",
+      "path": "/packages/identity-brand-kit-v{version}.zip",
+      "kind": "download",
+      "owner": "reference-renderer",
+      "artifact": "identity-brand-kit",
+      "status": "existing"
+    },
+    {
+      "id": "brand-kit-release-checksums",
+      "host": "brand-kit",
+      "path": "/packages/identity-brand-kit-v{version}.SHA256SUMS",
+      "kind": "download",
+      "owner": "reference-renderer",
+      "artifact": "identity-brand-kit",
+      "status": "existing"
+    },
+    {
+      "id": "brand-kit-local-alias",
+      "host": "brand-kit",
+      "path": "/brand-kit/",
+      "kind": "redirect",
+      "owner": "reference-renderer",
+      "target": "https://identity.egohygiene.io/",
+      "status": "existing"
+    }
+  ],
+  "releaseEvidence": {
+    "requiredFields": [
+      "releaseTag",
+      "releaseCommit",
+      "sourceDigest",
+      "assetProvenance",
+      "approvalEvidence"
+    ],
+    "experienceManifestRoute": "organization-identity-manifest",
+    "brandKitManifestRoute": "brand-kit-site-manifest",
+    "comparison": "exact-release-binding"
+  },
+  "qualityRequirements": [
+    "accessible-name-and-alt-text",
+    "contrast",
+    "deterministic-build",
+    "focus-visible",
+    "keyboard-navigation",
+    "no-javascript-readable",
+    "offline-source-inputs",
+    "reduced-motion",
+    "responsive-layout",
+    "route-and-link-integrity",
+    "semantic-html"
+  ],
+  "lifecycle": [
+    {
+      "stage": "preview",
+      "owner": "identity",
+      "requirements": [
+        "Build both adapters locally under the production /identity/ base path.",
+        "Serve the composed artifact so routes, assets, no-JavaScript content, and reduced motion can be reviewed together."
+      ]
+    },
+    {
+      "stage": "build",
+      "owner": "identity",
+      "requirements": [
+        "Use a clean checkout, frozen dependency resolution, the pinned LaunchKit blueprint, and the pinned Zensical release.",
+        "Consume reviewed Identity outputs from the selected stable release without network retrieval or copied token values."
+      ]
+    },
+    {
+      "stage": "verify",
+      "owner": "identity",
+      "requirements": [
+        "Fail on route collisions, broken links, missing release evidence, source drift, accessibility regressions, or nondeterministic output.",
+        "Compare the composite publication manifest to the release-backed Brand Kit site manifest."
+      ]
+    },
+    {
+      "stage": "handoff",
+      "owner": "identity",
+      "requirements": [
+        "Emit one content-addressed composite with its complete file inventory and verification evidence.",
+        "Require review before the organization route owner accepts the artifact."
+      ]
+    },
+    {
+      "stage": "publish",
+      "owner": "route-composer",
+      "requirements": [
+        "Install the exact reviewed composite at /identity/ without rebuilding or mutating it.",
+        "Verify HTTPS routes and release evidence after deployment."
+      ]
+    },
+    {
+      "stage": "rollback",
+      "owner": "route-composer",
+      "requirements": [
+        "Re-promote the preceding verified composite independently of the Brand Kit deployment.",
+        "Roll the Brand Kit back only by selecting an earlier stable published annotated Identity tag."
+      ]
+    },
+    {
+      "stage": "upgrade",
+      "owner": "identity",
+      "requirements": [
+        "Change one adapter pin in a dedicated reviewed pull request and record upstream license, behavior, output, and migration evidence.",
+        "Rebuild twice and compare file inventories and digests before updating a deployed composite."
+      ]
+    }
+  ],
+  "futureExpansion": {
+    "dogfoodIssue": "https://github.com/egohygiene/identity/issues/56",
+    "implementationIssue": "https://github.com/egohygiene/identity/issues/57",
+    "generalizationOwner": "https://github.com/egohygiene/holon/issues/4",
+    "universalGeneratorOwnedHere": false
+  }
+}

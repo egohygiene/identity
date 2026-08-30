@@ -8,6 +8,10 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- An accepted, machine-verified LaunchKit and Zensical publication architecture
+  for the dogfooded `/identity/` experience, including unambiguous route
+  ownership, immutable framework pins, release-evidence binding, independent
+  rollback, progressive enhancement, and a bounded Holon generalization path.
 - The approved Kern mascot and reusable v1 character-system contract, with a
   governed transparent master, full/portrait/icon projections, accessibility
   and motion rules, CC-BY-4.0 rights metadata, public Brand Kit integration,

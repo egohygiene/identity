@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-29
+updated: 2026-08-30
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -33,14 +33,15 @@ repository: egohygiene/identity
 visibility: public
 publication: central
 route: /roadmap/identity/
-updated: 2026-08-28
+updated: 2026-08-30
 -->
-## 2026-08-29 execution snapshot
+## 2026-08-30 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
 
 **Lifecycle:** v1.0.0 stable release published; public Brand Kit deployment active
-**Current gate:** Deploy and verify the immutable `v1.0.0` Brand Kit at `identity.egohygiene.io` after DNS and HTTPS finish provisioning.
+**Current gate:** Implement issue #57 from the accepted LaunchKit/Zensical
+publication architecture without weakening the immutable Brand Kit boundary.
 **North-star outcome:** A deterministic, governed Brand Kit v1 whose source decisions, generated assets, and approvals remain traceable.
 
 ### Visual roadmap publication
@@ -225,6 +226,37 @@ are reusable without transferring creative authority to a renderer.
 - Standard-library verification checks approval, provenance, license, digests,
   dimensions, PNG structure, and real RGBA transparency offline.
 
+<!-- roadmap-step
+id: IDN-Q08
+status: active
+depends_on: [IDN-Q07]
+issues: [56, 57]
+-->
+#### IDN-Q08 — Dogfood the public Identity experience
+
+**State:** `active`
+**Depends on:** `IDN-Q07`
+
+**Outcome:** Identity explains and demonstrates itself at `/identity/` through
+a pinned LaunchKit landing page and Zensical documentation while the immutable
+Brand Kit remains independently published and rollbackable.
+
+**Exit criteria:**
+
+- [x] Issue #56 assigns every landing, docs, manifest, download, and redirect
+  route to one owner through an accepted ADR and offline-verified contract.
+- [x] Framework adapters consume reviewed Identity outputs without becoming a
+  second source of tokens, assets, mascot facts, provenance, or approvals.
+- [ ] Issue #57 builds, previews, verifies, and hands off one content-addressed
+  `/identity/` composite with accessibility and release-binding evidence.
+
+**Current evidence:**
+
+- ADR-017 preserves the existing `identity.egohygiene.io` release publisher
+  and defines `egohygiene.io/identity/` as a separate reviewed artifact.
+- Holon's LaunchKit profile and upstream Zensical release are exact-pinned;
+  Zensical generalization remains with Holon issue #4 after the dogfood.
+
 ### Roadmap-to-issue handoff
 
 - A step is complete only when its exit criteria and required evidence are satisfied; commit count never determines progress.
@@ -257,7 +289,7 @@ They close only when the refining issues below provide implementation and valida
 | 1 — Extraction and canonical contracts | Establish an independent CLI and versioned consumer-owned source | #8, #9 | Parity tests, migration fixtures, published schemas, deterministic merge/override diagnostics |
 | 2 — Compiler and packages | Produce reproducible projections through stable adapter contracts | #10, #11 | Offline core tests, adapter contract tests, deterministic outputs, packages, manifests, checksums |
 | 3 — Trust and governance | Make quality, accessibility, provenance, voice, and approval testable | #12, #13 | Release-blocking validation, human-review evidence, usage/voice schemas, recovery guidance |
-| 4 — Public product experience | Present, preview, approve, download, and publish a Brand Kit | #14, #15, #16 | Accessible renderer, mutation-safe studio, immutable publication contract, deployed route checks |
+| 4 — Public product experience | Present, preview, approve, download, and publish a Brand Kit | #14, #15, #16, #50, #56, #57 | Accessible renderer, governed mascot, immutable Brand Kit, accepted dogfood architecture, and deployed route checks |
 | 5 — Proof and release | Prove variation across consumers and publish v1.0.0 | #17, #18 | Empathy/OptiFlow pilots, clean-room quickstart, compatibility suite, attestations, stable release |
 
 ## Current wave
@@ -335,6 +367,7 @@ Wave 0 establishes decisions that constrain every implementation PR:
 | Render and preview an understandable Brand Kit | #14, #15 | Accessibility, responsive, link, download, visual regression, and mutation-isolation tests |
 | Publish the Identity Brand Kit at `identity.egohygiene.io` | #16 | Immutable release projection, metadata, `/brand-kit/` compatibility redirect, deployment smoke test, and rollback evidence |
 | Reuse an approved mascot without losing human authority | #50 | Character/variant schemas, approval and provenance links, licensed exact bytes, accessibility and motion guidance, Brand Kit package verification |
+| Dogfood Identity through LaunchKit and Zensical without duplicating brand truth | #56, #57 | Accepted route/adapter contract, immutable pins, accessible deterministic composite, release-binding proof, and independent rollback |
 | Preserve product variation within a family | #17 | Empathy and OptiFlow inheritance/override evidence |
 | Release a supportable v1.0.0 | #18 | Platform matrix, documentation, SBOM/license inventory, checksums, attestations, and all release gates |
 
