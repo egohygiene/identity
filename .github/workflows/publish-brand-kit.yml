@@ -112,14 +112,77 @@ jobs:
           release_source="${RUNNER_TEMP}/identity-release-source"
           git worktree add --detach "${release_source}" "${release_commit}"
 
+          release_config="${release_source}/publication/identity-brand-kit.config.json"
+          if [[ ! -f "${release_config}" ]]; then
+            compatibility_index="${GITHUB_WORKSPACE}/publication/release-configs/index.json"
+            compatibility_config="$(
+              jq \
+                --exit-status \
+                --raw-output \
+                --arg release_tag "${requested_tag}" \
+                '.releases[$release_tag].config' \
+                "${compatibility_index}"
+            )"
+            expected_commit="$(
+              jq \
+                --exit-status \
+                --raw-output \
+                --arg release_tag "${requested_tag}" \
+                '.releases[$release_tag].commit' \
+                "${compatibility_index}"
+            )"
+            expected_config_digest="$(
+              jq \
+                --exit-status \
+                --raw-output \
+                --arg release_tag "${requested_tag}" \
+                '.releases[$release_tag].sha256' \
+                "${compatibility_index}"
+            )"
+            release_config="${GITHUB_WORKSPACE}/${compatibility_config}"
+
+            if [[ "${expected_commit}" != "${release_commit}" ]]; then
+              echo "::error::Compatibility config commit does not match ${requested_tag}."
+              exit 1
+            fi
+            if [[ ! -f "${release_config}" ]]; then
+              echo "::error::No release-owned or compatibility publication config exists for ${requested_tag}."
+              exit 1
+            fi
+            if [[ "$(sha256sum "${release_config}" | cut --delimiter=' ' --fields=1)" != "${expected_config_digest}" ]]; then
+              echo "::error::Compatibility publication config digest does not match its index."
+              exit 1
+            fi
+          fi
+
+          if [[ "$(jq --raw-output '.release.defaultTag' "${release_config}")" != "${requested_tag}" || "$(jq --raw-output '.release.defaultCommit' "${release_config}")" != "${release_commit}" ]]; then
+            echo "::error::Publication config is not bound to the selected release tag and commit."
+            exit 1
+          fi
+
           echo "tag=${requested_tag}" >> "${GITHUB_OUTPUT}"
           echo "commit=${release_commit}" >> "${GITHUB_OUTPUT}"
           echo "source=${release_source}" >> "${GITHUB_OUTPUT}"
+          echo "config=${release_config}" >> "${GITHUB_OUTPUT}"
 
       - name: Set up Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.0.0
         with:
           python-version: "3.12"
+
+      - name: Verify release-bound publication configuration
+        env:
+          RELEASE_SOURCE: ${{ steps.release.outputs.source }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_COMMIT: ${{ steps.release.outputs.commit }}
+          RELEASE_CONFIG: ${{ steps.release.outputs.config }}
+        run: >-
+          python3 scripts/verify_publication_release_configs.py
+          --repository-root "."
+          --config "${RELEASE_CONFIG}"
+          --source-root "${RELEASE_SOURCE}"
+          --release-tag "${RELEASE_TAG}"
+          --release-commit "${RELEASE_COMMIT}"
 
       - name: Set up Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
@@ -144,11 +207,13 @@ jobs:
           RELEASE_SOURCE: ${{ steps.release.outputs.source }}
           RELEASE_TAG: ${{ steps.release.outputs.tag }}
           RELEASE_COMMIT: ${{ steps.release.outputs.commit }}
+          RELEASE_CONFIG: ${{ steps.release.outputs.config }}
         run: >-
           pnpm run build:public --
           --source-root "${RELEASE_SOURCE}"
           --release-tag "${RELEASE_TAG}"
           --release-commit "${RELEASE_COMMIT}"
+          --config "${RELEASE_CONFIG}"
 
       - name: Verify public artifact contract
         working-directory: renderer

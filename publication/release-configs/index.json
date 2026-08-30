@@ -1,0 +1,11 @@
+{
+  "schema": "identity.public-brand-kit-release-config-index/v1",
+  "releases": {
+    "v1.0.0": {
+      "commit": "aaad8839104704cf57bfa846539b3b875421e03d",
+      "config": "publication/release-configs/v1.0.0.json",
+      "sha256": "40619c3459768c8cbe931f0638a7b9b7530de49315c5259c3b1d09a6719299ac",
+      "reason": "The first stable release predates the release-backed publisher configuration."
+    }
+  }
+}

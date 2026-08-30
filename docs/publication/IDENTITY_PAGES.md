@@ -64,12 +64,18 @@ out an annotated, stable Identity release tag, stages only that tag's
   and archive checksum; and
 - a matching checksum sidecar.
 
-The publisher reads `publication/identity-brand-kit.config.json` from the
-selected immutable release source. A newer default-branch configuration cannot
-claim an asset absent from that release. The page visibly links its release and
-publication manifest. `site.json` carries the same release, digest, canonical
-URL, and route-alias information for a machine check without scraping HTML and
-for the `/identity/` composite's cross-host release proof.
+The publisher normally reads `publication/identity-brand-kit.config.json` from
+the selected immutable release source. `v1.0.0` predates that file, so its exact
+tag and commit select a dedicated compatibility configuration through
+`publication/release-configs/index.json`. The index binds the fallback config
+to a SHA-256 digest, and offline verification confirms that every selected
+asset exists in the detached release tree. A newer default-branch configuration
+therefore cannot claim an asset absent from that release.
+
+The page visibly links its release and publication manifest. `site.json`
+carries the same release, digest, canonical URL, and route-alias information
+for a machine check without scraping HTML and for the `/identity/` composite's
+cross-host release proof.
 
 ## Local preview and verification
 
@@ -118,9 +124,9 @@ failed live-domain proof fails the deployment workflow rather than silently
 leaving a stale or misrouted site in place.
 
 The existing `v1.0.0` release predates this workflow. Merging the publisher
-enables the first deployment automatically: the `main` trigger reads
-`publication/identity-brand-kit.config.json` and selects its recorded stable
-release (`v1.0.0`).
+enables the first deployment automatically: the `main` trigger selects the
+recorded stable release (`v1.0.0`) and uses its digest-pinned compatibility
+configuration without substituting current assets.
 
 GitHub Pages must use **GitHub Actions** as its source. The published artifact
 contains `CNAME` with exactly `identity.egohygiene.io`; repository settings own

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json.schemastore.org/json",
+  "schema": "identity.public-brand-kit-config/v1",
+  "canonicalUrl": "https://identity.egohygiene.io/",
+  "release": {
+    "defaultTag": "v1.0.0",
+    "defaultCommit": "aaad8839104704cf57bfa846539b3b875421e03d"
+  },
+  "project": {
+    "id": "identity",
+    "displayName": "identity",
+    "repository": "https://github.com/egohygiene/identity",
+    "tagline": "brand kit generator"
+  },
+  "tokens": [
+    {
+      "path": "color.brand.primary",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [0.4157, 0.298, 1],
+        "alpha": 1
+      },
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "color.brand.secondary",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [0.4314, 0.6588, 1],
+        "alpha": 1
+      },
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "color.canvas",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [0.0392, 0.0392, 0.0549],
+        "alpha": 1
+      },
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "color.surface",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [0.1176, 0.1059, 0.149],
+        "alpha": 1
+      },
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "color.text",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [0.949, 0.9373, 0.9137],
+        "alpha": 1
+      },
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "color.text.muted",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [0.8039, 0.7294, 0.6039],
+        "alpha": 1
+      },
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "color.border",
+      "type": "color",
+      "value": {
+        "colorSpace": "srgb",
+        "components": [0.7373, 0.6627, 1],
+        "alpha": 0.42
+      },
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "typography.body.family",
+      "type": "fontFamily",
+      "value": ["Inter", "system-ui", "sans-serif"],
+      "sourceLayer": "identity"
+    },
+    {
+      "path": "typography.heading.family",
+      "type": "fontFamily",
+      "value": ["Inter", "system-ui", "sans-serif"],
+      "sourceLayer": "identity"
+    }
+  ],
+  "assets": [
+    {
+      "id": "emblem",
+      "label": "Crystal prism emblem",
+      "sourcePath": "brand/emblem.svg",
+      "mediaType": "image/svg+xml",
+      "altText": "The identity crystal prism emblem.",
+      "dimensions": "512 × 512 SVG viewBox units",
+      "intendedUse": "Primary mark for approved product surfaces and application icons.",
+      "safeZone": 0.18
+    },
+    {
+      "id": "horizontal-lockup",
+      "label": "Horizontal lockup",
+      "sourcePath": "brand/lockup-horizontal.svg",
+      "mediaType": "image/svg+xml",
+      "altText": "The identity wordmark beside its luminous crystal prism emblem.",
+      "dimensions": "1536 × 512 SVG viewBox units",
+      "intendedUse": "Wide headers, product surfaces, and documentation mastheads.",
+      "safeZone": 0.1
+    },
+    {
+      "id": "social-preview",
+      "label": "Social preview",
+      "sourcePath": "brand/social-preview.svg",
+      "mediaType": "image/svg+xml",
+      "altText": "identity brand kit generator social card with a crystal prism on a dark field.",
+      "dimensions": "1280 × 640 SVG viewBox units",
+      "intendedUse": "Social and link-preview surfaces.",
+      "safeZone": 0.08
+    }
+  ],
+  "guidance": {
+    "voice": {
+      "status": "declared",
+      "canonical": true,
+      "value": {
+        "principles": [
+          "Clarity in form.",
+          "Alignment in purpose.",
+          "Essence in everything."
+        ],
+        "character": ["clear", "precise", "present"]
+      }
+    },
+    "usage": {
+      "status": "declared",
+      "canonical": true,
+      "value": {
+        "do": [
+          "Preserve the declared clear space around the approved mark.",
+          "Use the approved dark or neutral background behavior."
+        ],
+        "dont": [
+          "Place the mark on busy or low-contrast backgrounds.",
+          "Treat an unapproved candidate as a published asset."
+        ]
+      }
+    }
+  },
+  "support": {
+    "motion": {
+      "status": "not-declared"
+    },
+    "imagery": {
+      "status": "not-declared"
+    },
+    "mascot": {
+      "status": "not-declared"
+    }
+  }
+}
