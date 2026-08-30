@@ -356,6 +356,21 @@ def verify_routes(
             errors.append(f"route {identifier} must redirect to the canonical Brand Kit")
     if routes.get("organization-identity-noslash", {}).get("target") != "https://egohygiene.io/identity/":
         errors.append("/identity must normalize to the canonical trailing-slash route")
+    handoff_ready = {
+        "organization-identity",
+        "organization-identity-noslash",
+        "organization-identity-docs",
+        "organization-identity-architecture",
+        "organization-identity-legal",
+        "organization-identity-manifest",
+        "organization-identity-brand-kit",
+        "organization-brand-alias",
+        "organization-design-alias",
+        "organization-brand-kit-alias",
+    }
+    for identifier in handoff_ready:
+        if routes.get(identifier, {}).get("status") != "handoff-ready":
+            errors.append(f"implemented dogfood route must be handoff-ready: {identifier}")
 
 
 def verify_release_and_quality(

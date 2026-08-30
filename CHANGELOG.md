@@ -8,6 +8,12 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- A deterministic dogfooded `/identity/` composite that materializes Holon's
+  exact-pinned LaunchKit site-suite variant, renders documentation,
+  architecture, and legal surfaces with its hash-locked Zensical graph,
+  resolves Kern and palette inputs from governed Identity packages, and emits
+  route, release, provenance, approval, inventory, checksum, rollback,
+  accessibility, browser, and visual-review evidence for a review-gated handoff.
 - An accepted, machine-verified LaunchKit and Zensical publication architecture
   for the dogfooded `/identity/` experience, including unambiguous route
   ownership, immutable framework pins, release-evidence binding, independent

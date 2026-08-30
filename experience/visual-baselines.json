@@ -1,0 +1,23 @@
+{
+  "schema": "identity.experience-visual-baselines/v1",
+  "reviewedOn": "2026-08-30",
+  "sourceDigests": {
+    "publication/identity-experience.content.json": "c70f590e2ee8ae702a8e12f67b7d36385df9ed3b82de110005d250d56d2bfb1e",
+    "experience/styles/identity-experience.css": "0c3d344ec54768dbd2f4fe3e7af779b51ca0015bedb5e0b80b2ab2d1072b957d",
+    "experience/styles/zensical-identity.css": "a44430fe46aa4f3798f354c62e00ad48a96d4eddc271e545667f0d3580dc956c",
+    "assets/identity/web/identity-palette.css": "8577b7dea2260441827412bd206d86c7213ed75f8973a8b71aae6b0401ade1e8",
+    "assets/identity/mascot/kern-full.png": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c"
+  },
+  "browserEvidence": [
+    { "id": "landing-desktop", "route": "/identity/", "width": 1440, "height": 1000, "colorScheme": "dark" },
+    { "id": "landing-mobile", "route": "/identity/", "width": 390, "height": 844, "colorScheme": "dark" },
+    { "id": "docs-desktop", "route": "/identity/docs/", "width": 1440, "height": 1000, "colorScheme": "dark" },
+    { "id": "architecture-desktop", "route": "/identity/architecture/", "width": 1440, "height": 1000, "colorScheme": "dark" },
+    { "id": "legal-mobile", "route": "/identity/legal/", "width": 390, "height": 844, "colorScheme": "dark" }
+  ],
+  "reviewRules": [
+    "Kern remains a static supporting guide with three visible eyes and the chest-integrated kernel.",
+    "Landing, docs, architecture, and legal surfaces preserve readable hierarchy, visible focus, and local Identity palette behavior.",
+    "Digest changes require human review of fresh wide and narrow screenshots across the composed routes."
+  ]
+}

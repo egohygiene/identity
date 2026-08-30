@@ -1,0 +1,79 @@
+/* Adapter-only aliases. Values remain owned by the generated Identity palette. */
+:root {
+  --identity-color-accent: var(--identity-color-deep-violet);
+  --identity-color-accent-ink: var(--identity-color-ivory);
+  --identity-color-canvas: var(--identity-color-ivory);
+  --identity-color-surface: color-mix(
+    in srgb,
+    var(--identity-color-ivory) 94%,
+    var(--identity-color-lavender-spectrum)
+  );
+  --identity-color-ink: var(--identity-color-obsidian);
+  --identity-color-muted: color-mix(
+    in srgb,
+    var(--identity-color-obsidian) 72%,
+    var(--identity-color-champagne)
+  );
+  --identity-color-border: color-mix(
+    in srgb,
+    var(--identity-color-obsidian) 28%,
+    var(--identity-color-lavender-spectrum)
+  );
+  --identity-font-body: Inter, system-ui, sans-serif;
+  --identity-radius-small: 0.5rem;
+  --identity-radius-large: 1.25rem;
+}
+
+.product-window-body img {
+  max-height: 34rem;
+  object-fit: contain;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--identity-color-deep-violet) 20%, transparent),
+    transparent 68%
+  );
+  border: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --identity-color-accent: var(--identity-color-lavender-spectrum);
+    --identity-color-accent-ink: var(--identity-color-obsidian);
+    --identity-color-canvas: var(--identity-color-obsidian);
+    --identity-color-surface: color-mix(
+      in srgb,
+      var(--identity-color-obsidian) 82%,
+      var(--identity-color-deep-violet)
+    );
+    --identity-color-ink: var(--identity-color-ivory);
+    --identity-color-muted: var(--identity-color-champagne);
+    --identity-color-border: color-mix(
+      in srgb,
+      var(--identity-color-lavender-spectrum) 42%,
+      transparent
+    );
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --identity-color-accent: var(--identity-color-luminous-blue);
+    --identity-color-muted: var(--identity-color-ink);
+    --identity-color-border: var(--identity-color-ink);
+  }
+
+  :focus-visible {
+    outline-width: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

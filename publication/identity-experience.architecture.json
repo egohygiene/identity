@@ -168,17 +168,17 @@
         "publication/identity-experience.content.json"
       ],
       "consumption": "reviewed-input",
-      "mustExist": false
+      "mustExist": true
     },
     {
       "id": "adapter-configuration",
       "class": "adapter-configuration",
       "authority": "adapter-only",
       "paths": [
-        "publication/identity-experience/"
+        "experience/"
       ],
       "consumption": "references-only",
-      "mustExist": false
+      "mustExist": true
     }
   ],
   "routes": [
@@ -190,7 +190,7 @@
       "owner": "launchkit",
       "adapter": "launchkit",
       "artifact": "identity-landing",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-identity-noslash",
@@ -199,7 +199,7 @@
       "kind": "redirect",
       "owner": "route-composer",
       "target": "https://egohygiene.io/identity/",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-identity-docs",
@@ -209,7 +209,7 @@
       "owner": "zensical",
       "adapter": "zensical",
       "artifact": "identity-documentation",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-identity-architecture",
@@ -219,7 +219,7 @@
       "owner": "zensical",
       "adapter": "zensical",
       "artifact": "identity-architecture",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-identity-legal",
@@ -229,7 +229,7 @@
       "owner": "zensical",
       "adapter": "zensical",
       "artifact": "identity-legal",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-identity-manifest",
@@ -238,7 +238,7 @@
       "kind": "manifest",
       "owner": "route-composer",
       "artifact": "identity-experience",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-identity-brand-kit",
@@ -247,7 +247,7 @@
       "kind": "redirect",
       "owner": "route-composer",
       "target": "https://identity.egohygiene.io/",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-brand-alias",
@@ -256,7 +256,7 @@
       "kind": "redirect",
       "owner": "route-composer",
       "target": "https://identity.egohygiene.io/",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-design-alias",
@@ -265,7 +265,7 @@
       "kind": "redirect",
       "owner": "route-composer",
       "target": "https://identity.egohygiene.io/",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "organization-brand-kit-alias",
@@ -274,7 +274,7 @@
       "kind": "redirect",
       "owner": "route-composer",
       "target": "https://identity.egohygiene.io/",
-      "status": "planned"
+      "status": "handoff-ready"
     },
     {
       "id": "brand-kit-root",

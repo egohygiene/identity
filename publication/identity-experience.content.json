@@ -1,0 +1,250 @@
+{
+  "$schema": "../contracts/v1/identity-experience-content.schema.json",
+  "schema": "identity.experience-content/v1",
+  "site": {
+    "canonicalUrl": "https://egohygiene.io/identity/",
+    "basePath": "/identity/",
+    "title": "Identity — governed Brand Kits",
+    "description": "Turn reviewed identity intent into accessible, portable, release-backed Brand Kit projections.",
+    "packageName": "@egohygiene/identity-experience"
+  },
+  "assets": {
+    "mascot": "full",
+    "socialImage": "assets/identity/brand/social-preview.svg",
+    "favicon": "assets/identity/web/favicon.png",
+    "palette": "assets/identity/web/identity-palette.css"
+  },
+  "launchkit": {
+    "schema": "holon.launchkit-content/v1",
+    "identity": {
+      "wordmark": "identity"
+    },
+    "navigation": [
+      { "label": "System", "href": "#features" },
+      { "label": "How it works", "href": "#architecture" },
+      { "label": "Documentation", "href": "/identity/docs/" },
+      { "label": "Architecture", "href": "/identity/architecture/" },
+      { "label": "Brand Kit", "href": "https://identity.egohygiene.io/" }
+    ],
+    "announcement": {
+      "label": "Inspect the release evidence",
+      "href": "/identity/publication.json"
+    },
+    "hero": {
+      "eyebrow": "Governed identity infrastructure",
+      "title": "Carry intent all the way to the artifact.",
+      "description": "Identity keeps semantic tokens, approved assets, voice, usage, rights, and human decisions intact as deterministic projections move across products and platforms.",
+      "actions": [
+        { "label": "Read the documentation", "href": "/identity/docs/", "tone": "primary" },
+        { "label": "Open the Brand Kit", "href": "https://identity.egohygiene.io/", "tone": "secondary" }
+      ]
+    },
+    "proof": {
+      "title": "Inspectable by construction",
+      "items": ["Offline source inputs", "Human-approved assets", "Content-addressed output", "Independent rollback"]
+    },
+    "demo": {
+      "eyebrow": "Meet Kern",
+      "title": "A guide, never the source of truth.",
+      "description": "Kern supports the story while the surrounding text, contracts, manifests, and evidence carry the meaning. His approved projection, alt text, rights, and provenance are resolved from Identity's governed package.",
+      "assetRef": "mascot"
+    },
+    "features": {
+      "eyebrow": "One governed system",
+      "title": "Brand truth that survives the framework.",
+      "description": "Canonical intent remains portable while every adapter stays replaceable.",
+      "items": [
+        { "eyebrow": "Kernel", "title": "Semantic intent", "description": "Model color, typography, spacing, motion, imagery, marks, voice, and operational meaning without binding them to one renderer." },
+        { "eyebrow": "Governance", "title": "Rights and decisions", "description": "Keep license, provenance, approval, accessibility, usage, and source lineage attached to each public projection." },
+        { "eyebrow": "Compiler", "title": "Deterministic packages", "description": "Validate, resolve, plan, render, verify, and checksum portable outputs with stable diagnostics and rollback evidence." },
+        { "eyebrow": "Consumers", "title": "Framework-neutral delivery", "description": "Feed reviewed outputs to sites, docs, repositories, applications, press kits, and social surfaces without a second brand source." }
+      ]
+    },
+    "useCases": {
+      "eyebrow": "Use Identity",
+      "title": "Project once, integrate deliberately.",
+      "description": "Each consumer selects the compatible outputs it needs and records the immutable release it reviewed.",
+      "items": [
+        { "title": "Product identity", "description": "Inherit organization semantics and record intentional, approved product differences." },
+        { "title": "Repository surfaces", "description": "Generate marks, social previews, documentation styles, and metadata from the same reviewed input." },
+        { "title": "Portable packages", "description": "Distribute tokens, assets, guidance, checksums, and deterministic archives without exposing internal compiler modules." }
+      ]
+    },
+    "code": {
+      "eyebrow": "Local-first",
+      "title": "Validate before projecting.",
+      "description": "Identity reads reviewed repository inputs, reports concrete recovery guidance, and does not fetch mutable brand source from the web.",
+      "language": "shell",
+      "value": "python3 scripts/validate_identity.py \\\n  --repository-root \"path/to/consumer\" \\\n  --format \"human\"\n\ncargo run --locked -- v1-generate \\\n  --repository-root \"path/to/consumer\"\n\ncargo run --locked -- v1-verify \\\n  --repository-root \"path/to/consumer\""
+    },
+    "architecture": {
+      "eyebrow": "Governed flow",
+      "title": "Every transformation leaves evidence.",
+      "description": "The compiler separates human intent, generated projections, transient review state, and published artifacts.",
+      "items": [
+        { "eyebrow": "01", "title": "Review intent", "description": "Approve source, tokens, guidance, rights, provenance, and the intended output profiles." },
+        { "eyebrow": "02", "title": "Compile projections", "description": "Resolve inheritance and aliases, plan exact mutations, render offline, and fail closed on drift or missing evidence." },
+        { "eyebrow": "03", "title": "Publish exact bytes", "description": "Hand a content-addressed artifact to the owning surface, verify the live release binding, and retain a known rollback target." }
+      ]
+    },
+    "integrations": {
+      "eyebrow": "Dogfooded composition",
+      "title": "Clear ownership at every seam.",
+      "description": "This experience proves the contract without moving authority into a site framework.",
+      "items": [
+        { "title": "LaunchKit", "description": "Holon owns the landing information architecture and accessible static-first presentation.", "href": "https://github.com/egohygiene/holon" },
+        { "title": "Zensical", "description": "Holon's shared docs profile renders reviewed documentation, architecture, and legal content without becoming its source.", "href": "/identity/docs/" },
+        { "title": "Relay", "description": "The organization route owner installs the reviewed composite without rebuilding or changing it.", "href": "https://github.com/egohygiene/relay" }
+      ]
+    },
+    "trust": {
+      "eyebrow": "Evidence first",
+      "title": "Inspect the exact thing you are using.",
+      "description": "Release, source, asset, rights, approval, route, checksum, and rollback evidence stay reachable from the experience.",
+      "links": [
+        { "label": "Publication manifest", "href": "/identity/publication.json" },
+        { "label": "Canonical Brand Kit evidence", "href": "https://identity.egohygiene.io/site.json" },
+        { "label": "Source repository", "href": "https://github.com/egohygiene/identity" },
+        { "label": "Security policy", "href": "https://github.com/egohygiene/identity/security/policy" }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Boundaries",
+      "title": "What this experience proves.",
+      "description": "The dogfood is a consumer of Identity, not a new authority over it.",
+      "items": [
+        { "question": "Is LaunchKit the Identity design system?", "answer": "No. LaunchKit is a replaceable presentation adapter. It consumes reviewed Identity outputs and owns only landing composition." },
+        { "question": "Does Zensical own the documentation source?", "answer": "No. Repository-owned Markdown is durable source. Zensical is pinned rendering and navigation infrastructure for the docs subtree." },
+        { "question": "Can this page change canonical tokens or assets?", "answer": "No. The build is read-only over reviewed Identity outputs and fails when selected bytes, alt text, provenance, approval, or release evidence drift." },
+        { "question": "How does rollback work?", "answer": "The organization route owner re-promotes a preceding verified composite. The canonical Brand Kit rolls back independently through an earlier stable annotated Identity tag." }
+      ]
+    },
+    "finalCta": {
+      "title": "Make identity explainable at the point of use.",
+      "description": "Start with the contracts, inspect the release evidence, then consume the smallest compatible package your surface needs.",
+      "actions": [
+        { "label": "Explore the docs", "href": "/identity/docs/", "tone": "primary" },
+        { "label": "Download the Brand Kit", "href": "https://identity.egohygiene.io/", "tone": "secondary" }
+      ]
+    },
+    "footer": {
+      "summary": "Identity turns reviewed intent into governed, portable Brand Kit projections.",
+      "groups": [
+        {
+          "title": "Identity",
+          "links": [
+            { "label": "Documentation", "href": "/identity/docs/" },
+            { "label": "Brand Kit", "href": "https://identity.egohygiene.io/" },
+            { "label": "Repository", "href": "https://github.com/egohygiene/identity" }
+          ]
+        },
+        {
+          "title": "Evidence",
+          "links": [
+            { "label": "Publication manifest", "href": "/identity/publication.json" },
+            { "label": "Release evidence", "href": "https://identity.egohygiene.io/site.json" },
+            { "label": "Releases", "href": "https://github.com/egohygiene/identity/releases" }
+          ]
+        }
+      ],
+      "legal": [
+        { "label": "Legal and trust", "href": "/identity/legal/" },
+        { "label": "Kern attribution", "href": "/identity/docs/kern/" },
+        { "label": "Support", "href": "https://github.com/egohygiene/identity/blob/main/SUPPORT.md" }
+      ]
+    }
+  },
+  "siteSuite": {
+    "schema": "holon.site-suite-content/v1",
+    "product": {
+      "name": "Identity",
+      "description": "Governed identity contracts and deterministic, release-backed Brand Kit projections.",
+      "repositoryUrl": "https://github.com/egohygiene/identity"
+    },
+    "documentation": {
+      "title": "Identity documentation",
+      "introduction": "Use Identity by selecting reviewed outputs, verifying their release evidence, and keeping framework adapters downstream from canonical brand intent.",
+      "pages": [
+        {
+          "slug": "start",
+          "title": "Start with Identity",
+          "summary": "Choose the smallest reviewed projection your surface needs.",
+          "body": "Identity separates canonical intent from its replaceable projections. Begin with the repository contracts and generated `assets/identity/manifest.json`, select a stable release, then record its tag, commit, source digest, and relevant package checksum in the consuming surface. Never copy token values, mascot facts, rights, provenance, or approvals into framework configuration.\n\nThe canonical public Brand Kit remains at [identity.egohygiene.io](https://identity.egohygiene.io/). This product experience is a dogfooded consumer of those same reviewed outputs."
+        },
+        {
+          "slug": "intent-to-projection",
+          "title": "Intent to projection",
+          "summary": "Trace every public artifact back to reviewed intent and evidence.",
+          "body": "The compiler validates repository input, resolves inheritance and aliases, plans exact mutations, renders offline, and verifies the resulting bytes. Generated projections remain reproducible because source paths, release identity, checksums, and approvals stay attached to the handoff.\n\nLaunchKit and Zensical consume those outputs read-only. They own presentation and navigation, not brand truth. A framework change therefore requires a reviewed adapter-pin update and fresh deterministic, accessibility, route, and visual evidence."
+        },
+        {
+          "slug": "kern",
+          "title": "Kern",
+          "summary": "Use Identity's approved guide with his governed description, rights, and provenance.",
+          "body": "Kern is Identity's hooded guide: three warm-white glowing eyes and a luminous diamond kernel integrated into charcoal and violet robes. Approved full, portrait, and icon projections contain no floating objects, orbiting rings, or particle effects.\n\nKern is licensed under CC BY 4.0. Use the exact alternative text, asset checksum, approval evidence, provenance, and guidance resolved from `assets/identity/mascot/manifest.json` and the canonical mascot package. He may support a story but must never be the sole carrier of meaning."
+        },
+        {
+          "slug": "release-evidence",
+          "title": "Release evidence",
+          "summary": "Verify the release, inputs, exact bytes, and rollback target before installation.",
+          "body": "`/identity/publication.json` binds the candidate release tag and full commit to a source digest, framework pins, mascot projection, evidence references, complete file inventory, and artifact digest. `SHA256SUMS` verifies every non-recursive artifact member.\n\nThe route owner installs the reviewed archive without rebuilding it, compares the binding with `https://identity.egohygiene.io/site.json`, checks the canonical HTTPS routes, and retains the preceding verified composite for rollback. A candidate build is review evidence only until its stable annotated release exists."
+        }
+      ]
+    },
+    "architecture": {
+      "title": "Identity publication architecture",
+      "introduction": "Canonical Identity outputs feed replaceable landing and documentation profiles; one bounded composer emits an immutable handoff for the organization route owner.",
+      "diagram": "flowchart TD\n  intent[Reviewed Identity intent] --> compiled[Compiled Identity outputs]\n  compiled --> landing[LaunchKit landing]\n  compiled --> docs[Zensical surfaces]\n  landing --> artifact[Content-addressed composite]\n  docs --> artifact\n  artifact --> relay[Relay review and installation]",
+      "decisions": [
+        {
+          "id": "ADR-017",
+          "title": "Compose the dogfood experience without moving brand authority",
+          "status": "accepted",
+          "summary": "Holon's exact-pinned landing-launchkit, docs-zensical, and site-suite profiles are replaceable projections. Identity owns reviewed content and release binding; Relay owns organization-route installation.",
+          "href": "https://github.com/egohygiene/identity/blob/main/docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md"
+        },
+        {
+          "id": "ADR-013",
+          "title": "Publish the reference renderer from release-owned source",
+          "status": "accepted",
+          "summary": "The canonical Brand Kit remains independently rollbackable and is generated from an immutable stable Identity release rather than default-branch state.",
+          "href": "https://github.com/egohygiene/identity/blob/main/docs/decisions/ADR-013-public-identity-reference-page.md"
+        },
+        {
+          "id": "ADR-006",
+          "title": "Keep authoring and generated outputs separate",
+          "status": "accepted",
+          "summary": "Human-authored intent remains distinguishable from deterministic projections and transient review evidence.",
+          "href": "https://github.com/egohygiene/identity/blob/main/docs/decisions/ADR-006-authoring-generated-state-boundary.md"
+        }
+      ]
+    },
+    "legal": {
+      "title": "Identity legal and trust",
+      "introduction": "Rights, accessibility, provenance, and artifact boundaries remain visible alongside the product experience.",
+      "pages": [
+        {
+          "slug": "licensing",
+          "title": "Licensing and attribution",
+          "summary": "Separate repository code terms from governed asset rights.",
+          "body": "Identity repository code and documentation are governed by the licenses published in the source repository. Individual asset packages may carry different rights. Kern is published under CC BY 4.0 and requires attribution as described by the mascot package.\n\nBefore redistribution, inspect the selected release's manifest, rights reference, provenance, and approval evidence. Do not infer rights from a preview image or from this explanatory page.",
+          "lastUpdated": "2026-08-30"
+        },
+        {
+          "slug": "accessibility",
+          "title": "Accessibility",
+          "summary": "The experience treats semantic content and governed alternative text as release gates.",
+          "body": "The composite is checked for keyboard navigation, visible focus, semantic headings and landmarks, alternative text, responsive layouts, reduced motion, high contrast, no-JavaScript readability, and serious or critical automated accessibility violations across major browser engines.\n\nReport a barrier through the Identity issue tracker with the affected route, browser, assistive technology, and steps to reproduce. Automated checks support but do not replace human review.",
+          "lastUpdated": "2026-08-30"
+        },
+        {
+          "slug": "publication-boundary",
+          "title": "Publication and privacy boundary",
+          "summary": "Identity hands off static reviewed bytes and does not control the organization host.",
+          "body": "This repository emits a static, content-addressed `/identity/` composite. It does not own the `egohygiene.io` homepage, DNS, TLS, hosting configuration, or organization-wide privacy policy. Relay and the organization route owner install exact reviewed bytes and verify the live release binding.\n\nThe repository-owned artifact does not add analytics, advertising, account forms, or runtime mutation. Host-level services and policies remain the responsibility of the organization route owner and must be reviewed independently.",
+          "lastUpdated": "2026-08-30"
+        }
+      ]
+    }
+  }
+}
