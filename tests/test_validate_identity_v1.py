@@ -216,6 +216,9 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "project.schema.json",
                 "publication-architecture.schema.json",
                 "quality-report.schema.json",
+                "repository-presentation-package-manifest.schema.json",
+                "repository-presentation-package.schema.json",
+                "repository-presentation.schema.json",
                 "social-surface-package-manifest.schema.json",
                 "social-surface-package.schema.json",
                 "social-surface-press-kit-handoff.schema.json",
@@ -279,6 +282,18 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["social-surface-press-kit-handoff.schema.json"]["properties"]["schema"]["const"],
             "identity.social-surface-press-kit-handoff/v1",
+        )
+        self.assertEqual(
+            schemas["repository-presentation.schema.json"]["properties"]["schema"]["const"],
+            validator.REPOSITORY_PRESENTATION_SOURCE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["repository-presentation-package.schema.json"]["properties"]["schema"]["const"],
+            "identity.repository-presentation-package/v1",
+        )
+        self.assertEqual(
+            schemas["repository-presentation-package-manifest.schema.json"]["properties"]["schema"]["const"],
+            "identity.repository-presentation-package-manifest/v1",
         )
         self.assertEqual(
             schemas["mascot.schema.json"]["properties"]["schema"]["const"],

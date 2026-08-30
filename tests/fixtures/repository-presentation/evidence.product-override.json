@@ -1,0 +1,8 @@
+{
+  "schema": "egohygiene.repository-presentation-evidence/v1",
+  "profile": {"id": "egohygiene.repository-presentation-profile/v1", "version": "1.0.0-alpha.1", "status": "proposed", "source": "catalog/repository-presentation-profile.json"},
+  "repository": {"name": "egohygiene/example-product", "type": "tool", "visibility": "public", "lifecycle": "active", "represented_commit": "2222222222222222222222222222222222222222"},
+  "assessment": {"state": "advisory", "observed_at": "2026-08-30T00:00:00Z", "assessor": "fixture", "assessor_version": "1.0.0-alpha.1"},
+  "slots": [{"id": "documentation", "requirement": "recommended", "state": "advisory", "evidence": [], "reason": "Documentation needs review."}],
+  "badge": {"label": "Hygienic", "message": "repository profile advisory", "state": "advisory", "profile_version": "1.0.0-alpha.1", "represented_commit": "2222222222222222222222222222222222222222", "evidence_url": "evidence/repository-presentation.json"}
+}

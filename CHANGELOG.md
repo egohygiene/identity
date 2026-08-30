@@ -32,6 +32,12 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   onto exact records from a rights-approved, digest-pinned Aether catalog.
 - Deterministic social target files, approved input copies, provenance,
   manifests, checksums, ZIP archives, and a verified Press Kit handoff.
+- An opt-in repository-presentation source that pins Hygiene's proposed profile
+  by full commit and digest while keeping visual selection under reviewed
+  `.identity/` authority.
+- Deterministic light, dark, high-contrast, and narrow README banners plus
+  static SVG/PNG `Hygienic` badges for explicit evidence states, accessible
+  fallbacks, framework-neutral descriptors, manifests, and checksums.
 
 ### Fixed
 
