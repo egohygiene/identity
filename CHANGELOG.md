@@ -26,6 +26,12 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Deterministic social target files, approved input copies, provenance,
   manifests, checksums, ZIP archives, and a verified Press Kit handoff.
 
+### Fixed
+
+- Bootstrap publication of `v1.0.0`, which predates the release-owned
+  publication configuration, through a commit- and digest-pinned compatibility
+  config whose asset selections are verified against the detached release.
+
 ## 1.0.0 — 2026-08-28
 
 ### Released

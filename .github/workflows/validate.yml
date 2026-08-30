@@ -59,6 +59,9 @@ jobs:
       - name: Verify accepted publication architecture
         run: python3 scripts/verify_publication_architecture.py --repository-root "."
 
+      - name: Verify release-bound publication configurations
+        run: python3 scripts/verify_publication_release_configs.py --repository-root "."
+
       - name: Verify Rust formatting
         run: cargo fmt --all --check
 
@@ -96,7 +99,7 @@ jobs:
           set -euo pipefail
           while IFS= read -r document; do
             python3 -m json.tool "${document}" >/dev/null
-          done < <(find contracts migration profiles tests/fixtures -type f -name "*.json" -print | sort)
+          done < <(find contracts migration profiles publication tests/fixtures -type f -name "*.json" -print | sort)
 
       - name: Compile Python verification tools
         run: python3 -m compileall -q scripts tests
