@@ -72,7 +72,7 @@ test("Zensical documentation is linked, local, and accessible", async ({ page })
   await expect(page.locator("h1")).toContainText("Identity documentation");
   await expect(page.getByRole("link", { name: "Kern", exact: true }).first()).toHaveAttribute(
     "href",
-    "kern/",
+    "./kern/",
   );
   await expect(page.locator('meta[content="zensical-0.0.57"]')).toHaveCount(1);
   await expect(page.locator('meta[content="Holon docs-zensical@1.0.0"]')).toHaveCount(1);
@@ -82,14 +82,14 @@ test("Zensical documentation is linked, local, and accessible", async ({ page })
 test("architecture and legal surfaces remain direct and accessible", async ({ page }) => {
   await page.goto("/identity/architecture/");
   await expect(page.locator("h1")).toContainText("Identity publication architecture");
-  await expect(page.getByText("ADR-017", { exact: false }).first()).toBeVisible();
+  await expect(page.locator("main h2").filter({ hasText: "ADR-017" })).toBeVisible();
   await expectNoSeriousAccessibilityViolations(page);
 
   await page.goto("/identity/legal/");
   await expect(page.locator("h1")).toContainText("Identity legal and trust");
   await expect(page.getByRole("link", { name: "Accessibility", exact: true }).first()).toHaveAttribute(
     "href",
-    "accessibility/",
+    "./accessibility/",
   );
   await expectNoSeriousAccessibilityViolations(page);
 });
