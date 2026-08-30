@@ -195,7 +195,7 @@
         "adapter": { "$ref": "#/$defs/identifier" },
         "artifact": { "$ref": "#/$defs/identifier" },
         "target": { "type": "string", "minLength": 1 },
-        "status": { "enum": ["planned", "existing"] }
+        "status": { "enum": ["planned", "handoff-ready", "existing"] }
       }
     }
   }

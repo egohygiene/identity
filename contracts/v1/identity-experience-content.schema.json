@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://identity.egohygiene.io/contracts/v1/identity-experience-content.schema.json",
+  "title": "Identity dogfood experience content v1",
+  "description": "Reviewed product copy and adapter references for the LaunchKit landing and Zensical documentation composition.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "site", "assets", "launchkit", "siteSuite"],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schema": { "const": "identity.experience-content/v1" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalUrl", "basePath", "title", "description", "packageName"],
+      "properties": {
+        "canonicalUrl": { "const": "https://egohygiene.io/identity/" },
+        "basePath": { "const": "/identity/" },
+        "title": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "packageName": { "const": "@egohygiene/identity-experience" }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mascot", "socialImage", "favicon", "palette"],
+      "properties": {
+        "mascot": { "enum": ["full", "portrait", "icon"] },
+        "socialImage": { "$ref": "#/$defs/path" },
+        "favicon": { "$ref": "#/$defs/path" },
+        "palette": { "$ref": "#/$defs/path" }
+      }
+    },
+    "launchkit": {
+      "type": "object",
+      "description": "Holon LaunchKit content with one Identity-only assetRef that the compiler resolves from governed mascot source.",
+      "required": ["schema", "identity", "hero", "features", "footer"],
+      "properties": {
+        "schema": { "const": "holon.launchkit-content/v1" },
+        "demo": {
+          "type": "object",
+          "required": ["eyebrow", "title", "description", "assetRef"],
+          "properties": {
+            "assetRef": { "const": "mascot" }
+          }
+        }
+      }
+    },
+    "siteSuite": {
+      "type": "object",
+      "description": "Reviewed documentation, architecture, and legal content accepted by Holon's site-suite v1 profile.",
+      "additionalProperties": false,
+      "required": ["schema", "product", "documentation", "architecture", "legal"],
+      "properties": {
+        "schema": { "const": "holon.site-suite-content/v1" },
+        "product": { "type": "object" },
+        "documentation": { "type": "object" },
+        "architecture": { "type": "object" },
+        "legal": { "type": "object" }
+      }
+    }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    }
+  }
+}

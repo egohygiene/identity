@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://identity.egohygiene.io/contracts/v1/identity-experience-publication.schema.json",
+  "title": "Identity dogfood publication evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "canonicalUrl",
+    "release",
+    "sourceDigest",
+    "frameworks",
+    "mascot",
+    "evidence",
+    "routes",
+    "artifact",
+    "handoff"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schema": { "const": "identity.experience-publication/v1" },
+    "canonicalUrl": { "const": "https://egohygiene.io/identity/" },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tag", "commit", "repository", "url", "brandKitEvidence"],
+      "properties": {
+        "tag": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "commit": { "$ref": "#/$defs/sha1" },
+        "repository": { "const": "https://github.com/egohygiene/identity" },
+        "url": { "type": "string", "format": "uri" },
+        "brandKitEvidence": { "const": "https://identity.egohygiene.io/site.json" }
+      }
+    },
+    "sourceDigest": { "$ref": "#/$defs/sha256" },
+    "frameworks": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "type": "object" }
+    },
+    "mascot": { "type": "object" },
+    "evidence": { "type": "object" },
+    "routes": {
+      "type": "array",
+      "minItems": 4,
+      "items": { "type": "object" }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "digest", "inventory", "checksums"],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "digest": { "$ref": "#/$defs/sha256" },
+        "inventory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256", "sizeBytes"],
+            "properties": {
+              "path": { "type": "string", "minLength": 1 },
+              "sha256": { "$ref": "#/$defs/sha256" },
+              "sizeBytes": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "checksums": { "const": "SHA256SUMS" }
+      }
+    },
+    "handoff": { "type": "object" }
+  },
+  "$defs": {
+    "sha1": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

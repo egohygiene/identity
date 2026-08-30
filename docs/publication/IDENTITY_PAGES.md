@@ -35,8 +35,30 @@ compares that release binding to the canonical Brand Kit's `/site.json` and
 fails closed if they disagree.
 
 Implementation, local preview, deployment, and live verification belong to
-[issue #57](https://github.com/egohygiene/identity/issues/57). The accepted
-architecture itself does not build or deploy the page.
+[issue #57](https://github.com/egohygiene/identity/issues/57). The bounded
+implementation now lives in [`experience/`](../../experience/README.md), with
+reviewed product copy in
+[`publication/identity-experience.content.json`](../../publication/identity-experience.content.json)
+and an offline builder/verifier pair under `scripts/`.
+
+The build verifies all three accepted Holon blueprint Git blobs and inventories
+before materializing the shared LaunchKit `site-suite` variant. It resolves
+Kern's exact bytes and alternative text from the governed mascot package,
+installs Holon's frozen pnpm graph and hash-locked Zensical graph, applies only
+Identity's bounded subpath/release-binding extension, rejects route collisions,
+and emits one `/identity/` tree with landing, docs, architecture, and legal
+surfaces. `SHA256SUMS` and `publication.json` bind every emitted file. A
+deterministic tar handoff is uploaded with browser, accessibility, responsive,
+reduced-motion, no-JavaScript, and visual review evidence.
+
+`v1.1.0` is the configured candidate binding until that stable Identity release
+exists. Candidate artifacts prove the build and must not be installed at the
+canonical route. A tag-triggered build binds the exact stable tag and commit;
+the opt-in live gate then compares those fields with the release-backed Brand
+Kit `site.json` before route-owner installation is considered verified.
+
+Local build and browser commands are documented in the
+[experience README](../../experience/README.md).
 
 ## Compatibility routes
 

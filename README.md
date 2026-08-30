@@ -344,6 +344,7 @@ deployed public website remains outside this CLI release transaction.
 | Voice, usage, and approval guidance | Implemented | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |
 | Renderer and asset studio | Implemented | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public Brand Kit site | Release-backed GitHub Pages deployment at `identity.egohygiene.io` | [#16](https://github.com/egohygiene/identity/issues/16), [publication guide](docs/publication/IDENTITY_PAGES.md) |
+| Dogfooded Identity experience | Deterministic LaunchKit + Zensical composite and review-gated `/identity/` handoff | [#57](https://github.com/egohygiene/identity/issues/57), [experience guide](experience/README.md) |
 | Consumer pilots | Implemented | [#17](https://github.com/egohygiene/identity/issues/17), [Empathy #77](https://github.com/egohygiene/empathy/pull/77), [OptiFlow #46](https://github.com/egohygiene/optiflow/pull/46) |
 | v1.0.0 release | Stable source prepared; final tag records the release evidence | [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
 | Design-system handbook and AI context | Implemented; consumer handoff remains next | [#35](https://github.com/egohygiene/identity/issues/35), [contract](docs/contracts/DESIGN_SYSTEM_V1.md) |

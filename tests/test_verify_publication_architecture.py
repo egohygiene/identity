@@ -114,6 +114,15 @@ class PublicationArchitectureTests(unittest.TestCase):
 
         self.assertTrue(any("canonical Brand Kit" in error for error in errors), errors)
 
+    def test_implemented_dogfood_routes_are_handoff_ready(self) -> None:
+        document = copy.deepcopy(self.document)
+        route = next(route for route in document["routes"] if route["id"] == "organization-identity")
+        route["status"] = "planned"
+
+        errors = self.validate(document)
+
+        self.assertTrue(any("handoff-ready" in error for error in errors), errors)
+
 
 if __name__ == "__main__":
     unittest.main()

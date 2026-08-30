@@ -205,6 +205,8 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "design-system-handbook.schema.json",
                 "design-system.schema.json",
                 "diagnostics.schema.json",
+                "identity-experience-content.schema.json",
+                "identity-experience-publication.schema.json",
                 "motion-policy.schema.json",
                 "mascot-package.schema.json",
                 "mascot.schema.json",
