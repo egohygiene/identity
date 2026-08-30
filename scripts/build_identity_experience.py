@@ -371,14 +371,34 @@ def apply_identity_inputs(
         + docs_style.read_bytes()
     )
 
-    # Identity's accepted offline/runtime boundary uses system fonts. Holon's
-    # shared profile intentionally leaves this native Zensical theme setting
-    # to consumers, so apply the exact bounded configuration before rendering.
+    # Identity's accepted offline/runtime boundary uses system fonts and does
+    # not ship Zensical's optional alpha search runtime. The latter currently
+    # injects unnamed controls and a non-focusable results region, while these
+    # three small surfaces already expose complete deterministic navigation.
+    # Holon's shared profile intentionally leaves these native Zensical
+    # settings to consumers, so apply exact bounded configuration before render.
     docs_builder = site / "site_docs.py"
     docs_builder_text = docs_builder.read_text(encoding="utf-8")
+    plugins_setting = "            'extra_css = [\"stylesheets/extra.css\"]',\n"
     setting = "            'custom_dir = \"overrides\"',\n"
-    if docs_builder_text.count(setting) != 1:
+    features_setting = (
+        "            'features = [\"content.code.copy\", \"navigation.footer\", "
+        "\"navigation.sections\", \"navigation.top\", \"search.highlight\"]',\n"
+    )
+    if (
+        docs_builder_text.count(plugins_setting) != 1
+        or docs_builder_text.count(setting) != 1
+        or docs_builder_text.count(features_setting) != 1
+    ):
         raise BuildError("Holon Zensical theme configuration boundary drifted")
+    docs_builder_text = docs_builder_text.replace(
+        plugins_setting,
+        plugins_setting
+        + '            "plugins = [{ search = { enabled = false } }]",\n',
+    ).replace(
+        features_setting,
+        features_setting.replace(', "search.highlight"', ""),
+    )
     docs_builder.write_text(
         docs_builder_text.replace(setting, setting + '            "font = false",\n'),
         encoding="utf-8",

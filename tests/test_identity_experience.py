@@ -129,6 +129,12 @@ class IdentityExperienceTests(unittest.TestCase):
             ),
             [],
         )
+        for surface in ("docs", "architecture", "legal"):
+            rendered = (artifact / f"identity/{surface}/index.html").read_text(
+                encoding="utf-8"
+            )
+            self.assertNotIn('data-md-component="search"', rendered)
+            self.assertNotIn('role="combobox"', rendered)
 
 
 if __name__ == "__main__":
