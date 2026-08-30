@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: identity-decisions
 title: Identity Decisions
 kind: architecture-document
-version: 1.1.0
+version: 1.2.0
 status: active
 owners:
   - egohygiene
