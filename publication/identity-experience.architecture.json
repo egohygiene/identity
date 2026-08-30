@@ -18,25 +18,31 @@
       "canonicalBrandSource": false,
       "pin": {
         "repository": "https://github.com/egohygiene/holon",
-        "commit": "93364d7461e537bc2fbe1beaf7b812b2b290feda",
+        "commit": "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6",
         "profile": "landing-launchkit",
         "version": "1.0.0",
         "path": "blueprints/launchkit/blueprint.json",
-        "gitBlob": "6f87ad486fe92ab0ee40f8116a4427ccf7ff7989"
+        "gitBlob": "3629339d25facb1e5b36cf6ab381c0744f1e3a14"
       }
     },
     {
       "id": "zensical",
       "role": "documentation",
-      "implementationOwner": "egohygiene/identity",
-      "status": "dogfood-adapter",
+      "implementationOwner": "egohygiene/holon",
+      "status": "available",
       "canonicalBrandSource": false,
       "pin": {
-        "repository": "https://github.com/zensical/zensical",
-        "version": "0.0.57",
-        "tag": "v0.0.57",
-        "tagObject": "ad8188ee60ae9187d64a4fe7c4970d3a1947028d",
-        "commit": "f18bb9957cb2740e5dd66d4a438c780b4e15d64c",
+        "repository": "https://github.com/egohygiene/holon",
+        "commit": "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6",
+        "profile": "docs-zensical",
+        "version": "1.0.0",
+        "path": "blueprints/zensical/blueprint.json",
+        "gitBlob": "5f6e385d54d6271c7fe89f441787d6b253cf9fb0",
+        "upstreamRepository": "https://github.com/zensical/zensical",
+        "upstreamVersion": "0.0.57",
+        "upstreamTag": "v0.0.57",
+        "upstreamTagObject": "ad8188ee60ae9187d64a4fe7c4970d3a1947028d",
+        "upstreamCommit": "f18bb9957cb2740e5dd66d4a438c780b4e15d64c",
         "license": "MIT",
         "developmentStatus": "alpha"
       }
@@ -56,12 +62,18 @@
     {
       "id": "route-composer",
       "role": "publication-composer",
-      "implementationOwner": "egohygiene/relay-and-organization-site",
-      "status": "contract",
+      "implementationOwner": "egohygiene/identity",
+      "status": "dogfood-adapter",
       "canonicalBrandSource": false,
       "pin": {
+        "repository": "https://github.com/egohygiene/holon",
+        "commit": "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6",
+        "profile": "site-suite",
+        "version": "1.0.0",
+        "path": "blueprints/site-suite/blueprint.json",
+        "gitBlob": "2635781f74fd1ba5ee5e6d742dcfabdd0289606b",
         "input": "content-addressed-identity-experience-artifact",
-        "deployment": "review-gated",
+        "publicationOwner": "egohygiene/relay",
         "networkAtBuild": false
       }
     }
@@ -84,11 +96,32 @@
       "rollback": "Promote the preceding verified documentation artifact without rebuilding it."
     },
     {
+      "id": "identity-architecture",
+      "owner": "zensical",
+      "host": "organization",
+      "basePath": "/identity/architecture/",
+      "inputs": ["compiled-identity", "authored-documentation", "adapter-configuration"],
+      "rollback": "Promote the preceding verified architecture artifact without rebuilding it."
+    },
+    {
+      "id": "identity-legal",
+      "owner": "zensical",
+      "host": "organization",
+      "basePath": "/identity/legal/",
+      "inputs": ["compiled-identity", "authored-documentation", "adapter-configuration"],
+      "rollback": "Promote the preceding verified legal projection without rebuilding it."
+    },
+    {
       "id": "identity-experience",
       "owner": "route-composer",
       "host": "organization",
       "basePath": "/identity/",
-      "inputs": ["identity-landing", "identity-documentation"],
+      "inputs": [
+        "identity-landing",
+        "identity-documentation",
+        "identity-architecture",
+        "identity-legal"
+      ],
       "rollback": "Reinstall the preceding content-addressed composite and verify its publication manifest."
     },
     {
@@ -176,6 +209,26 @@
       "owner": "zensical",
       "adapter": "zensical",
       "artifact": "identity-documentation",
+      "status": "planned"
+    },
+    {
+      "id": "organization-identity-architecture",
+      "host": "organization",
+      "path": "/identity/architecture/",
+      "kind": "page",
+      "owner": "zensical",
+      "adapter": "zensical",
+      "artifact": "identity-architecture",
+      "status": "planned"
+    },
+    {
+      "id": "organization-identity-legal",
+      "host": "organization",
+      "path": "/identity/legal/",
+      "kind": "page",
+      "owner": "zensical",
+      "adapter": "zensical",
+      "artifact": "identity-legal",
       "status": "planned"
     },
     {
@@ -309,7 +362,7 @@
       "stage": "preview",
       "owner": "identity",
       "requirements": [
-        "Build both adapters locally under the production /identity/ base path.",
+        "Build the pinned Holon LaunchKit, Zensical, and site-suite profiles locally under the production /identity/ base path.",
         "Serve the composed artifact so routes, assets, no-JavaScript content, and reduced motion can be reviewed together."
       ]
     },
@@ -317,7 +370,7 @@
       "stage": "build",
       "owner": "identity",
       "requirements": [
-        "Use a clean checkout, frozen dependency resolution, the pinned LaunchKit blueprint, and the pinned Zensical release.",
+        "Use a clean checkout, frozen dependency resolution, and the exact Holon site-suite profile that pins LaunchKit and Zensical.",
         "Consume reviewed Identity outputs from the selected stable release without network retrieval or copied token values."
       ]
     },

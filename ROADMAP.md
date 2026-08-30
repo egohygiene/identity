@@ -254,8 +254,8 @@ Brand Kit remains independently published and rollbackable.
 
 - ADR-017 preserves the existing `identity.egohygiene.io` release publisher
   and defines `egohygiene.io/identity/` as a separate reviewed artifact.
-- Holon's LaunchKit profile and upstream Zensical release are exact-pinned;
-  Zensical generalization remains with Holon issue #4 after the dogfood.
+- Holon's merged LaunchKit, Zensical, and site-suite profiles are exact-pinned;
+  Identity #57 owns only the bounded `/identity/` consumer extension and proof.
 
 ### Roadmap-to-issue handoff
 

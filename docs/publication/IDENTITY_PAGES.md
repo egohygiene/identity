@@ -5,7 +5,7 @@ deployment and rollback authority:
 
 | Surface | Purpose | Canonical URL |
 | --- | --- | --- |
-| Dogfooded product experience | LaunchKit product landing plus Zensical documentation | `https://egohygiene.io/identity/` |
+| Dogfooded product experience | LaunchKit landing plus Zensical docs, architecture, and legal surfaces | `https://egohygiene.io/identity/` |
 | Release-backed Brand Kit | Immutable previews, downloads, manifests, and checksums | `https://identity.egohygiene.io/` |
 
 The machine-readable route and lifecycle contract is
@@ -15,13 +15,15 @@ The rationale and framework boundary are accepted in
 
 ## Dogfooded product experience
 
-`/identity/` is a content-addressed composite. A pinned Holon LaunchKit profile
-owns the landing page, and a pinned Zensical release owns `/identity/docs/`.
-Identity builds and verifies the composite; the `egohygiene.io` route owner
-installs the exact reviewed bytes without rebuilding them. This repository does
-not own the organization homepage.
+`/identity/` is a content-addressed composite based on Holon's exact-pinned
+LaunchKit, Zensical, and site-suite v1 profiles. LaunchKit owns the landing;
+Zensical owns `/identity/docs/`, `/identity/architecture/`, and
+`/identity/legal/`. Identity supplies reviewed content and a bounded
+base-path/release-binding extension. The `egohygiene.io` route owner installs
+the exact reviewed bytes without rebuilding them. This repository does not own
+the organization homepage.
 
-Both adapters consume reviewed Identity release outputs read-only. Product copy
+All site adapters consume reviewed Identity release outputs read-only. Product copy
 and documentation remain reviewed authored content. Adapter configuration may
 select sections, navigation, and layout but may not restate tokens, asset bytes,
 Kern's character facts, provenance, or approvals.
@@ -147,12 +149,13 @@ Identity release binding before the pair is considered current.
 
 ## Framework updates
 
-LaunchKit and Zensical pins change one at a time in dedicated review. Update
-the pin, license/provenance evidence, frozen dependency resolution, migration
-notes, visual evidence, and deterministic file inventory together. Do not track
-a moving branch or let an adapter update pull new brand source from the web.
+LaunchKit, Zensical, and site-suite pins change one at a time in dedicated
+review. Update the pin, license/provenance evidence, frozen dependency
+resolution, migration notes, visual evidence, and deterministic file inventory
+together. Do not track a moving branch or let an adapter update pull new brand
+source from the web.
 
-Identity owns only the initial Zensical dogfood adapter. Reusable
-multi-repository generalization belongs to
-[Holon issue #4](https://github.com/egohygiene/holon/issues/4) after issue #57
-provides a working consumer and upgrade evidence.
+[Holon issue #4](https://github.com/egohygiene/holon/issues/4) owns the merged
+reusable profiles. Identity issue #57 consumes those profiles and owns only its
+reviewed content, `/identity/` base path, release binding, compatibility
+redirects, and consumer proof.

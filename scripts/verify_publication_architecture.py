@@ -41,12 +41,16 @@ EXPECTED_ADAPTERS = {
 EXPECTED_ARTIFACTS = {
     "identity-landing",
     "identity-documentation",
+    "identity-architecture",
+    "identity-legal",
     "identity-experience",
     "identity-brand-kit",
 }
 REQUIRED_ARTIFACT_BOUNDARIES = {
     "identity-landing": ("launchkit", "organization", "/identity/"),
     "identity-documentation": ("zensical", "organization", "/identity/docs/"),
+    "identity-architecture": ("zensical", "organization", "/identity/architecture/"),
+    "identity-legal": ("zensical", "organization", "/identity/legal/"),
     "identity-experience": ("route-composer", "organization", "/identity/"),
     "identity-brand-kit": ("reference-renderer", "brand-kit", "/"),
 }
@@ -89,6 +93,18 @@ REQUIRED_ROUTES = {
     "organization-identity": ("organization", "/identity/", "page", "launchkit"),
     "organization-identity-noslash": ("organization", "/identity", "redirect", "route-composer"),
     "organization-identity-docs": ("organization", "/identity/docs/", "page", "zensical"),
+    "organization-identity-architecture": (
+        "organization",
+        "/identity/architecture/",
+        "page",
+        "zensical",
+    ),
+    "organization-identity-legal": (
+        "organization",
+        "/identity/legal/",
+        "page",
+        "zensical",
+    ),
     "organization-identity-manifest": ("organization", "/identity/publication.json", "manifest", "route-composer"),
     "organization-identity-brand-kit": ("organization", "/identity/brand-kit/", "redirect", "route-composer"),
     "organization-brand-alias": ("organization", "/brand/", "redirect", "route-composer"),
@@ -185,11 +201,11 @@ def verify_adapter_pins(adapters: dict[str, dict[str, Any]], errors: list[str]) 
     launchkit_pin = launchkit.get("pin", {})
     expected_launchkit = {
         "repository": "https://github.com/egohygiene/holon",
-        "commit": "93364d7461e537bc2fbe1beaf7b812b2b290feda",
+        "commit": "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6",
         "profile": "landing-launchkit",
         "version": "1.0.0",
         "path": "blueprints/launchkit/blueprint.json",
-        "gitBlob": "6f87ad486fe92ab0ee40f8116a4427ccf7ff7989",
+        "gitBlob": "3629339d25facb1e5b36cf6ab381c0744f1e3a14",
     }
     if launchkit.get("role") != "landing" or launchkit.get("implementationOwner") != "egohygiene/holon":
         errors.append("LaunchKit responsibility must remain with the Holon landing profile")
@@ -199,20 +215,52 @@ def verify_adapter_pins(adapters: dict[str, dict[str, Any]], errors: list[str]) 
     zensical = adapters.get("zensical", {})
     zensical_pin = zensical.get("pin", {})
     expected_zensical = {
-        "repository": "https://github.com/zensical/zensical",
-        "version": "0.0.57",
-        "tag": "v0.0.57",
-        "tagObject": "ad8188ee60ae9187d64a4fe7c4970d3a1947028d",
-        "commit": "f18bb9957cb2740e5dd66d4a438c780b4e15d64c",
+        "repository": "https://github.com/egohygiene/holon",
+        "commit": "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6",
+        "profile": "docs-zensical",
+        "version": "1.0.0",
+        "path": "blueprints/zensical/blueprint.json",
+        "gitBlob": "5f6e385d54d6271c7fe89f441787d6b253cf9fb0",
+        "upstreamRepository": "https://github.com/zensical/zensical",
+        "upstreamVersion": "0.0.57",
+        "upstreamTag": "v0.0.57",
+        "upstreamTagObject": "ad8188ee60ae9187d64a4fe7c4970d3a1947028d",
+        "upstreamCommit": "f18bb9957cb2740e5dd66d4a438c780b4e15d64c",
         "license": "MIT",
         "developmentStatus": "alpha",
     }
-    if zensical.get("role") != "documentation" or zensical.get("status") != "dogfood-adapter":
-        errors.append("Zensical must remain a bounded Identity documentation dogfood adapter")
+    if (
+        zensical.get("role") != "documentation"
+        or zensical.get("status") != "available"
+        or zensical.get("implementationOwner") != "egohygiene/holon"
+    ):
+        errors.append("Zensical responsibility must remain with the Holon docs profile")
     if zensical_pin != expected_zensical:
-        errors.append("Zensical must match the accepted immutable upstream release pin")
+        errors.append("Zensical must match the accepted immutable Holon profile and upstream pin")
 
-    for identifier in ("launchkit", "zensical"):
+    route_composer = adapters.get("route-composer", {})
+    route_composer_pin = route_composer.get("pin", {})
+    expected_route_composer = {
+        "repository": "https://github.com/egohygiene/holon",
+        "commit": "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6",
+        "profile": "site-suite",
+        "version": "1.0.0",
+        "path": "blueprints/site-suite/blueprint.json",
+        "gitBlob": "2635781f74fd1ba5ee5e6d742dcfabdd0289606b",
+        "input": "content-addressed-identity-experience-artifact",
+        "publicationOwner": "egohygiene/relay",
+        "networkAtBuild": False,
+    }
+    if (
+        route_composer.get("role") != "publication-composer"
+        or route_composer.get("status") != "dogfood-adapter"
+        or route_composer.get("implementationOwner") != "egohygiene/identity"
+    ):
+        errors.append("route composition must remain a bounded Identity extension")
+    if route_composer_pin != expected_route_composer:
+        errors.append("route composition must extend the accepted immutable Holon site-suite pin")
+
+    for identifier in ("launchkit", "zensical", "route-composer"):
         pin = adapters.get(identifier, {}).get("pin", {})
         commit = pin.get("commit")
         if not isinstance(commit, str) or not HEX_40.fullmatch(commit):
