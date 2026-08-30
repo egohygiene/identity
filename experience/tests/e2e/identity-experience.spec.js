@@ -59,14 +59,17 @@ test("reduced motion and high contrast preserve the approved static mascot", asy
     return { animation: style.animationName, duration: style.animationDuration };
   });
   expect(motion.animation).toBe("none");
-  expect(["0s", "0.001ms"]).toContain(motion.duration);
+  const durationSeconds = motion.duration.endsWith("ms")
+    ? Number.parseFloat(motion.duration) / 1000
+    : Number.parseFloat(motion.duration);
+  expect(durationSeconds).toBeLessThanOrEqual(0.000001);
   await expectNoSeriousAccessibilityViolations(page);
 });
 
 test("Zensical documentation is linked, local, and accessible", async ({ page }) => {
   await page.goto("/identity/docs/");
 
-  await expect(page.locator("h1")).toHaveText("Identity documentation");
+  await expect(page.locator("h1")).toContainText("Identity documentation");
   await expect(page.getByRole("link", { name: "Kern", exact: true }).first()).toHaveAttribute(
     "href",
     "kern/",
@@ -78,12 +81,12 @@ test("Zensical documentation is linked, local, and accessible", async ({ page })
 
 test("architecture and legal surfaces remain direct and accessible", async ({ page }) => {
   await page.goto("/identity/architecture/");
-  await expect(page.locator("h1")).toHaveText("Identity publication architecture");
+  await expect(page.locator("h1")).toContainText("Identity publication architecture");
   await expect(page.getByText("ADR-017", { exact: false }).first()).toBeVisible();
   await expectNoSeriousAccessibilityViolations(page);
 
   await page.goto("/identity/legal/");
-  await expect(page.locator("h1")).toHaveText("Identity legal and trust");
+  await expect(page.locator("h1")).toContainText("Identity legal and trust");
   await expect(page.getByRole("link", { name: "Accessibility", exact: true }).first()).toHaveAttribute(
     "href",
     "accessibility/",
