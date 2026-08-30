@@ -1,0 +1,8 @@
+{
+  "schema": "egohygiene.repository-presentation-evidence/v1",
+  "profile": {"id": "egohygiene.repository-presentation-profile/v1", "version": "1.0.0-alpha.1", "status": "proposed", "source": "catalog/repository-presentation-profile.json"},
+  "repository": {"name": "egohygiene/example-product", "type": "tool", "visibility": "private", "lifecycle": "active", "represented_commit": "3333333333333333333333333333333333333333"},
+  "assessment": {"state": "exempt", "observed_at": "2026-08-30T00:00:00Z", "assessor": "fixture", "assessor_version": "1.0.0-alpha.1"},
+  "slots": [{"id": "identity_banner", "requirement": "optional", "state": "exempt", "evidence": [{"kind": "approval", "location": "governance/private-repository.json", "assertion": "authoritative", "freshness": "current"}], "reason": "Private presentation is narrowly exempted."}],
+  "badge": {"label": "Hygienic", "message": "profile exemption", "state": "exempt", "profile_version": "1.0.0-alpha.1", "represented_commit": "3333333333333333333333333333333333333333", "evidence_url": "evidence/repository-presentation.json"}
+}

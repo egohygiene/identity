@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../../contracts/v1/repository-presentation.schema.json",
+  "schema": "identity.repository-presentation-source/v1",
+  "profile": {
+    "path": "vendor/hygiene/repository-presentation-profile.v1.json",
+    "id": "egohygiene.repository-presentation-profile/v1",
+    "version": "1.0.0-alpha.1",
+    "status": "proposed",
+    "owner": "egohygiene/hygiene",
+    "repository": "https://github.com/egohygiene/hygiene",
+    "commit": "cb2ed63425d29abada2d2bbb43a3b3e59d11aeb8",
+    "digest": {
+      "algorithm": "sha256-utf8-lf",
+      "value": "44e0881519350e6747723995939c79c6fb4659e38a74b2c32e409866e7a186ba"
+    }
+  },
+  "organizationDefault": {
+    "bannerAssetId": "mark",
+    "altText": "Example Product organization repository identity banner.",
+    "fallbackText": "Example Product — A complete, governed Identity v1 fixture.",
+    "license": {
+      "spdx": "MIT",
+      "attribution": "Copyright 2026 Example"
+    },
+    "bannerApproval": "approve-repository-banner-default",
+    "badgeApproval": "approve-hygienic-badge-profile"
+  },
+  "project": {
+    "visibility": "public",
+    "override": {
+      "altText": "Example Product product-specific repository identity banner.",
+      "reason": "Name the bounded product identity while retaining the organization mark.",
+      "approval": "approve-repository-banner-override"
+    }
+  }
+}

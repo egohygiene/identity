@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/repository-presentation.schema.json",
+  "title": "Identity v1 repository-presentation source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema", "profile", "organizationDefault", "project"],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "(^|/)repository-presentation.schema.json$" },
+    "schema": { "const": "identity.repository-presentation-source/v1" },
+    "profile": { "$ref": "#/$defs/profileLock" },
+    "organizationDefault": { "$ref": "#/$defs/selection" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visibility", "override"],
+      "properties": {
+        "visibility": { "enum": ["public", "internal", "private"] },
+        "override": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["reason", "approval"],
+              "anyOf": [
+                { "required": ["bannerAssetId"] },
+                { "required": ["altText"] }
+              ],
+              "properties": {
+                "bannerAssetId": { "$ref": "#/$defs/identifier" },
+                "altText": { "$ref": "#/$defs/text" },
+                "reason": { "$ref": "#/$defs/text" },
+                "approval": { "$ref": "#/$defs/identifier" }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "text": { "type": "string", "minLength": 1 },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "profileLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "id", "version", "status", "owner", "repository", "commit", "digest"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relativePath" },
+        "id": { "const": "egohygiene.repository-presentation-profile/v1" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$" },
+        "status": { "enum": ["proposed", "active", "deprecated", "superseded"] },
+        "owner": { "const": "egohygiene/hygiene" },
+        "repository": { "const": "https://github.com/egohygiene/hygiene" },
+        "commit": { "$ref": "#/$defs/commit" },
+        "digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": { "const": "sha256-utf8-lf" },
+            "value": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bannerAssetId", "altText", "fallbackText", "license", "bannerApproval", "badgeApproval"],
+      "properties": {
+        "bannerAssetId": { "$ref": "#/$defs/identifier" },
+        "altText": { "$ref": "#/$defs/text" },
+        "fallbackText": { "$ref": "#/$defs/text" },
+        "license": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["spdx", "attribution"],
+          "properties": {
+            "spdx": { "type": "string", "pattern": "^[A-Za-z0-9.-]+$" },
+            "attribution": { "$ref": "#/$defs/text" }
+          }
+        },
+        "bannerApproval": { "$ref": "#/$defs/identifier" },
+        "badgeApproval": { "$ref": "#/$defs/identifier" }
+      }
+    }
+  }
+}

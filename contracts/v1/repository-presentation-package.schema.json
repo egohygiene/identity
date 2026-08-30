@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/repository-presentation-package.schema.json",
+  "title": "Identity v1 repository-presentation package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "version", "project", "source", "profile", "banner", "badge", "consumerBoundary"],
+  "properties": {
+    "schema": { "const": "identity.repository-presentation-package/v1" },
+    "version": { "const": "1.0.0" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "repository", "visibility"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "repository": { "type": "string", "pattern": "^https://" },
+        "visibility": { "enum": ["public", "internal", "private"] }
+      }
+    },
+    "source": { "type": "object" },
+    "profile": { "type": "object" },
+    "banner": { "type": "object" },
+    "badge": { "type": "object" },
+    "consumerBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["editsReadme", "evaluatesEvidence", "networkRequired", "generatedRegionsOnly"],
+      "properties": {
+        "editsReadme": { "const": false },
+        "evaluatesEvidence": { "const": false },
+        "networkRequired": { "const": false },
+        "generatedRegionsOnly": { "const": true }
+      }
+    }
+  }
+}

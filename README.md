@@ -204,6 +204,25 @@ a deterministic archive. It is renderer-ready input with publication authority
 explicitly denied. See the
 [social-surface projection contract](docs/contracts/SOCIAL_SURFACES_V1.md).
 
+## Repository presentation packages
+
+Consumers can project canonical README banners and local evidence badges from
+reviewed `.identity/` visuals plus one explicit Hygiene evidence document:
+
+```bash
+python3 scripts/render_repository_presentation.py \
+  --repository-root "path/to/consumer" \
+  --evidence "evidence/repository-presentation.json" \
+  --output "assets/identity/repository-presentation"
+```
+
+The output includes light, dark, high-contrast, and narrow banner variants;
+static SVG and PNG `Hygienic` badges; accessible textual fallbacks; a
+framework-neutral descriptor; integrity manifest; and checksums. Identity pins
+the proposed Hygiene profile by full commit and digest, but never evaluates
+evidence, activates policy, fetches the web, or edits a consumer README. See
+the [repository-presentation contract](docs/contracts/REPOSITORY_PRESENTATION_V1.md).
+
 ## Compiler core
 
 The Rust library exposes the deterministic framework-neutral compiler boundary
@@ -350,6 +369,7 @@ deployed public website remains outside this CLI release transaction.
 | Design-system handbook and AI context | Implemented; consumer handoff remains next | [#35](https://github.com/egohygiene/identity/issues/35), [contract](docs/contracts/DESIGN_SYSTEM_V1.md) |
 | Press Kit and Media Kit | Implemented | [#34](https://github.com/egohygiene/identity/issues/34), [contract](docs/contracts/PRESS_KIT_V1.md) |
 | Pinned social-surface packages | Implemented | [#52](https://github.com/egohygiene/identity/issues/52), [contract](docs/contracts/SOCIAL_SURFACES_V1.md) |
+| Repository banners and evidence-badge presentation | Implemented | [#54](https://github.com/egohygiene/identity/issues/54), [contract](docs/contracts/REPOSITORY_PRESENTATION_V1.md) |
 
 The umbrella [#2](https://github.com/egohygiene/identity/issues/2) records the
 compiler/package outcome. The Empathy and OptiFlow proof has landed through
@@ -381,6 +401,7 @@ compiler/package outcome. The Empathy and OptiFlow proof has landed through
 - [Design-system handbook and context contract](docs/contracts/DESIGN_SYSTEM_V1.md)
 - [Press Kit and Media Kit contract](docs/contracts/PRESS_KIT_V1.md)
 - [Social-surface projection contract](docs/contracts/SOCIAL_SURFACES_V1.md)
+- [Repository-presentation projection contract](docs/contracts/REPOSITORY_PRESENTATION_V1.md)
 - [Astryx motion-pattern evaluation](docs/evaluations/astryx-motion-patterns.md)
 - [Roadmap](ROADMAP.md)
 

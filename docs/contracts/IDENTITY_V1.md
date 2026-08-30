@@ -29,6 +29,7 @@ The v1 topology is:
 │   ├── design-references.json        # optional reviewed reference catalog
 │   ├── press-kit.json                # optional reviewed Press/Media Kit source
 │   ├── social-surfaces.json          # optional pinned surface selections
+│   ├── repository-presentation.json  # optional README banner/badge visual source
 │   └── mascot.json                   # optional reviewed character system
 ├── sources/                         # approved canonical source assets
 ├── candidates/                      # unapproved work state
@@ -60,6 +61,13 @@ to existing approved public Identity assets and closed project metadata
 selectors. Projects explicitly adopt every organization default and can record
 reviewed product exclusions or bounded overrides. See the
 [social-surface projection contract](SOCIAL_SURFACES_V1.md).
+
+`documents.repositoryPresentation` is an optional additive v1 path. It binds
+approved banner assets and accessible fallback text to an immutable Hygiene
+repository-presentation profile, supports a bounded approved product override,
+and supplies visual profiles for caller-provided evidence states. Identity
+does not evaluate repository evidence or edit README files. See the
+[repository-presentation contract](REPOSITORY_PRESENTATION_V1.md).
 
 `documents.mascot` is an optional additive v1 path. It binds one reviewed
 character system to a governed canonical asset, semantic visual invariants,
@@ -150,7 +158,7 @@ message, and a concrete recovery action. The initial code families are:
 | `IDN1700`–`IDN1799` | handbook source and reviewed references |
 | `IDN1800`–`IDN1899` | Press Kit source and public-selection boundary |
 | `IDN1900`–`IDN1999` | pinned social catalog, selection, and projection boundary |
-| `IDN2000`–`IDN2099` | mascot source, approval, provenance, and variant boundary |
+| `IDN2000`–`IDN2099` | governed repository-presentation and mascot visual-source boundaries |
 
 JSON output is the automation contract. Human output renders the same records;
 it does not invent a second validation result.

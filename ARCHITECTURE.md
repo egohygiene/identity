@@ -88,7 +88,7 @@ Exact fields, commands, and package formats belong to their versioned specificat
 
 | Repository/capability | Owns | Identity integration |
 | --- | --- | --- |
-| Hygiene | Organization policy and conformance requirements | Supplies versioned requirements; does not own product brand intent |
+| Hygiene | Organization policy, repository-presentation applicability, evidence semantics, and conformance requirements | Supplies exact versioned evidence/profile inputs; does not own product brand intent or visual rendering |
 | Aether | Shared schemas, architecture vocabulary, and agent instructions | Governs document/contracts conventions through published artifacts |
 | Holon | Reusable product components and templates | Consumes Identity tokens and packages; does not invent a second palette |
 | Relay | Reusable CI/CD and release automation | Executes thin, pinned validation/release workflows; Relay #8 owns deterministic browser/demo capture that emits Identity-owned visual-motion provenance rather than defining a second motion policy |
@@ -184,6 +184,7 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | Identity v1 source contract | Closed schemas, layered DTCG fixture, offline validator, adversarial diagnostics, and v0 migration plan | Preserve v1 compatibility while package and consumer layers consume the resolved model |
 | Compiler pipeline | Deterministic Rust core, adapter registry, mutation-free plan, plan/manifest schemas, checksum evidence, transactional local store, recovery tests, and offline/compatibility gates | Preserve authority boundaries while downstream validation and interfaces evolve |
 | Packages and projection validation | Nine versioned profiles, built-in offline adapters, DTCG/web/document/metadata/raster/archive projections, deterministic package/checksum schemas, cross-repository byte-identity tests, incremental tests, and subset-selection tests | Preserve package compatibility through real consumer/release proof |
+| Repository presentation | Exact-pinned proposed Hygiene profile, reviewed banner inheritance, explicit evidence-state rendering, local SVG/PNG variants, accessible fallbacks, manifests, and checksums | Hand the immutable descriptor to Holon and repository tooling without transferring evidence or README authority |
 | Quality and release evidence | `identity.quality-report/v1`, package/publication scopes, WCAG/reduced-motion/source-governance/SVG/PNG/manifest/budget checks, visual baselines, explicit skips, and human-review tests | Preserve the single release authority while #14 supplies browser evidence |
 | Visual-motion governance | `identity.motion-policy/v1`, `identity.visual-motion-manifest/v1`, Astryx adopt/adapt/reject evidence, deterministic capture/provenance checks, purpose budgets, reduced-motion fallbacks, baseline review, and adversarial tests | Consume deterministic capture evidence from Relay #8 and renderer evidence from #14 without coupling Identity to their implementations |
 | Renderer and studio | Proposed | Accessible framework-replaceable reference experience |
