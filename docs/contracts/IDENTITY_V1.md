@@ -62,6 +62,13 @@ selectors. Projects explicitly adopt every organization default and can record
 reviewed product exclusions or bounded overrides. See the
 [social-surface projection contract](SOCIAL_SURFACES_V1.md).
 
+`documents.channelRegistry` is an optional additive v1 path. It names the
+versioned organization registry for official social accounts and community
+channels. Lifecycle and verification remain separate, and only approved active
+records can become generated badges, footer links, Press Kit social links, or
+social-surface channel targets. See the
+[organization channel registry contract](CHANNEL_REGISTRY_V1.md).
+
 `documents.repositoryPresentation` is an optional additive v1 path. It binds
 approved banner assets and accessible fallback text to an immutable Hygiene
 repository-presentation profile, supports a bounded approved product override,

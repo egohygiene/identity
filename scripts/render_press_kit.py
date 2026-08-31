@@ -18,6 +18,7 @@ from typing import Any, Sequence
 import zipfile
 
 import render_design_system as design_system
+import channel_registry
 import validate_identity as validator
 
 PRESS_KIT_SCHEMA = "identity.press-kit/v1"
@@ -195,6 +196,35 @@ def build_projection(repository_root: Path) -> tuple[dict[str, Any], dict[str, b
         )
     facts = public_records(source, "facts", approvals)
     links = public_records(source, "links", approvals)
+    channel_source = channel_registry.source_for_project(repository_root, project_document)
+    projected_channels: list[dict[str, Any]] = []
+    if channel_source is not None:
+        if any(value.get("kind") == "social" for value in links):
+            raise ProjectionError(
+                "Press Kit social links must derive from documents.channelRegistry"
+            )
+        projected_channels = channel_registry.public_channels(channel_source)
+        governed = {
+            value["id"]: value for value in channel_registry.governed_channels(channel_source)
+        }
+        authored_ids = {value["id"] for value in links}
+        authored_urls = {value["url"] for value in links}
+        for value in projected_channels:
+            if f"channel-{value['id']}" in authored_ids or value["url"] in authored_urls:
+                raise ProjectionError(
+                    f"Press Kit link duplicates channel registry record: {value['id']}"
+                )
+        links.extend(
+            {
+                "id": f"channel-{value['id']}",
+                "label": value["label"],
+                "url": value["url"],
+                "kind": "social",
+                "approval": approval_record(governed[value["id"]], approvals),
+            }
+            for value in projected_channels
+        )
+        links.sort(key=lambda value: str(value["id"]))
     contacts = public_records(source, "contacts", approvals)
     team = public_records(source, "team", approvals)
     selections = public_records(source, "assets", approvals)
@@ -334,6 +364,11 @@ def build_projection(repository_root: Path) -> tuple[dict[str, Any], dict[str, b
         },
         "artifacts": artifacts,
     }
+    if channel_source is not None:
+        model["channelRegistry"] = {
+            "registry": channel_source["registry"],
+            "channels": projected_channels,
+        }
     return model, asset_bytes
 
 

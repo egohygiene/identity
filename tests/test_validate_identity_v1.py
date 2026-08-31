@@ -198,6 +198,9 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "brand-kit-checksums.schema.json",
                 "brand-kit-package.schema.json",
                 "brand-kit-view-model.schema.json",
+                "channel-registry-package.schema.json",
+                "channel-registry-package-manifest.schema.json",
+                "channel-registry.schema.json",
                 "compiler-manifest.schema.json",
                 "compiler-plan.schema.json",
                 "design-context.schema.json",
@@ -270,6 +273,18 @@ class IdentityV1ValidatorTests(unittest.TestCase):
         self.assertEqual(
             schemas["social-surfaces.schema.json"]["properties"]["schema"]["const"],
             validator.SOCIAL_SURFACE_SOURCE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["channel-registry.schema.json"]["properties"]["schema"]["const"],
+            validator.CHANNEL_REGISTRY_SOURCE_SCHEMA,
+        )
+        self.assertEqual(
+            schemas["channel-registry-package.schema.json"]["properties"]["schema"]["const"],
+            "identity.channel-registry-package/v1",
+        )
+        self.assertEqual(
+            schemas["channel-registry-package-manifest.schema.json"]["properties"]["schema"]["const"],
+            "identity.channel-registry-package-manifest/v1",
         )
         self.assertEqual(
             schemas["social-surface-package.schema.json"]["properties"]["schema"]["const"],

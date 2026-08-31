@@ -8,6 +8,15 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- A canonical v1 Ego Hygiene social and community channel registry with
+  distinct lifecycle and verification states, fail-closed activation and
+  evidence rules, role-only recovery ownership, and planned records for X,
+  Bluesky, Threads, Instagram, Pinterest, Mastodon, Discord, and Open
+  Collective.
+- Deterministic channel registry, accessible badge, footer-link, manifest,
+  checksum, and archive projections; Press Kit and social-surface adapters now
+  consume the same approved active channel records.
+
 - A consumer adoption golden path covering canonical source ownership, human
   approval, immutable tool pins, deterministic generation, optional additive
   projections, CI drift detection, upgrades, and atomic rollback, with Mantle

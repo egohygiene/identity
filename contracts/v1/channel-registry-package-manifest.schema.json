@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/channel-registry-package-manifest.schema.json",
+  "title": "Identity v1 channel registry package manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "version", "projectionSchema", "projectId", "registry", "sourceDigest", "files"],
+  "properties": {
+    "schema": { "const": "identity.channel-registry-package-manifest/v1" },
+    "version": { "const": "1.0.0" },
+    "projectionSchema": { "const": "identity.channel-registry-package/v1" },
+    "projectId": { "type": "string", "minLength": 1 },
+    "registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "owner", "reviewedAt"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "owner": { "type": "string", "minLength": 1 },
+        "reviewedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "sourceDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "files": {
+      "type": "object",
+      "minProperties": 4,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sha256", "bytes"],
+        "properties": {
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "bytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

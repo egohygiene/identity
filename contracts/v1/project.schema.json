@@ -72,6 +72,9 @@
         "socialSurfaces": {
           "$ref": "#/$defs/relativePath"
         },
+        "channelRegistry": {
+          "$ref": "#/$defs/relativePath"
+        },
         "repositoryPresentation": {
           "$ref": "#/$defs/relativePath"
         },

@@ -61,6 +61,11 @@ review.
 
 ## Generated package
 
+When `documents.channelRegistry` is present, every generated target consumes
+the approved active channel with the same reviewed platform label. The target
+contains that canonical channel record, or explicit null when no account is
+active; planned or withheld channels never become publication links.
+
 Run:
 
 ```bash

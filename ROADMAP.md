@@ -321,6 +321,13 @@ contextual tone, usage, accessibility/legal/localization guidance, approval
 lifecycle, and deterministic public/review projections. Issue #8 remains the
 final pre-renderer cross-repository gate.
 
+The organization-channel extension from #65 is implemented as an additive v1
+boundary. Identity now owns one versioned registry and deterministic public
+adapters; Press Kit and social-surface projections consume the same approved
+active records. The initial platform candidates remain honestly `planned`
+until their real handles, URLs, ownership, and verification evidence are
+reviewed.
+
 The umbrella #2 remains open despite the Wave 2 implementation milestone. Its
 remaining acceptance evidence is the real Empathy and OptiFlow consumer proof
 owned by #17 after the required quality/governance and renderer dependencies

@@ -18,6 +18,7 @@
     "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" } },
     "guidance": { "$ref": "#/$defs/guidance" },
     "socialSurfaces": { "$ref": "#/$defs/socialSurfaces" },
+    "channelRegistry": { "$ref": "#/$defs/channelRegistry" },
     "artifacts": { "type": "array", "minItems": 5, "items": { "$ref": "#/$defs/artifact" } }
   },
   "$defs": {
@@ -232,6 +233,15 @@
           }
         },
         "publicationAuthorized": { "const": false }
+      }
+    },
+    "channelRegistry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registry", "channels"],
+      "properties": {
+        "registry": { "type": "object" },
+        "channels": { "type": "array", "items": { "$ref": "channel-registry-package.schema.json#/$defs/publicChannel" } }
       }
     },
     "artifact": {

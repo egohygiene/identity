@@ -42,6 +42,12 @@ unverified download into a public asset.
 
 ## Generated package
 
+When `documents.channelRegistry` is present, all generated `social` links come
+from its badge-approved active records. The Press Kit source must not duplicate
+those links. This keeps its URLs, handles, verification state, accessible
+labels, and icon metadata aligned with badges, footers, and social-surface
+targets.
+
 `scripts/render_press_kit.py` first validates the complete consumer source,
 then creates a framework-neutral `identity.press-kit/v1` projection. Its
 source block records the canonical SHA-256 source digest, source schema, and a
