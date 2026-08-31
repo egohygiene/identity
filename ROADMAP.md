@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-30
+updated: 2026-08-31
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -33,22 +33,24 @@ repository: egohygiene/identity
 visibility: public
 publication: central
 route: /roadmap/identity/
-updated: 2026-08-30
+updated: 2026-08-31
 -->
 ## 2026-08-30 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap handoff. The longer-horizon strategy below remains canonical context; generated HTML, JSON, progress, issue plans, and commit lists are projections.
 
 **Lifecycle:** v1.0.0 stable release published; public Brand Kit deployment active
-**Current gate:** Implement issue #57 from the accepted LaunchKit/Zensical
-publication architecture without weakening the immutable Brand Kit boundary.
+**Current gate:** Prove repeatable post-v1 fleet adoption through Mantle while
+keeping canonical intent, generated packages, approvals, and rollback explicit.
 **North-star outcome:** A deterministic, governed Brand Kit v1 whose source decisions, generated assets, and approvals remain traceable.
 
 ### Visual roadmap publication
 
 **Mode:** `central`  
 **Route:** `/roadmap/identity/`  
-**Current publication evidence:** Release-backed GitHub Pages publisher prepared for `identity.egohygiene.io`; deployment awaits the configured Pages workflow and DNS/HTTPS verification.
+**Current publication evidence:** The release-backed GitHub Pages publisher is
+active at `identity.egohygiene.io`; DNS and HTTPS return the stable public Brand
+Kit independently from the organization website integration.
 
 Publish the public-safe Brand Kit projection at `identity.egohygiene.io`. The
 main `egohygiene.io` website/application may later offer redirect-only aliases,
@@ -128,27 +130,27 @@ issues: [14, 15]
 
 <!-- roadmap-step
 id: IDN-Q04
-status: planned
+status: complete
 depends_on: [IDN-Q03]
 issues: [16]
 -->
 #### IDN-Q04 — Publish the public identity route
 
-**State:** `planned`  
+**State:** `complete`
 **Depends on:** `IDN-Q03`
 
 **Outcome:** Issue #16 exposes an accessible, version-aware identity surface.
 
 **Exit criteria:**
 
-- [ ] The public route is deployed and linked from the organization portal.
-- [ ] Generated assets link back to source evidence.
+- [x] The public route is deployed through the release-backed Pages publisher.
+- [x] Generated assets link back to source and release evidence.
 
 **Current evidence:**
 
-- Issue #16 tracks the public route.
-- The release-backed GitHub Pages publisher and custom-domain artifact are
-  implemented; live verification waits for DNS and HTTPS provisioning.
+- Issue #16 implemented the public route.
+- `identity.egohygiene.io` serves the release-backed Brand Kit over HTTPS; the
+  separate organization-portal route retains its own deployment authority.
 
 <!-- roadmap-step
 id: IDN-Q05
@@ -228,13 +230,13 @@ are reusable without transferring creative authority to a renderer.
 
 <!-- roadmap-step
 id: IDN-Q08
-status: active
+status: complete
 depends_on: [IDN-Q07]
 issues: [56, 57]
 -->
 #### IDN-Q08 — Dogfood the public Identity experience
 
-**State:** `active`
+**State:** `complete`
 **Depends on:** `IDN-Q07`
 
 **Outcome:** Identity explains and demonstrates itself at `/identity/` through
@@ -247,7 +249,7 @@ Brand Kit remains independently published and rollbackable.
   route to one owner through an accepted ADR and offline-verified contract.
 - [x] Framework adapters consume reviewed Identity outputs without becoming a
   second source of tokens, assets, mascot facts, provenance, or approvals.
-- [ ] Issue #57 builds, previews, verifies, and hands off one content-addressed
+- [x] Issue #57 builds, previews, verifies, and hands off one content-addressed
   `/identity/` composite with accessibility and release-binding evidence.
 
 **Current evidence:**
@@ -255,7 +257,8 @@ Brand Kit remains independently published and rollbackable.
 - ADR-017 preserves the existing `identity.egohygiene.io` release publisher
   and defines `egohygiene.io/identity/` as a separate reviewed artifact.
 - Holon's merged LaunchKit, Zensical, and site-suite profiles are exact-pinned;
-  Identity #57 owns only the bounded `/identity/` consumer extension and proof.
+  Identity #57 delivered only the bounded `/identity/` consumer extension and
+  proof without transferring deployment authority.
 
 ### Roadmap-to-issue handoff
 

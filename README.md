@@ -345,10 +345,11 @@ The Brand Kit product contract and toolchain decisions are accepted. The
 extracted CLI, v1 source contract, deterministic compiler core, built-in
 projection/package layer, shared quality/evidence harness, governed
 visual-motion validation, voice/usage/approval guidance, reference renderer,
-asset studio, and Empathy/OptiFlow pilot integrations are implemented. The
-v1.0.0 source is prepared for final tagged publication after the full
-cross-platform, provenance, and support evidence passed. The separately
-deployed public website remains outside this CLI release transaction.
+asset studio, and Empathy/OptiFlow pilot integrations are implemented.
+`v1.0.0` is published as the first stable release, and the release-backed public
+Brand Kit is live at [`identity.egohygiene.io`](https://identity.egohygiene.io/).
+The separately composed `egohygiene.io/identity/` product experience remains an
+independent consumer and deployment transaction.
 
 | Capability | State | Tracking |
 | --- | --- | --- |
@@ -365,11 +366,18 @@ deployed public website remains outside this CLI release transaction.
 | Public Brand Kit site | Release-backed GitHub Pages deployment at `identity.egohygiene.io` | [#16](https://github.com/egohygiene/identity/issues/16), [publication guide](docs/publication/IDENTITY_PAGES.md) |
 | Dogfooded Identity experience | Deterministic LaunchKit + Zensical composite and review-gated `/identity/` handoff | [#57](https://github.com/egohygiene/identity/issues/57), [experience guide](experience/README.md) |
 | Consumer pilots | Implemented | [#17](https://github.com/egohygiene/identity/issues/17), [Empathy #77](https://github.com/egohygiene/empathy/pull/77), [OptiFlow #46](https://github.com/egohygiene/optiflow/pull/46) |
-| v1.0.0 release | Stable source prepared; final tag records the release evidence | [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
-| Design-system handbook and AI context | Implemented; consumer handoff remains next | [#35](https://github.com/egohygiene/identity/issues/35), [contract](docs/contracts/DESIGN_SYSTEM_V1.md) |
+| v1.0.0 release | Published with cross-platform, provenance, SBOM, checksum, and package evidence | [release](https://github.com/egohygiene/identity/releases/tag/v1.0.0), [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
+| Design-system handbook and AI context | Implemented with post-v1 consumer adoption path | [#35](https://github.com/egohygiene/identity/issues/35), [contract](docs/contracts/DESIGN_SYSTEM_V1.md), [adoption guide](docs/consumers/ADOPTION.md) |
 | Press Kit and Media Kit | Implemented | [#34](https://github.com/egohygiene/identity/issues/34), [contract](docs/contracts/PRESS_KIT_V1.md) |
 | Pinned social-surface packages | Implemented | [#52](https://github.com/egohygiene/identity/issues/52), [contract](docs/contracts/SOCIAL_SURFACES_V1.md) |
 | Repository banners and evidence-badge presentation | Implemented | [#54](https://github.com/egohygiene/identity/issues/54), [contract](docs/contracts/REPOSITORY_PRESENTATION_V1.md) |
+
+New repositories should follow the [consumer adoption golden
+path](docs/consumers/ADOPTION.md). It preserves human authority, immutable tool
+pins, generated-output ownership, drift verification, and rollback as one
+repeatable integration boundary. Mantle issue
+[#27](https://github.com/egohygiene/mantle/issues/27) is the first post-v1 fleet
+adoption of that pattern.
 
 The umbrella [#2](https://github.com/egohygiene/identity/issues/2) records the
 compiler/package outcome. The Empathy and OptiFlow proof has landed through
@@ -388,6 +396,7 @@ compiler/package outcome. The Empathy and OptiFlow proof has landed through
 - [Brand Kit foundations evaluation](docs/evaluations/brand-kit-foundations.md)
 - [Dependency policy](docs/DEPENDENCY_POLICY.md)
 - [v1 release guide](docs/releases/V1.md)
+- [consumer adoption golden path](docs/consumers/ADOPTION.md)
 - [release process](docs/releases/RELEASE_PROCESS.md)
 - [public Brand Kit publication](docs/publication/IDENTITY_PAGES.md)
 - [security policy](SECURITY.md)

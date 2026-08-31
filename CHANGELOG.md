@@ -8,6 +8,11 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- A consumer adoption golden path covering canonical source ownership, human
+  approval, immutable tool pins, deterministic generation, optional additive
+  projections, CI drift detection, upgrades, and atomic rollback, with Mantle
+  as the first post-v1 fleet adoption.
+
 - A deterministic dogfooded `/identity/` composite that materializes Holon's
   exact-pinned LaunchKit site-suite variant, renders documentation,
   architecture, and legal surfaces with its hash-locked Zensical graph,
