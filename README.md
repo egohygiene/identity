@@ -204,6 +204,23 @@ a deterministic archive. It is renderer-ready input with publication authority
 explicitly denied. See the
 [social-surface projection contract](docs/contracts/SOCIAL_SURFACES_V1.md).
 
+## Organization channels
+
+Identity owns one versioned registry for official Ego Hygiene social accounts
+and community channels. Consumers can render the complete reviewed lifecycle
+view plus public adapters that include only badge-approved active channels:
+
+```bash
+python3 scripts/render_channel_registry.py \
+  --repository-root "path/to/consumer" \
+  --output-directory "assets/identity/channels"
+```
+
+Planned and reserved candidates remain explicit without invented handles.
+Press Kit social links and social-surface targets consume this same registry,
+while credentials and recovery material remain outside the public contract.
+See the [organization channel registry contract](docs/contracts/CHANNEL_REGISTRY_V1.md).
+
 ## Repository presentation packages
 
 Consumers can project canonical README banners and local evidence badges from

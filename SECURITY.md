@@ -29,3 +29,12 @@ Release artifacts include SHA-256 checksums, an SPDX SBOM, and a GitHub build
 provenance attestation. Verify those before installing a prebuilt archive.
 The compiler is local-first and does not require credentials or a network
 connection after its locked dependencies have been obtained.
+
+## Social and community accounts
+
+The public channel registry stores lifecycle, ownership role, public URLs,
+verification evidence, and approved badge metadata only. Passwords, tokens,
+session cookies, recovery codes, MFA seeds, backup keys, private contact data,
+and provider recovery answers must remain in the private organization
+account-recovery runbook. Registry `recoveryOwner` values name roles, never
+credentials or private individuals' contact details.

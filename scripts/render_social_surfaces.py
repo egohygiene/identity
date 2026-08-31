@@ -17,6 +17,7 @@ from typing import Any, Sequence
 import zipfile
 
 import render_design_system as design_system
+import channel_registry
 import validate_identity as validator
 
 
@@ -238,6 +239,12 @@ def build_projection(
     if not isinstance(source_path, str):
         raise ProjectionError("social projection requires documents.socialSurfaces source")
     source = load_json(repository_root / source_path)
+    channel_source = channel_registry.source_for_project(repository_root, identity)
+    channel_index = (
+        channel_registry.public_channel_by_platform(channel_source)
+        if channel_source is not None
+        else {}
+    )
     catalog_lock = source["catalog"]
     catalog_path = repository_root / catalog_lock["path"]
     catalog = load_json(catalog_path)
@@ -350,6 +357,8 @@ def build_projection(
             },
             "status": {"state": "ready-for-rendering", "notes": notes},
         }
+        if channel_source is not None:
+            target["channel"] = channel_index.get(surface["platform"].casefold())
         targets.append(target)
         target_path = f"targets/{identifier}.json"
         target_payloads[target_path] = render_json(target).encode("utf-8")
@@ -425,6 +434,11 @@ def build_projection(
             "freshnessWarning": FRESHNESS_WARNING,
         },
     }
+    if channel_source is not None:
+        model["channelRegistry"] = {
+            "registry": channel_source["registry"],
+            "activeChannels": len(channel_registry.public_channels(channel_source)),
+        }
     handoff = {
         "schema": HANDOFF_SCHEMA,
         "projectId": identity["project"]["id"],
@@ -475,8 +489,8 @@ def render_markdown(model: dict[str, Any]) -> str:
         "",
         FRESHNESS_WARNING,
         "",
-        "| Selection | Platform | Placement | Use | Dimensions | Safe zone | Constraints |",
-        "| --- | --- | --- | --- | --- | --- | --- |",
+        "| Selection | Platform | Channel | Placement | Use | Dimensions | Safe zone | Constraints |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for target in model["targets"]:
         surface = target["surface"]
@@ -490,6 +504,15 @@ def render_markdown(model: dict[str, Any]) -> str:
                 for value in (
                     target["id"],
                     surface["platform"],
+                    (
+                        target["channel"]["label"]
+                        if isinstance(target.get("channel"), dict)
+                        else (
+                            "not active"
+                            if "channelRegistry" in model
+                            else "not declared"
+                        )
+                    ),
                     surface["placement"],
                     surface["use"],
                     f"{dimensions['widthPx']}×{dimensions['heightPx']}",

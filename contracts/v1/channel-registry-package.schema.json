@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/channel-registry-package.schema.json",
+  "title": "Identity v1 generated public channel registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "project", "source", "registry", "channels", "publicChannels", "artifacts"],
+  "properties": {
+    "schema": { "const": "identity.channel-registry-package/v1" },
+    "project": { "type": "object" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digest", "sourceSchema", "projectionVersion"],
+      "properties": {
+        "digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "sourceSchema": { "const": "identity.channel-registry-source/v1" },
+        "projectionVersion": { "const": "1.0.0" }
+      }
+    },
+    "registry": { "type": "object" },
+    "channels": { "type": "array", "items": { "type": "object" } },
+    "publicChannels": { "type": "array", "items": { "$ref": "#/$defs/publicChannel" } },
+    "artifacts": { "type": "array", "minItems": 7, "items": { "type": "object" } }
+  },
+  "$defs": {
+    "publicChannel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "platformId", "platform", "url", "handle", "label", "verification", "badge"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "platformId": { "type": "string", "minLength": 1 },
+        "platform": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "handle": { "type": ["string", "null"] },
+        "label": { "type": "string", "minLength": 1 },
+        "verification": { "enum": ["unverified", "pending", "verified", "not-applicable"] },
+        "badge": { "type": "object" }
+      }
+    }
+  }
+}
