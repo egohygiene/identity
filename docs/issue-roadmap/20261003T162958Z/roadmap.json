@@ -1,0 +1,243 @@
+{
+  "repository": "egohygiene/identity",
+  "audit_id": "20261003T162958Z",
+  "audit_commit": "320dc5e94843198893ff7216f22d1d3d58a04be4",
+  "tracker": {
+    "id": "TRACKER",
+    "title": "Stabilize Identity governance boundaries, recovery, and development workflow",
+    "body_file": "issues/TRACKER.md"
+  },
+  "issues": [
+    {
+      "id": "R01",
+      "title": "Enforce public/review guidance isolation in Rust projections",
+      "milestone": 1,
+      "priority": "P1",
+      "audit_findings": [
+        "AUDIT-001"
+      ],
+      "depends_on": [],
+      "body_file": "issues/R01.md"
+    },
+    {
+      "id": "R02",
+      "title": "Enforce complete source preflight for v1 CLI and library execution",
+      "milestone": 1,
+      "priority": "P1",
+      "audit_findings": [
+        "AUDIT-002"
+      ],
+      "depends_on": [],
+      "body_file": "issues/R02.md"
+    },
+    {
+      "id": "R03",
+      "title": "Constrain recovery journal mutation authority before any filesystem change",
+      "milestone": 1,
+      "priority": "P1",
+      "audit_findings": [
+        "AUDIT-003"
+      ],
+      "depends_on": [],
+      "body_file": "issues/R03.md"
+    },
+    {
+      "id": "R04",
+      "title": "Specify canonical source inventory and share Rust/Python digest vectors",
+      "milestone": 2,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-004"
+      ],
+      "depends_on": [
+        "R02"
+      ],
+      "body_file": "issues/R04.md"
+    },
+    {
+      "id": "R05",
+      "title": "Bind optional design-system projections to the displayed release",
+      "milestone": 2,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-005"
+      ],
+      "depends_on": [
+        "R04"
+      ],
+      "body_file": "issues/R05.md"
+    },
+    {
+      "id": "R06",
+      "title": "Validate generic artifact paths and preserve configured download bases",
+      "milestone": 2,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-006"
+      ],
+      "depends_on": [],
+      "body_file": "issues/R06.md"
+    },
+    {
+      "id": "R07",
+      "title": "Expose supported CLI inspection and recovery for interrupted consumers",
+      "milestone": 2,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-007"
+      ],
+      "depends_on": [
+        "R03",
+        "R08",
+        "R09"
+      ],
+      "body_file": "issues/R07.md"
+    },
+    {
+      "id": "R08",
+      "title": "Validate and confine transaction caches, staging, and backup paths",
+      "milestone": 2,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-008"
+      ],
+      "depends_on": [
+        "R03"
+      ],
+      "body_file": "issues/R08.md"
+    },
+    {
+      "id": "R09",
+      "title": "Establish exclusive writer serialization for generation and recovery",
+      "milestone": 2,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-008"
+      ],
+      "depends_on": [
+        "R08"
+      ],
+      "body_file": "issues/R09.md"
+    },
+    {
+      "id": "R10",
+      "title": "Qualify a reproducible browser, font, and screenshot environment",
+      "milestone": 3,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-009"
+      ],
+      "depends_on": [],
+      "body_file": "issues/R10.md"
+    },
+    {
+      "id": "R11",
+      "title": "Pin and qualify the default development Docker base identity",
+      "milestone": 3,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-014"
+      ],
+      "depends_on": [],
+      "body_file": "issues/R11.md"
+    },
+    {
+      "id": "R12",
+      "title": "Exercise standalone, Make, Task, and Docker setup entry points in CI",
+      "milestone": 3,
+      "priority": "P3",
+      "audit_findings": [
+        "AUDIT-010"
+      ],
+      "depends_on": [
+        "R10",
+        "R11"
+      ],
+      "body_file": "issues/R12.md"
+    },
+    {
+      "id": "R13",
+      "title": "Reconcile active architecture, capability, and publication documentation",
+      "milestone": 4,
+      "priority": "P2",
+      "audit_findings": [
+        "AUDIT-011"
+      ],
+      "depends_on": [
+        "R07"
+      ],
+      "body_file": "issues/R13.md"
+    },
+    {
+      "id": "R14",
+      "title": "Retire completed one-time guidance rewrite workflows",
+      "milestone": 4,
+      "priority": "P3",
+      "audit_findings": [
+        "AUDIT-013"
+      ],
+      "depends_on": [],
+      "body_file": "issues/R14.md"
+    },
+    {
+      "id": "R15",
+      "title": "Extract focused validator modules behind stable offline entry points",
+      "milestone": 4,
+      "priority": "P3",
+      "audit_findings": [
+        "AUDIT-012"
+      ],
+      "depends_on": [
+        "R02",
+        "R04"
+      ],
+      "body_file": "issues/R15.md"
+    },
+    {
+      "id": "R16",
+      "title": "Share Python projection boundary utilities without changing outputs",
+      "milestone": 4,
+      "priority": "P3",
+      "audit_findings": [
+        "AUDIT-012"
+      ],
+      "depends_on": [
+        "R01",
+        "R04",
+        "R15"
+      ],
+      "body_file": "issues/R16.md"
+    },
+    {
+      "id": "R17",
+      "title": "Extract focused Rust compiler, quality, and motion modules",
+      "milestone": 4,
+      "priority": "P3",
+      "audit_findings": [
+        "AUDIT-012"
+      ],
+      "depends_on": [
+        "R03",
+        "R04",
+        "R08",
+        "R09"
+      ],
+      "body_file": "issues/R17.md"
+    },
+    {
+      "id": "R18",
+      "title": "Extract renderer components and input adapters with stable behavior",
+      "milestone": 4,
+      "priority": "P3",
+      "audit_findings": [
+        "AUDIT-012"
+      ],
+      "depends_on": [
+        "R05",
+        "R06",
+        "R10"
+      ],
+      "body_file": "issues/R18.md"
+    }
+  ]
+}
