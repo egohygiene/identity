@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+from contextvars import ContextVar
 from dataclasses import dataclass
 from datetime import datetime
 import hashlib
@@ -15,6 +16,58 @@ from pathlib import Path, PurePosixPath
 import re
 import sys
 from typing import Any, Sequence
+
+
+class SourceSnapshot:
+    """Capture the local inputs actually consulted by authoritative preflight."""
+
+    def __init__(self, root: Path):
+        self.root = root.resolve()
+        self.files: dict[str, str] = {}
+        self.directories: set[str] = set()
+
+    def relative(self, path: Path) -> str:
+        relative = path.absolute().relative_to(self.root).as_posix()
+        if not valid_relative_path(relative):
+            raise OSError(f"invalid source path: {relative}")
+        current = self.root
+        for part in relative.split("/"):
+            current /= part
+            if current.is_symlink():
+                raise OSError(f"source path traverses a symbolic link: {relative}")
+        return relative
+
+    def read(self, path: Path) -> bytes:
+        relative = self.relative(path)
+        if not path.is_file():
+            raise OSError(f"source is not a regular file: {relative}")
+        content = path.read_bytes()
+        digest = hashlib.sha256(content).hexdigest()
+        if self.files.setdefault(relative, digest) != digest:
+            raise OSError(f"source changed during preflight: {relative}")
+        return content
+
+    def verify(self) -> None:
+        for relative in list(self.files):
+            self.read(self.root / relative)
+        for relative in self.directories:
+            path = self.root / relative
+            self.relative(path)
+            if not path.is_dir():
+                raise OSError(f"source directory changed during preflight: {relative}")
+
+    def as_dict(self) -> dict[str, Any]:
+        return {"files": self.files, "directories": sorted(self.directories)}
+
+
+_SOURCE_SNAPSHOT: ContextVar[SourceSnapshot | None] = ContextVar(
+    "identity_source_snapshot", default=None
+)
+
+
+def read_source_bytes(path: Path) -> bytes:
+    snapshot = _SOURCE_SNAPSHOT.get()
+    return snapshot.read(path) if snapshot is not None else path.read_bytes()
 
 PROJECT_SCHEMA = "identity.project/v1"
 TOKENS_SCHEMA = "identity.tokens/v1"
@@ -519,6 +572,7 @@ def valid_relative_path(value: Any) -> bool:
         or value.endswith("/")
         or "//" in value
         or "\\" in value
+        or ":" in value
         or "\x00" in value
     ):
         return False
@@ -530,7 +584,7 @@ def load_json(path: Path, pointer: str, diagnostics: list[Diagnostic]) -> dict[s
 
     try:
         value = json.loads(
-            path.read_text(encoding="utf-8"),
+            read_source_bytes(path).decode("utf-8"),
             object_pairs_hook=object_without_duplicates,
         )
     except DuplicateKeyError as error:
@@ -600,13 +654,19 @@ def resolve_local_path(
             f"Create the {expected} or correct the declared path.",
         )
         return None
+    snapshot = _SOURCE_SNAPSHOT.get()
+    if snapshot is not None:
+        if directory:
+            snapshot.directories.add(snapshot.relative(candidate))
+        else:
+            snapshot.read(candidate)
     return candidate
 
 
 def sha256(path: Path) -> str:
     """Return the lowercase SHA-256 digest for one local file."""
 
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return hashlib.sha256(read_source_bytes(path)).hexdigest()
 
 
 def validate_project(
@@ -3542,7 +3602,7 @@ def validate_social_surfaces(
         )
         if catalog is not None and catalog_path is not None:
             normalized = (
-                catalog_path.read_text(encoding="utf-8")
+                read_source_bytes(catalog_path).decode("utf-8")
                 .replace("\r\n", "\n")
                 .replace("\r", "\n")
                 .encode("utf-8")
@@ -4145,7 +4205,7 @@ def validate_repository_presentation(
         )
         if profile is not None and profile_path is not None:
             normalized = (
-                profile_path.read_text(encoding="utf-8")
+                read_source_bytes(profile_path).decode("utf-8")
                 .replace("\r\n", "\n")
                 .replace("\r", "\n")
                 .encode("utf-8")
@@ -4690,6 +4750,11 @@ def validate_identity(repository_root: Path) -> list[Diagnostic]:
 
     diagnostics: list[Diagnostic] = []
     identity_path = repository_root / ".identity/identity.json"
+    if identity_path.is_symlink() or identity_path.parent.is_symlink():
+        diagnostic(diagnostics, "IDN1003", ".identity/identity.json",
+                   "source path may not traverse a symbolic link",
+                   "Replace the symbolic link with repository-owned local content.")
+        return diagnostics
     project = load_json(identity_path, ".identity/identity.json", diagnostics)
     if project is None:
         return sorted(set(diagnostics))
@@ -4742,20 +4807,47 @@ def build_parser() -> argparse.ArgumentParser:
         default="human",
         help="Diagnostic output format.",
     )
+    parser.add_argument(
+        "--snapshot", action="store_true",
+        help="Include the validated file digests and directory paths in JSON output.",
+    )
     return parser
+
+
+def validate_snapshot(repository_root: Path) -> tuple[list[Diagnostic], SourceSnapshot]:
+    """Validate and bind the result to every consulted local source, without writes."""
+
+    snapshot = SourceSnapshot(repository_root)
+    token = _SOURCE_SNAPSHOT.set(snapshot)
+    try:
+        diagnostics = validate_identity(snapshot.root)
+        snapshot.verify()
+    except (OSError, ValueError) as error:
+        diagnostics = []
+        diagnostic(diagnostics, "IDN1003", ".identity", str(error),
+                   "Restore stable, regular local source files and rerun preflight.")
+    finally:
+        _SOURCE_SNAPSHOT.reset(token)
+    return diagnostics, snapshot
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Run validation and return 0 for valid, 1 for invalid, or 2 for bad arguments."""
 
     arguments = build_parser().parse_args(argv)
-    diagnostics = validate_identity(arguments.repository_root)
+    snapshot = None
+    if arguments.snapshot:
+        diagnostics, snapshot = validate_snapshot(arguments.repository_root)
+    else:
+        diagnostics = validate_identity(arguments.repository_root)
     result = {
         "schema": DIAGNOSTICS_SCHEMA,
         "valid": not diagnostics,
         "repository": str(arguments.repository_root),
         "diagnostics": [value.as_dict() for value in diagnostics],
     }
+    if snapshot is not None:
+        result["snapshot"] = snapshot.as_dict()
     if arguments.format == "json":
         print(json.dumps(result, indent=2, sort_keys=True))
     elif diagnostics:

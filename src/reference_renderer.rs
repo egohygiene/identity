@@ -131,6 +131,9 @@ pub struct BrandKitViewModel {
 impl BrandKitViewModel {
     #[must_use]
     pub fn from_brand_kit(model: &BrandKitModel) -> Self {
+        let guidance = model
+            .guidance
+            .for_audience(crate::brandkit::GuidanceAudience::Public);
         let tokens = model
             .tokens
             .iter()
@@ -187,8 +190,8 @@ impl BrandKitViewModel {
             tokens,
             assets,
             guidance: BrandKitViewGuidance {
-                voice: guidance_section(model.guidance.voice.clone()),
-                usage: guidance_section(model.guidance.usage.clone()),
+                voice: guidance_section(guidance.voice),
+                usage: guidance_section(guidance.usage),
             },
             support: BrandKitViewSupport {
                 motion: BrandKitViewSupportSection {

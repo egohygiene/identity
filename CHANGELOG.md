@@ -55,6 +55,14 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- Enforce complete source preflight in v1 generation, verification, and library
+  execution (#72), using the embedded authoritative validator and checking source
+  freshness before apply. Current builds require local Python 3.11+ for v1.
+- Bind recovery to an independently authorized output root and preflight all
+  journal actions, destinations, and backups before mutation (#73). New v2
+  journals support retryable rollback; legacy v1 journals are preserved for
+  explicit review instead of being automatically trusted.
+
 - Bootstrap publication of `v1.0.0`, which predates the release-owned
   publication configuration, through a commit- and digest-pinned compatibility
   config whose asset selections are verified against the detached release.

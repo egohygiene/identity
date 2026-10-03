@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import hashlib
+from html import escape
 import importlib.util
 import json
 from pathlib import Path
@@ -176,6 +177,86 @@ class BrandGuidanceRendererTests(unittest.TestCase):
             usage_path.write_text(f"{json.dumps(usage, indent=2)}\n", encoding="utf-8")
             with self.assertRaisesRegex(renderer.GuidanceError, "IDN1603"):
                 renderer.build_view_model(repository)
+
+    def test_shared_public_cases_filter_every_output_and_preserve_review(self) -> None:
+        cases = json.loads(
+            (REPOSITORY_ROOT / "tests/fixtures/guidance-public-cases.json").read_text()
+        )["cases"]
+        for case in cases:
+            with self.subTest(case=case["id"]), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                for update in case["updates"]:
+                    path = repository / f".identity/guidance/{update['document']}.json"
+                    document = json.loads(path.read_text())
+                    tokens = update["pointer"].lstrip("/").split("/")
+                    parent = document
+                    for token in tokens[:-1]:
+                        parent = parent[int(token)] if isinstance(parent, list) else parent[token]
+                    key = int(tokens[-1]) if isinstance(parent, list) else tokens[-1]
+                    parent[key] = update["value"]
+                    path.write_text(json.dumps(document, indent=2) + "\n")
+                before = source_digests(repository)
+                # These are valid consumers: validity must not imply public visibility.
+                self.assertEqual(renderer.validator.validate_identity(repository), [])
+                public = renderer.build_view_model(repository, audience="public")
+                review = renderer.build_view_model(repository, audience="review")
+                self.assertEqual(governance_states(public), {"approved"})
+                self.assertEqual(governance_states(review), {"candidate", "approved", "rejected", "superseded"})
+                self.assertEqual(
+                    {item["id"] for item in public["decisions"]},
+                    renderer.approval_ids({key: value for key, value in public.items() if key != "decisions"}),
+                )
+                for output_format in ("json", "markdown", "html"):
+                    output = renderer.render(public, output_format)
+                    for phrase in case["withheld"]:
+                        self.assertNotIn(phrase, output)
+                        if output_format == "html":
+                            self.assertNotIn(escape(phrase), output)
+                    for phrase in case["retained"]:
+                        self.assertIn(escape(phrase) if output_format == "html" else phrase, output)
+                review_json = renderer.render_json(review)
+                for phrase in case["withheld"]:
+                    # A blocked active asset is not a download in either audience;
+                    # its source remains intact and its decision stays in the review ledger.
+                    if phrase not in case.get("review_omitted", []):
+                        self.assertIn(phrase, review_json)
+                if case["id"] == "withheld-singletons-and-containers":
+                    for field in ("foundation", "localization", "accessibility", "legal"):
+                        self.assertIsNone(public[field])
+                        self.assertIsInstance(review[field], dict)
+                    self.assertEqual([context["id"] for context in public["contexts"]], ["repository-readme"])
+                    context = public["contexts"][0]
+                    self.assertEqual(context["examples"], [])
+                    self.assertEqual(context["antiExamples"], [])
+                    self.assertEqual(context["characteristics"], [])
+                    self.assertEqual(public["characteristics"], [])
+                    self.assertNotIn("marks", {section["id"] for section in public["sections"]})
+                    self.assertEqual(public["downloads"], [])
+                    self.assertIn('<html lang="und">', renderer.render_html(public))
+                    with self.assertRaisesRegex(renderer.GuidanceError, "unknown context"):
+                        renderer.build_view_model(repository, "incident-update", audience="public")
+                    review_context = renderer.build_view_model(repository, "incident-update", audience="review")
+                    self.assertEqual([item["id"] for item in review_context["contexts"]], ["incident-update"])
+                elif case["id"] == "approved-public-legacy":
+                    self.assertEqual([asset["id"] for asset in public["legacyAssets"]], ["legacy-wordmark"])
+                    self.assertEqual(public["legacyAssets"][0]["downloadName"], "example-product-legacy-wordmark.svg")
+                    self.assertIn("LEGACY", renderer.render_html(public))
+                self.assertEqual(source_digests(repository), before)
+
+    def test_public_schema_preserves_strict_review_and_projected_context_shape(self) -> None:
+        schema = json.loads((REPOSITORY_ROOT / "contracts/v1/brand-guidance.schema.json").read_text())
+        voice_schema = json.loads((REPOSITORY_ROOT / "contracts/v1/voice.schema.json").read_text())
+        source_context = voice_schema["$defs"]["context"]
+        projected_context = schema["$defs"]["projectedContext"]
+        self.assertEqual(projected_context["required"], source_context["required"])
+        self.assertEqual(set(projected_context["properties"]), set(source_context["properties"]))
+        review = schema["allOf"][0]
+        self.assertEqual(review["if"]["properties"]["audience"], {"const": "review"})
+        for field in ("foundation", "localization", "accessibility", "legal"):
+            variants = schema["properties"][field]["oneOf"]
+            self.assertIn({"type": "null"}, variants)
+            self.assertIn(review["then"]["properties"][field], variants)
 
 
 if __name__ == "__main__":

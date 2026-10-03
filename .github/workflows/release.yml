@@ -16,6 +16,7 @@ on:
       - "renderer/package.json"
       - "src/**"
       - "tests/**"
+      - "scripts/validate_identity.py"
       - "scripts/release_smoke.py"
       - "scripts/release_inventory.py"
       - "scripts/verify_release.py"

@@ -137,8 +137,17 @@ cargo run -- v1-verify --repository-root "path/to/consumer"
 `v1-generate` resolves the selected versioned profiles, writes a transactional
 package and compiler manifest beneath `assets/identity/`, and never writes
 canonical `.identity/` source. `v1-verify` is read-only; it fails when the
-selected package is missing, stale, or drifted. Consumers run the standalone
-validator first to obtain the complete stable source diagnostics.
+selected package is missing, stale, or drifted. Both commands and the public
+`V1ConsumerPipeline::load` library API run the complete authoritative source
+validator automatically, including schema, approval, digest, and path checks.
+
+V1 execution requires Python 3.11+ (`python3` on Unix, `python` on Windows;
+`IDENTITY_PYTHON` can select an explicit executable). The binary embeds the
+standard-library validator and runs it in isolated mode: no Identity checkout,
+Python packages, or network access is needed. Missing Python fails before writes.
+Validated input files are checked again after planning and before applying a
+build; source changes require loading and planning again. The standalone
+validator remains available for diagnostic-only use.
 
 ## Governed brand guidance
 

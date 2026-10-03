@@ -9,6 +9,8 @@
 //! it through the `identity v1-*` commands; they never reproduce token merging
 //! or package rendering locally.
 
+mod preflight;
+
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -27,15 +29,22 @@ use crate::compiler::{
 /// Reusable, immutable in-memory view of one validated v1 consumer source.
 #[derive(Clone, Debug)]
 pub struct V1ConsumerPipeline {
+    repository_root: PathBuf,
+    snapshot: preflight::Snapshot,
     intent: IdentityIntent,
     resolved: ResolvedIdentity,
     profiles: Vec<ProfileSelection>,
 }
 
 impl V1ConsumerPipeline {
-    /// Load local v1 source. Call the standalone validator first for its full,
-    /// stable diagnostics; this loader then supplies the compiler's model.
+    /// Validate local v1 source using the embedded authoritative validator,
+    /// then bind the immutable compiler model to its validated source snapshot.
     pub fn load(repository_root: &Path) -> CompilerResult<Self> {
+        let repository_root = repository_root
+            .canonicalize()
+            .map_err(|error| invalid("repository root", error.to_string()))?;
+        let repository_root = repository_root.as_path();
+        let snapshot = preflight::validate(repository_root)?;
         let project_path = repository_root.join(".identity/identity.json");
         let project = read_json(&project_path, ".identity/identity.json")?;
         let project_object = object(&project, ".identity/identity.json")?;
@@ -124,11 +133,37 @@ impl V1ConsumerPipeline {
             lineage: BTreeMap::new(),
             approvals,
         };
-        Ok(Self {
+        let pipeline = Self {
+            repository_root: repository_root.to_path_buf(),
+            snapshot,
             intent,
             resolved,
             profiles,
-        })
+        };
+        pipeline.verify_source()?;
+        Ok(pipeline)
+    }
+
+    fn verify_source(&self) -> CompilerResult<()> {
+        self.snapshot.verify(&self.repository_root)?;
+        if canonical_source_digest(&self.repository_root)? != self.intent.source_digest {
+            return Err(preflight::stale(
+                ".identity",
+                "canonical source changed after preflight",
+            ));
+        }
+        Ok(())
+    }
+
+    fn verify_intent(&self, intent: &IdentityIntent) -> CompilerResult<()> {
+        self.verify_source()?;
+        if intent != &self.intent {
+            return Err(preflight::stale(
+                ".identity",
+                "intent differs from validated source",
+            ));
+        }
+        Ok(())
     }
 
     #[must_use]
@@ -139,21 +174,21 @@ impl V1ConsumerPipeline {
 
 impl IdentityReader for V1ConsumerPipeline {
     fn read(&self) -> CompilerResult<IdentityIntent> {
+        self.verify_source()?;
         Ok(self.intent.clone())
     }
 }
 
 impl IdentityValidator for V1ConsumerPipeline {
-    fn validate(&self, _intent: &IdentityIntent) -> CompilerResult<ValidationReport> {
-        // The Python stdlib validator is the published, complete v1 source
-        // diagnostic contract. This adapter receives only a preflight-valid
-        // source and prevents the compiler from inventing a second schema.
+    fn validate(&self, intent: &IdentityIntent) -> CompilerResult<ValidationReport> {
+        self.verify_intent(intent)?;
         Ok(ValidationReport::default())
     }
 }
 
 impl IdentityResolver for V1ConsumerPipeline {
-    fn resolve(&self, _intent: &IdentityIntent) -> CompilerResult<ResolvedIdentity> {
+    fn resolve(&self, intent: &IdentityIntent) -> CompilerResult<ResolvedIdentity> {
+        self.verify_intent(intent)?;
         Ok(self.resolved.clone())
     }
 }
@@ -436,6 +471,12 @@ fn collect_canonical_files(
             )
         }) {
             continue;
+        }
+        if path.is_symlink() {
+            return Err(invalid(
+                path.display().to_string(),
+                "canonical source traverses a symbolic link",
+            ));
         }
         if path.is_dir() {
             collect_canonical_files(root, &path, files)?;

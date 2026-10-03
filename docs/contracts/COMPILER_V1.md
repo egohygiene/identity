@@ -16,9 +16,20 @@ read → validate → resolve → plan → render → verify → manifest
 The v1 consumer boundary adds `v1-generate` and `v1-verify`: the former uses
 the published source adapter and selected versioned profiles to apply one
 transactional package build, while the latter is read-only and fails on missing
-or drifted generated state. Full source diagnostics remain owned by the
-standalone standard-library validator, so consumers do not acquire a second
-schema implementation.
+or drifted generated state. Both commands and `V1ConsumerPipeline::load` invoke
+the embedded copy of `scripts/validate_identity.py`, preserving its diagnostic
+codes, paths, messages, and recovery guidance. Python 3.11+ is required at runtime
+(`python3` on Unix, `python` on Windows, or the executable in `IDENTITY_PYTHON`).
+Isolated mode disables consumer imports and site packages; the executable needs
+neither a source checkout nor network access. There is no unchecked fallback.
+
+Preflight snapshots all consulted files and declared directories, including
+inputs outside `.identity/`. The pipeline rejects stale bytes, replaced paths,
+and mismatched intents at its reader, validator, and resolver boundaries. The
+compiler rechecks source after planning, before rendering, and immediately before
+commit. Reusing a prepared compilation after changing source requires a fresh
+load and plan. These checks detect drift; exclusive writer serialization is a
+separate concern.
 
 ## Core ownership
 
@@ -127,6 +138,46 @@ Before mutation it:
 Only then are staged files atomically promoted one path at a time. The manifest is promoted last and all manifested output checksums are re-read after apply.
 
 A process interruption can leave the recovery journal behind. New plan/apply operations fail closed while any transaction workspace exists. Recovery is an explicit authority boundary: it restores replacements/removals from backups, removes newly created files, restores/removes the manifest as appropriate, and never writes under canonical `.identity/` source.
+
+### Recovery authority and journal compatibility
+
+`LocalArtifactStore::new(root)` authorizes only `assets/identity/`. Custom roots
+must be supplied independently through `LocalArtifactStore::with_output_root(root,
+"generated/branding")`, both when committing and when recovering. The CLI wires
+its explicit `--output-root` into that constructor. A journal cannot grant itself
+a broader root. Canonical `.identity/`, `.git/`, and `.cache/` roots are refused.
+
+New transactions use `identity.compiler-transaction/v2`. Journals bind the full
+compiler plan to the transaction directory digest, each action to its planned
+operation/current checksum, and staged writes to their resulting checksums.
+The manifest is exactly `<authorized-root>/.identity-manifest.json`. Portable
+paths reject traversal, Windows drive/stream/device aliases, case collisions,
+and conflicting parent/child destinations. Transaction, backup, and destination
+paths must not traverse symlinks.
+
+Recovery preflights **all** transaction workspaces before any rollback or cleanup.
+It validates plan identities, scope, unique actions, the manifest, every required
+backup checksum, and current destinations. A destination must be absent or match
+the recorded before/after bytes; unrelated edits block rollback. Backups are read
+into memory during preflight. Invalid or incomplete evidence leaves outputs,
+source files, backups, journals, and other workspaces untouched. Recovery can be
+retried after interruption; calling it again after successful recovery is a no-op.
+Only empty orphan workspaces are automatically removed. A populated workspace
+without a journal is retained for diagnosis.
+
+Legacy `identity.compiler-transaction/v1` journals are rejected with `IDN2325`
+and preserved. They lack the independent output scope and checksum evidence
+required for safe automatic migration. Before upgrading, complete recovery of
+any trusted pending transaction. If an older or damaged journal remains, preserve
+a copy of the workspace, independently identify the intended generated root and
+review the original plan/manifest, compare each destination and backup, then
+explicitly restore only reviewed generated files. Remove the retained workspace
+only after verifying that restoration. Do not relabel a v1 journal as v2 or run
+an older recovery implementation against unreviewed journal data.
+
+Plan hashes detect inconsistent evidence; the independently supplied output root
+limits mutation authority. Journals are not authenticated signatures, and this
+boundary does not serialize concurrent writers (tracked separately in #79).
 
 ## Failure states and diagnostic families
 
