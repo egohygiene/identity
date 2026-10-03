@@ -89,3 +89,24 @@ playwright.download.prss.microsoft.com. Keep TLS and package verification enable
 
 The separate Holon-based `experience/` workflow remains optional; see its
 README for its additional repository and dependencies.
+
+## V1 validator runtime
+
+Current source builds require [CPython](https://www.python.org/) 3.11+ for v1
+CLI and library preflight (#72). Python is a runtime dependency for this boundary;
+the v0 CLI remains independent of it. The host/base distributor owns the Python
+installation, version, and package checksum evidence. Cross-platform release CI
+selects Python 3.12 through the pinned setup action in
+[release.yml](../.github/workflows/release.yml). No Python packages are installed
+by the compiler. CPython and its standard library use the
+[PSF license](https://docs.python.org/3/license.html).
+
+The owning adapter is `V1ConsumerPipeline`: it runs the release-embedded
+`scripts/validate_identity.py` in a subprocess with `-I -S`, reads local source,
+and returns diagnostics plus a source snapshot. It requires process execution
+and read access to the consumer's declared inputs; it has no credential, network,
+or write capability in its validator logic. `IDENTITY_PYTHON` may select a
+trusted interpreter executable. A missing/unsupported interpreter fails closed.
+The Rust/Python conformance, copied-binary, invalid-source, and freshness tests
+are the replacement contract: an alternative runtime or native implementation
+must preserve those diagnostics and boundaries before replacing this runner.

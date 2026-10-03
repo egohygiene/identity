@@ -595,3 +595,84 @@ fn duplicate_adapter_registration_is_rejected() {
         .expect_err("duplicate adapter must be rejected");
     assert_eq!(error.kind, FailureKind::Invalid);
 }
+
+#[test]
+fn source_drift_during_adapter_planning_or_rendering_never_reaches_commit() {
+    use std::sync::{Arc, Mutex};
+
+    struct ChangingSource(Mutex<IdentityIntent>);
+    impl IdentityReader for ChangingSource {
+        fn read(&self) -> super::CompilerResult<IdentityIntent> {
+            Ok(self.0.lock().unwrap().clone())
+        }
+    }
+    struct ChangingAdapter {
+        source: Arc<ChangingSource>,
+        during_plan: bool,
+    }
+    impl ChangingAdapter {
+        fn change(&self) {
+            self.source.0.lock().unwrap().source_digest = "b".repeat(64);
+        }
+    }
+    impl ProjectionAdapter for ChangingAdapter {
+        fn descriptor(&self) -> AdapterDescriptor {
+            FixtureAdapter::deterministic().descriptor()
+        }
+        fn plan(
+            &self,
+            identity: &ResolvedIdentity,
+            target: &ProjectionTarget,
+        ) -> super::CompilerResult<AdapterPlan> {
+            if self.during_plan {
+                self.change();
+            }
+            FixtureAdapter::deterministic().plan(identity, target)
+        }
+        fn render(
+            &self,
+            identity: &ResolvedIdentity,
+            target: &ProjectionTarget,
+        ) -> super::CompilerResult<Vec<u8>> {
+            self.change();
+            FixtureAdapter::deterministic().render(identity, target)
+        }
+        fn verify(
+            &self,
+            identity: &ResolvedIdentity,
+            target: &ProjectionTarget,
+            bytes: &[u8],
+        ) -> super::CompilerResult<VerificationReport> {
+            FixtureAdapter::deterministic().verify(identity, target, bytes)
+        }
+    }
+    for during_plan in [true, false] {
+        let temporary = tempfile::tempdir().unwrap();
+        let source = Arc::new(ChangingSource(Mutex::new(fixture_intent())));
+        let mut registry = AdapterRegistry::new();
+        registry
+            .register(ChangingAdapter {
+                source: source.clone(),
+                during_plan,
+            })
+            .unwrap();
+        let mut store = LocalArtifactStore::new(temporary.path()).unwrap();
+        let mut compiler = Compiler::new(
+            source.as_ref(),
+            &FixtureValidator,
+            &FixtureResolver,
+            &registry,
+            &mut store,
+        );
+        let result = compiler.prepare(fixture_request("output.json"));
+        let error = if during_plan {
+            result.expect_err("source drift after planning")
+        } else {
+            compiler
+                .execute(&result.unwrap(), &BTreeSet::new())
+                .expect_err("source drift during render")
+        };
+        assert_eq!(error.kind, FailureKind::Drifted);
+        assert_eq!(fs::read_dir(temporary.path()).unwrap().count(), 0);
+    }
+}

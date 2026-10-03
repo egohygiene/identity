@@ -79,6 +79,27 @@ def refresh_layer_digests(repository: Path) -> None:
 class IdentityV1ValidatorTests(unittest.TestCase):
     """Prove closed schemas, deterministic layers, and governed assets."""
 
+    def test_snapshot_binds_declared_external_inputs_and_detects_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            shutil.copytree(VALID_FIXTURE, root, dirs_exist_ok=True)
+            shutil.move(root / ".identity/brief.md", root / "brief.md")
+            project_path = root / ".identity/identity.json"
+            project = json.loads(project_path.read_text())
+            project["documents"]["brief"] = "brief.md"
+            write_json(project_path, project)
+            diagnostics, snapshot = validator.validate_snapshot(root)
+            self.assertEqual(diagnostics, [])
+            self.assertIn("brief.md", snapshot.files)
+            self.assertIn(".identity/guidance/voice.json", snapshot.files)
+            self.assertIn(".identity/sources", snapshot.directories)
+            snapshot.verify()
+            (root / "brief.md").write_text("changed after preflight")
+            with self.assertRaisesRegex(OSError, "source changed"):
+                snapshot.verify()
+            # Snapshot recording must not leak into subsequent library calls.
+            self.assertEqual(validator.validate_identity(VALID_FIXTURE), [])
+
     def test_complete_v1_fixture_is_valid(self) -> None:
         self.assertEqual(validator.validate_identity(VALID_FIXTURE), [])
 

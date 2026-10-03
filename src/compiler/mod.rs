@@ -590,12 +590,40 @@ impl<'a> Compiler<'a> {
             previous_manifest.as_ref(),
         )?;
 
+        self.verify_source(&identity)?;
+
         Ok(PreparedCompilation {
             identity,
             request,
             plan,
             previous_manifest,
         })
+    }
+
+    fn verify_source(&self, expected: &ResolvedIdentity) -> CompilerResult<()> {
+        let intent = self.reader.read()?;
+        validate_intent(&intent)?;
+        let validation = self.validator.validate(&intent)?;
+        if validation.has_errors() {
+            return Err(CompilerError::from_diagnostics(
+                FailureKind::Invalid,
+                validation.diagnostics,
+            ));
+        }
+        let current = self.resolver.resolve(&intent)?;
+        if &current != expected {
+            return Err(CompilerError::new(
+                FailureKind::Drifted,
+                Diagnostic::error(
+                    "IDN2006",
+                    FailureKind::Drifted,
+                    None,
+                    "source changed after preparation",
+                    "Reload the source and create a new plan.",
+                ),
+            ));
+        }
+        Ok(())
     }
 
     // Execution keeps the render/verify/apply authority sequence visible in one place.
@@ -617,6 +645,7 @@ impl<'a> Compiler<'a> {
                 ),
             ));
         }
+        self.verify_source(&prepared.identity)?;
         if prepared.plan.has_blocking_diagnostics() {
             return Err(CompilerError::from_diagnostics(
                 FailureKind::Blocked,
@@ -744,6 +773,7 @@ impl<'a> Compiler<'a> {
             self.adapters,
             verification_evidence,
         )?;
+        self.verify_source(&prepared.identity)?;
         self.store.commit(&prepared.plan, &rendered, &manifest)?;
         Ok(manifest)
     }

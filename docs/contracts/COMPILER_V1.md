@@ -16,9 +16,20 @@ read → validate → resolve → plan → render → verify → manifest
 The v1 consumer boundary adds `v1-generate` and `v1-verify`: the former uses
 the published source adapter and selected versioned profiles to apply one
 transactional package build, while the latter is read-only and fails on missing
-or drifted generated state. Full source diagnostics remain owned by the
-standalone standard-library validator, so consumers do not acquire a second
-schema implementation.
+or drifted generated state. Both commands and `V1ConsumerPipeline::load` invoke
+the embedded copy of `scripts/validate_identity.py`, preserving its diagnostic
+codes, paths, messages, and recovery guidance. Python 3.11+ is required at runtime
+(`python3` on Unix, `python` on Windows, or the executable in `IDENTITY_PYTHON`).
+Isolated mode disables consumer imports and site packages; the executable needs
+neither a source checkout nor network access. There is no unchecked fallback.
+
+Preflight snapshots all consulted files and declared directories, including
+inputs outside `.identity/`. The pipeline rejects stale bytes, replaced paths,
+and mismatched intents at its reader, validator, and resolver boundaries. The
+compiler rechecks source after planning, before rendering, and immediately before
+commit. Reusing a prepared compilation after changing source requires a fresh
+load and plan. These checks detect drift; exclusive writer serialization is a
+separate concern.
 
 ## Core ownership
 
