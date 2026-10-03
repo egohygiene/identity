@@ -12,9 +12,9 @@
     {
       "destination": "src/commands.rs",
       "baseline_sha256": "01f0fe85a4fa1fa3c09db4db237b087912f8e73fe4d536cc24a87a56dbb87c32",
-      "current_sha256": "d85b2e12dc30faaa5a26b5c95250bf8e3e7bdc62a00f7e655b6463f3dbb1764a",
-      "issue": "https://github.com/egohygiene/identity/issues/17",
-      "reason": "Wire the reusable v1 consumer source adapter into the compiler and reference renderer, keeping generation transactional and verification read-only at the immutable consumer boundary."
+      "current_sha256": "3c87d039c0e2aa9695e0a11918bfacd48213ae3b2c4c02de8c052d6f396f4306",
+      "issue": "https://github.com/egohygiene/identity/issues/73",
+      "reason": "Preserve the v1 consumer and reference-renderer integration introduced in #17 while binding the local artifact store to the explicitly selected output root, so journals cannot broaden commit or recovery authority."
     },
     {
       "destination": "src/lib.rs",

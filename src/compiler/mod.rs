@@ -1452,10 +1452,28 @@ pub(crate) fn validate_portable_path(path: &str, label: &str) -> CompilerResult<
     if path.is_empty()
         || path.starts_with('/')
         || path.ends_with('/')
-        || path.contains('\\')
         || path
-            .split('/')
-            .any(|segment| segment.is_empty() || matches!(segment, "." | ".."))
+            .chars()
+            .any(|character| character.is_control() || "\\:*?\"<>|".contains(character))
+        || path.split('/').any(|segment| {
+            let stem = segment
+                .split('.')
+                .next()
+                .unwrap_or_default()
+                .to_ascii_uppercase();
+            segment.is_empty()
+                || matches!(segment, "." | "..")
+                || segment.ends_with(['.', ' '])
+                || matches!(stem.as_str(), "CON" | "PRN" | "AUX" | "NUL")
+                || ["COM", "LPT"].iter().any(|prefix| {
+                    stem.strip_prefix(prefix).is_some_and(|suffix| {
+                        matches!(
+                            suffix,
+                            "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "¹" | "²" | "³"
+                        )
+                    })
+                })
+        })
     {
         return Err(CompilerError::new(
             FailureKind::Invalid,

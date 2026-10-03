@@ -196,7 +196,8 @@ pub fn v1_generate(arguments: &V1CompilationArguments) -> Result<()> {
     let mut registry = AdapterRegistry::new();
     register_builtin_adapters(&mut registry).map_err(compiler_error)?;
     register_reference_renderer_adapter(&mut registry).map_err(compiler_error)?;
-    let mut store = LocalArtifactStore::new(&repository_root).map_err(compiler_error)?;
+    let mut store = LocalArtifactStore::with_output_root(&repository_root, &request.output_root)
+        .map_err(compiler_error)?;
     let mut compiler = Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
     let prepared = compiler.prepare(request).map_err(compiler_error)?;
     let manifest = compiler
@@ -217,7 +218,8 @@ pub fn v1_verify(arguments: &V1CompilationArguments) -> Result<()> {
     let mut registry = AdapterRegistry::new();
     register_builtin_adapters(&mut registry).map_err(compiler_error)?;
     register_reference_renderer_adapter(&mut registry).map_err(compiler_error)?;
-    let mut store = LocalArtifactStore::new(&repository_root).map_err(compiler_error)?;
+    let mut store = LocalArtifactStore::with_output_root(&repository_root, &request.output_root)
+        .map_err(compiler_error)?;
     let mut compiler = Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
     let prepared = compiler.prepare(request).map_err(compiler_error)?;
     if prepared.plan.has_mutations() {
