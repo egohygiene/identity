@@ -1,0 +1,11 @@
+.git
+.cache
+target
+**/node_modules
+**/__pycache__
+**/playwright-report
+**/test-results
+renderer/dist
+renderer/index.html
+renderer/.identity-public-build
+.identity-experience-*

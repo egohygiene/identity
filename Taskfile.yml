@@ -1,0 +1,24 @@
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+version: '3'
+
+tasks:
+  default:
+    cmds: ['bash scripts/dev-env.sh help']
+  setup:
+    desc: Install pinned tools, frozen dependencies, and build
+    cmds: ['bash scripts/dev-env.sh setup']
+  tools:
+    cmds: ['bash scripts/dev-env.sh tools']
+  deps:
+    cmds: ['bash scripts/dev-env.sh deps']
+  build:
+    cmds: ['bash scripts/dev-env.sh build']
+  check:
+    cmds: ['bash scripts/dev-env.sh check']
+  browsers:
+    cmds: ['bash scripts/dev-env.sh browsers {{.CLI_ARGS}}']
+  e2e:
+    cmds: ['bash scripts/dev-env.sh e2e {{.CLI_ARGS}}']
+  preview:
+    cmds: ['bash scripts/dev-env.sh preview {{.CLI_ARGS}}']
