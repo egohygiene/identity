@@ -67,6 +67,30 @@ every internal or unapproved record and retains only decisions referenced by
 the remaining model. The explicit `review` audience preserves the complete
 lifecycle ledger for maintainers.
 
+Rust guidance packages, archive guidance, and the reference renderer use the
+same approved/public boundary before serialization. `BrandKitGuidance::for_audience`
+requires an explicit `GuidanceAudience::Public` or `GuidanceAudience::Review`;
+the review projection copies the complete source without changing its history.
+Built-in distributable artifacts always select the public audience. The
+standalone Python renderer's `--audience review` remains the consumer entry
+point for the complete decision ledger.
+
+Filtering applies recursively to governed records, including foundation,
+localization, accessibility, legal notes, and examples inside public contexts.
+An empty usage section is omitted, references to hidden voice characteristics
+are removed, and asset records require public availability as well as approved
+public governance. Approved public legacy records remain labeled as legacy.
+Only decisions referenced by surviving guidance enter the public decision ledger.
+
+The normalized `identity.brand-guidance/v1` public model keeps its existing
+top-level keys: a withheld foundation, localization, accessibility, or legal
+record is `null`. Markdown and HTML omit that section; HTML uses language `und`
+when no public localization declares a language. Public context examples,
+anti-examples, and characteristic references may be empty after filtering.
+Review models retain the complete required records and source array constraints.
+Raw voice/usage package projections omit withheld object fields. Consumers must
+not interpret withheld guidance as newly reviewed prose or missing canonical source.
+
 ## Legacy policy
 
 A legacy asset remains visible only as a labeled migration/history record. It

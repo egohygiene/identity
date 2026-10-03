@@ -8,6 +8,7 @@
 //! versioned projection with a compiler manifest and source digest.
 
 mod archive;
+mod guidance;
 mod model;
 mod profiles;
 mod render;
@@ -25,6 +26,7 @@ use crate::compiler::{
     FailureKind, ProjectionAdapter, ProjectionTarget, ResolvedIdentity, VerificationReport,
 };
 
+pub use guidance::GuidanceAudience;
 pub use model::{
     BRAND_KIT_MODEL_SCHEMA, BrandKitGuidance, BrandKitLicense, BrandKitModel, BrandKitOrigin,
     BrandKitProject, BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken,

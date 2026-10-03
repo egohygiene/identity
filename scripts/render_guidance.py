@@ -16,6 +16,7 @@ from typing import Any, Sequence
 import validate_identity as validator
 
 BRAND_GUIDANCE_SCHEMA = "identity.brand-guidance/v1"
+_OMITTED = object()
 
 
 class GuidanceError(ValueError):
@@ -60,6 +61,44 @@ def is_public(value: dict[str, Any]) -> bool:
     return governance["state"] == "approved" and governance["visibility"] == "public"
 
 
+def public_records(value: Any) -> Any:
+    """Copy only approved/public governed records, recursively, without rewriting text."""
+
+    if isinstance(value, dict):
+        if "governance" in value and not is_public(value):
+            return _OMITTED
+        result = {}
+        for key, child in value.items():
+            projected = public_records(child)
+            if projected is not _OMITTED:
+                result[key] = projected
+        return result
+    if isinstance(value, list):
+        return [
+            projected
+            for child in value
+            if (projected := public_records(child)) is not _OMITTED
+        ]
+    return value
+
+
+def public_documents(
+    voice: dict[str, Any], usage: dict[str, Any]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Apply the same source-document audience boundary as Rust package projections."""
+
+    voice = public_records(voice)
+    usage = public_records(usage)
+    public_ids = {item["id"] for item in voice["characteristics"]}
+    for context in voice["contexts"]:
+        context["characteristics"] = [
+            identifier for identifier in context["characteristics"] if identifier in public_ids
+        ]
+    usage["sections"] = [section for section in usage["sections"] if section["rules"]]
+    usage["assets"] = [asset for asset in usage["assets"] if asset["availability"] == "public"]
+    return voice, usage
+
+
 def approval_ids(value: object) -> set[str]:
     """Collect decision IDs referenced by a projected model."""
 
@@ -90,6 +129,8 @@ def build_view_model(
     if audience not in {"public", "review"}:
         raise GuidanceError("audience must be public or review")
     project, voice, usage, approvals = guidance_documents(repository_root)
+    if audience == "public":
+        voice, usage = public_documents(voice, usage)
 
     contexts = voice["contexts"]
     if context is not None:
@@ -97,18 +138,6 @@ def build_view_model(
         if not contexts:
             available = ", ".join(item["id"] for item in voice["contexts"])
             raise GuidanceError(f"unknown context {context!r}; available: {available}")
-    if audience == "public":
-        contexts = [item for item in contexts if is_public(item)]
-        contexts = [
-            {
-                **item,
-                "examples": [value for value in item["examples"] if is_public(value)],
-                "antiExamples": [
-                    value for value in item["antiExamples"] if is_public(value)
-                ],
-            }
-            for item in contexts
-        ]
     characteristic_ids = {
         identifier
         for item in contexts
@@ -119,12 +148,8 @@ def build_view_model(
         characteristics = [
             item for item in characteristics if item["id"] in characteristic_ids
         ]
-    if audience == "public":
-        characteristics = [item for item in characteristics if is_public(item)]
 
     rules = context_rules(usage["sections"], context)
-    if audience == "public":
-        rules = [item for item in rules if is_public(item)]
     selected_rule_ids = {item["id"] for item in rules}
     sections = []
     for section in usage["sections"]:
@@ -154,16 +179,16 @@ def build_view_model(
             for field in ("id", "displayName", "tagline", "repository")
         },
         "selectedContext": context,
-        "foundation": voice["foundation"],
+        "foundation": voice.get("foundation"),
         "characteristics": characteristics,
         "contexts": contexts,
-        "localization": voice["localization"],
+        "localization": voice.get("localization"),
         "sections": sections,
         "doDont": rules,
         "downloads": downloads,
         "legacyAssets": legacy_assets,
-        "accessibility": usage["accessibility"],
-        "legal": usage["legal"],
+        "accessibility": usage.get("accessibility"),
+        "legal": usage.get("legal"),
         "decisions": sorted(approvals["decisions"], key=lambda item: item["id"]),
     }
     if audience == "public":
@@ -222,24 +247,24 @@ def render_markdown(model: dict[str, Any]) -> str:
     ]
     if model["selectedContext"] is not None:
         lines.extend([f"Selected context: `{model['selectedContext']}`", ""])
-    lines.extend(
-        [
-            "## Foundation",
-            "",
-            f"**Purpose:** {foundation['purpose']}",
-            "",
-            f"**Positioning:** {foundation['positioning']}",
-            "",
-            f"**Audience:** {', '.join(foundation['audience'])}",
-            "",
-            f"**Personality:** {', '.join(foundation['personality'])}",
-            "",
-            *markdown_governance(foundation),
-            "",
-            "## Voice characteristics",
-            "",
-        ]
-    )
+    if foundation is not None:
+        lines.extend(
+            [
+                "## Foundation",
+                "",
+                f"**Purpose:** {foundation['purpose']}",
+                "",
+                f"**Positioning:** {foundation['positioning']}",
+                "",
+                f"**Audience:** {', '.join(foundation['audience'])}",
+                "",
+                f"**Personality:** {', '.join(foundation['personality'])}",
+                "",
+                *markdown_governance(foundation),
+                "",
+            ]
+        )
+    lines.extend(["## Voice characteristics", ""])
     for item in model["characteristics"]:
         lines.extend(
             [
@@ -344,17 +369,23 @@ def render_markdown(model: dict[str, Any]) -> str:
         )
 
     accessibility = model["accessibility"]
-    lines.extend(["## Accessibility", "", accessibility["summary"], ""])
-    lines.extend(f"- {item}" for item in accessibility["rules"])
+    if accessibility is not None:
+        lines.extend(["## Accessibility", "", accessibility["summary"], ""])
+        lines.extend(f"- {item}" for item in accessibility["rules"])
     legal = model["legal"]
+    if legal is not None:
+        lines.extend(
+            [
+                "",
+                "## Legal and attribution",
+                "",
+                f"- Trademark: {legal['trademark']}",
+                f"- Copyright: {legal['copyright']}",
+                f"- Attribution: {legal['attribution']}",
+            ]
+        )
     lines.extend(
         [
-            "",
-            "## Legal and attribution",
-            "",
-            f"- Trademark: {legal['trademark']}",
-            f"- Copyright: {legal['copyright']}",
-            f"- Attribution: {legal['attribution']}",
             "",
             "## Decision ledger",
             "",
@@ -411,7 +442,7 @@ def render_html(model: dict[str, Any]) -> str:
 
     project = model["project"]
     foundation = model["foundation"]
-    language = model["localization"]["sourceLanguage"]
+    language = model["localization"]["sourceLanguage"] if model["localization"] else "und"
     styles = """
     :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
     body { margin: 0 auto; max-width: 76rem; padding: 2rem; line-height: 1.55; }
@@ -463,20 +494,24 @@ def render_html(model: dict[str, Any]) -> str:
         parts.append(
             f'<p>Selected context: <code>{escape(model["selectedContext"])}</code></p>'
         )
+    parts.extend(["</header>", '<main id="main">'])
+    if foundation is not None:
+        parts.extend(
+            [
+                '<section aria-labelledby="foundation">',
+                '<h2 id="foundation">Foundation</h2>',
+                f"<p><strong>Purpose:</strong> {escape(foundation['purpose'])}</p>",
+                f"<p><strong>Positioning:</strong> {escape(foundation['positioning'])}</p>",
+                "<h3>Audience</h3>",
+                html_list(foundation["audience"]),
+                "<h3>Personality</h3>",
+                html_list(foundation["personality"]),
+                html_governance(foundation),
+                "</section>",
+            ]
+        )
     parts.extend(
         [
-            "</header>",
-            '<main id="main">',
-            '<section aria-labelledby="foundation">',
-            '<h2 id="foundation">Foundation</h2>',
-            f"<p><strong>Purpose:</strong> {escape(foundation['purpose'])}</p>",
-            f"<p><strong>Positioning:</strong> {escape(foundation['positioning'])}</p>",
-            "<h3>Audience</h3>",
-            html_list(foundation["audience"]),
-            "<h3>Personality</h3>",
-            html_list(foundation["personality"]),
-            html_governance(foundation),
-            "</section>",
             '<section aria-labelledby="voice-characteristics">',
             '<h2 id="voice-characteristics">Voice characteristics</h2>',
             '<div class="grid">',
@@ -594,20 +629,30 @@ def render_html(model: dict[str, Any]) -> str:
         )
     accessibility = model["accessibility"]
     legal = model["legal"]
+    parts.append("</section>")
+    if accessibility is not None:
+        parts.extend(
+            [
+                '<section aria-labelledby="accessibility">',
+                '<h2 id="accessibility">Accessibility</h2>',
+                f"<p>{escape(accessibility['summary'])}</p>",
+                html_list(accessibility["rules"]),
+                "</section>",
+            ]
+        )
+    if legal is not None:
+        parts.extend(
+            [
+                '<section aria-labelledby="legal">',
+                '<h2 id="legal">Legal and attribution</h2>',
+                f"<p><strong>Trademark:</strong> {escape(legal['trademark'])}</p>",
+                f"<p><strong>Copyright:</strong> {escape(legal['copyright'])}</p>",
+                f"<p><strong>Attribution:</strong> {escape(legal['attribution'])}</p>",
+                "</section>",
+            ]
+        )
     parts.extend(
         [
-            "</section>",
-            '<section aria-labelledby="accessibility">',
-            '<h2 id="accessibility">Accessibility</h2>',
-            f"<p>{escape(accessibility['summary'])}</p>",
-            html_list(accessibility["rules"]),
-            "</section>",
-            '<section aria-labelledby="legal">',
-            '<h2 id="legal">Legal and attribution</h2>',
-            f"<p><strong>Trademark:</strong> {escape(legal['trademark'])}</p>",
-            f"<p><strong>Copyright:</strong> {escape(legal['copyright'])}</p>",
-            f"<p><strong>Attribution:</strong> {escape(legal['attribution'])}</p>",
-            "</section>",
             '<section aria-labelledby="decisions">',
             '<h2 id="decisions">Decision ledger</h2>',
             "<table>",

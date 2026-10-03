@@ -1,0 +1,227 @@
+{
+  "cases": [
+    {
+      "id": "mixed-lifecycle",
+      "updates": [],
+      "withheld": [
+        "Your brand system, ready when you are.",
+        "friendly-candidate",
+        "Branding solved forever.",
+        "old-tagline",
+        "The world's most revolutionary brand generator.",
+        "hype-claim",
+        "supersede-old-tagline",
+        "reject-hype-claim",
+        "supersede-legacy-wordmark",
+        "usage-asset:legacy-wordmark",
+        "Retained for historical migrations only; do not use in new work."
+      ],
+      "retained": [
+        "Help maintainers make governed brand choices with confidence.",
+        "Generate a reviewed Brand Kit locally, then inspect exactly what changed.",
+        "approve-voice-core",
+        "approve-usage-core"
+      ]
+    },
+    {
+      "id": "withheld-singletons-and-containers",
+      "updates": [
+        {
+          "document": "voice",
+          "pointer": "/foundation/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "voice",
+          "pointer": "/foundation/purpose",
+          "value": "PRIVATE-FOUNDATION-SENTINEL"
+        },
+        {
+          "document": "voice",
+          "pointer": "/localization/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "voice",
+          "pointer": "/localization/fallback",
+          "value": "PRIVATE-LOCALIZATION-SENTINEL"
+        },
+        {
+          "document": "usage",
+          "pointer": "/accessibility/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "usage",
+          "pointer": "/accessibility/summary",
+          "value": "PRIVATE-ACCESSIBILITY-SENTINEL"
+        },
+        {
+          "document": "usage",
+          "pointer": "/legal/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "usage",
+          "pointer": "/legal/trademark",
+          "value": "PRIVATE-LEGAL-SENTINEL"
+        },
+        {
+          "document": "voice",
+          "pointer": "/characteristics/0/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "voice",
+          "pointer": "/characteristics/0/description",
+          "value": "PRIVATE-CHARACTERISTIC-SENTINEL"
+        },
+        {
+          "document": "voice",
+          "pointer": "/contexts/1/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "voice",
+          "pointer": "/contexts/1/tone",
+          "value": "PRIVATE-CONTEXT-SENTINEL"
+        },
+        {
+          "document": "voice",
+          "pointer": "/contexts/0/examples/0/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "voice",
+          "pointer": "/contexts/0/examples/0/text",
+          "value": "PRIVATE-EXAMPLE-SENTINEL"
+        },
+        {
+          "document": "voice",
+          "pointer": "/contexts/0/antiExamples/0/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "voice",
+          "pointer": "/contexts/0/antiExamples/0/text",
+          "value": "PRIVATE-ANTIEXAMPLE-SENTINEL"
+        },
+        {
+          "document": "usage",
+          "pointer": "/sections/0/title",
+          "value": "PRIVATE-SECTION-SENTINEL"
+        },
+        {
+          "document": "usage",
+          "pointer": "/sections/0/rules/0/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "usage",
+          "pointer": "/sections/0/rules/1/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "usage",
+          "pointer": "/assets/0/availability",
+          "value": "blocked"
+        },
+        {
+          "document": "usage",
+          "pointer": "/assets/0/downloadName",
+          "value": null
+        },
+        {
+          "document": "usage",
+          "pointer": "/assets/0/notes",
+          "value": "PRIVATE-BLOCKED-ASSET-SENTINEL"
+        },
+        {
+          "document": "voice",
+          "pointer": "/characteristics/1/governance/visibility",
+          "value": "internal"
+        },
+        {
+          "document": "voice",
+          "pointer": "/characteristics/2/governance/visibility",
+          "value": "internal"
+        }
+      ],
+      "withheld": [
+        "Your brand system, ready when you are.",
+        "friendly-candidate",
+        "Branding solved forever.",
+        "old-tagline",
+        "The world's most revolutionary brand generator.",
+        "hype-claim",
+        "supersede-old-tagline",
+        "reject-hype-claim",
+        "supersede-legacy-wordmark",
+        "PRIVATE-FOUNDATION-SENTINEL",
+        "PRIVATE-LOCALIZATION-SENTINEL",
+        "PRIVATE-ACCESSIBILITY-SENTINEL",
+        "PRIVATE-LEGAL-SENTINEL",
+        "PRIVATE-CHARACTERISTIC-SENTINEL",
+        "PRIVATE-CONTEXT-SENTINEL",
+        "PRIVATE-EXAMPLE-SENTINEL",
+        "PRIVATE-ANTIEXAMPLE-SENTINEL",
+        "PRIVATE-SECTION-SENTINEL",
+        "PRIVATE-BLOCKED-ASSET-SENTINEL",
+        "usage-asset:legacy-wordmark",
+        "Retained for historical migrations only; do not use in new work."
+      ],
+      "retained": [
+        "Choose semantic foreground and background pairs with their declared contrast intent.",
+        "approve-usage-core"
+      ],
+      "review_omitted": [
+        "PRIVATE-BLOCKED-ASSET-SENTINEL"
+      ]
+    },
+    {
+      "id": "approved-public-legacy",
+      "updates": [
+        {
+          "document": "usage",
+          "pointer": "/assets/1/governance",
+          "value": {
+            "subject": "usage:core-guidance",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-08-21T12:15:00Z"
+            },
+            "approval": "approve-usage-core"
+          }
+        },
+        {
+          "document": "usage",
+          "pointer": "/assets/1/availability",
+          "value": "public"
+        },
+        {
+          "document": "usage",
+          "pointer": "/assets/1/downloadName",
+          "value": "example-product-legacy-wordmark.svg"
+        }
+      ],
+      "withheld": [
+        "Your brand system, ready when you are.",
+        "friendly-candidate",
+        "Branding solved forever.",
+        "old-tagline",
+        "The world's most revolutionary brand generator.",
+        "hype-claim",
+        "supersede-old-tagline",
+        "reject-hype-claim",
+        "supersede-legacy-wordmark"
+      ],
+      "retained": [
+        "Retained for historical migrations only; do not use in new work.",
+        "approve-usage-core"
+      ]
+    }
+  ]
+}

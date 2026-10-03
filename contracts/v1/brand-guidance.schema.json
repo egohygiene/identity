@@ -41,16 +41,26 @@
         { "type": "string", "minLength": 1 }
       ]
     },
-    "foundation": { "$ref": "voice.schema.json#/$defs/foundation" },
+    "foundation": {
+      "oneOf": [
+        { "$ref": "voice.schema.json#/$defs/foundation" },
+        { "type": "null" }
+      ]
+    },
     "characteristics": {
       "type": "array",
       "items": { "$ref": "voice.schema.json#/$defs/characteristic" }
     },
     "contexts": {
       "type": "array",
-      "items": { "$ref": "voice.schema.json#/$defs/context" }
+      "items": { "$ref": "#/$defs/projectedContext" }
     },
-    "localization": { "$ref": "voice.schema.json#/$defs/localization" },
+    "localization": {
+      "oneOf": [
+        { "$ref": "voice.schema.json#/$defs/localization" },
+        { "type": "null" }
+      ]
+    },
     "sections": {
       "type": "array",
       "items": { "$ref": "usage.schema.json#/$defs/section" }
@@ -67,11 +77,130 @@
       "type": "array",
       "items": { "$ref": "usage.schema.json#/$defs/asset" }
     },
-    "accessibility": { "$ref": "usage.schema.json#/$defs/accessibility" },
-    "legal": { "$ref": "usage.schema.json#/$defs/legal" },
+    "accessibility": {
+      "oneOf": [
+        { "$ref": "usage.schema.json#/$defs/accessibility" },
+        { "type": "null" }
+      ]
+    },
+    "legal": {
+      "oneOf": [
+        { "$ref": "usage.schema.json#/$defs/legal" },
+        { "type": "null" }
+      ]
+    },
     "decisions": {
       "type": "array",
       "items": { "$ref": "approvals.schema.json#/$defs/decision" }
     }
-  }
+  },
+  "$defs": {
+    "projectedContext": {
+      "description": "A public projection can have no surviving characteristic references or examples. Review retains the complete source context.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "audience",
+        "intent",
+        "tone",
+        "characteristics",
+        "preferredVocabulary",
+        "avoidedLanguage",
+        "naming",
+        "capitalization",
+        "punctuation",
+        "examples",
+        "antiExamples",
+        "governance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "voice.schema.json#/$defs/context/properties/id"
+        },
+        "label": {
+          "$ref": "voice.schema.json#/$defs/context/properties/label"
+        },
+        "audience": {
+          "$ref": "voice.schema.json#/$defs/context/properties/audience"
+        },
+        "intent": {
+          "$ref": "voice.schema.json#/$defs/context/properties/intent"
+        },
+        "tone": {
+          "$ref": "voice.schema.json#/$defs/context/properties/tone"
+        },
+        "characteristics": {
+          "type": "array",
+          "items": {
+            "$ref": "voice.schema.json#/$defs/nonEmptyStrings/items"
+          }
+        },
+        "preferredVocabulary": {
+          "$ref": "voice.schema.json#/$defs/context/properties/preferredVocabulary"
+        },
+        "avoidedLanguage": {
+          "$ref": "voice.schema.json#/$defs/context/properties/avoidedLanguage"
+        },
+        "naming": {
+          "$ref": "voice.schema.json#/$defs/context/properties/naming"
+        },
+        "capitalization": {
+          "$ref": "voice.schema.json#/$defs/context/properties/capitalization"
+        },
+        "punctuation": {
+          "$ref": "voice.schema.json#/$defs/context/properties/punctuation"
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "voice.schema.json#/$defs/context/properties/examples/items"
+          }
+        },
+        "antiExamples": {
+          "type": "array",
+          "items": {
+            "$ref": "voice.schema.json#/$defs/context/properties/antiExamples/items"
+          }
+        },
+        "governance": {
+          "$ref": "voice.schema.json#/$defs/context/properties/governance"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "audience": {
+            "const": "review"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "foundation": {
+            "$ref": "voice.schema.json#/$defs/foundation"
+          },
+          "localization": {
+            "$ref": "voice.schema.json#/$defs/localization"
+          },
+          "accessibility": {
+            "$ref": "usage.schema.json#/$defs/accessibility"
+          },
+          "legal": {
+            "$ref": "usage.schema.json#/$defs/legal"
+          },
+          "contexts": {
+            "type": "array",
+            "items": {
+              "$ref": "voice.schema.json#/$defs/context"
+            }
+          }
+        }
+      }
+    }
+  ]
 }
