@@ -1,0 +1,37 @@
+[
+  {
+    "repository": "egohygiene/identity",
+    "number": 70,
+    "title": "Stabilize Identity governance boundaries, recovery, and development workflow",
+    "before": "identity-70.before.md",
+    "after": "identity-70.md"
+  },
+  {
+    "repository": "egohygiene/identity",
+    "number": 83,
+    "title": "Reconcile active architecture, capability, and publication documentation",
+    "before": "identity-83.before.md",
+    "after": "identity-83.md"
+  },
+  {
+    "repository": "egohygiene/identity",
+    "number": 88,
+    "title": "Extract renderer components and input adapters with stable behavior",
+    "before": "identity-88.before.md",
+    "after": "identity-88.md"
+  },
+  {
+    "repository": "egohygiene/identity",
+    "number": 69,
+    "title": "Backfill repository ADR history and enable continuous decision capture",
+    "before": "identity-69.before.md",
+    "after": "identity-69.md"
+  },
+  {
+    "repository": "egohygiene/pace",
+    "number": 5,
+    "title": "[Capability 1] Roll out and reconcile the ADR baseline and Decisions views across the fleet",
+    "before": "pace-5.before.md",
+    "after": "pace-5.md"
+  }
+]
