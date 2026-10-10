@@ -7,14 +7,14 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-10T15:42:34Z'
+  updated_at: '2026-10-10T15:48:13Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Resume approved Identity ADR canonicalization, immutable validation and the production Decisions
-    artifact before consumer-owned deployment.
+  purpose: 'Resume the validated Identity ADR migration through PR #92 review and consumer-owned Decisions hosting,
+    deployment and feedback.'
   includes:
   - ADR source inventory, migration, authoring adoption, shared validation and next owner actions.
   excludes:
@@ -38,30 +38,29 @@ scope:
   - docs/decision-disposition-review-2026-10-10.md
   - docs/decision-ratification-2026-10-10.md
   - docs/decision-validation.md
+  - docs/evidence/identity-adrs-ratified-2026-10-10.json
   - docs/evidence/identity-adrs-2026-10-10.json
   - https://github.com/egohygiene/identity/issues/69
   - https://github.com/egohygiene/.github/issues/30
   - https://github.com/egohygiene/pace/issues/25
   - https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
 work:
-  objective: Complete the approved R1 canonical migration and prove the exact immutable source through shared
-    validation and the Decisions build.
+  objective: Review and merge the approved, validated canonical ADR migration, then settle consumer hosting and
+    deploy the Decisions page for maintainer feedback.
   success_conditions:
-  - Transcribe the explicit human disposition for all 21 ADRs while preserving original prose, dates, IDs
-    and approved R1 notes.
-  - Keep implementation states distinct from acceptance and verification; retain truthful unrequested-domain
-    coverage.
-  - Bind immutable validation and production build evidence before selecting and implementing consumer-owned
-    host composition.
+  - Preserve the explicit human disposition, original ADR history and approved R1 notes for all 21 accepted records.
+  - Keep immutable source, native replay, deterministic production artifact and hosted execution evidence distinct.
+  - Complete explicit consumer-owned hosting, composition, deployment and live feedback before repository-by-repository
+    fleet rollout.
   active_issue:
     provider: github
     id: egohygiene/identity#69
     url: https://github.com/egohygiene/identity/issues/69
   next:
     kind: action
-    id: validate-immutable-identity-adr-candidate
-    description: Publish the canonical candidate, rerun immutable architecture validation and ADR collection,
-      then inspect the shared production Decisions build.
+    id: review-merge-identity-adr-canonicalization
+    description: 'Review and merge PR #92 at its final evidence head, then explicitly select consumer-owned Decisions
+      hosting and composition before deployment and maintainer feedback.'
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/pull/92
@@ -80,43 +79,56 @@ state:
       provider: github
       id: egohygiene/identity#92
       url: https://github.com/egohygiene/identity/pull/92
-    handoff_state: in-progress
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-10T15:42:34Z'
+    observed_at: '2026-10-10T15:47:20Z'
     default_branch_revision: 434f60c8b829c695b3bcd1a45faf5e0c114d37cf
     issue_state: open
     pull_request_state: draft
-    notes: PR92 exists as a draft. szmyty explicitly approved R1 at packet 418aa9757898b6c09b4f01eface522778cff90e8
-      on 2026-10-10; the durable approval comment was GET-verified. Main remains 434f60c8b829c695b3bcd1a45faf5e0c114d37cf.
-      Canonicalization is the current working candidate; no Decisions deployment is established.
+    notes: 'PR #92 remains draft at this observation. Explicit R1 approval is already recorded and GET-verified.
+      Immutable source 12227dad43c90b02e14971030f22242f3a205c9d passed both native replays and repeatable production
+      build. The final evidence/continuity head is tracked by the PR; candidate self-revision stays null. Main is
+      unchanged; no Decisions deployment is established.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-10T15:42:34Z'
+  reviewed_at: '2026-10-10T15:47:20Z'
   reviewed_by: Codex
   evidence:
-  - command: Pinned Relay collect_repository_adrs.py collect against the canonical working candidate
+  - command: All 21 ADR schemas, anatomy, immutable source-prose preservation, index and approved R1 note checks
     outcome: passed
-    observed_at: '2026-10-10T15:42:34Z'
-    notes: 'Delegated native result: exit 0, ready, 21 decisions, observed/current/complete ADR coverage.
-      Hygiene valid, coverage valid and Observatory normalized. EgoLint incomplete reflects unrequested roadmap/history,
-      not ADR findings. Immutable replay remains next.'
-  - command: Pinned Relay run_repository_architecture_validation.py run against the canonical working candidate
+    observed_at: '2026-10-10T15:47:20Z'
+    notes: 'All 21 passed; all 12 approved note blocks preserved. Implementation states: 12 implemented, 7 in_progress,
+      2 not_started, none verified. Current acceptance exactly transcribes the human disposition.'
+  - command: Pinned Relay native architecture adapter, two immutable replays at 12227dad43c90b02e14971030f22242f3a205c9d
     outcome: limited
-    observed_at: '2026-10-10T15:42:34Z'
-    notes: 'Delegated native result: exit 0, incomplete/warning, six warnings including the working-tree revision
-      boundary; zero ADR findings. This is not complete repository-wide conformance.'
-  - command: ADR013–018 pinned schema, anatomy, original-source preservation and exact R1 note comparison
+    observed_at: '2026-10-10T15:47:20Z'
+    notes: Exit 0, identical incomplete/warning result, five non-ADR adoption/diagram/history-bound warnings; zero
+      errors or ADR findings. Native history inspected 100 commits at its policy limit; trusted snapshot retained
+      179 without truncation. Report SHA256 e6c790c9fef42f9c348a6766cde2616bbdd0b910dbb751375659b1536281732f.
+  - command: Pinned Relay native ADR collector, two immutable replays at 12227dad43c90b02e14971030f22242f3a205c9d
     outcome: passed
-    observed_at: '2026-10-10T15:42:34Z'
-    notes: Six records passed schema/date/URI checks, ordered seven-section anatomy, exact original prose
-      preservation and exact approved notes/scope qualifiers.
+    observed_at: '2026-10-10T15:47:20Z'
+    notes: Exit 0, identical ready result, 21 observed/current/complete decisions. Hygiene and coverage valid; Observatory
+      normalized. EgoLint incomplete concerns other uncollected domains. Collection SHA256 6408827af835e4244cfbb73c167b0817a084dc0896d74c689a5021fffc3cda8a.
+  - command: Shared production Decisions build in two clean checkouts at 12227dad43c90b02e14971030f22242f3a205c9d
+    outcome: passed
+    observed_at: '2026-10-10T15:43:57Z'
+    notes: 'Relay 4137cb07: 19 files byte-identical, 21 accepted records with approval/canonical immutable links,
+      zero broken local links. Manifest SHA256 f28e126078ff885c008231ea5b38ce72220ce9848f09f0396efbbd392f593cb1.
+      This is artifact evidence, not live deployment.'
+  - command: Hosted decision run 38064773820 and CLI run 38064773390 at source 12227dad43c90b02e14971030f22242f3a205c9d
+    outcome: limited
+    observed_at: '2026-10-10T15:48:13Z'
+    notes: Both succeeded. Decision artifact 11674446365 upload metadata/logs verified for PR merge candidate d106af6f7313e714bb4d036e732fd96a2caf635e;
+      archive not downloaded. Final evidence-commit CI is not yet claimed.
   environment_limitations:
-  - Native results describe a mutable working candidate; no immutable replay or production Decisions build
-    is claimed yet.
-  - No new consumer deployment, live-route verification or rollback exercise has occurred.
-  - Prior immutable receipt and hosted artifact evidence remain historical and bound to their stated revisions.
+  - Final evidence/continuity commit follows the tested source; inspect the PR head and compare source blobs before
+    acceptance.
+  - No consumer host selection, deployment, live-route verification or rollback exercise is established.
+  - Architecture remains incomplete outside the ADR surface; current hosted archive contents were not independently
+    downloaded.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -135,97 +147,92 @@ privacy:
 
 ## Purpose and precedence
 
-This is the current operational handoff. Canonical ADRs, the pinned Hygiene
-policy, live Git state and owning issues take precedence. Continue from
-[Identity #69](https://github.com/egohygiene/identity/issues/69) and
-[organization #30](https://github.com/egohygiene/.github/issues/30).
+Canonical ADRs, pinned Hygiene policy, live Git state and owning issues take
+precedence. Continue from [Identity #69](https://github.com/egohygiene/identity/issues/69)
+and [organization #30](https://github.com/egohygiene/.github/issues/30).
 
 ## Resume protocol
 
-1. Read AGENTS.md, inspect branch/status/history and canonical sources.
+1. Read AGENTS.md, branch/status/history and canonical sources.
 2. Refresh main, PR #92, Identity #69 and the organization log.
-3. Read the ratification record and approved immutable R1 packet.
-4. Continue immutable validation/build; refresh this file before handoff.
+3. Read the ratification and new immutable validation/build receipt.
+4. Review the final PR head, then proceed through consumer-owned publication.
 
 ## Current objective and success conditions
 
-R1 is explicitly approved. Complete the canonical migration and its immutable
-validation/build evidence. Preserve historical prose and approved corrections;
-acceptance does not assert complete implementation or deployment. Do not ask
-for the same R1 disposition again.
+R1 is explicitly approved and canonicalization is implemented. Review and
+merge the validated source/evidence candidate, then complete hosting and
+publication for maintainer feedback. Do not request the same R1 approval again.
+Acceptance, implementation, artifact production and deployment remain distinct.
 
 ## State snapshot
 
-Main remains `434f60c8b829c695b3bcd1a45faf5e0c114d37cf`. Existing draft
-[PR #92](https://github.com/egohygiene/identity/pull/92) carries branch
-`codex/identity-69-disposition-review`; its self-revision remains null here.
-`szmyty` approved R1 on 2026-10-10 in the
-[verified durable comment](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806),
-bound to unchanged packet `418aa9757898b6c09b4f01eface522778cff90e8`.
-Relay remains pinned to `4137cb07a017b7bbae2ee38fe9b039c58b0b17eb`.
+Main is `434f60c8b829c695b3bcd1a45faf5e0c114d37cf`. Existing draft
+[PR #92](https://github.com/egohygiene/identity/pull/92) carries
+`codex/identity-69-disposition-review`; its final self-revision remains null here.
+Validated source is `12227dad43c90b02e14971030f22242f3a205c9d`; the later
+receipt/continuity head is discoverable from the PR. `szmyty` approved unchanged
+R1 packet `418aa9757898b6c09b4f01eface522778cff90e8` on 2026-10-10 in the
+[verified comment](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806).
+Relay is pinned to `4137cb07a017b7bbae2ee38fe9b039c58b0b17eb`.
 
 ## Completed and material changes
 
-- All 21 canonical ADRs transcribe accepted human dispositions dated 2026-10-10.
-- Original prose, IDs, historical dates and metadata remain preserved; exact
-  approved R1 notes and scope qualifiers govern their current reading.
-- The canonical index and migration/ratification records reflect that approval.
-- Shared advisory workflow adoption is now `present`; unrelated domains remain
-  explicitly unrequested. No required enforcement or host reassignment occurs.
-- Aether authoring 2.0.0 and continuity 1.1.0 use exact source
+- All 21 canonical ADRs record accepted human dispositions dated 2026-10-10.
+- Original prose, IDs, dates and metadata survive alongside exact approved R1
+  notes/qualifiers; index and migration/ratification records reflect approval.
+- Shared advisory adoption is present; required mode is not enabled.
+- Both immutable native replays and two clean production builds passed their
+  bounded gates. No consumer publication authority changed.
+- Aether authoring 2.0.0 and continuity 1.1.0 use pinned source
   `8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2`; no host installation is claimed.
 
 ## Validation and review evidence
 
-The native working-candidate collector exited 0 and reported ready: 21
-observed/current/complete decisions, valid Hygiene and coverage checks, and
-normalized Observatory output. EgoLint's incomplete overall state reflects
-unrequested roadmap/history. Architecture validation exited 0 with
-incomplete/warning, six warnings including mutable revision, and zero ADR
-findings. These results do not establish immutable source or repository-wide
-conformance. The old receipt and hosted evidence remain historical.
+The [new receipt](docs/evidence/identity-adrs-ratified-2026-10-10.json) binds
+immutable source 12227dad and exact replay/build evidence. Collection is ready
+with 21 observed/current/complete ADRs. Architecture retains five non-ADR
+warnings, including native history bounded at 100 commits; ADR findings are zero.
+Production emits 19 byte-identical files across clean checkouts, with 21 accepted
+records, explicit implementation states, approval/source links and no broken
+local links. Hosted decision and CLI checks succeeded at the recorded source head. Decision
+artifact upload is confirmed; archive bytes were not independently downloaded.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No unresolved R1 approval gate remains. Actual immutable replay and production
-artifact admission/build are next. Planned capabilities keep truthful
-implementation states; no ADR is promoted to verified from human acceptance.
-Decisions hosting, routes, aliases and composition still require an explicit
-consumer-owned choice. Preserve the independent Brand Kit publisher and the
-organization experience. Two stale experience-content ADR links retain their
-visual-review gate; Holon's older blueprint compatibility remains separate.
+R1 approval is complete. Remaining acceptance is final PR review plus explicit
+Decisions host, routes, aliases, composition, deployment and live evidence.
+Preserve the independent Brand Kit publisher and organization experience.
+The two stale experience-content ADR links keep their visual-review gate.
+Holon blueprint compatibility and incomplete capabilities remain separately owned.
 
 ## Next dependency-ready work
 
-Publish the canonical source candidate, rerun both pinned native boundaries
-against its full commit, and build/inspect the shared production Decisions
-artifact. Record exact source, coverage and artifact digests. Then settle
-host/route composition, deploy through its owner, and verify live output and
-rollback. Show the deployed page to the maintainer for feedback before fleet
-rollout. Keep Identity #69 and Relay #115 open for remaining acceptance.
+Review/merge PR #92, preserving the tested source and exact evidence boundaries.
+Select consumer-owned host composition, deploy through its existing owner, and
+verify live routes, provenance and rollback. Show the deployed Decisions page
+to the maintainer for feedback before proceeding repository by repository.
+Keep Identity #69 and Relay #115 open until their acceptance evidence is complete.
 
 ## Parallel changes and reconciliation
 
-PR #92 is the active candidate; refresh other live work before further edits.
-PR #90 coordination and PR #91 adoption are merged; the five coordination
-issue updates were separately applied. Preserve unrelated progress and leave
-broader roadmap/publication-document reconciliation with Identity #83.
+Refresh live work before editing. PR #90 coordination and PR #91 adoption are merged;
+the five coordination issue updates were separately applied. Preserve unrelated
+progress; Identity #83 owns broader roadmap/publication-document reconciliation.
 
 ## Privacy and redaction
 
-Retain public source links and concise durable disposition evidence. Exclude
-private conversations, credentials, local paths and unrelated context. The R1
-packet remains immutable historical review material; its approval example is
-not the authority. The explicit human comment is the authority.
+Keep public source links and concise durable disposition evidence. Exclude
+private conversations, credentials, local paths and unrelated context. The
+immutable packet preserves historical review; the human comment grants approval.
 
 ## Handoff update protocol
 
-After each domain check, refresh this checkpoint and owning issue/log with
-exact revision, results and remaining gates. Do not substitute tests, merges
-or agent recommendations for disposition, or mutable results for immutable
-acceptance evidence.
+Refresh this file and the owning issue/log after domain checks with exact
+revisions and remaining gates. Compare tested source blobs across the final
+metadata-only commit; merge and green CI do not substitute for live evidence.
 
 ## Compaction and supersession
 
-Keep this file below 240 lines and 16,384 UTF-8 bytes. Replace stale observations;
-Git and work trackers retain history. Mark unresolved conflicts stale.
+Keep below 240 lines and 16,384 UTF-8 bytes. Replace stale observations; Git and
+work trackers retain history. Mark unresolved conflicts stale.

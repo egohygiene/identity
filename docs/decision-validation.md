@@ -38,6 +38,33 @@ outcome separately. An ordinary PR represents GitHub's merge candidate SHA;
 record it separately from the branch head. Hosted checks and live publication
 are not established by these configuration files or local results.
 
+## Ratified corpus checkpoint — 2026-10-10
+
+The [ratified-source receipt](evidence/identity-adrs-ratified-2026-10-10.json)
+binds source `12227dad43c90b02e14971030f22242f3a205c9d` and observation
+`2026-10-10T15:43:57Z`. Immutable ADR collection exited 0, reported ready,
+and collected all 21 accepted decisions with complete/current coverage.
+Hygiene and coverage checks were valid, Observatory normalized the input,
+and EgoLint retained incomplete status for uncollected domains.
+
+Architecture validation exited 0 with incomplete/warning status: five warnings
+for unknown surfaces, unavailable diagram semantics and the bounded history
+scan; no ADR metadata, lifecycle, index or lineage findings remain. Two native
+replays were byte-identical. This is ADR-domain admission, not complete
+repository-wide conformance.
+
+The shared production action also ran locally against two clean full-history
+checkouts. Its fresh ADR admission and bundle validation passed; all 19 output
+files were byte-identical. The Decisions page has 21 records, declared approval
+evidence and immutable canonical source links, with no broken local links or
+anchors. Acceptance does not imply implementation completion: twelve records
+are implemented, seven in progress and two not started.
+
+The generated artifact has not been deployed. The native route is
+`/intelligence/decisions/`; consumer hosting, route composition, a `/decisions/`
+alias and rollback remain separate work. The receipt distinguishes local build
+evidence from the hosted advisory validation run and its retained artifact.
+
 ## Local validation through the same adapter
 
 Use trusted source checkouts outside Identity at the exact pins above. Follow
