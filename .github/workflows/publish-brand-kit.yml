@@ -14,6 +14,9 @@ on:
       - "publication/**"
       - "renderer/**"
       - "scripts/package_public_brand_kit.py"
+      - "docs/decisions/**"
+      - ".config/egolint/repository-intelligence.toml"
+      - "scripts/identity_decisions_publication.py"
   release:
     types:
       - published
@@ -23,6 +26,11 @@ on:
         description: "Stable Identity release tag to project"
         required: true
         default: "v1.0.0"
+        type: string
+      intelligence_revision:
+        description: "Optional full ancestor commit for Decisions replay; empty uses the publisher revision"
+        required: false
+        default: ""
         type: string
 
 permissions:
@@ -50,6 +58,14 @@ jobs:
     outputs:
       release_tag: ${{ steps.release.outputs.tag }}
       release_commit: ${{ steps.release.outputs.commit }}
+      publisher_commit: ${{ steps.publisher.outputs.commit }}
+      intelligence_commit: ${{ steps.publisher.outputs.intelligence-commit }}
+      handoff_artifact: ${{ steps.publisher.outputs.handoff-artifact }}
+      handoff_digest: ${{ steps.handoff.outputs.artifact-digest }}
+      composed_site_digest: ${{ steps.composition.outputs.composed-site-digest }}
+      rollback_revision: ${{ steps.rollback.outputs.revision }}
+      rollback_site_digest: ${{ steps.rollback.outputs.site-digest }}
+      rollback_url: ${{ steps.rollback.outputs.url }}
 
     steps:
       - name: Harden runner
@@ -63,6 +79,49 @@ jobs:
           ref: "main"
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Resolve the exact publisher and Decisions revisions
+        id: publisher
+        env:
+          MANUAL_INTELLIGENCE_REVISION: ${{ inputs.intelligence_revision }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          publisher_commit="$(git rev-parse HEAD^{commit})"
+          intelligence_commit="${MANUAL_INTELLIGENCE_REVISION:-${publisher_commit}}"
+          if [[ ! "${intelligence_commit}" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::Decisions revision must be a full lowercase commit SHA."
+            exit 1
+          fi
+          git cat-file -e "${intelligence_commit}^{commit}"
+          git merge-base --is-ancestor "${intelligence_commit}" "${publisher_commit}"
+          {
+            printf 'commit=%s\n' "${publisher_commit}"
+            printf 'intelligence-commit=%s\n' "${intelligence_commit}"
+            printf 'handoff-artifact=identity-decisions-publication-%s-%s-%s\n' \
+              "${publisher_commit}" "${GITHUB_RUN_ID}" "${GITHUB_RUN_ATTEMPT}"
+          } >> "${GITHUB_OUTPUT}"
+
+      - name: Resolve the recorded prior deployment recovery point
+        id: rollback
+        shell: bash
+        run: |
+          set -euo pipefail
+          recovery="publication/decisions-rollback.json"
+          revision="$(jq --exit-status --raw-output '.consumerRevision' "${recovery}")"
+          site_digest="$(jq --exit-status --raw-output '.siteDigest' "${recovery}")"
+          deployment_url="$(jq --exit-status --raw-output '.deploymentUrl' "${recovery}")"
+          if [[ ! "${revision}" =~ ^[0-9a-f]{40}$ || \
+                ! "${site_digest}" =~ ^sha256:[0-9a-f]{64}$ || \
+                "${deployment_url}" != "${CANONICAL_URL}" ]]; then
+            echo "::error::The recorded prior deployment recovery point is invalid."
+            exit 1
+          fi
+          {
+            printf 'revision=%s\n' "${revision}"
+            printf 'site-digest=%s\n' "${site_digest}"
+            printf 'url=%s\n' "${deployment_url}"
+          } >> "${GITHUB_OUTPUT}"
 
       - name: Resolve immutable stable release source
         id: release
@@ -219,6 +278,98 @@ jobs:
         working-directory: renderer
         run: pnpm run verify:public
 
+      - name: Retain verified bytes from the prior public deployment
+        run: >-
+          python3 scripts/identity_decisions_publication.py
+          --operation capture-rollback
+          --rollback-record publication/decisions-rollback.json
+          --canonical-url "${CANONICAL_URL}"
+          --evidence-directory .relay/repository-intelligence-deployment
+
+      - name: Capture the unchanged Brand Kit before composition
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        with:
+          operation: capture-baseline
+          site-directory: renderer/dist
+          intelligence-directory: renderer/dist/intelligence
+          consumer-revision: ${{ steps.publisher.outputs.intelligence-commit }}
+
+      - name: Build validated Repository Intelligence from canonical ADRs
+        id: intelligence
+        uses: egohygiene/relay/actions/repository-intelligence@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        with:
+          collect-adrs: "true"
+          output-directory: renderer/dist/intelligence
+          work-directory: .cache/repository-intelligence
+          source-commit: ${{ steps.publisher.outputs.intelligence-commit }}
+          activity-ref: ${{ steps.publisher.outputs.intelligence-commit }}
+          require-full-history: "true"
+
+      - name: Compose the consumer-owned Decisions alias
+        run: >-
+          python3 scripts/identity_decisions_publication.py
+          --operation compose
+          --site-directory renderer/dist
+          --canonical-url "${CANONICAL_URL}"
+
+      - name: Verify composed routes and byte-preserved Brand Kit
+        id: composition
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        with:
+          operation: verify-composition
+          site-directory: renderer/dist
+          intelligence-directory: renderer/dist/intelligence
+          consumer-revision: ${{ steps.publisher.outputs.intelligence-commit }}
+          relay-revision: cabbf5b3b658d585b4d56ef0c99917969a96eed2
+          required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
+          aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
+
+      - name: Record the separate publisher and source bindings
+        env:
+          PUBLISHER_COMMIT: ${{ steps.publisher.outputs.commit }}
+          INTELLIGENCE_COMMIT: ${{ steps.publisher.outputs.intelligence-commit }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_COMMIT: ${{ steps.release.outputs.commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I - <<'PYTHON'
+          import json
+          import os
+          from pathlib import Path
+
+          binding = {
+              "repository": "egohygiene/identity",
+              "publisher_revision": os.environ["PUBLISHER_COMMIT"],
+              "intelligence_revision": os.environ["INTELLIGENCE_COMMIT"],
+              "brand_kit_release": {
+                  "tag": os.environ["RELEASE_TAG"],
+                  "revision": os.environ["RELEASE_COMMIT"],
+              },
+              "relay_revision": "cabbf5b3b658d585b4d56ef0c99917969a96eed2",
+          }
+          Path(".relay/repository-intelligence-deployment/source-binding.json").write_text(
+              json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+          )
+          PYTHON
+
+      - name: Preserve exact site and private deployment verification inputs
+        id: handoff
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ${{ steps.publisher.outputs.handoff-artifact }}
+          path: |
+            renderer/dist
+            .relay/repository-intelligence-deployment/consumer-route-baseline.json
+            .relay/repository-intelligence-deployment/composition-verification.json
+            .relay/repository-intelligence-deployment/source-binding.json
+            .relay/repository-intelligence-deployment/rollback-site.tar
+            .relay/repository-intelligence-deployment/rollback-record.json
+            .relay/repository-intelligence-deployment/rollback-capture.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
@@ -234,6 +385,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
+      actions: read
+      contents: read
       pages: write
       id-token: write
 
@@ -246,6 +399,40 @@ jobs:
         uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
         with:
           egress-policy: audit
+
+      - name: Check out the exact trusted publisher for live verification
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.build.outputs.publisher_commit }}
+          persist-credentials: false
+
+      - name: Download the exact composed-site handoff
+        id: download
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ needs.build.outputs.handoff_artifact }}
+          path: .
+
+      - name: Revalidate downloaded composition before deployment
+        id: composition
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        with:
+          operation: verify-composition
+          site-directory: renderer/dist
+          intelligence-directory: renderer/dist/intelligence
+          consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
+          relay-revision: cabbf5b3b658d585b4d56ef0c99917969a96eed2
+          required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
+          aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
+
+      - name: Confirm the build and deployment site identities agree
+        env:
+          BUILD_DIGEST: ${{ needs.build.outputs.composed_site_digest }}
+          DEPLOY_DIGEST: ${{ steps.composition.outputs.composed-site-digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${BUILD_DIGEST}" = "${DEPLOY_DIGEST}"
 
       - name: Deploy GitHub Pages
         id: deployment
@@ -302,3 +489,44 @@ jobs:
             "${CANONICAL_URL}"
           grep --fixed-strings --quiet "${CANONICAL_URL}" "${page_html}"
           grep --fixed-strings --quiet "Release ${EXPECTED_RELEASE_TAG#v}" "${page_html}"
+
+      - name: Verify live Decisions, alias, and preserved Brand Kit bytes
+        run: >-
+          python3 scripts/identity_decisions_publication.py
+          --operation verify-live
+          --site-directory renderer/dist
+          --canonical-url "${CANONICAL_URL}"
+          --evidence-directory .relay/repository-intelligence-deployment
+
+      - name: Record the actual deployment result independently of live verification
+        id: receipt
+        if: >-
+          always() && steps.download.outcome == 'success' &&
+          contains(fromJSON('["success","failure","cancelled"]'), steps.deployment.outcome)
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        with:
+          operation: record-receipt
+          site-directory: renderer/dist
+          intelligence-directory: renderer/dist/intelligence
+          consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
+          relay-revision: cabbf5b3b658d585b4d56ef0c99917969a96eed2
+          required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
+          aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
+          workflow-run-id: ${{ github.run_id }}
+          workflow-run-attempt: ${{ github.run_attempt }}
+          deployment-environment: github-pages
+          deployment-url: https://identity.egohygiene.io/
+          deployment-conclusion: ${{ steps.deployment.outcome }}
+          rollback-revision: ${{ needs.build.outputs.rollback_revision }}
+          rollback-site-digest: ${{ needs.build.outputs.rollback_site_digest }}
+          rollback-url: ${{ needs.build.outputs.rollback_url }}
+
+      - name: Preserve deployment and live-verification evidence
+        if: always() && steps.download.outcome == 'success'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: identity-decisions-deployment-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .relay/repository-intelligence-deployment/*.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30

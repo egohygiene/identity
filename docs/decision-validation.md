@@ -60,10 +60,13 @@ evidence and immutable canonical source links, with no broken local links or
 anchors. Acceptance does not imply implementation completion: twelve records
 are implemented, seven in progress and two not started.
 
-The generated artifact has not been deployed. The native route is
-`/intelligence/decisions/`; consumer hosting, route composition, a `/decisions/`
-alias and rollback remain separate work. The receipt distinguishes local build
-evidence from the hosted advisory validation run and its retained artifact.
+That checkpoint did not deploy the generated artifact. It remains an immutable
+receipt for the 21-record source above, not evidence for later source changes.
+The publication implementation now selects the existing Brand Kit host for
+`/intelligence/decisions/` and its consumer-owned `/decisions/` alias as described
+below. New proposed ADR-022 makes the candidate corpus 22 records; it requires
+fresh native admission and production-build evidence. The earlier receipt and
+its bytes remain unchanged.
 
 ## Local validation through the same adapter
 
@@ -144,17 +147,33 @@ Its output must be `adr-collection.review.json` outside Identity. Exit `2`
 retains partial/invalid evidence; exit `3` denotes a runtime/input denial.
 Every review envelope remains `publication: denied` and is not a site snapshot.
 
-After the recorded disposition and complete source validation, review a
-separate opt-in to the shared `collect-adrs: true` build. It requires complete,
-fresh validated ADR coverage; it does not publish a review envelope.
-A successful local production-script artifact is distinct from hosted
-execution and live deployment. Consumer-owned hosting, routes, composition, deployment receipts and
-rollback remain separate acceptance work. Preserve the release-backed Brand Kit
-at `identity.egohygiene.io` and the independent organization `/identity/`
-experience described in the [publication guide](publication/IDENTITY_PAGES.md).
-Record the Intelligence host before adding its canonical `/intelligence/decisions/`
-route and consumer-owned `/decisions/` redirect; neither existing host is
-reassigned by this adoption.
+The selected implementation extends the existing Brand Kit publisher on
+`identity.egohygiene.io` with the Relay `collect-adrs: true` build pinned to
+`cabbf5b3b658d585b4d56ef0c99917969a96eed2`. This publication pin includes
+[Relay PR #138](https://github.com/egohygiene/relay/pull/138)'s baseline path-order
+repair; the advisory validation adoption and historical receipt retain their
+separate `4137cb07a017b7bbae2ee38fe9b039c58b0b17eb` source above.
+[Proposed ADR-022](decisions/ADR-022-decisions-publication-composition.md) records
+this new composition choice; the earlier R1 approval covers only ADR-001–021.
+The production build requires complete, fresh validated ADR coverage at its
+full source commit and does not publish a review envelope. Proposed records
+remain proposed in the generated view.
+
+Capture every existing Brand Kit file before adding `intelligence/` and the
+consumer-owned `/decisions/` alias. Require byte-preserved Brand Kit content,
+collision-free routes, immutable source bindings and the exact composed
+artifact digest. The Brand Kit still uses its separately selected stable
+release; current ADRs do not become release-owned assets. The independent
+organization `/identity/` experience keeps its existing owner and gates.
+
+A successful local artifact, hosted execution, Pages deployment and live
+content verification are separate results. Retain the shared composition and
+deployment receipts, verify live bytes against the retained artifact, and
+establish a recoverable prior deployment before claiming publication complete.
+Manual replay of an ancestor ADR source still requires fresh collection.
+See the [publication checkpoint](publication/IDENTITY_PAGES.md#decisions-composition-checkpoint--2026-10-10)
+for routes, source identities and rollback requirements. Deployment results and
+maintainer feedback remain required before fleet follow-up.
 
 Two existing architecture-preview references in
 `publication/identity-experience.content.json` need a later reviewed correction:
