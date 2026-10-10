@@ -171,10 +171,16 @@ ADR-022 accepted.
 | Component | Route/source boundary |
 | --- | --- |
 | Existing Brand Kit | Root and every existing file remain byte-preserved from the selected stable release build. The initial binding remains `v1.0.0`. |
-| Repository Intelligence | The Relay action pinned to `cabbf5b3b658d585b4d56ef0c99917969a96eed2` freshly collects canonical ADRs at a full repository commit and emits `renderer/dist/intelligence`. |
+| Repository Intelligence | The Relay action pinned to `2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0` freshly collects canonical ADRs at a full repository commit and emits `renderer/dist/intelligence`. |
 | Decisions | `https://identity.egohygiene.io/intelligence/decisions/` |
 | Consumer alias | `https://identity.egohygiene.io/decisions/` redirects to `/intelligence/decisions/`. |
 | Organization experience | `/identity/` keeps its independent route owner, stable-release gate and deployment process. |
+
+The current publication pin adopts [Relay PR #141](https://github.com/egohygiene/relay/pull/141)'s
+hidden-card styling fix. The [first deployment receipt](../evidence/identity-decisions-deployment-2026-10-10.json)
+retains its original pin and filtering failure. Republish this revision and
+verify query, facets, reset and no-match card visibility before recording the
+repair as live; the earlier byte-verification result is not that proof.
 
 The same `Publish Identity Brand Kit` workflow uploads and deploys one composed
 Pages artifact. It records the publisher revision, ADR source revision and

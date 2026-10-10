@@ -149,10 +149,14 @@ Every review envelope remains `publication: denied` and is not a site snapshot.
 
 The selected implementation extends the existing Brand Kit publisher on
 `identity.egohygiene.io` with the Relay `collect-adrs: true` build pinned to
-`cabbf5b3b658d585b4d56ef0c99917969a96eed2`. This publication pin includes
+`2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0`. This publication pin includes
 [Relay PR #138](https://github.com/egohygiene/relay/pull/138)'s baseline path-order
-repair; the advisory validation adoption and historical receipt retain their
-separate `4137cb07a017b7bbae2ee38fe9b039c58b0b17eb` source above.
+repair and [Relay PR #141](https://github.com/egohygiene/relay/pull/141)'s shared
+hidden-card styling repair for [Relay #139](https://github.com/egohygiene/relay/issues/139).
+The advisory validation adoption retains its separate
+`4137cb07a017b7bbae2ee38fe9b039c58b0b17eb` source above. Historical receipts keep
+their original source pins; this update requires a new deployment and live
+visibility checks before claiming the repaired canary is verified.
 [Proposed ADR-022](decisions/ADR-022-decisions-publication-composition.md) records
 this new composition choice; the earlier R1 approval covers only ADR-001–021.
 The production build requires complete, fresh validated ADR coverage at its
