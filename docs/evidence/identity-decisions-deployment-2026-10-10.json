@@ -1,0 +1,262 @@
+{
+  "artifacts": [
+    {
+      "expires_at": "2026-11-09T16:24:56Z",
+      "id": 11676205317,
+      "independently_downloaded": true,
+      "name": "identity-decisions-deployment-38067442472-1",
+      "url": "https://api.github.com/repos/egohygiene/identity/actions/artifacts/11676205317",
+      "zip_digest": "sha256:a6397f6142d603288962f2192dbf2ce82a3b3b052436da7b2c90e7639b8b158a"
+    },
+    {
+      "expires_at": "2026-10-11T16:24:24Z",
+      "id": 11675366215,
+      "independently_downloaded": false,
+      "name": "github-pages",
+      "url": "https://api.github.com/repos/egohygiene/identity/actions/artifacts/11675366215",
+      "zip_digest": "sha256:2850fdfd726140d0945e3fcf53abe61b7bd8f91811382b82d9cf40d1fb0d95c8"
+    },
+    {
+      "expires_at": "2026-11-09T16:24:23Z",
+      "id": 11675331641,
+      "independently_downloaded": true,
+      "name": "identity-decisions-publication-e6bafa362de900fdcffac60c33b8bed2c3905115-38067442472-1",
+      "url": "https://api.github.com/repos/egohygiene/identity/actions/artifacts/11675331641",
+      "zip_digest": "sha256:7087c467466950c9375dc34687d21abe12ff56b0c9c3d16054e2ba13c1997928"
+    }
+  ],
+  "browser_review": {
+    "entry_url": "https://identity.egohygiene.io/decisions/",
+    "followup": "https://github.com/egohygiene/relay/issues/139",
+    "resolved_url": "https://identity.egohygiene.io/intelligence/decisions/",
+    "result": "Rendered 22records; semantic headings, labels, skip link and source links observed. Reset returns the full view. Search reports one matching record but nonmatching cards remain visible; review is partial."
+  },
+  "canonicalization": {
+    "merge_revision": "642d096e60b729060e5880e5222d7b57184b735e",
+    "pull_request": 92
+  },
+  "decision_projection": {
+    "accepted": 21,
+    "coverage": {
+      "checks": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "decisions": {
+        "collection": "observed",
+        "freshness": "current",
+        "observed_at": "2026-10-10T16:23:04Z",
+        "reason": "complete"
+      },
+      "deployments": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "git": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "history": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "issues": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "pull_requests": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "releases": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "roadmap": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      }
+    },
+    "implementation": {
+      "implemented": 12,
+      "in_progress": 8,
+      "not_started": 2,
+      "verified": 0
+    },
+    "local_integration_result": "One successful shared production integration; final PR head changes only test temporary-path normalization. Earlier 21-record two-location replay remains separate historical evidence.",
+    "local_integration_source": "a57e8e4b2f8d314fc29c8d456fcd02e65a2bf849",
+    "proposed": 1,
+    "records": 22
+  },
+  "deployment_receipt": {
+    "aliases": [
+      {
+        "route": "/decisions/",
+        "target": "/intelligence/decisions/"
+      }
+    ],
+    "build_manifest": {
+      "bundle_digest": "sha256:66a333d92e341575d12cba5a582045f50991e4e0a9140204453b4a83ceb3d3c4",
+      "path": "intelligence/build-manifest.json",
+      "sha256": "sha256:3606f910ebe589a98220bf0091ac121ed39d89d2365855f71f917e3a61cff06f"
+    },
+    "composition": {
+      "preserved_consumer_files": {
+        "digest": "sha256:bcf6c6a6f2d38b6182b5e8585c99920a9eed045334caf2c98f5d81a395003108",
+        "file_count": 40
+      },
+      "preserved_consumer_routes": [
+        {
+          "route": "/",
+          "sha256": "sha256:2b727623547063dbd985e7b4d1b639283aa9debdc26ee1ae97cabfc905969afa"
+        },
+        {
+          "route": "/brand-kit/",
+          "sha256": "sha256:2d89abc3df0c1cc48d5405c7381a6351381656ac65ad81a9c289a633a635bd4d"
+        }
+      ],
+      "published_routes": [
+        "/",
+        "/brand-kit/",
+        "/decisions/",
+        "/intelligence/",
+        "/intelligence/compare/",
+        "/intelligence/dashboard/",
+        "/intelligence/decisions/",
+        "/intelligence/dependencies/",
+        "/intelligence/health/",
+        "/intelligence/journey/",
+        "/intelligence/now/",
+        "/intelligence/releases/",
+        "/intelligence/roadmap/",
+        "/intelligence/search/",
+        "/intelligence/work/"
+      ],
+      "site_digest": "sha256:c2f04e52b447472080f1ebde6cb794d9e31e47e1a3c2099337de26bd956a7e79"
+    },
+    "consumer": {
+      "repository": "egohygiene/identity",
+      "revision": "e6bafa362de900fdcffac60c33b8bed2c3905115"
+    },
+    "deployment": {
+      "conclusion": "success",
+      "environment": "github-pages",
+      "recorded_at": "2026-10-10T16:24:55Z",
+      "url": "https://identity.egohygiene.io/"
+    },
+    "generator": {
+      "repository": "egohygiene/relay",
+      "revision": "cabbf5b3b658d585b4d56ef0c99917969a96eed2"
+    },
+    "rollback": {
+      "consumer_revision": "8aae2c6767d07714ea16bf0ea493e1f1ac399b6e",
+      "deployment_url": "https://identity.egohygiene.io/",
+      "site_digest": "sha256:c690803f5eda55c7b61d7ae34a1df3e109d2dad9aad9a34ef086207d4cd0fd88"
+    },
+    "schema": "egohygiene.relay.repository-intelligence-deployment-receipt/v1",
+    "schema_version": 1,
+    "verification": {
+      "maximum_source_age_seconds": 604800,
+      "source_epoch": 1791649384,
+      "verified_epoch": 1791649495
+    },
+    "workflow": {
+      "run_attempt": 1,
+      "run_id": 38067442472
+    }
+  },
+  "file_verification": {
+    "alias_files": 1,
+    "brand_kit_files_preserved": 40,
+    "independent_download_checks": "Ordinary handoff and evidence ZIP hashes match provider metadata; all Intelligence manifest files and all 60 live receipt paths match downloaded bytes; all 40 original files match the retained rollback inventory and archive.",
+    "intelligence_files": 19,
+    "live_passed": 60,
+    "live_unavailable": 0,
+    "published_files": 60
+  },
+  "limitations": [
+    "Other eight evidence domains remain uncollected; partial build status is not a deployment failure.",
+    "Original prior Pages ZIP expired; rollback archive is a verified fresh live capture.",
+    "Retained ordinary artifacts expire 2026-11-09; actual rollback re-promotion was not exercised.",
+    "Identity #69 remains open for the known UI followup and maintainer feedback. No complete accessibility or fleet-readiness claim."
+  ],
+  "live_verification": {
+    "attempts": 1,
+    "canonical_url": "https://identity.egohygiene.io/",
+    "expected_manifest_sha256": "sha256:3606f910ebe589a98220bf0091ac121ed39d89d2365855f71f917e3a61cff06f",
+    "expected_source": {
+      "repository": "egohygiene/identity",
+      "revision": "e6bafa362de900fdcffac60c33b8bed2c3905115"
+    },
+    "observed_at": "2026-10-10T16:24:55.773202Z",
+    "result": "passed",
+    "schema": "identity.decisions-live-verification/v1"
+  },
+  "next": [
+    "Resolve Relay #139 shared CSS filtering and republish through the same owner.",
+    "Obtain maintainer feedback on the live Decisions page before fleet rollout.",
+    "Obtain separate human disposition for proposed ADR-022; no acceptance is inferred from deployment."
+  ],
+  "observed_at": "2026-10-10T16:29:31.090600Z",
+  "publication": {
+    "merge_revision": "e6bafa362de900fdcffac60c33b8bed2c3905115",
+    "pull_request": 93,
+    "relay_baseline_fix_pull_request": "https://github.com/egohygiene/relay/pull/138",
+    "source_binding": {
+      "brand_kit_release": {
+        "revision": "aaad8839104704cf57bfa846539b3b875421e03d",
+        "tag": "v1.0.0"
+      },
+      "intelligence_revision": "e6bafa362de900fdcffac60c33b8bed2c3905115",
+      "publisher_revision": "e6bafa362de900fdcffac60c33b8bed2c3905115",
+      "relay_revision": "cabbf5b3b658d585b4d56ef0c99917969a96eed2",
+      "repository": "egohygiene/identity"
+    },
+    "validated_head": "3a77088c88cf71456eea5553252d775d14013b7f"
+  },
+  "repository": "egohygiene/identity",
+  "retained_evidence_files": {
+    "composition-verification.json": "sha256:729958b25f82a416ca11ff0a8835fad1079c3812c9319469ad04e35957451af6",
+    "consumer-route-baseline.json": "sha256:837025aa695acda6bc72e17c0254be8a30dd55e6b54a66ab322425773ab2b69b",
+    "deployment-receipt.json": "sha256:abc0e2d315826b79986d8b362262029f681f5fbbd5571cf26671113db510df38",
+    "live-verification.json": "sha256:5d815ddcd3e53c5d6244529704146fd2a3d8a1ed93b1489168f64150969f6db7",
+    "rollback-capture.json": "sha256:edc6e9cb55f19c7e7592febafea3de99f21faf605543b95d1d9fa76bd9e96cfc",
+    "rollback-record.json": "sha256:ff0ba18053b09e1a53ed8345c5d2947a737d670ff0bc92b342f90a15d53ec2a9",
+    "source-binding.json": "sha256:cd0c2689b185dafc998ce13cb636b8b7fabfdfa0c8f8f80de232c51715a6ed32"
+  },
+  "rollback": {
+    "archive_provenance": "new capture; not the original expired Pages artifact",
+    "archive_sha256": "sha256:d886c103ec8e47bad78cd75243c2b6b339734919e6415a41cb7cb93b0f65e9fe",
+    "consumer_revision": "8aae2c6767d07714ea16bf0ea493e1f1ac399b6e",
+    "files": 40,
+    "observed_at": "2026-10-10T16:23:36.495999Z",
+    "result": "passed",
+    "schema": "identity.decisions-rollback-capture/v1",
+    "site_digest": "sha256:c690803f5eda55c7b61d7ae34a1df3e109d2dad9aad9a34ef086207d4cd0fd88"
+  },
+  "schema": "identity.decisions-deployment-checkpoint/v1",
+  "workflow": {
+    "build_job": 114257854133,
+    "conclusion": "success",
+    "deploy_job": 114258126838,
+    "run_attempt": 1,
+    "run_id": 38067442472,
+    "url": "https://github.com/egohygiene/identity/actions/runs/38067442472"
+  }
+}
