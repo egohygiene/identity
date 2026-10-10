@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-10T10:41:58Z'
+  updated_at: '2026-10-10T10:46:01Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -37,6 +37,8 @@ scope:
   - docs/decision-validation.md
   - https://github.com/egohygiene/identity/issues/69
   - https://github.com/egohygiene/.github/issues/30
+  - docs/evidence/identity-adrs-2026-10-10.json
+  - https://github.com/egohygiene/identity/pull/91
 work:
   objective: Complete a preservation-first ADR adoption checkpoint and present the unresolved legacy dispositions
     for human review.
@@ -56,6 +58,7 @@ work:
       canonicalizing legacy lifecycle metadata.
     readiness: ready
     references:
+    - https://github.com/egohygiene/identity/pull/91
     - https://github.com/egohygiene/identity/issues/69
     - https://github.com/egohygiene/.github/issues/30
     depends_on: []
@@ -67,23 +70,27 @@ state:
   candidate:
     branch: codex/identity-69-adr-adoption
     revision: null
-    pull_request: null
-    handoff_state: in-progress
+    pull_request:
+      provider: github
+      id: egohygiene/identity#91
+      url: https://github.com/egohygiene/identity/pull/91
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-10T10:38:49Z'
+    observed_at: '2026-10-10T10:46:01Z'
     default_branch_revision: 8aae2c6767d07714ea16bf0ea493e1f1ac399b6e
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Public main source and issue inspected; Relay135 merged4137cb07a017b7bbae2ee38fe9b039c58b0b17eb.
-      Refresh refs and parallel PR90 before continuation.
+    pull_request_state: open
+    notes: Main remains 8aae2c6; PR91 is open and ready for review at source checkpoint 0d36bb4be6702f6329a22a19a4a751d5d28799ae.
+      Hosted decision and CLI workflows started; completion and artifact retention not yet observed. PR90 remains
+      a separate open draft.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#90
     url: https://github.com/egohygiene/identity/pull/90
 review:
   status: partial
-  reviewed_at: '2026-10-10T10:41:58Z'
+  reviewed_at: '2026-10-10T10:46:01Z'
   reviewed_by: Codex
   evidence:
   - command: Pinned Relay ADR native tests at 4137cb07a017b7bbae2ee38fe9b039c58b0b17eb
@@ -95,7 +102,7 @@ review:
     outcome: limited
     observed_at: '2026-10-10T10:38:49Z'
     notes: 'Exit2: unavailable decisions coverage, missing canonical index and15 legacy extraction gaps; publication
-      denied. Candidate validation pending.'
+      denied. Candidate replay is recorded below.'
   - command: Pinned Hygiene c589587395750cd1c79c6fa0bef010189c547249 JSON Schema and seven-section checks
     outcome: passed
     observed_at: '2026-10-10T10:41:58Z'
@@ -103,21 +110,25 @@ review:
   - command: Git blob comparison against 8aae2c6767d07714ea16bf0ea493e1f1ac399b6e and index inspection
     outcome: passed
     observed_at: '2026-10-10T10:41:58Z'
-    notes: 15 detailed ADRs byte-identical;3 inline bodies and oldanchors preserved;21 unique numeric-order
-      canonical targets.
+    notes: 15 detailed ADRs byte-identical;3 inline bodies and oldanchors preserved;21 unique numeric-order canonical
+      targets.
   - command: python3 scripts/verify_docs.py --repository-root .; python3 scripts/verify_publication_architecture.py
       --repository-root .; python3 scripts/verify_publication_release_configs.py --repository-root .
     outcome: passed
     observed_at: '2026-10-10T10:41:58Z'
-    notes: Documentation links, publication architecture and release-bound configuration pass. No deployment
-      performed.
+    notes: Documentation links, publication architecture and release-bound configuration pass. No deployment performed.
   - command: Pinned Relay architecture adapter suite at 4137cb07a017b7bbae2ee38fe9b039c58b0b17eb
     outcome: passed
     observed_at: '2026-10-10T10:41:58Z'
     notes: 29 tests passed, zero skips, using the distinct architecture runtime.
+  - command: Pinned Relay architecture and ADR collector immutable replay at 0d36bb4be6702f6329a22a19a4a751d5d28799ae
+    outcome: limited
+    observed_at: '2026-10-10T10:46:01Z'
+    notes: Architecture exit 0 nonconformant/warning: 53 warnings. Collector exit 2 invalid, partial/current decisions
+      coverage and publication denied; identical second replay. Exact hashes/commands in docs/evidence/identity-adrs-2026-10-10.json.
   environment_limitations:
-  - Hosted workflow execution, artifact upload, production Decisions build and live routes have not been observed
-    for this candidate.
+  - Hosted completion/upload, production Decisions build and live routes are not established by local checks.
+  - CLI/browser/release suites were not rerun locally for this source/documentation and thin-workflow change.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -156,7 +167,8 @@ migration, corpus conformance or live Decisions publication.
 ## State snapshot
 
 The audited main is `8aae2c6767d07714ea16bf0ea493e1f1ac399b6e`.
-The candidate is `codex/identity-69-adr-adoption`; its self-revision remains null.
+[PR91](https://github.com/egohygiene/identity/pull/91) is ready for review on
+`codex/identity-69-adr-adoption`; its self-revision remains null.
 The shared Relay selection is merged `4137cb07a017b7bbae2ee38fe9b039c58b0b17eb`.
 
 ## Completed and material changes
@@ -169,8 +181,10 @@ The shared Relay selection is merged `4137cb07a017b7bbae2ee38fe9b039c58b0b17eb`.
 
 ## Validation and review evidence
 
-The front matter records source checks and native test suites. Immutable
-candidate replay and final evidence will be recorded before the PR handoff.
+The [validation receipt](docs/evidence/identity-adrs-2026-10-10.json) binds
+source checkpoint `0d36bb4be6702f6329a22a19a4a751d5d28799ae`. Both native paths
+ran; architecture reports 53 warnings and the collector denies publication.
+The later evidence/continuity-only update preserves the selected source blobs.
 
 ## Blockers, risks, unknowns, and deferred work
 
