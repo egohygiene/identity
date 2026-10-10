@@ -54,7 +54,7 @@ source-path = "schemas/repository-intelligence.v1.schema.json"
 
 [adrs]
 # "present" selects the existing corpus for inspection; it is not conformance.
-# Relay's separate adr-adoption: legacy preserves incomplete migration.
+# Relay selects present after the approved canonical metadata migration.
 state = "present"
 policy-reference = "docs/decisions/policy-reference.json"
 decision-directory = "docs/decisions"

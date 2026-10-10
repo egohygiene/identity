@@ -12,12 +12,20 @@ audit, PR #90 and PR #91 merged; current reviewed main is
 were separately reconciled and applied on 2026-10-10, as recorded in
 [organization #30](https://github.com/egohygiene/.github/issues/30).
 
-The [R1 disposition recommendation packet](decision-disposition-review-2026-10-10.md)
-now provides a plain-English choice, recommendation and concrete scope
-clarifications for all 21 records. Human dispositions remain pending. The
-original eighteen records, three proposed records, index and validation receipt
-are unchanged by this review checkpoint. Read R1 before requesting approval;
-the historical authority and provenance gaps below remain part of the record.
+Maintainer `szmyty` subsequently approved the exact
+[R1 packet at `418aa975`](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md)
+on 2026-10-10. The [durable disposition](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806)
+retains ADR-001–018 with R1's clarifications and separately accepts ADR-019–021.
+The [ratification record](decision-ratification-2026-10-10.md) records the scope.
+This candidate applies the approved canonical metadata/anatomy and dated notes
+while preserving original substantive prose, dates/status claims and provenance.
+The frozen R1 packet and pre-approval validation receipt remain unchanged.
+
+The original audit and requested-review sections below describe the earlier
+evidence boundary. Their unresolved historical authority/date observations are
+preserved; current approval is dated 2026-10-10 and does not backdate them.
+Do not request R1 approval again. Source conformance and publication still need
+their own immutable validation and delivery evidence.
 
 ## Outcome and present limitation
 

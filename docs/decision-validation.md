@@ -1,8 +1,8 @@
 # Identity decision validation
 
 Identity [#69](https://github.com/egohygiene/identity/issues/69) adopts shared
-validation in advisory mode while historical decision dispositions remain under
-human review. [The policy](../.config/egolint/repository-intelligence.toml)
+validation in advisory mode after the explicit
+[2026-10-10 human disposition](decision-ratification-2026-10-10.md). [The policy](../.config/egolint/repository-intelligence.toml)
 selects EgoLint's existing rules; [the workflow](../.github/workflows/decision-validation.yml)
 calls Relay without copying its validator or acquiring publication authority.
 
@@ -21,14 +21,17 @@ The separately pinned roadmap/projection contract entries in the TOML retain
 their proposed authority; the accepted ADR policy does not promote them.
 
 The TOML declares ADR source `present` so the native validator inspects it.
-The workflow declares adoption `legacy` because migration is incomplete. These
+The workflow now declares adoption `present` for the canonical corpus. These
 are different dimensions: a successful job cannot accept a historical decision
-or promote legacy coverage to conformance. Metadata, missing approval, lineage,
-and index findings remain visible warnings. Roadmap, commit history, repository
+or turn source presence into conformance. Metadata, approval, lineage,
+and index findings remain visible if a future change introduces them. Roadmap, commit history, repository
 contracts, and diagrams remain unknown in this bounded check.
 
-Expected outcomes are `legacy` or `nonconformant` with `warning`, depending on
-the inspected corpus. Runtime, acquisition, unsafe input, or evidence-retention
+The intended ADR-domain result is valid metadata and complete observed
+collection after the approved migration. Repository-contract, roadmap/history
+and diagram domains remain explicitly uncollected; whole-repository status may
+therefore remain incomplete/warning. Report actual results for each immutable
+source and domain without promoting those gaps to conformance. Runtime, acquisition, unsafe input, or evidence-retention
 failure still fails execution. No skipped or unavailable check counts as a
 pass. Inspect the retained semantic status, coverage, and actual artifact-upload
 outcome separately. An ordinary PR represents GitHub's merge candidate SHA;
@@ -76,7 +79,7 @@ request = {
     },
     "mode": "advisory",
     "adoption": {
-        "repository-contracts": "unknown", "architecture-records": "legacy",
+        "repository-contracts": "unknown", "architecture-records": "present",
         "diagram-sources": "unknown",
     },
     "inputs": {
@@ -108,16 +111,17 @@ defines the equivalent CI parameters and retention behavior.
 ## Review collection and later publication
 
 For normalized review evidence, use the separately prepared runtime and
-`collect_repository_adrs.py collect --adoption legacy` documented in Relay's
+`collect_repository_adrs.py collect --adoption present` documented in Relay's
 [ADR collector guide](https://github.com/egohygiene/relay/blob/4137cb07a017b7bbae2ee38fe9b039c58b0b17eb/docs/repository-adr-collector.md).
 Its output must be `adr-collection.review.json` outside Identity. Exit `2`
 retains partial/invalid evidence; exit `3` denotes a runtime/input denial.
 Every review envelope remains `publication: denied` and is not a site snapshot.
 
-After explicit disposition review and complete source validation, review a
+After the recorded disposition and complete source validation, review a
 separate opt-in to the shared `collect-adrs: true` build. It requires complete,
-fresh validated ADR coverage; it cannot publish the current legacy review
-envelope. Consumer-owned hosting, routes, composition, deployment receipts and
+fresh validated ADR coverage; it does not publish a review envelope.
+A successful local production-script artifact is distinct from hosted
+execution and live deployment. Consumer-owned hosting, routes, composition, deployment receipts and
 rollback remain separate acceptance work. Preserve the release-backed Brand Kit
 at `identity.egohygiene.io` and the independent organization `/identity/`
 experience described in the [publication guide](publication/IDENTITY_PAGES.md).

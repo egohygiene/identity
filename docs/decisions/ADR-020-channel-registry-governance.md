@@ -2,35 +2,53 @@
 schema: egohygiene.architecture-decision/v1
 id: ADR-020
 title: Separate channel governance, account lifecycle, and verification
-status: proposed
-date: "2026-10-10"
+status: accepted
+date: '2026-10-10'
 decision_scope: repository
 visibility: public
 owners:
-  - egohygiene/identity
+- egohygiene/identity
 issue: https://github.com/egohygiene/identity/issues/65
 pull_request: https://github.com/egohygiene/identity/pull/68
-related: [ADR-013, ADR-015, ADR-016]
+related:
+- ADR-013
+- ADR-015
+- ADR-016
 supersedes: []
 superseded_by: []
-affected_repositories: [egohygiene/identity]
+affected_repositories:
+- egohygiene/identity
 affected_contracts: []
 implementation_status: implemented
 evidence:
-  - type: pull_request
-    url: https://github.com/egohygiene/identity/pull/68
-    description: Implements the canonical registry, independent lifecycle and verification, deterministic public adapters, and shared Press Kit/social consumption.
-  - type: documentation
-    url: https://github.com/egohygiene/identity/blob/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e/docs/contracts/CHANNEL_REGISTRY_V1.md
-    description: Inspected channel-registry source, projection, activation, rollback, and no-secrets contract.
-  - type: implementation
-    url: https://github.com/egohygiene/identity/blob/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e/publication/channel-registry.v1.json
-    description: Canonical source at the audit boundary records planned channels; source presence does not prove active accounts or architectural approval.
-approval: null
+- type: pull_request
+  url: https://github.com/egohygiene/identity/pull/68
+  description: Implements the canonical registry, independent lifecycle and verification, deterministic
+    public adapters, and shared Press Kit/social consumption.
+- type: documentation
+  url: https://github.com/egohygiene/identity/blob/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e/docs/contracts/CHANNEL_REGISTRY_V1.md
+  description: Inspected channel-registry source, projection, activation, rollback, and no-secrets contract.
+- type: implementation
+  url: https://github.com/egohygiene/identity/blob/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e/publication/channel-registry.v1.json
+  description: Canonical source at the audit boundary records planned channels; source presence does not
+    prove active accounts or architectural approval.
+- type: approval
+  url: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
+  description: Explicit maintainer acceptance on 2026-10-10 of R1 at 418aa9757898b6c09b4f01eface522778cff90e8;
+    recorded by Codex on the maintainer's behalf.
+approval:
+  date: '2026-10-10'
+  by: szmyty
+  evidence: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
 exceptions: []
 ---
 
 # ADR-020: Separate channel governance, account lifecycle, and verification
+
+The original reconstruction below is preserved as pre-approval history. Its
+proposed-state and pending-review wording describes that earlier checkpoint;
+the current human disposition is recorded in front matter and the dated note
+below.
 
 ## Context
 
@@ -102,3 +120,12 @@ Reconstructed on 2026-10-10 from main revision
 `60bcd9a8202ec054650bc6c0bea6fbe0349a75f0` is dated 2026-08-31. This is an
 implementation date, not a proven human architectural disposition. No global
 contract ID is invented for the existing `identity.*` source identifiers.
+
+## Human disposition — 2026-10-10
+
+Maintainer `szmyty` explicitly accepted ADR-020 as a separate proposed-record
+choice in [recommendation set R1](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md).
+The [durable disposition](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806) records
+that approval on 2026-10-10. The original reconstruction text and evidence
+remain intact; implementation stays `implemented`, with no new runtime,
+release, creative-asset, account or deployment verification inferred.
