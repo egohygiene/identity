@@ -1,0 +1,272 @@
+{
+  "purpose": "Bounded Identity69 migration validation receipt; not a conformance, human disposition, hosted, or deployment receipt.",
+  "observed_at": "2026-10-10T10:45:21Z",
+  "repository": "egohygiene/identity",
+  "source_revision": "0d36bb4be6702f6329a22a19a4a751d5d28799ae",
+  "source_tree": "0af0cd835d30a1121d03db9ff3b89db3a47a2b2a",
+  "base_revision": "8aae2c6767d07714ea16bf0ea493e1f1ac399b6e",
+  "relay_revision": "4137cb07a017b7bbae2ee38fe9b039c58b0b17eb",
+  "aether_revision": "8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2",
+  "pull_request": "https://github.com/egohygiene/identity/pull/91",
+  "preservation": {
+    "unchanged_detailed_adrs": 15,
+    "verbatim_inline_extractions": 3,
+    "legacy_claims_unresolved": 18,
+    "canonical_index_rows": 21,
+    "new_proposed_adrs": [
+      "ADR-019",
+      "ADR-020",
+      "ADR-021"
+    ],
+    "publication_configuration": "unchanged"
+  },
+  "collector": {
+    "command_template": "python -I \"$RELAY_SOURCE/actions/repository-intelligence/scripts/collect_repository_adrs.py\" collect --runtime \"$ADR_RUNTIME\" --repository-root \"$IDENTITY_SOURCE\" --repository egohygiene/identity --visibility public --source-commit 0d36bb4be6702f6329a22a19a4a751d5d28799ae --observed-at 2026-10-10T10:44:00Z --adoption legacy --output \"$REVIEW_DIRECTORY/adr-collection.review.json\"",
+    "exit_code": 2,
+    "status": "invalid",
+    "publication": "denied",
+    "validation": {
+      "coverage": "valid",
+      "diagnostics_truncated": false,
+      "egolint": "invalid",
+      "hygiene": "valid",
+      "observatory": "normalized"
+    },
+    "coverage": {
+      "checks": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "decisions": {
+        "collection": "partial",
+        "freshness": "current",
+        "observed_at": "2026-10-10T10:44:00Z",
+        "reason": "incomplete"
+      },
+      "deployments": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "git": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "history": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "issues": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "pull_requests": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "releases": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      },
+      "roadmap": {
+        "collection": "uncollected",
+        "freshness": "unknown",
+        "observed_at": null,
+        "reason": "not_requested"
+      }
+    },
+    "diagnostic_counts": {
+      "EGO-INTEL-ADOPTION-001": 3,
+      "EGO-INTEL-ADR-INDEX-001": 18,
+      "EGO-INTEL-ADR-LINEAGE-001": 11,
+      "EGO-INTEL-ADR-METADATA-001": 18,
+      "EXTRACTION": 18,
+      "INTEGRATION": 1
+    },
+    "source_hashes": [
+      {
+        "path": "docs/decisions/ADR-001-creative-approval-human-owned.md",
+        "sha256": "ed96fa442c9ee9b66e44f8e59c7583f64bc310ac5373e72b3ff4fee771f1e92a"
+      },
+      {
+        "path": "docs/decisions/ADR-002-stable-identity-contract.md",
+        "sha256": "229536c298defb7e802d3328ea781f50726854eb15d64697bc2795cda190ff64"
+      },
+      {
+        "path": "docs/decisions/ADR-003-deterministic-projection-boundary.md",
+        "sha256": "08dbed1244241a1a13d66552fe7f1e0c6084743e12fb521fcd9026779bf9bc30"
+      },
+      {
+        "path": "docs/decisions/ADR-004-dtcg-token-contract.md",
+        "sha256": "0524542a2ce13711509289973b442115c64c22b8114b154b619722f317cc2072"
+      },
+      {
+        "path": "docs/decisions/ADR-005-json-schema-contract.md",
+        "sha256": "e0aed308de4d4a5a58d48ebb5ef2968d67a2115324693ae424d46debe889e428"
+      },
+      {
+        "path": "docs/decisions/ADR-006-rust-rendering-stack.md",
+        "sha256": "e55beff095083e3c1c2e9088b0218459d61c94d7038caa51e6c8f9b18df195c3"
+      },
+      {
+        "path": "docs/decisions/ADR-007-font-tooling-boundaries.md",
+        "sha256": "eec5bfec069ec2e0291b3aa06ee0b4038a6a887e0e6a4690f78a2c0939c10933"
+      },
+      {
+        "path": "docs/decisions/ADR-008-platform-profile-contracts.md",
+        "sha256": "3d069493ae0176faef5b924d51882bbf31a28cf9984fd0c37bf6dd376918cdd0"
+      },
+      {
+        "path": "docs/decisions/ADR-009-storybook-consumer-adapter.md",
+        "sha256": "22ac5920d293adfdda62c7898de2cbc01ae0744377af99e92092476fbd9a7802"
+      },
+      {
+        "path": "docs/decisions/ADR-010-reference-renderer-boundary.md",
+        "sha256": "3c373e4b2aedeaf47f6861751dc9f803da865231962d600d025e52658369cd60"
+      },
+      {
+        "path": "docs/decisions/ADR-011-accessibility-and-visual-evidence.md",
+        "sha256": "84dad5276173e09f62323e6117a58ce40d35fe9038f8becb4b2fb35ddd54b04d"
+      },
+      {
+        "path": "docs/decisions/ADR-012-local-layered-identity-v1.md",
+        "sha256": "686acc68bee34ae0bf1881898c49c4a9297ec4a50cd5d1e0a023f41c5c95d86d"
+      },
+      {
+        "path": "docs/decisions/ADR-013-preserve-guidance-lifecycle.md",
+        "sha256": "13641f79df277d7b5a4e1f278f0936ac480ff6c50574bdebd460de368f690cbe"
+      },
+      {
+        "path": "docs/decisions/ADR-014-design-system-projection-boundary.md",
+        "sha256": "57aeb0e5e06d63fd05c5b1916f5df098142fa859f855638092d5180560b0ba3c"
+      },
+      {
+        "path": "docs/decisions/ADR-015-press-kit-projection-boundary.md",
+        "sha256": "72f380859b10c463e04e7144ecc1a810d8f724659126c3bc737f37f41b381c60"
+      },
+      {
+        "path": "docs/decisions/ADR-016-pinned-social-surface-projection-boundary.md",
+        "sha256": "4a2aea484bc084c0f3ed094206d365132f65c6c3db12bfa3ee0c2d99c9ab05e5"
+      },
+      {
+        "path": "docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md",
+        "sha256": "232dcef8c12017029d00f685e812addd73db51d1518f5046a6d160847bda1007"
+      },
+      {
+        "path": "docs/decisions/ADR-018-repository-presentation-projection-boundary.md",
+        "sha256": "b9d18130e240c659c93f9a3a73c9ed5d90dd5172a7133e957cb8ba56e0d02812"
+      },
+      {
+        "path": "docs/decisions/ADR-019-immutable-release-contract.md",
+        "sha256": "36119a3535292ee8234b9bae105c6a06f9ebad37d1645104ac6a76e85148e6fe"
+      },
+      {
+        "path": "docs/decisions/ADR-020-channel-registry-governance.md",
+        "sha256": "94cc7728c61aba41178c8058ce2f29087efa1a14b93febce8fc0794d6c3f29c4"
+      },
+      {
+        "path": "docs/decisions/ADR-021-governed-mascot-package.md",
+        "sha256": "0ed89fb25e7d77f967ccffc32a63c21cb099b9cc42cee6639fede831881b8f10"
+      },
+      {
+        "path": "docs/decisions/README.md",
+        "sha256": "dc3af73e023954148895ec55dd929305516c6a9b81f4c08a819be7271a175c15"
+      },
+      {
+        "path": "docs/decisions/policy-reference.json",
+        "sha256": "c98f651c029f4fe6bbd87a3d9a99d134100bdd90600244255958c2e5c1cde57d"
+      }
+    ],
+    "candidate_digests": {
+      "projection_sha256": "bc47ed664124e7cb315a358519253e57e31b1a63c833d89af126df2000ee97a6",
+      "snapshot_sha256": "a7bcabfc7447d5ddb8ca6e6c6bfd2f62ffc591356e0ba4d54f9e349ae39f7d29"
+    },
+    "runtime_hashes": {
+      "collector_sha256": "fce32ebf519329b8ccb9daa582d4012554cd1ea3527a475bb40df5900677a991",
+      "egolint_sha256": "76aec314dd664c3d509c774e5f2291386966e361f027f41ef12c643b661c2d35",
+      "lock_sha256": "7398494f726036ccfdb73dcc5587244ef46d951a6b649c69286b013c9946d7c0",
+      "shared_runtime_sha256": "011034b57cd27ffe3f70b7572053e236fcff723e858d89ef907544fbe8b19311"
+    },
+    "owner_revisions": {
+      "egolint": "2d3600f14848e28099acc34ce8043699da2b9a32",
+      "hygiene": "639a003d5ddc4d242c2cf190eeb59a9fc522d199",
+      "hygiene_adr": "c589587395750cd1c79c6fa0bef010189c547249",
+      "observatory": "f411b83398dd07aa3d5e6e2c89d1e8dfff746085"
+    },
+    "review_envelope_sha256": "ba93a58d1f477c286b2e5b75a39011c087a7a0b910e786b26e72d40e1dd52a77",
+    "identical_replay": true
+  },
+  "architecture": {
+    "command_template": "python \"$RELAY_SOURCE/scripts/run_repository_architecture_validation.py\" run --repository-root \"$IDENTITY_SOURCE\" --request \"$REVIEW_DIRECTORY/request.json\" --runtime \"$ARCHITECTURE_RUNTIME\"",
+    "request_guide": "docs/decision-validation.md",
+    "represented_revision": "0d36bb4be6702f6329a22a19a4a751d5d28799ae",
+    "exit_code": 0,
+    "semantic_status": "nonconformant",
+    "outcome": "warning",
+    "counts": {
+      "critical": 0,
+      "error": 0,
+      "info": 0,
+      "total": 53,
+      "warning": 53
+    },
+    "coverage": {
+      "architecture-records": "failed",
+      "diagram-sources": "unavailable",
+      "repository-contracts": "unavailable"
+    },
+    "findings_truncated": false,
+    "scan_truncated": false,
+    "diagnostic_counts": {
+      "EGO-INTEL-ADOPTION-001": 3,
+      "EGO-INTEL-ADR-INDEX-001": 18,
+      "EGO-INTEL-ADR-LINEAGE-001": 11,
+      "EGO-INTEL-ADR-METADATA-001": 18,
+      "RELAY-ARCH-DIAGRAM-001": 1,
+      "RELAY-ARCH-LEGACY-001": 1,
+      "RELAY-ARCH-UNKNOWN-001": 1
+    },
+    "result_sha256": "de3a881e13d39c9afe1b7f3b22cde49ff726fe6f14b4d0f5e4c03783f58dcce6",
+    "profile_sha256": "6a2354340c6e40e1e29f7a881e4e117b1f8144483b8cec0d34d370bcb895357a",
+    "egolint_revision": "933472b6322d2060c487e5a8a6f0bc5197696af0",
+    "egolint_sha256": "0345627433722e0bb7671f35e0c5028c7020f61e8a86880949005dc300aef60e"
+  },
+  "checks": {
+    "native_adr_tests": {
+      "passed": 31,
+      "skipped": 0
+    },
+    "native_architecture_adapter_tests": {
+      "passed": 29,
+      "skipped": 0
+    },
+    "new_adr_schema_and_anatomy": "passed",
+    "policy_reference_schema": "passed",
+    "legacy_preservation": "passed",
+    "canonical_index_targets": "passed",
+    "documentation_links": "passed",
+    "publication_architecture": "passed",
+    "publication_release_configs": "passed",
+    "git_diff_check": "passed"
+  },
+  "limitations": [
+    "The full corpus remains nonconformant;18 legacy metadata/index gaps and11 references to those unparsed records remain explicit.",
+    "The collector review envelope is never production input, even when individual projection checks pass.",
+    "Hosted workflow execution, artifact retention, production Decisions build and live routes were not observed in this local receipt.",
+    "Identity CLI/browser/release test suites were not rerun for this source-documentation and thin-workflow change.",
+    "Later continuity/evidence-only commits must verify selected ADR and workflow source blobs still match this revision."
+  ]
+}

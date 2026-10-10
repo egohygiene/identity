@@ -1,0 +1,71 @@
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+# Adapted from EgoLint's exact 933472b6322d2060c487e5a8a6f0bc5197696af0
+# tests/fixtures/repository-intelligence/valid/policy.toml.
+schema-version = 1
+id = "egolint.repository-intelligence-validation/v1"
+repository = "egohygiene/identity"
+
+[profile]
+id = "identity-decisions-advisory"
+enforcement = "advisory"
+enabled-rules = [
+  "EGO-INTEL-CONTRACT-001",
+  "EGO-INTEL-ADOPTION-001",
+  "EGO-INTEL-ADR-METADATA-001",
+  "EGO-INTEL-ADR-LIFECYCLE-001",
+  "EGO-INTEL-ADR-INDEX-001",
+  "EGO-INTEL-ADR-LINEAGE-001",
+  "EGO-INTEL-LINK-001",
+  "EGO-INTEL-CYCLE-001",
+]
+
+[[contracts]]
+id = "egohygiene.architecture-decision/v1"
+version = "1.1.0"
+authority = "accepted"
+source-repository = "egohygiene/hygiene"
+source-revision = "c589587395750cd1c79c6fa0bef010189c547249"
+source-path = "schemas/architecture-decision.v1.schema.json"
+
+[[contracts]]
+id = "egohygiene.architecture-decision-policy-reference/v1"
+version = "1.0.0"
+authority = "accepted"
+source-repository = "egohygiene/hygiene"
+source-revision = "c589587395750cd1c79c6fa0bef010189c547249"
+source-path = "schemas/architecture-decision-policy-reference.v1.schema.json"
+
+[[contracts]]
+id = "hygiene.roadmap/v1alpha1"
+version = "0.1.0"
+authority = "proposed"
+source-repository = "egohygiene/hygiene"
+source-revision = "f598ed659a43dd759d4ede41c27f9e5daf991aa7"
+source-path = "docs/ecosystem/visual-roadmap-system.md"
+
+[[contracts]]
+id = "egohygiene.repository-intelligence/v1"
+version = "1.0.0-alpha.1"
+authority = "proposed"
+source-repository = "egohygiene/hygiene"
+source-revision = "f598ed659a43dd759d4ede41c27f9e5daf991aa7"
+source-path = "schemas/repository-intelligence.v1.schema.json"
+
+[adrs]
+# "present" selects the existing corpus for inspection; it is not conformance.
+# Relay's separate adr-adoption: legacy preserves incomplete migration.
+state = "present"
+policy-reference = "docs/decisions/policy-reference.json"
+decision-directory = "docs/decisions"
+index = "docs/decisions/README.md"
+known-external-decisions = []
+
+[roadmap]
+state = "unknown"
+path = "ROADMAP.md"
+known-external-steps = []
+
+[commit-history]
+state = "unknown"
+maximum-commits = 100

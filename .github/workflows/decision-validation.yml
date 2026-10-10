@@ -1,0 +1,39 @@
+---
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Validate Identity decision evidence
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "identity-decision-validation-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  decisions:
+    name: Inspect legacy ADR evidence without publication
+    permissions:
+      contents: read
+    # Reviewed Relay source adoption; this does not claim an immutable release.
+    uses: egohygiene/relay/.github/workflows/repository-architecture-validation.yml@4137cb07a017b7bbae2ee38fe9b039c58b0b17eb
+    with:
+      check-id: identity-decisions
+      mode: advisory
+      repository-contract-adoption: unknown
+      repository-contracts: "[]"
+      # Source exists, but historical dispositions still need human review.
+      adr-adoption: legacy
+      adr-policy: ".config/egolint/repository-intelligence.toml"
+      diagram-adoption: unknown
+      diagram-roots: "[]"
+      artifact-retention-days: 30
