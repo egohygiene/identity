@@ -1,0 +1,96 @@
+--- identity-70.before.md
++++ identity-70.md
+@@ -14,0 +15,18 @@
++
++<!-- identity-intelligence-coordination:v1 -->
++## Coordination with the Identity Intelligence pilot
++
++[Identity #69](https://github.com/egohygiene/identity/issues/69) remains the repository ADR migration and continuous-capture issue; [Pace #5](https://github.com/egohygiene/pace/issues/5) owns reviewed fleet adoption. This tracker coordinates Identity stabilization with that pilot; completing all 18 audit issues is **not** a blanket prerequisite for Observatory or read-only ADR collection.
++
++| Activity | Scoped prerequisite |
++| --- | --- |
++| Read-only repository inventory, Observatory collection, and ADR collection | Honor authorized source visibility and shared input/coverage contracts. Report missing, partial, stale, or unverified evidence honestly. These activities can proceed alongside this tracker and do not require all compiler, renderer, environment, or refactoring issues to close. |
++| ADR backfill, migration, and continuous capture | Retain #69's shared-system and human-authority gates and Pace #5's preview/apply/verify process. List any additional Identity repair only when the exercised operation requires it, with concrete evidence. |
++| Publication of Intelligence views or Identity projections | Satisfy the applicable shared publication, privacy, immutable-input, and route-ownership contract. Determine prerequisites for the specific surface; read-only collection does not confer deployment authority. |
++
++#83 should reconcile canonical ROADMAP.md with #70–#88 and the completed v1 pilot/release evidence in an early, bounded documentation PR; its final recovery/audience/download wording still follows #71, #76, and #77. Until that reconciliation lands, collection should expose the dated roadmap and its stale status claims instead of silently inventing a corrected intent model.
++
++The release-backed Brand Kit, organization `/identity/` experience, and proposed Repository Intelligence views retain separate publication ownership. #83 records the exact boundaries; #69/Pace #5 adoption does not replace the Brand Kit publisher or its domain configuration.
++
++**Verified stabilization checkpoint — 2026-10-03:** #71–#73 are closed after [PR #89](https://github.com/egohygiene/identity/pull/89) merged as [8aae2c6767d07714ea16bf0ea493e1f1ac399b6e](https://github.com/egohygiene/identity/commit/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e). This is merged-main evidence, not a claim that these repairs have been included in a stable tag or deployed release. The historical audit below remains unchanged.
++<!-- /identity-intelligence-coordination:v1 -->
+@@ -877,3 +895,3 @@
+-- [ ] #71 — Enforce public/review guidance isolation in Rust projections (R01, P1)
+-- [ ] #72 — Enforce complete source preflight for v1 CLI and library execution (R02, P1)
+-- [ ] #73 — Constrain recovery journal mutation authority before any filesystem change (R03, P1)
++- [x] #71 — Enforce public/review guidance isolation in Rust projections (R01, P1)
++- [x] #72 — Enforce complete source preflight for v1 CLI and library execution (R02, P1)
++- [x] #73 — Constrain recovery journal mutation authority before any filesystem change (R03, P1)
+--- identity-83.before.md
++++ identity-83.md
+@@ -10,0 +11,5 @@
++- [ ] ROADMAP.md represents #70–#88 through stable canonical steps and issue links, reconciles IDN-Q05 against the completed #17/#18 exit evidence, and preserves existing step IDs and historical records.
++- [ ] Roadmap frontmatter, execution-snapshot dates, machine-readable status/dependency/issue fields, and prose agree with reviewed evidence; collection time is not substituted for source-review freshness.
++- [ ] Merged implementation, tagged release, deployed publication, and accepted decision status remain distinct; #71–#73's merged-main evidence is not reported as an already deployed release.
++- [ ] Brand Kit, organization `/identity/`, and proposed Intelligence publication boundaries have an explicit ownership/route/validation/rollback matrix. Unknown Intelligence host or deployment choices remain proposed or unverified rather than borrowing an existing surface's authority.
++- [ ] #70, #69, and Pace #5 distinguish independent read-only collection from gated migration/publication; no blanket dependency on all 18 audit issues is introduced.
+@@ -14,0 +20,18 @@
++
++<!-- identity-intelligence-coordination:v1 -->
++## Roadmap freshness and publication coordination
++
++At main commit [8aae2c6](https://github.com/egohygiene/identity/commit/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e), ROADMAP.md's dated execution snapshot omits #70–#88 and still labels IDN-Q05 `active`, although #17/#18 are closed and its listed exit criteria are checked. Recheck the latest default branch and concurrent PRs before editing, then ship this bounded roadmap reconciliation early rather than waiting for unrelated stabilization/refactor completion. Reconcile completion from exit criteria and durable evidence, not closed issue state alone; retain historical observations and stable step identifiers.
++
++Inventory can begin now. Final documentation of public audience, downloads, and recovery must follow the actual contracts established by #71, #76, and #77 respectively. The repaired preflight's Python requirement and legacy-journal handling also need accurate current-build wording without rewriting historical release claims.
++
++Preserve the publication ownership established by ADR-017 and the publication machine contracts:
++
++| Surface | Boundary to retain |
++| --- | --- |
++| Release-backed Brand Kit at `identity.egohygiene.io` | Existing immutable-release renderer/publisher, downloads, manifests, domain association, and rollback by release identity. |
++| Organization product experience at `egohygiene.io/identity/` | Separately reviewed content-addressed composite; organization route owner installs the approved artifact under its own deployment/rollback authority. |
++| Proposed Repository Intelligence / Decisions views | Consume shared Relay/Observatory contracts through #69 and [Pace #5](https://github.com/egohygiene/pace/issues/5). Record approved host, routes, publisher, privacy, and rollback authority explicitly; do not infer permission to replace the Brand Kit root, CNAME, or organization experience. |
++
++A successful local build, proposed route, merged source change, or closed renderer issue is not proof of a live deployment. Keep repository-owned Markdown as source; generated dashboards and ledgers remain projections with source revision, freshness, and partial-coverage evidence. Do not rewrite ADR history or create a separate roadmap source in GitHub issue prose.
++<!-- /identity-intelligence-coordination:v1 -->
+@@ -57 +80 @@
+-Depends on: #77.
++Final documentation depends on: #71, #76, #77. Inventory and evidence-backed roadmap reconciliation can start independently now; this issue is not a blanket gate for read-only Intelligence collection.
+--- identity-88.before.md
++++ identity-88.md
+@@ -11 +11 @@
+-- [ ] Release binding, artifact-path validation, and public audience tests remain green.
++- [ ] Release binding, artifact-path validation, and public audience tests remain green, including #71's shared mixed-lifecycle fixtures: public projections exclude internal/unapproved records while review projections retain governed history.
+@@ -57 +57 @@
+-Depends on: #75, #76, #80.
++Depends on: #71, #75, #76, #80. #71 is satisfied by merged PR #89; retain its public/review boundary as an explicit refactor prerequisite.
+--- identity-69.before.md
++++ identity-69.md
+@@ -15,0 +16,12 @@
++
++<!-- identity-intelligence-coordination:v1 -->
++## Coordination with Identity stabilization
++
++Coordinate this repository pilot with [Identity #70](https://github.com/egohygiene/identity/issues/70) and [Pace #5](https://github.com/egohygiene/pace/issues/5), preserving this issue's existing shared-system scheduling gates. #70 is related stabilization work, **not** a requirement to finish all 18 audit issues before Observatory or read-only ADR collection.
++
++Passive inventory and read-only collection are distinct from this issue's historical backfill, migration, continuous capture, and publication work. They may proceed in parallel under authorized visibility and the shared input/coverage contract, with missing, stale, partial, and unverified evidence reported honestly. They do not bypass the foundations or human authority needed for migration/publication.
++
++The migration plan should identify only Identity repairs required by the operations it actually exercises, with concrete evidence. Unrelated compiler, renderer, development-environment, or module cleanup must not become accidental collector prerequisites. #71–#73 have merged through PR #89; do not infer a new stable release or deployment from that merge.
++
++#83 owns reconciliation of canonical ROADMAP.md and current publication documentation. It must preserve separate ownership for the release-backed Brand Kit, the organization `/identity/` experience, and proposed Intelligence views. Adoption here must explicitly declare the Intelligence publication target and may not silently replace existing Pages/domain/route ownership.
++<!-- /identity-intelligence-coordination:v1 -->
+@@ -50,0 +63 @@
++- [ ] The reviewed plan links #70 and #83, separates read-only collection from migration/publication gates, and records only operation-specific Identity prerequisites without requiring all 18 stabilization issues.
+--- pace-5.before.md
++++ pace-5.md
+@@ -34,0 +35,10 @@
++<!-- identity-intelligence-coordination:v1 -->
++## Identity pilot coordination — 2026-10-03
++
++Continue using [Identity #69](https://github.com/egohygiene/identity/issues/69) as the existing repository backfill/adoption canary. Link its parallel stabilization tracker [Identity #70](https://github.com/egohygiene/identity/issues/70) and documentation/roadmap reconciliation [Identity #83](https://github.com/egohygiene/identity/issues/83); do not create a duplicate pilot or make all 18 audit fixes/refactors prerequisites for Observatory or read-only ADR collection.
++
++Read-only inventory/collection can proceed with authorized source visibility and truthful freshness, partial-coverage, and uncertainty reporting. This does not waive #69's shared-system or human-authority requirements for historical migration, continuous capture, and publication. Record an Identity stabilization prerequisite only when a specific exercised operation depends on it, with supporting evidence.
++
++#83 should ship the bounded canonical-roadmap reconciliation early, including #70–#88 and IDN-Q05's #17/#18 completion evidence; its final audience/download/recovery wording follows #71/#76/#77. Publication targets remain explicit and separate: the immutable Brand Kit host, the organization `/identity/` experience, and proposed Intelligence/Decisions views do not share deployment authority by implication. Existing ADR-first campaign scope and subsequent roadmap rollout ordering remain unchanged.
++<!-- /identity-intelligence-coordination:v1 -->
++
