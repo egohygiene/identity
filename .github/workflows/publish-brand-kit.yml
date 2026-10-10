@@ -287,7 +287,7 @@ jobs:
           --evidence-directory .relay/repository-intelligence-deployment
 
       - name: Capture the unchanged Brand Kit before composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
         with:
           operation: capture-baseline
           site-directory: renderer/dist
@@ -296,7 +296,7 @@ jobs:
 
       - name: Build validated Repository Intelligence from canonical ADRs
         id: intelligence
-        uses: egohygiene/relay/actions/repository-intelligence@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        uses: egohygiene/relay/actions/repository-intelligence@2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
         with:
           collect-adrs: "true"
           output-directory: renderer/dist/intelligence
@@ -314,13 +314,13 @@ jobs:
 
       - name: Verify composed routes and byte-preserved Brand Kit
         id: composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
         with:
           operation: verify-composition
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ steps.publisher.outputs.intelligence-commit }}
-          relay-revision: cabbf5b3b658d585b4d56ef0c99917969a96eed2
+          relay-revision: 2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
 
@@ -346,7 +346,7 @@ jobs:
                   "tag": os.environ["RELEASE_TAG"],
                   "revision": os.environ["RELEASE_COMMIT"],
               },
-              "relay_revision": "cabbf5b3b658d585b4d56ef0c99917969a96eed2",
+              "relay_revision": "2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0",
           }
           Path(".relay/repository-intelligence-deployment/source-binding.json").write_text(
               json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -415,13 +415,13 @@ jobs:
 
       - name: Revalidate downloaded composition before deployment
         id: composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
         with:
           operation: verify-composition
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
-          relay-revision: cabbf5b3b658d585b4d56ef0c99917969a96eed2
+          relay-revision: 2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
 
@@ -503,13 +503,13 @@ jobs:
         if: >-
           always() && steps.download.outcome == 'success' &&
           contains(fromJSON('["success","failure","cancelled"]'), steps.deployment.outcome)
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@cabbf5b3b658d585b4d56ef0c99917969a96eed2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
         with:
           operation: record-receipt
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
-          relay-revision: cabbf5b3b658d585b4d56ef0c99917969a96eed2
+          relay-revision: 2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
           workflow-run-id: ${{ github.run_id }}
