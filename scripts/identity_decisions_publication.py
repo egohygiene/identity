@@ -22,6 +22,7 @@ ALIAS = "decisions/index.html"
 ALIAS_HTML = b'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <title>Identity Decisions</title>
+<link rel="icon" type="image/png" href="/intelligence/egohygiene.png">
 <meta http-equiv="refresh" content="0; url=/intelligence/decisions/">
 <link rel="canonical" href="https://identity.egohygiene.io/intelligence/decisions/">
 </head><body><p><a href="/intelligence/decisions/">Read Identity Decisions</a></p></body></html>

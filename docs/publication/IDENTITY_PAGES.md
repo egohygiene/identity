@@ -171,16 +171,24 @@ ADR-022 accepted.
 | Component | Route/source boundary |
 | --- | --- |
 | Existing Brand Kit | Root and every existing file remain byte-preserved from the selected stable release build. The initial binding remains `v1.0.0`. |
-| Repository Intelligence | The Relay action pinned to `2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0` freshly collects canonical ADRs at a full repository commit and emits `renderer/dist/intelligence`. |
+| Repository Intelligence | The Relay action pinned to `f19b65b3f8bd8466884dee5529fa77f2430440b6` freshly collects canonical ADRs at a full repository commit and emits `renderer/dist/intelligence`. |
 | Decisions | `https://identity.egohygiene.io/intelligence/decisions/` |
 | Consumer alias | `https://identity.egohygiene.io/decisions/` redirects to `/intelligence/decisions/`. |
 | Organization experience | `/identity/` keeps its independent route owner, stable-release gate and deployment process. |
 
-The current publication pin adopts [Relay PR #141](https://github.com/egohygiene/relay/pull/141)'s
-hidden-card styling fix. The [first deployment receipt](../evidence/identity-decisions-deployment-2026-10-10.json)
-retains its original pin and filtering failure. Republish this revision and
-verify query, facets, reset and no-match card visibility before recording the
-repair as live; the earlier byte-verification result is not that proof.
+The publication pin retains [Relay PR #141](https://github.com/egohygiene/relay/pull/141)'s
+hidden-card styling fix, verified in the immutable
+[filtering checkpoint](../evidence/identity-decisions-filtering-2026-10-10.json).
+It also packages the organization logo and GitHub mark with the shared site.
+Global navigation uses accessible logo links with the existing destinations;
+all Intelligence pages and the consumer Decisions alias select the packaged
+organization logo as their favicon. Asset provenance belongs to Relay's
+shared action README. This does not replace the release-owned Brand Kit assets.
+
+For this and each later repository adoption, verify the visible marks, link
+destinations, keyboard focus, and served favicon bytes after publication.
+Historical deployment receipts retain their original source and file counts;
+they are not evidence that this later branding revision is already deployed.
 
 The same `Publish Identity Brand Kit` workflow uploads and deploys one composed
 Pages artifact. It records the publisher revision, ADR source revision and
