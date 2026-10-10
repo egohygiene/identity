@@ -7,19 +7,18 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-10T17:19:12Z'
+  updated_at: '2026-10-10T17:44:53Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Resume from the technically verified Identity Decisions pilot, reconcile its completed issues, and obtain maintainer feedback before
-    fleet rollout.
+  purpose: Deliver the specific navigation-logo and favicon feedback through shared Relay presentation and a verified Identity consumer repin.
   includes:
-  - Exact repaired deployment, archive and live-byte bindings, bounded browser checks, separate feedback and disposition limits.
+  - Closed pilot state, bounded branding feedback, shared-source ownership, exact-pin consumer handoff and historical recovery evidence.
   excludes:
-  - Conversation transcripts, duplicated architecture and raw workflow logs.
-  - Unrelated release or visual approval, organization experience publication and fleet rollout.
+  - New ADR dispositions, unrelated refactors, Brand Kit redesign, new route ownership and automatic fleet rollout.
+  - Conversation transcripts, raw logs, private paths and duplicate canonical policy.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -45,105 +44,119 @@ scope:
   - https://github.com/egohygiene/relay/issues/115
   - https://github.com/egohygiene/.github/issues/30
   - https://github.com/egohygiene/pace/issues/25
-  - https://github.com/egohygiene/identity/pull/93
-  - https://github.com/egohygiene/identity/actions/runs/38067442472
   - docs/evidence/identity-decisions-deployment-2026-10-10.json
   - https://github.com/egohygiene/relay/issues/139
-  - https://github.com/egohygiene/relay/pull/141
-  - https://github.com/egohygiene/identity/pull/94
   - docs/evidence/identity-decisions-filtering-2026-10-10.json
   - https://github.com/egohygiene/identity/pull/95
   - https://github.com/egohygiene/identity/actions/runs/38070854820
   - https://github.com/egohygiene/pace/issues/5
+  - https://github.com/egohygiene/identity/pull/96
+  - https://github.com/egohygiene/relay/pull/142
+  - https://github.com/egohygiene/relay/blob/5f5e27e8ed4071559c284c7c0c8a5bf30be03421/actions/repository-intelligence/README.md#navigation-branding
 work:
-  objective: Close the technically completed Identity pilot against its recorded evidence and obtain substantive maintainer feedback before fleet
-    rollout.
+  objective: Implement and verify the requested organization/GitHub navigation marks and organization favicon while preserving existing destinations
+    and consumer authority.
   success_conditions:
-  - Preserve 21 accepted ADR dispositions, proposed ADR-022 and the unchanged first-deployment receipt.
-  - Retain the repaired deployment source and passing 60-file, 40-file Brand Kit, filtering and bounded keyboard/semantic evidence.
-  - 'Reconcile Identity #69 and Relay #139 against satisfied technical criteria without inferring human feedback or new ADR acceptance.'
-  - Obtain substantive maintainer feedback before Pace coordinates the next repository rollout.
+  - Use reviewed real organization artwork and a GitHub source-link mark across the shared Repository Intelligence shell; preserve labels
+    and destinations.
+  - Include the organization favicon on every Repository Intelligence route and bind all generated assets through the existing deterministic
+    manifest.
+  - Repin Identity to the exact merged Relay revision, rebuild through the existing publisher and verify visible navigation/favicon behavior
+    plus all 40 preserved Brand Kit files.
+  - 'Keep future consumer adoption as reviewed repin/rebuild work in Pace #5 and organization #30; do not imply automatic upgrades or blanket
+    approval.'
   active_issue:
     provider: github
-    id: egohygiene/identity#69
-    url: https://github.com/egohygiene/identity/issues/69
+    id: egohygiene/pace#5
+    url: https://github.com/egohygiene/pace/issues/5
   next:
     kind: action
-    id: identity-pilot-closeout-and-feedback
-    description: Reconcile completed pilot/filtering criteria with their owning issues, then obtain maintainer feedback on the repaired live Decisions
-      page before fleet rollout.
+    id: identity-navigation-branding-publication
+    description: Review and merge the exact Relay branding adoption, republish through the existing owner, then verify navigation destinations,
+      organization/favicon assets, live bytes and 40 preserved Brand Kit files.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/69
-    - https://github.com/egohygiene/relay/issues/139
+    - https://github.com/egohygiene/relay/pull/142
     - https://github.com/egohygiene/pace/issues/5
+    - https://github.com/egohygiene/.github/issues/30
     - https://identity.egohygiene.io/decisions/
     depends_on: []
 state:
   base:
-    revision: e1453d81d3e5b20687a67d7bc375dff3b42b1b9a
+    revision: b8542fbc8f749397b8f1619fe2b25bc1958e3a8d
     ref: refs/heads/main
-    verified_at: '2026-10-10T17:19:12Z'
+    verified_at: '2026-10-10T17:33:26Z'
   candidate:
-    branch: codex/identity-69-filtering-handoff
+    branch: codex/identity-navigation-branding
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-10T17:19:12Z'
-    default_branch_revision: e1453d81d3e5b20687a67d7bc375dff3b42b1b9a
+    observed_at: '2026-10-10T17:39:06Z'
+    default_branch_revision: b8542fbc8f749397b8f1619fe2b25bc1958e3a8d
     issue_state: open
     pull_request_state: not-applicable
-    notes: 'PR #95 merged at e1453d81d3e5b20687a67d7bc375dff3b42b1b9a, also the deployed source. Pages run 38070854820 passed; all 60 live files
-      verified at 17:15:06.196622Z. Actual browser filtering and bounded keyboard/semantics passed. Identity #69 and Relay #139 were still open
-      at this read; technical closeout is ready, substantive feedback pending. This documentation candidate has null self-SHA/PR.'
+    notes: 'Identity main remains b8542fbc after PR96; completed #69/#139 stay closed. This candidate adopts Relay PR143 merge f19b65b3f8bd8466884dee5529fa77f2430440b6,
+      containing PR142 branding plus corrected existing test inventories. The last verified live Identity source remains e1453d81. Consumer
+      merge, publication and branding browser proof are pending.'
   parallel_changes:
   - provider: github
     id: egohygiene/pace#5
     url: https://github.com/egohygiene/pace/issues/5
 review:
   status: passed
-  reviewed_at: '2026-10-10T17:19:12Z'
+  reviewed_at: '2026-10-10T17:44:53Z'
   reviewed_by: Codex
   evidence:
-  - command: 'Git fetch main; GitHub GET merged Identity PR #95, Identity #69 and Relay #139'
+  - command: 'GitHub GET Identity #69, Relay #139, Pace #5, organization #30 and merged Identity PR #96'
     outcome: passed
-    observed_at: '2026-10-10T17:19:12Z'
-    notes: Merged source e1453d81d3e5b20687a67d7bc375dff3b42b1b9a has reviewed tree 0a146d11a48187d2617bf9006ce0771254f7cae6. Both owning issues
-      are still open; this checkpoint records readiness, not an unperformed closure.
-  - command: 'Read source-bound Relay PR #141 and Identity PR #95 validation; owner verified hosted retry'
+    observed_at: '2026-10-10T17:33:26Z'
+    notes: 'Identity #69 and Relay #139 are closed/completed; Pace #5 and organization #30 stay open. PR #96 merged at b8542fbc8f749397b8f1619fe2b25bc1958e3a8d.
+      Its documentation merge does not replace deployed source e1453d81.'
+  - command: Read scoped architecture, system, roadmap, decisions and current publication boundaries
     outcome: passed
-    observed_at: '2026-10-10T17:19:12Z'
-    notes: 34 shared focused tests and 17 consumer publication tests passed. Relay 38070582605 attempt 1 hit transient toolchain acquisition after
-      575 passed/84 skipped; attempt 2 completed successfully. No skipped checks are counted as passes.
-  - command: Inspect successful Pages run 38070854820 and its retained deployment/live receipts
+    observed_at: '2026-10-10T17:33:26Z'
+    notes: Relay owns reusable presentation and immutable artifacts; Identity retains its one publisher, Brand Kit bytes and rollback. This
+      bounded branding follow-up does not change those decisions or ADR lifecycles.
+  - command: Review the maintainer-requested navigation and favicon feedback
     outcome: passed
-    observed_at: '2026-10-10T17:19:12Z'
-    notes: Build 114267783278 and deploy 114268032846 succeeded at e1453d81 with Relay 2519eacc. All 60 live files passed first attempt at 2026-10-10T17:15:06.196622Z.
-  - command: Independently verify downloaded handoff 11676801702 and deployment evidence 11676901602 archives
+    observed_at: '2026-10-10T17:33:26Z'
+    notes: Specific feedback requests the real organization mark in the upper-right Ego Hygiene link, a GitHub logo for the source link,
+      and the organization-logo favicon throughout Repository Intelligence. Link destinations remain unchanged. This is scoped feedback,
+      not blanket product or fleet approval.
+  - command: 'Owner verification of Relay PR #142 merge and exact reviewed tree'
     outcome: passed
-    observed_at: '2026-10-10T17:19:12Z'
-    notes: Both ZIP digests match provider metadata; all manifest/live bindings, 40 preserved Brand Kit files, source/run bindings and 40 rollback
-      archive files verify. This offline review checks retained live evidence; it is not another HTTP crawl.
-  - command: Actual public-page browser review after confirming deployed source e1453d81
+    observed_at: '2026-10-10T17:39:06Z'
+    notes: Reviewed head 340a794c0ff974da5bd60b73df4afe3bae806776 merged at 5f5e27e8ed4071559c284c7c0c8a5bf30be03421; merge tree cf28d45ad4b6623e65d481484eb10981d94fd324
+      matches the reviewed candidate. Shared 34 focused tests passed and independent review found no blockers. This does not assert unobserved
+      hosted checks or a consumer deployment.
+  - command: Compare Identity publication workflow with base after nine exact Relay pin/provenance substitutions; parse YAML
     outcome: passed
-    observed_at: '2026-10-10T17:19:12Z'
-    notes: ADR-022 query and proposed filter each show one card; implemented facet shows 12 with 10 hidden; no-match shows zero and the empty
-      state; resets restore 22. Nonmatching headings are truly hidden. Tab focus, visible outline, labels, polite live region and keyboard skip-link
-      behavior passed bounded checks.
-  - command: Documentation links; pinned Aether front-matter schema, exact headings/size, privacy, preservation and diff checks
+    observed_at: '2026-10-10T17:39:06Z'
+    notes: The owner verified exactly nine pin/provenance substitutions and valid YAML; no event, permission, job graph or Brand Kit input
+      changes. Two current guides select the same merge and cite its asset provenance. Alias favicon is the bounded consumer code edit; all
+      17 existing publication tests passed after it.
+  - command: Pinned continuity schema, twelve ordered headings, size, canonical paths, links, privacy and git diff --check
     outcome: passed
-    observed_at: '2026-10-10T17:19:12Z'
-    notes: Two-file evidence handoff only. Structural validity is not official released continuity conformance; no runtime or ADR lifecycle changes
-      are made.
+    observed_at: '2026-10-10T17:39:06Z'
+    notes: Only this handoff is edited by the continuity owner. Both historical receipts, ADRs and 40-file recovery source remain unchanged;
+      final candidate merge and live branding verification are pending.
+  - command: Review Relay PR143 follow-up and final consumer pin
+    outcome: passed
+    observed_at: '2026-10-10T17:44:53Z'
+    notes: PR142 hosted run 38072510240 found two old file inventories missing the favicon. PR143 updates those expectations only; 10 bundle
+      and 23 dashboard tests pass with no skips. Merge f19b65b3 has verified tree 77d5c8135e6587b119a03618f6b49d831f517063. Consumer pins agree;
+      no runtime changes in this follow-up.
   environment_limitations:
-  - Substantive maintainer feedback remains pending before fleet rollout; execution authorization is not user feedback.
-  - Browser checks are bounded keyboard/semantics and filtering, not a complete accessibility audit, screen-reader or audio test. The generated
-    local fixture was not executed under the browser file-URL policy.
-  - Only Decisions has complete/current collected coverage; eight other evidence domains remain uncollected.
-  - Ordinary artifacts expire 2026-11-09. Rollback is a fresh verified capture, not the expired original Pages ZIP; re-promotion was not exercised.
-  - ADR-022 remains proposed and requires separate human disposition; 12 implemented, 8 in progress and 2 not started remain independent declarations.
+  - The exact shared branding merge is adopted and local candidate checks pass. Consumer merge, hosted publication and actual branding/favicon
+    browser verification remain pending; prior filtering evidence is not reused as branding proof.
+  - The prior generated local browser fixture was not executed under file-URL policy; actual public filtering checks are recorded separately
+    in the immutable receipt.
+  - Specific navigation/favicon feedback is received; no blanket product acceptance, full accessibility audit or fleet completion is inferred.
+  - ADR-022 remains proposed; eight non-ADR evidence domains remain uncollected.
+  - Historical ordinary artifacts expire 2026-11-09; the 40-file rollback archive is a verified fresh capture, not the expired original Pages
+    ZIP, and re-promotion was not exercised.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -162,61 +175,52 @@ privacy:
 
 ## Purpose and precedence
 
-Canonical ADRs, pinned Hygiene policy, live Git state and owning issues take precedence. Continue from [Identity #69](https://github.com/egohygiene/identity/issues/69), [Pace #5](https://github.com/egohygiene/pace/issues/5) and [organization #30](https://github.com/egohygiene/.github/issues/30).
+Canonical ADRs, scoped instructions and live state outrank this checkpoint. [Pace #5](https://github.com/egohygiene/pace/issues/5) and [organization #30](https://github.com/egohygiene/.github/issues/30) coordinate the next shared presentation follow-up and reviewed fleet adoption. Identity retains its existing publisher and Brand Kit ownership.
 
 ## Resume protocol
 
-1. Read AGENTS.md, branch/status/history and canonical publication sources.
-2. Refresh main, Identity #69, [Relay #139](https://github.com/egohygiene/relay/issues/139) and Pace #5; technical completion and tracker closure are separate observations.
-3. Read the [filtering checkpoint](docs/evidence/identity-decisions-filtering-2026-10-10.json) and unchanged [first-deployment receipt](docs/evidence/identity-decisions-deployment-2026-10-10.json).
-4. Reconcile the completed technical pilot, then obtain substantive maintainer feedback before fleet rollout.
+Read AGENTS.md, current publication sources and the two historical deployment receipts. Confirm Relay PR #143 merge `f19b65b3f8bd8466884dee5529fa77f2430440b6` and the Identity candidate before review. Verify branding through the same publication path; do not reopen completed pilot work or patch generated output.
 
 ## Current objective and success conditions
 
-The repaired Decisions pilot is deployed and passes its technical closeout checks: source-bound artifact and live-byte verification, actual filtering visibility, and bounded keyboard/semantic review. Record closure through the owning issues and obtain maintainer feedback before fleet work. Permission to continue does not supply feedback or accept proposed ADR-022.
+Specific maintainer feedback has now been received: replace the upper-right Ego Hygiene marker with the real organization logo, use the GitHub logo for the source link, and use the organization-logo favicon across Repository Intelligence routes. Relay owns the reusable rendering change. Identity consumes its reviewed immutable merge and verifies the deployed result while preserving existing link destinations, all 40 Brand Kit files and the single publisher.
 
 ## State snapshot
 
-[Identity PR #95](https://github.com/egohygiene/identity/pull/95) merged source `e1453d81d3e5b20687a67d7bc375dff3b42b1b9a`, tree `0a146d11a48187d2617bf9006ce0771254f7cae6`, from reviewed head `b81eb7e3f59544baf0f4b162698b64bdb6f386bd`. [Pages run 38070854820](https://github.com/egohygiene/identity/actions/runs/38070854820), attempt 1, successfully deployed that source with Relay `2519eaccefaa6a6e7f199b05cc0f8cf9803c76a0`. Identity #69 and Relay #139 remain open at this document's live read, with technical criteria ready for closure. This documentation-only candidate has null self-SHA and PR; it is not a new deployment.
+Base main is `b8542fbc8f749397b8f1619fe2b25bc1958e3a8d` after [PR #96](https://github.com/egohygiene/identity/pull/96). Identity #69 and Relay #139/#115 are closed. Last verified live source remains `e1453d81` through run 38070854820. This candidate selects [Relay PR #143](https://github.com/egohygiene/relay/pull/143) merge `f19b65b3f8bd8466884dee5529fa77f2430440b6`, which includes PR #142's branding and a two-inventory test correction. Consumer merge and branding deployment/browser verification are pending; self-SHA and PR remain null.
 
 ## Completed and material changes
 
-- [Relay PR #141](https://github.com/egohygiene/relay/pull/141) repairs hidden-card styling in the shared renderer. Identity consumes its exact merge through the existing single Pages publisher; no generated consumer output was patched.
-- All 60 live files passed first-attempt verification: 40 unchanged Brand Kit files, 19 Intelligence files and the `/decisions/` alias. The canonical route remains `/intelligence/decisions/`; the organization `/identity/` experience retains its owner.
-- Publisher and Decisions source are `e1453d81d3e5b20687a67d7bc375dff3b42b1b9a`. Brand Kit separately binds stable `v1.0.0` commit `aaad8839104704cf57bfa846539b3b875421e03d`.
-- The new receipt adds repaired deployment and actual browser evidence. The first receipt, ADR corpus and [R1 approval](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806) remain unchanged; [ADR-022](docs/decisions/ADR-022-decisions-publication-composition.md) stays proposed.
-- Pinned Aether authoring 2.0.0 and continuity 1.1.0 were loaded directly from `8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2`; no host installation is claimed.
+The ADR migration, collection, publication and bounded filtering pilot are technically complete. The [filtering receipt](docs/evidence/identity-decisions-filtering-2026-10-10.json) records the prior repaired source, 60 live files, 40 preserved Brand Kit files and actual query/facet/reset/no-match plus bounded keyboard/semantic checks. The [first-deployment receipt](docs/evidence/identity-decisions-deployment-2026-10-10.json) retains its original defect observation. Both remain unchanged.
+
+The candidate adopts the new Relay merge through exactly nine publication pin/provenance substitutions and matching current guides. The `/decisions/` alias adds the same organization favicon while preserving its redirect and canonical target. The previous checkpoint's feedback-pending observation is superseded by the specific navigation/favicon request now implemented in shared source and this consumer candidate. It does not become blanket acceptance of the product, an exhaustive accessibility review or authorization to ratify ADR-022. All 21 accepted dispositions, the proposed record and their implementation declarations remain independent.
 
 ## Validation and review evidence
 
-The [new receipt](docs/evidence/identity-decisions-filtering-2026-10-10.json) binds successful build/deploy jobs and all 60 live files at `2026-10-10T17:15:06.196622Z`. Downloaded ordinary artifacts `11676801702` and `11676901602` match provider ZIP digests; manifest, source/run, preserved baseline and 40-file rollback bindings were independently checked. Manifest SHA-256 is `2ecfb97f17233b86e0dbc2e3a21fb69d3f7dfd3b45ea8d5626080c7489950062`. The one-day Pages ZIP was not independently downloaded.
-
-Actual public-page review confirmed the new source and true visibility: single-record query and proposed state show ADR-022 alone; implemented facet shows 12 cards and hides 10; no-match shows zero cards and its message; reset restores 22 cards/headings. Keyboard focus reaches the State selector with a visible outline; controls have names, filter output is polite live, and Enter on the skip link focuses main content. These are bounded checks, not a full accessibility audit. The previously documented public-page failure now passes; the separate generated local fixture was not executed under browser file-URL policy.
-
-Shared focused tests (34) and consumer publication tests (17) passed. [Relay validation 38070582605](https://github.com/egohygiene/relay/actions/runs/38070582605) completed successfully on attempt 2 after transient toolchain acquisition stopped attempt 1; skipped checks are not promoted to passes. Consumer PR #95 decision `38070838515`, renderer `38070837995` and CLI `38070838012` checks also passed after merge. Local documentation/schema/headings/size/privacy/preservation checks validate this handoff, without rerunning runtime suites for documentation-only changes.
+Fresh GitHub reads confirm #69/#139 closed, PR #96 merged and parent coordination open. Existing receipts retain exact provider/artifact/live/browser evidence for the filtering deployment; it is not new branding proof. The alias now references `/intelligence/egohygiene.png` as its favicon and retains its redirect/canonical destinations. All 17 existing publication tests and diff check pass. The owner verified workflow equivalence to base apart from nine exact pin/provenance substitutions, and YAML parsing passed. Shared source has 34 passing existing focused tests and independent no-blocker review. Its routed fixture has 21 files with all 12 HTML favicon links and 11 shell navigation destinations checked; standalone dashboard validation also passed. [Asset provenance](https://github.com/egohygiene/relay/blob/5f5e27e8ed4071559c284c7c0c8a5bf30be03421/actions/repository-intelligence/README.md#navigation-branding) preserves the dated organization-avatar capture and immutable GitHub SVG source. These fixture results are not a new consumer deployment. Continuity schema, headings, size, paths, links, privacy and diff checks pass.
 
 ## Blockers, risks, unknowns, and deferred work
 
-There is no remaining observed filtering or technical pilot blocker. Maintainer feedback remains pending before fleet rollout. No complete accessibility, screen-reader/audio or whole-repository conformance claim is made. The page has 22 records (21 accepted, one proposed); implementation stays 12 implemented, 8 in progress, 2 not started, none verified. Eight non-ADR evidence domains remain uncollected. ADR-022 needs separate human disposition.
+The shared merge is adopted; review and merge this consumer candidate before publication. Verify actual artwork, destination preservation and favicon availability on the deployed routes; source success alone is not deployment evidence. Eight non-ADR evidence domains remain uncollected. ADR-022 still requires separate human disposition. No full accessibility audit, screen-reader/audio test or completed fleet rollout is claimed.
 
-Ordinary artifacts expire November 9, 2026. Rollback bytes are a fresh verified 40-file capture, not the expired original Pages ZIP; re-promotion was not exercised. The fixed recovery inventory must be refreshed from retained verified evidence before later stable-release changes alter its root bytes.
+Historical ordinary artifacts expire November 9, 2026. The 40-file recovery archive is a verified fresh capture, not the expired original Pages ZIP; rollback re-promotion was not exercised. Preserve that exact recovery source and refresh it through reviewed evidence before later stable-release changes alter root bytes. Do not assume the new branded output retains the prior 60-file count.
 
 ## Next dependency-ready work
 
-Reconcile Identity #69 and Relay #139 with the passing technical evidence, then gather substantive feedback on [the repaired live page](https://identity.egohygiene.io/decisions/) before Pace coordinates the next repository. [Relay #115](https://github.com/egohygiene/relay/issues/115) is already closed for collector/handoff acceptance. Do not reopen completed corpus or collector work to require unrelated stabilization, all other evidence domains, or completion of planned ADR implementations.
+Review the exact `f19b65b3f8bd8466884dee5529fa77f2430440b6` adoption, merge this consumer change, then rebuild through the existing publisher and verify the actual page, favicon, source links, manifest/live bytes and unchanged Brand Kit. Pace #5 and organization #30 retain the checklist for subsequent consumers; each needs reviewed repinning and rebuilding. Further feedback can follow the bounded delivery without turning it into broad refactoring.
 
 ## Parallel changes and reconciliation
 
-This isolated branch changes only continuity and the new filtering receipt. Runtime, workflow, route ownership, all ADRs and earlier receipts remain unchanged. Decision-impact result: ADR not required; this is evidence for the existing publication and routine shared repair, without a new durable choice. The five PR #90 coordination updates are applied; Identity #83 retains broader roadmap/publication-document reconciliation. Parent fleet and release/publication issues keep their independent acceptance.
+Relay PR #142 supplies the shared renderer/assets; #143 corrects existing test inventories. The consumer owner changes only the existing integration pins, relevant guides and alias favicon; workflow authority and the Brand Kit are preserved. This editor owns CONTINUITY.md only: no new receipt, ADR change, source mutation or publisher redesign. Decision impact: ADR not required; this is routine adoption of requested shared presentation within the existing publication boundary. Identity #83 retains broader roadmap/publication-document reconciliation.
 
 ## Privacy and redaction
 
-Retain public source links and concise evidence only. Exclude private context, credentials, local paths and raw logs. The checkpoint grants no new authority.
+Retain public identifiers and bounded evidence. Exclude private context, credentials, private paths and raw logs. This checkpoint grants no new authority.
 
 ## Handoff update protocol
 
-Update exact issue states and feedback evidence after their actions occur. Keep the first and repaired deployment receipts immutable as historical observations. Leave a containing commit's own SHA null. Distinguish provider deployment, offline byte review, actual browser behavior, recovery availability, human disposition and maintainer feedback.
+Refresh exact source, candidate checks, merge, deployment and browser results as those observations occur. Preserve both historical receipts rather than rewriting prior evidence as branding success. Leave the containing commit's own SHA null. Distinguish specific product feedback from ADR disposition and fleet completion.
 
 ## Compaction and supersession
 
-Keep below 240 lines and 16,384 UTF-8 bytes. Replace stale observations; Git and work trackers retain history. Mark unresolved conflicts stale.
+Replace stale operational claims while Git and trackers retain history. Keep the twelve required sections below 240 lines and 16,384 UTF-8 bytes; mark unresolved state conflicts stale.
