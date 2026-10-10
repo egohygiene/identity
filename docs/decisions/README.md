@@ -10,7 +10,9 @@ clarifications and separately accepted ADR-019–021 on 2026-10-10. The
 exact reviewed packet and durable approval. All records now use canonical
 metadata and anatomy; source validation and publication remain separately
 evidenced. Implementation states remain in each record and do not follow
-from acceptance alone.
+from acceptance alone. ADR-022 separately proposes the consumer publication
+composition and has no lifecycle approval; the corpus contains 21 accepted
+records and one proposed record.
 
 | ID | Title | Decision status | Date | Canonical record |
 | --- | --- | --- | --- | --- |
@@ -35,6 +37,7 @@ from acceptance alone.
 | ADR-019 | Preserve an independent immutable Identity release contract | accepted | 2026-10-10 | [ADR-019](ADR-019-immutable-release-contract.md) |
 | ADR-020 | Separate channel governance, account lifecycle, and verification | accepted | 2026-10-10 | [ADR-020](ADR-020-channel-registry-governance.md) |
 | ADR-021 | Keep mascot source and approved derivatives behind a governed package | accepted | 2026-10-10 | [ADR-021](ADR-021-governed-mascot-package.md) |
+| ADR-022 | Compose current Decisions evidence beneath the existing Brand Kit publisher | proposed | 2026-10-10 | [ADR-022](ADR-022-decisions-publication-composition.md) |
 
 ## Ongoing capture
 
@@ -44,7 +47,8 @@ records proposed, and cite the decision-impact result in the PR template.
 See [validation and upgrade commands](../decision-validation.md).
 
 The index dates identify the current 2026-10-10 disposition for migrated legacy
-records and the reconstruction date for ADR-019–021. Original declared dates,
+records, the reconstruction date for ADR-019–021 and the proposal date for
+ADR-022. Original declared dates,
 status claims and substantive prose remain preserved in each record with
 immutable source provenance. Approval uses its actual current date; no historical
 approval is inferred. No ID, filename or compatibility anchor was changed.

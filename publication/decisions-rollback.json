@@ -1,0 +1,263 @@
+{
+  "allOriginalFilePathsCaptured": true,
+  "brandSourceDigest": "b757ea1a341638098b9b0ef28bb3be035838f33cc996820e133f9551a18f4d79",
+  "captureMethod": "HTTPS retrieval of every file named in the original successful Pages upload tar inventory",
+  "capturedFiles": 40,
+  "consumerRevision": "8aae2c6767d07714ea16bf0ea493e1f1ac399b6e",
+  "deploymentUrl": "https://identity.egohygiene.io/",
+  "files": [
+    {
+      "bytes": 23,
+      "path": "CNAME",
+      "sha256": "sha256:e1caced0d54a7a591d54d7d7f5cf6df8daecbe23299fa99c5bff3a03933752f7"
+    },
+    {
+      "bytes": 1727,
+      "path": "README.md",
+      "sha256": "sha256:73b7ebf4fef7eaa6866efa88c1879cfecf0202279172c4ce5ea21eeafb22bf82"
+    },
+    {
+      "bytes": 12884,
+      "path": "assets/index-BNOKh7NO.css",
+      "sha256": "sha256:74e02b7fc5dc415224837eff002f6fe6c062eafec72e661977f2cbd70d6cd73e"
+    },
+    {
+      "bytes": 224810,
+      "path": "assets/index-qjB4MXXo.js",
+      "sha256": "sha256:0a6f3696959573d7fbc091782a7f045dc9d71e9b46b4c7e4d5b0e9b82fe6d34f"
+    },
+    {
+      "bytes": 2364,
+      "path": "brand/avatar-square.svg",
+      "sha256": "sha256:093aa646fc0a720d118c8b932068bc11b90db1fcc159abf63a97a3580f69c10d"
+    },
+    {
+      "bytes": 12898,
+      "path": "brand/banner-hires.webp",
+      "sha256": "sha256:48b5c8f91538362856f21dfca16b274bbf2dddad23a228905a8d95074f32c60f"
+    },
+    {
+      "bytes": 3406,
+      "path": "brand/banner-readme.svg",
+      "sha256": "sha256:0507b9f8ff011642097032c35baf3fab996654db3ff074f10c16077f957b062e"
+    },
+    {
+      "bytes": 11962,
+      "path": "brand/banner-readme.webp",
+      "sha256": "sha256:a6171b1b38c1ac1023d2b102fda89060d82081b4be81041ad5360df347b560d2"
+    },
+    {
+      "bytes": 2387,
+      "path": "brand/emblem.svg",
+      "sha256": "sha256:20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c"
+    },
+    {
+      "bytes": 2531,
+      "path": "brand/lockup-horizontal.svg",
+      "sha256": "sha256:5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed"
+    },
+    {
+      "bytes": 2707,
+      "path": "brand/open-graph.svg",
+      "sha256": "sha256:50fab81e6ba7d90e27d99a7ef9798927d0f9a9fc2b2e07de8252290293176ab5"
+    },
+    {
+      "bytes": 3338,
+      "path": "brand/social-preview.svg",
+      "sha256": "sha256:619714e55ee1c8b39236838e429e80cacaf9480612052850d730ebe62e3f15db"
+    },
+    {
+      "bytes": 596,
+      "path": "brand-kit/index.html",
+      "sha256": "sha256:2d89abc3df0c1cc48d5405c7381a6351381656ac65ad81a9c289a633a635bd4d"
+    },
+    {
+      "bytes": 4876,
+      "path": "guidelines/color-palette.svg",
+      "sha256": "sha256:6a6683766f9ed077624cb85ae3af605619e3b3497c282bd96e77f379922f1a0e"
+    },
+    {
+      "bytes": 3764,
+      "path": "guidelines/design-system.svg",
+      "sha256": "sha256:7250bf2e61728c6bef5a9ef02b71cebbc63aab982486d2ae69dd0cd1d5c09f1a"
+    },
+    {
+      "bytes": 3683,
+      "path": "guidelines/usage-guidelines.svg",
+      "sha256": "sha256:95dec8fc5cc80758082e2f5aad8b409928d4436f3382ba99ad6bef957dca76c5"
+    },
+    {
+      "bytes": 49672,
+      "path": "index.html",
+      "sha256": "sha256:2b727623547063dbd985e7b4d1b639283aa9debdc26ee1ae97cabfc905969afa"
+    },
+    {
+      "bytes": 3031,
+      "path": "manifest.json",
+      "sha256": "sha256:5d0c175222b859c221b767407d6ec7bafca99094d55dce34b8faa9e496cbaf10"
+    },
+    {
+      "bytes": 202,
+      "path": "packages/identity-brand-kit-v1.0.0.SHA256SUMS",
+      "sha256": "sha256:6dd9b1c2f8739c74eea221da6c8e41b22c5da7159cdd41e8ff43abe428046bd1"
+    },
+    {
+      "bytes": 5569,
+      "path": "packages/identity-brand-kit-v1.0.0.manifest.json",
+      "sha256": "sha256:728e6030fd8c981b00fc31f6aec5c736e33c820432d56e12b73ffb348809fbaa"
+    },
+    {
+      "bytes": 74949,
+      "path": "packages/identity-brand-kit-v1.0.0.zip",
+      "sha256": "sha256:fc98043b6629fa6b87f12613eeec80e6434c0cac10f7c75c91eeb2189db9f1e4"
+    },
+    {
+      "bytes": 6984,
+      "path": "reference/avatar-square.webp",
+      "sha256": "sha256:047b2c8810815d46e7391a033e2b601c8129e4a8a5459c860138ada8ce67f3b3"
+    },
+    {
+      "bytes": 2486,
+      "path": "reference/color-palette.webp",
+      "sha256": "sha256:2a073d229a67bb7a97edf5bb83c4fd4547d6f3eaaeb53659fa7aafb148a1ee8c"
+    },
+    {
+      "bytes": 2398,
+      "path": "reference/design-system.webp",
+      "sha256": "sha256:a2b160ad9221bb0566c4c07ef9d575c1739f963ecfbb79a0ace0a50910c735e5"
+    },
+    {
+      "bytes": 1582,
+      "path": "reference/lockup.webp",
+      "sha256": "sha256:5238fa31ff0f973ec773ca6561ca1ffb9f4bf226e0c3e0da56c521033106c001"
+    },
+    {
+      "bytes": 2178,
+      "path": "reference/master-emblem.webp",
+      "sha256": "sha256:e0f1e74df580991aaeb8d97f780d6358e7200cd7466c3bd6b79ea952b599a8f3"
+    },
+    {
+      "bytes": 6954,
+      "path": "reference/social-preview.webp",
+      "sha256": "sha256:f3a57194b262e355bcbea3b3b5f06db6e241428463c4d7308c4bd5528a1c0185"
+    },
+    {
+      "bytes": 2902,
+      "path": "reference/usage-guidelines.webp",
+      "sha256": "sha256:1794238b039440b94ebd5bea5aa77412d7b5d1e18b6dfc980c59b0801ea8fe04"
+    },
+    {
+      "bytes": 636,
+      "path": "site.json",
+      "sha256": "sha256:b9911ddb23650849d562940902c283744f29a5ac51e0a7e88f38968ed989f19e"
+    },
+    {
+      "bytes": 2176,
+      "path": "web/apple-touch-icon.png",
+      "sha256": "sha256:89ead769af2f301b6646cf01a7de05bca8ce1cfefa5b4bc3d0b4da37c17319dd"
+    },
+    {
+      "bytes": 666,
+      "path": "web/favicon-16x16.png",
+      "sha256": "sha256:dc7e2b8228b102dacace90989b1df312c5d517d42104be723d06346bec2f85e7"
+    },
+    {
+      "bytes": 819,
+      "path": "web/favicon-32x32.png",
+      "sha256": "sha256:972b4c9f212cd4f3b3ecc50fbf21598f88b64447c862717e11bec7f69e24974a"
+    },
+    {
+      "bytes": 1039,
+      "path": "web/favicon-48x48.png",
+      "sha256": "sha256:3311f76384910764fb54ca5df0e13877eff211fb340d077aa05a317c9d1397a8"
+    },
+    {
+      "bytes": 1274,
+      "path": "web/favicon-64x64.png",
+      "sha256": "sha256:fc84ad701d137901894528747a2350ba6fab0bba176167a7065daaad40b6df8b"
+    },
+    {
+      "bytes": 1274,
+      "path": "web/favicon.png",
+      "sha256": "sha256:fc84ad701d137901894528747a2350ba6fab0bba176167a7065daaad40b6df8b"
+    },
+    {
+      "bytes": 2676,
+      "path": "web/icon-192x192.png",
+      "sha256": "sha256:fb88187bc42fb0a8b8264d1af55359a8e3efcafa84daba26c5273574206f0c59"
+    },
+    {
+      "bytes": 2364,
+      "path": "web/icon.svg",
+      "sha256": "sha256:093aa646fc0a720d118c8b932068bc11b90db1fcc159abf63a97a3580f69c10d"
+    },
+    {
+      "bytes": 419,
+      "path": "web/identity-palette.css",
+      "sha256": "sha256:8577b7dea2260441827412bd206d86c7213ed75f8973a8b71aae6b0401ade1e8"
+    },
+    {
+      "bytes": 2505,
+      "path": "web/maskable-icon.svg",
+      "sha256": "sha256:7f32b9d17085f8340feca98d809c27bafecbe84c811ea62fe62abb4420b83d1c"
+    },
+    {
+      "bytes": 454,
+      "path": "web/site.webmanifest",
+      "sha256": "sha256:845a186ea096903dafe3def746d47c3673360762c44e799811556e4ac6a3a58a"
+    }
+  ],
+  "firstCapturedFileWrittenAt": "2026-10-10T16:01:17Z",
+  "inventoryAlgorithm": "sha256-canonical-file-inventory-v1",
+  "inventoryHelper": {
+    "functions": [
+      "file_inventory",
+      "inventory_digest"
+    ],
+    "path": "actions/repository-intelligence-deployment-provenance/scripts/repository_intelligence_deployment_provenance.py",
+    "repository": "egohygiene/relay",
+    "revision": "4137cb07a017b7bbae2ee38fe9b039c58b0b17eb",
+    "sha256": "3cd650f7a25c57636d005232c52a12dfd2aced7afbcefa1fe850909733ccae5e"
+  },
+  "limits": [
+    "This is a newly captured currently served site, not the expired original GitHub Actions ZIP.",
+    "The original upload logs establish the complete forty-file inventory and deployed consumer revision; present HTTP responses supply captured bytes.",
+    "The original uploaded ZIP digest cannot be reverified without its expired bytes. It is recorded only as historical provider evidence.",
+    "Hidden files were excluded by the original Pages upload action; no .nojekyll file was in its tar inventory.",
+    "No site rebuild, repository mutation, publication, or deployment was performed to create this capture."
+  ],
+  "newCaptureArchive": {
+    "bytes": 501760,
+    "filename": "identity-live-rollback-37157851822.tar",
+    "sha256": "d886c103ec8e47bad78cd75243c2b6b339734919e6415a41cb7cb93b0f65e9fe"
+  },
+  "noRebuildPerformed": true,
+  "observedAt": "2026-10-10T16:02:47Z",
+  "publicationManifestSha256": "728e6030fd8c981b00fc31f6aec5c736e33c820432d56e12b73ffb348809fbaa",
+  "release": {
+    "commit": "aaad8839104704cf57bfa846539b3b875421e03d",
+    "repository": "https://github.com/egohygiene/identity",
+    "tag": "v1.0.0",
+    "url": "https://github.com/egohygiene/identity/releases/tag/v1.0.0"
+  },
+  "releaseManifestAndArchiveChecksumsVerified": true,
+  "schema": "identity.decisions-publication-rollback/v1",
+  "siteDigest": "sha256:c690803f5eda55c7b61d7ae34a1df3e109d2dad9aad9a34ef086207d4cd0fd88",
+  "sourceDeployment": {
+    "buildConclusion": "success",
+    "buildJobId": 111304907789,
+    "deployJobId": 111304999281,
+    "deploymentConclusion": "success",
+    "liveVerificationConclusion": "success",
+    "originalArtifactAvailability": "expired-or-deleted; artifact listing empty and download returned 404",
+    "originalArtifactId": 11286585084,
+    "originalArtifactRetentionDays": 1,
+    "originalArtifactVerifiedNow": false,
+    "originalArtifactZipSha256": "871efce11759f9d8e0eabc49dd5790d600eddfc266d57d6299ff15fad87f6b73",
+    "pagesUploadConclusion": "success",
+    "runAttempt": 1,
+    "runId": 37157851822,
+    "runUrl": "https://github.com/egohygiene/identity/actions/runs/37157851822",
+    "workflow": ".github/workflows/publish-brand-kit.yml"
+  }
+}
