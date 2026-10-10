@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-10T10:46:01Z'
+  updated_at: '2026-10-10T10:48:38Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -77,13 +77,14 @@ state:
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-10T10:46:01Z'
+    observed_at: '2026-10-10T10:48:38Z'
     default_branch_revision: 8aae2c6767d07714ea16bf0ea493e1f1ac399b6e
     issue_state: open
     pull_request_state: open
-    notes: Main remains 8aae2c6; PR91 is open and ready for review at source checkpoint 0d36bb4be6702f6329a22a19a4a751d5d28799ae.
-      Hosted decision and CLI workflows started; completion and artifact retention not yet observed. PR90 remains
-      a separate open draft.
+    notes: Main remains 8aae2c6; PR91 is open and ready for review. Decision workflow run38046076510 succeeded at
+      7cc7d4d0956d728c0bcf2c4ba164eaa0409710a2; CLI validation still running at observation. This continuity-only
+      correction preserves tested source0d36bb4. Refresh final-head checks before merge. PR90 remains a separate
+      open draft.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#90
@@ -124,10 +125,11 @@ review:
   - command: Pinned Relay architecture and ADR collector immutable replay at 0d36bb4be6702f6329a22a19a4a751d5d28799ae
     outcome: limited
     observed_at: '2026-10-10T10:46:01Z'
-    notes: Architecture exit 0 nonconformant/warning: 53 warnings. Collector exit 2 invalid, partial/current decisions
-      coverage and publication denied; identical second replay. Exact hashes/commands in docs/evidence/identity-adrs-2026-10-10.json.
+    notes: Architecture exit 0 nonconformant/warning with 53 warnings. Collector exit 2 invalid, partial/current
+      decisions coverage and publication denied; identical second replay. Exact hashes/commands in docs/evidence/identity-adrs-2026-10-10.json.
   environment_limitations:
-  - Hosted completion/upload, production Decisions build and live routes are not established by local checks.
+  - Hosted decision workflow succeeded at prior head7cc7d4d; artifact retention still requires inspection. Production
+    Decisions build and live routes remain unverified.
   - CLI/browser/release suites were not rerun locally for this source/documentation and thin-workflow change.
 privacy:
   classification: public-repository
