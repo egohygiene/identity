@@ -5,6 +5,7 @@ target
 
 # Identity transient compiler/workspace state
 .cache/identity/
+.reports/architecture-validation/
 .identity-experience-*/
 __pycache__/
 experience/node_modules/
