@@ -4,6 +4,29 @@ Issue: [Identity #69](https://github.com/egohygiene/identity/issues/69).
 Audit and reconstruction date: 2026-10-10.
 Source boundary: [`8aae2c6767d07714ea16bf0ea493e1f1ac399b6e`](https://github.com/egohygiene/identity/tree/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e).
 
+## Current review checkpoint
+
+The inventory below remains bound to its original source audit. Since that
+audit, PR #90 and PR #91 merged; current reviewed main is
+`434f60c8b829c695b3bcd1a45faf5e0c114d37cf`. PR #90's five issue-body edits
+were separately reconciled and applied on 2026-10-10, as recorded in
+[organization #30](https://github.com/egohygiene/.github/issues/30).
+
+Maintainer `szmyty` subsequently approved the exact
+[R1 packet at `418aa975`](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md)
+on 2026-10-10. The [durable disposition](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806)
+retains ADR-001–018 with R1's clarifications and separately accepts ADR-019–021.
+The [ratification record](decision-ratification-2026-10-10.md) records the scope.
+This candidate applies the approved canonical metadata/anatomy and dated notes
+while preserving original substantive prose, dates/status claims and provenance.
+The frozen R1 packet and pre-approval validation receipt remain unchanged.
+
+The original audit and requested-review sections below describe the earlier
+evidence boundary. Their unresolved historical authority/date observations are
+preserved; current approval is dated 2026-10-10 and does not backdate them.
+Do not request R1 approval again. Source conformance and publication still need
+their own immutable validation and delivery evidence.
+
 ## Outcome and present limitation
 
 Preserve Identity's existing decision history, inventory its authority gaps,
@@ -70,9 +93,11 @@ ratification of ADR-001–ADR-018 or proposed ADR-021. The
 records historical release evidence; it is not a separate architectural
 ratification or a fresh release check.
 
-Unmerged Identity PR #90 prepares issue-coordination edits; it is not included
-in audited main and merging it does not apply those issue updates. It is not
-evidence that the pilot, publication, or human authority gates have cleared.
+At the original audit boundary, Identity PR #90 was unmerged and prepared
+issue-coordination edits. It was not included in that audited main; merging
+alone did not apply its issue updates. The current review checkpoint above
+records the later merge and separately verified application. Neither event
+supplies ADR ratification or Decisions publication evidence.
 
 ## Existing-record migration and disposition table
 
@@ -174,7 +199,8 @@ Broader roadmap/publication documentation reconciliation remains
 
 ## Concrete human disposition requested
 
-Review the migration PR's exact **candidate commit** and this 18-row table.
+Review the exact **packet commit**, the R1 recommendations linked above and
+this preserved 18-row provenance table.
 For each existing ADR, choose one of the following; a single explicit statement
 may cover an enumerated group of IDs if the same disposition applies:
 

@@ -1,0 +1,649 @@
+{
+  "schema": "identity.ratified-adr-evidence/v1",
+  "purpose": "Evidence checkpoint for the human-approved R1 migration and local production Decisions artifact; no deployed site is claimed.",
+  "repository": "egohygiene/identity",
+  "source_commit": "12227dad43c90b02e14971030f22242f3a205c9d",
+  "source_tree": "254074e48b46cecf26286f52d5749d8ba323cc0c",
+  "approval": {
+    "by": "szmyty",
+    "date": "2026-10-10",
+    "evidence": "https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806",
+    "reviewed_packet": "418aa9757898b6c09b4f01eface522778cff90e8"
+  },
+  "source_review": {
+    "canonical_records": 21,
+    "accepted": 21,
+    "original_substantive_prose_preserved": true,
+    "original_dates_and_claims_preserved_as_history": true,
+    "approved_note_blocks_preserved": 12,
+    "frozen_r1_packet_unchanged": true,
+    "implementation": {
+      "implemented": 12,
+      "in_progress": 7,
+      "not_started": 2,
+      "verified": 0
+    },
+    "schema_anatomy_index_approval_and_independent_review": "passed"
+  },
+  "native_validation": {
+    "adr_collection": {
+      "artifact": {
+        "bytes": 224876,
+        "path": "adr-collection.review.json",
+        "sha256": "6408827af835e4244cfbb73c167b0817a084dc0896d74c689a5021fffc3cda8a"
+      },
+      "candidate_digests": {
+        "projection_sha256": "c226dc55be57827f773e33964464ce4906ad3ad66304e7725f470a15372c6f53",
+        "snapshot_sha256": "434f3b7280995ffd6816013e66035edecca1e20de030f81e2b332e5715db0ca2"
+      },
+      "coverage": {
+        "checks": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        },
+        "decisions": {
+          "collection": "observed",
+          "freshness": "current",
+          "observed_at": "2026-10-10T15:43:57Z",
+          "reason": "complete"
+        },
+        "deployments": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        },
+        "git": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        },
+        "history": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        },
+        "issues": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        },
+        "pull_requests": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        },
+        "releases": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        },
+        "roadmap": {
+          "collection": "uncollected",
+          "freshness": "unknown",
+          "observed_at": null,
+          "reason": "not_requested"
+        }
+      },
+      "decision_statuses": {
+        "accepted": 21
+      },
+      "diagnostics_by_code": {
+        "EGO-INTEL-ADOPTION-001": 3,
+        "INTEGRATION": 1
+      },
+      "exit_codes": [
+        0,
+        0
+      ],
+      "inputs": {
+        "adoption": "present",
+        "collected_at": "2026-10-10T15:43:57Z",
+        "decision_directory": "docs/decisions",
+        "index": "docs/decisions/README.md",
+        "maximum_age_seconds": 86400,
+        "policy_reference": "docs/decisions/policy-reference.json",
+        "sources": [
+          {
+            "path": "docs/decisions/ADR-001-creative-approval-human-owned.md",
+            "sha256": "f4da4cdae5e0edba530cab9cec3563e52514d1f82bc8dd0501131b92a351341c"
+          },
+          {
+            "path": "docs/decisions/ADR-002-stable-identity-contract.md",
+            "sha256": "8c02ec249a2d9314f14456ab6b6d9b8e1b8d7ffa7118cdbf0abe2702d2e466f8"
+          },
+          {
+            "path": "docs/decisions/ADR-003-deterministic-projection-boundary.md",
+            "sha256": "0cc464ebf915e65c15647f7f8b91878f8624625f4829286bbac241166a4078c1"
+          },
+          {
+            "path": "docs/decisions/ADR-004-dtcg-token-contract.md",
+            "sha256": "e32873bf4170a43fc6d36c9023c21597c46987747389347771bbbbe712a7fa8c"
+          },
+          {
+            "path": "docs/decisions/ADR-005-json-schema-contract.md",
+            "sha256": "013029b5e43430b47160dfa660eff74f4db26e35b350673a31accac50c756f99"
+          },
+          {
+            "path": "docs/decisions/ADR-006-rust-rendering-stack.md",
+            "sha256": "e9e7bda12f0b8f57c5262ee731b563874efa313c160ac4dc0622b1b5275e294c"
+          },
+          {
+            "path": "docs/decisions/ADR-007-font-tooling-boundaries.md",
+            "sha256": "6aba8399e30c0ce8585154686a66f7d31efe0284328189ccd5f848439c4df237"
+          },
+          {
+            "path": "docs/decisions/ADR-008-platform-profile-contracts.md",
+            "sha256": "b048d6937413734d9877423ff72f47c2246d80fdc4d8bf8c27f8330a3742a749"
+          },
+          {
+            "path": "docs/decisions/ADR-009-storybook-consumer-adapter.md",
+            "sha256": "2aa270774cc1a1ae711abacb22a2f3aa434515fe291679c0158887b833a3e639"
+          },
+          {
+            "path": "docs/decisions/ADR-010-reference-renderer-boundary.md",
+            "sha256": "232ca32b66a056171c3c461a1745fbeff6b3787c41de60a0fa242ac9edf6d195"
+          },
+          {
+            "path": "docs/decisions/ADR-011-accessibility-and-visual-evidence.md",
+            "sha256": "3d9d27fd36cc82fe5bf959e1e8df8eb711d27a749d331b43345717d8ab70ee0e"
+          },
+          {
+            "path": "docs/decisions/ADR-012-local-layered-identity-v1.md",
+            "sha256": "64dd010f6afd2771897af0dff44390f737cd0a839a6b3e52177d7d0aca48a79e"
+          },
+          {
+            "path": "docs/decisions/ADR-013-preserve-guidance-lifecycle.md",
+            "sha256": "067bf0331b1969d9d1ddee5dd8b1da7912e4a974b1fe2635409def6a5cee0fcd"
+          },
+          {
+            "path": "docs/decisions/ADR-014-design-system-projection-boundary.md",
+            "sha256": "7cac47f210e771f594404381efc47eef934768571b61db6cb63db00a5c3a1620"
+          },
+          {
+            "path": "docs/decisions/ADR-015-press-kit-projection-boundary.md",
+            "sha256": "37096b9462704434aa3e53c7e2fb001403de32019f6cdc3b656b1e3346df9252"
+          },
+          {
+            "path": "docs/decisions/ADR-016-pinned-social-surface-projection-boundary.md",
+            "sha256": "266fb441eba6c15227e0a4f3024ad3aaa62febfce0f04865c4afd402e3982823"
+          },
+          {
+            "path": "docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md",
+            "sha256": "7ebdc1b45c6cf50bd9014cf5d638af4d1143db739f3039ede0f97d763e0119b2"
+          },
+          {
+            "path": "docs/decisions/ADR-018-repository-presentation-projection-boundary.md",
+            "sha256": "78e121f30a2eb63fe8fe00acd53436a74cc16a2423961563dec04cd0daeacc1e"
+          },
+          {
+            "path": "docs/decisions/ADR-019-immutable-release-contract.md",
+            "sha256": "43572c70c8c1f3ca22fb78181525146ccadd041c1db4cb2a3f74608767b87f35"
+          },
+          {
+            "path": "docs/decisions/ADR-020-channel-registry-governance.md",
+            "sha256": "7582d73228c35b12800bfefb0e31dc3f52cddb95a8362bd96ee2fe6df8a4cc16"
+          },
+          {
+            "path": "docs/decisions/ADR-021-governed-mascot-package.md",
+            "sha256": "812292387a7c136620d114dd4240369906aeaf0dbfc5e2a81b9c1ee4e5d25a97"
+          },
+          {
+            "path": "docs/decisions/README.md",
+            "sha256": "cd7cc85e94321343e2df1b153d9e6abe6b77b36e52991801ce3944f88a162a29"
+          },
+          {
+            "path": "docs/decisions/policy-reference.json",
+            "sha256": "c98f651c029f4fe6bbd87a3d9a99d134100bdd90600244255958c2e5c1cde57d"
+          }
+        ]
+      },
+      "owner_pins": {
+        "egolint": {
+          "repository": "egohygiene/egolint",
+          "revision": "2d3600f14848e28099acc34ce8043699da2b9a32",
+          "tree": "de7a3cb6d77c9f38b9388e2b38c88295059dffef"
+        },
+        "hygiene": {
+          "repository": "egohygiene/hygiene",
+          "revision": "639a003d5ddc4d242c2cf190eeb59a9fc522d199",
+          "tree": "212a81d3f0527dc925ab1379afacaffeebb23658"
+        },
+        "hygiene_adr": {
+          "repository": "egohygiene/hygiene",
+          "revision": "c589587395750cd1c79c6fa0bef010189c547249",
+          "tree": "b1a49bd33dac766d4ad9e0d7013ac34cd3d603db"
+        },
+        "observatory": {
+          "repository": "egohygiene/observatory",
+          "revision": "f411b83398dd07aa3d5e6e2c89d1e8dfff746085",
+          "tree": "bf621ef1b6c389979179e27c0f074b25d6f1565e"
+        }
+      },
+      "publication": "denied",
+      "record_count": 21,
+      "runtime": {
+        "collector_sha256": "fce32ebf519329b8ccb9daa582d4012554cd1ea3527a475bb40df5900677a991",
+        "egolint_sha256": "76aec314dd664c3d509c774e5f2291386966e361f027f41ef12c643b661c2d35",
+        "lock_sha256": "7398494f726036ccfdb73dcc5587244ef46d951a6b649c69286b013c9946d7c0",
+        "shared_runtime_sha256": "011034b57cd27ffe3f70b7572053e236fcff723e858d89ef907544fbe8b19311"
+      },
+      "status": "ready",
+      "validation": {
+        "coverage": "valid",
+        "diagnostics_truncated": false,
+        "egolint": "incomplete",
+        "hygiene": "valid",
+        "observatory": "normalized"
+      }
+    },
+    "architecture": {
+      "adr_findings": 0,
+      "artifacts": [
+        {
+          "bytes": 4119,
+          "path": ".reports/architecture-validation/result.json",
+          "sha256": "e6c790c9fef42f9c348a6766cde2616bbdd0b910dbb751375659b1536281732f"
+        },
+        {
+          "bytes": 1411,
+          "path": ".reports/architecture-validation/evidence-17ec25986ad22921fc5e01ec/diagram-evidence.json",
+          "sha256": "a0954ddaea1ee054f85bdb1d34528cfd527ff1e73a6da9cc72a3087fa2c2d6c2"
+        },
+        {
+          "bytes": 2180,
+          "path": ".reports/architecture-validation/evidence-17ec25986ad22921fc5e01ec/egolint-run.json",
+          "sha256": "99d57fe023d9b123e1b3b647d3d47a2ac8433b42eddfe2792cc2b8a2e09e3940"
+        },
+        {
+          "bytes": 2734,
+          "path": ".reports/architecture-validation/evidence-17ec25986ad22921fc5e01ec/egolint.sarif",
+          "sha256": "476f84234c26e5bc74439fbac8fdbd6d3fcd16724c80d58823819a079ed53342"
+        },
+        {
+          "bytes": 1627,
+          "path": ".reports/architecture-validation/evidence-17ec25986ad22921fc5e01ec/repository-intelligence.json",
+          "sha256": "06f62dc69c0d1de28edffcedf180b3e59aa5114f5cf2db6245bf49b2f422336e"
+        }
+      ],
+      "counts": {
+        "critical": 0,
+        "error": 0,
+        "info": 0,
+        "total": 5,
+        "warning": 5
+      },
+      "coverage": {
+        "architecture-records": "partial",
+        "diagram-sources": "unavailable",
+        "repository-contracts": "unavailable"
+      },
+      "exit_codes": [
+        0,
+        0
+      ],
+      "findings_by_id": {
+        "EGO-INTEL-ADOPTION-001": 3,
+        "RELAY-ARCH-DIAGRAM-001": 1,
+        "RELAY-ARCH-UNKNOWN-001": 1
+      },
+      "native_commit_history_adoption": "unknown",
+      "native_commit_history_truncated": true,
+      "native_intelligence_status": "incomplete",
+      "native_summary": {
+        "adrs_inspected": 21,
+        "blocking_diagnostics": 0,
+        "commits_inspected": 100,
+        "diagnostics": 3,
+        "roadmap_steps_inspected": 0
+      },
+      "outcome": "warning",
+      "owner_pins": [
+        {
+          "repository": "egohygiene/hygiene",
+          "revision": "c589587395750cd1c79c6fa0bef010189c547249",
+          "version": "architecture-v0.1.0+adr-1.1.0"
+        },
+        {
+          "repository": "egohygiene/egolint",
+          "revision": "933472b6322d2060c487e5a8a6f0bc5197696af0",
+          "version": "0.1.0-alpha.1"
+        },
+        {
+          "repository": "egohygiene/holon",
+          "revision": "660b941f99618806fcadd589bcdae61c519f96e4",
+          "version": "1.0.0"
+        }
+      ],
+      "request": {
+        "adoption": {
+          "architecture-records": "present",
+          "diagram-sources": "unknown",
+          "repository-contracts": "unknown"
+        },
+        "bounds": {
+          "maximum_findings": 256,
+          "maximum_scanned_bytes": 104857600,
+          "maximum_scanned_files": 10000
+        },
+        "inputs": {
+          "diagram_roots": [],
+          "repository_contracts": [],
+          "repository_intelligence_policy": ".config/egolint/repository-intelligence.toml"
+        },
+        "mode": "advisory",
+        "output": {
+          "format": "json",
+          "path": ".reports/architecture-validation/result.json"
+        },
+        "profile": {
+          "sha256": "6a2354340c6e40e1e29f7a881e4e117b1f8144483b8cec0d34d370bcb895357a",
+          "version": "1.0.0-alpha.2"
+        },
+        "repository": {
+          "id": "egohygiene/identity",
+          "represented_revision": "12227dad43c90b02e14971030f22242f3a205c9d",
+          "root": ".",
+          "visibility": "public"
+        },
+        "schema_version": "relay.repository-architecture-validation-request/v1"
+      },
+      "runtime": {
+        "egolint_sha256": "0345627433722e0bb7671f35e0c5028c7020f61e8a86880949005dc300aef60e",
+        "profile_sha256": "6a2354340c6e40e1e29f7a881e4e117b1f8144483b8cec0d34d370bcb895357a"
+      },
+      "semantic_status": "incomplete",
+      "warning_scope": [
+        "Roadmap and commit-history adoption remain explicitly unknown.",
+        "Native commit-history inventory reaches the caller policy maximum of 100 commits and reports truncation; the trusted capture retained all 179 reachable commit objects.",
+        "Repository contracts and diagram adoption remain unknown; no reviewed diagram semantic validator is selected."
+      ]
+    },
+    "checked_on": "2026-10-10",
+    "collection_observed_at": "2026-10-10T15:43:57Z",
+    "limits": [
+      "This confirms bounded ADR source validity and complete current Decisions collection, not whole-repository conformance.",
+      "The review-only envelope always denies publication; it is not promoted into a production site snapshot.",
+      "No source mutation, hosted workflow execution, artifact upload, deployment, live route or fresh browser accessibility result is claimed.",
+      "The 21 declared human approvals are sourced from the recorded R1 disposition; passing validators do not supply human authority."
+    ],
+    "purpose": "Bounded immutable native source validation for ratified Identity ADR migration; not hosted or deployment evidence.",
+    "relay_commit": "4137cb07a017b7bbae2ee38fe9b039c58b0b17eb",
+    "replay": {
+      "complete_adr_review_envelope_byte_identical": true,
+      "complete_architecture_result_and_all_artifacts_byte_identical": true,
+      "fresh_runtime_rebuild_claimed": false,
+      "runs": 2,
+      "same_prepared_runtimes": true,
+      "separate_source_locations": true
+    },
+    "repository": "egohygiene/identity",
+    "reproduction": {
+      "architecture_argv": [
+        "<architecture-python>",
+        "<trusted-relay>/scripts/run_repository_architecture_validation.py",
+        "run",
+        "--repository-root",
+        "<identity-checkout>",
+        "--request",
+        "<review>/architecture-request.json",
+        "--runtime",
+        "<trusted-architecture-runtime>"
+      ],
+      "collector_argv": [
+        "<adr-python>",
+        "-I",
+        "<trusted-relay>/actions/repository-intelligence/scripts/collect_repository_adrs.py",
+        "collect",
+        "--runtime",
+        "<trusted-adr-runtime>",
+        "--repository-root",
+        "<identity-checkout>",
+        "--repository",
+        "egohygiene/identity",
+        "--visibility",
+        "public",
+        "--source-commit",
+        "12227dad43c90b02e14971030f22242f3a205c9d",
+        "--observed-at",
+        "2026-10-10T15:43:57Z",
+        "--adoption",
+        "present",
+        "--output",
+        "<review>/adr-collection.review.json"
+      ],
+      "replay_instruction": "Run each command twice at separate clean checkouts of the same immutable commit with the same request, runtimes and observation boundary; compare complete retained bytes.",
+      "runtime_prerequisite": "Prepare the two distinct native runtimes from exact Relay 4137cb07 locks/profiles with their hash-locked Python requirements and Rust 1.85.1. Use trusted code and runtimes outside the consumer."
+    },
+    "source_capture": {
+      "bytes": 4616846,
+      "files": 390,
+      "history_commits": 179,
+      "history_truncated": false,
+      "sha256": "b9ce4ebd4add94b18f0a3c44204718c3e8702f4c7b393cb5045127128daa81b5",
+      "truncated": false
+    },
+    "source_commit": "12227dad43c90b02e14971030f22242f3a205c9d",
+    "source_tree": "254074e48b46cecf26286f52d5749d8ba323cc0c"
+  },
+  "local_production_build": {
+    "adr_receipts_equal": true,
+    "builds": 2,
+    "bundle_digest": "sha256:73d3baebd1110ddd70caf0db90fc394530f6eef0e449ee09a73208c03d1ad288",
+    "bundle_files": 19,
+    "candidate_digests": {
+      "projection_sha256": "c226dc55be57827f773e33964464ce4906ad3ad66304e7725f470a15372c6f53",
+      "snapshot_sha256": "434f3b7280995ffd6816013e66035edecca1e20de030f81e2b332e5715db0ca2"
+    },
+    "complete_bundle_bytes_equal": true,
+    "decisions_coverage": {
+      "collection": "observed",
+      "freshness": "current",
+      "observed_at": "2026-10-10T15:43:57Z",
+      "reason": "complete"
+    },
+    "decisions_page": {
+      "approval_url_text_count": 21,
+      "broken_local_links": [],
+      "bytes": 105148,
+      "canonical_source_link_count": 21,
+      "declared_human_approval_count": 21,
+      "file": "decisions/index.html",
+      "implementation_states": {
+        "Implemented": 12,
+        "In Progress": 7,
+        "Not Started": 2
+      },
+      "missing_adr_ids": [],
+      "record_count": 21,
+      "sha256": "285452229eb1f6a9bb69816fa3057b6905a2762213b9a3853fef85bf40d58b12",
+      "statuses": {
+        "Accepted": 21
+      }
+    },
+    "different_checkout_names": true,
+    "execution": "local execution of pinned composite action Bash bodies",
+    "full_history_checkouts": true,
+    "inventory_sha256": {
+      "build-manifest.json": "f28e126078ff885c008231ea5b38ce72220ce9848f09f0396efbbd392f593cb1",
+      "compare/index.html": "06a04f0dcab6234611f1ebe34db36cf9b94e3cc8c36d79f7e519371b0c2ae346",
+      "dashboard/index.html": "07ee4f5cc59f2af0396fb545dc8853ca57792872edb8e182af035f4009a767ce",
+      "decisions/index.html": "285452229eb1f6a9bb69816fa3057b6905a2762213b9a3853fef85bf40d58b12",
+      "dependencies/index.html": "89c54e317ab819156471e3b81a1cae370df75fee9a1eed4768ef56bfe0834fcc",
+      "explorer.js": "67c5967ffefc868d8861cdb5042e8c361c111bf7d478f175318122b26841a06a",
+      "health/index.html": "dad58a89ce2c55034241257d6a088ca4d74581a0dfc1980ef7991d758fd245c0",
+      "index.html": "002c407ae88867035d12033fcae5e0bf3d6c2a6f8804a56d5c70e61ede33c3d4",
+      "journey/index.html": "cdcb7b571169348191595a22a6434025c393baf8e3acef186a73b08533de0c61",
+      "now/index.html": "8c5e3f9ed2a9913b785bac3278e2681829ec870b1a28febd3c2bb7190d2bac0a",
+      "provenance.json": "844524d436f098e096272543441b3fcdcf653c761c7325457e6e373dc54824c7",
+      "releases/index.html": "89c93fb00231322a040b58ffbd4583f9ced20a07e90a955bf4d4e388363953c1",
+      "roadmap/index.html": "87b71c79d384179159032a10dfa635ab44ab31327b240a02bb4ab4c072177c81",
+      "search/index.html": "4164f4f59b442587e9817b65b9d01e76e11916960f51e52a4ac6a749ec5a0328",
+      "site.css": "cc6b108f44996435ecd9548013dd133593a058f73924b249cac06a48b690d684",
+      "site.js": "05041557a164b29f8b7bd02708f64e2455ea31e3f48c97019ae4aaff36900b68",
+      "styles.css": "4e1a7c393889b62ae170fd5cddafd6a34524a88ba249b20429388342b8e19aa8",
+      "summary.json": "738eeaa59ac844fa8aa58a6d121a7aa7376d39384425258ab521c6f14e02a172",
+      "work/index.html": "5bf6e02fab8967fa4bb9200068cf216157a98ca5c480815cefea47059fa78961"
+    },
+    "limits": [
+      "Local production script execution; no hosted workflow or artifact upload evidence.",
+      "The nineteen generated files were retained locally; this receipt is not the full site artifact.",
+      "No Pages upload, deployment, domain assignment, alias installation, or live route verification.",
+      "Native artifact route is /intelligence/decisions/; host, composition, /decisions/ alias, and rollback remain a separate decision.",
+      "Human approval URL is rendered as declared text, not a clickable link. Canonical ADR source links are clickable.",
+      "ADR acceptance and complete Decisions collection do not establish completed implementation or complete collection of other domains.",
+      "Review-only collector envelope publication remains denied; the production adapter performed its own fresh admission before rendering."
+    ],
+    "manifest_sha256": "f28e126078ff885c008231ea5b38ce72220ce9848f09f0396efbbd392f593cb1",
+    "observed_at": "2026-10-10T15:43:57Z",
+    "other_domain_coverage": {
+      "collection": "uncollected",
+      "domains": [
+        "checks",
+        "deployments",
+        "git",
+        "history",
+        "issues",
+        "pull_requests",
+        "releases",
+        "roadmap"
+      ],
+      "freshness": "unknown",
+      "observed_at": null,
+      "reason": "not_requested"
+    },
+    "owner_sources": {
+      "egolint": {
+        "repository": "egohygiene/egolint",
+        "revision": "2d3600f14848e28099acc34ce8043699da2b9a32",
+        "tree": "de7a3cb6d77c9f38b9388e2b38c88295059dffef"
+      },
+      "hygiene": {
+        "repository": "egohygiene/hygiene",
+        "revision": "639a003d5ddc4d242c2cf190eeb59a9fc522d199",
+        "tree": "212a81d3f0527dc925ab1379afacaffeebb23658"
+      },
+      "hygiene_adr": {
+        "repository": "egohygiene/hygiene",
+        "revision": "c589587395750cd1c79c6fa0bef010189c547249",
+        "tree": "b1a49bd33dac766d4ad9e0d7013ac34cd3d603db"
+      },
+      "observatory": {
+        "repository": "egohygiene/observatory",
+        "revision": "f411b83398dd07aa3d5e6e2c89d1e8dfff746085",
+        "tree": "bf621ef1b6c389979179e27c0f074b25d6f1565e"
+      }
+    },
+    "relay_commit": "4137cb07a017b7bbae2ee38fe9b039c58b0b17eb",
+    "repository": "egohygiene/identity",
+    "reproduction": {
+      "collector_recipe": "https://github.com/egohygiene/relay/blob/4137cb07a017b7bbae2ee38fe9b039c58b0b17eb/docs/repository-adr-collector.md",
+      "context": "Local harness binds repository visibility public, private false, default branch main, generator repository egohygiene/relay and exact relay_commit. These are explicit local inputs, not GitHub execution observations.",
+      "harness_method": "RepositoryIntelligencePortabilityTests.run_action",
+      "harness_source": "https://github.com/egohygiene/relay/blob/4137cb07a017b7bbae2ee38fe9b039c58b0b17eb/tests/test_repository_intelligence_portability.py",
+      "inputs": {
+        "activity-ref": "12227dad43c90b02e14971030f22242f3a205c9d",
+        "activity-since": "2020-01-01",
+        "adr-runtime": "caller-selected trusted runtime outside consumer checkouts",
+        "as-of": "2026-10-10T15:43:57Z",
+        "collect-adrs": "true",
+        "max-depth": "10",
+        "observatory-comparison": "",
+        "observatory-snapshot": "",
+        "output-directory": "dist/intelligence",
+        "reports-directory": ".reports",
+        "repository": "egohygiene/identity",
+        "require-full-history": "true",
+        "source-commit": "12227dad43c90b02e14971030f22242f3a205c9d",
+        "work-directory": ".cache/repository-intelligence"
+      },
+      "interpreter": "CPython 3.12.14 with the exact pinned collector requirements",
+      "production_source": "https://github.com/egohygiene/relay/blob/4137cb07a017b7bbae2ee38fe9b039c58b0b17eb/actions/repository-intelligence/action.yml",
+      "steps": [
+        "Prepare the trusted ADR runtime outside both consumers using the pinned Relay collector recipe and locked owner sources.",
+        "Create two clean full-history clones with different checkout names and detach each at source_commit.",
+        "Set the harness module REPOSITORY to egohygiene/identity; bind self.commit to source_commit, self.generator to relay_commit, and self.workspace to a temporary directory outside both clones.",
+        "Invoke run_action separately for each clone with the inputs below, supplying the trusted runtime and interpreter directory. The harness executes every checked-in action Bash body, including fresh native collection, production renderers, manifest creation and bundle validation.",
+        "Compare SHA-256 inventories of every output file and complete ADR receipt equality. Verify twenty-one cards, declared approvals and immutable canonical source links, plus local Decisions link and fragment integrity."
+      ]
+    },
+    "result": "passed",
+    "runtime": {
+      "collector_sha256": "fce32ebf519329b8ccb9daa582d4012554cd1ea3527a475bb40df5900677a991",
+      "egolint_sha256": "76aec314dd664c3d509c774e5f2291386966e361f027f41ef12c643b661c2d35",
+      "lock_sha256": "7398494f726036ccfdb73dcc5587244ef46d951a6b649c69286b013c9946d7c0",
+      "shared_runtime_sha256": "011034b57cd27ffe3f70b7572053e236fcff723e858d89ef907544fbe8b19311"
+    },
+    "schema": "identity.local-production-decisions-build-review/v1",
+    "source_commit": "12227dad43c90b02e14971030f22242f3a205c9d",
+    "source_tree": "254074e48b46cecf26286f52d5749d8ba323cc0c",
+    "tracked_source_unchanged": true,
+    "validation": {
+      "coverage": "valid",
+      "diagnostics_truncated": false,
+      "egolint": "incomplete",
+      "hygiene": "valid",
+      "observatory": "normalized"
+    }
+  },
+  "hosted_advisory_validation": {
+    "head_revision": "12227dad43c90b02e14971030f22242f3a205c9d",
+    "represented_merge_revision": "d106af6f7313e714bb4d036e732fd96a2caf635e",
+    "decision_validation": {
+      "run_id": 38064773820,
+      "url": "https://github.com/egohygiene/identity/actions/runs/38064773820",
+      "conclusion": "success",
+      "job_id": 114250087848,
+      "artifact_upload": "success",
+      "final_advisory_enforcement": "success",
+      "warning_annotations": 5
+    },
+    "artifact": {
+      "id": 11674446365,
+      "name": "relay-report-architecture-identity-decisions-cacab2166b99b14f-38064773820-1",
+      "size_in_bytes": 7219,
+      "url": "https://api.github.com/repos/egohygiene/identity/actions/artifacts/11674446365",
+      "archive_download_url": "https://api.github.com/repos/egohygiene/identity/actions/artifacts/11674446365/zip",
+      "expired": false,
+      "created_at": "2026-10-10T15:44:46Z",
+      "expires_at": "2026-11-09T15:44:45Z",
+      "updated_at": "2026-10-10T15:44:46Z",
+      "digest": "sha256:2ac00d29455f40585b7860dd68cb586be75e2779a538880ea152bb87a6b8f1d0",
+      "workflow_run": {
+        "id": 38064773820,
+        "repository_id": 1315637826,
+        "head_repository_id": 1315637826,
+        "head_branch": "codex/identity-69-disposition-review",
+        "head_sha": "12227dad43c90b02e14971030f22242f3a205c9d"
+      },
+      "download_and_checksum_independently_verified": false
+    },
+    "manifest_sha256_from_job_log": "05d4714d8c10f3617ccf0fba09bbd6ac1446a4d016add828ec7e36c0567a3b53",
+    "cli_validation": {
+      "run_id": 38064773390,
+      "url": "https://github.com/egohygiene/identity/actions/runs/38064773390",
+      "conclusion": "success"
+    },
+    "limits": [
+      "Run, job steps, artifact metadata and decoded job log were inspected; archive download and checksum verification were not performed for this run.",
+      "Hosted advisory architecture validation is separate from the local production Decisions build.",
+      "These results apply to the stated source head and represented merge revision; later documentation-only checkpoints require source-equivalence checks."
+    ]
+  },
+  "handoff": {
+    "subsequent_documentation_changes_only": [
+      "CONTINUITY.md",
+      "docs/decision-validation.md",
+      "docs/evidence/identity-adrs-ratified-2026-10-10.json"
+    ],
+    "source_equivalence": "All 21 ADRs, canonical index, policy reference, workflow and validator configuration must remain byte-identical to source_commit; this receipt does not substitute a new commit into prior outputs.",
+    "next": "Review/merge the canonical source PR; decide consumer-owned host, canonical route and alias, artifact composition and rollback; deploy and obtain maintainer feedback before fleet rollout."
+  }
+}

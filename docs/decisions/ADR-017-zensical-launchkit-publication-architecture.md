@@ -1,12 +1,49 @@
+---
+schema: egohygiene.architecture-decision/v1
+id: ADR-017
+title: Compose Identity's dogfood experience without moving brand authority
+status: accepted
+date: "2026-10-10"
+decision_scope: repository
+visibility: public
+owners:
+  - egohygiene/identity
+issue: https://github.com/egohygiene/identity/issues/56
+pull_request: https://github.com/egohygiene/identity/pull/59
+related: []
+supersedes: []
+superseded_by: []
+affected_repositories: [egohygiene/identity]
+affected_contracts: []
+implementation_status: in_progress
+evidence:
+  - type: approval
+    url: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
+    description: Explicit human approval of R1 at packet 418aa9757898b6c09b4f01eface522778cff90e8, retaining this direction now with its listed clarifications and scope limits.
+  - type: documentation
+    url: https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md
+    description: Immutable original record; historical prose, metadata and dates are preserved separately from the current human disposition.
+  - type: documentation
+    url: https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/publication/IDENTITY_PAGES.md
+    description: Inspected contract and implementation boundary at the reviewed source revision; no new runtime or publication verification is implied.
+  - type: implementation
+    url: https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/scripts/build_identity_experience.py
+    description: Inspected bounded implementation at the reviewed source revision.
+  - type: documentation
+    url: https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md
+    description: Exact R1 recommendations, dated clarifications and scope qualifiers approved by the human disposition.
+approval:
+  date: "2026-10-10"
+  by: szmyty
+  evidence: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
+exceptions: []
+---
+
 # ADR-017: Compose Identity's dogfood experience without moving brand authority
 
-- **Status:** Accepted
-- **Date:** 2026-08-30
-- **Amended:** 2026-08-30 after Holon issue #4 merged
-- **Tracking:** [Identity issue #56](https://github.com/egohygiene/identity/issues/56)
-- **Implementation:** [Identity issue #57](https://github.com/egohygiene/identity/issues/57)
-- **Decision owners:** Identity maintainers and the `egohygiene.io` route owner
-- **Machine contract:** [`publication/identity-experience.architecture.json`](../../publication/identity-experience.architecture.json)
+The canonical date records the explicit human disposition on 2026-10-10.
+Original source prose and metadata are preserved below as historical evidence;
+the approved R1 clarifications and scope limits govern their current reading.
 
 ## Context
 
@@ -74,7 +111,7 @@ Issue #57 must add a lockfile or equivalent package-resolution evidence for
 every transitive build dependency. A tag or version string alone is not a
 complete dependency lock.
 
-## Responsibility boundary
+### Responsibility boundary
 
 | Concern | Owner | Required behavior |
 | --- | --- | --- |
@@ -87,7 +124,7 @@ complete dependency lock.
 | Identity subpath, release binding, and compatibility redirects | Bounded Identity issue #57 adapter | Extend the shared profile through content/configuration without copying internals |
 | Composite route installation | Relay and the `egohygiene.io` route owner | Install exact reviewed bytes; do not rebuild them in the portal |
 
-## Route decision
+### Route decision
 
 | Public route | Behavior | Owner |
 | --- | --- | --- |
@@ -108,7 +145,7 @@ landing build owns `/identity/` but must not emit anything under
 `/identity/docs/`; the documentation build owns that subtree. The composite
 builder fails on every other collision rather than choosing an implicit winner.
 
-## Content compilation boundary
+### Content compilation boundary
 
 Three source classes enter the experience:
 
@@ -129,7 +166,7 @@ digest, asset-provenance references, approval-evidence references, framework
 pins, file inventory, and artifact digest. Live verification compares that
 binding to `identity.egohygiene.io/site.json` and fails closed on disagreement.
 
-## Preview, build, deployment, and rollback
+### Preview, build, deployment, and rollback
 
 Local preview uses the production `/identity/` base path and mounts the landing,
 docs, architecture, legal, manifests, downloads, and redirects together.
@@ -149,7 +186,7 @@ previous verified composite. The Brand Kit rolls back independently through
 its existing stable-tag workflow. Neither rollback requires rebuilding the
 artifact being restored.
 
-## Framework upgrades
+### Framework upgrades
 
 LaunchKit, Zensical, and site-suite upgrades are separate intake events. Each
 upgrade:
@@ -167,20 +204,7 @@ only reviewed product content, the `/identity/` base-path/release-binding
 extension, compatibility redirects, and consumer evidence. It does not fork
 Holon internals or grow a universal multi-repository site generator.
 
-## Consequences
-
-- The product experience can use LaunchKit and Zensical without weakening the
-  existing immutable Brand Kit.
-- The public route presents current approved Identity outputs while the
-  framework remains replaceable.
-- The organization homepage is not moved into this repository; publication is
-  an explicit artifact handoff.
-- Identity can dogfood the same shared profile that later consumers adopt while
-  keeping its subpath and release-binding behavior bounded to this repository.
-- There are two deployments and therefore two rollback controls, but their
-  evidence is compared through one release binding.
-
-## Alternatives rejected
+## Alternatives considered and rejected
 
 - **Replace the Brand Kit root with LaunchKit:** turns a release-proof surface
   into a marketing surface and couples downloads to presentation churn.
@@ -193,9 +217,87 @@ Holon internals or grow a universal multi-repository site generator.
 - **Fork the merged Holon profiles into Identity:** would discard the reviewed
   generic/LaunchKit proofs and immediately create framework drift.
 
-## Reconsider when
+These are the alternatives recorded in the historical source. No additional
+contemporaneous alternatives or rationale are inferred.
+
+## Consequences and tradeoffs
+
+- The product experience can use LaunchKit and Zensical without weakening the
+  existing immutable Brand Kit.
+- The public route presents current approved Identity outputs while the
+  framework remains replaceable.
+- The organization homepage is not moved into this repository; publication is
+  an explicit artifact handoff.
+- Identity can dogfood the same shared profile that later consumers adopt while
+  keeping its subpath and release-binding behavior bounded to this repository.
+- There are two deployments and therefore two rollback controls, but their
+  evidence is compared through one release binding.
+
+## Implementation and evidence links
+
+The inspected bounded composite builder and handoff implementation are
+present, with release and deployment gates still separate. The publication
+guide records a configured `v1.1.0` candidate binding; this migration performs
+no release, deployment, live-route verification, or rollback exercise. The
+end-to-end publication choice therefore remains `in_progress`.
+
+[Original implementation PR #59](https://github.com/egohygiene/identity/pull/59),
+[inspected contract](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/publication/IDENTITY_PAGES.md), and
+[implementation source](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/scripts/build_identity_experience.py)
+provide the bounded evidence. Human approval is recorded separately in the
+[explicit R1 disposition](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806).
+
+## Replacement or exit strategy
 
 Revisit if the organization route owner cannot install content-addressed
 subpath artifacts, Holon publishes a breaking profile revision, Zensical leaves
 the chosen compatibility line, or the two-host release binding cannot be
 verified without transferring publication authority into Identity.
+
+## Follow-up work
+
+Obtain and verify a qualifying stable release, artifact handoff, installation,
+release agreement, and rollback evidence through the existing publication
+owners. Decide Repository Intelligence hosting, composition and aliases
+separately before adding any Decisions route. Reconcile the two known
+experience-content ADR references through their existing visual-review gate.
+
+## Historical metadata and provenance
+
+The following metadata is reproduced from the original record. Its status
+and dates are historical claims, not the date or proof of the current
+approval.
+
+- **Status:** Accepted
+- **Date:** 2026-08-30
+- **Amended:** 2026-08-30 after Holon issue #4 merged
+- **Tracking:** [Identity issue #56](https://github.com/egohygiene/identity/issues/56)
+- **Implementation:** [Identity issue #57](https://github.com/egohygiene/identity/issues/57)
+- **Decision owners:** Identity maintainers and the `egohygiene.io` route owner
+- **Machine contract:** [`publication/identity-experience.architecture.json`](../../publication/identity-experience.architecture.json)
+
+Preserved from [immutable source `434f60c8b829c695b3bcd1a45faf5e0c114d37cf`](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md).
+The present disposition transcribes `szmyty`'s explicit approval of
+[R1 at `418aa9757898b6c09b4f01eface522778cff90e8`](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md);
+it does not backdate acceptance or convert implementation into verification.
+
+## Approved R1 clarification — 2026-10-10
+
+### N017 — Two existing hosts, no inferred Decisions deployment
+
+Retain `identity.egohygiene.io` as the independently release-backed Brand Kit
+and `egohygiene.io/identity/` as the separately governed product-experience
+artifact. References to prior “acceptance,” including the machine contract's
+status, remain legacy claims rather than independent human-approval evidence.
+The inspected implementation provides a bounded composite and handoff path;
+its configured `v1.1.0` candidate binding does not establish production
+installation or live release agreement. Any disposition now concerns retaining
+this architecture now and does not prove the original acceptance date.
+Repository Intelligence hosting, `/intelligence/decisions/`, `/decisions/`
+aliases, and their composition and deployment ownership remain a separate
+explicit decision; this disposition selects none of them.
+
+Evidence: [publication guide](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/publication/IDENTITY_PAGES.md) and
+[machine contract](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/publication/identity-experience.architecture.json).
+Retain the August 30 declared/amendment dates separately from the August 29
+Git introduction/amendment observations.

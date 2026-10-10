@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   decisions:
-    name: Inspect legacy ADR evidence without publication
+    name: Validate canonical ADR evidence without publication
     permissions:
       contents: read
     # Reviewed Relay source adoption; this does not claim an immutable release.
@@ -31,8 +31,8 @@ jobs:
       mode: advisory
       repository-contract-adoption: unknown
       repository-contracts: "[]"
-      # Source exists, but historical dispositions still need human review.
-      adr-adoption: legacy
+      # Human dispositions are recorded; validate the canonical corpus.
+      adr-adoption: present
       adr-policy: ".config/egolint/repository-intelligence.toml"
       diagram-adoption: unknown
       diagram-roots: "[]"
