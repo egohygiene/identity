@@ -21,7 +21,7 @@ class PublicationTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
         self.site, self.evidence = self.root / "site", self.root / "evidence"
         self.evidence.mkdir()
         self.consumer = {"repository": "egohygiene/identity", "revision": "a" * 40}
