@@ -56,6 +56,8 @@ The headings below preserve the three historical inline links.
 
 ## Open decisions
 
-ADR-022 awaits its own human disposition. The migration map retains the earlier
+ADR-022 and [ADR-023](docs/decisions/ADR-023-canonical-source-digest.md) await
+their own human dispositions. ADR-023 proposes the shared source-digest
+compatibility contract for #74. The migration map retains the earlier
 open questions as history; [ROADMAP.md](ROADMAP.md) owns current execution
 order. Detailed ADR-004 onward retain their existing paths.

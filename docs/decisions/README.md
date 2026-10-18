@@ -11,8 +11,9 @@ exact reviewed packet and durable approval. All records now use canonical
 metadata and anatomy; source validation and publication remain separately
 evidenced. Implementation states remain in each record and do not follow
 from acceptance alone. ADR-022 separately proposes the consumer publication
-composition and has no lifecycle approval; the corpus contains 21 accepted
-records and one proposed record.
+composition. ADR-023 proposes the shared source-digest compatibility contract.
+Neither proposal has lifecycle approval; the corpus contains 21 accepted
+records and two proposed records.
 
 | ID | Title | Decision status | Date | Canonical record |
 | --- | --- | --- | --- | --- |
@@ -38,6 +39,7 @@ records and one proposed record.
 | ADR-020 | Separate channel governance, account lifecycle, and verification | accepted | 2026-10-10 | [ADR-020](ADR-020-channel-registry-governance.md) |
 | ADR-021 | Keep mascot source and approved derivatives behind a governed package | accepted | 2026-10-10 | [ADR-021](ADR-021-governed-mascot-package.md) |
 | ADR-022 | Compose current Decisions evidence beneath the existing Brand Kit publisher | proposed | 2026-10-10 | [ADR-022](ADR-022-decisions-publication-composition.md) |
+| ADR-023 | Preserve and specify a shared canonical source digest | proposed | 2026-10-18 | [ADR-023](ADR-023-canonical-source-digest.md) |
 
 ## Ongoing capture
 
@@ -48,7 +50,7 @@ See [validation and upgrade commands](../decision-validation.md).
 
 The index dates identify the current 2026-10-10 disposition for migrated legacy
 records, the reconstruction date for ADR-019–021 and the proposal date for
-ADR-022. Original declared dates,
+ADR-022; ADR-023 uses its actual 2026-10-18 proposal date. Original declared dates,
 status claims and substantive prose remain preserved in each record with
 immutable source provenance. Approval uses its actual current date; no historical
 approval is inferred. No ID, filename or compatibility anchor was changed.
