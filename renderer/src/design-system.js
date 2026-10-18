@@ -43,6 +43,7 @@ export function createDesignSystemView({ handbook, context, artifactDirectory })
   }
   assertObject(handbook.project, "Design-system handbook project");
   assertObject(context.project, "AI design context project");
+  assertObject(handbook.source, "Design-system handbook source");
   assertObject(context.source, "AI design context source");
   if (handbook.project.id !== context.project.id) {
     throw new TypeError(
@@ -59,8 +60,22 @@ export function createDesignSystemView({ handbook, context, artifactDirectory })
       "AI design context must declare the handbook schema it was projected from.",
     );
   }
-  if (!/^[0-9a-f]{64}$/u.test(context.source.digest || "")) {
-    throw new TypeError("AI design context must declare a SHA-256 source digest.");
+  for (const [source, label] of [
+    [handbook.source, "Design-system handbook"],
+    [context.source, "AI design context"],
+  ]) {
+    if (
+      typeof source.digest !== "string"
+      || source.digest.length !== 64
+      || !/^[0-9a-f]{64}$/u.test(source.digest)
+    ) {
+      throw new TypeError(`${label} must declare a SHA-256 source digest.`);
+    }
+  }
+  if (handbook.source.digest !== context.source.digest) {
+    throw new TypeError(
+      "Design-system handbook and AI context source digests must match.",
+    );
   }
   for (const [value, label] of [
     [handbook.sections, "Design-system handbook sections"],

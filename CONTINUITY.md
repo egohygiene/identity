@@ -7,20 +7,20 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-18T03:54:28Z'
+  updated_at: '2026-10-18T11:53:59Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: 'Deliver #74 shared canonical source-digest semantics and compatibility evidence after merged PR #110.'
+  purpose: 'Deliver #75 optional handbook/context release binding after merged #74.'
   includes:
-  - Digest inventory/path/framing rules, shared Rust/Python conformance, release transition, proposed ADR-023,
-    and the next dependency.
+  - Source-binding guards, malformed/stale/mixed-input regressions, four artifact downloads, compatibility guidance,
+    and next work.
   excludes:
-  - Guidance/release enforcement (#75), output confinement/concurrency (#78/#79), broad refactors, releases, publication,
-    and fleet rollout.
-  - Private paths, raw logs, transcripts, and duplicate policy.
+  - Artifact-path policy (#76), output confinement/concurrency (#78/#79), broad refactors, new schemas/ADR dispositions,
+    releases and deployments.
+  - Private paths, logs, transcripts and duplicated canonical policy.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -30,136 +30,125 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
+  - docs/contracts/BRAND_KIT_RENDERER_V1.md
+  - docs/contracts/DESIGN_SYSTEM_V1.md
   - docs/contracts/SOURCE_DIGEST_V1.md
-  - docs/contracts/IDENTITY_V1.md
-  - docs/contracts/COMPILER_V1.md
-  - docs/decisions/README.md
+  - contracts/v1/design-system-handbook.schema.json
+  - contracts/v1/design-context.schema.json
+  - renderer/src/design-system.js
+  - renderer/src/model.js
+  - renderer/tests/design-system.test.js
+  - renderer/tests/design-system.integration.test.js
   - docs/decisions/policy-reference.json
-  - docs/decisions/ADR-012-local-layered-identity-v1.md
+  - docs/decisions/ADR-014-design-system-projection-boundary.md
   - docs/decisions/ADR-019-immutable-release-contract.md
   - docs/decisions/ADR-023-canonical-source-digest.md
-  - src/v1_consumer/source_digest.rs
-  - scripts/validate_identity.py
-  - scripts/render_design_system.py
-  - tests/fixtures/source-digest-v1.json
-  - .github/workflows/release.yml
-  - https://github.com/egohygiene/identity/issues/74
+  - .github/workflows/reference-renderer.yml
   - https://github.com/egohygiene/identity/issues/75
-  - https://github.com/egohygiene/identity/pull/110
+  - https://github.com/egohygiene/identity/issues/76
+  - https://github.com/egohygiene/identity/pull/111
 work:
-  objective: Make Rust and Python identify the same canonical source without rewriting historical release bindings.
+  objective: Reject optional design-system guidance unless handbook, context and displayed release share the same
+    source identity.
   success_conditions:
-  - Pass shared inventory/digest/path vectors, legacy coexistence and the historical fixture hash on both implementations.
-  - Align included-link, reparse-point, nonportable-name and non-regular-entry rejection with authoritative preflight.
-  - Document producer-specific compatibility and atomic whole-set upgrades; preserve goldens and publication bindings.
-  - Provide a validated bounded PR with proposed ADR-023, refreshed continuity and actual local/hosted coverage
-    labels.
+  - Validate both existing JSON source.digest bindings as exact lowercase SHA-256 strings and require equality
+    with release.sourceDigest.
+  - Reject wrong-project, missing/malformed, stale and mixed-source inputs before page replacement.
+  - Preserve matching v1/legacy-TOML coexistence, all four artifact download targets and immutable historical
+    bindings.
+  - Provide passing renderer, publication, integrity and hosted browser evidence with a bounded review PR.
   active_issue:
     provider: github
-    id: egohygiene/identity#74
-    url: https://github.com/egohygiene/identity/issues/74
+    id: egohygiene/identity#75
+    url: https://github.com/egohygiene/identity/issues/75
   next:
     kind: issue
-    id: egohygiene/identity#75
-    description: 'Review/merge #74, then enforce optional guidance/release agreement using its documented migration.'
-    readiness: blocked
+    id: egohygiene/identity#76
+    description: 'After review/merge of #75, centralize renderer artifact-path validation and preserve configured
+      local/CDN bases.'
+    readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/75
-    - ROADMAP.md#idn-q14--bind-optional-guidance-to-its-release
-    depends_on:
-    - egohygiene/identity#74
+    - https://github.com/egohygiene/identity/issues/76
+    - ROADMAP.md#idn-q15--validate-download-paths-and-configured-bases
+    depends_on: []
 state:
   base:
-    revision: 6e19b186c8cb4d3816d0970b8f73b613d96786e2
+    revision: 644294e11fdcf1dde24937790bc42cc028cb099a
     ref: refs/heads/main
-    verified_at: '2026-10-18T03:48:40Z'
+    verified_at: '2026-10-18T11:53:12Z'
   candidate:
-    branch: codex/74-source-digest-conformance
+    branch: codex/75-design-system-release-binding
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#111
-      url: https://github.com/egohygiene/identity/pull/111
-    handoff_state: review-reference-recorded
+    pull_request: null
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-18T03:54:28Z'
-    default_branch_revision: 6e19b186c8cb4d3816d0970b8f73b613d96786e2
+    observed_at: '2026-10-18T11:53:12Z'
+    default_branch_revision: 644294e11fdcf1dde24937790bc42cc028cb099a
     issue_state: open
-    pull_request_state: open
-    notes: 'Main remains the #110 merge. PR #111 is open/draft at initial head a8cb5e0d909b75e79f6120bcdd3d8d8b9adecd80.
-      CLI, renderer and native decision workflows pass. macOS exposed invalid-UTF-8 fixture creation failure,
-      corrected here. Final matrix revalidation is pending; no release is created.'
+    pull_request_state: not-applicable
+    notes: 'GitHub confirms PR #111 merged at this base, #74 closed, #75/#76 open, and no competing open PR before
+      creation. IDN-Q13 is complete; IDN-Q14 is this unmerged candidate. #83 retains its final #76/#77 gate.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-18T03:54:28Z'
+  reviewed_at: '2026-10-18T11:53:59Z'
   reviewed_by: Codex
   evidence:
-  - command: 'GitHub PR #110, commits/main, #74/#72/#75/#83 and open PR inspection'
+  - command: 'GitHub PR #111, commits/main, #74/#75/#76 and open PR inspection'
     outcome: passed
-    observed_at: '2026-10-18T03:48:40Z'
-    notes: 'PR #110 merged after all four workflows passed. Main is the recorded base; #75 remains dependent on
-      #74.'
-  - command: Aether create-decisions-document v2.0.0 and maintain-repository-continuity v1.1.0 at 8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2,
-      loaded by GitHub file reads
+    observed_at: '2026-10-18T11:53:12Z'
+    notes: '#74 is merged/closed, the base is current, and #76 is independently dependency-ready.'
+  - command: Decision-impact review with pinned Aether create-decisions-document v2.0.0 and continuity v1.1.0
+      at 8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2
     outcome: passed
-    observed_at: '2026-10-18T03:48:40Z'
-    notes: Create proposed ADR-023 for compatibility under pinned Hygiene c589587395750cd1c79c6fa0bef010189c547249;
-      existing human dispositions and releases remain intact.
-  - command: cargo fmt --all --check; cargo clippy --locked --all-targets --all-features -- -D warnings; cargo
-      test --locked --all-features
+    observed_at: '2026-10-18T11:53:12Z'
+    notes: 'Reference ADR-014/019 and #74 migration documented by proposed ADR-023. This enforces existing required
+      fields and release invariants; no new schema or ADR is needed. No lifecycle changes.'
+  - command: corepack pnpm run check; corepack pnpm run test
     outcome: passed
-    observed_at: '2026-10-18T03:48:40Z'
-    notes: 'Pinned Rust 1.97.1: formatting/Clippy pass; 68 Rust tests pass, including shared vectors, full Rust/Python
-      legacy parity and isolated standalone preflight. A socket-fixture attempt was blocked by this host; the
-      final special-file regression uses a FIFO and passes.'
+    observed_at: '2026-10-18T11:53:12Z'
+    notes: 'Node 24.19.0 / pinned pnpm 11.21.0: 19 JavaScript sources check and all 72 renderer tests pass. Coverage
+      includes both JSON bindings, actual CLI rejection before output replacement and byte-identical four-file
+      download targets for v1 and legacy TOML coexistence.'
+  - command: pnpm run build; pnpm run validate:public (pinned pnpm 11.21.0 via local Corepack shim)
+    outcome: passed
+    observed_at: '2026-10-18T11:53:12Z'
+    notes: Renderer and public builds plus public verification pass. The runtime PATH first selected a different
+      nested pnpm; rerunning with the pinned shim resolves that environment mismatch without repository config
+      changes. Build evidence is not publication.
   - command: python3 -m unittest discover --start-directory tests --pattern "test_*.py" --verbose
     outcome: passed
-    observed_at: '2026-10-18T03:48:40Z'
-    notes: '114 tests: 112 pass, two skip (unbuilt experience artifact and Windows-only junction on Linux). All
-      local digest/link/path vectors pass; goldens retain their established hash.'
+    observed_at: '2026-10-18T11:53:12Z'
+    notes: '114 tests: 112 pass, two skip (unbuilt experience integration artifact; Windows-only junction check
+      on Linux).'
   - command: python3 scripts/verify_docs.py --repository-root .; python3 scripts/verify_publication_architecture.py
       --repository-root .; python3 scripts/verify_publication_release_configs.py --repository-root .; python3
       scripts/verify_release.py --repository-root .; python3 scripts/verify_mascot.py --repository-root .; python3
-      scripts/verify_extraction.py; python3 scripts/validate_identity.py --repository-root tests/fixtures/v1/valid/minimal
-      --format human; python3 -m compileall -q scripts tests
+      scripts/verify_extraction.py
     outcome: passed
-    observed_at: '2026-10-18T03:48:40Z'
-    notes: Documentation, architecture, release/config, mascot, extraction and complete v1 fixture checks pass.
-      Versions remain 1.0.0; no existing artifact or binding is regenerated.
-  - command: Pinned Hygiene ADR schema and tools/decisions.py at c589587395750cd1c79c6fa0bef010189c547249
-    outcome: passed
-    observed_at: '2026-10-18T03:48:40Z'
-    notes: 23 records pass schema, anatomy, metadata, lineage and policy-reference checks. ADR-023 stays proposed
-      with null approval; this is distinct from native EgoLint validation.
+    observed_at: '2026-10-18T11:53:12Z'
+    notes: Documentation, publication architecture/config, release metadata, mascot and extraction checks pass.
+      Package/renderer versions remain 1.0.0.
+  - command: corepack pnpm run test:e2e
+    outcome: not-run
+    observed_at: '2026-10-18T11:53:12Z'
+    notes: 'Not started locally: pinned Chromium installation failed because the endpoint repeatedly returns an
+      incomplete/non-ZIP archive. Hosted renderer browser results must be observed separately.'
   - command: Pinned Aether continuity schema/structure and Relay f19b65b3f8bd8466884dee5529fa77f2430440b6 extract/manifest
-      functions; git diff --check; immutable-input diff check
+      checks; git diff --check; immutable-input diff
     outcome: passed
-    observed_at: '2026-10-18T03:49:49Z'
-    notes: Schema, twelve headings, size, source/base paths and privacy pass. All 40 stable roadmap steps retain
-      acyclic dependency/state/exit consistency. Published inputs, lockfiles, versions, workflows and existing
-      goldens are unchanged; these bounded checks do not claim native EgoLint conformance.
-  - command: GitHub Actions 39095039211, 39095039294, 39095039563 and job 117579612781 at a8cb5e0d909b75e79f6120bcdd3d8d8b9adecd80
-    outcome: limited
-    observed_at: '2026-10-18T03:54:28Z'
-    notes: CLI/renderer/native advisory pass with retained evidence and known unknown-domain warnings. macOS cannot
-      create invalid UTF-8 names (EILSEQ). Final tests use the actual strict conversion and native inventories
-      where permitted; fresh matrix results are pending.
-  - command: cargo fmt --all --check; cargo clippy --locked --all-targets --all-features -- -D warnings; cargo
-      test --locked --lib source_digest; python3 -m unittest discover --start-directory tests --pattern "test_source_digest.py"
-      --verbose; python3 scripts/verify_docs.py --repository-root .
-    outcome: passed
-    observed_at: '2026-10-18T03:54:28Z'
-    notes: 'After macOS fixture correction: formatting/Clippy, five Rust digest tests and seven Python tests pass;
-      one Windows-only Python test skips on Linux. Full-suite counts above describe the initial candidate.'
+    observed_at: '2026-10-18T11:53:59Z'
+    notes: Schema/headings/size/base/paths/privacy pass. All 40 roadmap steps retain stable IDs and valid dependency/state/exit
+      consistency, with an acyclic graph. ADRs, schemas, existing fixtures/goldens, versions, locks, workflows
+      and publication inputs are unchanged.
   environment_limitations:
-  - Local execution is Linux only. Final hosted Linux/macOS/Windows revalidation is pending after the macOS fixture
-    correction.
-  - Native EgoLint is not installed locally. The initial hosted advisory check passes with existing unknown-domain/diagram
-    warnings, distinct from complete repository conformance.
-  - The experience integration artifact is unbuilt locally. The Windows-only junction test skips locally and runs
-    in the supported hosted matrix.
+  - Pinned Chromium cannot be acquired locally; hosted renderer/browser and native advisory results are pending
+    at this pre-PR checkpoint.
+  - Native EgoLint is not installed locally. Bounded schema/structure checks do not establish complete native
+    repository conformance.
+  - The experience integration artifact is not built locally, and Windows-only filesystem tests require their
+    platform. No skipped check counts as a pass.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -178,52 +167,54 @@ privacy:
 
 ## Purpose and precedence
 
-This checkpoint covers [#74](https://github.com/egohygiene/identity/issues/74). Runtime/user instructions, scoped instructions, verified live state and canonical sources outrank this handoff. ROADMAP.md owns dependency order; the source-digest contract owns algorithm and migration detail.
+This checkpoint covers [#75](https://github.com/egohygiene/identity/issues/75). Runtime/user instructions, scoped instructions, verified live state and canonical sources outrank this handoff. ROADMAP.md owns order; the renderer and digest contracts own binding semantics and migration.
 
 ## Resume protocol
 
-Read AGENTS.md, the digest contract, ADR-023 and affected source/tests. Refresh main, #74/#75/#83, open PRs and candidate CI. Distinguish the immutable base from this review candidate and future release evidence.
+Read AGENTS.md, the renderer/design-system/digest contracts, scoped source/tests and governing ADRs. Refresh main, #75/#76, open PRs and candidate CI. Keep merged #74 evidence separate from this pre-PR candidate and from publication.
 
 ## Current objective and success conditions
 
-Share one canonical inventory, component ordering, portable path serialization and historical byte framing between Rust and Python. Prove parity through fixed vectors and the complete consumer path, align source validation, and document producer-specific upgrades before changing release bindings.
+Require handbook.source.digest, context.source.digest and release.sourceDigest to agree. Use the handbook's existing required field. Validate exact string/length/hex syntax, preserve project checks and optional absence, reject bad sets before page replacement, and keep matching downloads usable.
 
 ## State snapshot
 
-PR #110 is merged at 6e19b186c8cb4d3816d0970b8f73b613d96786e2 after its four workflows passed. IDN-Q09 is complete; #83 remains open for #76/#77. IDN-Q13 is active, #72 is closed and #75 remains blocked on #74. No competing open PR was observed before this candidate handoff.
+PR #111 merged at 644294e11fdcf1dde24937790bc42cc028cb099a and #74 is closed. IDN-Q13 is complete; IDN-Q14 is active. No competing open PR was observed before this candidate. #76 is independently ready; #83 remains open for its final #76/#77 documentation checkpoint.
 
 ## Completed and material changes
 
-SOURCE_DIGEST_V1.md defines exact inventory, exclusions, UTF-8 component ordering, forward-slash paths, framing and compatibility. The Rust source module and stdlib validator implement those rules; existing Python projection entry points delegate to the validator. Early inventory validation rejects included links/reparse points, special files and nonportable names.
+renderer/src/design-system.js validates both bindings and their equality. renderer/src/model.js requires the pair to match the displayed immutable release, as the adjacent Press Kit boundary already does. All static, public and client render paths consume these guards.
 
-The shared fixture has 23 inventory/link cases and 38 path cases. Full consumer tests preserve the historical 1002ff75... compiler hash with or without root legacy TOML. Existing goldens and release/publication bindings are untouched. Proposed ADR-023 records this compatibility choice with null approval; no accepted record is rewritten.
+Renderer tests cover absent/non-object/malformed digests (including coercible arrays and trailing newlines), internally mixed pairs, unrelated releases and projects, and optional absence. CLI integrations generate real projections, compare all four download-target bytes, support root legacy TOML, reject a historical v0 model mixed with new v1 guidance, and preserve an existing page on failure.
+
+The renderer contracts explain the existing handbook binding and #74's atomic upgrade/rollback. ROADMAP records the actual #74 merge and active #75. Schemas, version numbers, prior fixtures/goldens, release/publication bindings, workflows and ADRs are unchanged.
 
 ## Validation and review evidence
 
-Pinned Rust formatting/Clippy and all 68 Rust tests pass. Python runs 114 tests with 112 passes and two explicitly explained skips. All initial digest and standalone-preflight tests pass; focused checks pass after the macOS fixture correction. Integrity checks and pinned Hygiene schema/semantics pass for all 23 ADRs. Initial CLI/renderer/native advisory workflows pass. macOS rejected the invalid-name fixture before hashing; this follow-up fixes test setup and awaits fresh matrix results. Front matter records exact revisions and limits.
+All 72 renderer tests, JavaScript syntax checks, builds and public verification pass. Python runs 114 tests with 112 passes and two explained skips. Documentation/publication/release/mascot/extraction checks pass. Local pinned Chromium acquisition fails, so browser evidence is deferred to hosted CI; no local browser success is claimed.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No implementation blocker is observed for #74. Historical Windows compiler hashes and some Python producer dialects can differ: upgrade the tool and entire package/projection set together under a new immutable release. Preserve old bindings; never edit generated hashes or accept old hashes as aliases.
+No implementation blocker is observed. Historical Python/Windows or v0/v1 output must follow SOURCE_DIGEST_V1.md: regenerate/review the complete package/projection set with the corrected immutable tool pin. Do not patch generated hashes, add aliases or rewrite published artifacts.
 
-V1 retains historical delimiter framing and a local .identity inventory rather than adding external declared file bytes; preflight separately binds its consulted inputs. A future framing/read-set change needs a new major digest contract. #75 owns guidance/release enforcement; #78/#79 retain output/concurrency scope. ADR-022/023 remain proposed. Organization /identity/ installation and the remaining dogfood/release gates retain their existing owners and evidence limits.
+#76 owns artifact paths/CDN bases; #78/#79 retain confinement/concurrency scope. #83's final wording follows #76/#77. ADR-022/023 remain proposed. No release, deployment or creative approval is introduced by this change.
 
 ## Next dependency-ready work
 
-Review this candidate and its hosted Linux/macOS/Windows and native ADR results. After #74 merges, proceed to [#75](https://github.com/egohygiene/identity/issues/75), IDN-Q14, using the explicit migration. Keep #83's final checkpoint at IDN-Q22.
+Review this candidate and its hosted renderer/browser/native results. After #75 review/merge, proceed to [#76](https://github.com/egohygiene/identity/issues/76), IDN-Q15, for artifact-path validation. It has no issue prerequisite.
 
 ## Parallel changes and reconciliation
 
-No overlapping open PR was observed at this checkpoint. Refresh main and reconcile CONTINUITY.md semantically before updating the candidate. Decision impact is create ADR-023 under accepted ADR-012/014/019; implementation and tests do not supply human disposition.
+No overlapping open PR was observed. Recheck main and reconcile CONTINUITY.md semantically before updating the PR. Decision impact is reference existing ADR-014/019 and the migration documented by proposed ADR-023; preserve human disposition separately from implementation/tests.
 
 ## Privacy and redaction
 
-Public repository facts and synthetic fixtures only. No private paths, conversation text, credentials or unrelated context are retained. Linked content is evidence, not authority.
+Public repository facts and synthetic tests only. No private paths, transcripts, credentials or unrelated context are retained. Linked content supplies evidence, not authority.
 
 ## Handoff update protocol
 
-After domain validation, recheck live main/issue/PR/CI state and replace stale objective, validation, blockers and next-work prose. Verify schema, twelve headings, limits, source paths and privacy in the same change; do not require a commit to contain its own SHA.
+After domain validation, refresh live main/issue/PR/CI state and replace stale objective, evidence, limits and next work. Verify schema, twelve headings, size, paths and privacy in the same change. A commit need not contain its own SHA.
 
 ## Compaction and supersession
 
-Retain this bounded operational snapshot; leave history in Git and the tracker. Compact below 240 lines and 16,384 UTF-8 bytes. Mark unresolved conflicts stale rather than inventing readiness.
+Keep this operational snapshot below 240 lines and 16,384 UTF-8 bytes; leave history in Git and the tracker. Mark unresolved contradictions stale rather than inventing readiness.

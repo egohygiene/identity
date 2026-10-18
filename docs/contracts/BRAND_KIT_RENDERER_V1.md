@@ -63,11 +63,25 @@ design-context.md
 ```
 
 The renderer validates the handbook/context schemas, shared project identity,
-declared handbook schema, and SHA-256 source digest before adding the optional
-Design system section. That section presents approved principles, inheritance,
+and declared handbook schema. Both JSON projections must provide their existing
+`source.digest` binding as a lowercase 64-character SHA-256 string. The handbook
+and context digests must equal each other and `release.sourceDigest` in the Brand
+Kit model before rendering the optional Design system section. Missing,
+malformed, stale, or mixed-source bindings fail with an explicit error; project
+identity alone cannot establish agreement. The handbook uses its existing
+required binding, without adding a separate release field or model version.
+
+That section presents approved principles, inheritance,
 capability ownership, and artifact downloads. It does not re-author source
 facts in renderer configuration, nor does its presence imply that Holon or a
 product consumer has implemented an undeclared capability.
+
+An absent design-system pair remains valid. For legacy/v1 coexistence, use the
+[shared source-digest migration](SOURCE_DIGEST_V1.md#compatibility-and-release-migration):
+regenerate the compiler view model and all four projections from the same source
+and corrected immutable tool selection. Historical Python/Windows digests and
+older v0 release models receive no aliases or unchecked compatibility fallback.
+Keep previous published artifact sets intact and upgrade/roll back the whole set.
 
 When a consumer supplies a generated Press Kit directory, the renderer may
 also consume its `press-kit.json` projection and the packaged assets named by

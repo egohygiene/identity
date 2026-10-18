@@ -40,7 +40,7 @@ updated: 2026-10-18
 Reviewed source: [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. This is the source-review date; a later collector run does not renew its freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #83's bounded reconciliation merged in PR #110 (IDN-Q09). Implement and review #74's shared source-digest contract (IDN-Q13).
+**Current gate:** #74's shared source-digest contract merged in PR #111 (IDN-Q13). Implement and review #75's optional guidance/release binding (IDN-Q14).
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 There are 28 open issues: fifteen remaining audit work items (#74–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. #71–#73 are complete on merged main through [PR #89](https://github.com/egohygiene/identity/pull/89); those repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) has an early independent reconciliation and a final checkpoint after #76/#77. The separate steps preserve that distinction.
@@ -357,7 +357,7 @@ issues: [73]
 
 <!-- roadmap-step
 id: IDN-Q13
-status: active
+status: complete
 depends_on: [IDN-Q11]
 issues: [74]
 -->
@@ -367,13 +367,13 @@ issues: [74]
 
 **Exit criteria:**
 
-- [ ] Shared inventory/digest vectors pass and any release-binding transition is explicitly documented.
+- [x] Shared inventory/digest vectors pass and the release-binding transition is explicitly documented in merged PR #111.
 
-**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74). The candidate defines [shared digest semantics and migration](docs/contracts/SOURCE_DIGEST_V1.md) with shared Rust/Python vectors and proposed ADR-023. Preserve historical release identities and offline operation; this step remains active until review/merge.
+**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74), [PR #111](https://github.com/egohygiene/identity/pull/111), merged at `644294e11fdcf1dde24937790bc42cc028cb099a`. Shared Rust/Python vectors and Linux/macOS/Windows release gates pass. [Digest semantics and migration](docs/contracts/SOURCE_DIGEST_V1.md) preserve historical release identities and offline operation; ADR-023 remains proposed.
 
 <!-- roadmap-step
 id: IDN-Q14
-status: blocked
+status: active
 depends_on: [IDN-Q13]
 issues: [75]
 -->

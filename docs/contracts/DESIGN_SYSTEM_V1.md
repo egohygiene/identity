@@ -126,6 +126,24 @@ The explicit output directory receives `design-system-handbook.json`,
 It may not point into `.identity/`, traverse symbolic links, or cause an
 external reference URL to be retrieved.
 
+## Binding to a displayed Brand Kit
+
+Both generated JSON contracts already require `source.digest`. The renderer
+requires each value to be a lowercase SHA-256 string, then requires
+`handbook.source.digest == context.source.digest == release.sourceDigest`.
+The handbook's existing field supplies its explicit binding; no additional
+release identifier or schema change is needed. Project IDs/display names must
+also agree. A malformed or absent binding, a stale member of the pair, or a
+pair from a different source fails before page rendering/output replacement.
+
+The four downloadable artifacts travel together with the same compiler package
+and immutable producer selection. Consumers upgrading historical Python/Windows
+or mixed v0/v1 output follow the [source-digest transition](SOURCE_DIGEST_V1.md#compatibility-and-release-migration).
+Regenerate and review the complete set rather than patching digest fields or
+silently accepting an old hash. Root legacy TOML coexistence is supported by
+the corrected digest contract; it does not authorize attaching new v1 guidance
+to an unrelated historical v0 release. An omitted projection pair remains valid.
+
 ## Deliberately deferred
 
 This contract does not create:

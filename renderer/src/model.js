@@ -60,6 +60,11 @@ export function assertBrandKitViewModel(model) {
         "Design-system handbook display name must match the Brand Kit view model project.",
       );
     }
+    if (designSystem.handbook.source.digest !== model.release.sourceDigest) {
+      throw new TypeError(
+        "Design-system source digest must match the Brand Kit immutable release.",
+      );
+    }
   }
   if (model.pressKit !== undefined) {
     const pressKit = assertPressKitView(model.pressKit);

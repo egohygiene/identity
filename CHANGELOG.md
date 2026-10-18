@@ -55,6 +55,10 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- Bind optional design-system handbook/context source digests to each other and
+  the displayed immutable Brand Kit release (#75). Missing, malformed, stale,
+  wrong-project and mixed-source inputs fail before rendering; matching v1 and
+  legacy-TOML coexistence retain all four artifact downloads.
 - Align Rust and Python canonical source digests (#74), including legacy TOML
   exclusion, portable UTF-8 component ordering and `/` separators. Shared
   conformance vectors cover inventory and path boundaries; invalid included
