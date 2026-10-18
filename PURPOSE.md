@@ -86,7 +86,7 @@ Identity fulfills its purpose when:
 
 - **Implemented:** The independent CLI, v1 source validator, deterministic compiler/packages, guidance, reference renderer, and approval-aware studio are present. The [consumer pilots](https://github.com/egohygiene/identity/issues/17) and [v1.0.0 release closeout](https://github.com/egohygiene/identity/issues/18#issuecomment-5448834860) provide separate consumer and release evidence.
 - **Published:** The standalone Brand Kit at `https://identity.egohygiene.io/` consumes the immutable stable release. The organization `https://egohygiene.io/identity/` experience has a separate artifact and deployment gate; its candidate build is not proof of installation.
-- **Accepted:** The [canonical ADR index](docs/decisions/README.md) records 21 accepted decisions and proposed ADR-022/023. Decision acceptance remains distinct from implementation, verification, and deployment.
+- **Accepted:** The [canonical ADR index](docs/decisions/README.md) records 21 accepted decisions and proposed ADR-0022/023. Decision acceptance remains distinct from implementation, verification, and deployment.
 - **Remaining:** [ROADMAP.md](ROADMAP.md) maps stabilization #70–#88 and Brand Kit completion #98–#109. Merged post-v1 repairs are not retroactively part of v1.0.0.
 - **Deferred:** Managed services, marketplaces, and provider-specific creative generation are outside v1 unless a later decision changes the roadmap.
 

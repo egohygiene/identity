@@ -11,7 +11,7 @@ deployment and rollback authority:
 The machine-readable route and lifecycle contract is
 [`publication/identity-experience.architecture.json`](../../publication/identity-experience.architecture.json).
 The rationale and framework boundary are accepted in
-[ADR-017](../decisions/ADR-017-zensical-launchkit-publication-architecture.md).
+[ADR-0017](../decisions/ADR-0017-zensical-launchkit-publication-architecture.md).
 
 ## Dogfooded product experience
 
@@ -163,10 +163,10 @@ an automatic run.
 ## Decisions composition checkpoint — 2026-10-10
 
 The current implementation adds Repository Intelligence to the existing Brand
-Kit publisher and host. [Proposed ADR-022](../decisions/ADR-022-decisions-publication-composition.md)
-records this consumer choice separately from accepted ADR-017 and the earlier
+Kit publisher and host. [Proposed ADR-0022](../decisions/ADR-0022-decisions-publication-composition.md)
+records this consumer choice separately from accepted ADR-0017 and the earlier
 R1 disposition. Implementation and deployment authorization do not mark
-ADR-022 accepted.
+ADR-0022 accepted.
 
 The latest recorded publication checkpoint is
 [PR #97](https://github.com/egohygiene/identity/pull/97), merged at
@@ -178,7 +178,7 @@ alias, and 40 preserved Brand Kit files), visible organization/GitHub marks,
 correct destinations, keyboard focus, and the organization favicon. This is
 the later deployment/branding checkpoint, not a new observation by this guide.
 The Brand Kit release remains `v1.0.0`; the current Decisions source has its
-independent full commit binding. ADR-022 remains proposed and production
+independent full commit binding. ADR-0022 remains proposed and production
 rollback has not been established by that proof.
 
 | Component | Route/source boundary |
@@ -219,7 +219,7 @@ the deployment receipt separate from the live-verification result.
 
 The [ratified-source receipt](../evidence/identity-adrs-ratified-2026-10-10.json)
 is historical evidence for source `12227dad43c90b02e14971030f22242f3a205c9d`
-and 21 accepted records. Adding proposed ADR-022 required fresh admission and
+and 21 accepted records. Adding proposed ADR-0022 required fresh admission and
 build evidence for the 22-record corpus. The later publisher and live-proof
 checkpoint above records that deployed composition; the earlier receipt remains
 unchanged and supplies neither later-source nor exercised-rollback evidence.

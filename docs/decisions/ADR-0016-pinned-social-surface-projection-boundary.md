@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-016
+id: ADR-0016
 title: Project social surfaces from pinned external facts
 status: accepted
 date: "2026-10-10"
@@ -39,7 +39,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-016: Project social surfaces from pinned external facts
+# ADR-0016: Project social surfaces from pinned external facts
 
 The canonical date records the explicit human disposition on 2026-10-10.
 Original source prose and metadata are preserved below as historical evidence;

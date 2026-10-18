@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-010
+id: ADR-0010
 title: Render from a framework-neutral immutable view model
 status: accepted
 date: '2026-10-10'
@@ -20,7 +20,7 @@ implementation_status: implemented
 evidence:
 - type: approval
   url: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
-  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-010 with its scope qualifiers and exact N010 note.
+  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-0010 with its scope qualifiers and exact N010 note.
 - type: documentation
   url: https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-010-reference-renderer-boundary.md
   description: Immutable original record preserves historical wording and declared metadata; its legacy label is not the current approval evidence.
@@ -37,7 +37,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-010: Render from a framework-neutral immutable view model
+# ADR-0010: Render from a framework-neutral immutable view model
 
 ## Context
 
@@ -123,7 +123,7 @@ implemented in repository source. The original reference to future proof in
 issue #14 records the historical delivery sequence. Current acceptance must
 use evidence for the exact candidate or release; source fixtures alone do not
 prove a fresh passing browser run or live deployment. The separate product
-experience described by ADR-017 does not replace the release-backed Brand Kit
+experience described by ADR-0017 does not replace the release-backed Brand Kit
 renderer.
 
 Evidence: [view-model implementation](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/src/reference_renderer.rs),

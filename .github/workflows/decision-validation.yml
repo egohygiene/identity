@@ -25,7 +25,7 @@ jobs:
     permissions:
       contents: read
     # Reviewed Relay source adoption; this does not claim an immutable release.
-    uses: egohygiene/relay/.github/workflows/repository-architecture-validation.yml@4137cb07a017b7bbae2ee38fe9b039c58b0b17eb
+    uses: egohygiene/relay/.github/workflows/repository-architecture-validation.yml@ac2600f4619f64c75a0e499e0540d8f48d516f9c
     with:
       check-id: identity-decisions
       mode: advisory

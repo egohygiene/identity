@@ -1,6 +1,6 @@
 ---
 schema: "egohygiene.architecture-decision/v1"
-id: "ADR-006"
+id: "ADR-0006"
 title: "Use a pinned Rust vector and raster stack"
 status: "accepted"
 date: "2026-10-10"
@@ -9,7 +9,7 @@ visibility: "public"
 owners: ["egohygiene/identity"]
 issue: "https://github.com/egohygiene/identity/issues/69"
 pull_request: "https://github.com/egohygiene/identity/pull/92"
-related: ["ADR-007", "ADR-008", "ADR-011"]
+related: ["ADR-0007", "ADR-0008", "ADR-0011"]
 supersedes: []
 superseded_by: []
 affected_repositories: ["egohygiene/identity"]
@@ -38,7 +38,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-006: Use a pinned Rust vector and raster stack
+# ADR-0006: Use a pinned Rust vector and raster stack
 
 ## Context
 

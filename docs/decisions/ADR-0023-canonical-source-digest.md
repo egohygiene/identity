@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-023
+id: ADR-0023
 title: Preserve and specify a shared canonical source digest
 status: proposed
 date: '2026-10-18'
@@ -11,9 +11,9 @@ owners:
 issue: https://github.com/egohygiene/identity/issues/74
 pull_request: https://github.com/egohygiene/identity/pull/111
 related:
-- ADR-012
-- ADR-014
-- ADR-019
+- ADR-0012
+- ADR-0014
+- ADR-0019
 supersedes: []
 superseded_by: []
 affected_repositories:
@@ -29,12 +29,12 @@ approval: null
 exceptions: []
 ---
 
-# ADR-023: Preserve and specify a shared canonical source digest
+# ADR-0023: Preserve and specify a shared canonical source digest
 
 ## Context
 
-ADR-012 governs local digest-pinned source, ADR-014 governs derived handbooks,
-and ADR-019 preserves immutable releases. They do not specify the complete
+ADR-0012 governs local digest-pinned source, ADR-0014 governs derived handbooks,
+and ADR-0019 preserves immutable releases. They do not specify the complete
 cross-language inventory algorithm. Python includes a root legacy TOML entry
 that Rust excludes; native path spelling and ordering also differ on Windows.
 Changing the framing or ordering without a compatibility boundary can invalidate

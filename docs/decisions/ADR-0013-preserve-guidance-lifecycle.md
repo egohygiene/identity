@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-013
+id: ADR-0013
 title: Preserve guidance lifecycle state in every projection
 status: accepted
 date: "2026-10-10"
@@ -39,7 +39,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-013: Preserve guidance lifecycle state in every projection
+# ADR-0013: Preserve guidance lifecycle state in every projection
 
 The canonical date records the explicit human disposition on 2026-10-10.
 Original source prose and metadata are preserved below as historical evidence;
