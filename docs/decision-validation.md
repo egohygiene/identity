@@ -64,8 +64,10 @@ That checkpoint did not deploy the generated artifact. It remains an immutable
 receipt for the 21-record source above, not evidence for later source changes.
 The publication implementation now selects the existing Brand Kit host for
 `/intelligence/decisions/` and its consumer-owned `/decisions/` alias as described
-below. New proposed ADR-022 makes the candidate corpus 22 records; it requires
-fresh native admission and production-build evidence for each selected source.
+below. ADR-022 made that candidate corpus 22 records. Proposed ADR-023 adds the
+source-digest compatibility contract in the current #74 candidate, bringing its
+corpus to 23 records; each selected source requires fresh native admission and
+production-build evidence.
 The later deployed source `55d0339ba5518c7b72154a2aad54a9e5b2bf2fff` has the
 separate PR #97/run checkpoint in the
 [publication guide](publication/IDENTITY_PAGES.md#decisions-composition-checkpoint--2026-10-10).

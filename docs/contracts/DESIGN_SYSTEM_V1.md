@@ -75,7 +75,8 @@ The generated handbook and context are reproducible from the same validated
 source. The projection command and public renderer together:
 
 1. validate the complete Identity v1 source before resolving anything;
-2. include a stable SHA-256 source digest covering the resolved inputs;
+2. include the shared [canonical source inventory digest](SOURCE_DIGEST_V1.md),
+   with explicit exclusions and a release compatibility boundary;
 3. sort derived arrays by stable source IDs/paths and use canonical JSON;
 4. record a fixed renderer/projection version rather than a wall-clock
    generation timestamp; and

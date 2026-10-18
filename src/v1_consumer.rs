@@ -10,6 +10,7 @@
 //! or package rendering locally.
 
 mod preflight;
+mod source_digest;
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
@@ -25,6 +26,7 @@ use crate::compiler::{
     CompilerError, CompilerResult, Diagnostic, FailureKind, IdentityIntent, IdentityReader,
     IdentityResolver, IdentityValidator, ResolvedIdentity, ValidationReport, sha256_hex,
 };
+use source_digest::canonical_source_digest;
 
 /// Reusable, immutable in-memory view of one validated v1 consumer source.
 #[derive(Clone, Debug)]
@@ -422,69 +424,6 @@ fn source_assets(
         );
     }
     Ok((sources, governance))
-}
-
-fn canonical_source_digest(repository_root: &Path) -> CompilerResult<String> {
-    let identity_root = repository_root.join(".identity");
-    let mut files = Vec::new();
-    collect_canonical_files(&identity_root, &identity_root, &mut files)?;
-    files.sort();
-    let mut bytes = Vec::new();
-    for path in files {
-        let relative = path
-            .strip_prefix(repository_root)
-            .map_err(|error| invalid(".identity", error.to_string()))?
-            .to_string_lossy();
-        let content = fs::read(&path)
-            .map_err(|error| invalid(path.display().to_string(), error.to_string()))?;
-        bytes.extend_from_slice(relative.as_bytes());
-        bytes.push(0);
-        bytes.extend_from_slice(&content);
-        bytes.push(0);
-    }
-    Ok(sha256_hex(&bytes))
-}
-
-fn collect_canonical_files(
-    root: &Path,
-    current: &Path,
-    files: &mut Vec<PathBuf>,
-) -> CompilerResult<()> {
-    for entry in fs::read_dir(current)
-        .map_err(|error| invalid(current.display().to_string(), error.to_string()))?
-    {
-        let entry =
-            entry.map_err(|error| invalid(current.display().to_string(), error.to_string()))?;
-        let path = entry.path();
-        let relative = path
-            .strip_prefix(root)
-            .map_err(|error| invalid(root.display().to_string(), error.to_string()))?;
-        if relative == Path::new("identity.toml")
-            || relative.file_name().is_some_and(|name| name == "README.md")
-        {
-            continue;
-        }
-        if relative.components().next().is_some_and(|component| {
-            matches!(
-                component.as_os_str().to_str(),
-                Some("candidates" | "references")
-            )
-        }) {
-            continue;
-        }
-        if path.is_symlink() {
-            return Err(invalid(
-                path.display().to_string(),
-                "canonical source traverses a symbolic link",
-            ));
-        }
-        if path.is_dir() {
-            collect_canonical_files(root, &path, files)?;
-        } else if path.is_file() {
-            files.push(path);
-        }
-    }
-    Ok(())
 }
 
 fn read_json(path: &Path, label: &str) -> CompilerResult<Value> {

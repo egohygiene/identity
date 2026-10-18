@@ -55,6 +55,11 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- Align Rust and Python canonical source digests (#74), including legacy TOML
+  exclusion, portable UTF-8 component ordering and `/` separators. Shared
+  conformance vectors cover inventory and path boundaries; invalid included
+  entries fail preflight. Existing release identities remain historical, with
+  an explicit whole-set migration for affected Python/Windows producers.
 - Enforce complete source preflight in v1 generation, verification, and library
   execution (#72), using the embedded authoritative validator and checking source
   freshness before apply. Current builds require local Python 3.11+ for v1.

@@ -12,8 +12,10 @@ from dataclasses import dataclass
 from datetime import datetime
 import hashlib
 import json
+import os
 from pathlib import Path, PurePosixPath
 import re
+import stat
 import sys
 from typing import Any, Sequence
 
@@ -577,6 +579,82 @@ def valid_relative_path(value: Any) -> bool:
     ):
         return False
     return all(part not in {"", ".", ".."} for part in value.split("/"))
+
+
+def valid_canonical_source_path(value: str) -> bool:
+    """Match the compiler's portable path rules for digest inventory entries."""
+
+    if not valid_relative_path(value) or any(
+        ord(character) < 0x20
+        or 0x7F <= ord(character) <= 0x9F
+        or 0xD800 <= ord(character) <= 0xDFFF
+        or character in '\\:*?"<>|'
+        for character in value
+    ):
+        return False
+    ascii_upper = str.maketrans("abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    reserved = {"CON", "PRN", "AUX", "NUL"} | {
+        f"{prefix}{suffix}" for prefix in ("COM", "LPT") for suffix in "123456789¹²³"
+    }
+    return all(
+        not part.endswith((".", " ")) and part.split(".", 1)[0].translate(ascii_upper) not in reserved
+        for part in value.split("/")
+    )
+
+
+def canonical_source_files(repository_root: Path) -> list[Path]:
+    """Inventory egohygiene.identity.source-digest/v1 without following excluded entries or links."""
+
+    def is_link(metadata: os.stat_result) -> bool:
+        return stat.S_ISLNK(metadata.st_mode) or bool(
+            getattr(metadata, "st_file_attributes", 0)
+            & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+        )
+
+    identity_root = repository_root / ".identity"
+    metadata = identity_root.lstat()
+    if is_link(metadata) or not stat.S_ISDIR(metadata.st_mode):
+        raise ValueError("canonical .identity source must be a local directory")
+    files = []
+
+    def visit(directory: Path) -> None:
+        for path in directory.iterdir():
+            relative = path.relative_to(identity_root)
+            # Match the historical compiler exclusions before inspecting an entry.
+            if path.name == "README.md" or (
+                len(relative.parts) == 1
+                and relative.parts[0] in {"identity.toml", "candidates", "references"}
+            ):
+                continue
+            portable = path.relative_to(repository_root).as_posix()
+            if not valid_canonical_source_path(portable):
+                raise ValueError(f"invalid portable canonical source path: {portable}")
+            metadata = path.lstat()
+            if is_link(metadata):
+                raise ValueError(f"canonical source traverses a symbolic link or reparse point: {portable}")
+            if stat.S_ISDIR(metadata.st_mode):
+                visit(path)
+            elif stat.S_ISREG(metadata.st_mode):
+                files.append(path)
+            else:
+                raise ValueError(f"canonical source is not a regular file or directory: {portable}")
+
+    visit(identity_root)
+    return sorted(files, key=lambda path: tuple(
+        part.encode("utf-8") for part in path.relative_to(repository_root).parts
+    ))
+
+
+def canonical_source_digest(repository_root: Path) -> str:
+    """Hash the ordered inventory using the historical v1 NUL byte framing."""
+
+    digest = hashlib.sha256()
+    for path in canonical_source_files(repository_root):
+        digest.update(path.relative_to(repository_root).as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(read_source_bytes(path))
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 def load_json(path: Path, pointer: str, diagnostics: list[Diagnostic]) -> dict[str, Any] | None:
@@ -4749,6 +4827,12 @@ def validate_identity(repository_root: Path) -> list[Diagnostic]:
     """Return all v1 source violations without mutating repository state."""
 
     diagnostics: list[Diagnostic] = []
+    try:
+        canonical_source_files(repository_root)
+    except (OSError, ValueError) as error:
+        diagnostic(diagnostics, "IDN1003", ".identity", str(error),
+                   "Restore regular local source files with portable paths and rerun validation.")
+        return diagnostics
     identity_path = repository_root / ".identity/identity.json"
     if identity_path.is_symlink() or identity_path.parent.is_symlink():
         diagnostic(diagnostics, "IDN1003", ".identity/identity.json",

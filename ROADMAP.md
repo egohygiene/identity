@@ -40,7 +40,7 @@ updated: 2026-10-18
 Reviewed source: [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. This is the source-review date; a later collector run does not renew its freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** Merge #83's bounded reconciliation (IDN-Q09), then implement #74's shared source-digest contract (IDN-Q13).
+**Current gate:** #83's bounded reconciliation merged in PR #110 (IDN-Q09). Implement and review #74's shared source-digest contract (IDN-Q13).
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 There are 28 open issues: fifteen remaining audit work items (#74–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. #71–#73 are complete on merged main through [PR #89](https://github.com/egohygiene/identity/pull/89); those repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) has an early independent reconciliation and a final checkpoint after #76/#77. The separate steps preserve that distinction.
@@ -291,7 +291,7 @@ the bounded artifact implementation, not production installation.
 
 <!-- roadmap-step
 id: IDN-Q09
-status: active
+status: complete
 depends_on: []
 issues: [83]
 -->
@@ -301,9 +301,9 @@ issues: [83]
 
 **Exit criteria:**
 
-- [ ] The bounded documentation reconciliation is reviewed and merged; #83 remains open for its final recovery/download checkpoint.
+- [x] PR #110 merged the bounded documentation reconciliation; #83 remains open for its final recovery/download checkpoint.
 
-**Evidence and scope:** [#83](https://github.com/egohygiene/identity/issues/83). This early pass is independent of #76/#77; their final wording belongs to IDN-Q22.
+**Evidence and scope:** [#83](https://github.com/egohygiene/identity/issues/83), [PR #110](https://github.com/egohygiene/identity/pull/110), merged at `6e19b186c8cb4d3816d0970b8f73b613d96786e2`. This early pass is independent of #76/#77; their final wording belongs to IDN-Q22.
 
 ### Stabilization and invariant-preserving cleanup
 
@@ -357,7 +357,7 @@ issues: [73]
 
 <!-- roadmap-step
 id: IDN-Q13
-status: ready
+status: active
 depends_on: [IDN-Q11]
 issues: [74]
 -->
@@ -369,7 +369,7 @@ issues: [74]
 
 - [ ] Shared inventory/digest vectors pass and any release-binding transition is explicitly documented.
 
-**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74). Preserve historical release identities and offline operation.
+**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74). The candidate defines [shared digest semantics and migration](docs/contracts/SOURCE_DIGEST_V1.md) with shared Rust/Python vectors and proposed ADR-023. Preserve historical release identities and offline operation; this step remains active until review/merge.
 
 <!-- roadmap-step
 id: IDN-Q14

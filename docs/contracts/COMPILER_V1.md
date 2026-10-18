@@ -31,6 +31,11 @@ commit. Reusing a prepared compilation after changing source requires a fresh
 load and plan. These checks detect drift; exclusive writer serialization is a
 separate concern.
 
+The [canonical source digest contract](SOURCE_DIGEST_V1.md) specifies the common
+Rust/Python inventory and preserves historical Rust/Unix byte framing and
+component ordering. It documents the legacy Python and Windows compatibility
+transition without rewriting published release bindings.
+
 ## Core ownership
 
 The compiler core owns:

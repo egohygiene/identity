@@ -81,6 +81,45 @@ fn copy_tree(source: &Path, destination: &Path) {
     }
 }
 
+#[test]
+fn historical_digest_survives_legacy_toml_coexistence_in_rust_and_python_projections() {
+    use identity::compiler::IdentityReader;
+
+    let root = TempDir::new().unwrap();
+    copy_tree(&fixture_root(), root.path());
+    for legacy in [false, true] {
+        if legacy {
+            fs::write(
+                root.path().join(".identity/identity.toml"),
+                b"legacy source\n",
+            )
+            .unwrap();
+        }
+        let pipeline = V1ConsumerPipeline::load(root.path()).expect("preflight valid consumer");
+        let digest = pipeline.read().unwrap().source_digest;
+        assert_eq!(
+            digest,
+            "1002ff75ea51f6e016929894ea30cc96565bdbbca749a0e7fff1ebd0d2f21353"
+        );
+        let python = std::env::var_os("IDENTITY_PYTHON")
+            .unwrap_or_else(|| if cfg!(windows) { "python" } else { "python3" }.into());
+        let output = Command::new(python)
+            .arg(Path::new(env!("CARGO_MANIFEST_DIR")).join("scripts/render_design_system.py"))
+            .arg("--repository-root")
+            .arg(root.path())
+            .args(["--format", "context-json"])
+            .output()
+            .expect("run Python projection");
+        assert!(
+            output.status.success(),
+            "{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        let context: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(context["source"]["digest"], digest);
+    }
+}
+
 fn guidance_documents(root: &Path) -> Value {
     let document = |name| {
         serde_json::from_slice::<Value>(
@@ -354,6 +393,20 @@ fn symlinked_sources_fail_preflight_for_cli_and_library() {
         std::os::unix::fs::symlink(moved, original).unwrap();
         assert_preflight_rejected(root.path(), "IDN1003");
     }
+}
+
+#[test]
+fn unreferenced_symlinks_fail_preflight_for_cli_and_library() {
+    let root = TempDir::new().unwrap();
+    copy_tree(&fixture_root(), root.path());
+    fs::create_dir_all(root.path().join("assets/identity")).unwrap();
+    fs::write(root.path().join("assets/identity/sentinel"), b"keep").unwrap();
+    let link = root.path().join(".identity/unreferenced-link");
+    #[cfg(unix)]
+    std::os::unix::fs::symlink("absent", &link).unwrap();
+    #[cfg(windows)]
+    std::os::windows::fs::symlink_file("absent", &link).unwrap();
+    assert_preflight_rejected(root.path(), "IDN1003");
 }
 
 #[test]

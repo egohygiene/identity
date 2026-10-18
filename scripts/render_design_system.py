@@ -7,7 +7,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -52,28 +51,12 @@ def is_public(value: dict[str, Any]) -> bool:
 
 
 def canonical_source_digest(repository_root: Path) -> str:
-    """Return the compiler-compatible digest of local canonical Identity source."""
+    """Return egohygiene.identity.source-digest/v1, shared by every Python projection."""
 
-    identity_root = repository_root / ".identity"
-    if not identity_root.is_dir():
-        raise ProjectionError("missing canonical .identity source directory")
-    files = []
-    for path in identity_root.rglob("*"):
-        if not path.is_file() or path.is_symlink():
-            continue
-        relative_to_identity = path.relative_to(identity_root)
-        if path.name == "README.md" or relative_to_identity.parts[0] in {"candidates", "references"}:
-            continue
-        files.append(path)
-
-    digest = hashlib.sha256()
-    for path in sorted(files):
-        relative = path.relative_to(repository_root).as_posix().encode("utf-8")
-        digest.update(relative)
-        digest.update(b"\0")
-        digest.update(path.read_bytes())
-        digest.update(b"\0")
-    return digest.hexdigest()
+    try:
+        return validator.canonical_source_digest(repository_root)
+    except (OSError, ValueError) as error:
+        raise ProjectionError(str(error)) from error
 
 
 def resolve_alias_value(

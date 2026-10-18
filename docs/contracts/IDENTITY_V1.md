@@ -7,6 +7,12 @@ for one organization, product, or repository identity. Canonical input stays
 under `.identity/`; Identity-owned projections stay under `assets/identity/`.
 No generated file becomes source merely because it is committed.
 
+The [canonical source digest contract](SOURCE_DIGEST_V1.md) defines the shared
+Rust/Python inventory, path rules, ordering, raw-byte framing and release
+compatibility transition. Included inventory entries must be regular local
+files/directories with portable UTF-8 paths; links and reparse points fail
+source validation even when not explicitly referenced by the manifest.
+
 The v1 topology is:
 
 ```text

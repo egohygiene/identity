@@ -1,0 +1,742 @@
+{
+  "schema": "identity.source-digest-vectors/v1",
+  "contract": "egohygiene.identity.source-digest/v1",
+  "cases": [
+    {
+      "id": "empty-inventory",
+      "directories": [
+        ".identity"
+      ],
+      "files": [],
+      "links": [],
+      "inventory": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "normal",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": ".identity/tokens.json",
+          "hex": "7b22636f6c6f72223a22707572706c65227d0a"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/identity.json",
+        ".identity/tokens.json"
+      ],
+      "sha256": "a584c36e7069d50527c44d41e35f5f0402623eb31202e8bf79bbcebfe0f7a196"
+    },
+    {
+      "id": "normal-reversed-creation-order",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/tokens.json",
+          "hex": "7b22636f6c6f72223a22707572706c65227d0a"
+        },
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/identity.json",
+        ".identity/tokens.json"
+      ],
+      "sha256": "a584c36e7069d50527c44d41e35f5f0402623eb31202e8bf79bbcebfe0f7a196"
+    },
+    {
+      "id": "legacy-toml-coexistence",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": ".identity/identity.toml",
+          "hex": "5b6964656e746974795d0a6e616d65203d20226c6567616379220a"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/identity.json"
+      ],
+      "sha256": "9305886f661c11ce4176405deb094496c71453bdc902de5bf6934086ae323fa0"
+    },
+    {
+      "id": "readme-candidates-references-and-generated-exclusions",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": ".identity/README.md",
+          "hex": "646f63756d656e746174696f6e"
+        },
+        {
+          "path": ".identity/notes/README.md",
+          "hex": "6e657374656420646f63756d656e746174696f6e"
+        },
+        {
+          "path": ".identity/candidates/deep/draft.svg",
+          "hex": "756e617070726f766564"
+        },
+        {
+          "path": ".identity/references/inspiration.svg",
+          "hex": "7265666572656e6365"
+        },
+        {
+          "path": "assets/identity/generated.svg",
+          "hex": "67656e657261746564"
+        },
+        {
+          "path": "brief.md",
+          "hex": "6465636c617265642065787465726e616c20696e707574732075736520707265666c696768742c206e6f74207468697320646967657374"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/identity.json"
+      ],
+      "sha256": "9305886f661c11ce4176405deb094496c71453bdc902de5bf6934086ae323fa0"
+    },
+    {
+      "id": "case-sensitive-readme-name",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": ".identity/Readme.md",
+          "hex": "696e636c75646564"
+        },
+        {
+          "path": ".identity/notes/README.md",
+          "hex": "6578636c75646564"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/Readme.md",
+        ".identity/identity.json"
+      ],
+      "sha256": "fdc79ab132804350838073a6a47eb94f7394d346f41c7ca90fd4df7a526a287b"
+    },
+    {
+      "id": "nested-lookalikes-are-included",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": ".identity/notes/candidates/draft.txt",
+          "hex": "696e636c75646564206e65737465642063616e64696461746573"
+        },
+        {
+          "path": ".identity/notes/identity.toml",
+          "hex": "696e636c75646564206e6573746564206c6567616379206e616d65"
+        },
+        {
+          "path": ".identity/notes/references/ref.txt",
+          "hex": "696e636c75646564206e6573746564207265666572656e636573"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/identity.json",
+        ".identity/notes/candidates/draft.txt",
+        ".identity/notes/identity.toml",
+        ".identity/notes/references/ref.txt"
+      ],
+      "sha256": "c4c17a6939265730a579d0f542b5ee549b74e7fdf73adbf81c4ff9fc7c8784f7"
+    },
+    {
+      "id": "component-order-not-whole-path-order",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/a.json",
+          "hex": "66696c65"
+        },
+        {
+          "path": ".identity/a/child.json",
+          "hex": "6e6573746564"
+        },
+        {
+          "path": ".identity/a-b.json",
+          "hex": "70756e6374756174696f6e"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/a/child.json",
+        ".identity/a-b.json",
+        ".identity/a.json"
+      ],
+      "sha256": "90c56ba316d2d862b546bd1827874a04d9972823016281e8b84e0ea3f20f694f"
+    },
+    {
+      "id": "case-sensitive-order",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/a-lower.json",
+          "hex": "6c6f776572"
+        },
+        {
+          "path": ".identity/B-upper.json",
+          "hex": "7570706572"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/B-upper.json",
+        ".identity/a-lower.json"
+      ],
+      "sha256": "649c249fcc7c08b76915278579cd96bd40a30cebb23249e9d72aa4955dac7661"
+    },
+    {
+      "id": "unicode-paths-and-order",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/🧭.json",
+          "hex": "61737472616c"
+        },
+        {
+          "path": ".identity/空/資料.txt",
+          "hex": "736f7572636520e8b387e696990a"
+        },
+        {
+          "path": ".identity/ß.txt",
+          "hex": "756e69636f6465"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/ß.txt",
+        ".identity/空/資料.txt",
+        ".identity/🧭.json"
+      ],
+      "sha256": "0ed5cde2159da6988951bd2c790fde2dcc0cafa13c1e9cfb2da88e9ece38f4cb"
+    },
+    {
+      "id": "binary-nul-and-crlf-bytes",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/binary.dat",
+          "hex": "00ff000d0a80"
+        },
+        {
+          "path": ".identity/empty",
+          "hex": ""
+        },
+        {
+          "path": ".identity/text.md",
+          "hex": "66697273740d0a7365636f6e640a"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/binary.dat",
+        ".identity/empty",
+        ".identity/text.md"
+      ],
+      "sha256": "871a1fc993864ca914a38125b25ec34a572e8142b8d321019e43a00b62e2685f"
+    },
+    {
+      "id": "excluded-names-prune-subtrees",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": ".identity/README.md/ignored.txt",
+          "hex": "69676e6f726564"
+        },
+        {
+          "path": ".identity/identity.toml/ignored.txt",
+          "hex": "69676e6f726564"
+        }
+      ],
+      "links": [],
+      "inventory": [
+        ".identity/identity.json"
+      ],
+      "sha256": "9305886f661c11ce4176405deb094496c71453bdc902de5bf6934086ae323fa0"
+    },
+    {
+      "id": "missing-identity-root",
+      "directories": [],
+      "files": [],
+      "links": [],
+      "inventory": null,
+      "sha256": null
+    },
+    {
+      "id": "regular-file-identity-root",
+      "directories": [],
+      "files": [
+        {
+          "path": ".identity",
+          "hex": "6e6f742061206469726563746f7279"
+        }
+      ],
+      "links": [],
+      "inventory": null,
+      "sha256": null
+    },
+    {
+      "id": "included-file-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/link.txt",
+          "target": "../outside.txt",
+          "directory": false
+        }
+      ],
+      "inventory": null,
+      "sha256": null
+    },
+    {
+      "id": "included-directory-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/link",
+          "target": "../outside",
+          "directory": true
+        }
+      ],
+      "inventory": null,
+      "sha256": null
+    },
+    {
+      "id": "broken-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/link",
+          "target": "absent",
+          "directory": false
+        }
+      ],
+      "inventory": null,
+      "sha256": null
+    },
+    {
+      "id": "cycle-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/cycle",
+          "target": ".",
+          "directory": true
+        }
+      ],
+      "inventory": null,
+      "sha256": null
+    },
+    {
+      "id": "excluded-legacy-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/identity.toml",
+          "target": "../outside.txt",
+          "directory": false
+        }
+      ],
+      "inventory": [
+        ".identity/identity.json"
+      ],
+      "sha256": "9305886f661c11ce4176405deb094496c71453bdc902de5bf6934086ae323fa0"
+    },
+    {
+      "id": "excluded-readme-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/notes/README.md",
+          "target": "../../outside.txt",
+          "directory": false
+        }
+      ],
+      "inventory": [
+        ".identity/identity.json"
+      ],
+      "sha256": "9305886f661c11ce4176405deb094496c71453bdc902de5bf6934086ae323fa0"
+    },
+    {
+      "id": "excluded-candidates-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/candidates",
+          "target": "../outside",
+          "directory": true
+        }
+      ],
+      "inventory": [
+        ".identity/identity.json"
+      ],
+      "sha256": "9305886f661c11ce4176405deb094496c71453bdc902de5bf6934086ae323fa0"
+    },
+    {
+      "id": "excluded-references-symlink",
+      "directories": [
+        ".identity"
+      ],
+      "files": [
+        {
+          "path": ".identity/identity.json",
+          "hex": "7b2270726f6a656374223a226578616d706c65227d0a"
+        },
+        {
+          "path": "outside.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        },
+        {
+          "path": "outside/data.txt",
+          "hex": "6f757473696465206d757374206e6f742062652072656164"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity/references",
+          "target": "absent",
+          "directory": true
+        }
+      ],
+      "inventory": [
+        ".identity/identity.json"
+      ],
+      "sha256": "9305886f661c11ce4176405deb094496c71453bdc902de5bf6934086ae323fa0"
+    },
+    {
+      "id": "identity-root-symlink",
+      "directories": [],
+      "files": [
+        {
+          "path": "outside/identity.json",
+          "hex": "6f757473696465"
+        }
+      ],
+      "links": [
+        {
+          "path": ".identity",
+          "target": "outside",
+          "directory": true
+        }
+      ],
+      "inventory": null,
+      "sha256": null
+    }
+  ],
+  "paths": [
+    {
+      "path": ".identity/identity.json",
+      "valid": true
+    },
+    {
+      "path": ".identity/.hidden",
+      "valid": true
+    },
+    {
+      "path": ".identity/空/🧭.json",
+      "valid": true
+    },
+    {
+      "path": ".identity/é.txt",
+      "valid": true
+    },
+    {
+      "path": ".identity/é.txt",
+      "valid": true
+    },
+    {
+      "path": ".identity/conifer.txt",
+      "valid": true
+    },
+    {
+      "path": ".identity/COM0.txt",
+      "valid": true
+    },
+    {
+      "path": ".identity/LPT10.txt",
+      "valid": true
+    },
+    {
+      "path": ".identity/space inside.txt",
+      "valid": true
+    },
+    {
+      "path": "",
+      "valid": false
+    },
+    {
+      "path": "/absolute",
+      "valid": false
+    },
+    {
+      "path": "C:/identity.json",
+      "valid": false
+    },
+    {
+      "path": "../identity.json",
+      "valid": false
+    },
+    {
+      "path": ".identity/../escape",
+      "valid": false
+    },
+    {
+      "path": ".identity/./token",
+      "valid": false
+    },
+    {
+      "path": ".identity//token",
+      "valid": false
+    },
+    {
+      "path": ".identity/",
+      "valid": false
+    },
+    {
+      "path": ".identity\\token",
+      "valid": false
+    },
+    {
+      "path": ".identity/a:b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a*b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a?b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a\"b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a<b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a>b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a|b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a\u0000b",
+      "valid": false
+    },
+    {
+      "path": ".identity/a\nb",
+      "valid": false
+    },
+    {
+      "path": ".identity/ab",
+      "valid": false
+    },
+    {
+      "path": ".identity/trailing.",
+      "valid": false
+    },
+    {
+      "path": ".identity/trailing ",
+      "valid": false
+    },
+    {
+      "path": ".identity/con",
+      "valid": false
+    },
+    {
+      "path": ".identity/NUL.txt",
+      "valid": false
+    },
+    {
+      "path": ".identity/aux.json",
+      "valid": false
+    },
+    {
+      "path": ".identity/PRN",
+      "valid": false
+    },
+    {
+      "path": ".identity/COM1.json",
+      "valid": false
+    },
+    {
+      "path": ".identity/Lpt9",
+      "valid": false
+    },
+    {
+      "path": ".identity/COM¹.txt",
+      "valid": false
+    },
+    {
+      "path": ".identity/LPT³.json",
+      "valid": false
+    }
+  ]
+}

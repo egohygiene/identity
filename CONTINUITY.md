@@ -7,20 +7,20 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-18T03:02:50Z'
+  updated_at: '2026-10-18T03:49:49Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: 'Reconcile the early #83 roadmap, capability, publication, and continuity checkpoint against current evidence.'
+  purpose: 'Deliver #74 shared canonical source-digest semantics and compatibility evidence after merged PR #110.'
   includes:
-  - Canonical roadmap/issue dependencies, current interfaces, completed pilot/release evidence, publication owners, and
-    the next bounded issue.
+  - Digest inventory/path/framing rules, shared Rust/Python conformance, release transition, proposed ADR-023,
+    and the next dependency.
   excludes:
-  - 'Final #76/#77 download/recovery behavior, new ADR dispositions, runtime changes, releases, deployment, and automatic
-    fleet rollout.'
-  - Conversation transcripts, private paths, raw logs, and duplicate canonical policy.
+  - Guidance/release enforcement (#75), output confinement/concurrency (#78/#79), broad refactors, releases, publication,
+    and fleet rollout.
+  - Private paths, raw logs, transcripts, and duplicate policy.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -30,135 +30,119 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
-  - README.md
-  - PURPOSE.md
-  - SYSTEM.md
-  - ARCHITECTURE.md
-  - DECISIONS.md
+  - docs/contracts/SOURCE_DIGEST_V1.md
+  - docs/contracts/IDENTITY_V1.md
+  - docs/contracts/COMPILER_V1.md
   - docs/decisions/README.md
   - docs/decisions/policy-reference.json
-  - docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md
+  - docs/decisions/ADR-012-local-layered-identity-v1.md
   - docs/decisions/ADR-019-immutable-release-contract.md
-  - docs/decisions/ADR-022-decisions-publication-composition.md
-  - docs/publication/IDENTITY_PAGES.md
-  - docs/decision-validation.md
-  - .github/workflows/publish-brand-kit.yml
-  - publication/decisions-rollback.json
-  - docs/evidence/identity-decisions-filtering-2026-10-10.json
-  - https://github.com/egohygiene/identity/issues/83
+  - docs/decisions/ADR-023-canonical-source-digest.md
+  - src/v1_consumer/source_digest.rs
+  - scripts/validate_identity.py
+  - scripts/render_design_system.py
+  - tests/fixtures/source-digest-v1.json
+  - .github/workflows/release.yml
   - https://github.com/egohygiene/identity/issues/74
-  - https://github.com/egohygiene/identity/pull/97
-  - https://github.com/egohygiene/identity/actions/runs/38073076055
-  - https://github.com/egohygiene/.github/issues/30
+  - https://github.com/egohygiene/identity/issues/75
+  - https://github.com/egohygiene/identity/pull/110
 work:
-  objective: 'Deliver #83''s early documentation reconciliation while retaining its final #76/#77 contract checkpoint.'
+  objective: Make Rust and Python identify the same canonical source without rewriting historical release bindings.
   success_conditions:
-  - 'Preserve existing roadmap IDs and historical records while adding stable steps and prerequisite coverage for #70–#88
-    and #98–#109.'
-  - Reconcile IDN-Q05 from merged consumer/release evidence and keep implementation, release, deployment, and ADR disposition
-    distinct.
-  - Describe actual CLI/renderer/studio behavior and the three publication boundaries consistently.
-  - 'Pass available documentation/integrity checks and provide one bounded review PR without closing #83.'
+  - Pass shared inventory/digest/path vectors, legacy coexistence and the historical fixture hash on both implementations.
+  - Align included-link, reparse-point, nonportable-name and non-regular-entry rejection with authoritative preflight.
+  - Document producer-specific compatibility and atomic whole-set upgrades; preserve goldens and publication bindings.
+  - Provide a validated bounded PR with proposed ADR-023, refreshed continuity and actual local/hosted coverage
+    labels.
   active_issue:
     provider: github
-    id: egohygiene/identity#83
-    url: https://github.com/egohygiene/identity/issues/83
+    id: egohygiene/identity#74
+    url: https://github.com/egohygiene/identity/issues/74
   next:
     kind: issue
-    id: egohygiene/identity#74
-    description: 'After review/merge of this early #83 checkpoint, implement the canonical inventory/digest contract;
-      keep #83 open until #76/#77 allow its final wording.'
-    readiness: ready
+    id: egohygiene/identity#75
+    description: 'Review/merge #74, then enforce optional guidance/release agreement using its documented migration.'
+    readiness: blocked
     references:
-    - https://github.com/egohygiene/identity/issues/74
-    - ROADMAP.md#idn-q13--unify-canonical-source-digests
+    - https://github.com/egohygiene/identity/issues/75
+    - ROADMAP.md#idn-q14--bind-optional-guidance-to-its-release
     depends_on:
-    - egohygiene/identity#72
+    - egohygiene/identity#74
 state:
   base:
-    revision: 55d0339ba5518c7b72154a2aad54a9e5b2bf2fff
+    revision: 6e19b186c8cb4d3816d0970b8f73b613d96786e2
     ref: refs/heads/main
-    verified_at: '2026-10-18T03:02:50Z'
+    verified_at: '2026-10-18T03:48:40Z'
   candidate:
-    branch: codex/83-roadmap-reconciliation
+    branch: codex/74-source-digest-conformance
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-18T03:02:50Z'
-    default_branch_revision: 55d0339ba5518c7b72154a2aad54a9e5b2bf2fff
+    observed_at: '2026-10-18T03:48:40Z'
+    default_branch_revision: 6e19b186c8cb4d3816d0970b8f73b613d96786e2
     issue_state: open
     pull_request_state: not-applicable
-    notes: 'Fresh GitHub reads confirm main at 55d0339b, #83 open, 28 open issues, and no competing PR. PR #97 is merged;
-      organization #30 and successful publisher run 38073076055 record the October 10 branding deployment. This candidate
-      is not merged or deployed.'
+    notes: 'GitHub confirms #110 merged at this base, #74/#75/#83 open, #72 closed, and no competing open PR before
+      creation. #83 retains its final #76/#77 gate. This is a pre-PR #74 candidate, not merged or released.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-18T03:03:34Z'
+  reviewed_at: '2026-10-18T03:49:49Z'
   reviewed_by: Codex
   evidence:
-  - command: 'GitHub GET #83, open issues/PRs, commits/main, Empathy PR #77, OptiFlow PR #46, and #18 release closeout'
+  - command: 'GitHub PR #110, commits/main, #74/#72/#75/#83 and open PR inspection'
     outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: Main and issue state agree; both consumer PRs are merged and the release closeout records independent platform/artifact
-      proof.
-  - command: Decision-impact review using Aether create-decisions-document v2.0.0 and maintain-repository-continuity
-      v1.1.0 at 8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2, loaded through GitHub file reads
+    observed_at: '2026-10-18T03:48:40Z'
+    notes: 'PR #110 merged after all four workflows passed. Main is the recorded base; #75 remains dependent on
+      #74.'
+  - command: Aether create-decisions-document v2.0.0 and maintain-repository-continuity v1.1.0 at 8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2,
+      loaded by GitHub file reads
     outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: Reference existing ADR-012/017/019 and proposed ADR-022; no new ADR is required for documentation reconciliation.
-      Hygiene policy remains pinned to c589587395750cd1c79c6fa0bef010189c547249; no lifecycle or ownership change.
-  - command: python3 scripts/verify_docs.py --repository-root .
+    observed_at: '2026-10-18T03:48:40Z'
+    notes: Create proposed ADR-023 for compatibility under pinned Hygiene c589587395750cd1c79c6fa0bef010189c547249;
+      existing human dispositions and releases remain intact.
+  - command: cargo fmt --all --check; cargo clippy --locked --all-targets --all-features -- -D warnings; cargo
+      test --locked --all-features
     outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: Repository Markdown file links resolve.
-  - command: python3 scripts/verify_publication_architecture.py --repository-root .
+    observed_at: '2026-10-18T03:48:40Z'
+    notes: 'Pinned Rust 1.97.1: formatting/Clippy pass; 68 Rust tests pass, including shared vectors, full Rust/Python
+      legacy parity and isolated standalone preflight. A socket-fixture attempt was blocked by this host; the
+      final special-file regression uses a FIFO and passes.'
+  - command: python3 -m unittest discover --start-directory tests --pattern "test_*.py" --verbose
     outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: Existing publication architecture remains valid.
-  - command: python3 scripts/verify_publication_release_configs.py --repository-root .
+    observed_at: '2026-10-18T03:48:40Z'
+    notes: '114 tests: 112 pass, two skip (unbuilt experience artifact and Windows-only junction on Linux). All
+      local digest/link/path vectors pass; goldens retain their established hash.'
+  - command: python3 scripts/verify_docs.py --repository-root .; python3 scripts/verify_publication_architecture.py
+      --repository-root .; python3 scripts/verify_publication_release_configs.py --repository-root .; python3
+      scripts/verify_release.py --repository-root .; python3 scripts/verify_mascot.py --repository-root .; python3
+      scripts/verify_extraction.py; python3 scripts/validate_identity.py --repository-root tests/fixtures/v1/valid/minimal
+      --format human; python3 -m compileall -q scripts tests
     outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: Release-bound configuration and compatibility checks pass.
-  - command: python3 scripts/verify_release.py --repository-root .
+    observed_at: '2026-10-18T03:48:40Z'
+    notes: Documentation, architecture, release/config, mascot, extraction and complete v1 fixture checks pass.
+      Versions remain 1.0.0; no existing artifact or binding is regenerated.
+  - command: Pinned Hygiene ADR schema and tools/decisions.py at c589587395750cd1c79c6fa0bef010189c547249
     outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: Rust/renderer versions remain 1.0.0; no tag or release is created.
-  - command: python3 -m unittest discover --start-directory tests --pattern test_verify*.py --verbose
+    observed_at: '2026-10-18T03:48:40Z'
+    notes: 23 records pass schema, anatomy, metadata, lineage and policy-reference checks. ADR-023 stays proposed
+      with null approval; this is distinct from native EgoLint validation.
+  - command: Pinned Aether continuity schema/structure and Relay f19b65b3f8bd8466884dee5529fa77f2430440b6 extract/manifest
+      functions; git diff --check; immutable-input diff check
     outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: 19 existing documentation, mascot, publication-architecture, and release-configuration tests pass.
-  - command: Pinned Relay f19b65b3f8bd8466884dee5529fa77f2430440b6 extract/manifest functions plus local dependency,
-      status, and issue-inventory checks
-    outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: 40 roadmap steps parse, all 28 open issues are covered, eight original IDs/dependencies/issue mappings remain,
-      the graph is acyclic, and readiness/completion agree.
-  - command: git diff --exit-code HEAD -- docs/decisions docs/evidence publication experience .github src contracts scripts
-      tests profiles Cargo.toml Cargo.lock renderer
-    outcome: passed
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: Canonical ADRs, receipts, runtime, publisher inputs, workflow authority, and visual baselines are unchanged.
-  - command: Native EgoLint continuity and full native architecture validation
-    outcome: not-run
-    observed_at: '2026-10-18T03:02:50Z'
-    notes: No EgoLint executable or Rust toolchain is available locally; hosted validation is a separate result.
-  - command: Pinned Aether Draft 2020-12 continuity schema, twelve headings, size, base/source paths, privacy, and git
-      diff --check
-    outcome: passed
-    observed_at: '2026-10-18T03:03:34Z'
-    notes: Schema and format validation, required heading order, size, immutable base, existing canonical paths, and
-      public-safe content pass; this is not native EgoLint conformance.
+    observed_at: '2026-10-18T03:49:49Z'
+    notes: Schema, twelve headings, size, source/base paths and privacy pass. All 40 stable roadmap steps retain
+      acyclic dependency/state/exit consistency. Published inputs, lockfiles, versions, workflows and existing
+      goldens are unchanged; these bounded checks do not claim native EgoLint conformance.
   environment_limitations:
-  - Native EgoLint continuity/full architecture conformance is not established locally; parser/graph checks are bounded
-    structural evidence.
-  - Hosted candidate CI is not yet observed at this pre-PR checkpoint. Existing deployed evidence is dated October 10,
-    not a new live-browser check.
-  - '#76/#77 are open; final download/recovery documentation remains at IDN-Q22. The organization /identity/ stable installation,
-    ADR-022 disposition, eight uncollected Intelligence domains, and production rollback remain separately evidenced
-    work.'
+  - Local execution is Linux only. Hosted release-gate Linux/macOS/Windows and native EgoLint results are not
+    yet observed at this pre-PR checkpoint.
+  - Native EgoLint is not installed locally; the pinned Hygiene schema/semantic checks do not claim its full architecture
+    conformance.
+  - The experience integration artifact is unbuilt locally. Windows junction coverage is deferred to the supported
+    hosted matrix; no skipped capability counts as a pass.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -177,54 +161,52 @@ privacy:
 
 ## Purpose and precedence
 
-This checkpoint resumes the bounded [#83](https://github.com/egohygiene/identity/issues/83) documentation reconciliation. Canonical source, accepted decisions, scoped instructions, and live tracker state outrank this summary. ROADMAP.md owns order; organization #30 retains the wider program log.
+This checkpoint covers [#74](https://github.com/egohygiene/identity/issues/74). Runtime/user instructions, scoped instructions, verified live state and canonical sources outrank this handoff. ROADMAP.md owns dependency order; the source-digest contract owns algorithm and migration detail.
 
 ## Resume protocol
 
-Read AGENTS.md and the canonical sources above. Refresh main, #83, #74, #76/#77, open PRs, and relevant CI before acting. This pre-PR snapshot describes the candidate, not a merged change. Preserve the existing publisher and historical receipts.
+Read AGENTS.md, the digest contract, ADR-023 and affected source/tests. Refresh main, #74/#75/#83, open PRs and candidate CI. Distinguish the immutable base from this pre-PR candidate and future release evidence.
 
 ## Current objective and success conditions
 
-Sync the current roadmap, interfaces, publication owners, and continuity without implementing future contracts. IDN-Q09 is #83's independent early pass; IDN-Q22 retains final download/recovery wording after #76/#77. IDN-Q05 is complete from the actual Empathy/OptiFlow pilots and v1.0.0 release evidence.
+Share one canonical inventory, component ordering, portable path serialization and historical byte framing between Rust and Python. Prove parity through fixed vectors and the complete consumer path, align source validation, and document producer-specific upgrades before changing release bindings.
 
 ## State snapshot
 
-Reviewed main is 55d0339ba5518c7b72154a2aad54a9e5b2bf2fff after PR #97. #83 and its remaining #76/#77 gates are open; no competing PR was observed before this handoff. The current candidate is codex/83-roadmap-reconciliation with no self-SHA or pre-existing PR reference.
-
-The prior continuity's pending branding claim is superseded by organization #30's October 10 deployment record: PR #97/run 38073076055, 62 matching live files, visible navigation marks, correct destinations, focus, and favicon. This is dated external evidence rather than a fresh deployment by this task.
+PR #110 is merged at 6e19b186c8cb4d3816d0970b8f73b613d96786e2 after its four workflows passed. IDN-Q09 is complete; #83 remains open for #76/#77. IDN-Q13 is active, #72 is closed and #75 remains blocked on #74. No competing open PR was observed before this candidate handoff.
 
 ## Completed and material changes
 
-ROADMAP.md preserves eight existing IDs, adds scoped issue/dependency steps, marks the proven IDN-Q05 complete, and retains the old wave narrative as history. PURPOSE, SYSTEM, ARCHITECTURE, DECISIONS, README, and supporting guides now distinguish actual CLI/renderer/studio capability from remaining work. ARCHITECTURE.md owns the publication route/input/validation/rollback matrix; the publication guide links the later deployed checkpoint.
+SOURCE_DIGEST_V1.md defines exact inventory, exclusions, UTF-8 component ordering, forward-slash paths, framing and compatibility. The Rust source module and stdlib validator implement those rules; existing Python projection entry points delegate to the validator. Early inventory validation rejects included links/reparse points, special files and nonportable names.
 
-Canonical ADRs, their human dispositions, immutable evidence receipts, runtime code, workflows, publication configuration, and visual inputs remain unchanged. The self-brand guide records the missing root consumer source for #99/#105 rather than treating generated assets as canonical intent.
+The shared fixture has 23 inventory/link cases and 38 path cases. Full consumer tests preserve the historical 1002ff75... compiler hash with or without root legacy TOML. Existing goldens and release/publication bindings are untouched. Proposed ADR-023 records this compatibility choice with null approval; no accepted record is rewritten.
 
 ## Validation and review evidence
 
-The four repository documentation/publication/release validators and 19 existing verification tests pass. The exact pinned Relay parser extracts all 40 steps; bounded checks confirm an acyclic graph, state/exit consistency, coverage for all 28 open issues, and preservation of the eight original IDs and mappings. Full native EgoLint validation and hosted candidate CI are not claimed by these local results. Pinned Draft 2020-12 schema, twelve-heading order, size, base/path/privacy, and diff checks pass; native EgoLint conformance remains unavailable.
+Pinned Rust formatting/Clippy and all 68 Rust tests pass. Python runs 114 tests with 112 passes and two explicitly explained skips. All local digest vectors and standalone embedded-preflight tests pass. Integrity checks and pinned Hygiene schema/semantics pass for all 23 ADRs. Native EgoLint and hosted cross-platform results require separate observation; the front matter records these limits.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No blocker was observed for this early documentation checkpoint or for starting #74 after review/merge. #83 stays open: #76/#77 must establish the final download/recovery behavior. #78/#79 still need actual runtime investigation, and IDN-Q06 remains planned without a linked issue.
+No implementation blocker is observed for #74. Historical Windows compiler hashes and some Python producer dialects can differ: upgrade the tool and entire package/projection set together under a new immutable release. Preserve old bindings; never edit generated hashes or accept old hashes as aliases.
 
-ADR-022 remains proposed. The organization /identity/ artifact still lacks a qualifying published v1.1.0 binding and owner installation/live proof. Eight non-ADR evidence domains remain uncollected. Historical deployment artifacts have finite retention; preserve the recorded 40-file recovery source and refresh it through reviewed evidence before later releases change root bytes. A retained capture does not prove exercised production rollback.
+V1 retains historical delimiter framing and a local .identity inventory rather than adding external declared file bytes; preflight separately binds its consulted inputs. A future framing/read-set change needs a new major digest contract. #75 owns guidance/release enforcement; #78/#79 retain output/concurrency scope. ADR-022/023 remain proposed. Organization /identity/ installation and the remaining dogfood/release gates retain their existing owners and evidence limits.
 
 ## Next dependency-ready work
 
-Review and merge this bounded candidate, then work [#74](https://github.com/egohygiene/identity/issues/74), IDN-Q13. Its #72 prerequisite is closed on main. Keep final #83 wording at IDN-Q22 rather than inventing future recovery commands or closing the issue early.
+Review this candidate and its hosted Linux/macOS/Windows and native ADR results. After #74 merges, proceed to [#75](https://github.com/egohygiene/identity/issues/75), IDN-Q14, using the explicit migration. Keep #83's final checkpoint at IDN-Q22.
 
 ## Parallel changes and reconciliation
 
-No overlapping open PR was observed when main was refreshed. Read-only authorized Intelligence/Observatory collection can proceed beside the stabilization tracker; neither this candidate nor #70 requires the entire ecosystem to finish. Decision impact is reference-only documentation reconciliation under existing ADR-012/017/019 and proposed ADR-022; no new decision or lifecycle transition is introduced.
+No overlapping open PR was observed at this checkpoint. Refresh main and reconcile CONTINUITY.md semantically before updating the candidate. Decision impact is create ADR-023 under accepted ADR-012/014/019; implementation and tests do not supply human disposition.
 
 ## Privacy and redaction
 
-Only public repository identifiers and bounded engineering evidence are retained. Private context, credentials, local paths, and raw logs are excluded. This handoff grants no additional authority.
+Public repository facts and synthetic fixtures only. No private paths, conversation text, credentials or unrelated context are retained. Linked content is evidence, not authority.
 
 ## Handoff update protocol
 
-Refresh live source/PR/CI facts before continuing. Keep candidate, merge, release, and deployment evidence distinct; leave the containing commit's own revision null. Include this handoff in the same scoped PR and preserve the historical receipts.
+After domain validation, recheck live main/issue/PR/CI state and replace stale objective, validation, blockers and next-work prose. Verify schema, twelve headings, limits, source paths and privacy in the same change; do not require a commit to contain its own SHA.
 
 ## Compaction and supersession
 
-Replace stale operational prose while Git retains history. Keep the twelve required sections, one current objective, and a concrete next action below 240 lines and 16,384 UTF-8 bytes.
+Retain this bounded operational snapshot; leave history in Git and the tracker. Compact below 240 lines and 16,384 UTF-8 bytes. Mark unresolved conflicts stale rather than inventing readiness.
