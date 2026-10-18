@@ -7,19 +7,19 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-18T11:53:59Z'
+  updated_at: '2026-10-18T12:35:10Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: 'Deliver #75 optional handbook/context release binding after merged #74.'
+  purpose: 'Deliver #76 shared renderer artifact-path validation while preserving configured deployment bases.'
   includes:
-  - Source-binding guards, malformed/stale/mixed-input regressions, four artifact downloads, compatibility guidance,
+  - Core and optional import guards, URL normalization and compatibility, adversarial/HTTP regressions, proposal evidence
     and next work.
   excludes:
-  - Artifact-path policy (#76), output confinement/concurrency (#78/#79), broad refactors, new schemas/ADR dispositions,
-    releases and deployments.
+  - Filesystem confinement/concurrency and recovery (#78/#79/#77), broad refactors, ADR lifecycle changes, releases and
+    deployments.
   - Private paths, logs, transcripts and duplicated canonical policy.
   precedence:
   - user-and-runtime-instructions
@@ -32,123 +32,120 @@ scope:
   - ROADMAP.md
   - docs/contracts/BRAND_KIT_RENDERER_V1.md
   - docs/contracts/DESIGN_SYSTEM_V1.md
+  - docs/contracts/PRESS_KIT_V1.md
   - docs/contracts/SOURCE_DIGEST_V1.md
-  - contracts/v1/design-system-handbook.schema.json
-  - contracts/v1/design-context.schema.json
-  - renderer/src/design-system.js
+  - renderer/README.md
+  - renderer/src/artifact-paths.js
   - renderer/src/model.js
-  - renderer/tests/design-system.test.js
-  - renderer/tests/design-system.integration.test.js
+  - renderer/src/design-system.js
+  - renderer/src/press-kit.js
+  - renderer/tests/artifact-paths.test.js
+  - renderer/tests/artifact-paths.integration.test.js
   - docs/decisions/policy-reference.json
-  - docs/decisions/ADR-014-design-system-projection-boundary.md
-  - docs/decisions/ADR-019-immutable-release-contract.md
-  - docs/decisions/ADR-023-canonical-source-digest.md
+  - docs/decisions/ADR-024-renderer-artifact-paths.md
   - .github/workflows/reference-renderer.yml
-  - https://github.com/egohygiene/identity/issues/75
   - https://github.com/egohygiene/identity/issues/76
-  - https://github.com/egohygiene/identity/pull/111
+  - https://github.com/egohygiene/identity/issues/78
+  - https://github.com/egohygiene/identity/pull/112
 work:
-  objective: Reject optional design-system guidance unless handbook, context and displayed release share the same
-    source identity.
+  objective: Constrain every renderer download to its declared bundle path while retaining explicit local, route and
+    CDN deployment bases.
   success_conditions:
-  - Validate both existing JSON source.digest bindings as exact lowercase SHA-256 strings and require equality
-    with release.sourceDigest.
-  - Reject wrong-project, missing/malformed, stale and mixed-source inputs before page replacement.
-  - Preserve matching v1/legacy-TOML coexistence, all four artifact download targets and immutable historical
-    bindings.
-  - Provide passing renderer, publication, integrity and hosted browser evidence with a bounded review PR.
+  - Reject traversal, URL-shaped paths, backslashes, encoded separators and nested encoding before rendering and URL
+    construction.
+  - Validate core asset/package paths, every optional artifact/asset entry and publication manifest paths without mutating
+    imported models.
+  - Preserve generated package targets, safe filename encoding and configured relative/rooted/HTTP(S) directories.
+  - Provide passing import/CLI/HTTP regressions and public/integrity evidence in one review PR, with hosted browser/native
+    outcomes separate.
   active_issue:
     provider: github
-    id: egohygiene/identity#75
-    url: https://github.com/egohygiene/identity/issues/75
+    id: egohygiene/identity#76
+    url: https://github.com/egohygiene/identity/issues/76
   next:
     kind: issue
-    id: egohygiene/identity#76
-    description: 'After review/merge of #75, centralize renderer artifact-path validation and preserve configured
-      local/CDN bases.'
+    id: egohygiene/identity#78
+    description: 'After #76 review/merge, reproduce transaction-cache redirection and establish the supported confinement
+      contract.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/76
-    - ROADMAP.md#idn-q15--validate-download-paths-and-configured-bases
-    depends_on: []
+    - https://github.com/egohygiene/identity/issues/78
+    - ROADMAP.md#idn-q17--confine-transaction-workspaces
+    depends_on:
+    - egohygiene/identity#73
 state:
   base:
-    revision: 644294e11fdcf1dde24937790bc42cc028cb099a
+    revision: 69d55c1caaa5b3959ed2ffdbbcd1fd69357d87dc
     ref: refs/heads/main
-    verified_at: '2026-10-18T11:53:12Z'
+    verified_at: '2026-10-18T12:35:10Z'
   candidate:
-    branch: codex/75-design-system-release-binding
+    branch: codex/76-artifact-path-validation
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-18T11:53:12Z'
-    default_branch_revision: 644294e11fdcf1dde24937790bc42cc028cb099a
+    observed_at: '2026-10-18T12:35:10Z'
+    default_branch_revision: 69d55c1caaa5b3959ed2ffdbbcd1fd69357d87dc
     issue_state: open
     pull_request_state: not-applicable
-    notes: 'GitHub confirms PR #111 merged at this base, #74 closed, #75/#76 open, and no competing open PR before
-      creation. IDN-Q13 is complete; IDN-Q14 is this unmerged candidate. #83 retains its final #76/#77 gate.'
+    notes: 'PR #112 is merged and #75 closed; #76/#78 are open. No competing open PR was observed before creation. #78''s
+      #73 prerequisite is complete. #83 retains its final #76/#77 gate.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-18T11:53:59Z'
+  reviewed_at: '2026-10-18T12:35:10Z'
   reviewed_by: Codex
   evidence:
-  - command: 'GitHub PR #111, commits/main, #74/#75/#76 and open PR inspection'
+  - command: 'GitHub commits/main, open PRs, #75/#76/#78 inspection'
     outcome: passed
-    observed_at: '2026-10-18T11:53:12Z'
-    notes: '#74 is merged/closed, the base is current, and #76 is independently dependency-ready.'
-  - command: Decision-impact review with pinned Aether create-decisions-document v2.0.0 and continuity v1.1.0
-      at 8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: 'Confirmed merged #75, current immutable base, no competing PR, and dependency-ready #78 after this candidate.'
+  - command: Pinned Aether create-decisions-document v2.0.0 and continuity v1.1.0 at 8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2
     outcome: passed
-    observed_at: '2026-10-18T11:53:12Z'
-    notes: 'Reference ADR-014/019 and #74 migration documented by proposed ADR-023. This enforces existing required
-      fields and release invariants; no new schema or ADR is needed. No lifecycle changes.'
-  - command: corepack pnpm run check; corepack pnpm run test
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: Final significance check creates proposed ADR-024 for encoding/rooted-path compatibility, referencing ADR-010/014/015/019.
+      Approval stays null; no existing lifecycle changes.
+  - command: pnpm run check; pnpm run test (Node 24.19.0, pnpm 11.21.0)
     outcome: passed
-    observed_at: '2026-10-18T11:53:12Z'
-    notes: 'Node 24.19.0 / pinned pnpm 11.21.0: 19 JavaScript sources check and all 72 renderer tests pass. Coverage
-      includes both JSON bindings, actual CLI rejection before output replacement and byte-identical four-file
-      download targets for v1 and legacy TOML coexistence.'
-  - command: pnpm run build; pnpm run validate:public (pinned pnpm 11.21.0 via local Corepack shim)
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: 22 JavaScript sources check; all 279 renderer tests pass, including unsafe imports/direct joins, optional
+      entries, CLI page preservation, four deployment bases and real prefixed HTTP downloads.
+  - command: pnpm run build; pnpm run validate:public (pinned pnpm 11.21.0)
     outcome: passed
-    observed_at: '2026-10-18T11:53:12Z'
-    notes: Renderer and public builds plus public verification pass. The runtime PATH first selected a different
-      nested pnpm; rerunning with the pinned shim resolves that environment mismatch without repository config
-      changes. Build evidence is not publication.
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: Static/public builds and publication manifest/archive/inventory verification pass. Existing sourceDigest c8b1264966bd87a28942cf9c920437845b35fc234637b7df15a171f039767bd6
+      is unchanged. Building is not publication.
   - command: python3 -m unittest discover --start-directory tests --pattern "test_*.py" --verbose
     outcome: passed
-    observed_at: '2026-10-18T11:53:12Z'
-    notes: '114 tests: 112 pass, two skip (unbuilt experience integration artifact; Windows-only junction check
-      on Linux).'
-  - command: python3 scripts/verify_docs.py --repository-root .; python3 scripts/verify_publication_architecture.py
-      --repository-root .; python3 scripts/verify_publication_release_configs.py --repository-root .; python3
-      scripts/verify_release.py --repository-root .; python3 scripts/verify_mascot.py --repository-root .; python3
-      scripts/verify_extraction.py
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: '114 tests: 112 pass, two skip (unbuilt experience integration artifact; Windows-only junction case on Linux).'
+  - command: python3 scripts/verify_docs.py --repository-root .; python3 scripts/verify_publication_architecture.py --repository-root
+      .; python3 scripts/verify_publication_release_configs.py --repository-root .; python3 scripts/verify_release.py
+      --repository-root .; python3 scripts/verify_mascot.py --repository-root .; python3 scripts/verify_extraction.py
     outcome: passed
-    observed_at: '2026-10-18T11:53:12Z'
-    notes: Documentation, publication architecture/config, release metadata, mascot and extraction checks pass.
-      Package/renderer versions remain 1.0.0.
-  - command: corepack pnpm run test:e2e
-    outcome: not-run
-    observed_at: '2026-10-18T11:53:12Z'
-    notes: 'Not started locally: pinned Chromium installation failed because the endpoint repeatedly returns an
-      incomplete/non-ZIP archive. Hosted renderer browser results must be observed separately.'
-  - command: Pinned Aether continuity schema/structure and Relay f19b65b3f8bd8466884dee5529fa77f2430440b6 extract/manifest
-      checks; git diff --check; immutable-input diff
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: Documentation, publication architecture/configuration, release metadata, mascot and extraction integrity pass.
+      Versions stay 1.0.0.
+  - command: pnpm exec playwright test --grep "accessible, linkable"
+    outcome: limited
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: The local run fails at browser launch because pinned Chromium is absent; no browser assertion executes. Earlier
+      acquisition in this workspace failed on incomplete archives. Hosted browser results remain pending at this pre-PR
+      checkpoint.
+  - command: Pinned Hygiene c589587395750cd1c79c6fa0bef010189c547249 metadata/schema/lineage checks; Relay f19b65b3f8bd8466884dee5529fa77f2430440b6
+      extract/manifest plus bounded dependency checks
     outcome: passed
-    observed_at: '2026-10-18T11:53:59Z'
-    notes: Schema/headings/size/base/paths/privacy pass. All 40 roadmap steps retain stable IDs and valid dependency/state/exit
-      consistency, with an acyclic graph. ADRs, schemas, existing fixtures/goldens, versions, locks, workflows
-      and publication inputs are unchanged.
+    observed_at: '2026-10-18T12:35:10Z'
+    notes: '24 ADRs validate: 21 accepted, three proposed; prior records are byte-identical. All 40 roadmap IDs/dependencies
+      are stable and acyclic; #75 is complete, #76 active, #78 ready.'
   environment_limitations:
-  - Pinned Chromium cannot be acquired locally; hosted renderer/browser and native advisory results are pending
-    at this pre-PR checkpoint.
-  - Native EgoLint is not installed locally. Bounded schema/structure checks do not establish complete native
+  - Local Chromium is unavailable; hosted renderer/browser checks and exact-candidate native advisory results must be
+    observed separately.
+  - Native EgoLint is not installed locally. Pinned schema/structure and helper checks do not establish complete native
     repository conformance.
-  - The experience integration artifact is not built locally, and Windows-only filesystem tests require their
-    platform. No skipped check counts as a pass.
+  - Experience integration is not built locally, and Windows-only filesystem checks require their platform. Skips are
+    not passes.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -167,45 +164,49 @@ privacy:
 
 ## Purpose and precedence
 
-This checkpoint covers [#75](https://github.com/egohygiene/identity/issues/75). Runtime/user instructions, scoped instructions, verified live state and canonical sources outrank this handoff. ROADMAP.md owns order; the renderer and digest contracts own binding semantics and migration.
+This checkpoint covers [#76](https://github.com/egohygiene/identity/issues/76). Runtime/user instructions, scoped instructions, verified live state and canonical sources outrank this snapshot. ROADMAP.md owns order; the renderer contract owns path/base semantics and compatibility.
 
 ## Resume protocol
 
-Read AGENTS.md, the renderer/design-system/digest contracts, scoped source/tests and governing ADRs. Refresh main, #75/#76, open PRs and candidate CI. Keep merged #74 evidence separate from this pre-PR candidate and from publication.
+Read AGENTS.md, the shared artifact-path contract, optional projection code/tests and proposed ADR-024. Refresh main, #76/#78, open PRs and candidate CI before acting. Keep this pre-PR snapshot separate from merge, release and deployment evidence.
 
 ## Current objective and success conditions
 
-Require handbook.source.digest, context.source.digest and release.sourceDigest to agree. Use the handbook's existing required field. Validate exact string/length/hex syntax, preserve project checks and optional absence, reject bad sets before page replacement, and keep matching downloads usable.
+Constrain core and optional downloads to bundle-relative paths before rendering and URL construction. Retain explicitly configured relative, rooted and HTTP(S) bases. Reject traversal, URL-shaped paths, backslashes, encoded separators and nested encoding while preserving immutable source/release identities and generated package targets.
 
 ## State snapshot
 
-PR #111 merged at 644294e11fdcf1dde24937790bc42cc028cb099a and #74 is closed. IDN-Q13 is complete; IDN-Q14 is active. No competing open PR was observed before this candidate. #76 is independently ready; #83 remains open for its final #76/#77 documentation checkpoint.
+PR #112 merged at 69d55c1caaa5b3959ed2ffdbbcd1fd69357d87dc and #75 is closed. IDN-Q14 is complete; IDN-Q15 is this unmerged candidate. No competing open PR was observed before creation. #78 is ready after review/merge; #83 remains open for final #76/#77 documentation reconciliation.
 
 ## Completed and material changes
 
-renderer/src/design-system.js validates both bindings and their equality. renderer/src/model.js requires the pair to match the displayed immutable release, as the adjacent Press Kit boundary already does. All static, public and client render paths consume these guards.
+renderer/src/artifact-paths.js owns shared path/directory/base normalization. Core model imports check all asset/package downloads. Optional Design System imports check all four expected paths, and Press Kit imports check retained projection artifacts plus published artifact/asset paths. BrandKitPage checks the configured base and publication manifest; joinAssetUrl guards direct URL construction.
 
-Renderer tests cover absent/non-object/malformed digests (including coercible arrays and trailing newlines), internally mixed pairs, unrelated releases and projects, and optional absence. CLI integrations generate real projections, compare all four download-target bytes, support root legacy TOML, reject a historical v0 model mixed with new v1 guidance, and preserve an existing page on failure.
+The contract normalizes one leading ./ and safe segment encoding, permits ordinary filename dots/spaces/Unicode, and rejects ambiguous separators, schemes, nested encoding and rooted model paths. Model leading slashes are no longer stripped; deployment prefixes belong in the explicit base. No model/generated-file rewrite or new external-download variant is introduced.
 
-The renderer contracts explain the existing handbook binding and #74's atomic upgrade/rollback. ROADMAP records the actual #74 merge and active #75. Schemas, version numbers, prior fixtures/goldens, release/publication bindings, workflows and ADRs are unchanged.
+CLI regressions preserve an existing page on invalid inputs and verify all download targets for four deployment bases. A local HTTP server serves the exact generated handbook/context bytes under a configured prefix. Existing release, projection and source-digest guards remain intact.
+
+Proposed ADR-024 records the compatibility choice with null approval. ROADMAP marks the actual #75 merge and active #76; canonical docs and CHANGELOG describe the rules. Existing ADRs, schemas, golden fixtures, versions, locks, workflows, source digests and publication inputs are unchanged.
 
 ## Validation and review evidence
 
-All 72 renderer tests, JavaScript syntax checks, builds and public verification pass. Python runs 114 tests with 112 passes and two explained skips. Documentation/publication/release/mascot/extraction checks pass. Local pinned Chromium acquisition fails, so browser evidence is deferred to hosted CI; no local browser success is claimed.
+All 279 renderer tests and 22 JavaScript syntax checks pass. Static/public builds and public artifact verification pass. Python runs 114 tests: 112 pass and two skip with the reasons above. Documentation/publication/release/mascot/extraction checks pass. Pinned metadata/schema/lineage checks validate 24 ADRs; Relay extraction and bounded graph/state checks validate 40 stable roadmap steps.
+
+The local browser run fails before assertions because pinned Chromium is absent. Hosted browser/native results are pending at this pre-PR checkpoint. Final continuity schema/headings/size/base/path/privacy and diff checks accompany handoff; those bounded checks do not claim whole-repository conformance.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No implementation blocker is observed. Historical Python/Windows or v0/v1 output must follow SOURCE_DIGEST_V1.md: regenerate/review the complete package/projection set with the corrected immutable tool pin. Do not patch generated hashes, add aliases or rewrite published artifacts.
+No implementation blocker is observed. Consumers with rooted model paths must supply bundle-relative paths in newly reviewed models and move deployment prefixes to configuration; historical published bytes remain immutable. Literal-percent filenames and implicit external-download paths are unsupported by the explicit contract.
 
-#76 owns artifact paths/CDN bases; #78/#79 retain confinement/concurrency scope. #83's final wording follows #76/#77. ADR-022/023 remain proposed. No release, deployment or creative approval is introduced by this change.
+#78/#79 retain transaction confinement/concurrency; #77 retains recovery. #83's final wording follows #76/#77. ADR-022/023/024 remain proposed. No release, deployment or creative approval is introduced by this candidate.
 
 ## Next dependency-ready work
 
-Review this candidate and its hosted renderer/browser/native results. After #75 review/merge, proceed to [#76](https://github.com/egohygiene/identity/issues/76), IDN-Q15, for artifact-path validation. It has no issue prerequisite.
+Review this candidate and its hosted renderer/browser/native results. After #76 review/merge, proceed to [#78](https://github.com/egohygiene/identity/issues/78), IDN-Q17: first reproduce or disprove cache/staging/backup redirection, then establish confinement without breaking legitimate generation/recovery. Its #73 prerequisite is complete.
 
 ## Parallel changes and reconciliation
 
-No overlapping open PR was observed. Recheck main and reconcile CONTINUITY.md semantically before updating the PR. Decision impact is reference existing ADR-014/019 and the migration documented by proposed ADR-023; preserve human disposition separately from implementation/tests.
+No overlapping open PR was observed. Recheck main and reconcile CONTINUITY.md semantically before updating the PR. Final decision impact is create proposed ADR-024 under pinned Hygiene policy; existing accepted decisions and proposed records retain their separate human dispositions.
 
 ## Privacy and redaction
 

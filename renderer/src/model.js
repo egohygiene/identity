@@ -3,6 +3,7 @@
 
 import { assertDesignSystemView } from "./design-system.js";
 import { assertPressKitView } from "./press-kit.js";
+import { normalizeArtifactPath, normalizeAssetBaseUrl } from "./artifact-paths.js";
 
 export const BRAND_KIT_VIEW_MODEL_SCHEMA = "identity.brand-kit-view-model/v1";
 
@@ -39,6 +40,17 @@ export function assertBrandKitViewModel(model) {
         `Brand Kit view model ${collectionName} must be an array.`,
       );
     }
+  }
+  for (const asset of model.assets) {
+    if (
+      asset?.availability === "generated-download"
+      || (asset?.downloadPath !== undefined && asset?.downloadPath !== null)
+    ) {
+      normalizeArtifactPath(asset.downloadPath, "Asset download path");
+    }
+  }
+  for (const entry of model.packages) {
+    normalizeArtifactPath(entry?.path, "Package download path");
   }
   if (!model.release || typeof model.release.immutableId !== "string") {
     throw new TypeError("Brand Kit view model must declare an immutable release.");
@@ -140,14 +152,7 @@ export function sourceDataUrl(asset, assetBaseUrl = "./") {
 }
 
 export function joinAssetUrl(assetBaseUrl, relativePath) {
-  const normalizedPath = relativePath.replace(/^\/+/, "");
-  const normalizedBase = ensureTrailingSlash(assetBaseUrl || "./");
-
-  if (/^https?:\/\//u.test(normalizedBase)) {
-    return new URL(normalizedPath, normalizedBase).toString();
-  }
-
-  return `${normalizedBase}${normalizedPath}`;
+  return `${normalizeAssetBaseUrl(assetBaseUrl)}${normalizeArtifactPath(relativePath)}`;
 }
 
 export function deriveThemeVariables(model) {
@@ -183,10 +188,6 @@ export function statusLabel(status) {
     default:
       return "Not declared";
   }
-}
-
-function ensureTrailingSlash(value) {
-  return value.endsWith("/") ? value : `${value}/`;
 }
 
 function fontFamilyValue(value) {

@@ -1,6 +1,8 @@
 // Copyright 2026 Ego Hygiene
 // SPDX-License-Identifier: MIT
 
+import { normalizeArtifactDirectory, normalizeArtifactPath } from "./artifact-paths.js";
+
 export const DESIGN_SYSTEM_HANDBOOK_SCHEMA =
   "identity.design-system-handbook/v1";
 export const DESIGN_CONTEXT_SCHEMA = "identity.design-context/v1";
@@ -87,7 +89,7 @@ export function createDesignSystemView({ handbook, context, artifactDirectory })
     }
   }
 
-  const directory = normalizeArtifactDirectory(artifactDirectory);
+  const directory = normalizeArtifactDirectory(artifactDirectory, "Design-system artifact directory");
   return {
     handbook,
     context,
@@ -102,36 +104,29 @@ export function createDesignSystemView({ handbook, context, artifactDirectory })
 
 export function assertDesignSystemView(value) {
   assertObject(value, "Design-system renderer view");
-  return createDesignSystemView({
+  const expected = createDesignSystemView({
     handbook: value.handbook,
     context: value.context,
     artifactDirectory: artifactDirectoryFromView(value),
   });
+  for (const [index, artifact] of value.artifacts.entries()) {
+    if (normalizeArtifactPath(artifact?.path, "Design-system artifact path") !== expected.artifacts[index].path) {
+      throw new TypeError("Design-system artifact paths must identify all four files in the same published directory.");
+    }
+  }
+  return expected;
 }
 
 function artifactDirectoryFromView(value) {
   if (!Array.isArray(value.artifacts) || value.artifacts.length !== ARTIFACTS.length) {
     throw new TypeError("Design-system renderer view must declare all four artifacts.");
   }
-  const first = value.artifacts[0];
-  if (!first || typeof first.path !== "string") {
-    throw new TypeError("Design-system renderer view artifact paths must be strings.");
-  }
+  const firstPath = normalizeArtifactPath(value.artifacts[0]?.path, "Design-system artifact path");
   const suffix = "design-system-handbook.json";
-  if (!first.path.endsWith(suffix)) {
+  if (!firstPath.endsWith(suffix)) {
     throw new TypeError("Design-system renderer view has an unexpected handbook artifact path.");
   }
-  return first.path.slice(0, -suffix.length);
-}
-
-function normalizeArtifactDirectory(value) {
-  if (typeof value !== "string" || value.length === 0) {
-    throw new TypeError("Design-system artifact directory must be a non-empty relative path.");
-  }
-  if (/^(?:\/|https?:\/\/)/u.test(value) || value.includes("..")) {
-    throw new TypeError("Design-system artifact directory must stay within the published site.");
-  }
-  return value.endsWith("/") ? value : `${value}/`;
+  return firstPath.slice(0, -suffix.length);
 }
 
 function assertObject(value, label) {

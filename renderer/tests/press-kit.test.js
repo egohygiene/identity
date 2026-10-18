@@ -6,6 +6,47 @@ import { describe, expect, test } from "vitest";
 import { assertPressKitView, createPressKitView } from "../src/press-kit.js";
 
 describe("Press Kit renderer view", () => {
+  for (const field of ["asset", "artifact"]) {
+    test.each([
+      "../outside.svg", "assets/./mark.svg", "//elsewhere.test/mark.svg",
+      "https://elsewhere.test/mark.svg", "assets/%2e%2e/outside.svg",
+      "assets/%2fmark.svg", "assets/%5cmark.svg", "assets/%252fmark.svg", "assets\\mark.svg",
+    ])(`rejects an unsafe ${field} path in both projections and imported views: %s`, (input) => {
+      const pressKit = projection();
+      const setPath = (value) => {
+        if (field === "asset") value.assets[0].downloadPath = input;
+        else value.artifacts[4].path = input;
+      };
+      setPath(pressKit);
+      expect(() => createPressKitView({ pressKit, artifactDirectory: "press-kit" })).toThrow(/bundle-relative path/u);
+
+      const view = createPressKitView({ pressKit: projection(), artifactDirectory: "press-kit" });
+      if (field === "asset") view.pressKit.assets[0].downloadPath = `press-kit/${input}`;
+      else view.artifacts[4].path = `press-kit/${input}`;
+      expect(() => assertPressKitView(view)).toThrow(/bundle-relative path/u);
+    });
+  }
+
+  test.each(["../kit", "//elsewhere.test/kit", "kit\\nested", "kit/%2f", "kit/%252f"])(
+    "rejects an unsafe Press Kit directory %s", (artifactDirectory) => {
+      expect(() => createPressKitView({ pressKit: projection(), artifactDirectory })).toThrow(/bundle-relative path/u);
+    },
+  );
+
+  test("canonicalizes safe prefixes and URL encoding consistently", () => {
+    const pressKit = projection();
+    pressKit.assets[0].downloadPath = "./assets/mark%20draft..svg";
+    const view = createPressKitView({ pressKit, artifactDirectory: "./press kit/" });
+    expect(view.pressKit.assets[0].downloadPath).toBe("press%20kit/assets/mark%20draft..svg");
+    expect(assertPressKitView(view)).toBe(view);
+  });
+
+  test("validates projection artifact paths retained inside an imported view", () => {
+    const view = createPressKitView({ pressKit: projection(), artifactDirectory: "press-kit" });
+    view.pressKit.artifacts[4].path = "https://elsewhere.test/kit.zip";
+    expect(() => assertPressKitView(view)).toThrow(/Press Kit projection artifact path.*bundle-relative path/u);
+  });
+
   test("keeps every generated path inside its supplied publication directory", () => {
     const view = createPressKitView({
       pressKit: projection(),
@@ -43,7 +84,7 @@ describe("Press Kit renderer view", () => {
 
     expect(() =>
       createPressKitView({ pressKit: value, artifactDirectory: "press-kit" }),
-    ).toThrow("must stay within the published Press Kit directory");
+    ).toThrow("must be a non-empty bundle-relative path");
   });
 });
 

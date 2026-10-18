@@ -95,6 +95,59 @@ facts from `.identity/`.
 The renderer must not read `.identity/`, infer missing brand facts, or reach into
 a sibling repository.
 
+## Artifact paths and configured deployment bases
+
+Compatibility rationale is recorded in proposed
+[ADR-024](../decisions/ADR-024-renderer-artifact-paths.md).
+
+All model-provided download paths are relative to the published bundle:
+`assets[].downloadPath`, `packages[].path`, every optional Design System and
+Press Kit artifact/asset path, and the separately supplied publication
+`manifestPath`. Imported models are checked before rendering; URL construction
+applies the same shared validator. A generated-download asset requires a path;
+an embedded source may omit it or use null.
+
+The path contract is:
+
+- Accept non-empty strings with `/`-separated, non-empty filename segments.
+  Remove one optional leading `./`. Reject `.` and `..` segments anywhere else.
+- Decode each segment once and serialize it with URI component encoding. This
+  preserves safe spaces, Unicode, and existing encoding such as `%20`.
+- Reject absolute/rooted URLs and paths, protocol-relative paths, schemes and
+  drive prefixes, backslashes, encoded separators, malformed UTF-8/escapes,
+  query/fragment delimiters, and control characters (U+0000–001F and U+007F).
+  Colons and decoded percent signs are forbidden, including nested encoding
+  such as `%252f`. Literal percent filenames are outside this path contract.
+- File paths cannot end in `/`. Artifact-directory configuration accepts one
+  trailing `/` and applies the same relative-segment rules. Dots within an
+  ordinary filename, such as `logo..draft.svg`, are valid.
+
+Validation does not rewrite the imported model or any generated file. Design
+System views must identify all four known files in one directory. Press Kit
+published paths must remain beneath their declared Press Kit directory.
+
+`--asset-base-url` is separate, explicit deployment configuration. It accepts
+relative directories (including `../identity/`), rooted route prefixes, and
+absolute HTTP(S) directory URLs. Empty/omitted bases mean `./`; one trailing
+slash is ensured. HTTP(S) bases use standard URL serialization. Credentials,
+query strings, fragments, protocol-relative bases, other schemes, raw
+whitespace/control characters, and backslashes are rejected. Rendering remains
+offline; configuring a CDN does not fetch its contents.
+
+| Configured base | Artifact path | Download URL |
+| --- | --- | --- |
+| `./` | `brand/mark.svg` | `./brand/mark.svg` |
+| `../identity` | `./brand/mark.svg` | `../identity/brand/mark.svg` |
+| `/products/example/v1` | `packages/tokens/tokens.json` | `/products/example/v1/packages/tokens/tokens.json` |
+| `https://cdn.example.test/identity/v1` | `brand/mark.svg` | `https://cdn.example.test/identity/v1/brand/mark.svg` |
+
+Existing compiler-generated package paths retain their targets. Leading `/`
+is no longer silently stripped from model paths: put deployment prefixes in
+the configured base and supply bundle-relative paths in newly reviewed models.
+Do not patch historical published models, source digests, or artifact bytes.
+The explicit publication `releaseUrl` remains an external release-page link;
+v1 has no generic external-download path variant.
+
 ## Compiler API
 
 Rust consumers compose the existing package request with the renderer target:
