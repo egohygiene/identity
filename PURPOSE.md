@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: identity-purpose
 title: Identity Purpose
 kind: architecture-document
-version: 1.0.0
+version: 1.0.1
 status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-20
+updated: 2026-10-18
 governed_by:
   - architecture-purpose
 depends_on: []
@@ -58,7 +58,7 @@ Identity is useful without the rest of Ego Hygiene. Any repository can own an id
 | Identity contracts, schemas, and compatibility | Organization policy and conformance |
 | Semantic tokens, voice, metadata, usage rules, and target profiles | Product UI components and templates |
 | Deterministic planning, projection, validation, and manifests | Consumer application implementation |
-| Brand Kit packages, view model, and reference renderer | Public website shell, route wiring, domain, and deployment |
+| Brand Kit packages, view model, reference renderer, and standalone Brand Kit publisher | Organization website shell, route installation, domain, and deployment |
 | Approval-aware candidate and creative handoff contracts | External creative or AI providers |
 
 Identity is not a generic logo generator, a raw asset archive, a product component library, or an authority that can silently approve or publish creative work.
@@ -84,8 +84,9 @@ Identity fulfills its purpose when:
 
 ## Evidence and uncertainty
 
-- **Observed:** An Identity CLI and consumer contract were incubated in Empathy; they have not yet been extracted into this repository.
-- **Accepted:** Identity is a standalone Brand Kit generator with the ownership boundary defined here.
-- **Proposed:** The schema, compiler, packages, renderer, asset studio, pilots, and release remain tracked implementation work.
+- **Implemented:** The independent CLI, v1 source validator, deterministic compiler/packages, guidance, reference renderer, and approval-aware studio are present. The [consumer pilots](https://github.com/egohygiene/identity/issues/17) and [v1.0.0 release closeout](https://github.com/egohygiene/identity/issues/18#issuecomment-5448834860) provide separate consumer and release evidence.
+- **Published:** The standalone Brand Kit at `https://identity.egohygiene.io/` consumes the immutable stable release. The organization `https://egohygiene.io/identity/` experience has a separate artifact and deployment gate; its candidate build is not proof of installation.
+- **Accepted:** The [canonical ADR index](docs/decisions/README.md) records 21 accepted decisions and proposed ADR-022. Decision acceptance remains distinct from implementation, verification, and deployment.
+- **Remaining:** [ROADMAP.md](ROADMAP.md) maps stabilization #70–#88 and Brand Kit completion #98–#109. Merged post-v1 repairs are not retroactively part of v1.0.0.
 - **Deferred:** Managed services, marketplaces, and provider-specific creative generation are outside v1 unless a later decision changes the roadmap.
 

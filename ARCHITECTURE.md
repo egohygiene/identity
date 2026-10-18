@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: identity-architecture
 title: Identity Architecture
 kind: architecture-document
-version: 1.0.0
+version: 1.0.1
 status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-08-22
+updated: 2026-10-18
 governed_by:
   - architecture-architecture
 depends_on:
@@ -68,7 +68,7 @@ Dependencies point inward toward stable contracts and domain behavior. External 
 | Render | Explicitly accepted plan and approved sources | Isolated generated work state | Publish or approve creative work |
 | Verify | Source, outputs, manifest, fixtures, and policy | Validation evidence | Present partial coverage as success |
 | Package | Verified outputs | Immutable package candidates | Replace canonical source |
-| Publish | Approved immutable release | Consumer-owned deployment | Depend on a mutable default branch |
+| Publish | Approved immutable release and separately bound current evidence | Owning surface's deployment | Substitute mutable brand inputs for the selected release |
 
 ## Stable interfaces
 
@@ -96,12 +96,32 @@ Exact fields, commands, and package formats belong to their versioned specificat
 | Observatory | Organization health and evidence projection | Reads stable Identity validation and release evidence |
 | Empathy | Baseline consumer and former incubation host | Owns its `.identity/` source and consumes an immutable Identity release |
 | OptiFlow | Product consumer with distinct visual overrides | Demonstrates family defaults plus intentional product variation |
-| Website repository | Public shell, route integration, deployment, redirect, and domain | Publishes an immutable Brand Kit artifact at `/identity` |
-| Identity | Brand contracts, projections, packages, view model, reference renderer, and evidence | Never copies sibling internals or assumes their default branches |
+| Website repository | Organization public shell, route installation, deployment, redirect, and domain | Installs the reviewed `/identity/` product-experience artifact; does not own the standalone Brand Kit publisher |
+| Identity | Brand contracts, projections, packages, view model, reference renderer, standalone publisher, and evidence | Uses versioned sibling interfaces and exact source bindings; retains the consumer-owned source boundary |
 
 ## Public-route boundary
 
-`https://egohygiene.io/identity` is the canonical organization Brand Kit route. `/brand-kit` is a permanent discoverability redirect. Identity owns the released Brand Kit bundle and publication contract; the website repository owns route wiring, the surrounding shell, deployment, redirect behavior, and rollback execution.
+`https://identity.egohygiene.io/` is the canonical public Brand Kit.
+`https://egohygiene.io/identity/` is the separately owned product experience,
+not a replacement Brand Kit host. Accepted
+[ADR-017](docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md)
+and [ADR-019](docs/decisions/ADR-019-immutable-release-contract.md) preserve
+the release, adapter, and two-surface boundaries. Proposed
+[ADR-022](docs/decisions/ADR-022-decisions-publication-composition.md) records
+the implemented Decisions composition without acquiring lifecycle acceptance.
+
+| Surface and routes | Owner and inputs | Validation and current evidence | Rollback |
+| --- | --- | --- | --- |
+| Standalone Brand Kit: `identity.egohygiene.io/`, `/site.json`, `/packages/`, local `/brand-kit/` redirect | Identity's existing single Pages publisher and reference renderer select a published stable annotated tag. The current selected release is `v1.0.0`. | Release/configuration/asset binding, package checksums, canonical domain and served bytes. [Publisher run 38073076055](https://github.com/egohygiene/identity/actions/runs/38073076055) and [organization #30](https://github.com/egohygiene/.github/issues/30) record the October 10 deployment and 40 preserved Brand Kit files. | Select an earlier stable annotated release through the existing publisher; verify its output and independent Decisions source. Preserve a verified recovery artifact before changing release-owned bytes. |
+| Organization product experience: `egohygiene.io/identity/` and its docs, architecture, legal, manifest, and redirect routes | Identity builds a content-addressed composite from pinned Holon profiles; the organization route owner installs the exact reviewed artifact. | Offline architecture/artifact verification, deterministic inventory, accessibility/browser review, exact cross-host release agreement, and owner installation/live proof. #57 delivered the bounded candidate; configured `v1.1.0` is not a published release or deployment. | The organization route owner re-promotes the preceding verified composite independently of the Brand Kit. |
+| Current Decisions projection: `identity.egohygiene.io/intelligence/` and `/decisions/` alias | The same Identity publisher composes pinned Relay output from a full current ADR source revision. Publisher, ADR source, and stable Brand Kit release retain separate bindings. | Fresh ADR admission, public allowlisting, route-collision and Brand Kit preservation checks, retained artifact and live hashes. PR #97/run 38073076055 record source `55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`; organization #30 records 62 matching live files. ADR-022 remains proposed. | Retain the exact composed artifact and prior 40-file recovery capture. Replay a reviewed ancestor ADR source only through fresh admission; a retained archive does not prove an exercised rollback. |
+
+The [publication guide](docs/publication/IDENTITY_PAGES.md) and existing
+machine contracts own exact routes and commands. Broader Intelligence hosts,
+routes, and fleet adoption remain separately scoped; the deployed Decisions
+canary supplies no blanket publication authority. Read-only inventory,
+Observatory, and ADR collection can proceed alongside #70 using their source
+visibility and coverage contracts; they do not wait for every audit repair.
 
 ## Dependency rules
 
@@ -146,6 +166,11 @@ The compiler still rejects network-dependent or nondeterministic adapters. The
 package layer does not make its output canonical or publish implicitly. Its
 narrow `v1-generate` command is a consumer-owned transactional build boundary,
 and `v1-verify` detects missing or drifted generated state without mutation.
+On current source both commands and the public v1 loader run the complete
+embedded Python preflight automatically. PR #89 repaired public/review
+filtering, source authority, and journal authority on main; it did not change
+historical release bytes. #74–#79 retain the remaining digest, renderer-input,
+transaction workspace, writer, and distributed recovery work.
 
 The #12 quality layer sits downstream of the resolved Brand Kit and compiler
 manifest. It owns `identity.quality-report/v1`, package/publication scopes,
@@ -167,9 +192,10 @@ checks are automated while motion meaning, direction/origin, and changed visual
 baselines remain human decisions. Relay #8 is a downstream capture producer for
 this contract, not an Identity runtime dependency.
 
-Renderer interaction checks are deliberately skipped in package scope and become
-blocking review requirements in publication scope until #14 supplies browser
-evidence.
+Renderer interaction checks remain outside package scope and require actual
+browser evidence in publication scope. #14 implemented that renderer path;
+#80 now owns a reproducible browser/font environment, and #88 must preserve
+its accessibility and visual behavior during extraction.
 
 ## Trust boundaries
 
@@ -185,9 +211,10 @@ Canonical source, generated work state, released packages, provider sessions, CI
 | Compiler pipeline | Deterministic Rust core, adapter registry, mutation-free plan, plan/manifest schemas, checksum evidence, transactional local store, recovery tests, and offline/compatibility gates | Preserve authority boundaries while downstream validation and interfaces evolve |
 | Packages and projection validation | Nine versioned profiles, built-in offline adapters, DTCG/web/document/metadata/raster/archive projections, deterministic package/checksum schemas, cross-repository byte-identity tests, incremental tests, and subset-selection tests | Preserve package compatibility through real consumer/release proof |
 | Repository presentation | Exact-pinned proposed Hygiene profile, reviewed banner inheritance, explicit evidence-state rendering, local SVG/PNG variants, accessible fallbacks, manifests, and checksums | Hand the immutable descriptor to Holon and repository tooling without transferring evidence or README authority |
-| Quality and release evidence | `identity.quality-report/v1`, package/publication scopes, WCAG/reduced-motion/source-governance/SVG/PNG/manifest/budget checks, visual baselines, explicit skips, and human-review tests | Preserve the single release authority while #14 supplies browser evidence |
+| Quality and release evidence | `identity.quality-report/v1`, package/publication scopes, WCAG/reduced-motion/source-governance/SVG/PNG/manifest/budget checks, visual baselines, explicit skips, human-review tests, and renderer browser evidence | Preserve the single release authority and qualify the browser environment through #80 |
 | Visual-motion governance | `identity.motion-policy/v1`, `identity.visual-motion-manifest/v1`, Astryx adopt/adapt/reject evidence, deterministic capture/provenance checks, purpose budgets, reduced-motion fallbacks, baseline review, and adversarial tests | Consume deterministic capture evidence from Relay #8 and renderer evidence from #14 without coupling Identity to their implementations |
-| Renderer and studio | Proposed | Accessible framework-replaceable reference experience |
-| Public route | Deferred pending released artifacts and website work | Immutable `/identity` deployment with `/brand-kit` redirect |
+| Renderer and studio | Implemented reference renderer, governed local previews/handoffs, and `studio-review` | Complete kit presentation through #99–#105; preserve approval and model compatibility during #88 |
+| Publication | Release-backed standalone Brand Kit and separately bound Decisions deployment; organization composite has a candidate handoff | Preserve the surface matrix above; obtain a qualifying stable release and organization owner installation before claiming the `/identity/` experience live |
+| Consumer proof and release | Merged Empathy/OptiFlow pilots and published `v1.0.0`; Mantle provides post-v1 adoption | Ship later repairs in a new immutable release and repeat the real self-consumer/upgrade proof under #98 |
 
 Implementation evidence determines availability. An accepted architecture direction is not itself an implemented runtime capability.

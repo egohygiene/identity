@@ -65,8 +65,11 @@ receipt for the 21-record source above, not evidence for later source changes.
 The publication implementation now selects the existing Brand Kit host for
 `/intelligence/decisions/` and its consumer-owned `/decisions/` alias as described
 below. New proposed ADR-022 makes the candidate corpus 22 records; it requires
-fresh native admission and production-build evidence. The earlier receipt and
-its bytes remain unchanged.
+fresh native admission and production-build evidence for each selected source.
+The later deployed source `55d0339ba5518c7b72154a2aad54a9e5b2bf2fff` has the
+separate PR #97/run checkpoint in the
+[publication guide](publication/IDENTITY_PAGES.md#decisions-composition-checkpoint--2026-10-10).
+The earlier receipt and its bytes remain unchanged.
 
 ## Local validation through the same adapter
 
@@ -160,7 +163,11 @@ The advisory validation adoption retains its separate
 their original source pins; the
 [filtering checkpoint](evidence/identity-decisions-filtering-2026-10-10.json)
 records the repaired canary's verification. The later shared navigation and
-organization-favicon update requires its own publication and live asset checks.
+organization-favicon update received separate publication and live asset proof
+through [PR #97](https://github.com/egohygiene/identity/pull/97),
+[run 38073076055](https://github.com/egohygiene/identity/actions/runs/38073076055),
+and [organization #30](https://github.com/egohygiene/.github/issues/30). Historical
+filtering evidence is not reused as proof of the later artwork revision.
 [Proposed ADR-022](decisions/ADR-022-decisions-publication-composition.md) records
 this new composition choice; the earlier R1 approval covers only ADR-001–021.
 The production build requires complete, fresh validated ADR coverage at its
@@ -181,7 +188,8 @@ establish a recoverable prior deployment before claiming publication complete.
 Manual replay of an ancestor ADR source still requires fresh collection.
 See the [publication checkpoint](publication/IDENTITY_PAGES.md#decisions-composition-checkpoint--2026-10-10)
 for routes, source identities and rollback requirements. Deployment results and
-maintainer feedback remain required before fleet follow-up.
+maintainer feedback remain required for each later consumer. Identity #69 is
+closed; its completed canary does not make Pace #5's fleet rollout complete.
 
 Two existing architecture-preview references in
 `publication/identity-experience.content.json` need a later reviewed correction:

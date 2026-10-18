@@ -15,7 +15,14 @@ These files are the first human-approved self-hosting visual projection for the 
 
 These files are **generated brand outputs**, not a replacement for canonical identity intent. The accepted Identity architecture keeps human-reviewed intent under a consumer-owned `.identity/` contract and generated outputs under `assets/identity/` or versioned packages.
 
-The visual direction was explicitly selected and approved on 2026-08-22. When the v1 `.identity/` source contract is promoted to `main`, this kit should become the golden self-hosting fixture and be reproducible from reviewed source.
+The visual direction was explicitly selected and approved on 2026-08-22. The
+v1 `.identity/` contract is now implemented, but the tracked repository root
+does not yet contain its own `.identity/` consumer source.
+[#99](https://github.com/egohygiene/identity/issues/99) inventories the existing
+source, configuration, approvals, and projections;
+[#105](https://github.com/egohygiene/identity/issues/105) owns the complete kit
+and real-consumer proof. Preserve the reviewed assets and approval evidence
+while establishing that reproducible self-consumer path.
 
 Kern's character system received its own explicit review on 2026-08-29. Its
 canonical source, approval, provenance, accessibility guidance, derivative

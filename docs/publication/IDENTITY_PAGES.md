@@ -147,10 +147,10 @@ selected release tag and commit, then checks the canonical page metadata. A
 failed live-domain proof fails the deployment workflow rather than silently
 leaving a stale or misrouted site in place.
 
-The existing `v1.0.0` release predates this workflow. Merging the publisher
-enables the first deployment automatically: the `main` trigger selects the
-recorded stable release (`v1.0.0`) and uses its digest-pinned compatibility
-configuration without substituting current assets.
+The existing `v1.0.0` release predates this workflow. The publisher's initial
+deployment selected that recorded stable release through the `main` trigger
+and its digest-pinned compatibility configuration. Later publisher revisions
+still select the exact stable source without substituting current assets.
 
 GitHub Pages must use **GitHub Actions** as its source. The published artifact
 contains `CNAME` with exactly `identity.egohygiene.io`; repository settings own
@@ -167,6 +167,19 @@ Kit publisher and host. [Proposed ADR-022](../decisions/ADR-022-decisions-public
 records this consumer choice separately from accepted ADR-017 and the earlier
 R1 disposition. Implementation and deployment authorization do not mark
 ADR-022 accepted.
+
+The latest recorded publication checkpoint is
+[PR #97](https://github.com/egohygiene/identity/pull/97), merged at
+`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`, and successful
+[publisher run 38073076055](https://github.com/egohygiene/identity/actions/runs/38073076055).
+[Organization #30](https://github.com/egohygiene/.github/issues/30) records the
+October 10 live proof: 62 matching file hashes (21 Intelligence files, one
+alias, and 40 preserved Brand Kit files), visible organization/GitHub marks,
+correct destinations, keyboard focus, and the organization favicon. This is
+the later deployment/branding checkpoint, not a new observation by this guide.
+The Brand Kit release remains `v1.0.0`; the current Decisions source has its
+independent full commit binding. ADR-022 remains proposed and production
+rollback has not been established by that proof.
 
 | Component | Route/source boundary |
 | --- | --- |
@@ -188,7 +201,7 @@ shared action README. This does not replace the release-owned Brand Kit assets.
 For this and each later repository adoption, verify the visible marks, link
 destinations, keyboard focus, and served favicon bytes after publication.
 Historical deployment receipts retain their original source and file counts;
-they are not evidence that this later branding revision is already deployed.
+the separate PR #97/run checkpoint above supplies the later branding evidence.
 
 The same `Publish Identity Brand Kit` workflow uploads and deploys one composed
 Pages artifact. It records the publisher revision, ADR source revision and
@@ -206,9 +219,10 @@ the deployment receipt separate from the live-verification result.
 
 The [ratified-source receipt](../evidence/identity-adrs-ratified-2026-10-10.json)
 is historical evidence for source `12227dad43c90b02e14971030f22242f3a205c9d`
-and 21 accepted records. Adding proposed ADR-022 requires new 22-record source
-validation and build evidence. Neither that old receipt nor this guide claims
-that the new composition is already deployed or its rollback has been exercised.
+and 21 accepted records. Adding proposed ADR-022 required fresh admission and
+build evidence for the 22-record corpus. The later publisher and live-proof
+checkpoint above records that deployed composition; the earlier receipt remains
+unchanged and supplies neither later-source nor exercised-rollback evidence.
 
 The [rollback capture](../../publication/decisions-rollback.json) records the
 prior site's complete 40-file inventory and the bytes retrieved over HTTPS on
