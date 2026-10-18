@@ -31,7 +31,7 @@ brand authority into either framework. See the
 
 ## Brand Kit preview
 
-The first human-approved self-hosting visual direction now lives under [`assets/identity/`](assets/identity/README.md). These are generated projections—not a replacement for the future canonical `.identity/` source contract.
+The first human-approved self-hosting visual direction lives under [`assets/identity/`](assets/identity/README.md). These are generated projections. The v1 `.identity/` source contract is implemented; [#99](https://github.com/egohygiene/identity/issues/99) and [#105](https://github.com/egohygiene/identity/issues/105) track the real self-consumer source inventory and complete kit proof.
 
 Kern, the approved Identity guide, now dogfoods the v1
 [mascot and character-system contract](docs/contracts/MASCOT_SYSTEM_V1.md).
@@ -103,7 +103,8 @@ CLI profiles into a deterministic review plan. It does not write canonical
 remain outside both locations.
 
 Raster/vector rendering, asset application, packaging, and publication remain
-outside this extracted CLI vertical slice. See the
+outside the extracted v0 vertical slice. The separate v1 package commands are
+documented below. See the
 [Empathy extraction evidence](docs/migration/EMPATHY_EXTRACTION.md).
 
 ## Identity v1 source
@@ -377,6 +378,14 @@ Brand Kit is live at [`identity.egohygiene.io`](https://identity.egohygiene.io/)
 The separately composed `egohygiene.io/identity/` product experience remains an
 independent consumer and deployment transaction.
 
+Current source includes the public/review, source-preflight, and recovery
+authority repairs merged through [PR #89](https://github.com/egohygiene/identity/pull/89).
+The latest published stable release remains `v1.0.0`; merged implementation,
+released artifacts, deployed pages, and accepted ADRs are separate evidence.
+The stabilization and complete-kit sequence is maintained in
+[ROADMAP.md](ROADMAP.md). #83's final download/recovery wording follows #76
+and #77; the current CLI does not expose an inspection or recovery command.
+
 | Capability | State | Tracking |
 | --- | --- | --- |
 | Brand Kit product contract | Accepted | [#6](https://github.com/egohygiene/identity/issues/6) |
@@ -386,7 +395,7 @@ independent consumer and deployment transaction.
 | Compiler core | Implemented | [#10](https://github.com/egohygiene/identity/issues/10), [contract](docs/contracts/COMPILER_V1.md) |
 | Projection adapters and packages | Implemented | [#11](https://github.com/egohygiene/identity/issues/11), [contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md) |
 | Quality and release evidence | Implemented | [#12](https://github.com/egohygiene/identity/issues/12), [contract](docs/contracts/QUALITY_GATES_V1.md) |
-| Visual-motion validation | Implemented in this change | [#3](https://github.com/egohygiene/identity/issues/3), [contract](docs/contracts/VISUAL_MOTION_V1.md), [Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) |
+| Visual-motion validation | Implemented | [#3](https://github.com/egohygiene/identity/issues/3), [contract](docs/contracts/VISUAL_MOTION_V1.md), [Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) |
 | Voice, usage, and approval guidance | Implemented | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |
 | Renderer and asset studio | Implemented | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
 | Public Brand Kit site | Release-backed GitHub Pages deployment at `identity.egohygiene.io` | [#16](https://github.com/egohygiene/identity/issues/16), [publication guide](docs/publication/IDENTITY_PAGES.md) |
@@ -440,4 +449,4 @@ compiler/package outcome. The Empathy and OptiFlow proof has landed through
 - [Astryx motion-pattern evaluation](docs/evaluations/astryx-motion-patterns.md)
 - [Roadmap](ROADMAP.md)
 
-The [roadmap issue](https://github.com/egohygiene/identity/issues/5) is the execution source of truth. Architecture documents define durable intent and boundaries; individual issues own implementation detail and evidence.
+[ROADMAP.md](ROADMAP.md) owns execution order. [#70](https://github.com/egohygiene/identity/issues/70) tracks stabilization and [#98](https://github.com/egohygiene/identity/issues/98) tracks complete-kit delivery and optional scope decisions; the original [#5](https://github.com/egohygiene/identity/issues/5) remains historical context. Architecture documents define durable boundaries; individual issues own implementation detail and evidence.

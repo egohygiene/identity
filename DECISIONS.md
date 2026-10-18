@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: identity-decisions
 title: Identity Decisions
 kind: architecture-document
-version: 1.4.0
+version: 1.4.1
 status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-10-10
+updated: 2026-10-18
 governed_by:
   - architecture-decisions
 depends_on:
@@ -31,7 +31,10 @@ supersedes: []
 
 The [canonical decision index](docs/decisions/README.md) links all records.
 The [migration map](docs/decision-migration-2026-10-10.md) preserves historical
-status claims, provenance and unresolved human disposition work.
+status claims, provenance, and the questions identified before ratification.
+The [2026-10-10 human disposition](docs/decision-ratification-2026-10-10.md)
+subsequently retained ADR-001–018 and accepted ADR-019–021. ADR-022 remains
+proposed; its implemented publication path does not supply lifecycle approval.
 
 Legacy acceptance claims remain unchanged in their records; this navigation
 page does not ratify them. New records follow the pinned
@@ -53,5 +56,6 @@ The headings below preserve the three historical inline links.
 
 ## Open decisions
 
-See the migration map for the preserved historical open questions and current
-review work. Detailed ADR-004 onward retain their existing paths.
+ADR-022 awaits its own human disposition. The migration map retains the earlier
+open questions as history; [ROADMAP.md](ROADMAP.md) owns current execution
+order. Detailed ADR-004 onward retain their existing paths.
