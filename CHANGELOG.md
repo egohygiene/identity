@@ -55,6 +55,11 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- Validate generic and optional renderer artifact paths with one bundle-relative
+  contract (#76), rejecting traversal, URL-shaped paths, encoded separators,
+  and nested encoding before rendering or URL construction. Preserve explicit
+  local/route/CDN bases and generated package targets; model paths beginning
+  with `/` now fail instead of silently losing their prefix.
 - Bind optional design-system handbook/context source digests to each other and
   the displayed immutable Brand Kit release (#75). Missing, malformed, stale,
   wrong-project and mixed-source inputs fail before rendering; matching v1 and

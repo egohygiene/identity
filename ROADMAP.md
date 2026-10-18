@@ -40,7 +40,7 @@ updated: 2026-10-18
 Reviewed source: [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. This is the source-review date; a later collector run does not renew its freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #74's shared source-digest contract merged in PR #111 (IDN-Q13). Implement and review #75's optional guidance/release binding (IDN-Q14).
+**Current gate:** #74's shared source-digest contract and #75's optional guidance/release binding merged in PRs #111/#112 (IDN-Q13/14). Implement and review #76's artifact-path/download-base boundary (IDN-Q15).
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 There are 28 open issues: fifteen remaining audit work items (#74–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. #71–#73 are complete on merged main through [PR #89](https://github.com/egohygiene/identity/pull/89); those repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) has an early independent reconciliation and a final checkpoint after #76/#77. The separate steps preserve that distinction.
@@ -373,7 +373,7 @@ issues: [74]
 
 <!-- roadmap-step
 id: IDN-Q14
-status: active
+status: complete
 depends_on: [IDN-Q13]
 issues: [75]
 -->
@@ -383,13 +383,13 @@ issues: [75]
 
 **Exit criteria:**
 
-- [ ] Matching inputs render/download and wrong-project, stale, malformed, or mixed-release inputs fail.
+- [x] Matching inputs render/download and wrong-project, stale, malformed, or mixed-release inputs fail.
 
-**Evidence and scope:** [#75](https://github.com/egohygiene/identity/issues/75). Use IDN-Q13's compatibility transition instead of silently changing old bindings.
+**Evidence and scope:** [#75](https://github.com/egohygiene/identity/issues/75), [PR #112](https://github.com/egohygiene/identity/pull/112), merged at `69d55c1caaa5b3959ed2ffdbbcd1fd69357d87dc`. Exact source-binding guards, all 72 renderer tests, six hosted browser checks and cross-platform release gates pass. Use IDN-Q13's compatibility transition instead of silently changing old bindings.
 
 <!-- roadmap-step
 id: IDN-Q15
-status: ready
+status: active
 depends_on: []
 issues: [76]
 -->

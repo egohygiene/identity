@@ -102,6 +102,22 @@ asset tree as the public source. The full deployment and rollback procedure is
 documented in
 [`docs/publication/IDENTITY_PAGES.md`](../docs/publication/IDENTITY_PAGES.md).
 
+## Download paths and deployment bases
+
+Model download paths stay relative to the published bundle. The shared
+validator covers generic assets/packages, all optional Design System and Press
+Kit entries, and publication manifests before rendering and URL construction.
+It rejects traversal, URL-shaped paths, encoded separators, and nested encoding;
+one leading `./` and safe filename encoding are normalized.
+
+Configure hosting separately with `--asset-base-url`: `./`, `../identity/`,
+`/products/example/v1/`, and `https://cdn.example.test/identity/v1/` are
+supported. Put route/CDN prefixes there, rather than in model paths. A model
+path beginning with `/` now fails instead of silently losing its leading slash.
+Existing generated package paths keep the same targets. The complete rules and
+compatibility boundary are in the
+[renderer contract](../docs/contracts/BRAND_KIT_RENDERER_V1.md#artifact-paths-and-configured-deployment-bases).
+
 ## Authority labels
 
 The page deliberately labels:

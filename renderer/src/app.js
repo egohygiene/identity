@@ -3,6 +3,8 @@
 
 import React from "react";
 
+import { normalizeArtifactPath, normalizeAssetBaseUrl } from "./artifact-paths.js";
+
 import {
   SECTION_DEFINITIONS,
   assertBrandKitViewModel,
@@ -17,6 +19,10 @@ const h = React.createElement;
 
 export function BrandKitPage({ model, assetBaseUrl = "./", publication = null }) {
   assertBrandKitViewModel(model);
+  assetBaseUrl = normalizeAssetBaseUrl(assetBaseUrl);
+  if (publication) {
+    normalizeArtifactPath(publication.manifestPath, "Publication manifest path");
+  }
   const colorTokens = model.tokens.filter((token) => token.type === "color");
   const typographyTokens = model.tokens.filter(
     (token) =>

@@ -120,7 +120,11 @@ When the handoff is valid, the optional Press and media kit section shows only
 generated source: boilerplate, facts, links, contacts, supplied public team
 bios, selected assets, usage/legal status, and bundle downloads. Relative
 asset paths are normalized and constrained to the generated Press Kit
-directory. The renderer never reads `.identity/` or fills in a missing press
+directory using the shared
+[artifact-path contract](BRAND_KIT_RENDERER_V1.md#artifact-paths-and-configured-deployment-bases).
+Every imported artifact and selected-asset download is checked; configured
+local/CDN bases remain separate from these paths.
+The renderer never reads `.identity/` or fills in a missing press
 contact, biography, asset, legal claim, or social account.
 
 ## Missing data and lifecycle behavior

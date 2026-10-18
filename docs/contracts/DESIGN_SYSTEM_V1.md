@@ -144,6 +144,12 @@ silently accepting an old hash. Root legacy TOML coexistence is supported by
 the corrected digest contract; it does not authorize attaching new v1 guidance
 to an unrelated historical v0 release. An omitted projection pair remains valid.
 
+The renderer checks every imported artifact path against the four expected
+filenames in the same publication directory, using the shared
+[artifact-path contract](BRAND_KIT_RENDERER_V1.md#artifact-paths-and-configured-deployment-bases).
+Directory paths remain bundle-relative; local routes and CDN prefixes belong
+in the separately configured deployment base.
+
 ## Deliberately deferred
 
 This contract does not create:

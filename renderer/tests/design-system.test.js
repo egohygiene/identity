@@ -32,6 +32,30 @@ function boundModel() {
 }
 
 describe("design-system source binding", () => {
+  test.each([0, 1, 2, 3])("validates imported artifact path %i, including secondary entries", (index) => {
+    const model = boundModel();
+    model.designSystem.artifacts[index].path = "design-system/%2foutside.json";
+    expect(() => assertBrandKitViewModel(model)).toThrow(/bundle-relative path/u);
+  });
+
+  test("requires all four downloads to identify the declared projection directory", () => {
+    const model = boundModel();
+    model.designSystem.artifacts[2].path = "elsewhere/design-context.json";
+    expect(() => assertBrandKitViewModel(model)).toThrow(/all four files in the same published directory/u);
+  });
+
+  test.each(["../kit", "//elsewhere.test/kit", "kit\\nested", "kit/%2e%2e", "kit/%252f"])(
+    "rejects an unsafe projection directory %s", (artifactDirectory) => {
+      expect(() => createDesignSystemView({ ...projections(), artifactDirectory })).toThrow(/bundle-relative path/u);
+    },
+  );
+
+  test("allows harmless filename dots and a leading relative directory prefix", () => {
+    const pair = projections();
+    const view = createDesignSystemView({ ...pair, artifactDirectory: "./kit..draft/" });
+    expect(view.artifacts[0].path).toBe("kit..draft/design-system-handbook.json");
+  });
+
   test("accepts the generated pair bound to its release without changing inputs", () => {
     const model = boundModel();
     const before = structuredClone(model);

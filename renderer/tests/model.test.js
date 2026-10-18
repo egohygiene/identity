@@ -10,7 +10,7 @@ describe("joinAssetUrl", () => {
     expect(joinAssetUrl("./", "packages/brand-kit/brand-kit.zip")).toBe(
       "./packages/brand-kit/brand-kit.zip",
     );
-    expect(joinAssetUrl("../identity", "/brand/mark.svg")).toBe(
+    expect(joinAssetUrl("../identity", "./brand/mark.svg")).toBe(
       "../identity/brand/mark.svg",
     );
   });

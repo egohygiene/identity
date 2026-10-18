@@ -1,6 +1,8 @@
 // Copyright 2026 Ego Hygiene
 // SPDX-License-Identifier: MIT
 
+import { normalizeArtifactDirectory, normalizeArtifactPath } from "./artifact-paths.js";
+
 export const PRESS_KIT_PROJECTION_SCHEMA = "identity.press-kit/v1";
 
 /**
@@ -9,13 +11,13 @@ export const PRESS_KIT_PROJECTION_SCHEMA = "identity.press-kit/v1";
  */
 export function createPressKitView({ pressKit, artifactDirectory }) {
   assertProjection(pressKit);
-  const directory = normalizeArtifactDirectory(artifactDirectory);
+  const directory = normalizeArtifactDirectory(artifactDirectory, "Press Kit artifact directory");
   return {
     pressKit: {
       ...pressKit,
       assets: pressKit.assets.map((asset) => ({
         ...asset,
-        downloadPath: `${directory}${normalizeRelativePath(
+        downloadPath: `${directory}${normalizeArtifactPath(
           asset?.downloadPath,
           "Press Kit asset download path",
         )}`,
@@ -23,7 +25,7 @@ export function createPressKitView({ pressKit, artifactDirectory }) {
     },
     artifacts: pressKit.artifacts.map((artifact) => ({
       ...artifact,
-      path: `${directory}${normalizeRelativePath(
+      path: `${directory}${normalizeArtifactPath(
         artifact?.path,
         "Press Kit artifact path",
       )}`,
@@ -43,12 +45,14 @@ export function assertPressKitView(value) {
   if (!jsonArtifact || typeof jsonArtifact.path !== "string") {
     throw new TypeError("Press Kit renderer view must declare the JSON artifact path.");
   }
+  const jsonArtifactPath = normalizeArtifactPath(jsonArtifact.path, "Press Kit artifact path");
   const suffix = "press-kit.json";
-  if (!jsonArtifact.path.endsWith(suffix)) {
+  if (!jsonArtifactPath.endsWith(suffix)) {
     throw new TypeError("Press Kit renderer view has an unexpected JSON artifact path.");
   }
   const directory = normalizeArtifactDirectory(
-    jsonArtifact.path.slice(0, -suffix.length),
+    jsonArtifactPath.slice(0, -suffix.length),
+    "Press Kit artifact directory",
   );
   for (const artifact of value.artifacts) {
     assertPublishedPath(artifact?.path, directory, "Press Kit artifact path");
@@ -89,40 +93,20 @@ function assertProjection(pressKit) {
       throw new TypeError(`${label} must be an array.`);
     }
   }
+  for (const artifact of pressKit.artifacts) {
+    normalizeArtifactPath(artifact?.path, "Press Kit projection artifact path");
+  }
   const kinds = new Set(pressKit.boilerplates.map((value) => value?.kind));
   if (!kinds.has("short") || !kinds.has("long")) {
     throw new TypeError("Press Kit projection must include short and long boilerplates.");
   }
 }
 
-function normalizeArtifactDirectory(value) {
-  if (typeof value !== "string" || value.length === 0) {
-    throw new TypeError("Press Kit artifact directory must be a non-empty relative path.");
-  }
-  if (/^(?:\/|https?:\/\/)/u.test(value) || value.includes("..")) {
-    throw new TypeError("Press Kit artifact directory must stay within the published site.");
-  }
-  return value.endsWith("/") ? value : `${value}/`;
-}
-
-function normalizeRelativePath(value, label) {
-  if (
-    typeof value !== "string" ||
-    value.length === 0 ||
-    /^(?:\/|https?:\/\/)/u.test(value) ||
-    value.includes("..") ||
-    value.includes("\\")
-  ) {
-    throw new TypeError(`${label} must stay within the published Press Kit directory.`);
-  }
-  return value.replace(/^\.\/+/u, "");
-}
-
 function assertPublishedPath(value, directory, label) {
-  if (typeof value !== "string" || !value.startsWith(directory)) {
+  const normalized = normalizeArtifactPath(value, label);
+  if (!normalized.startsWith(directory)) {
     throw new TypeError(`${label} must stay within the published Press Kit directory.`);
   }
-  normalizeRelativePath(value.slice(directory.length), label);
 }
 
 function assertObject(value, label) {
