@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import errno
 import os
 from pathlib import Path
 import shutil
@@ -147,8 +148,18 @@ class SourceDigestTests(unittest.TestCase):
                 shutil.copytree(VALID_FIXTURE, root, dirs_exist_ok=True)
                 if kind == "non-utf8":
                     path = os.fsencode(root / ".identity") + b"/invalid-\xff"
-                    with open(path, "wb") as output:
-                        output.write(b"must not be lossily renamed")
+                    self.assertFalse(validator.valid_canonical_source_path(
+                        ".identity/" + os.fsdecode(b"invalid-\xff")
+                    ))
+                    try:
+                        with open(path, "wb") as output:
+                            output.write(b"must not be lossily renamed")
+                    except OSError as error:
+                        if sys.platform != "darwin" or error.errno != errno.EILSEQ:
+                            raise
+                        # The filesystem rejected the name before inventory;
+                        # the pure path rejection above still runs on macOS.
+                        continue
                 else:
                     os.mkfifo(root / ".identity/pipe")
                 with self.assertRaises(ValueError):

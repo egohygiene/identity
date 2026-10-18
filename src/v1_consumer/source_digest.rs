@@ -3,6 +3,7 @@
 
 //! egohygiene.identity.source-digest/v1; see `docs/contracts/SOURCE_DIGEST_V1.md`.
 
+use std::ffi::OsString;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -13,6 +14,11 @@ use super::invalid;
 // Components are ordered by their exact UTF-8 bytes, independently of the host
 // filesystem's path ordering. In particular, Windows must not fold case here.
 type SourceFile = (Vec<String>, PathBuf);
+
+fn source_name(name: OsString, label: &str) -> CompilerResult<String> {
+    name.into_string()
+        .map_err(|_| invalid(label, "canonical source path must use valid UTF-8"))
+}
 
 pub(super) fn canonical_source_digest(repository_root: &Path) -> CompilerResult<String> {
     let mut bytes = Vec::new();
@@ -64,10 +70,7 @@ fn collect_canonical_files(
     let label = prefix.join("/");
     for entry in fs::read_dir(current).map_err(|error| invalid(&label, error.to_string()))? {
         let entry = entry.map_err(|error| invalid(&label, error.to_string()))?;
-        let name = entry
-            .file_name()
-            .into_string()
-            .map_err(|_| invalid(&label, "canonical source path must use valid UTF-8"))?;
+        let name = source_name(entry.file_name(), &label)?;
         // Exclude by lexical name before inspecting or descending into the entry.
         if name == "README.md"
             || (prefix.len() == 1
@@ -241,17 +244,12 @@ mod tests {
     #[cfg(unix)]
     #[test]
     fn non_utf8_source_names_are_rejected_without_lossy_conversion() {
-        use std::os::unix::ffi::OsStrExt;
+        use std::os::unix::ffi::OsStringExt;
 
-        let repository = TempDir::new().unwrap();
-        let root = repository.path().join(".identity");
-        fs::create_dir(&root).unwrap();
-        fs::write(
-            root.join(std::ffi::OsStr::from_bytes(b"invalid-\xff")),
-            b"source",
-        )
-        .unwrap();
-        assert!(canonical_source_digest(repository.path()).is_err());
+        // macOS rejects creating this filename (EILSEQ), so exercise the exact
+        // inventory conversion independently of filesystem name support.
+        let name = OsString::from_vec(b"invalid-\xff".to_vec());
+        assert!(source_name(name, ".identity").is_err());
     }
 
     #[cfg(unix)]

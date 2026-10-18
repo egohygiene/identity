@@ -131,8 +131,10 @@ ordering/hashes, link cases and portable path cases. Both language suites consum
 these vectors rather than generating expected hashes from either implementation.
 They include normal and reversed creation order, legacy coexistence, exclusions,
 nested lookalikes, component/case ordering, Unicode paths, binary/NUL/CRLF bytes,
-missing roots, links and cycles. Native Unix tests additionally cover non-UTF-8
-names and special files. The full consumer regression compares actual Rust and
+missing roots, links and cycles. Unix tests cover non-UTF-8 conversion and
+special files; Python also exercises non-UTF-8 inventory entries on filesystems
+that permit their creation. macOS rejects creating those names with `EILSEQ`.
+The full consumer regression compares actual Rust and
 Python projection digests and preserves the existing fixture hash and goldens.
 
 ```bash

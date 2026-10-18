@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-18T03:49:49Z'
+  updated_at: '2026-10-18T03:54:28Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -76,20 +76,24 @@ state:
   candidate:
     branch: codex/74-source-digest-conformance
     revision: null
-    pull_request: null
-    handoff_state: ready-for-review
+    pull_request:
+      provider: github
+      id: egohygiene/identity#111
+      url: https://github.com/egohygiene/identity/pull/111
+    handoff_state: review-reference-recorded
   live:
     status: verified
-    observed_at: '2026-10-18T03:48:40Z'
+    observed_at: '2026-10-18T03:54:28Z'
     default_branch_revision: 6e19b186c8cb4d3816d0970b8f73b613d96786e2
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'GitHub confirms #110 merged at this base, #74/#75/#83 open, #72 closed, and no competing open PR before
-      creation. #83 retains its final #76/#77 gate. This is a pre-PR #74 candidate, not merged or released.'
+    pull_request_state: open
+    notes: 'Main remains the #110 merge. PR #111 is open/draft at initial head a8cb5e0d909b75e79f6120bcdd3d8d8b9adecd80.
+      CLI, renderer and native decision workflows pass. macOS exposed invalid-UTF-8 fixture creation failure,
+      corrected here. Final matrix revalidation is pending; no release is created.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-18T03:49:49Z'
+  reviewed_at: '2026-10-18T03:54:28Z'
   reviewed_by: Codex
   evidence:
   - command: 'GitHub PR #110, commits/main, #74/#72/#75/#83 and open PR inspection'
@@ -136,13 +140,26 @@ review:
     notes: Schema, twelve headings, size, source/base paths and privacy pass. All 40 stable roadmap steps retain
       acyclic dependency/state/exit consistency. Published inputs, lockfiles, versions, workflows and existing
       goldens are unchanged; these bounded checks do not claim native EgoLint conformance.
+  - command: GitHub Actions 39095039211, 39095039294, 39095039563 and job 117579612781 at a8cb5e0d909b75e79f6120bcdd3d8d8b9adecd80
+    outcome: limited
+    observed_at: '2026-10-18T03:54:28Z'
+    notes: CLI/renderer/native advisory pass with retained evidence and known unknown-domain warnings. macOS cannot
+      create invalid UTF-8 names (EILSEQ). Final tests use the actual strict conversion and native inventories
+      where permitted; fresh matrix results are pending.
+  - command: cargo fmt --all --check; cargo clippy --locked --all-targets --all-features -- -D warnings; cargo
+      test --locked --lib source_digest; python3 -m unittest discover --start-directory tests --pattern "test_source_digest.py"
+      --verbose; python3 scripts/verify_docs.py --repository-root .
+    outcome: passed
+    observed_at: '2026-10-18T03:54:28Z'
+    notes: 'After macOS fixture correction: formatting/Clippy, five Rust digest tests and seven Python tests pass;
+      one Windows-only Python test skips on Linux. Full-suite counts above describe the initial candidate.'
   environment_limitations:
-  - Local execution is Linux only. Hosted release-gate Linux/macOS/Windows and native EgoLint results are not
-    yet observed at this pre-PR checkpoint.
-  - Native EgoLint is not installed locally; the pinned Hygiene schema/semantic checks do not claim its full architecture
-    conformance.
-  - The experience integration artifact is unbuilt locally. Windows junction coverage is deferred to the supported
-    hosted matrix; no skipped capability counts as a pass.
+  - Local execution is Linux only. Final hosted Linux/macOS/Windows revalidation is pending after the macOS fixture
+    correction.
+  - Native EgoLint is not installed locally. The initial hosted advisory check passes with existing unknown-domain/diagram
+    warnings, distinct from complete repository conformance.
+  - The experience integration artifact is unbuilt locally. The Windows-only junction test skips locally and runs
+    in the supported hosted matrix.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -165,7 +182,7 @@ This checkpoint covers [#74](https://github.com/egohygiene/identity/issues/74). 
 
 ## Resume protocol
 
-Read AGENTS.md, the digest contract, ADR-023 and affected source/tests. Refresh main, #74/#75/#83, open PRs and candidate CI. Distinguish the immutable base from this pre-PR candidate and future release evidence.
+Read AGENTS.md, the digest contract, ADR-023 and affected source/tests. Refresh main, #74/#75/#83, open PRs and candidate CI. Distinguish the immutable base from this review candidate and future release evidence.
 
 ## Current objective and success conditions
 
@@ -183,7 +200,7 @@ The shared fixture has 23 inventory/link cases and 38 path cases. Full consumer 
 
 ## Validation and review evidence
 
-Pinned Rust formatting/Clippy and all 68 Rust tests pass. Python runs 114 tests with 112 passes and two explicitly explained skips. All local digest vectors and standalone embedded-preflight tests pass. Integrity checks and pinned Hygiene schema/semantics pass for all 23 ADRs. Native EgoLint and hosted cross-platform results require separate observation; the front matter records these limits.
+Pinned Rust formatting/Clippy and all 68 Rust tests pass. Python runs 114 tests with 112 passes and two explicitly explained skips. All initial digest and standalone-preflight tests pass; focused checks pass after the macOS fixture correction. Integrity checks and pinned Hygiene schema/semantics pass for all 23 ADRs. Initial CLI/renderer/native advisory workflows pass. macOS rejected the invalid-name fixture before hashing; this follow-up fixes test setup and awaits fresh matrix results. Front matter records exact revisions and limits.
 
 ## Blockers, risks, unknowns, and deferred work
 
