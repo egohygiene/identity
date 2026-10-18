@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-18T14:32:49Z'
+  updated_at: '2026-10-18T14:39:30Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -49,6 +49,7 @@ scope:
   - https://github.com/egohygiene/identity/issues/99
   - https://github.com/egohygiene/identity/issues/98
   - https://github.com/egohygiene/identity/pull/113
+  - https://github.com/egohygiene/identity/pull/114
 work:
   objective: Review the complete current field inventory and demonstrated capability gaps, then choose the minimum compatible
     authoring contract for checkpoint 2.
@@ -77,30 +78,34 @@ state:
   base:
     revision: 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7
     ref: refs/heads/main
-    verified_at: '2026-10-18T14:32:49Z'
+    verified_at: '2026-10-18T14:39:30Z'
   candidate:
     branch: codex/99-field-catalog
-    revision: null
-    pull_request: null
+    revision: 10525fb51633da0b6e94080d7c5b3f77013e5807
+    pull_request:
+      provider: github
+      id: egohygiene/identity#114
+      url: https://github.com/egohygiene/identity/pull/114
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-18T14:32:49Z'
+    observed_at: '2026-10-18T14:39:30Z'
     default_branch_revision: 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'PR #113 is merged and #76 closed; #99 is open with no competing open PR observed before creation. The selected
-      priority is #99 checkpoint 1; #78 remains ready but paused. There are 25 open issues at this checkpoint.'
+    pull_request_state: draft
+    notes: 'PR #114 is the sole open PR and remains draft at the observed revision. Main remains 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7;
+      #99 is open with its inventory/map criteria recorded and review pending. #78 stays paused; checkpoints 2/3 are
+      unstarted.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-18T14:32:49Z'
+  reviewed_at: '2026-10-18T14:39:30Z'
   reviewed_by: Codex
   evidence:
-  - command: 'GitHub commits/main, #99, PR #113, open PR and issue inventory'
+  - command: 'GitHub commits/main, #99, PR #114 and open PR inventory'
     outcome: passed
-    observed_at: '2026-10-18T14:32:49Z'
-    notes: 'Current main and #76 merge are verified. No competing PR was observed; #99 has no direct issue prerequisite.'
+    observed_at: '2026-10-18T14:39:30Z'
+    notes: 'Main is unchanged; #114 is the sole open PR and is draft. #99 remains open. No competing changes were observed.'
   - command: Pinned Aether decision-impact v2.0.0 and continuity v1.1.0 at 8ef3bd34d5fec835da54eb8acd0d074b79ee8fe2,
       loaded earlier in this session and reused at the immutable pin
     outcome: passed
@@ -137,6 +142,12 @@ review:
     observed_at: '2026-10-18T14:32:49Z'
     notes: '24 prior ADRs are byte-identical and validate: 21 accepted, three proposed. All 40 roadmap IDs/dependency
       mappings remain stable and acyclic; #76 is complete and #99 active.'
+  - command: GitHub Actions runs 39136796707 (CLI) and 39136797090 (decision evidence)
+    outcome: passed
+    observed_at: '2026-10-18T14:39:30Z'
+    notes: Both workflows succeeded for observed candidate 10525fb51633da0b6e94080d7c5b3f77013e5807. The native adapter
+      is advisory and retains five warnings about unknown adoption/evidence and unvalidated diagram semantics; workflow
+      success is not whole-repository conformance. A subsequent continuity-only commit must be checked separately.
   environment_limitations:
   - Native EgoLint is unavailable locally; helper/schema checks are bounded evidence and hosted candidate outcomes remain
     separate.
@@ -173,7 +184,7 @@ Make every wanted identity area traceable to its current source, requiredness, g
 
 ## State snapshot
 
-PR #113 merged at 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7 and #76 is closed. Twenty-five issues remain. IDN-Q15 is complete; IDN-Q29 is active with checkpoint 1 ready for review in this candidate. No competing open PR was observed before creation. #78 is ready but paused while the selected #99 contract review proceeds.
+PR #113 merged at 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7 and #76 is closed. Twenty-five issues remain. IDN-Q15 is complete; IDN-Q29 is active with checkpoint 1 ready for review in draft [PR #114](https://github.com/egohygiene/identity/pull/114). It is the sole open PR; #99 records the completed inventory/map and pending review. #78 is ready but paused while the selected #99 contract review proceeds.
 
 ## Completed and material changes
 
@@ -187,7 +198,7 @@ README and the adoption guide link the review. ROADMAP records #76's actual merg
 
 A locked local CLI build succeeds. Five temporary variants preserve all canonical source bytes; the expected failures and coverage gaps are retained rather than reported as conformance. All 114 existing Python tests run with 112 passes and two explained skips. Documentation/publication/release/mascot/extraction checks pass. Pinned schema/helper checks validate 24 unchanged ADRs and 40 stable roadmap steps. Final continuity structure/size/privacy/base and diff checks accompany handoff.
 
-Local helper checks do not establish complete native repository conformance. This pre-PR checkpoint does not claim hosted acceptance, a new release, site deployment or successful fleet adoption.
+Both hosted workflows succeeded at the observed candidate revision above; later continuity-only updates require fresh checks. The advisory native adapter retains five adoption/evidence/diagram warnings. No complete repository conformance, creative approval, release, deployment or fleet adoption is claimed.
 
 ## Blockers, risks, unknowns, and deferred work
 
