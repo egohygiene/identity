@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-018
+id: ADR-0018
 title: Project repository presentation without evaluating repository truth
 status: accepted
 date: "2026-10-10"
@@ -39,7 +39,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-018: Project repository presentation without evaluating repository truth
+# ADR-0018: Project repository presentation without evaluating repository truth
 
 The canonical date records the explicit human disposition on 2026-10-10.
 Original source prose and metadata are preserved below as historical evidence;

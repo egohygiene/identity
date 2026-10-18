@@ -10,12 +10,12 @@ calls Relay without copying its validator or acquiring publication authority.
 
 | Input | Reviewed immutable source |
 | --- | --- |
-| Relay workflow and local adapter | `4137cb07a017b7bbae2ee38fe9b039c58b0b17eb` |
-| Hygiene ADR policy | `c589587395750cd1c79c6fa0bef010189c547249` |
-| EgoLint architecture validator | `933472b6322d2060c487e5a8a6f0bc5197696af0` |
-| Holon materialization contract | `660b941f99618806fcadd589bcdae61c519f96e4` |
+| Relay workflow and local adapter | `ac2600f4619f64c75a0e499e0540d8f48d516f9c` |
+| Hygiene ADR policy | `a05b14f8b9e2772124f879f818e09a911e996ad8` |
+| EgoLint architecture validator | `d917ea524962639494e5bb4b3196192238ba57d9` |
+| Holon materialization contract | `a7734dba83305276b12932fcd4ce348044d9a2e9` |
 
-Relay's `1.0.0-alpha.2` architecture profile verifies source artifact digests.
+Relay's `1.0.0-alpha.4` architecture profile verifies source artifact digests.
 This is reviewed source adoption, not a claim that every input is released.
 The separately pinned roadmap/projection contract entries in the TOML retain
 their proposed authority; the accepted ADR policy does not promote them.
@@ -64,7 +64,7 @@ That checkpoint did not deploy the generated artifact. It remains an immutable
 receipt for the 21-record source above, not evidence for later source changes.
 The publication implementation now selects the existing Brand Kit host for
 `/intelligence/decisions/` and its consumer-owned `/decisions/` alias as described
-below. ADR-022 made that candidate corpus 22 records. Proposed ADR-023 adds the
+below. ADR-0022 made that candidate corpus 22 records. Proposed ADR-0023 adds the
 source-digest compatibility contract in the current #74 candidate, bringing its
 corpus to 23 records; each selected source requires fresh native admission and
 production-build evidence.
@@ -76,7 +76,7 @@ The earlier receipt and its bytes remain unchanged.
 ## Local validation through the same adapter
 
 Use trusted source checkouts outside Identity at the exact pins above. Follow
-Relay's pinned [runtime preparation instructions](https://github.com/egohygiene/relay/blob/4137cb07a017b7bbae2ee38fe9b039c58b0b17eb/docs/repository-architecture-validation.md#prepare-the-trusted-runtime)
+Relay's pinned [runtime preparation instructions](https://github.com/egohygiene/relay/blob/ac2600f4619f64c75a0e499e0540d8f48d516f9c/docs/repository-architecture-validation.md#prepare-the-trusted-runtime)
 for CPython 3.12/Linux x86_64, hash-locked Python packages and Rust 1.85.1.
 Acquire dependencies explicitly, then prepare and validate offline. An ADR
 collector runtime receipt is **not** an architecture-validator receipt.
@@ -170,8 +170,8 @@ through [PR #97](https://github.com/egohygiene/identity/pull/97),
 [run 38073076055](https://github.com/egohygiene/identity/actions/runs/38073076055),
 and [organization #30](https://github.com/egohygiene/.github/issues/30). Historical
 filtering evidence is not reused as proof of the later artwork revision.
-[Proposed ADR-022](decisions/ADR-022-decisions-publication-composition.md) records
-this new composition choice; the earlier R1 approval covers only ADR-001–021.
+[Proposed ADR-0022](decisions/ADR-0022-decisions-publication-composition.md) records
+this new composition choice; the earlier R1 approval covers only ADR-0001–021.
 The production build requires complete, fresh validated ADR coverage at its
 full source commit and does not publish a review envelope. Proposed records
 remain proposed in the generated view.
@@ -196,12 +196,12 @@ closed; its completed canary does not make Pace #5's fleet rollout complete.
 Two existing architecture-preview references in
 `publication/identity-experience.content.json` need a later reviewed correction:
 
-- `ADR-013-public-identity-reference-page.md` does not exist. The intended
-  renderer theme belongs to `ADR-010-reference-renderer-boundary.md`, with its
+- `ADR-0013-public-identity-reference-page.md` does not exist. The intended
+  renderer theme belongs to `ADR-0010-reference-renderer-boundary.md`, with its
   actual immutable-view-model title and supported summary.
-- `ADR-006-authoring-generated-state-boundary.md` does not exist. The intended
+- `ADR-0006-authoring-generated-state-boundary.md` does not exist. The intended
   deterministic/generative boundary belongs to
-  `ADR-003-deterministic-projection-boundary.md`, with its actual title and summary.
+  `ADR-0003-deterministic-projection-boundary.md`, with its actual title and summary.
 
 The content file is digest-bound by `experience/visual-baselines.json`, whose
 review rules require human review of fresh wide/narrow screenshots before a
@@ -218,3 +218,9 @@ selected owner catalog supports them. Preserve historical records, dispositions
 and the migration map; never enable required mode because an advisory run is
 green. A reviewed revert of the workflow/policy change removes this check
 without modifying Brand Kit publication, ADR history or deployment rollback.
+
+## Four-digit adoption — 2026-10-18
+
+Current policy: Hygiene v1.2.0 at `a05b14f8b9e2772124f879f818e09a911e996ad8`; native validator: EgoLint `d917ea524962639494e5bb4b3196192238ba57d9`; both shared runtime entrypoints: Relay `ac2600f4619f64c75a0e499e0540d8f48d516f9c` (architecture profile alpha.4). Authoring: Aether `dc8a16851f452763ef4f7fbe4bf057d4500b1921`, spec 3.1.0, skill 2.1.0 and managed module 0.3.0. The shared projection merge boundary preserves consumer instructions and copies the module exactly.
+
+The [per-record map](adr-workflow/2026-10-18-four-digit-ids.md) covers all 24 canonical filename/ID changes; the separate inline map is in root DECISIONS.md. Status and approval remain independent: 21 accepted, three proposed. Dated human ratification, immutable source receipts and publication rollback archives retain their original IDs and bytes. Earlier selections in this guide record prior checkpoints rather than the current runtime. Validate the complete corpus with the selected native tools before publication. Identity #114 remains a separate audit draft.

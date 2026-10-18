@@ -104,17 +104,17 @@ Exact fields, commands, and package formats belong to their versioned specificat
 `https://identity.egohygiene.io/` is the canonical public Brand Kit.
 `https://egohygiene.io/identity/` is the separately owned product experience,
 not a replacement Brand Kit host. Accepted
-[ADR-017](docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md)
-and [ADR-019](docs/decisions/ADR-019-immutable-release-contract.md) preserve
+[ADR-0017](docs/decisions/ADR-0017-zensical-launchkit-publication-architecture.md)
+and [ADR-0019](docs/decisions/ADR-0019-immutable-release-contract.md) preserve
 the release, adapter, and two-surface boundaries. Proposed
-[ADR-022](docs/decisions/ADR-022-decisions-publication-composition.md) records
+[ADR-0022](docs/decisions/ADR-0022-decisions-publication-composition.md) records
 the implemented Decisions composition without acquiring lifecycle acceptance.
 
 | Surface and routes | Owner and inputs | Validation and current evidence | Rollback |
 | --- | --- | --- | --- |
 | Standalone Brand Kit: `identity.egohygiene.io/`, `/site.json`, `/packages/`, local `/brand-kit/` redirect | Identity's existing single Pages publisher and reference renderer select a published stable annotated tag. The current selected release is `v1.0.0`. | Release/configuration/asset binding, package checksums, canonical domain and served bytes. [Publisher run 38073076055](https://github.com/egohygiene/identity/actions/runs/38073076055) and [organization #30](https://github.com/egohygiene/.github/issues/30) record the October 10 deployment and 40 preserved Brand Kit files. | Select an earlier stable annotated release through the existing publisher; verify its output and independent Decisions source. Preserve a verified recovery artifact before changing release-owned bytes. |
 | Organization product experience: `egohygiene.io/identity/` and its docs, architecture, legal, manifest, and redirect routes | Identity builds a content-addressed composite from pinned Holon profiles; the organization route owner installs the exact reviewed artifact. | Offline architecture/artifact verification, deterministic inventory, accessibility/browser review, exact cross-host release agreement, and owner installation/live proof. #57 delivered the bounded candidate; configured `v1.1.0` is not a published release or deployment. | The organization route owner re-promotes the preceding verified composite independently of the Brand Kit. |
-| Current Decisions projection: `identity.egohygiene.io/intelligence/` and `/decisions/` alias | The same Identity publisher composes pinned Relay output from a full current ADR source revision. Publisher, ADR source, and stable Brand Kit release retain separate bindings. | Fresh ADR admission, public allowlisting, route-collision and Brand Kit preservation checks, retained artifact and live hashes. PR #97/run 38073076055 record source `55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`; organization #30 records 62 matching live files. ADR-022 remains proposed. | Retain the exact composed artifact and prior 40-file recovery capture. Replay a reviewed ancestor ADR source only through fresh admission; a retained archive does not prove an exercised rollback. |
+| Current Decisions projection: `identity.egohygiene.io/intelligence/` and `/decisions/` alias | The same Identity publisher composes pinned Relay output from a full current ADR source revision. Publisher, ADR source, and stable Brand Kit release retain separate bindings. | Fresh ADR admission, public allowlisting, route-collision and Brand Kit preservation checks, retained artifact and live hashes. PR #97/run 38073076055 record source `55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`; organization #30 records 62 matching live files. ADR-0022 remains proposed. | Retain the exact composed artifact and prior 40-file recovery capture. Replay a reviewed ancestor ADR source only through fresh admission; a retained archive does not prove an exercised rollback. |
 
 The [publication guide](docs/publication/IDENTITY_PAGES.md) and existing
 machine contracts own exact routes and commands. Broader Intelligence hosts,

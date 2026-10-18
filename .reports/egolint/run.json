@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "generated_at_unix": 1792358465,
+  "operation": "check",
+  "status": "findings",
+  "egolint_exit_code": 1,
+  "adapter_exit_code": 0,
+  "image": "ghcr.io/egohygiene/egolint-full:edge",
+  "profile": {
+    "schema_version": 1,
+    "name": "fast",
+    "scope": "changed_files_with_repository_policy",
+    "purpose": "Deterministic pull-request and local feedback.",
+    "policy_source": ".config/megalinter/policy.yml#profiles/fast"
+  },
+  "config_sources": [
+    "compiled defaults"
+  ],
+  "report_path": ".reports/egolint/run.json",
+  "completeness": "partial",
+  "summary": {
+    "normalized_tool_results": 3,
+    "normalized_findings": 24,
+    "normalized_suppressions": 0
+  },
+  "tool_results": [
+    {
+      "schema_version": 1,
+      "tool_id": "EGOLINT_PORTABILITY",
+      "owner": "egohygiene/egolint",
+      "policy_source": ".config/rules/portability.toml",
+      "status": "failed_findings",
+      "enforcement": "blocking",
+      "finding_count": 20,
+      "warning_count": 0,
+      "duration_ms": null,
+      "evidence": []
+    },
+    {
+      "schema_version": 1,
+      "tool_id": "EGOLINT_REPOSITORY_INTELLIGENCE",
+      "owner": "egohygiene/egolint",
+      "policy_source": ".config/rules/repository-intelligence.v1.toml",
+      "status": "passed_with_warnings",
+      "enforcement": "advisory",
+      "finding_count": 0,
+      "warning_count": 3,
+      "duration_ms": null,
+      "evidence": []
+    },
+    {
+      "schema_version": 1,
+      "tool_id": "EGOLINT_REPOSITORY_RELEASE",
+      "owner": "egohygiene/egolint",
+      "policy_source": "vendor/hygiene/repository-release-policy.v1.json",
+      "status": "passed_with_warnings",
+      "enforcement": "advisory",
+      "finding_count": 0,
+      "warning_count": 1,
+      "duration_ms": null,
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "other",
+          "path": ".reports/egolint/repository-release.json",
+          "sha256": null,
+          "description": "Focused repository-release applicability and validation state."
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "schema_version": 1,
+      "id": "EGO-INTEL-ADOPTION-001-repository-intelligence-v1-26c3d437bcfae5fe",
+      "rule": {
+        "tool_id": "EGOLINT_REPOSITORY_INTELLIGENCE",
+        "rule_id": "EGO-INTEL-ADOPTION-001"
+      },
+      "severity": "warning",
+      "message": "roadmap evidence is explicitly unknown; conformance is incomplete Remediation: Declare each surface present, unknown, or not-applicable; provide a represented commit before claiming complete evidence.",
+      "location": {
+        "path": ".config/egolint/repository-intelligence.toml",
+        "start_line": null,
+        "start_column": null,
+        "end_line": null,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/repository-intelligence.v1.toml#EGO-INTEL-ADOPTION-001",
+        "configuration_path": ".config/egolint/repository-intelligence.toml"
+      },
+      "fingerprint": "repository-intelligence-v1-26c3d437bcfae5fe",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/repository-intelligence.v1.toml",
+          "sha256": null,
+          "description": "Egolint catalog rule mapped to egohygiene.repository-intelligence/v1."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-INTEL-ADOPTION-001-repository-intelligence-v1-8100af8bba50adc2",
+      "rule": {
+        "tool_id": "EGOLINT_REPOSITORY_INTELLIGENCE",
+        "rule_id": "EGO-INTEL-ADOPTION-001"
+      },
+      "severity": "warning",
+      "message": "represented commit is unknown; the report cannot claim a complete source snapshot Remediation: Declare each surface present, unknown, or not-applicable; provide a represented commit before claiming complete evidence.",
+      "location": {
+        "path": ".config/egolint/repository-intelligence.toml",
+        "start_line": null,
+        "start_column": null,
+        "end_line": null,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/repository-intelligence.v1.toml#EGO-INTEL-ADOPTION-001",
+        "configuration_path": ".config/egolint/repository-intelligence.toml"
+      },
+      "fingerprint": "repository-intelligence-v1-8100af8bba50adc2",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/repository-intelligence.v1.toml",
+          "sha256": null,
+          "description": "Egolint catalog rule mapped to egohygiene.repository-intelligence/v1."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-INTEL-ADOPTION-001-repository-intelligence-v1-86dfb5c7e9913f46",
+      "rule": {
+        "tool_id": "EGOLINT_REPOSITORY_INTELLIGENCE",
+        "rule_id": "EGO-INTEL-ADOPTION-001"
+      },
+      "severity": "warning",
+      "message": "commit-history evidence is explicitly unknown; conformance is incomplete Remediation: Declare each surface present, unknown, or not-applicable; provide a represented commit before claiming complete evidence.",
+      "location": {
+        "path": ".config/egolint/repository-intelligence.toml",
+        "start_line": null,
+        "start_column": null,
+        "end_line": null,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/repository-intelligence.v1.toml#EGO-INTEL-ADOPTION-001",
+        "configuration_path": ".config/egolint/repository-intelligence.toml"
+      },
+      "fingerprint": "repository-intelligence-v1-86dfb5c7e9913f46",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/repository-intelligence.v1.toml",
+          "sha256": null,
+          "description": "Egolint catalog rule mapped to egohygiene.repository-intelligence/v1."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGOLINT_RELEASE_AETHER_DECLARATION-252d16eaad647c3f",
+      "rule": {
+        "tool_id": "EGOLINT_REPOSITORY_RELEASE",
+        "rule_id": "EGOLINT_RELEASE_AETHER_DECLARATION"
+      },
+      "severity": "warning",
+      "message": "The repository release declaration is unavailable. Remediation: Create .egohygiene/release.json from the pinned Aether contract, or have an authorized planner select not-applicable.",
+      "location": {
+        "path": ".egohygiene/release.json",
+        "start_line": null,
+        "start_column": null,
+        "end_line": null,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": "vendor/hygiene/repository-release-policy.v1.json#aether_declaration",
+        "configuration_path": "vendor/hygiene/repository-release-policy.v1.json"
+      },
+      "fingerprint": "252d16eaad647c3f",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "configuration",
+          "path": ".egohygiene/release.json",
+          "sha256": null,
+          "description": "Repository-owned Aether release declaration."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-b7abbbad77664aa8",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "docs/issue-coordination/20261003/apply.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-b7abbbad77664aa8",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-6d441b3133cc36b2",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "experience/site_suite_adapter.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-6d441b3133cc36b2",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-2f8f6ec30e3d1a68",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/build_identity_experience.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-2f8f6ec30e3d1a68",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-07ac4f3a532211ab",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/channel_registry.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-07ac4f3a532211ab",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-97bb7a998c7c4827",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/identity_decisions_publication.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-97bb7a998c7c4827",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-4850ef9f5ac45dd1",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/package_public_brand_kit.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-4850ef9f5ac45dd1",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-8cce4bdff05aa48f",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/plan_v0_migration.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-8cce4bdff05aa48f",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-1a8d1f2c669d770e",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/release_inventory.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-1a8d1f2c669d770e",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-b83b428104946fe9",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/release_smoke.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-b83b428104946fe9",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-a8b8ce46182284ea",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/render_channel_registry.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-a8b8ce46182284ea",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-9ddb4099e96ce635",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/render_design_system.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-9ddb4099e96ce635",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-32b2c0e2ba12e527",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/render_press_kit.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-32b2c0e2ba12e527",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-bef0d1616c476f9f",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/render_social_surfaces.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-bef0d1616c476f9f",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-f1043d3c35cdb0b7",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/validate_identity.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-f1043d3c35cdb0b7",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-e99041c17ff8c92f",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/verify_docs.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-e99041c17ff8c92f",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-5b0acc3c48d39ad9",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/verify_identity_experience.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-5b0acc3c48d39ad9",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-d3e18d3db64c428f",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/verify_mascot.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-d3e18d3db64c428f",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-4326dc4229b98d12",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/verify_publication_architecture.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-4326dc4229b98d12",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-9f54be627070e9a8",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/verify_publication_release_configs.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-9f54be627070e9a8",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    },
+    {
+      "schema_version": 1,
+      "id": "EGO-PORT-EXEC-001-portability-v1-41e340e3a254f673",
+      "rule": {
+        "tool_id": "EGOLINT_PORTABILITY",
+        "rule_id": "EGO-PORT-EXEC-001"
+      },
+      "severity": "error",
+      "message": "shebang script is tracked with Git mode 100644; expected 100755",
+      "location": {
+        "path": "scripts/verify_release.py",
+        "start_line": 1,
+        "start_column": 1,
+        "end_line": 1,
+        "end_column": null
+      },
+      "ownership": {
+        "owner": "egohygiene/egolint",
+        "policy_source": ".config/rules/portability.toml",
+        "configuration_path": ".config/rules/portability.toml"
+      },
+      "fingerprint": "portability-v1-41e340e3a254f673",
+      "evidence": [
+        {
+          "schema_version": 1,
+          "kind": "policy",
+          "path": ".config/rules/portability.toml",
+          "sha256": null,
+          "description": "1 authoritative reference(s) are recorded in the bundled rule catalog."
+        }
+      ],
+      "suppressed_by": null
+    }
+  ],
+  "suppressions": [],
+  "evidence": [
+    {
+      "schema_version": 1,
+      "kind": "policy",
+      "path": ".config/rules/portability.toml",
+      "sha256": null,
+      "description": "Egolint's embedded versioned portability rule catalog."
+    },
+    {
+      "schema_version": 1,
+      "kind": "policy",
+      "path": "vendor/hygiene/repository-release-policy.v1.json",
+      "sha256": "20030513c311416c5130a15af897590892025b55cfd79d210be362d47748063f",
+      "description": "Immutable Hygiene repository-release applicability profile."
+    },
+    {
+      "schema_version": 1,
+      "kind": "other",
+      "path": ".reports/egolint/repository-release.json",
+      "sha256": null,
+      "description": "Focused offline repository-release applicability evidence."
+    },
+    {
+      "schema_version": 1,
+      "kind": "configuration",
+      "path": ".config/egolint/repository-intelligence.toml",
+      "sha256": null,
+      "description": "Versioned Repository Intelligence semantic policy and adoption profile."
+    }
+  ]
+}

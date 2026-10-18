@@ -281,7 +281,7 @@ the bounded artifact implementation, not production installation.
 
 **Current evidence:**
 
-- ADR-017 preserves the existing `identity.egohygiene.io` release publisher
+- ADR-0017 preserves the existing `identity.egohygiene.io` release publisher
   and defines `egohygiene.io/identity/` as a separate reviewed artifact.
 - Holon's merged LaunchKit, Zensical, and site-suite profiles are exact-pinned;
   Identity #57 delivered only the bounded `/identity/` consumer extension and
@@ -369,7 +369,7 @@ issues: [74]
 
 - [x] Shared inventory/digest vectors pass and the release-binding transition is explicitly documented in merged PR #111.
 
-**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74), [PR #111](https://github.com/egohygiene/identity/pull/111), merged at `644294e11fdcf1dde24937790bc42cc028cb099a`. Shared Rust/Python vectors and Linux/macOS/Windows release gates pass. [Digest semantics and migration](docs/contracts/SOURCE_DIGEST_V1.md) preserve historical release identities and offline operation; ADR-023 remains proposed.
+**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74), [PR #111](https://github.com/egohygiene/identity/pull/111), merged at `644294e11fdcf1dde24937790bc42cc028cb099a`. Shared Rust/Python vectors and Linux/macOS/Windows release gates pass. [Digest semantics and migration](docs/contracts/SOURCE_DIGEST_V1.md) preserve historical release identities and offline operation; ADR-0023 remains proposed.
 
 <!-- roadmap-step
 id: IDN-Q14

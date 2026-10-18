@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-022
+id: ADR-0022
 title: Compose current Decisions evidence beneath the existing Brand Kit publisher
 status: proposed
 date: '2026-10-10'
@@ -11,10 +11,10 @@ owners:
 issue: https://github.com/egohygiene/identity/issues/69
 pull_request: null
 related:
-- ADR-011
-- ADR-017
-- ADR-018
-- ADR-019
+- ADR-0011
+- ADR-0017
+- ADR-0018
+- ADR-0019
 supersedes: []
 superseded_by: []
 affected_repositories:
@@ -44,13 +44,13 @@ approval: null
 exceptions: []
 ---
 
-# ADR-022: Compose current Decisions evidence beneath the existing Brand Kit publisher
+# ADR-0022: Compose current Decisions evidence beneath the existing Brand Kit publisher
 
 ## Context
 
 Identity's canonical ADR migration is merged, and its 21-record source has
 bounded native and local production-build evidence. That evidence does not
-choose a host or demonstrate deployment. ADR-017 preserves the release-backed
+choose a host or demonstrate deployment. ADR-0017 preserves the release-backed
 Brand Kit at `identity.egohygiene.io` and the separately owned organization
 `/identity/` experience; its approved N017 clarification leaves Decisions
 hosting open. Current repository decisions also have a different update cycle
@@ -58,7 +58,7 @@ from the immutable stable Brand Kit release.
 
 The publication work is authorized separately from ADR lifecycle disposition.
 This record proposes the durable composition boundary and remains proposed;
-implementation, a merge, and deployment do not accept it. Existing ADR-001–021
+implementation, a merge, and deployment do not accept it. Existing ADR-0001–021
 and their explicit human dispositions remain unchanged.
 
 ## Decision
@@ -164,6 +164,6 @@ establish that a rollback was exercised.
   deploy and retain the actual receipt plus live verification results.
 - Show the deployed Decisions page to the maintainer for feedback before
   continuing the repository-by-repository fleet rollout.
-- Obtain a separate explicit human disposition for ADR-022; do not infer it
+- Obtain a separate explicit human disposition for ADR-0022; do not infer it
   from implementation/deployment authorization or the earlier R1 approval.
 

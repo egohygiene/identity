@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-017
+id: ADR-0017
 title: Compose Identity's dogfood experience without moving brand authority
 status: accepted
 date: "2026-10-10"
@@ -39,7 +39,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-017: Compose Identity's dogfood experience without moving brand authority
+# ADR-0017: Compose Identity's dogfood experience without moving brand authority
 
 The canonical date records the explicit human disposition on 2026-10-10.
 Original source prose and metadata are preserved below as historical evidence;

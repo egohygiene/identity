@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-019
+id: ADR-0019
 title: Preserve an independent immutable Identity release contract
 status: accepted
 date: '2026-10-10'
@@ -11,10 +11,10 @@ owners:
 issue: https://github.com/egohygiene/identity/issues/18
 pull_request: https://github.com/egohygiene/identity/pull/43
 related:
-- ADR-003
-- ADR-011
-- ADR-012
-- ADR-017
+- ADR-0003
+- ADR-0011
+- ADR-0012
+- ADR-0017
 supersedes: []
 superseded_by: []
 affected_repositories:
@@ -45,7 +45,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-019: Preserve an independent immutable Identity release contract
+# ADR-0019: Preserve an independent immutable Identity release contract
 
 The original reconstruction below is preserved as pre-approval history. Its
 proposed-state and pending-review wording describes that earlier checkpoint;
@@ -56,7 +56,7 @@ below.
 
 Identity's CLI, source contracts, generated packages, and reference renderer
 need a versioned distribution boundary that consumers can pin independently
-of a website deployment. ADR-017 records the two public presentation surfaces;
+of a website deployment. ADR-0017 records the two public presentation surfaces;
 it does not fully record the preceding release artifact and compatibility
 decision. The inspected release procedure and workflow already implement this
 boundary. This historical reconstruction proposes documenting that choice;
@@ -126,7 +126,7 @@ does not prove a historical approval date. This ADR remains proposed.
 
 ## Human disposition — 2026-10-10
 
-Maintainer `szmyty` explicitly accepted ADR-019 as a separate proposed-record
+Maintainer `szmyty` explicitly accepted ADR-0019 as a separate proposed-record
 choice in [recommendation set R1](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md).
 The [durable disposition](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806) records
 that approval on 2026-10-10. The original reconstruction text and evidence

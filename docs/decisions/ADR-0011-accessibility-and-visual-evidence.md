@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-011
+id: ADR-0011
 title: Layer normative, exact, browser, and human quality evidence
 status: accepted
 date: '2026-10-10'
@@ -20,7 +20,7 @@ implementation_status: in_progress
 evidence:
 - type: approval
   url: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
-  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-011 with its scope qualifiers and exact N011 note.
+  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-0011 with its scope qualifiers and exact N011 note.
 - type: documentation
   url: https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-011-accessibility-and-visual-evidence.md
   description: Immutable original record preserves historical wording and declared metadata; its legacy label is not the current approval evidence.
@@ -37,7 +37,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-011: Layer normative, exact, browser, and human quality evidence
+# ADR-0011: Layer normative, exact, browser, and human quality evidence
 
 ## Context
 

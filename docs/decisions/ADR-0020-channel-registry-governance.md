@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-020
+id: ADR-0020
 title: Separate channel governance, account lifecycle, and verification
 status: accepted
 date: '2026-10-10'
@@ -11,9 +11,9 @@ owners:
 issue: https://github.com/egohygiene/identity/issues/65
 pull_request: https://github.com/egohygiene/identity/pull/68
 related:
-- ADR-013
-- ADR-015
-- ADR-016
+- ADR-0013
+- ADR-0015
+- ADR-0016
 supersedes: []
 superseded_by: []
 affected_repositories:
@@ -43,7 +43,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-020: Separate channel governance, account lifecycle, and verification
+# ADR-0020: Separate channel governance, account lifecycle, and verification
 
 The original reconstruction below is preserved as pre-approval history. Its
 proposed-state and pending-review wording describes that earlier checkpoint;
@@ -56,7 +56,7 @@ Press Kits, social packages, footers, and badges need consistent reviewed
 account facts without confusing a planned channel with an existing account
 or a verified account with an active one. The inspected
 `identity.channel-registry-source/v1` contract implements this distinction.
-ADR-016 assigns third-party platform facts to Aether; this additional choice
+ADR-0016 assigns third-party platform facts to Aether; this additional choice
 concerns consumer-owned account identity and its governed projections.
 
 ## Decision
@@ -123,7 +123,7 @@ contract ID is invented for the existing `identity.*` source identifiers.
 
 ## Human disposition — 2026-10-10
 
-Maintainer `szmyty` explicitly accepted ADR-020 as a separate proposed-record
+Maintainer `szmyty` explicitly accepted ADR-0020 as a separate proposed-record
 choice in [recommendation set R1](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md).
 The [durable disposition](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806) records
 that approval on 2026-10-10. The original reconstruction text and evidence

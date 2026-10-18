@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-021
+id: ADR-0021
 title: Keep mascot source and approved derivatives behind a governed package
 status: accepted
 date: '2026-10-10'
@@ -11,10 +11,10 @@ owners:
 issue: https://github.com/egohygiene/identity/issues/50
 pull_request: https://github.com/egohygiene/identity/pull/58
 related:
-- ADR-001
-- ADR-003
-- ADR-013
-- ADR-017
+- ADR-0001
+- ADR-0003
+- ADR-0013
+- ADR-0017
 supersedes: []
 superseded_by: []
 affected_repositories:
@@ -45,7 +45,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-021: Keep mascot source and approved derivatives behind a governed package
+# ADR-0021: Keep mascot source and approved derivatives behind a governed package
 
 The original reconstruction below is preserved as pre-approval history. Its
 proposed-state and pending-review wording describes that earlier checkpoint;
@@ -58,7 +58,7 @@ A mascot must carry reviewed identity, rights, provenance, accessibility,
 usage, and approval when reused across a Brand Kit and product pages. An image
 prompt or a generated crop cannot supply those authorities. The implemented
 mascot source/package contracts add a durable optional boundary beyond the
-general human-approval and projection choices in ADR-001 and ADR-003.
+general human-approval and projection choices in ADR-0001 and ADR-0003.
 
 ## Decision
 
@@ -127,7 +127,7 @@ organization contract registration is implied by this record.
 
 ## Human disposition — 2026-10-10
 
-Maintainer `szmyty` explicitly accepted ADR-021 as a separate proposed-record
+Maintainer `szmyty` explicitly accepted ADR-0021 as a separate proposed-record
 choice in [recommendation set R1](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md).
 The [durable disposition](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806) records
 that approval on 2026-10-10. The original reconstruction text and evidence

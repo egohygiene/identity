@@ -1,7 +1,7 @@
 ---
 schema: "egohygiene.architecture-decision/v1"
-id: "ADR-001"
-title: "Keep creative approval human-owned"
+id: "ADR-0002"
+title: "Store consumer assets beneath a stable identity contract"
 status: "accepted"
 date: "2026-10-10"
 decision_scope: "repository"
@@ -9,7 +9,7 @@ visibility: "public"
 owners: ["egohygiene/identity"]
 issue: "https://github.com/egohygiene/identity/issues/69"
 pull_request: "https://github.com/egohygiene/identity/pull/92"
-related: ["ADR-012", "ADR-013", "ADR-021"]
+related: ["ADR-0003", "ADR-0012"]
 supersedes: []
 superseded_by: []
 affected_repositories: ["egohygiene/identity"]
@@ -23,13 +23,13 @@ evidence:
     url: "https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md"
     description: "Approved R1 recommendation set and exact scope clarifications at the reviewed immutable packet commit."
   - type: "documentation"
-    url: "https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-001-creative-approval-human-owned.md"
+    url: "https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-002-stable-identity-contract.md"
     description: "Immutable pre-canonicalization record preserving its historical wording, date, status claim, and provenance."
   - type: "commit"
     url: "https://github.com/egohygiene/identity/commit/5ec2d88ef5c1ace7e7782bd000b48183af0e47f2"
     description: "Original record introduction; evidence of recorded history rather than proof of historical human approval."
   - type: "implementation"
-    url: "https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/contracts/IDENTITY_V1.md"
+    url: "https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/src/v1_consumer.rs"
     description: "Inspected implementation or governing source contract; bounded evidence, not a newly executed verification result."
 approval:
   date: "2026-10-10"
@@ -38,7 +38,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-001: Keep creative approval human-owned
+# ADR-0002: Store consumer assets beneath a stable identity contract
 
 ## Context
 
@@ -46,7 +46,7 @@ exceptions: []
 
 ## Decision
 
-- **Decision:** Keep creative approval human-owned.
+- **Decision:** Store consumer assets beneath a stable identity contract.
 
 ## Alternatives considered and rejected
 
@@ -58,9 +58,9 @@ The original inline record does not identify alternatives or rejection rationale
 
 ## Implementation and evidence links
 
-The inspected source contract requires approved source bytes, provenance, and a human decision for the same subject. Studio handoff separately requires a named reviewer. This supports the implemented ownership boundary; validation of a record does not itself establish actual human approval.
+The inspected source contract and consumer adapter separate consumer-owned source from generated output and preserve explicit manifest boundaries. This supports the implemented ownership choice, not a claim that every consumer capability or path-handling case is verified.
 
-[Inspected source](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/contracts/IDENTITY_V1.md). The front-matter implementation status is independent of human acceptance. No new runtime, browser, release, or deployment verification is claimed.
+[Inspected source](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/src/v1_consumer.rs). The front-matter implementation status is independent of human acceptance. No new runtime, browser, release, or deployment verification is claimed.
 
 [PR #4](https://github.com/egohygiene/identity/pull/4) introduced the original record in [commit `5ec2d88ef5c1ace7e7782bd000b48183af0e47f2`](https://github.com/egohygiene/identity/commit/5ec2d88ef5c1ace7e7782bd000b48183af0e47f2) on 2026-08-19. That introduction does not prove a historical approval date.
 
@@ -76,9 +76,15 @@ Validate the final canonical corpus and index through the pinned shared tools at
 
 Maintainer `szmyty` explicitly retained this direction now under [R1 at `418aa9757898b6c09b4f01eface522778cff90e8`](https://github.com/egohygiene/identity/blob/418aa9757898b6c09b4f01eface522778cff90e8/docs/decision-disposition-review-2026-10-10.md). The [durable approval](https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806) was recorded by Codex on the maintainer's behalf. The canonical date and approval date record this current human disposition; they do not backdate acceptance to the legacy record date or establish additional implementation or publication authority.
 
+## Approved scope qualifier — 2026-10-10
+
+Consumers own stable source; generated assets remain replaceable outputs.
+
+Retain now; source paths may be explicitly declared rather than always fixed at `.identity/`.
+
 ## Historical metadata and provenance
 
-The following original metadata is preserved as historical evidence. Its status and date lines are legacy claims, not the current approval record. [Original record at `434f60c8b829c695b3bcd1a45faf5e0c114d37cf`](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-001-creative-approval-human-owned.md).
+The following original metadata is preserved as historical evidence. Its status and date lines are legacy claims, not the current approval record. [Original record at `434f60c8b829c695b3bcd1a45faf5e0c114d37cf`](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-002-stable-identity-contract.md).
 
 - **Status:** Accepted as the current architectural direction
 - **Date:** 2026-08-19
@@ -92,4 +98,4 @@ claim. The legacy acceptance claim lacks durable human disposition evidence;
 it is unresolved under the pinned Hygiene policy, not canonical acceptance.
 See the [migration map](../decision-migration-2026-10-10.md).
 
-[Original inline record and history](https://github.com/egohygiene/identity/blob/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e/DECISIONS.md#adr-001-keep-creative-approval-human-owned).
+[Original inline record and history](https://github.com/egohygiene/identity/blob/8aae2c6767d07714ea16bf0ea493e1f1ac399b6e/DECISIONS.md#adr-002-store-consumer-assets-beneath-a-stable-identity-contract).
