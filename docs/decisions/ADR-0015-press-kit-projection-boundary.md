@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-015
+id: ADR-0015
 title: Keep Press Kits as governed public projections
 status: accepted
 date: "2026-10-10"
@@ -39,7 +39,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-015: Keep Press Kits as governed public projections
+# ADR-0015: Keep Press Kits as governed public projections
 
 The canonical date records the explicit human disposition on 2026-10-10.
 Original source prose and metadata are preserved below as historical evidence;

@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-008
+id: ADR-0008
 title: Encode platform metadata as versioned first-party profiles
 status: accepted
 date: '2026-10-10'
@@ -20,7 +20,7 @@ implementation_status: in_progress
 evidence:
 - type: approval
   url: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
-  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-008 with its scope qualifiers and exact N008 note.
+  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-0008 with its scope qualifiers and exact N008 note.
 - type: documentation
   url: https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-008-platform-profile-contracts.md
   description: Immutable original record preserves historical wording and declared metadata; its legacy label is not the current approval evidence.
@@ -37,7 +37,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-008: Encode platform metadata as versioned first-party profiles
+# ADR-0008: Encode platform metadata as versioned first-party profiles
 
 ## Context
 
@@ -125,7 +125,7 @@ a historical statement. No historical approval date or new test result is inferr
 
 “First-party” describes Identity's projection profiles, serializers and
 validators; it does not transfer ownership of reusable external platform
-facts from Aether. Social-surface facts follow ADR-016's pinned external-catalog
+facts from Aether. Social-surface facts follow ADR-0016's pinned external-catalog
 boundary. Existing versioned profiles establish bounded implementation, not
 complete delivery of every requirement field, lifecycle state or platform
 mentioned in this record. Historical source-verification dates are not current

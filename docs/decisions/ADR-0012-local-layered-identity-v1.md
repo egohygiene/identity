@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-012
+id: ADR-0012
 title: Use local, layered Identity v1 source contracts
 status: accepted
 date: '2026-10-10'
@@ -20,7 +20,7 @@ implementation_status: implemented
 evidence:
 - type: approval
   url: https://github.com/egohygiene/identity/pull/92#issuecomment-6099135806
-  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-012 with its scope qualifiers and exact N012 note.
+  description: szmyty approved R1 at 418aa9757898b6c09b4f01eface522778cff90e8, retaining ADR-0012 with its scope qualifiers and exact N012 note.
 - type: documentation
   url: https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-012-local-layered-identity-v1.md
   description: Immutable original record preserves historical wording and declared metadata; its legacy label is not the current approval evidence.
@@ -37,7 +37,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-012: Use local, layered Identity v1 source contracts
+# ADR-0012: Use local, layered Identity v1 source contracts
 
 ## Context
 

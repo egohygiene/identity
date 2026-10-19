@@ -1,6 +1,6 @@
 ---
 schema: "egohygiene.architecture-decision/v1"
-id: "ADR-005"
+id: "ADR-0005"
 title: "Publish curated JSON Schemas and validate them offline"
 status: "accepted"
 date: "2026-10-10"
@@ -9,7 +9,7 @@ visibility: "public"
 owners: ["egohygiene/identity"]
 issue: "https://github.com/egohygiene/identity/issues/69"
 pull_request: "https://github.com/egohygiene/identity/pull/92"
-related: ["ADR-004", "ADR-012"]
+related: ["ADR-0004", "ADR-0012"]
 supersedes: []
 superseded_by: []
 affected_repositories: ["egohygiene/identity"]
@@ -38,7 +38,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-005: Publish curated JSON Schemas and validate them offline
+# ADR-0005: Publish curated JSON Schemas and validate them offline
 
 ## Context
 
@@ -76,7 +76,7 @@ The original Decision section above preserves its rejected alternatives verbatim
 - [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12)
 - [Rust `jsonschema`](https://github.com/Stranger6667/jsonschema)
 
-The inspected runtime embeds the Python standard-library validator selected by ADR-012. Cargo.toml does not include the originally intended Rust jsonschema port. The curated schemas and offline boundary are present, while the intended port and full vendoring/conformance requirements remain in progress as clarified by N005 below.
+The inspected runtime embeds the Python standard-library validator selected by ADR-0012. Cargo.toml does not include the originally intended Rust jsonschema port. The curated schemas and offline boundary are present, while the intended port and full vendoring/conformance requirements remain in progress as clarified by N005 below.
 
 [Inspected source](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/src/v1_consumer/preflight.rs). The front-matter implementation status is independent of human acceptance. No new runtime, browser, release, or deployment verification is claimed.
 
@@ -105,7 +105,7 @@ The following N005 text is preserved verbatim from the approved R1 packet.
 Retain curated Draft 2020-12 schemas, offline validation, and separate semantic
 and migration authority. Rust `jsonschema` remains the original intended but
 unimplemented validation port. Current v1 validation uses the Python
-standard-library validator selected by ADR-012 and embedded in Rust preflight.
+standard-library validator selected by ADR-0012 and embedded in Rust preflight.
 Generic Draft 2020-12 engine equivalence and completed schema/meta-schema
 vendoring are not claimed. Replacing the intended port requires the documented
 conformance evidence and a reviewed decision.
@@ -114,7 +114,7 @@ This recommendation preserves the intended Rust port; it neither cancels it
 nor schedules its implementation in the ADR publication checkpoint. A
 maintainer preference to abandon that port needs a separately explicit change.
 
-Evidence: [ADR-012](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-012-local-layered-identity-v1.md),
+Evidence: [ADR-0012](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/docs/decisions/ADR-012-local-layered-identity-v1.md),
 [preflight](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/src/v1_consumer/preflight.rs) and
 [dependency manifest](https://github.com/egohygiene/identity/blob/434f60c8b829c695b3bcd1a45faf5e0c114d37cf/Cargo.toml).
 

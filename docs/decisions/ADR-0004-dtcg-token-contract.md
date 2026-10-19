@@ -1,6 +1,6 @@
 ---
 schema: "egohygiene.architecture-decision/v1"
-id: "ADR-004"
+id: "ADR-0004"
 title: "Use DTCG 2025.10 as the token contract"
 status: "accepted"
 date: "2026-10-10"
@@ -9,7 +9,7 @@ visibility: "public"
 owners: ["egohygiene/identity"]
 issue: "https://github.com/egohygiene/identity/issues/69"
 pull_request: "https://github.com/egohygiene/identity/pull/92"
-related: ["ADR-005", "ADR-008", "ADR-012"]
+related: ["ADR-0005", "ADR-0008", "ADR-0012"]
 supersedes: []
 superseded_by: []
 affected_repositories: ["egohygiene/identity"]
@@ -38,7 +38,7 @@ approval:
 exceptions: []
 ---
 
-# ADR-004: Use DTCG 2025.10 as the token contract
+# ADR-0004: Use DTCG 2025.10 as the token contract
 
 ## Context
 

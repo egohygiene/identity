@@ -4,7 +4,7 @@
 Rust v1 consumer and Python projections. It preserves the existing Rust/Unix
 digest for supported trees, including the established fixture hash
 `1002ff75ea51f6e016929894ea30cc96565bdbbca749a0e7fff1ebd0d2f21353`.
-The proposed compatibility decision is [ADR-023](../decisions/ADR-023-canonical-source-digest.md).
+The proposed compatibility decision is [ADR-0023](../decisions/ADR-0023-canonical-source-digest.md).
 
 ## Inventory
 

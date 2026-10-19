@@ -43,7 +43,7 @@ The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2
 **Current gate:** #74/#75/#76 merged in PRs #111/#112/#113 (IDN-Q13–15). Review #99 checkpoint 1's field catalog and observed gaps before selecting compatible contract changes (IDN-Q29). #78 remains ready; its implementation is paused while this selected contract checkpoint is reviewed.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
-The original snapshot mapped 28 open issues. #74/#75/#76 are now closed, leaving 25: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
+The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
 
 ### Visual roadmap publication
 
@@ -282,7 +282,7 @@ the bounded artifact implementation, not production installation.
 
 **Current evidence:**
 
-- ADR-017 preserves the existing `identity.egohygiene.io` release publisher
+- ADR-0017 preserves the existing `identity.egohygiene.io` release publisher
   and defines `egohygiene.io/identity/` as a separate reviewed artifact.
 - Holon's merged LaunchKit, Zensical, and site-suite profiles are exact-pinned;
   Identity #57 delivered only the bounded `/identity/` consumer extension and
@@ -370,7 +370,7 @@ issues: [74]
 
 - [x] Shared inventory/digest vectors pass and the release-binding transition is explicitly documented in merged PR #111.
 
-**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74), [PR #111](https://github.com/egohygiene/identity/pull/111), merged at `644294e11fdcf1dde24937790bc42cc028cb099a`. Shared Rust/Python vectors and Linux/macOS/Windows release gates pass. [Digest semantics and migration](docs/contracts/SOURCE_DIGEST_V1.md) preserve historical release identities and offline operation; ADR-023 remains proposed.
+**Evidence and scope:** [#74](https://github.com/egohygiene/identity/issues/74), [PR #111](https://github.com/egohygiene/identity/pull/111), merged at `644294e11fdcf1dde24937790bc42cc028cb099a`. Shared Rust/Python vectors and Linux/macOS/Windows release gates pass. [Digest semantics and migration](docs/contracts/SOURCE_DIGEST_V1.md) preserve historical release identities and offline operation; ADR-0023 remains proposed.
 
 <!-- roadmap-step
 id: IDN-Q14
@@ -402,7 +402,7 @@ issues: [76]
 
 - [x] Adversarial path cases fail before rendering and supported route-prefixed/CDN downloads pass.
 
-**Evidence and scope:** [#76](https://github.com/egohygiene/identity/issues/76), [PR #113](https://github.com/egohygiene/identity/pull/113), merged at `063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`. All 279 renderer tests, six hosted Chromium checks and three-platform release/clean-room gates pass. ADR-024 remains proposed. This supplies the URL-path boundary for IDN-Q31/IDN-Q35, not complete selected-file or public-asset coverage.
+**Evidence and scope:** [#76](https://github.com/egohygiene/identity/issues/76), [PR #113](https://github.com/egohygiene/identity/pull/113), merged at `063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`. All 279 renderer tests, six hosted Chromium checks and three-platform release/clean-room gates pass. ADR-0024 remains proposed. This supplies the URL-path boundary for IDN-Q31/IDN-Q35, not complete selected-file or public-asset coverage.
 
 <!-- roadmap-step
 id: IDN-Q16

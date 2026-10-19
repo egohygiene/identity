@@ -1,6 +1,6 @@
 ---
 schema: egohygiene.architecture-decision/v1
-id: ADR-024
+id: ADR-0024
 title: Separate bundle-relative artifact paths from deployment bases
 status: proposed
 date: '2026-10-18'
@@ -11,10 +11,10 @@ owners:
 issue: https://github.com/egohygiene/identity/issues/76
 pull_request: null
 related:
-- ADR-010
-- ADR-014
-- ADR-015
-- ADR-019
+- ADR-0010
+- ADR-0014
+- ADR-0015
+- ADR-0019
 supersedes: []
 superseded_by: []
 affected_repositories:
@@ -29,12 +29,12 @@ approval: null
 exceptions: []
 ---
 
-# ADR-024: Separate bundle-relative artifact paths from deployment bases
+# ADR-0024: Separate bundle-relative artifact paths from deployment bases
 
 ## Context
 
-ADR-010 defines the immutable renderer port; ADR-014/015 govern optional
-projections and ADR-019 preserves published releases. The existing renderer
+ADR-0010 defines the immutable renderer port; ADR-0014/015 govern optional
+projections and ADR-0019 preserves published releases. The existing renderer
 contract requires release-relative downloads, but generic URL construction
 accepts traversal and strips leading slashes. Optional projections apply
 different path checks, and imported Design System views inspect only the first

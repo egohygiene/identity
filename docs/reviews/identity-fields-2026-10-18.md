@@ -207,10 +207,10 @@ files; compare top-level asset selection with usage availability/governance.
 Use synthetic approval evidence, never a copied real person's approval.
 
 Decision-impact operation: **reference**. Existing
-[ADR-001](../decisions/ADR-001-creative-approval-human-owned.md),
-[ADR-012](../decisions/ADR-012-local-layered-identity-v1.md),
-[ADR-013](../decisions/ADR-013-preserve-guidance-lifecycle.md) and
-[ADR-019](../decisions/ADR-019-immutable-release-contract.md) govern authority,
+[ADR-001](https://github.com/egohygiene/identity/blob/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7/docs/decisions/ADR-001-creative-approval-human-owned.md),
+[ADR-012](https://github.com/egohygiene/identity/blob/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7/docs/decisions/ADR-012-local-layered-identity-v1.md),
+[ADR-013](https://github.com/egohygiene/identity/blob/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7/docs/decisions/ADR-013-preserve-guidance-lifecycle.md) and
+[ADR-019](https://github.com/egohygiene/identity/blob/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7/docs/decisions/ADR-019-immutable-release-contract.md) govern authority,
 local source, lifecycle and release distinctions. This checkpoint inventories
 evidence and presents choices without adopting a new source shape. Aether's
 pinned decision-impact v2.0.0 and continuity v1.1.0 at

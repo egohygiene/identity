@@ -2,7 +2,7 @@
   "$schema": "../contracts/v1/publication-architecture.schema.json",
   "schema": "identity.publication-architecture/v1",
   "status": "accepted",
-  "decision": "docs/decisions/ADR-017-zensical-launchkit-publication-architecture.md",
+  "decision": "docs/decisions/ADR-0017-zensical-launchkit-publication-architecture.md",
   "scope": {
     "repository": "https://github.com/egohygiene/identity",
     "experienceCanonicalUrl": "https://egohygiene.io/identity/",

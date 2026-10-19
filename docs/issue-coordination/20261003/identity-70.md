@@ -310,7 +310,7 @@ production-readiness certification is assigned.
   digest input. Python's compiler-compatible digest excludes README files,
   candidates, references, and symlinks, but includes that TOML file.
 - **Evidence — observed:** [v1_consumer.rs](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/v1_consumer.rs#L392), especially
-  line 427; [render_design_system.py](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/scripts/render_design_system.py#L54).
+  line 427; [render_design_system.py](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md0).
   A valid temporary v1 consumer with a synthetic legacy TOML file validated and
   generated successfully. Rust digest was
   `1002ff75ea51f6e016929894ea30cc96565bdbbca749a0e7fff1ebd0d2f21353`;
@@ -338,7 +338,7 @@ production-readiness certification is assigned.
 - **Observation:** The renderer checks a design-system project's identity and
   the context digest's syntax but does not compare that digest with the Brand
   Kit release. The adjacent Press Kit integration does compare its source digest.
-- **Evidence — observed:** [model.js](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/renderer/src/model.js#L51) and its
+- **Evidence — observed:** [model.js](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md1) and its
   Press Kit check at line 76; `renderer/src/design-system.js:58` validates schema
   linkage and digest syntax. A same-project design context with a digest of
   64 zeroes was accepted alongside fixture release digest
@@ -363,7 +363,7 @@ production-readiness certification is assigned.
   traversal and URL-shaped values. Generic model validation checks basic shape
   rather than normalizing each asset/package path. Press Kit paths have more
   restrictive handling than generic assets.
-- **Evidence — observed:** [model.js](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/renderer/src/model.js#L137),
+- **Evidence — observed:** [model.js](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md2),
   `contracts/v1/brand-kit-view-model.schema.json:281`, and
   `renderer/src/press-kit.js:102`. A direct call with base
   `https://cdn.example.test/brand/` and path `../outside.svg` returned
@@ -391,7 +391,7 @@ production-readiness certification is assigned.
   explicit recovery. The public CLI has generation and verification, but no
   recovery operation. Recovery currently requires a Rust API caller.
 - **Evidence — observed:** `src/compiler/filesystem.rs:342`,
-  `src/compiler/filesystem.rs:496`, [cli.rs](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/cli.rs), and the executed
+  `src/compiler/filesystem.rs:496`, [cli.rs](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md3), and the executed
   `identity --help` inventory. The compiler contract describes an explicit
   recovery boundary without a consumer CLI recipe.
 - **Why it matters — inferred:** A user of the distributed binary can be blocked
@@ -415,7 +415,7 @@ production-readiness certification is assigned.
   transaction paths are formed by direct joins. `commit` checks recovery state
   and later calls `create_dir_all` on a plan-digest directory without an exclusive
   reservation or visible per-consumer writer lock.
-- **Evidence — observed:** [filesystem.rs](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/compiler/filesystem.rs#L50),
+- **Evidence — observed:** [filesystem.rs](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md4),
   lines 58–76, 313–342, and 388–403. No lock/create-new operation was found in
   this implementation. Source checksums are rechecked, which is a useful guard
   but does not reserve the transaction namespace.
@@ -441,11 +441,11 @@ production-readiness certification is assigned.
 - **Area:** visual evidence, CI, developer experience.
   **Effort:** medium. **Impact:** medium.
 - **Observation:** Playwright is pinned, but reference CI uses `ubuntu-latest`
-  and Node major 24 without a fixed browser container/font environment. ADR-011
+  and Node major 24 without a fixed browser container/font environment. ADR-0011
   calls for pinned browser/container conditions and fixed fonts and settings.
-- **Evidence — observed:** [reference-renderer.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/.github/workflows/reference-renderer.yml#L85),
-  [playwright.config.js](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/renderer/playwright.config.js), and
-  [ADR-011](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/docs/decisions/ADR-011-accessibility-and-visual-evidence.md).
+- **Evidence — observed:** [reference-renderer.yml](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md5),
+  [playwright.config.js](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md6), and
+  [ADR-0011](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md7).
   Fresh local E2E ran six checks: five passed, and screenshot comparison failed
   with 46,969 differing pixels on a 1440×1000 viewport. This cloud host has a
   custom generic sans-serif substitution. Earlier same-session font diagnosis
@@ -471,10 +471,10 @@ production-readiness certification is assigned.
 - **Observation:** README records implemented renderer/studio/consumer proof
   and the standalone canonical site. Active/provisional architecture context
   still includes present-tense extraction and pre-renderer statements.
-- **Evidence — observed:** [PURPOSE.md](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/PURPOSE.md#evidence-and-uncertainty)
+- **Evidence — observed:** [PURPOSE.md](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md8)
   line 87 says the CLI has not been extracted;
-  [SYSTEM.md](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/SYSTEM.md#system-inventory) lists renderer/studio as proposed;
-  [ARCHITECTURE.md](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/ARCHITECTURE.md#public-route-boundary) line 104 names the
+  [SYSTEM.md](https://github.com/egohygiene/aether/blob/087bceccd936922371155e69dc92ff802aa8a029/library/organization/specs/quality/auditor.spec.md9) lists renderer/studio as proposed;
+  [ARCHITECTURE.md](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1080) line 104 names the
   organization route as canonical, while `README.md:27` and lines 382–385
   describe the standalone site and implemented renderer. Some ADRs are
   intentionally historical; this finding concerns documents presented as
@@ -499,8 +499,8 @@ production-readiness certification is assigned.
 - **Observation:** The portable Docker add-on's default base is the mutable
   `node:24-bookworm` tag. The repository's dependency policy explicitly says
   container images use digests; no exception for this default was found.
-- **Evidence — observed:** [Dockerfile](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/dev/Dockerfile#L5) and
-  [DEPENDENCY_POLICY.md](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/docs/DEPENDENCY_POLICY.md#security-and-supply-chain)
+- **Evidence — observed:** [Dockerfile](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1081) and
+  [DEPENDENCY_POLICY.md](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1082)
   line 91. Configurable `BASE_IMAGE` already permits a digest, but does not make
   the default immutable. Earlier same-session Docker verification qualified a
   specific locally prepared proxy-trusted base, not every future tagged image.
@@ -528,9 +528,9 @@ production-readiness certification is assigned.
   commands, but do not directly exercise `scripts/dev-env.sh`, Make, Task, or
   the Docker add-on. The helper's `check` covers product tests but omits several
   root CI integrity validators; it is not a complete CI-equivalent target.
-- **Evidence — observed:** [dev-env.sh](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/scripts/dev-env.sh#L67),
-  [validate.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/.github/workflows/validate.yml#L50),
-  [release.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/.github/workflows/release.yml), and all workflow command
+- **Evidence — observed:** [dev-env.sh](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1083),
+  [validate.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1084),
+  [release.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1085), and all workflow command
   inventories. No helper invocation was found. This does not negate the earlier
   successful local standalone/Make/Task/Docker verification.
 - **Why it matters — inferred:** Future setup changes can pass product CI while
@@ -581,9 +581,9 @@ production-readiness certification is assigned.
 - **Observation:** Two workflows target `feat/13-brand-guidance-v1`, embed
   historical prose replacements, grant `contents: write`, commit README/ROADMAP
   changes, and push to that feature branch.
-- **Evidence — observed:** [refine-guidance-docs.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/.github/workflows/refine-guidance-docs.yml#L4)
+- **Evidence — observed:** [refine-guidance-docs.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1086)
   lines 11–22 and 177–178;
-  [refine-guidance-docs-v2.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/.github/workflows/refine-guidance-docs-v2.yml#L4)
+  [refine-guidance-docs-v2.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1087)
   lines 11–22 and 176–177. These are not general-purpose doc validators.
 - **Why it matters — inferred:** One-time automation adds persistent maintenance
   and write-capability surface with little current development value. Whether
@@ -629,8 +629,8 @@ production-readiness certification is assigned.
 - **Observation:** Publication resolves stable release tags/commits and checks
   release-bound configuration; release packaging has license inventory, SBOM,
   checksums, and build-provenance attestation steps. Actions are SHA-pinned.
-- **Evidence — observed:** [.github/workflows/publish-brand-kit.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/.github/workflows/publish-brand-kit.yml),
-  [.github/workflows/release.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/.github/workflows/release.yml),
+- **Evidence — observed:** [.github/workflows/publish-brand-kit.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1088),
+  [.github/workflows/release.yml](https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/brandkit/render.rs#L1089),
   `scripts/verify_publication_release_configs.py`, and the passing local public
   package/configuration checks. Workflow definitions were inspected, not run.
 - **Why it matters — inferred:** Release identity and provenance can remain
@@ -752,7 +752,7 @@ These are proposed issues only; none was created.
 ## Evidence index
 
 For immutable source navigation, use
-`https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/<path>#L<line>`.
+`https://github.com/egohygiene/identity/blob/320dc5e94843198893ff7216f22d1d3d58a04be4/src/reference_renderer.rs#L1890<path>#L<line>`.
 The line starts recorded below were read from this checkout; generated sizes and
 line counts are observations at this commit, not future thresholds.
 
@@ -765,7 +765,7 @@ line counts are observations at this commit, not future thresholds.
 | E05 | src/compiler/filesystem.rs:50, 58, 211, 256, 313, 328, 388, 496; compiler/tests.rs:520 | AUDIT-003, AUDIT-007, AUDIT-008, AUDIT-015 |
 | E06 | scripts/render_design_system.py:54; scripts/render_guidance.py:56; validate_identity.py:560 | AUDIT-001, AUDIT-002, AUDIT-004 |
 | E07 | renderer/src/model.js:51, 137; design-system.js:58; press-kit.js path validation | AUDIT-005, AUDIT-006 |
-| E08 | Playwright config/tests; reference-renderer.yml:85; ADR-011 | AUDIT-009 |
+| E08 | Playwright config/tests; reference-renderer.yml:85; ADR-0011 | AUDIT-009 |
 | E09 | scripts/dev-env.sh:67; Makefile; Taskfile.yml; dev/Dockerfile:5; DEPENDENCY_POLICY:91 | AUDIT-010, AUDIT-014 |
 | E10 | validate_identity.py 4,774 lines; compiler/mod.rs 1,486; quality/mod.rs 1,451; app.js 1,145 | AUDIT-012 |
 | E11 | Both refine-guidance-docs workflows:4, 11, 22 and final push commands | AUDIT-013 |

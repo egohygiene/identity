@@ -25,7 +25,7 @@ At main commit [8aae2c6](https://github.com/egohygiene/identity/commit/8aae2c676
 
 Inventory can begin now. Final documentation of public audience, downloads, and recovery must follow the actual contracts established by #71, #76, and #77 respectively. The repaired preflight's Python requirement and legacy-journal handling also need accurate current-build wording without rewriting historical release claims.
 
-Preserve the publication ownership established by ADR-017 and the publication machine contracts:
+Preserve the publication ownership established by ADR-0017 and the publication machine contracts:
 
 | Surface | Boundary to retain |
 | --- | --- |

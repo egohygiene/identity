@@ -6,7 +6,7 @@
 - Reference adapter: React 19 + Vite
 - Owning issue: [Identity #14](https://github.com/egohygiene/identity/issues/14)
 - Governing decision:
-  [ADR-010](../decisions/ADR-010-reference-renderer-boundary.md)
+  [ADR-0010](../decisions/ADR-0010-reference-renderer-boundary.md)
 
 ## Purpose
 
@@ -98,7 +98,7 @@ a sibling repository.
 ## Artifact paths and configured deployment bases
 
 Compatibility rationale is recorded in proposed
-[ADR-024](../decisions/ADR-024-renderer-artifact-paths.md).
+[ADR-0024](../decisions/ADR-0024-renderer-artifact-paths.md).
 
 All model-provided download paths are relative to the published bundle:
 `assets[].downloadPath`, `packages[].path`, every optional Design System and
