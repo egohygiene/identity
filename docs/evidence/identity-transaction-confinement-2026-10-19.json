@@ -53,9 +53,14 @@
     },
     {
       "path": "src/compiler/filesystem/tests.rs",
-      "sha256": "3241d26ec6cb7cda19da9cd2c125d51fc9c9a1c01be96aac360e451e6ada3093"
+      "sha256": "23631297373e6bdf9c66dae5d22ac3c7a3de5cba9ca72711978b3e088e480a9c"
     }
   ],
+  "hostedPlatformCheckpoint": {
+    "head": "7447050f2eb40a4f7da1f3d4685172987e00c56e",
+    "result": "Two new junction tests failed during mklink fixture setup (Invalid switch identity), before the safety assertions. Candidate correction builds native path components; fresh Windows replay remains pending.",
+    "windowsRun": 39320468879
+  },
   "limits": [
     "Windows junction matrices are compiled only on Windows and require hosted Windows results; no local Windows execution is claimed.",
     "The supported cache is the fixed repository-relative path; redirected external roots are unsupported.",

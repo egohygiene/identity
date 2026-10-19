@@ -850,7 +850,7 @@ fn windows_junction_cache_components_are_rejected_without_redirected_writes() {
         let external = TempDir::new().unwrap();
         let (plan, artifacts, manifest) = fixture(root.path(), OUTPUT);
         write_fixture(&external.path().join("sentinel"), b"external sentinel").unwrap();
-        let junction = root.path().join(&relative);
+        let junction = append_portable(root.path(), &relative);
         fs::create_dir_all(junction.parent().unwrap()).unwrap();
         let result = std::process::Command::new("cmd")
             .args(["/C", "mklink", "/J"])
@@ -891,10 +891,10 @@ fn windows_junction_recovery_paths_preserve_outputs_and_external_evidence() {
         let transaction = interrupted(root.path(), OUTPUT, 4);
         let source = match location {
             "cache" => root.path().join(".cache"),
-            "cache-identity" => root.path().join(".cache/identity"),
-            "transaction-root" => root.path().join(TRANSACTION_ROOT),
+            "cache-identity" => append_portable(root.path(), ".cache/identity"),
+            "transaction-root" => append_portable(root.path(), TRANSACTION_ROOT),
             "workspace" => transaction,
-            relative => transaction.join(relative),
+            relative => append_portable(&transaction, relative),
         };
         let target = external.path().join("relocated-evidence");
         fs::rename(&source, &target).unwrap();

@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-19T20:34:08Z'
+  updated_at: '2026-10-19T20:38:23Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -73,20 +73,24 @@ state:
   candidate:
     branch: codex/78-transaction-confinement
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#119
+      url: https://github.com/egohygiene/identity/pull/119
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-19T20:34:08Z'
+    observed_at: '2026-10-19T20:38:23Z'
     default_branch_revision: 8816294e9d9c43f250d771e9fa627c4b1861e78a
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'PR #118 merged at observed main and issue #99 closed. No open PR was returned by the scoped PR
-      search before creating this issue #78 candidate. Issue73 prerequisite is closed.'
+    pull_request_state: draft
+    notes: PR119 is draft at observed head7447050f2eb40a4f7da1f3d4685172987e00c56e. CLI/advisory checks pass;
+      the Windows release gate failed new junction fixture setup, before assertions. This correction uses native
+      path components; fresh hosted replay is pending. PR118 is merged and issue99 closed.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-19T20:34:08Z'
+  reviewed_at: '2026-10-19T20:38:23Z'
   reviewed_by: Codex
   evidence:
   - command: Frozen baseline CLI v1-generate with four disposable cache/workspace symlink cases
@@ -119,6 +123,13 @@ review:
     observed_at: '2026-10-19T20:34:08Z'
     notes: All pass. Repeated documentation check covers the new receipt/review links. No release, publication,
       source schema, journal schema or ADR lifecycle change occurs.
+  - command: Hosted release gate39320468879 at head7447050f2eb40a4f7da1f3d4685172987e00c56e; subsequent local
+      filesystem rerun
+    outcome: limited
+    observed_at: '2026-10-19T20:38:23Z'
+    notes: Windows mklink treated a forward-slash fixture segment as a switch. Both new tests failed setup,
+      not a passing safety result. Native component construction is corrected; all23 Linux filesystem cases,
+      formatting and strict Clippy pass again. Windows correction requires fresh native replay.
   environment_limitations:
   - Local runtime is Linux; Windows junction regression execution and macOS/Windows release gates remain fresh
     hosted requirements for the final candidate.
@@ -156,7 +167,7 @@ Enforce the existing fixed repository-relative transaction cache with useful fai
 
 ## State snapshot
 
-Main is 8816294e9d9c43f250d771e9fa627c4b1861e78a, including merged #118. #99 is closed and IDN-Q29 complete. #78/IDN-Q17 is active; prerequisite #73 is closed. Candidate codex/78-transaction-confinement has no containing SHA/PR until created. #79/IDN-Q18 remains blocked until #78 completes; no writer lock is claimed. All 40 roadmap IDs/dependencies remain intact.
+Main is 8816294e9d9c43f250d771e9fa627c4b1861e78a, including merged #118. #99 is closed and IDN-Q29 complete. #78/IDN-Q17 is active; prerequisite #73 is closed. Candidate codex/78-transaction-confinement is draft PR #119. The containing revision stays null while preparing its native-path test correction. #79/IDN-Q18 remains blocked until #78 completes; no writer lock is claimed. All 40 roadmap IDs/dependencies remain intact.
 
 ## Completed and material changes
 
@@ -172,7 +183,7 @@ All 84 Rust tests and strict all-target/all-feature lint/format checks pass; the
 
 ## Blockers, risks, unknowns, and deferred work
 
-No bounded local implementation blocker remains. Local Windows/macOS execution is unavailable; hosted platform gates remain required. This does not establish concurrent-writer safety, hostile filesystem topology confinement or power-loss durability. #79 owns writer serialization; #77 later exposes supported inspection/recovery CLI. The current binary CLI still has no recovery command.
+No bounded local implementation blocker remains. Local Windows/macOS execution is unavailable. The first Windows gate failed new junction fixture setup because mklink parsed a forward-slash segment as a switch; the native-path correction is pending fresh hosted execution. No Windows safety pass is inferred from that failed setup. This does not establish concurrent-writer safety, hostile filesystem topology confinement or power-loss durability. #79 owns writer serialization; #77 later exposes supported inspection/recovery CLI. The current binary CLI still has no recovery command.
 
 G03/G04 public asset/download work remains #101/#105, with complete-kit/self-adoption/release/upgrade proof under later roadmap owners. Proposed ADR-0025 remains proposed/null approval. Merging #118 completed the bounded authoring milestone without accepting an ADR or publishing a release.
 
