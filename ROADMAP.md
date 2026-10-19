@@ -40,7 +40,7 @@ updated: 2026-10-18
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #74/#75/#76 merged in PRs #111/#112/#113 (IDN-Q13–15), and #99 checkpoint 1 merged in PR #114. Checkpoint 2 merged in PR #117 with executable nullable guidance, producer diagnostics and authoring examples. Checkpoint 3 supplies the pinned Mantle proof and initializer/validation handoffs (IDN-Q29); review this candidate before completing #99. #78 remains ready but paused under this selected priority.
+**Current gate:** #99 completed through PRs #114/#117/#118; checkpoint 3 merged at `8816294e9d9c43f250d771e9fa627c4b1861e78a`. #78 transaction-path confinement (IDN-Q17) is the active authorized issue. #79 writer serialization follows its reviewed completion.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -422,7 +422,7 @@ issues: [77]
 
 <!-- roadmap-step
 id: IDN-Q17
-status: ready
+status: active
 depends_on: [IDN-Q12]
 issues: [78]
 -->
@@ -434,7 +434,7 @@ issues: [78]
 
 - [ ] Runtime redirection evidence is recorded, unsafe paths fail before writes, and valid generation/recovery remains supported.
 
-**Evidence and scope:** [#78](https://github.com/egohygiene/identity/issues/78). The audit risk was inferred; establish actual runtime behavior before selecting a fix.
+**Evidence and scope:** [#78](https://github.com/egohygiene/identity/issues/78) is active from main `8816294e9d9c43f250d771e9fa627c4b1861e78a`. Current serialized Unix cache-symlink cases are already guarded by #73; the candidate records actual runtime evidence and tightens per-operation checks, metadata failure handling and Windows reparse-point rejection. The fixed repository-local cache remains the supported contract; redirected external caches are refused. IDN-Q17 stays active pending review/merge; per-consumer writer serialization remains IDN-Q18/#79.
 
 <!-- roadmap-step
 id: IDN-Q18
@@ -616,7 +616,7 @@ issues: [70]
 
 <!-- roadmap-step
 id: IDN-Q29
-status: active
+status: complete
 depends_on: []
 issues: [99]
 -->
@@ -626,9 +626,9 @@ issues: [99]
 
 **Exit criteria:**
 
-- [ ] Coverage/ownership inventory, minimal/expanded fixtures, compatibility, useful diagnostics, and only demonstrated source gaps are complete.
+- [x] Coverage/ownership inventory, minimal/expanded fixtures, compatibility, useful diagnostics, and only demonstrated source gaps are complete.
 
-**Evidence and scope:** [#99](https://github.com/egohygiene/identity/issues/99) remains the selected priority after IDN-Q13–15. [Checkpoint 1](docs/reviews/identity-fields-2026-10-18.md), merged in PR #114, preserves the dated field audit and synthetic probes. Checkpoint 2, merged in PR #117, aligns independently null guidance through validation/compilation/projection, reports unsupported producer formats before decoding, and supplies [minimal/expanded examples](examples/v1/README.md) plus the [authoring worksheet](docs/consumers/AUTHORING.md). [Proposed ADR-0025](docs/decisions/ADR-0025-executable-minimal-authoring-core.md) records the bounded core/authority choice; it grants no lifecycle approval. Existing governed voice/Press Kit sources retain rich-copy authority and no speculative project fields are added. The checkpoint 3 candidate adds a [pinned Mantle proof](docs/consumers/MANTLE_AUTHORING_PROOF.md), repeatable disposable generation/read-only drift checks, public/nullable probes and [initializer/EgoLint handoffs](docs/consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md). IDN-Q29 remains active pending that review and merge. Root self-brand source, full public selection and advertised-download repairs remain later explicit work.
+**Evidence and scope:** [#99](https://github.com/egohygiene/identity/issues/99) is closed after all three reviewed checkpoints. [Checkpoint 1](docs/reviews/identity-fields-2026-10-18.md), merged in PR #114, preserves the dated field audit and synthetic probes. Checkpoint 2, merged in PR #117, aligns independently null guidance through validation/compilation/projection, reports unsupported producer formats before decoding, and supplies [minimal/expanded examples](examples/v1/README.md) plus the [authoring worksheet](docs/consumers/AUTHORING.md). [Proposed ADR-0025](docs/decisions/ADR-0025-executable-minimal-authoring-core.md) records the bounded core/authority choice; it grants no lifecycle approval. Existing governed voice/Press Kit sources retain rich-copy authority and no speculative project fields are added. Checkpoint 3, merged in PR #118, adds a [pinned Mantle proof](docs/consumers/MANTLE_AUTHORING_PROOF.md), repeatable disposable generation/read-only drift checks, public/nullable probes and [initializer/EgoLint handoffs](docs/consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md). IDN-Q29 is complete after the maintainer-authorized merge at `8816294e9d9c43f250d771e9fa627c4b1861e78a`. Root self-brand source, full public selection and advertised-download repairs remain later explicit work.
 
 <!-- roadmap-step
 id: IDN-Q30

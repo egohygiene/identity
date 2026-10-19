@@ -142,7 +142,34 @@ No timestamp, random id, absolute machine path, ambient environment value, or ne
 .cache/identity/transactions/<plan-digest>/
 ```
 
-Before mutation it:
+### Supported local cache paths
+
+The cache root is fixed at `.cache/identity/transactions/` beneath the
+canonicalized repository directory supplied by the caller. There is no separate
+cache-root option or environment override. Externally located caches reached
+through a symlink, Windows junction or another reparse point are unsupported;
+use a real local directory tree. Selecting the repository itself through a
+caller-supplied alias still resolves that repository before this boundary.
+
+Every existing component must be inspectable and have the expected directory
+or regular-file kind. Inspection failures are errors, not evidence of absence.
+Generation checks cache/workspace paths, reserves a new plan directory and
+creates staging, backup and pending-journal files without overwriting an
+existing leaf. Each transaction operation rechecks its confined path; recovery
+checks the complete retained tree before rollback or cleanup. Unsupported
+preexisting paths are rejected without changing consumer or external files.
+No fallback cache, automatic relocation, installation or journal migration is
+performed.
+
+These checks apply to serialized local operations. They do not make pathname
+checks atomic against another process replacing directory components between
+inspection and use. Per-consumer writer serialization and stale-owner handling
+remain [#79](https://github.com/egohygiene/identity/issues/79); stronger protection
+against hostile concurrent filesystem mutation is not claimed. Promotion still
+requires filesystem rename support between staging and output; an unsupported
+move retains transaction evidence for recovery.
+
+Before publishing generated output, the store:
 
 1. rechecks every planned current checksum to reject stale plans;
 2. stages all verified writes;
