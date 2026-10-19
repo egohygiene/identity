@@ -103,6 +103,20 @@ class SocialSurfaceProjectionTests(unittest.TestCase):
         with self.assertRaisesRegex(renderer.ProjectionError, "documents.socialSurfaces"):
             renderer.build_projection(VALID_FIXTURE)
 
+    def test_selected_assets_still_require_declared_public_usage(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            add_social_source(repository)
+            project_path = repository / ".identity/identity.json"
+            project = json.loads(project_path.read_text(encoding="utf-8"))
+            project["documents"]["guidance"]["usage"] = None
+            write_json(project_path, project)
+            before = source_digests(repository)
+            with self.assertRaisesRegex(renderer.ProjectionError, "IDN1903.*public usage asset"):
+                renderer.build_projection(repository)
+            self.assertEqual(source_digests(repository), before)
+
     def test_profile_header_and_post_targets_preserve_catalog_facts(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             repository = Path(temporary) / "consumer"

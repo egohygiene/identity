@@ -34,13 +34,17 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def guidance_documents(
     repository_root: Path,
-) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
+) -> tuple[
+    dict[str, Any], dict[str, Any] | None, dict[str, Any] | None, dict[str, Any]
+]:
     """Load project, voice, usage, and decisions through declared local paths."""
 
     project = load_json(repository_root / ".identity/identity.json")
     documents = project["documents"]
-    voice = load_json(repository_root / documents["guidance"]["voice"])
-    usage = load_json(repository_root / documents["guidance"]["usage"])
+    voice_path = documents["guidance"]["voice"]
+    usage_path = documents["guidance"]["usage"]
+    voice = load_json(repository_root / voice_path) if voice_path is not None else None
+    usage = load_json(repository_root / usage_path) if usage_path is not None else None
     approvals = load_json(repository_root / documents["approvals"])
     return project, voice, usage, approvals
 
@@ -83,19 +87,21 @@ def public_records(value: Any) -> Any:
 
 
 def public_documents(
-    voice: dict[str, Any], usage: dict[str, Any]
-) -> tuple[dict[str, Any], dict[str, Any]]:
+    voice: dict[str, Any] | None, usage: dict[str, Any] | None
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
     """Apply the same source-document audience boundary as Rust package projections."""
 
     voice = public_records(voice)
     usage = public_records(usage)
-    public_ids = {item["id"] for item in voice["characteristics"]}
-    for context in voice["contexts"]:
-        context["characteristics"] = [
-            identifier for identifier in context["characteristics"] if identifier in public_ids
-        ]
-    usage["sections"] = [section for section in usage["sections"] if section["rules"]]
-    usage["assets"] = [asset for asset in usage["assets"] if asset["availability"] == "public"]
+    if voice is not None:
+        public_ids = {item["id"] for item in voice["characteristics"]}
+        for context in voice["contexts"]:
+            context["characteristics"] = [
+                identifier for identifier in context["characteristics"] if identifier in public_ids
+            ]
+    if usage is not None:
+        usage["sections"] = [section for section in usage["sections"] if section["rules"]]
+        usage["assets"] = [asset for asset in usage["assets"] if asset["availability"] == "public"]
     return voice, usage
 
 
@@ -132,39 +138,44 @@ def build_view_model(
     if audience == "public":
         voice, usage = public_documents(voice, usage)
 
-    contexts = voice["contexts"]
+    # Null declarations have no authored prose or records to project. Keep the
+    # normalized model's existing empty collections and nullable singletons.
+    voice = voice or {}
+    usage = usage or {}
+
+    contexts = voice.get("contexts", [])
     if context is not None:
         contexts = [item for item in contexts if item["id"] == context]
         if not contexts:
-            available = ", ".join(item["id"] for item in voice["contexts"])
+            available = ", ".join(item["id"] for item in voice.get("contexts", []))
             raise GuidanceError(f"unknown context {context!r}; available: {available}")
     characteristic_ids = {
         identifier
         for item in contexts
         for identifier in item["characteristics"]
     }
-    characteristics = voice["characteristics"]
+    characteristics = voice.get("characteristics", [])
     if context is not None:
         characteristics = [
             item for item in characteristics if item["id"] in characteristic_ids
         ]
 
-    rules = context_rules(usage["sections"], context)
+    rules = context_rules(usage.get("sections", []), context)
     selected_rule_ids = {item["id"] for item in rules}
     sections = []
-    for section in usage["sections"]:
+    for section in usage.get("sections", []):
         selected = [item for item in section["rules"] if item["id"] in selected_rule_ids]
         if selected:
             sections.append({**section, "rules": selected})
 
     downloads = [
         item
-        for item in usage["assets"]
+        for item in usage.get("assets", [])
         if item["status"] == "active"
         and item["availability"] == "public"
         and item["governance"]["state"] == "approved"
     ]
-    legacy_assets = [item for item in usage["assets"] if item["status"] == "legacy"]
+    legacy_assets = [item for item in usage.get("assets", []) if item["status"] == "legacy"]
     if audience == "public":
         legacy_assets = [
             item

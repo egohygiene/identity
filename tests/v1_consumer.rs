@@ -132,6 +132,112 @@ fn guidance_documents(root: &Path) -> Value {
 }
 
 #[test]
+fn nullable_guidance_drives_packages_and_renderer_without_reading_absent_documents() {
+    use identity::compiler::IdentityReader;
+
+    for declared_voice in [false, true] {
+        for declared_usage in [false, true] {
+            let repository = TempDir::new().expect("create temporary consumer");
+            copy_tree(&fixture_root(), repository.path());
+            for (field, declared) in [("voice", declared_voice), ("usage", declared_usage)] {
+                if !declared {
+                    fs::remove_file(
+                        repository
+                            .path()
+                            .join(format!(".identity/guidance/{field}.json")),
+                    )
+                    .unwrap();
+                    change_json(
+                        repository.path(),
+                        ".identity/identity.json",
+                        &format!("/documents/guidance/{field}"),
+                        Value::Null,
+                    );
+                }
+            }
+            let pipeline =
+                V1ConsumerPipeline::load(repository.path()).expect("load optional guidance");
+            let intent = pipeline.read().unwrap();
+            let resolved = pipeline.resolve(&intent).unwrap();
+            let model = BrandKitModel::from_resolved(&resolved).unwrap();
+            assert_eq!(model.guidance.voice.is_some(), declared_voice);
+            assert_eq!(model.guidance.usage.is_some(), declared_usage);
+            let profiles = ["metadata", "archive"].map(|id| ProfileSelection {
+                id: id.to_owned(),
+                version: "1.0.0".to_owned(),
+            });
+            let request =
+                with_reference_renderer(compiler_request("assets/identity", &profiles).unwrap());
+            let mut registry = AdapterRegistry::new();
+            register_builtin_adapters(&mut registry).unwrap();
+            register_reference_renderer_adapter(&mut registry).unwrap();
+            let mut store = LocalArtifactStore::new(repository.path()).unwrap();
+            let mut compiler =
+                Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
+            let prepared = compiler.prepare(request.clone()).unwrap();
+            compiler.execute(&prepared, &BTreeSet::new()).unwrap();
+            for relative in [
+                "packages/guidance/voice-and-usage.json",
+                "packages/renderer/brand-kit.view-model.json",
+            ] {
+                let output: Value = serde_json::from_slice(
+                    &fs::read(repository.path().join("assets/identity").join(relative)).unwrap(),
+                )
+                .unwrap();
+                for (field, declared) in [("voice", declared_voice), ("usage", declared_usage)] {
+                    let expected = if declared { "declared" } else { "not-declared" };
+                    if relative.contains("view-model") {
+                        assert_eq!(output["guidance"][field]["status"], expected);
+                        assert_eq!(output["guidance"][field]["value"].is_null(), !declared);
+                    } else {
+                        assert_eq!(output["status"][field], expected);
+                        assert_eq!(output[field].is_null(), !declared);
+                    }
+                }
+            }
+            assert!(!compiler.prepare(request).unwrap().plan.has_mutations());
+            assert_eq!(
+                pipeline.read().unwrap(),
+                intent,
+                "canonical source stays unchanged"
+            );
+        }
+    }
+}
+
+#[test]
+fn authoring_examples_generate_and_verify_through_the_published_cli() {
+    for name in ["minimal", "expanded"] {
+        let repository = TempDir::new().expect("create temporary authoring consumer");
+        let example = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("examples/v1")
+            .join(name);
+        copy_tree(&example, repository.path());
+        let pipeline =
+            V1ConsumerPipeline::load(repository.path()).expect("load exact authoring example");
+        let original = identity::compiler::IdentityReader::read(&pipeline).unwrap();
+        for operation in ["v1-generate", "v1-verify"] {
+            let output = Command::new(env!("CARGO_BIN_EXE_identity"))
+                .arg(operation)
+                .arg("--repository-root")
+                .arg(repository.path())
+                .output()
+                .expect("run published CLI against authoring example");
+            assert!(
+                output.status.success(),
+                "{name} {operation}: {}",
+                String::from_utf8_lossy(&output.stderr)
+            );
+        }
+        assert_eq!(
+            identity::compiler::IdentityReader::read(&pipeline).unwrap(),
+            original,
+            "authoring example source stays unchanged"
+        );
+    }
+}
+
+#[test]
 fn public_packages_and_renderer_filter_shared_lifecycle_cases_without_mutating_review() {
     let cases: Value = serde_json::from_slice(
         &fs::read(

@@ -12,9 +12,10 @@ metadata and anatomy; source validation and publication remain separately
 evidenced. Implementation states remain in each record and do not follow
 from acceptance alone. ADR-0022 separately proposes the consumer publication
 composition. ADR-0023 proposes the shared source-digest compatibility contract.
-ADR-0024 proposes the renderer artifact-path compatibility rules. These three
-proposals have no lifecycle approval; the corpus contains 21 accepted records
-and three proposed records.
+ADR-0024 proposes the renderer artifact-path compatibility rules. ADR-0025
+proposes the executable minimal authoring core and nullable-guidance behavior.
+These four proposals have no lifecycle approval; the corpus contains 21
+accepted records and four proposed records.
 
 | ID | Title | Decision status | Date | Canonical record |
 | --- | --- | --- | --- | --- |
@@ -42,6 +43,7 @@ and three proposed records.
 | ADR-0022 | Compose current Decisions evidence beneath the existing Brand Kit publisher | proposed | 2026-10-10 | [ADR-0022](ADR-0022-decisions-publication-composition.md) |
 | ADR-0023 | Preserve and specify a shared canonical source digest | proposed | 2026-10-18 | [ADR-0023](ADR-0023-canonical-source-digest.md) |
 | ADR-0024 | Separate bundle-relative artifact paths from deployment bases | proposed | 2026-10-18 | [ADR-0024](ADR-0024-renderer-artifact-paths.md) |
+| ADR-0025 | Keep the executable authoring core independent of optional guidance | proposed | 2026-10-19 | [ADR-0025](ADR-0025-executable-minimal-authoring-core.md) |
 
 ## Ongoing capture
 
@@ -52,7 +54,8 @@ See [validation and upgrade commands](../decision-validation.md).
 
 The index dates identify the current 2026-10-10 disposition for migrated legacy
 records, the reconstruction date for ADR-0019–021 and the proposal date for
-ADR-0022; ADR-0023/024 use their actual 2026-10-18 proposal date. Original declared dates,
+ADR-0022; ADR-0023/024 use their actual 2026-10-18 proposal date and ADR-0025 its
+2026-10-19 proposal date. Original declared dates,
 status claims and substantive prose remain preserved in each record with
 immutable source provenance. Approval uses its actual current date; no historical
 approval is inferred. No ID, filename or compatibility anchor was changed.

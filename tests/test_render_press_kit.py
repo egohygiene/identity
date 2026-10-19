@@ -177,6 +177,20 @@ class PressKitProjectionTests(unittest.TestCase):
         with self.assertRaisesRegex(renderer.ProjectionError, "documents.pressKit"):
             renderer.build_projection(VALID_FIXTURE)
 
+    def test_selected_assets_still_require_declared_public_usage(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            add_press_source(repository)
+            project_path = repository / ".identity/identity.json"
+            project = json.loads(project_path.read_text(encoding="utf-8"))
+            project["documents"]["guidance"]["usage"] = None
+            write_json(project_path, project)
+            before = source_digests(repository)
+            with self.assertRaisesRegex(renderer.ProjectionError, "IDN1801.*public usage asset"):
+                renderer.build_projection(repository)
+            self.assertEqual(source_digests(repository), before)
+
     def test_projection_filters_unapproved_material_and_matches_contract_shape(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             repository = Path(temporary) / "consumer"

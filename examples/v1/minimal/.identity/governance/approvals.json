@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../../../contracts/v1/approvals.schema.json",
+  "schema": "identity.approvals/v1",
+  "decisions": [
+    {
+      "id": "example-mark-approval",
+      "subject": "mark",
+      "candidate": ".identity/sources/mark.svg",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-mark-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    }
+  ]
+}

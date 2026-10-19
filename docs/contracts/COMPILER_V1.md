@@ -23,6 +23,15 @@ codes, paths, messages, and recovery guidance. Python 3.11+ is required at runti
 Isolated mode disables consumer imports and site packages; the executable needs
 neither a source checkout nor network access. There is no unchecked fallback.
 
+Source preflight and producer capability are separate: a governed PNG/font can
+be valid canonical input while unsupported by the SVG-only Rust source bridge.
+The bridge checks every provenance asset and reports `IDN3304` with failure state
+`unsupported` before UTF-8 decoding unsupported formats. Non-UTF-8 bytes at an
+`.svg` path remain invalid producer input (`IDN3301`), even if their governed
+bytes pass format-agnostic source validation. See the [capability table](IDENTITY_V1.md#source-authority-and-producer-capabilities).
+Independently null voice/usage declarations use the existing optional guidance
+model; selected outputs remain subject to their actual profile prerequisites.
+
 Preflight snapshots all consulted files and declared directories, including
 inputs outside `.identity/`. The pipeline rejects stale bytes, replaced paths,
 and mismatched intents at its reader, validator, and resolver boundaries. The

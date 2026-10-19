@@ -838,12 +838,13 @@ def validate_project(
         )
         if guidance is not None:
             for field in ("voice", "usage"):
-                resolve_local_path(
-                    repository_root,
-                    guidance.get(field),
-                    f"/documents/guidance/{field}",
-                    diagnostics,
-                )
+                if guidance.get(field) is not None:
+                    resolve_local_path(
+                        repository_root,
+                        guidance[field],
+                        f"/documents/guidance/{field}",
+                        diagnostics,
+                    )
         handbook = project.get("documents", {}).get("handbook")
         if handbook is not None:
             handbook = require_closed(
@@ -2124,6 +2125,8 @@ def validate_voice(
     if not isinstance(guidance, dict):
         return set()
     path_value = guidance.get("voice")
+    if path_value is None:
+        return set()
     path = resolve_local_path(
         repository_root,
         path_value,
@@ -2505,6 +2508,8 @@ def validate_usage(
     if not isinstance(guidance, dict):
         return
     path_value = guidance.get("usage")
+    if path_value is None:
+        return
     path = resolve_local_path(
         repository_root,
         path_value,

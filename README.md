@@ -437,6 +437,8 @@ compiler/package outcome. The Empathy and OptiFlow proof has landed through
 - [security policy](SECURITY.md)
 - [support policy](SUPPORT.md)
 - [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)
+- [Identity authoring worksheet](docs/consumers/AUTHORING.md)
+- [Minimal and expanded v1 authoring examples](examples/v1/README.md)
 - [Identity field catalog and checkpoint 1 review](docs/reviews/identity-fields-2026-10-18.md)
 - [Guidance v1 contract](docs/contracts/GUIDANCE_V1.md)
 - [Compiler v1 contract](docs/contracts/COMPILER_V1.md)

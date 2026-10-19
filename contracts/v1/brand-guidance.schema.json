@@ -182,16 +182,28 @@
       "then": {
         "properties": {
           "foundation": {
-            "$ref": "voice.schema.json#/$defs/foundation"
+            "oneOf": [
+              { "$ref": "voice.schema.json#/$defs/foundation" },
+              { "type": "null" }
+            ]
           },
           "localization": {
-            "$ref": "voice.schema.json#/$defs/localization"
+            "oneOf": [
+              { "$ref": "voice.schema.json#/$defs/localization" },
+              { "type": "null" }
+            ]
           },
           "accessibility": {
-            "$ref": "usage.schema.json#/$defs/accessibility"
+            "oneOf": [
+              { "$ref": "usage.schema.json#/$defs/accessibility" },
+              { "type": "null" }
+            ]
           },
           "legal": {
-            "$ref": "usage.schema.json#/$defs/legal"
+            "oneOf": [
+              { "$ref": "usage.schema.json#/$defs/legal" },
+              { "type": "null" }
+            ]
           },
           "contexts": {
             "type": "array",

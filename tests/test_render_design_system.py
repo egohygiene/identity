@@ -43,6 +43,37 @@ def source_digests(repository_root: Path) -> dict[str, str]:
 class DesignSystemProjectionTests(unittest.TestCase):
     """Prove deterministic projections preserve their source and ownership boundaries."""
 
+    def test_handbook_projects_only_declared_guidance(self) -> None:
+        for declared_voice in (False, True):
+            for declared_usage in (False, True):
+                with (
+                    self.subTest(voice=declared_voice, usage=declared_usage),
+                    tempfile.TemporaryDirectory() as temporary,
+                ):
+                    repository = Path(temporary) / "consumer"
+                    shutil.copytree(VALID_FIXTURE, repository)
+                    project_path = repository / ".identity/identity.json"
+                    project = json.loads(project_path.read_text(encoding="utf-8"))
+                    for field, declared in (("voice", declared_voice), ("usage", declared_usage)):
+                        if not declared:
+                            (repository / project["documents"]["guidance"][field]).unlink()
+                            project["documents"]["guidance"][field] = None
+                    project_path.write_text(json.dumps(project, indent=2) + "\n", encoding="utf-8")
+                    before = source_digests(repository)
+                    handbook, context = renderer.build_projections(repository)
+                    kinds = {
+                        entry["kind"]
+                        for section in handbook["sections"]
+                        for entry in section["entries"]
+                    }
+                    self.assertEqual("voice" in kinds, declared_voice)
+                    self.assertEqual("usage" in kinds, declared_usage)
+                    if not declared_voice:
+                        self.assertEqual(context["applicability"]["contexts"], [])
+                    for output_format in ("handbook-json", "handbook-markdown", "context-json", "context-markdown"):
+                        self.assertIn("Example Product", renderer.render((handbook, context), output_format))
+                    self.assertEqual(source_digests(repository), before)
+
     def test_models_match_contracts_and_reviewed_golden_outputs(self) -> None:
         handbook, context = renderer.build_projections(VALID_FIXTURE)
         handbook_schema = json.loads(

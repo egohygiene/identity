@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../contracts/v1/tokens.schema.json",
+  "$extensions": {
+    "org.egohygiene.identity": {
+      "schema": "identity.tokens/v1",
+      "layer": {
+        "id": "example-organization",
+        "kind": "organization-defaults",
+        "priority": 0
+      }
+    }
+  },
+  "color": {
+    "$type": "color",
+    "brand": {
+      "primary": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.42,
+            0.2,
+            0.72
+          ],
+          "alpha": 1
+        }
+      }
+    }
+  }
+}

@@ -106,7 +106,10 @@ def approved_decision(approvals: dict[str, Any], identifier: str, subject: str) 
 
 
 def resolve_public_asset(repository_root: Path, documents: dict[str, Any], asset_id: str) -> tuple[Path, dict[str, str]]:
-    usage = load_json(repository_root / documents["guidance"]["usage"])
+    usage_path = documents["guidance"]["usage"]
+    if usage_path is None:
+        raise ProjectionError("repository-presentation projection requires declared documents.guidance.usage for the approved public banner asset")
+    usage = load_json(repository_root / usage_path)
     provenance = load_json(repository_root / documents["provenance"])
     usage_asset = next((item for item in usage.get("assets", []) if item.get("id") == asset_id), None)
     record = next((item for item in provenance.get("assets", []) if item.get("id") == asset_id), None)

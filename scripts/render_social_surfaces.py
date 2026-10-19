@@ -270,7 +270,10 @@ def build_projection(
         for item in approvals_document["decisions"]
         if isinstance(item, dict) and isinstance(item.get("id"), str)
     }
-    usage = load_json(repository_root / documents["guidance"]["usage"])
+    usage_path = documents["guidance"]["usage"]
+    if usage_path is None:
+        raise ProjectionError("social projection requires declared documents.guidance.usage for approved public source assets")
+    usage = load_json(repository_root / usage_path)
     provenance = load_json(repository_root / documents["provenance"])
     usage_assets, provenance_assets = public_assets(usage, provenance)
     records = {

@@ -29,8 +29,8 @@ The v1 topology is:
 │   ├── provenance.json              # license, lineage, accessibility, usage
 │   └── approvals.json               # human decisions and evidence
 ├── guidance/
-│   ├── voice.json                   # optional until IDN-11 lands
-│   ├── usage.json                   # optional until IDN-11 lands
+│   ├── voice.json                   # optional; null declaration when absent
+│   ├── usage.json                   # optional; null declaration when absent
 │   ├── design-system.json            # optional reviewed handbook source
 │   ├── design-references.json        # optional reviewed reference catalog
 │   ├── press-kit.json                # optional reviewed Press/Media Kit source
@@ -43,9 +43,23 @@ The v1 topology is:
 ```
 
 The manifest may choose different normalized repository-relative paths, but it
-must name every boundary above. Voice and usage paths are nullable in the first
-v1 slice so #13 can stabilize their contents without pretending that v0 prose
-was already structured. Directories are never optional.
+must name the core boundaries. The `documents.guidance` object and its `voice`
+and `usage` keys remain required; each value is a normalized local path or
+explicit `null`. Either document can be undeclared independently. Null skips
+loading and uses the existing not-declared/null projection state. Missing keys,
+empty paths, missing files and malformed adopted documents remain errors.
+Directories are never optional. Optional extensions below are omitted by leaving
+their manifest property absent, rather than inventing an empty document.
+
+Executable null guidance is a post-`v1.0.0` capability: use a reviewed immutable
+implementation containing #99 checkpoint 2 and matching validator/projection
+scripts until that behavior ships in a new stable release. The published
+`v1.0.0` schema's null allowance alone does not prove its runtime support.
+
+The [authoring worksheet](../consumers/AUTHORING.md) maps the small core and
+optional sections to their existing fields. [Minimal and expanded examples](../../examples/v1/README.md)
+exercise the same source contract without changing the established regression
+fixture. Approval and rights entries in those examples are synthetic test data.
 
 `documents.handbook` is an optional additive v1 object. When a consumer adopts
 it, it names both local handbook source files. `design-system.json` records
@@ -152,6 +166,31 @@ one provenance record. The record's digest must match the bytes. Its license
 status must be `approved`, its provenance must be complete, and its approval
 must resolve to an approved human decision for the same subject. Candidates
 and references remain distinct trust zones.
+
+## Source authority and producer capabilities
+
+Source validation proves governed local bytes and relationships, not universal
+format decoding or public-kit completeness. Keep these current boundaries distinct:
+
+| Boundary | Supported input and result | Limit |
+| --- | --- | --- |
+| Offline source validator | Regular local bytes with matching digest, license, lineage, accessibility and subject-matched approval. | Format-agnostic integrity checks do not prove image/font decoding or publication rights beyond supplied evidence. |
+| Rust `v1-generate` / `v1-verify` bridge | Lowercase `.svg` provenance paths, UTF-8 SVG source; selected adapters derive mechanical SVG/PNG outputs. | The bridge loads **every** provenance asset, including ancillary ones. Other formats return `IDN3304` / `unsupported` before UTF-8 decoding, even for a tokens-only selection. No source is removed or converted automatically. |
+| Press Kit and social-surface packages | Explicitly selected governed public asset bytes can be copied into packages. | MIME labels and byte copying do not establish raster decoding, creative suitability or general compiler support. Each projection retains its own usage/governance prerequisites. |
+| Repository presentation | Its current banner adapter assumes SVG source. | Do not infer PNG support from other package paths. |
+| Mascot source | Its source schema permits PNG/SVG under its own contract. | The checked-in Kern verifier is a specific governed mascot check, not a general raster-to-core converter. |
+
+An optional byte-copy producer can support governed binary assets independently;
+the current generic bridge remains unsupported for that source set. Preserve
+canonical rights and approval evidence rather than removing provenance or
+reclassifying approved source merely to make generation pass. Add an approved
+SVG master only when it actually exists.
+
+Present source, supported producer, verified selected outputs and complete public
+kit are separate results. Generic public asset selection and advertised archive
+availability remain tracked in #101/#105; a valid minimum source does not resolve
+those output gaps. Nulling a document path does not exclude leftover files from
+the physical canonical-source digest or authorize their deletion.
 
 ## Diagnostics
 
