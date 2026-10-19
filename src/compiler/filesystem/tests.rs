@@ -7,6 +7,11 @@ use tempfile::TempDir;
 
 const OUTPUT: &str = "assets/identity";
 
+fn write_fixture(path: &Path, bytes: &[u8]) -> std::io::Result<()> {
+    fs::create_dir_all(path.parent().unwrap())?;
+    fs::write(path, bytes)
+}
+
 fn fixture(
     root: &Path,
     output_root: &str,
@@ -34,7 +39,7 @@ fn fixture(
     ] {
         let path = format!("{output_root}/{name}");
         if let Some(bytes) = old {
-            LocalArtifactStore::write_bytes(&root.join(&path), bytes).unwrap();
+            write_fixture(&root.join(&path), bytes).unwrap();
         }
         actions.push(PlanAction {
             scope: if path == manifest_path {
@@ -148,7 +153,13 @@ fn tree(root: &Path) -> BTreeMap<PathBuf, Vec<u8>> {
             let entry = entry.unwrap();
             let path = entry.path();
             let kind = entry.file_type().unwrap();
-            let bytes = if kind.is_symlink() {
+            let redirected = kind.is_symlink();
+            #[cfg(windows)]
+            let redirected = {
+                use std::os::windows::fs::MetadataExt;
+                redirected || path.symlink_metadata().unwrap().file_attributes() & 0x400 != 0
+            };
+            let bytes = if redirected {
                 fs::read_link(&path)
                     .unwrap()
                     .to_string_lossy()
@@ -157,8 +168,10 @@ fn tree(root: &Path) -> BTreeMap<PathBuf, Vec<u8>> {
             } else if kind.is_dir() {
                 collect(root, &path, entries);
                 Vec::new()
-            } else {
+            } else if kind.is_file() {
                 fs::read(&path).unwrap()
+            } else {
+                b"non-regular filesystem entry".to_vec()
             };
             entries.insert(path.strip_prefix(root).unwrap().to_path_buf(), bytes);
         }
@@ -190,7 +203,7 @@ fn recovery_rejects_every_operation_outside_its_independently_authorized_scope()
         for index in 0..4 {
             let root = TempDir::new().unwrap();
             let transaction = interrupted(root.path(), OUTPUT, 4);
-            LocalArtifactStore::write_bytes(&root.path().join(target), b"user sentinel").unwrap();
+            write_fixture(&root.path().join(target), b"user sentinel").unwrap();
             let mut journal = journal(&transaction);
             journal.plan.actions[index].path = target.to_owned();
             if index == 3 {
@@ -403,7 +416,10 @@ fn custom_scope_must_be_authorized_by_the_caller_for_both_commit_and_recovery() 
 fn recovery_rejects_symlinked_cache_destinations_journals_and_backups() {
     for location in [
         "cache",
+        "cache-identity",
+        "transaction-root",
         "transaction",
+        "staging-root",
         "journal",
         "backup-root",
         "backup-file",
@@ -415,7 +431,10 @@ fn recovery_rejects_symlinked_cache_destinations_journals_and_backups() {
         let transaction = interrupted(root.path(), OUTPUT, 4);
         let source = match location {
             "cache" => root.path().join(".cache"),
+            "cache-identity" => root.path().join(".cache/identity"),
+            "transaction-root" => root.path().join(TRANSACTION_ROOT),
             "transaction" => transaction.clone(),
+            "staging-root" => transaction.join("staged"),
             "journal" => transaction.join("journal.json"),
             "backup-root" => transaction.join("backup"),
             "backup-file" => transaction.join(format!("backup/{OUTPUT}/replaced.json")),
@@ -494,7 +513,7 @@ fn conflicting_transactions_are_rejected_before_either_is_recovered() {
     for (path, content) in bytes {
         let source = transaction.join(&path);
         if source.is_file() {
-            LocalArtifactStore::write_bytes(&copy.join(path), &content).unwrap();
+            write_fixture(&copy.join(path), &content).unwrap();
         } else {
             fs::create_dir_all(copy.join(path)).unwrap();
         }
@@ -510,7 +529,7 @@ fn rollback_does_not_write_through_a_preexisting_hard_link_in_its_workspace() {
     let root = TempDir::new().unwrap();
     let transaction = interrupted(root.path(), OUTPUT, 4);
     let sentinel = root.path().join(".identity/sentinel");
-    LocalArtifactStore::write_bytes(&sentinel, b"canonical sentinel").unwrap();
+    write_fixture(&sentinel, b"canonical sentinel").unwrap();
     fs::hard_link(&sentinel, transaction.join("recovery.tmp")).unwrap();
     LocalArtifactStore::new(root.path())
         .unwrap()
@@ -525,4 +544,373 @@ fn unusable_recovery_staging_path_is_rejected_before_restoring_any_file() {
     let transaction = interrupted(root.path(), OUTPUT, 4);
     fs::create_dir(transaction.join("recovery.tmp")).unwrap();
     assert_blocked_without_mutation(root.path());
+}
+
+#[cfg(unix)]
+#[test]
+fn commit_rejects_each_redirected_cache_component_without_touching_either_tree() {
+    for relative in [".cache", ".cache/identity", TRANSACTION_ROOT] {
+        let root = TempDir::new().unwrap();
+        let external = TempDir::new().unwrap();
+        let (plan, artifacts, manifest) = fixture(root.path(), OUTPUT);
+        write_fixture(&external.path().join("sentinel"), b"external sentinel").unwrap();
+        let link = root.path().join(relative);
+        fs::create_dir_all(link.parent().unwrap()).unwrap();
+        std::os::unix::fs::symlink(external.path(), link).unwrap();
+        let before = tree(root.path());
+        let external_before = tree(external.path());
+        let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        assert!(store.commit(&plan, &artifacts, &manifest).is_err());
+        assert!(store.recovery_required().is_err());
+        assert!(store.recover().is_err());
+        assert_eq!(tree(root.path()), before, "{relative}");
+        assert_eq!(tree(external.path()), external_before, "{relative}");
+    }
+}
+
+#[test]
+fn cache_components_must_be_directories_before_generation_or_recovery() {
+    for relative in [".cache", ".cache/identity", TRANSACTION_ROOT] {
+        let root = TempDir::new().unwrap();
+        let (plan, artifacts, manifest) = fixture(root.path(), OUTPUT);
+        write_fixture(&root.path().join(relative), b"user-owned cache blocker").unwrap();
+        let before = tree(root.path());
+        let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        assert!(store.commit(&plan, &artifacts, &manifest).is_err());
+        assert!(store.recovery_required().is_err());
+        assert!(store.recover().is_err());
+        assert_eq!(tree(root.path()), before, "{relative}");
+    }
+}
+
+#[test]
+fn commit_never_reuses_a_preexisting_empty_or_populated_workspace() {
+    for marker in [
+        None,
+        Some("staged/sentinel"),
+        Some("backup/sentinel"),
+        Some("journal.pending"),
+        Some("journal.json"),
+    ] {
+        let root = TempDir::new().unwrap();
+        let (plan, artifacts, manifest) = fixture(root.path(), OUTPUT);
+        let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        let workspace = store.transaction_directory(&plan.plan_digest);
+        fs::create_dir_all(&workspace).unwrap();
+        if let Some(marker) = marker {
+            write_fixture(&workspace.join(marker), b"preserve transaction evidence").unwrap();
+        }
+        let before = tree(root.path());
+        let error = store.commit(&plan, &artifacts, &manifest).unwrap_err();
+        assert_eq!(error.kind, FailureKind::Blocked);
+        assert_eq!(error.diagnostics[0].code, "IDN2301");
+        assert_eq!(tree(root.path()), before, "{marker:?}");
+    }
+}
+
+#[test]
+fn recovery_inspection_does_not_create_repair_or_clean_workspaces() {
+    let root = TempDir::new().unwrap();
+    let store = LocalArtifactStore::new(root.path()).unwrap();
+    let before = tree(root.path());
+    assert!(!store.recovery_required().unwrap());
+    assert_eq!(tree(root.path()), before);
+    interrupted(root.path(), OUTPUT, 2);
+    let before = tree(root.path());
+    assert!(store.recovery_required().unwrap());
+    assert_eq!(tree(root.path()), before);
+}
+
+#[test]
+fn repository_root_must_be_a_directory() {
+    let root = TempDir::new().unwrap();
+    let file = root.path().join("not-a-repository");
+    fs::write(&file, b"user sentinel").unwrap();
+    let before = tree(root.path());
+    assert!(LocalArtifactStore::new(file).is_err());
+    assert_eq!(tree(root.path()), before);
+}
+
+#[test]
+fn recovery_reads_hard_linked_evidence_without_overwriting_its_other_names() {
+    for relative in [
+        "journal.json",
+        "backup/assets/identity/replaced.json",
+        "backup/assets/identity/.identity-manifest.json",
+        "staged/unconsumed-evidence",
+    ] {
+        let root = TempDir::new().unwrap();
+        let external = TempDir::new().unwrap();
+        let transaction = interrupted(root.path(), OUTPUT, 4);
+        let evidence = transaction.join(relative);
+        if !evidence.exists() {
+            write_fixture(&evidence, b"preserved evidence bytes").unwrap();
+        }
+        fs::hard_link(&evidence, external.path().join("evidence-alias")).unwrap();
+        let external_before = tree(external.path());
+        let source = root.path().join(".identity/sentinel");
+        write_fixture(&source, b"canonical sentinel").unwrap();
+        let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        assert_eq!(store.recover().unwrap().recovered_transactions, 1);
+        assert_eq!(tree(external.path()), external_before, "{relative}");
+        assert_eq!(fs::read(source).unwrap(), b"canonical sentinel");
+        assert!(!store.recovery_required().unwrap());
+    }
+}
+
+#[test]
+fn transaction_helpers_cannot_write_outside_their_namespace() {
+    let root = TempDir::new().unwrap();
+    let external = TempDir::new().unwrap();
+    let store = LocalArtifactStore::new(root.path()).unwrap();
+    let canonical = root.path().join(".identity/sentinel");
+    write_fixture(&canonical, b"canonical sentinel").unwrap();
+    let source = root.path().join(format!("{OUTPUT}/previous.json"));
+    write_fixture(&source, b"generated previous state").unwrap();
+    for destination in [
+        canonical.clone(),
+        root.path().join("notes/sentinel"),
+        root.path()
+            .join(".cache/identity/transactions-neighbor/sentinel"),
+        store.transaction_root().join("../sentinel"),
+        store.transaction_root().join("staged/NUL"),
+        external.path().join("sentinel"),
+    ] {
+        let before = tree(root.path());
+        let external_before = tree(external.path());
+        assert!(store.write_bytes(&destination, b"replacement").is_err());
+        assert!(store.copy_file(&source, &destination).is_err());
+        assert_eq!(tree(root.path()), before);
+        assert_eq!(tree(external.path()), external_before);
+    }
+    let before = tree(root.path());
+    let backup = store
+        .transaction_directory(&"a".repeat(64))
+        .join("backup/file");
+    assert!(store.copy_file(&canonical, &backup).is_err());
+    assert_eq!(tree(root.path()), before);
+}
+
+#[test]
+fn fresh_transaction_writes_never_overwrite_existing_files_or_hard_links() {
+    for relative in [
+        "staged/assets/identity/created.json",
+        "backup/assets/identity/replaced.json",
+        "journal.pending",
+        "journal.json",
+    ] {
+        for hard_link in [false, true] {
+            let root = TempDir::new().unwrap();
+            let external = TempDir::new().unwrap();
+            let store = LocalArtifactStore::new(root.path()).unwrap();
+            let workspace = store.transaction_directory(&"a".repeat(64));
+            let destination = workspace.join(relative);
+            fs::create_dir_all(destination.parent().unwrap()).unwrap();
+            let sentinel = external.path().join("sentinel");
+            fs::write(&sentinel, b"external sentinel").unwrap();
+            if hard_link {
+                fs::hard_link(&sentinel, &destination).unwrap();
+            } else {
+                fs::write(&destination, b"transaction sentinel").unwrap();
+            }
+            let before = tree(root.path());
+            let external_before = tree(external.path());
+            assert!(
+                store
+                    .write_bytes(&destination, b"staged replacement")
+                    .is_err()
+            );
+            assert_eq!(
+                tree(root.path()),
+                before,
+                "{relative}, hard_link={hard_link}"
+            );
+            assert_eq!(tree(external.path()), external_before);
+        }
+    }
+}
+
+#[test]
+fn fresh_backups_never_overwrite_existing_files_or_hard_links() {
+    for relative in [
+        "backup/assets/identity/replaced.json",
+        "backup/assets/identity/.identity-manifest.json",
+    ] {
+        for hard_link in [false, true] {
+            let root = TempDir::new().unwrap();
+            let external = TempDir::new().unwrap();
+            let store = LocalArtifactStore::new(root.path()).unwrap();
+            let source = root.path().join(format!("{OUTPUT}/replaced.json"));
+            write_fixture(&source, b"generated previous state").unwrap();
+            let destination = store.transaction_directory(&"a".repeat(64)).join(relative);
+            fs::create_dir_all(destination.parent().unwrap()).unwrap();
+            let sentinel = external.path().join("sentinel");
+            fs::write(&sentinel, b"external sentinel").unwrap();
+            if hard_link {
+                fs::hard_link(&sentinel, &destination).unwrap();
+            } else {
+                fs::write(&destination, b"transaction sentinel").unwrap();
+            }
+            let before = tree(root.path());
+            let external_before = tree(external.path());
+            assert!(store.copy_file(&source, &destination).is_err());
+            assert_eq!(
+                tree(root.path()),
+                before,
+                "{relative}, hard_link={hard_link}"
+            );
+            assert_eq!(tree(external.path()), external_before);
+        }
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn transaction_writes_and_backups_reject_every_redirected_parent_and_leaf() {
+    for relative in [
+        "staged",
+        "staged/assets",
+        "staged/assets/identity",
+        "staged/assets/identity/created.json",
+        "backup",
+        "backup/assets",
+        "backup/assets/identity",
+        "backup/assets/identity/replaced.json",
+        "journal.pending",
+        "journal.json",
+    ] {
+        let root = TempDir::new().unwrap();
+        let external = TempDir::new().unwrap();
+        let store = LocalArtifactStore::new(root.path()).unwrap();
+        let workspace = store.transaction_directory(&"a".repeat(64));
+        let link = workspace.join(relative);
+        fs::create_dir_all(link.parent().unwrap()).unwrap();
+        let sentinel = external.path().join("sentinel");
+        fs::write(&sentinel, b"external sentinel").unwrap();
+        let leaf = Path::new(relative).extension().is_some();
+        std::os::unix::fs::symlink(if leaf { &sentinel } else { external.path() }, &link).unwrap();
+        let source = root.path().join(format!("{OUTPUT}/replaced.json"));
+        write_fixture(&source, b"generated previous state").unwrap();
+        let before = tree(root.path());
+        let external_before = tree(external.path());
+        if relative.starts_with("backup") {
+            let destination = workspace.join("backup/assets/identity/replaced.json");
+            assert!(store.copy_file(&source, &destination).is_err());
+        } else {
+            let destination = if relative.starts_with("staged") {
+                workspace.join("staged/assets/identity/created.json")
+            } else {
+                link
+            };
+            assert!(
+                store
+                    .write_bytes(&destination, b"staged replacement")
+                    .is_err()
+            );
+        }
+        assert_eq!(tree(root.path()), before, "{relative}");
+        assert_eq!(tree(external.path()), external_before, "{relative}");
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn transaction_paths_reject_special_entries_without_opening_them() {
+    for relative in [
+        "staged/assets/identity/created.json",
+        "backup/assets/identity/replaced.json",
+        "journal.pending",
+    ] {
+        let root = TempDir::new().unwrap();
+        let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        let destination = store.transaction_directory(&"a".repeat(64)).join(relative);
+        fs::create_dir_all(destination.parent().unwrap()).unwrap();
+        let status = std::process::Command::new("mkfifo")
+            .arg(&destination)
+            .status()
+            .unwrap();
+        assert!(status.success());
+        let before = tree(root.path());
+        assert!(store.checked_transaction_path(&destination).is_err());
+        assert!(store.recover().is_err());
+        assert_eq!(tree(root.path()), before, "{relative}");
+    }
+}
+
+#[cfg(windows)]
+#[test]
+fn windows_junction_cache_components_are_rejected_without_redirected_writes() {
+    for relative in [
+        ".cache".to_owned(),
+        ".cache/identity".to_owned(),
+        TRANSACTION_ROOT.to_owned(),
+        format!("{TRANSACTION_ROOT}/{}", "a".repeat(64)),
+    ] {
+        let root = TempDir::new().unwrap();
+        let external = TempDir::new().unwrap();
+        let (plan, artifacts, manifest) = fixture(root.path(), OUTPUT);
+        write_fixture(&external.path().join("sentinel"), b"external sentinel").unwrap();
+        let junction = root.path().join(&relative);
+        fs::create_dir_all(junction.parent().unwrap()).unwrap();
+        let result = std::process::Command::new("cmd")
+            .args(["/C", "mklink", "/J"])
+            .arg(&junction)
+            .arg(external.path())
+            .output()
+            .unwrap();
+        assert!(
+            result.status.success(),
+            "{}",
+            String::from_utf8_lossy(&result.stderr)
+        );
+        let before = tree(root.path());
+        let external_before = tree(external.path());
+        let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        assert!(store.commit(&plan, &artifacts, &manifest).is_err());
+        assert!(store.recover().is_err());
+        assert_eq!(tree(root.path()), before, "{relative}");
+        assert_eq!(tree(external.path()), external_before, "{relative}");
+    }
+}
+
+#[cfg(windows)]
+#[test]
+fn windows_junction_recovery_paths_preserve_outputs_and_external_evidence() {
+    for location in [
+        "cache",
+        "cache-identity",
+        "transaction-root",
+        "workspace",
+        "staged",
+        "staged/assets",
+        "backup",
+        "backup/assets",
+    ] {
+        let root = TempDir::new().unwrap();
+        let external = TempDir::new().unwrap();
+        let transaction = interrupted(root.path(), OUTPUT, 4);
+        let source = match location {
+            "cache" => root.path().join(".cache"),
+            "cache-identity" => root.path().join(".cache/identity"),
+            "transaction-root" => root.path().join(TRANSACTION_ROOT),
+            "workspace" => transaction,
+            relative => transaction.join(relative),
+        };
+        let target = external.path().join("relocated-evidence");
+        fs::rename(&source, &target).unwrap();
+        let result = std::process::Command::new("cmd")
+            .args(["/C", "mklink", "/J"])
+            .arg(&source)
+            .arg(&target)
+            .output()
+            .unwrap();
+        assert!(
+            result.status.success(),
+            "{}",
+            String::from_utf8_lossy(&result.stderr)
+        );
+        let external_before = tree(external.path());
+        assert_blocked_without_mutation(root.path());
+        assert_eq!(tree(external.path()), external_before, "{location}");
+    }
 }

@@ -7,22 +7,20 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-19T12:00:10Z'
+  updated_at: '2026-10-19T20:32:52Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: 'Deliver issue 99 checkpoint 3: pinned real-consumer proof and bounded initialization/validation
-    handoffs.'
+  purpose: Deliver issue 78 transaction-path confinement with bounded runtime evidence and preserved recovery.
   includes:
-  - Offline disposable Mantle generation, exact manifest inventories, read-only drift verification, public/nullable
-    probes and repeatable proof tooling.
-  - Supported manual v1 route, future initializer acceptance and proposed EgoLint owner handoffs; documentation/decision
-    evidence refresh.
+  - Fixed local cache contract; per-operation transaction/output checks, fresh workspace/file reservations
+    and Windows reparse-point rejection.
+  - Baseline/current runtime evidence, regression tests and reconciliation of completed issue 99.
   excludes:
-  - Initializer/EgoLint implementation, consumer pin changes, public-kit selection/download repairs, creative
-    approval, releases and deployment.
+  - Issue 79 writer serialization, hostile concurrent filesystem mutation, issue 77 recovery CLI, releases,
+    deployment and public-kit follow-ups.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -32,104 +30,102 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
-  - docs/contracts/IDENTITY_V1.md
-  - docs/contracts/GUIDANCE_V1.md
-  - docs/consumers/AUTHORING.md
-  - docs/decisions/ADR-0025-executable-minimal-authoring-core.md
+  - docs/contracts/COMPILER_V1.md
+  - src/compiler/filesystem.rs
+  - src/compiler/filesystem/tests.rs
+  - docs/reviews/transaction-confinement-2026-10-19.md
+  - docs/evidence/identity-transaction-confinement-2026-10-19.json
+  - docs/decisions/ADR-0012-local-layered-identity-v1.md
+  - docs/decisions/ADR-0019-immutable-release-contract.md
   - docs/decisions/policy-reference.json
-  - https://github.com/egohygiene/identity/issues/99
+  - https://github.com/egohygiene/identity/issues/78
   - https://github.com/egohygiene/identity/issues/116
-  - docs/consumers/MANTLE_AUTHORING_PROOF.md
-  - docs/consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md
-  - docs/evidence/identity-authoring-mantle-2026-10-19.json
 work:
-  objective: Prove the reviewed source/authoring path against existing real source while preserving input and
-    approval authority; close only the bounded handoff scope.
+  objective: Enforce the existing repository-local/no-link transaction contract before unsupported path writes
+    while preserving deterministic generation and interrupted recovery.
   success_conditions:
-  - Two fresh selected-output generations agree; exact manifested bytes verify and missing/altered/stale probes
-    fail without repair.
-  - Actual Mantle files match the immutable revision and remain unchanged; public/nullable behavior and optional
-    package prerequisites have explicit evidence.
-  - Initialization and delegated validation interfaces, gaps and verified owners are explicit; no adapter,
-    release or approval is inferred.
+  - Record actual baseline behavior without inferring an exploit; all unsafe preexisting cache/staging/backup
+    paths fail without changing consumer or external sentinels.
+  - Use fresh transaction leaves and exact path authority; metadata failures and Windows reparse points cannot
+    become supported redirected caches.
+  - Valid generation remains byte-identical to baseline; legitimate interrupted, repeated and custom-root recovery
+    passes.
   active_issue:
     provider: github
-    id: egohygiene/identity#99
-    url: https://github.com/egohygiene/identity/issues/99
+    id: egohygiene/identity#78
+    url: https://github.com/egohygiene/identity/issues/78
   next:
     kind: action
-    id: identity-99-checkpoint-3-review
-    description: Review checkpoint 3 proof and handoffs before merging and completing issue 99; then sync before
-      starting transaction confinement issue 78.
+    id: identity-78-review
+    description: Review the tested confinement PR, then merge only after maintainer acceptance; issue 79 writer
+      serialization is the next scheduled work.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/99
-    - https://github.com/egohygiene/identity/issues/116
     - https://github.com/egohygiene/identity/issues/78
+    - https://github.com/egohygiene/identity/issues/79
+    - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 03eaeac72e2cf69c7bf205dd80f53ca25d1629e4
+    revision: 8816294e9d9c43f250d771e9fa627c4b1861e78a
     ref: refs/heads/main
-    verified_at: '2026-10-19T12:00:10Z'
+    verified_at: '2026-10-19T20:32:52Z'
   candidate:
-    branch: codex/99-consumer-authoring-proof
+    branch: codex/78-transaction-confinement
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-19T12:00:10Z'
-    default_branch_revision: 03eaeac72e2cf69c7bf205dd80f53ca25d1629e4
+    observed_at: '2026-10-19T20:32:52Z'
+    default_branch_revision: 8816294e9d9c43f250d771e9fa627c4b1861e78a
     issue_state: open
     pull_request_state: not-applicable
-    notes: PR 117 is merged at observed main. Issue 99 and roadmap 116 remain open; this checkpoint 3 candidate
-      has not yet been opened as a PR.
+    notes: 'PR #118 merged at observed main and issue #99 closed. No open PR was returned by the scoped PR
+      search before creating this issue #78 candidate. Issue73 prerequisite is closed.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-19T12:00:10Z'
+  reviewed_at: '2026-10-19T20:32:52Z'
   reviewed_by: Codex
   evidence:
-  - command: verify_consumer_authoring.py against egohygiene/mantle@b08045acc1e982dd9424c1d8c91b0badd64744e8
+  - command: Frozen baseline CLI v1-generate with four disposable cache/workspace symlink cases
     outcome: passed
-    observed_at: '2026-10-19T12:00:10Z'
-    notes: Runtime baseline 03eaeac; rebuilt binary hash and candidate harness hash recorded. Two fresh 19-file
-      trees match; all 18 manifest outputs match actual bytes/checksums. Three negative probes exit 1 without
-      file changes. All 14 input files match raw Git blobs.
-  - command: Pinned Mantle source/projection inspection and disposable public/nullable/optional probes
+    observed_at: '2026-10-19T20:32:52Z'
+    notes: Baseline 8816294 and binary hash are recorded in the receipt. All static cases reject with IDN2311/IDN2301
+      and preserve both trees. Ten failed timing injections are explicitly inconclusive, not a safety pass
+      or confirmed exploit.
+  - command: cargo test --locked --all-features; final namespace confinement case rerun
     outcome: passed
-    observed_at: '2026-10-19T12:00:10Z'
-    notes: 13 physical source files, 11 canonical digest files and one additional consulted external profile
-      remain unchanged. Public guidance has 17 records and only referenced decisions. All three null variants
-      pass core checks; optional presentation retains its usage prerequisite. Counterfactual internal context
-      is omitted publicly.
+    observed_at: '2026-10-19T20:32:52Z'
+    notes: 84 Rust tests pass, including 23 filesystem cases. Existing interruption/recovery checks remain;
+      direct namespace, fresh-file/hard-link, parent/leaf redirection and special-entry checks preserve sentinels.
+  - command: cargo fmt --all --check; cargo clippy --locked --all-targets --all-features -- --deny warnings
+    outcome: passed
+    observed_at: '2026-10-19T20:32:52Z'
+    notes: Pinned Rust 1.97.1 formatting and all-target/all-feature strict lint pass.
   - command: python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose
     outcome: passed
-    observed_at: '2026-10-19T12:00:10Z'
-    notes: '138 cases: 136 pass, two existing skips. Eleven new harness cases include real Git blob comparisons,
-      producer faults, symlink/source confinement, nonrepairing verification and timeout/receipt guards.'
-  - command: verify_docs.py, verify_release.py, verify_mascot.py, verify_publication_architecture.py, verify_publication_release_configs.py,
-      verify_extraction.py; compileall and diff check
+    observed_at: '2026-10-19T20:32:52Z'
+    notes: '138 cases complete: 136 pass and two existing skips (unbuilt experience artifact and Linux-inapplicable
+      Windows junction case).'
+  - command: Independent baseline/candidate fresh CLI generation and verification
     outcome: passed
-    observed_at: '2026-10-19T12:00:10Z'
-    notes: All six standalone verifiers, Python compilation and whitespace checks pass. No Rust source or accepted
-      ADR changes are included.
-  - command: Local JSON Schema registry and pinned Hygiene ADR schema/anatomy/set/policy-reference helpers
+    observed_at: '2026-10-19T20:32:52Z'
+    notes: Both binaries generate identical complete 14-file inventories, including hidden manifest; both verify
+      and preserve canonical fixture files. Actual binary/source hashes are recorded separately.
+  - command: Six standalone docs/release/mascot/publication/extraction verifiers; compileall and diff check
     outcome: passed
-    observed_at: '2026-10-19T12:00:10Z'
-    notes: 15 example source documents, eight public/review guidance combinations and all 25 ADRs pass. ADR-0025
-      implementation evidence is updated; 21 accepted records and four proposed/null-approval records retain
-      their dispositions.
+    observed_at: '2026-10-19T20:32:52Z'
+    notes: All pass. Repeated documentation check covers the new receipt/review links. No release, publication,
+      source schema, journal schema or ADR lifecycle change occurs.
   environment_limitations:
-  - Fresh hosted CLI, platform release-validation and advisory architecture runs remain pending for the final
-    PR; local evidence does not substitute for those checks.
-  - Two Python skips cover the unbuilt experience artifact and Windows junction behavior on Linux; they are
-    not passes.
-  - The harness verifies bytes/revisions but does not attest binary build origin. Earlier supplemental committed-output
-    comparison used a separately identified preexisting binary.
-  - Pinned metadata/continuity/roadmap checks are bounded validation, not whole-repository native conformance,
-    creative review or public-kit acceptance.
+  - Local runtime is Linux; Windows junction regression execution and macOS/Windows release gates remain fresh
+    hosted requirements for the final candidate.
+  - 'Failed timing injection does not reproduce or disprove a race. Pathname checks are not atomic against
+    hostile directory replacement; issue #79 retains writer serialization.'
+  - Pinned ADR/continuity/roadmap checks are bounded validation, not whole-repository native conformance. Exact-head
+    hosted evidence belongs in the PR when available.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -148,54 +144,54 @@ privacy:
 
 ## Purpose and precedence
 
-This checkpoint covers #99 checkpoint 3. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md and operational issue #116 retain priority and dependency ownership.
+This checkpoint covers #78. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md and issue #116 own execution order and dependencies.
 
 ## Resume protocol
 
-Read AGENTS.md, this handoff, #99/#116, the authoring worksheet, Mantle proof/receipt, initialization handoffs and proposed ADR-0025. Refresh main, candidate PR/head and checks. The maintainer review boundary precedes #99 completion and issue #78.
+Read AGENTS.md, this handoff, #78/#116, compiler transaction contract, confinement review/receipt and filesystem code/tests. Refresh main, candidate PR/head and checks. The maintainer authorized merging #118 and starting #78; later issues retain their review boundaries.
 
 ## Current objective and success conditions
 
-Exercise the existing real source through deterministic selected output and read-only verification, record actual public/nullable behavior and bound future integration. Preserve human authority and distinguish source validity, producer support, selected output and complete public-kit readiness.
+Enforce the existing fixed repository-relative transaction cache with useful failures and complete input preservation. Confirm actual baseline behavior, strengthen per-operation checks and retain legitimate generation/recovery. Keep source validity, generated state, concurrency safety and release state distinct.
 
 ## State snapshot
 
-Main is 03eaeac72e2cf69c7bf205dd80f53ca25d1629e4, including merged #117. Candidate codex/99-consumer-authoring-proof has no containing SHA/PR until created. #99/IDN-Q29 stays open/active pending review and merge; #78 stays ready but paused. The 25 pre-tracker issues and all 40 stable roadmap IDs/dependencies are preserved.
+Main is 8816294e9d9c43f250d771e9fa627c4b1861e78a, including merged #118. #99 is closed and IDN-Q29 complete. #78/IDN-Q17 is active; prerequisite #73 is closed. Candidate codex/78-transaction-confinement has no containing SHA/PR until created. #79/IDN-Q18 remains blocked until #78 completes; no writer lock is claimed. All 40 roadmap IDs/dependencies remain intact.
 
 ## Completed and material changes
 
-The new stdlib proof tool uses two disposable copies, independently checks exact manifest files/bytes/checksums, compares fresh trees and proves current verification is read-only. Missing output, altered output and valid JSON-whitespace source change each fail with exit 1 without repair. It executes only the explicitly selected binary and trusted validator, not consumer scripts; Git comparisons use raw blobs, with bounded commands and a receipt outside both checkouts.
+src/compiler/filesystem.rs rejects inspection errors, nonregular components, symlinks and all Windows reparse points. Native components retain exact UTF8 semantics instead of lossy slash replacement. Transaction helpers remain beneath .cache/identity/transactions and promotion beneath the independently authorized output root. New plan directories and create_new transaction leaves prevent accidental reuse or truncation of existing staging/backups/journals. Journal publication, recovery temporary writes and cleanup recheck authority. Recovery retains complete preflight, legacy-journal rejection and unlink-before-recreate behavior.
 
-Pinned Mantle b08045acc1e982dd9424c1d8c91b0badd64744e8 has 13 physical .identity files, 11 canonical digest files and one additional consulted external profile (14 proof inputs). Source digest fb5b86b632cb47eb160b13da92742687f5e76148b6d5300239a601b7d29147e8 is preserved. Two fresh core trees contain 18 outputs plus hidden manifest; optional presentation adds 23 files in the existing 42-file tree. Supplemental comparison, public selection, three null variants, internal-context omission and optional prerequisites are separately qualified in the receipt.
+COMPILER_V1.md makes the existing fixed local cache contract explicit: no external-root option, linked fallback or automatic relocation. Serialized local pathname checks do not promise atomic protection against another process replacing directory components. Ordinary rename support is still required; failures retain recovery evidence.
 
-The handoff document records v0-only init, supported manual v1 authoring, current JSON source diagnostics and textual binary limits. It proposes conditions for owner review without defining an accepted EgoLint enum/adapter. Existing coordination remains Identity #108, EgoLint #35/#36, Relay #49, Holon #41 and Realm #19. No duplicate issue, installed adapter or automatic v1 initializer is claimed.
+The new review/receipt records actual baseline rejection of four pre-planted Unix redirects, with both trees unchanged. No current static redirected-write exploit is established. Ten timing attempts did not achieve injection and are inconclusive. New tests exercise every cache component, staged/backup parents/leaves, file/hard-link collisions, namespace escapes, special entries and legitimate recovery. Windows-specific junction tests await native execution.
 
 ## Validation and review evidence
 
-The real proof passes with consumed input bytes matched to immutable Git blobs; both independent 19-file inventories match. Three negative verifies are nonrepairing. All 138 Python cases complete with 136 passes/two explained skips, including eleven proof-tool cases and actual Git integration. Six standalone verifiers, compilation, local schemas and 25-record ADR checks pass. Final pinned continuity/40-step roadmap and diff checks accompany handoff. Hosted exact-head results belong in the PR when available.
+All 84 Rust tests and strict all-target/all-feature lint/format checks pass; the final namespace case was rerun after its portable-vector correction. All 138 Python cases finish with 136 passes/two explained skips. Six standalone verifiers, compilation and diff checks pass. Two fresh baseline/current CLI trees are byte-identical across 14 files and both verify without changing canonical source. The pinned schema/helper check validates continuity, all 40 stable roadmap steps and all 25 ADRs before handoff. Hosted results remain separate exact-head evidence in the PR.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No bounded implementation blocker remains. Proposed ADR-0025 remains proposed/null approval; implementation evidence does not supply disposition. Six preexisting Mantle declared approvals are preserved without independent ratification. No source facts, artwork, consumer pins or approvals change.
+No bounded local implementation blocker remains. Local Windows/macOS execution is unavailable; hosted platform gates remain required. This does not establish concurrent-writer safety, hostile filesystem topology confinement or power-loss durability. #79 owns writer serialization; #77 later exposes supported inspection/recovery CLI. The current binary CLI still has no recovery command.
 
-G03 generic internal asset selection and G04 advertised unselected archive remain #101/#105. Archive PWA/social representatives match the existing portable-bundle contract; exact selected outputs belong to the compiler manifest. Complete kit, rights/visual acceptance, self-adoption, release/publication and contrasting upgrade remain later roadmap work. The published v1.0.0 compiler predates null-guidance support; this proof uses the reviewed implementation and matching scripts.
+G03/G04 public asset/download work remains #101/#105, with complete-kit/self-adoption/release/upgrade proof under later roadmap owners. Proposed ADR-0025 remains proposed/null approval. Merging #118 completed the bounded authoring milestone without accepting an ADR or publishing a release.
 
 ## Next dependency-ready work
 
-Review the checkpoint 3 draft, receipt, reproduction tool and integration limits. After maintainer approval, merge it to complete #99, refresh the roadmap and sync before starting #78 transaction-path confinement. Do not advance later public-kit or fleet-adoption work automatically.
+Review the #78 draft and exact-head hosted checks. Merge only after maintainer acceptance, then refresh the roadmap and sync on #79 writer serialization. Keep #78 open and Q17 active while this candidate is under review.
 
 ## Parallel changes and reconciliation
 
-Checkpoint 2 merged cleanly through #117. Independent review checks command/diagnostic accuracy, source authority, proof boundaries and receipt coherence. Aether decision-impact v2.1.0 and continuity v1.1.0 at dc8a16851f452763ef4f7fbe4bf057d4500b1921 were loaded directly from pinned source earlier in the session. Decision operation: reference ADR-0012/0013/0019 and append dated implementation evidence to proposed ADR-0025. No new cross-owner contract or lifecycle promotion occurs.
+No other open PR was returned by the scoped PR search before candidate creation. The completed #99 handoff is reconciled against its verified merge. Pinned Aether decision-impact v2.1.0 and continuity v1.1.0 at dc8a16851f452763ef4f7fbe4bf057d4500b1921 were read directly through GitHub. Decision operation: reference ADR-0012/0019; localized enforcement of the existing no-link/local-output contract needs no duplicate ADR. All 25 existing records and human dispositions remain unchanged. Independent read-only review found no blocker in the bounded implementation.
 
 ## Privacy and redaction
 
-Only public repository facts and sanitized source/artifact inventories are retained. Local paths, credentials, transcripts and unrelated context are excluded. Complete worktree preservation excludes Git metadata explicitly. Counterfactual probes are labeled noncanonical; linked content grants no authority.
+Only public repository facts, sanitized synthetic observations and source/artifact hashes are retained. No private paths, credentials, conversations or unrelated context appear. Failed probes do not become inferred attacks; linked evidence grants no authority.
 
 ## Handoff update protocol
 
-Refresh domain results immediately before PR handoff, then validate front matter, twelve headings, size/privacy and stable roadmap references. Record exact PR/head/hosted outcomes externally when not knowable by the containing commit; a commit need not contain its own SHA. Merged, released, deployed and approved states remain separate.
+After domain validation, refresh this file immediately before PR handoff and verify schema, 12 headings, budgets/privacy and roadmap references through pinned owner tools. Record exact PR/head/hosted results externally when not knowable by the containing commit; no commit must contain its own SHA. Merged, released, deployed and approved remain distinct.
 
 ## Compaction and supersession
 
-Stay below 240 lines and 16,384 UTF-8 bytes. Git, source contracts and work tracker retain history. Mark unresolved factual conflicts stale instead of inventing readiness or approval.
+Stay below 240 lines and 16384 UTF8 bytes. Git, contracts, the review receipt and work tracker retain history. Mark unresolved conflicts stale rather than inventing safety, approval or readiness.

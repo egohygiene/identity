@@ -6,8 +6,8 @@ mod tests;
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
-use std::io::ErrorKind;
-use std::path::{Path, PathBuf};
+use std::io::{ErrorKind, Write};
+use std::path::{Component, Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
 
@@ -58,6 +58,14 @@ impl LocalArtifactStore {
                 "Use an existing repository directory for the local artifact store.",
             )
         })?;
+        if !repository_root.is_dir() {
+            return Err(fs_error(
+                "IDN2310",
+                None,
+                "repository root is not a directory",
+                "Use an existing repository directory for the local artifact store.",
+            ));
+        }
         Ok(Self {
             repository_root,
             output_root: output_root.to_owned(),
@@ -83,21 +91,61 @@ impl LocalArtifactStore {
     fn resolve(&self, relative_path: &str) -> CompilerResult<PathBuf> {
         validate_portable_path(relative_path, "artifact path")?;
         let mut current = self.repository_root.clone();
-        for segment in relative_path.split('/') {
+        let mut segments = relative_path.split('/').peekable();
+        while let Some(segment) = segments.next() {
             current.push(segment);
-            if current
-                .symlink_metadata()
-                .is_ok_and(|metadata| metadata.file_type().is_symlink())
-            {
-                return Err(fs_error(
-                    "IDN2311",
-                    Some(relative_path.to_owned()),
-                    "artifact path traverses a symbolic link",
-                    "Use a real repository-relative directory tree for generated artifacts.",
-                ));
+            match current.symlink_metadata() {
+                Ok(metadata) => {
+                    if is_link(&metadata)
+                        || (!metadata.is_file() && !metadata.is_dir())
+                        || (segments.peek().is_some() && !metadata.is_dir())
+                    {
+                        return Err(fs_error(
+                            "IDN2311",
+                            Some(relative_path.to_owned()),
+                            "artifact path contains a link, reparse point, or unsupported filesystem entry",
+                            "Use regular files and real repository-relative directories for generated state and transaction caches.",
+                        ));
+                    }
+                }
+                Err(error) if error.kind() == ErrorKind::NotFound => {}
+                Err(error) => {
+                    return Err(fs_error(
+                        "IDN2311",
+                        Some(relative_path.to_owned()),
+                        format!("cannot inspect artifact path component: {error}"),
+                        "Restore inspectable regular files and directories before retrying.",
+                    ));
+                }
             }
         }
         Ok(current)
+    }
+
+    fn checked_local_path(&self, path: &Path) -> CompilerResult<PathBuf> {
+        let relative = path
+            .strip_prefix(&self.repository_root)
+            .map_err(|_| recovery_error("filesystem path escaped the repository"))?;
+        let components = relative
+            .components()
+            .map(|component| match component {
+                Component::Normal(value) => value
+                    .to_str()
+                    .ok_or_else(|| recovery_error("filesystem path must use valid UTF-8")),
+                _ => Err(recovery_error("filesystem path is not repository-relative")),
+            })
+            .collect::<CompilerResult<Vec<_>>>()?;
+        self.resolve(&components.join("/"))
+    }
+
+    fn checked_output_path(&self, path: &Path) -> CompilerResult<PathBuf> {
+        let output = append_portable(&self.repository_root, &self.output_root);
+        if !path.starts_with(&output) || path == output {
+            return Err(recovery_error(
+                "mutation path is outside the authorized output root",
+            ));
+        }
+        self.checked_local_path(path)
     }
 
     fn staged_path(transaction: &Path, relative_path: &str) -> PathBuf {
@@ -112,8 +160,10 @@ impl LocalArtifactStore {
         transaction.join("journal.json")
     }
 
-    fn write_bytes(path: &Path, bytes: &[u8]) -> CompilerResult<()> {
+    fn create_transaction_file(&self, path: &Path) -> CompilerResult<fs::File> {
+        self.checked_transaction_path(path)?;
         if let Some(parent) = path.parent() {
+            self.checked_transaction_path(parent)?;
             fs::create_dir_all(parent).map_err(|error| {
                 fs_error(
                     "IDN2312",
@@ -123,28 +173,51 @@ impl LocalArtifactStore {
                 )
             })?;
         }
-        fs::write(path, bytes).map_err(|error| {
-            fs_error(
-                "IDN2313",
-                Some(path.display().to_string()),
-                format!("cannot write transaction file: {error}"),
-                "Check local filesystem permissions and retry.",
-            )
-        })
+        self.checked_transaction_path(path)?;
+        fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(path)
+            .map_err(|error| {
+                fs_error(
+                    "IDN2313",
+                    Some(path.display().to_string()),
+                    format!("cannot reserve fresh transaction file: {error}"),
+                    "Preserve existing transaction evidence and recover before retrying.",
+                )
+            })
     }
 
-    fn copy_file(source: &Path, destination: &Path) -> CompilerResult<()> {
-        if let Some(parent) = destination.parent() {
-            fs::create_dir_all(parent).map_err(|error| {
+    fn write_bytes(&self, path: &Path, bytes: &[u8]) -> CompilerResult<()> {
+        self.create_transaction_file(path)?
+            .write_all(bytes)
+            .map_err(|error| {
                 fs_error(
-                    "IDN2314",
-                    Some(parent.display().to_string()),
-                    format!("cannot create backup directory: {error}"),
+                    "IDN2313",
+                    Some(path.display().to_string()),
+                    format!("cannot write transaction file: {error}"),
                     "Check local filesystem permissions and retry.",
                 )
-            })?;
+            })
+    }
+
+    fn copy_file(&self, source: &Path, destination: &Path) -> CompilerResult<()> {
+        let source = self.checked_output_path(source)?;
+        if !source.is_file() {
+            return Err(recovery_error(
+                "backup source is not a regular generated file",
+            ));
         }
-        fs::copy(source, destination).map_err(|error| {
+        let mut source_file = fs::File::open(&source).map_err(|error| {
+            fs_error(
+                "IDN2315",
+                Some(source.display().to_string()),
+                format!("cannot copy generated artifact: {error}"),
+                "Check local filesystem permissions and retry before mutation.",
+            )
+        })?;
+        let mut destination_file = self.create_transaction_file(destination)?;
+        std::io::copy(&mut source_file, &mut destination_file).map_err(|error| {
             fs_error(
                 "IDN2315",
                 Some(source.display().to_string()),
@@ -155,7 +228,12 @@ impl LocalArtifactStore {
         Ok(())
     }
 
-    fn remove_file_if_present(path: &Path) -> CompilerResult<()> {
+    fn remove_file_if_present(&self, path: &Path) -> CompilerResult<()> {
+        if path.starts_with(self.transaction_root()) {
+            self.checked_transaction_path(path)?;
+        } else {
+            self.checked_output_path(path)?;
+        }
         match fs::remove_file(path) {
             Ok(()) => Ok(()),
             Err(error) if error.kind() == ErrorKind::NotFound => Ok(()),
@@ -169,6 +247,11 @@ impl LocalArtifactStore {
     }
 
     fn promote(&mut self, staged: &Path, destination: &Path) -> CompilerResult<()> {
+        self.checked_transaction_path(staged)?;
+        if !staged.is_file() {
+            return Err(recovery_error("staged artifact is not a regular file"));
+        }
+        self.checked_output_path(destination)?;
         if let Some(parent) = destination.parent() {
             fs::create_dir_all(parent).map_err(|error| {
                 fs_error(
@@ -179,7 +262,8 @@ impl LocalArtifactStore {
                 )
             })?;
         }
-        Self::remove_file_if_present(destination)?;
+        self.checked_output_path(destination)?;
+        self.remove_file_if_present(destination)?;
         fs::rename(staged, destination).map_err(|error| {
             fs_error(
                 "IDN2320",
@@ -393,10 +477,12 @@ impl LocalArtifactStore {
     }
 
     fn checked_transaction_path(&self, path: &Path) -> CompilerResult<PathBuf> {
-        let relative = path
-            .strip_prefix(&self.repository_root)
-            .map_err(|_| recovery_error("transaction path escaped the repository"))?;
-        self.resolve(&relative.to_string_lossy().replace('\\', "/"))
+        if !path.starts_with(self.transaction_root()) {
+            return Err(recovery_error(
+                "transaction path escaped the transaction root",
+            ));
+        }
+        self.checked_local_path(path)
     }
 
     fn inspect_transaction_tree(&self, directory: &Path) -> CompilerResult<()> {
@@ -471,8 +557,9 @@ impl LocalArtifactStore {
         })
     }
 
-    fn read_journal(transaction: &Path) -> CompilerResult<Option<TransactionJournal>> {
-        let journal_path = Self::journal_path(transaction);
+    fn read_journal(&self, transaction: &Path) -> CompilerResult<Option<TransactionJournal>> {
+        self.checked_transaction_path(transaction)?;
+        let journal_path = self.checked_transaction_path(&Self::journal_path(transaction))?;
         let bytes = match fs::read(&journal_path) {
             Ok(bytes) => bytes,
             Err(error) if error.kind() == ErrorKind::NotFound => {
@@ -519,13 +606,13 @@ impl LocalArtifactStore {
             .filter(|value| super::valid_sha256(value))
             .ok_or_else(|| recovery_error("transaction directory is not a plan digest"))?;
         self.inspect_transaction_tree(transaction)?;
-        let recovery_temp = transaction.join("recovery.tmp");
+        let recovery_temp = self.checked_transaction_path(&transaction.join("recovery.tmp"))?;
         if recovery_temp.exists() && !recovery_temp.is_file() {
             return Err(recovery_error(
                 "recovery staging path is not a regular file",
             ));
         }
-        let Some(journal) = Self::read_journal(transaction)? else {
+        let Some(journal) = self.read_journal(transaction)? else {
             return Ok(RecoveryTransaction {
                 directory: transaction.to_path_buf(),
                 plan_digest: None,
@@ -597,14 +684,15 @@ impl LocalArtifactStore {
                     self.checked_transaction_path(&transaction.directory.join("recovery.tmp"))?;
                 // Unlink any old temporary file first: never overwrite through
                 // a hard link supplied in the untrusted transaction workspace.
-                Self::remove_file_if_present(&staged)?;
-                Self::write_bytes(&staged, bytes)?;
+                self.remove_file_if_present(&staged)?;
+                self.write_bytes(&staged, bytes)?;
                 self.promote(&staged, &destination)?;
             } else {
-                Self::remove_file_if_present(&destination)?;
+                self.remove_file_if_present(&destination)?;
                 self.after_mutation()?;
             }
         }
+        self.inspect_transaction_tree(&transaction.directory)?;
         fs::remove_dir_all(&transaction.directory)
             .map_err(|error| recovery_error(format!("cannot remove recovered workspace: {error}")))
     }
@@ -626,15 +714,22 @@ impl ArtifactStore for LocalArtifactStore {
     }
 
     fn recovery_required(&self) -> CompilerResult<bool> {
-        match fs::read_dir(self.resolve(TRANSACTION_ROOT)?) {
-            Ok(mut entries) => Ok(entries.next().is_some()),
-            Err(error) if error.kind() == ErrorKind::NotFound => Ok(false),
-            Err(error) => Err(fs_error(
+        let inspection_error = |error| {
+            fs_error(
                 "IDN2331",
                 Some(self.transaction_root().display().to_string()),
                 format!("cannot inspect transaction workspace: {error}"),
                 "Check local filesystem permissions before compiler operations.",
-            )),
+            )
+        };
+        match fs::read_dir(self.resolve(TRANSACTION_ROOT)?) {
+            Ok(mut entries) => entries
+                .next()
+                .transpose()
+                .map(|entry| entry.is_some())
+                .map_err(inspection_error),
+            Err(error) if error.kind() == ErrorKind::NotFound => Ok(false),
+            Err(error) => Err(inspection_error(error)),
         }
     }
 
@@ -701,7 +796,17 @@ impl ArtifactStore for LocalArtifactStore {
 
         let transaction =
             self.checked_transaction_path(&self.transaction_directory(&plan.plan_digest))?;
-        fs::create_dir_all(&transaction).map_err(|error| {
+        let transaction_root = self.checked_transaction_path(&self.transaction_root())?;
+        fs::create_dir_all(&transaction_root).map_err(|error| {
+            fs_error(
+                "IDN2338",
+                Some(transaction_root.display().to_string()),
+                format!("cannot create compiler transaction root: {error}"),
+                "Check local filesystem permissions before applying the plan.",
+            )
+        })?;
+        self.checked_transaction_path(&transaction_root)?;
+        fs::create_dir(&transaction).map_err(|error| {
             fs_error(
                 "IDN2338",
                 Some(transaction.display().to_string()),
@@ -711,14 +816,14 @@ impl ArtifactStore for LocalArtifactStore {
         })?;
 
         for artifact in artifacts {
-            Self::write_bytes(
+            self.write_bytes(
                 &Self::staged_path(&transaction, &artifact.path),
                 &artifact.bytes,
             )?;
         }
         let staged_manifest = Self::staged_path(&transaction, &plan.manifest_path);
         let manifest_content = manifest_bytes(manifest)?;
-        Self::write_bytes(&staged_manifest, &manifest_content)?;
+        self.write_bytes(&staged_manifest, &manifest_content)?;
 
         let mut journal_actions = Vec::new();
         for action in plan.actions.iter().filter(|action| {
@@ -741,7 +846,7 @@ impl ArtifactStore for LocalArtifactStore {
                         "Discard the stale plan and re-plan from current generated state.",
                     ));
                 }
-                Self::copy_file(&destination, &Self::backup_path(&transaction, &action.path))?;
+                self.copy_file(&destination, &Self::backup_path(&transaction, &action.path))?;
             }
             journal_actions.push(TransactionAction {
                 path: action.path.clone(),
@@ -755,7 +860,7 @@ impl ArtifactStore for LocalArtifactStore {
         let manifest_destination = self.resolve(&plan.manifest_path)?;
         let manifest_existed = manifest_destination.is_file();
         if manifest_existed {
-            Self::copy_file(
+            self.copy_file(
                 &manifest_destination,
                 &Self::backup_path(&transaction, &plan.manifest_path),
             )?;
@@ -777,8 +882,18 @@ impl ArtifactStore for LocalArtifactStore {
         journal_bytes.push(b'\n');
         // Publish the journal only after every backup and staged write exists.
         let pending_journal = transaction.join("journal.pending");
-        Self::write_bytes(&pending_journal, &journal_bytes)?;
-        fs::rename(&pending_journal, Self::journal_path(&transaction))
+        self.write_bytes(&pending_journal, &journal_bytes)?;
+        let journal_path = self.checked_transaction_path(&Self::journal_path(&transaction))?;
+        if journal_path
+            .try_exists()
+            .map_err(|error| recovery_error(error.to_string()))?
+        {
+            return Err(recovery_error(
+                "journal publication would replace existing evidence",
+            ));
+        }
+        self.checked_transaction_path(&pending_journal)?;
+        fs::rename(&pending_journal, journal_path)
             .map_err(|error| recovery_error(format!("cannot publish journal: {error}")))?;
         self.preflight_recovery(&transaction)?;
 
@@ -793,7 +908,7 @@ impl ArtifactStore for LocalArtifactStore {
                     self.promote(&Self::staged_path(&transaction, &action.path), &destination)?;
                 }
                 PlanOperation::Remove => {
-                    Self::remove_file_if_present(&destination)?;
+                    self.remove_file_if_present(&destination)?;
                     self.after_mutation()?;
                 }
                 PlanOperation::Unchanged => {}
@@ -805,6 +920,7 @@ impl ArtifactStore for LocalArtifactStore {
         self.promote(&staged_manifest, &manifest_destination)?;
         verify_manifested_outputs(self, manifest)?;
 
+        self.inspect_transaction_tree(&transaction)?;
         fs::remove_dir_all(&transaction).map_err(|error| {
             fs_error(
                 "IDN2341",
@@ -913,6 +1029,18 @@ fn append_portable(root: &Path, relative_path: &str) -> PathBuf {
     relative_path
         .split('/')
         .fold(root.to_path_buf(), |path, segment| path.join(segment))
+}
+
+fn is_link(metadata: &fs::Metadata) -> bool {
+    #[cfg(windows)]
+    {
+        use std::os::windows::fs::MetadataExt;
+        // Refuse every reparse point, including non-symlink redirectors.
+        if metadata.file_attributes() & 0x400 != 0 {
+            return true;
+        }
+    }
+    metadata.file_type().is_symlink()
 }
 
 fn verify_manifested_outputs(

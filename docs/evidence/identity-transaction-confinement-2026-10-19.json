@@ -1,0 +1,138 @@
+{
+  "baseline": {
+    "binarySha256": "1d47ac62e7ebec9fa0ba38baba6e8c1734c2719cb07be4fb6225128ce3cac938",
+    "buildCommand": "cargo build --locked --bin identity",
+    "command": [
+      "identity",
+      "v1-generate",
+      "--repository-root",
+      "DISPOSABLE_CONSUMER"
+    ],
+    "fixture": "tests/fixtures/v1/valid/minimal",
+    "observation": "All pre-planted Unix cache/workspace symlinks were rejected before changing either tree. The historical audit did not establish a current serialized-use redirected-write exploit.",
+    "outputRoot": "assets/identity",
+    "revision": "8816294e9d9c43f250d771e9fa627c4b1861e78a",
+    "runtimeSourceMatchesRevision": true,
+    "runtimeSourcePath": "src/compiler/filesystem.rs",
+    "runtimeSourceSha256": "de71dac6b808ee57d870e7910251bca96839b252d7a03720311e837ed2717c55",
+    "staticRedirects": [
+      {
+        "component": ".cache",
+        "consumerUnchanged": true,
+        "exitCode": 1,
+        "externalUnchanged": true,
+        "stderr": "error: IDN2311: artifact path traverses a symbolic link"
+      },
+      {
+        "component": ".cache/identity",
+        "consumerUnchanged": true,
+        "exitCode": 1,
+        "externalUnchanged": true,
+        "stderr": "error: IDN2311: artifact path traverses a symbolic link"
+      },
+      {
+        "component": ".cache/identity/transactions",
+        "consumerUnchanged": true,
+        "exitCode": 1,
+        "externalUnchanged": true,
+        "stderr": "error: IDN2311: artifact path traverses a symbolic link"
+      },
+      {
+        "component": ".cache/identity/transactions/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "consumerUnchanged": true,
+        "exitCode": 1,
+        "externalUnchanged": true,
+        "stderr": "error: IDN2301: a previous compiler transaction requires recovery"
+      }
+    ]
+  },
+  "candidateSource": [
+    {
+      "path": "src/compiler/filesystem.rs",
+      "sha256": "9d69832c31704fd3cdb866d1c0855dff5e473dd9b079a087ac4e5a38b534272e"
+    },
+    {
+      "path": "src/compiler/filesystem/tests.rs",
+      "sha256": "8b70e1393f3948d522da17d4df62524b80f679924332f9438fcad891158ad699"
+    }
+  ],
+  "limits": [
+    "Windows junction matrices are compiled only on Windows and require hosted Windows results; no local Windows execution is claimed.",
+    "The supported cache is the fixed repository-relative path; redirected external roots are unsupported.",
+    "Path checks are not atomic against hostile concurrent directory changes; exclusive writer serialization remains issue 79.",
+    "The baseline scratch checkout later received test-only additions; baseline runtime source was compared with the raw revision, and its CLI binary predates those additions.",
+    "No release, deployment, creative authority, journal schema or accepted ADR lifecycle change is made."
+  ],
+  "localValidation": {
+    "allFeatureRustTests": {
+      "failed": 0,
+      "passed": 84
+    },
+    "checks": [
+      "cargo fmt --all --check",
+      "cargo clippy --locked --all-targets --all-features -- --deny warnings",
+      "six standalone documentation/release/mascot/publication/extraction verifiers",
+      "Final namespace confinement case rerun after replacing a platform-specific test path with a portable reserved-name vector"
+    ],
+    "focusedFilesystemTests": {
+      "failed": 0,
+      "ignored": 0,
+      "passed": 23
+    },
+    "platform": "Linux",
+    "pythonRuntime": "3.12.14",
+    "pythonTests": {
+      "cases": 138,
+      "passed": 136,
+      "skipped": 2
+    },
+    "rustToolchain": "1.97.1"
+  },
+  "observedAt": "2026-10-19T20:29:29Z",
+  "recordPurpose": "Issue 78 bounded local runtime observations; not a new report contract, confirmed exploit, concurrency proof or release attestation.",
+  "repository": "egohygiene/identity",
+  "supportedGenerationComparison": {
+    "fixture": "tests/fixtures/v1/valid/minimal",
+    "independentFreshTreesEqual": true,
+    "outputRoot": "assets/identity",
+    "runs": [
+      {
+        "binarySha256": "1d47ac62e7ebec9fa0ba38baba6e8c1734c2719cb07be4fb6225128ce3cac938",
+        "canonicalFilesUnchanged": true,
+        "generatedFileCount": 14,
+        "generationExit": 0,
+        "implementation": "baseline",
+        "verificationExit": 0
+      },
+      {
+        "binarySha256": "6a9111f623881e48fc2991235ce12edbcd74bf37f3e1f063f2e0405c4bed1b9b",
+        "canonicalFilesUnchanged": true,
+        "generatedFileCount": 14,
+        "generationExit": 0,
+        "implementation": "candidate",
+        "verificationExit": 0
+      }
+    ],
+    "sharedGeneratedFileSha256": {
+      ".identity-manifest.json": "86ee54abafc5b12e0cf096ac2d7c93ecc2d6455accd7c9b635bf1b4c49ab438c",
+      "brand/mark.svg": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+      "packages/guidance/README.md": "72de4e2cc95c2a1f6e2f788ed6bb15cbc69406f0d8eb571dc4ab54439211824d",
+      "packages/guidance/voice-and-usage.json": "3bf4c7cff181589933894af641d4ff43d2cc05e9b164ce6a043926cf40584e8d",
+      "packages/metadata/metadata.json": "22ef9ae360dc554ded4b6dace7cac0cef7ac0a6ab10d1bb17ab7c1df0285c8fa",
+      "packages/metadata/open-graph.html": "2df473ddcfcfbb806f539f21778e000f1ec1131cfbad4bc3fbba854b467fff5f",
+      "packages/metadata/package.json": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f",
+      "packages/renderer/brand-kit.view-model.json": "a08d2784c0e0930e2bd53f0bc6bd52f9df50703b2941b08435fb657e46662cbb",
+      "packages/tokens/package.json": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843",
+      "packages/tokens/tailwind.theme.json": "0ab35788a542e279f92ef3ea93eaff323bbc75814d5931b7a2f3a21e8baa57a0",
+      "packages/tokens/tokens.css": "83423fb81f57a4f2176ae4ec417900a9427b0daf10ddd9ace27663221573ba1b",
+      "packages/tokens/tokens.d.ts": "3e8f23156481845d31e3964c302887c503da69041a2e5af3779ddd08a75290ea",
+      "packages/tokens/tokens.js": "648c947db230166a181db4ca21ffd7ebb981598da806a58c56e3c44ef5205c1a",
+      "packages/tokens/tokens.json": "6fb60127c6433f7e8ba91999c7c54bd4ed754458013e1acf23e7e2f0036e96b9"
+    }
+  },
+  "timingProbeLimit": {
+    "attempts": 10,
+    "conclusion": "Inconclusive. No race was reproduced; failed scheduling does not disprove races or establish concurrency safety. No further timing experiment is part of acceptance.",
+    "injectionsAchieved": 0
+  }
+}
