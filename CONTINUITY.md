@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-19T20:32:52Z'
+  updated_at: '2026-10-19T20:34:08Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -69,7 +69,7 @@ state:
   base:
     revision: 8816294e9d9c43f250d771e9fa627c4b1861e78a
     ref: refs/heads/main
-    verified_at: '2026-10-19T20:32:52Z'
+    verified_at: '2026-10-19T20:34:08Z'
   candidate:
     branch: codex/78-transaction-confinement
     revision: null
@@ -77,7 +77,7 @@ state:
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-19T20:32:52Z'
+    observed_at: '2026-10-19T20:34:08Z'
     default_branch_revision: 8816294e9d9c43f250d771e9fa627c4b1861e78a
     issue_state: open
     pull_request_state: not-applicable
@@ -86,37 +86,37 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-19T20:32:52Z'
+  reviewed_at: '2026-10-19T20:34:08Z'
   reviewed_by: Codex
   evidence:
   - command: Frozen baseline CLI v1-generate with four disposable cache/workspace symlink cases
     outcome: passed
-    observed_at: '2026-10-19T20:32:52Z'
+    observed_at: '2026-10-19T20:34:08Z'
     notes: Baseline 8816294 and binary hash are recorded in the receipt. All static cases reject with IDN2311/IDN2301
       and preserve both trees. Ten failed timing injections are explicitly inconclusive, not a safety pass
       or confirmed exploit.
   - command: cargo test --locked --all-features; final namespace confinement case rerun
     outcome: passed
-    observed_at: '2026-10-19T20:32:52Z'
+    observed_at: '2026-10-19T20:34:08Z'
     notes: 84 Rust tests pass, including 23 filesystem cases. Existing interruption/recovery checks remain;
       direct namespace, fresh-file/hard-link, parent/leaf redirection and special-entry checks preserve sentinels.
   - command: cargo fmt --all --check; cargo clippy --locked --all-targets --all-features -- --deny warnings
     outcome: passed
-    observed_at: '2026-10-19T20:32:52Z'
+    observed_at: '2026-10-19T20:34:08Z'
     notes: Pinned Rust 1.97.1 formatting and all-target/all-feature strict lint pass.
   - command: python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose
     outcome: passed
-    observed_at: '2026-10-19T20:32:52Z'
+    observed_at: '2026-10-19T20:34:08Z'
     notes: '138 cases complete: 136 pass and two existing skips (unbuilt experience artifact and Linux-inapplicable
       Windows junction case).'
   - command: Independent baseline/candidate fresh CLI generation and verification
     outcome: passed
-    observed_at: '2026-10-19T20:32:52Z'
+    observed_at: '2026-10-19T20:34:08Z'
     notes: Both binaries generate identical complete 14-file inventories, including hidden manifest; both verify
       and preserve canonical fixture files. Actual binary/source hashes are recorded separately.
   - command: Six standalone docs/release/mascot/publication/extraction verifiers; compileall and diff check
     outcome: passed
-    observed_at: '2026-10-19T20:32:52Z'
+    observed_at: '2026-10-19T20:34:08Z'
     notes: All pass. Repeated documentation check covers the new receipt/review links. No release, publication,
       source schema, journal schema or ADR lifecycle change occurs.
   environment_limitations:

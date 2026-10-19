@@ -53,7 +53,7 @@
     },
     {
       "path": "src/compiler/filesystem/tests.rs",
-      "sha256": "8b70e1393f3948d522da17d4df62524b80f679924332f9438fcad891158ad699"
+      "sha256": "3241d26ec6cb7cda19da9cd2c125d51fc9c9a1c01be96aac360e451e6ada3093"
     }
   ],
   "limits": [
@@ -72,7 +72,8 @@
       "cargo fmt --all --check",
       "cargo clippy --locked --all-targets --all-features -- --deny warnings",
       "six standalone documentation/release/mascot/publication/extraction verifiers",
-      "Final namespace confinement case rerun after replacing a platform-specific test path with a portable reserved-name vector"
+      "Final namespace confinement case rerun after replacing a platform-specific test path with a portable reserved-name vector",
+      "All 23 filesystem cases rerun with canonical native test paths for macOS/Windows parity"
     ],
     "focusedFilesystemTests": {
       "failed": 0,

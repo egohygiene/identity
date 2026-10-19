@@ -665,7 +665,7 @@ fn transaction_helpers_cannot_write_outside_their_namespace() {
     let store = LocalArtifactStore::new(root.path()).unwrap();
     let canonical = root.path().join(".identity/sentinel");
     write_fixture(&canonical, b"canonical sentinel").unwrap();
-    let source = root.path().join(format!("{OUTPUT}/previous.json"));
+    let source = store.resolve(&format!("{OUTPUT}/previous.json")).unwrap();
     write_fixture(&source, b"generated previous state").unwrap();
     for destination in [
         canonical.clone(),
@@ -740,7 +740,7 @@ fn fresh_backups_never_overwrite_existing_files_or_hard_links() {
             let root = TempDir::new().unwrap();
             let external = TempDir::new().unwrap();
             let store = LocalArtifactStore::new(root.path()).unwrap();
-            let source = root.path().join(format!("{OUTPUT}/replaced.json"));
+            let source = store.resolve(&format!("{OUTPUT}/replaced.json")).unwrap();
             write_fixture(&source, b"generated previous state").unwrap();
             let destination = store.transaction_directory(&"a".repeat(64)).join(relative);
             fs::create_dir_all(destination.parent().unwrap()).unwrap();
@@ -789,7 +789,7 @@ fn transaction_writes_and_backups_reject_every_redirected_parent_and_leaf() {
         fs::write(&sentinel, b"external sentinel").unwrap();
         let leaf = Path::new(relative).extension().is_some();
         std::os::unix::fs::symlink(if leaf { &sentinel } else { external.path() }, &link).unwrap();
-        let source = root.path().join(format!("{OUTPUT}/replaced.json"));
+        let source = store.resolve(&format!("{OUTPUT}/replaced.json")).unwrap();
         write_fixture(&source, b"generated previous state").unwrap();
         let before = tree(root.path());
         let external_before = tree(external.path());
