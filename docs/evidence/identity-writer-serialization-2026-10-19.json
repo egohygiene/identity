@@ -385,7 +385,7 @@
       },
       {
         "path": "src/compiler/filesystem/tests.rs",
-        "sha256": "de6c8b578ffa0cc42c01de6225a993d7de7776a860ce971c514bd2885455ad63"
+        "sha256": "fdfebbcb0ace6adbc44e29f506f3b6b2a03a08fb8a96fdc3c1c75367d24eb657"
       },
       {
         "path": "src/compiler/filesystem/tests/process_tests.rs",
@@ -439,6 +439,13 @@
       "Ordinary guard drop explicitly unlocks then closes. Termination relies on native lifetime of every inherited/duplicated handle; the tested worker does not spawn descendants.",
       "One transient busy result occurred before explicit-unlock guard cleanup. A separate controlled Unix primitive experiment confirms inherited-descriptor retention is possible; the original test interleaving is unproven. Final 20 replays pass without retry.",
       "No power-loss, hostile directory replacement, network filesystem or arbitrary nonparticipating writer guarantee."
-    ]
+    ],
+    "firstHostedWindowsObservation": {
+      "head": "121c248aa56d60fc06c93592de0485612b5170e8",
+      "representedMergeCandidate": "95ef4c0d3fa912e4b7c67649e36b9a6b842323fb",
+      "run": "https://github.com/egohygiene/identity/actions/runs/39333401726",
+      "result": "failed one legacy workspace-junction snapshot assertion: outputs/junction/external bytes remained unchanged, but the permitted new empty writer.lock was not in the old expected snapshot. All nine new Windows process cases passed; this failed gate is not an overall native platform pass.",
+      "correction": "Only tests.rs changes: the workspace-child junction case permits exactly a newly created empty writer.lock. Cache/cache-identity/transaction-root cases and all external trees retain strict equality. Production source unchanged; focused Linux33 filesystem cases, formatting and clean-target strict Clippy pass. Fresh Windows replay remains required."
+    }
   }
 }

@@ -900,7 +900,11 @@ fn windows_junction_cache_components_are_rejected_without_redirected_writes() {
         let mut store = LocalArtifactStore::new(root.path()).unwrap();
         assert!(store.commit(&plan, &artifacts, &manifest).is_err());
         assert!(store.recover().is_err());
-        assert_eq!(tree(root.path()), before, "{relative}");
+        if relative.starts_with(&format!("{TRANSACTION_ROOT}/")) {
+            assert_only_writer_lock_created(root.path(), before);
+        } else {
+            assert_eq!(tree(root.path()), before, "{relative}");
+        }
         assert_eq!(tree(external.path()), external_before, "{relative}");
     }
 }

@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-19T22:12:24Z'
+  updated_at: '2026-10-19T22:16:06Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -73,21 +73,25 @@ state:
   candidate:
     branch: codex/79-writer-serialization
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#120
+      url: https://github.com/egohygiene/identity/pull/120
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-19T22:12:24Z'
+    observed_at: '2026-10-19T22:16:06Z'
     default_branch_revision: 417865a449678f887237d94aaa019a10bcc16612
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Maintainer authorized merging PR119 and continuing issue79. PR119 merged at the base revision and issue78
-      is closed. Issue79 is open; candidate PR creation and fresh hosted replay follow this locally validated
-      checkpoint.
+    pull_request_state: draft
+    notes: PR120 is draft at observed head121c248aa56d60fc06c93592de0485612b5170e8. First Windows gate failed
+      one legacy workspace-junction snapshot expectation because permitted empty writer.lock was new; all nine
+      new Windows process cases passed. This candidate corrects only that expectation. Production is unchanged;
+      fresh hosted replay is pending. PR119 is merged and issue78 closed.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-19T22:12:24Z'
+  reviewed_at: '2026-10-19T22:16:06Z'
   reviewed_by: Codex
   evidence:
   - command: Frozen baseline instrumented coordination tests (2 cases)
@@ -130,6 +134,13 @@ review:
     observed_at: '2026-10-19T22:12:24Z'
     notes: 26 ADRs (21 accepted, five proposed); prior 25 dispositions/approval/lineage unchanged. All 40 stable
       IDs and 88 dependency edges preserved; Q17 complete and Q18 active.
+  - command: First hosted Windows run39333401726 at head121c248; subsequent focused Linux correction checks
+    outcome: limited
+    observed_at: '2026-10-19T22:16:06Z'
+    notes: Windows reports65 library passes, one old workspace-junction snapshot failure and one ignored helper.
+      Exact permitted empty coordination-file expectation is corrected; external/parent-cache assertions stay
+      strict. All33 Linux filesystem cases, formatting and clean-target strict Clippy pass again. Fresh Windows
+      replay remains required.
   environment_limitations:
   - Local Linux evidence does not establish native Windows/macOS behavior; fresh hosted replay is required and
     exact-head results belong in the PR.
@@ -168,7 +179,7 @@ Reserve one cooperative local writer before generation or recovery checks shared
 
 ## State snapshot
 
-Main is 417865a449678f887237d94aaa019a10bcc16612, including merged #119. #78 is closed and IDN-Q17 complete. #79/IDN-Q18 is active; #77 remains blocked until its reviewed completion. Candidate codex/79-writer-serialization is locally validated before PR creation. Candidate revision/PR remain null because this containing commit cannot name itself. All 40 roadmap IDs, issue mappings and 88 dependencies remain intact.
+Main is 417865a449678f887237d94aaa019a10bcc16612, including merged #119. #78 is closed and IDN-Q17 complete. #79/IDN-Q18 is active; #77 remains blocked until its reviewed completion. Candidate codex/79-writer-serialization is draft PR #120, observed at head121c248aa56d60fc06c93592de0485612b5170e8 before this test correction. Candidate revision remains null because this containing commit cannot name itself. All 40 roadmap IDs, issue mappings and 88 dependencies remain intact.
 
 ## Completed and material changes
 
@@ -186,7 +197,7 @@ Pristine baseline and frozen candidate shipping binaries generate identical comp
 
 ## Blockers, risks, unknowns, and deferred work
 
-No bounded local implementation blocker remains. Fresh hosted platform execution is still required. A transient busy result before explicit unlock has an unproven precise interleaving; a separate native experiment confirms fork-inherited descriptor retention is possible. Final parallel replays pass without test retries. No all-schedule, hostile-directory-replacement, network-filesystem or power-loss guarantee is claimed. Do not mix uncoordinated older writers or manually change cache state while writers are active.
+No bounded local implementation blocker remains. First hosted Windows failed one legacy workspace-junction snapshot because the permitted empty lock file was new; all nine new process cases passed. This correction permits only that empty coordination file in the child-workspace case, preserving strict parent-cache and external assertions. Production code is unchanged; fresh hosted replay is required. A transient busy result before explicit unlock has an unproven precise interleaving; a separate native experiment confirms fork-inherited descriptor retention is possible. Final parallel replays pass without test retries. No all-schedule, hostile-directory-replacement, network-filesystem or power-loss guarantee is claimed. Do not mix uncoordinated older writers or manually change cache state while writers are active.
 
 #77 owns supported inspection/recovery CLI; the binary still has none. #80/#81 qualify browser/Docker environments, #82 exercises setup entry points, #84 retires one-time workflows, and #83 completes current documentation reconciliation. Public asset/download gaps remain #101/#105; self-adoption/release/canary proof remains later roadmap work.
 
