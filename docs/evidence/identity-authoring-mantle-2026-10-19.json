@@ -1,0 +1,1272 @@
+{
+  "recordPurpose": "Issue 99 checkpoint 3 public development evidence; an observation, not a new versioned report contract, release attestation or approval.",
+  "selectedOutputProof": {
+    "baseline": {
+      "generatedInventoryMethod": "release_smoke.tree_digest; length-framed relative file names and raw bytes; includes hidden compiler manifest",
+      "independentGenerations": [
+        {
+          "files": 19,
+          "generationExit": 0,
+          "inventorySha256": "5248db785b17de9079517ddf5f90c4aa09d8e705d7fd1205468fee2da1d10a6d",
+          "verificationExit": 0
+        },
+        {
+          "files": 19,
+          "generationExit": 0,
+          "inventorySha256": "5248db785b17de9079517ddf5f90c4aa09d8e705d7fd1205468fee2da1d10a6d",
+          "verificationExit": 0
+        }
+      ],
+      "independentGenerationsEqual": true,
+      "manifestChecksumsMatch": true,
+      "manifestDigestMethod": "SHA-256 of actual compiler manifest file bytes",
+      "manifestOutputSetExact": true,
+      "manifestSha256": "7328cb7b58b33c58f3be1cf0a2045abb04ca137c2c19abbf7b0b32dd6ea40c3a",
+      "outputs": [
+        {
+          "bytes": 777,
+          "path": "assets/identity/brand/mark.svg",
+          "sha256": "88ca2ab2450bb58a66418eb08f9eff5e5271975a27547bdbfe359be27cd64be8"
+        },
+        {
+          "bytes": 829,
+          "path": "assets/identity/docs/document.css",
+          "sha256": "f38f1cae3a87ad443be432a7143024a6a2ba7b9fd41a3a3460b3b6f38bd0be79"
+        },
+        {
+          "bytes": 16698,
+          "path": "assets/identity/github/social-preview.png",
+          "sha256": "39a01b2242100703c238fd4719201719eddd2ae94f882c56c697b1f43dccf79f"
+        },
+        {
+          "bytes": 95307,
+          "path": "assets/identity/packages/brand-kit/brand-kit.zip",
+          "sha256": "8ec6503996b3acc476070672b7fd5a4d6128d5e7d11d7e37aa53b5e7226f4fb7"
+        },
+        {
+          "bytes": 2201,
+          "path": "assets/identity/packages/brand-kit/checksums.json",
+          "sha256": "5632b71cb45cb1e9d1f242c640fa8fe343b43fda6bf04ce108f473add00b4902"
+        },
+        {
+          "bytes": 2431,
+          "path": "assets/identity/packages/brand-kit/index.json",
+          "sha256": "52e36b68063d771a70d6827fc60deb5139740ae4f2800caf704d42e9fbc40fea"
+        },
+        {
+          "bytes": 11914,
+          "path": "assets/identity/packages/guidance/README.md",
+          "sha256": "918a00be7dca5bf47255ff453a36048f70d583b976470879b65a8eaad134b59d"
+        },
+        {
+          "bytes": 12652,
+          "path": "assets/identity/packages/guidance/voice-and-usage.json",
+          "sha256": "d037d180a80015e125dd7e1b5a3dfcc581c8e15d663118e135f7691ebafb5681"
+        },
+        {
+          "bytes": 354,
+          "path": "assets/identity/packages/metadata/metadata.json",
+          "sha256": "2d551bb5f08fc688438deb7da25b1ac648f452886583d848156ec69ffec7c8f1"
+        },
+        {
+          "bytes": 426,
+          "path": "assets/identity/packages/metadata/open-graph.html",
+          "sha256": "7a5f734bc6ba23801f9516a35899695c37bd4fc39bdb1afc0299639e8976d5bd"
+        },
+        {
+          "bytes": 342,
+          "path": "assets/identity/packages/metadata/package.json",
+          "sha256": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f"
+        },
+        {
+          "bytes": 21123,
+          "path": "assets/identity/packages/renderer/brand-kit.view-model.json",
+          "sha256": "ba05e68f2e52520e9f263d496ea7ac1a3c722ae479082ddfee7a78b9d8792ac4"
+        },
+        {
+          "bytes": 414,
+          "path": "assets/identity/packages/tokens/package.json",
+          "sha256": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843"
+        },
+        {
+          "bytes": 509,
+          "path": "assets/identity/packages/tokens/tailwind.theme.json",
+          "sha256": "2ce761da4b06214651437281a72331a5135a70a9dfc96525735d90b5aece59f3"
+        },
+        {
+          "bytes": 550,
+          "path": "assets/identity/packages/tokens/tokens.css",
+          "sha256": "bc6f1c10323fec4d3a9f7bd88302f594b0e0caa3a4ad5a70e35317654c82d6c2"
+        },
+        {
+          "bytes": 442,
+          "path": "assets/identity/packages/tokens/tokens.d.ts",
+          "sha256": "384893dfd022892146c1e44ed90bcfea8047b15c4ed0769999a4461ea59c3366"
+        },
+        {
+          "bytes": 1425,
+          "path": "assets/identity/packages/tokens/tokens.js",
+          "sha256": "56cd42917a24785a0f0c262e0da169349b115cded368bcec1162f0492208a074"
+        },
+        {
+          "bytes": 5140,
+          "path": "assets/identity/packages/tokens/tokens.json",
+          "sha256": "e93869519aeaf22d8461304924ea07a8a2a2b023dcab0872a4c6204c05d4db1a"
+        }
+      ],
+      "validationDiagnostics": [],
+      "verificationPreservedFiles": true
+    },
+    "consumer": {
+      "consumedFilesCompared": 14,
+      "consumedFilesMatchRevision": true,
+      "contentComparison": "raw Git blobs; no consumer clean/smudge filters, diff drivers or textconv",
+      "originalConsumerUnchanged": true,
+      "originalInventoryExcludes": [
+        ".git"
+      ],
+      "repository": "egohygiene/mantle",
+      "revision": "b08045acc1e982dd9424c1d8c91b0badd64744e8",
+      "revisionEvidence": "checkout HEAD verified",
+      "selectedProfiles": [
+        {
+          "id": "core",
+          "version": "1.0.0"
+        },
+        {
+          "id": "github",
+          "version": "1.0.0"
+        },
+        {
+          "id": "docs",
+          "version": "1.0.0"
+        },
+        {
+          "id": "tokens",
+          "version": "1.0.0"
+        },
+        {
+          "id": "metadata",
+          "version": "1.0.0"
+        },
+        {
+          "id": "archive",
+          "version": "1.0.0"
+        }
+      ],
+      "sourceDigest": "fb5b86b632cb47eb160b13da92742687f5e76148b6d5300239a601b7d29147e8",
+      "sourceFiles": 14,
+      "sourceInventoryMethod": "SHA-256 of sorted JSON entry inventory; includes full .identity and declared external inputs; distinct from canonical sourceDigest",
+      "sourceInventorySha256": "92a0071ca8f5e09a4ddbb8108e01343576b55f9cbcb9781b35604f2d75a4d9cb",
+      "sourceRevisionBinding": "consumed bytes match raw revision blobs",
+      "sourceUnchanged": true
+    },
+    "implementation": {
+      "binaryBuildOrigin": "caller-selected binary; build-to-revision provenance is not verified by this harness",
+      "binarySha256": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb",
+      "consumedFilesCompared": 2,
+      "consumedFilesMatchRevision": true,
+      "contentComparison": "raw Git blobs; no consumer clean/smudge filters, diff drivers or textconv",
+      "repository": "egohygiene/identity",
+      "revision": "03eaeac72e2cf69c7bf205dd80f53ca25d1629e4",
+      "revisionEvidence": "checkout HEAD verified",
+      "scripts": [
+        {
+          "path": "scripts/validate_identity.py",
+          "sha256": "4f8a8a8b4f209695d7a5e651a919e78cad3a346d7d38dde9c6e192f1c515f456"
+        },
+        {
+          "path": "scripts/release_smoke.py",
+          "sha256": "4826b0023ec1bee34222a37b8ec8a55805ae0f5b3c101791e83445362ffb8c6e"
+        }
+      ]
+    },
+    "limits": [
+      "Only selected core outputs are verified; separately generated optional packages need their own checks.",
+      "Public/review guidance selection and nullable omissions require their separately recorded probes.",
+      "Generic internal asset selection G03 and advertised unselected archive G04 remain #101/#105.",
+      "Git metadata and consumed-file comparisons are reported explicitly; binary build origin requires separate review.",
+      "No network, consumer scripts, installation, source authoring, creative approval, release or deployed-site verification is performed."
+    ],
+    "observedAt": "2026-10-19T11:59:46Z",
+    "probes": [
+      {
+        "case": "selected-output-missing",
+        "expectedFailureObserved": true,
+        "verificationExit": 1,
+        "verificationPreservedFiles": true
+      },
+      {
+        "case": "selected-output-drift",
+        "expectedFailureObserved": true,
+        "verificationExit": 1,
+        "verificationPreservedFiles": true
+      },
+      {
+        "case": "canonical-source-changed",
+        "expectedFailureObserved": true,
+        "verificationExit": 1,
+        "verificationPreservedFiles": true
+      }
+    ],
+    "proofTool": {
+      "path": "scripts/verify_consumer_authoring.py",
+      "sha256": "f7696f6e3c830d883e23e20835eeb5bae7ae1aed1a160e885221481cc48bc97d",
+      "source": "actual candidate checkout bytes; separate from the runtime implementation revision"
+    },
+    "scope": "Offline selected-output authoring rehearsal in disposable copies; no release, publication, approval or public-kit attestation."
+  },
+  "supplementalObservations": {
+    "archiveSelectionBoundary": {
+      "archiveEntries": [
+        "brand/mark.svg",
+        "docs/document.css",
+        "github/social-preview.png",
+        "guidance/README.md",
+        "metadata/metadata.json",
+        "metadata/open-graph.html",
+        "pwa/icon-192.png",
+        "pwa/icon-512.png",
+        "pwa/icon-maskable-512.png",
+        "social/card-1200x630.png",
+        "tokens/tailwind.theme.json",
+        "tokens/tokens.css",
+        "tokens/tokens.d.ts",
+        "tokens/tokens.js",
+        "tokens/tokens.json"
+      ],
+      "archiveEntryCount": 15,
+      "archiveIndexProfiles": [
+        "core",
+        "web",
+        "pwa",
+        "github",
+        "docs",
+        "social",
+        "tokens",
+        "metadata"
+      ],
+      "assessment": "Observed PWA/social ZIP entries despite inapplicable direct profiles match the documented representative archive boundary. This is not identified as a new defect. Exact direct profile outputs are verified through the compiler manifest, not archive index.",
+      "canonicalOrCandidateSourceZoneEntries": [],
+      "contractPath": "docs/contracts/BRAND_KIT_PACKAGES_V1.md",
+      "contractRule": "The archive intentionally contains a portable representative Brand Kit bundle, while the compiler manifest describes the exact selected profile build.",
+      "contractSection": "Deterministic archive",
+      "inapplicableProfiles": [
+        "web",
+        "pwa",
+        "social"
+      ],
+      "remainingReadinessLimit": "This structural proof does not establish visual approval, public-kit consumer integration, generic asset selection/download correctness, or completion of separate #101/#105 work.",
+      "selectedProfiles": [
+        {
+          "id": "core",
+          "version": "1.0.0"
+        },
+        {
+          "id": "github",
+          "version": "1.0.0"
+        },
+        {
+          "id": "docs",
+          "version": "1.0.0"
+        },
+        {
+          "id": "tokens",
+          "version": "1.0.0"
+        },
+        {
+          "id": "metadata",
+          "version": "1.0.0"
+        },
+        {
+          "id": "archive",
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "baseline": {
+      "canonicalBytesPreserved": true,
+      "committedTreeComparison": {
+        "differentBytes": [],
+        "equal": true,
+        "leftFileCount": 42,
+        "onlyLeft": [],
+        "onlyRight": [],
+        "rightFileCount": 42
+      },
+      "generationBinaryReceipt": {
+        "qualification": "Earlier preexisting workspace debug binary used to generate the disposable baseline copy and compare with committed output; not relabeled as the freshly rebuilt binary. Independent fresh-generation proof is owned separately.",
+        "sha256": "d9d20f2ed674b234b6d376146f2e0bd4757fb20e3037fba5e591b90536dec9c3"
+      },
+      "omissionEvidenceLimit": "Baseline public source has only approved/public guidance; its traversal proves published selection and minimal referenced decisions, while the separately labeled noncanonical visibility probe exercises actual omission.",
+      "publicGuidance": {
+        "accessibilityAbsent": false,
+        "audience": "public",
+        "characteristicIds": [
+          "operator-respecting",
+          "state-explicit"
+        ],
+        "contextIds": [
+          "command-plan",
+          "failure-recovery"
+        ],
+        "decisionIds": [
+          "approve-mantle-usage",
+          "approve-mantle-voice"
+        ],
+        "downloadIds": [
+          "mark"
+        ],
+        "foundationAbsent": false,
+        "governanceStates": [
+          "approved"
+        ],
+        "governanceVisibilities": [
+          "public"
+        ],
+        "governedRecordCount": 17,
+        "legalAbsent": false,
+        "localizationAbsent": false,
+        "schema": "identity.brand-guidance/v1",
+        "sectionIds": [
+          "layered-shell-mark"
+        ],
+        "selectedContext": null,
+        "sha256": "b05e782c98fa0501b31e90993629359c1665180963a3efdd467873fc38bd0635"
+      },
+      "repositoryPresentationComparison": {
+        "differentBytes": [],
+        "equal": true,
+        "leftFileCount": 23,
+        "onlyLeft": [],
+        "onlyRight": [],
+        "rightFileCount": 23
+      },
+      "reviewGuidance": {
+        "accessibilityAbsent": false,
+        "audience": "review",
+        "characteristicIds": [
+          "operator-respecting",
+          "state-explicit"
+        ],
+        "contextIds": [
+          "command-plan",
+          "failure-recovery"
+        ],
+        "decisionIds": [
+          "approve-mantle-hygienic-badge",
+          "approve-mantle-mark",
+          "approve-mantle-primary",
+          "approve-mantle-repository-banner",
+          "approve-mantle-usage",
+          "approve-mantle-voice"
+        ],
+        "downloadIds": [
+          "mark"
+        ],
+        "foundationAbsent": false,
+        "governanceStates": [
+          "approved"
+        ],
+        "governanceVisibilities": [
+          "public"
+        ],
+        "governedRecordCount": 17,
+        "legalAbsent": false,
+        "localizationAbsent": false,
+        "schema": "identity.brand-guidance/v1",
+        "sectionIds": [
+          "layered-shell-mark"
+        ],
+        "selectedContext": null,
+        "sha256": "81358bb4d5cf6b7dc447a0c4b35d0f246dc0bcf218b97be6e850153c3e5ae2d6"
+      },
+      "sourceHasInternalOrUnapprovedGuidance": false,
+      "sourceValidation": {
+        "exitCode": 0,
+        "expectedExitCode": 0,
+        "matchesExpectedExitCode": true
+      }
+    },
+    "consumerToolchainObserved": {
+      "changed": false,
+      "compilerRelease": "v1.0.0",
+      "scriptRevision": "3c2fd3141371b355628e81f66f63159f19d63338"
+    },
+    "counterfactualVisibilityProbe": {
+      "approvalsAddedOrModified": false,
+      "classification": "synthetic noncanonical disposable probe; not a creative decision or proposed consumer change",
+      "factsAdded": false,
+      "patch": [
+        {
+          "from": "public",
+          "jsonPointerWithinSourceDocument": "/contexts/0/governance/visibility",
+          "op": "replace",
+          "path": "/contexts/0/governance/visibility",
+          "sourceDocument": ".identity/guidance/voice.json",
+          "value": "internal"
+        }
+      ],
+      "publicGuidance": {
+        "accessibilityAbsent": false,
+        "audience": "public",
+        "characteristicIds": [
+          "operator-respecting",
+          "state-explicit"
+        ],
+        "contextIds": [
+          "failure-recovery"
+        ],
+        "decisionIds": [
+          "approve-mantle-usage",
+          "approve-mantle-voice"
+        ],
+        "downloadIds": [
+          "mark"
+        ],
+        "foundationAbsent": false,
+        "governanceStates": [
+          "approved"
+        ],
+        "governanceVisibilities": [
+          "public"
+        ],
+        "governedRecordCount": 14,
+        "legalAbsent": false,
+        "localizationAbsent": false,
+        "schema": "identity.brand-guidance/v1",
+        "sectionIds": [
+          "layered-shell-mark"
+        ],
+        "selectedContext": null,
+        "sha256": "ecce26aea4fd0483c6968de5bb1b9d247ea34598615da1d856815994c571486d"
+      },
+      "reviewGuidance": {
+        "accessibilityAbsent": false,
+        "audience": "review",
+        "characteristicIds": [
+          "operator-respecting",
+          "state-explicit"
+        ],
+        "contextIds": [
+          "command-plan",
+          "failure-recovery"
+        ],
+        "decisionIds": [
+          "approve-mantle-hygienic-badge",
+          "approve-mantle-mark",
+          "approve-mantle-primary",
+          "approve-mantle-repository-banner",
+          "approve-mantle-usage",
+          "approve-mantle-voice"
+        ],
+        "downloadIds": [
+          "mark"
+        ],
+        "foundationAbsent": false,
+        "governanceStates": [
+          "approved"
+        ],
+        "governanceVisibilities": [
+          "internal",
+          "public"
+        ],
+        "governedRecordCount": 17,
+        "legalAbsent": false,
+        "localizationAbsent": false,
+        "schema": "identity.brand-guidance/v1",
+        "sectionIds": [
+          "layered-shell-mark"
+        ],
+        "selectedContext": null,
+        "sha256": "d75f3063089e02e099ac760144450a79c7863ce40092533e19f666b8cc8ecdae"
+      },
+      "sourceValidation": {
+        "exitCode": 0,
+        "expectedExitCode": 0,
+        "matchesExpectedExitCode": true
+      }
+    },
+    "implementation": {
+      "binary": {
+        "path": "target/debug/identity",
+        "provenanceLimit": "Root reports cargo build --locked at the exact implementation revision before the nullable runs; this collector observed the fresh binary digest before all nullable runs and again afterward. Explicit per-variant repeated generation/verification receipts capture before/after hashes. Independent clean-generation proof is owned separately.",
+        "sha256": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb"
+      },
+      "repository": "egohygiene/identity",
+      "revision": "03eaeac72e2cf69c7bf205dd80f53ca25d1629e4",
+      "revisionUrl": "https://github.com/egohygiene/identity/commit/03eaeac72e2cf69c7bf205dd80f53ca25d1629e4",
+      "scripts": [
+        {
+          "path": "scripts/validate_identity.py",
+          "sha256": "4f8a8a8b4f209695d7a5e651a919e78cad3a346d7d38dde9c6e192f1c515f456"
+        },
+        {
+          "path": "scripts/render_guidance.py",
+          "sha256": "ef44f2ee4fe7a66abbe9fb80980d99abcd804087699fa4d47a5a9fe34efaba6c"
+        },
+        {
+          "path": "scripts/render_repository_presentation.py",
+          "sha256": "1ca87a891c317fef37d95609428c05947681e696dbbdbd5de445f7d51a8c8ee4"
+        },
+        {
+          "path": "scripts/render_press_kit.py",
+          "sha256": "c6aa537a1e83f1edabb9322ba78c82b500e346a4bec342457016d12459912119"
+        },
+        {
+          "path": "scripts/render_design_system.py",
+          "sha256": "65f445ec71c11b6c12edd6e7d656752b049287a7a189b293cc04fe6c5d580b0e"
+        }
+      ]
+    },
+    "nullableGuidanceVariants": [
+      {
+        "approvalsAddedOrModified": false,
+        "classification": "synthetic noncanonical omission probe on existing consumer source; not an adoption change or new approval",
+        "dependentRepositoryPresentationProjection": {
+          "command": [
+            "python3",
+            "<identity-root>/scripts/render_repository_presentation.py",
+            "--repository-root",
+            "<scratch-root>/consumer-mantle-voice-null-probe",
+            "--evidence",
+            "<scratch-root>/consumer-mantle-voice-null-probe/evidence/repository-presentation.json",
+            "--output",
+            "<scratch-root>/mantle-voice-null-presentation-dependent-proof"
+          ],
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true,
+          "qualification": "Optional dependent surface retains its declared usage prerequisite. Source validator and core generation/verification accept the explicit null declaration; a selected repository-presentation projection still requires adopted approved/public usage asset guidance.",
+          "stderr": "",
+          "stdout": "Rendered repository-presentation package to <scratch-root>/mantle-voice-null-presentation-dependent-proof"
+        },
+        "factsAdded": false,
+        "freshBinaryReceipt": {
+          "observations": [
+            {
+              "command": [
+                "<identity-root>/target/debug/identity",
+                "v1-generate",
+                "--repository-root",
+                "<scratch-root>/consumer-mantle-voice-null-probe",
+                "--output-root",
+                "assets/identity-nullability-proof"
+              ],
+              "exitCode": 0,
+              "stderr": "",
+              "stdout": "Generated 18 v1 Identity projections for mantle"
+            },
+            {
+              "command": [
+                "<identity-root>/target/debug/identity",
+                "v1-verify",
+                "--repository-root",
+                "<scratch-root>/consumer-mantle-voice-null-probe",
+                "--output-root",
+                "assets/identity-nullability-proof"
+              ],
+              "exitCode": 0,
+              "stderr": "",
+              "stdout": "Verified v1 Identity projections for mantle"
+            }
+          ],
+          "qualification": "Repeated incremental generation/verification establishes command receipt with freshly built binary; independent clean-generation evidence is owned separately. Initial nullable runs also observed this same binary digest before the run.",
+          "sameAsInitialAllVariantRun": true,
+          "sha256After": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb",
+          "sha256Before": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb"
+        },
+        "generation": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        },
+        "guidanceProjections": [
+          {
+            "audience": "public",
+            "observation": {
+              "exitCode": 0,
+              "expectedExitCode": 0,
+              "matchesExpectedExitCode": true
+            },
+            "summary": {
+              "accessibilityAbsent": false,
+              "audience": "public",
+              "characteristicIds": [],
+              "contextIds": [],
+              "decisionIds": [
+                "approve-mantle-usage"
+              ],
+              "downloadIds": [
+                "mark"
+              ],
+              "foundationAbsent": true,
+              "governanceStates": [
+                "approved"
+              ],
+              "governanceVisibilities": [
+                "public"
+              ],
+              "governedRecordCount": 7,
+              "legalAbsent": false,
+              "localizationAbsent": true,
+              "schema": "identity.brand-guidance/v1",
+              "sectionIds": [
+                "layered-shell-mark"
+              ],
+              "selectedContext": null,
+              "sha256": "98fc5aa8847e70f61ce1739790f7e5f3c442c8247b4b9ac48ad3f37d2faf5821"
+            }
+          },
+          {
+            "audience": "review",
+            "observation": {
+              "exitCode": 0,
+              "expectedExitCode": 0,
+              "matchesExpectedExitCode": true
+            },
+            "summary": {
+              "accessibilityAbsent": false,
+              "audience": "review",
+              "characteristicIds": [],
+              "contextIds": [],
+              "decisionIds": [
+                "approve-mantle-hygienic-badge",
+                "approve-mantle-mark",
+                "approve-mantle-primary",
+                "approve-mantle-repository-banner",
+                "approve-mantle-usage",
+                "approve-mantle-voice"
+              ],
+              "downloadIds": [
+                "mark"
+              ],
+              "foundationAbsent": true,
+              "governanceStates": [
+                "approved"
+              ],
+              "governanceVisibilities": [
+                "public"
+              ],
+              "governedRecordCount": 7,
+              "legalAbsent": false,
+              "localizationAbsent": true,
+              "schema": "identity.brand-guidance/v1",
+              "sectionIds": [
+                "layered-shell-mark"
+              ],
+              "selectedContext": null,
+              "sha256": "0c4eb0e01f3dbfb99e0268fed8296813eebc68b28f2aafe9858776275394a014"
+            }
+          }
+        ],
+        "id": "voice-null",
+        "keptPhysicalGuidanceFiles": {
+          "usage": {
+            "bytesUnchangedFromRealConsumer": true,
+            "exists": true,
+            "path": ".identity/guidance/usage.json"
+          },
+          "voice": {
+            "bytesUnchangedFromRealConsumer": true,
+            "exists": true,
+            "path": ".identity/guidance/voice.json"
+          }
+        },
+        "patches": [
+          {
+            "from": ".identity/guidance/voice.json",
+            "op": "replace",
+            "path": "/documents/guidance/voice",
+            "value": null
+          }
+        ],
+        "repositoryPresentationKeptDeclared": true,
+        "sourceBytesPreservedAfterPatch": true,
+        "sourceChangesFromRealConsumer": [
+          ".identity/identity.json"
+        ],
+        "sourceDigestAfterPatch": "5a82e1ce7871de4cc16366936535c221df36d51ed3ed56a80d0f84678e5eda5e",
+        "sourceValidation": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        },
+        "verification": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        }
+      },
+      {
+        "approvalsAddedOrModified": false,
+        "classification": "synthetic noncanonical omission probe on existing consumer source; not an adoption change or new approval",
+        "dependentRepositoryPresentationProjection": {
+          "command": [
+            "python3",
+            "<identity-root>/scripts/render_repository_presentation.py",
+            "--repository-root",
+            "<scratch-root>/consumer-mantle-usage-null-probe",
+            "--evidence",
+            "<scratch-root>/consumer-mantle-usage-null-probe/evidence/repository-presentation.json",
+            "--output",
+            "<scratch-root>/mantle-usage-null-presentation-dependent-proof"
+          ],
+          "exitCode": 1,
+          "expectedExitCode": 1,
+          "matchesExpectedExitCode": true,
+          "qualification": "Optional dependent surface retains its declared usage prerequisite. Source validator and core generation/verification accept the explicit null declaration; a selected repository-presentation projection still requires adopted approved/public usage asset guidance.",
+          "stderr": "repository-presentation projection failed: repository-presentation projection requires declared documents.guidance.usage for the approved public banner asset",
+          "stdout": ""
+        },
+        "factsAdded": false,
+        "freshBinaryReceipt": {
+          "observations": [
+            {
+              "command": [
+                "<identity-root>/target/debug/identity",
+                "v1-generate",
+                "--repository-root",
+                "<scratch-root>/consumer-mantle-usage-null-probe",
+                "--output-root",
+                "assets/identity-nullability-proof"
+              ],
+              "exitCode": 0,
+              "stderr": "",
+              "stdout": "Generated 18 v1 Identity projections for mantle"
+            },
+            {
+              "command": [
+                "<identity-root>/target/debug/identity",
+                "v1-verify",
+                "--repository-root",
+                "<scratch-root>/consumer-mantle-usage-null-probe",
+                "--output-root",
+                "assets/identity-nullability-proof"
+              ],
+              "exitCode": 0,
+              "stderr": "",
+              "stdout": "Verified v1 Identity projections for mantle"
+            }
+          ],
+          "qualification": "Repeated incremental generation/verification establishes command receipt with freshly built binary; independent clean-generation evidence is owned separately. Initial nullable runs also observed this same binary digest before the run.",
+          "sameAsInitialAllVariantRun": true,
+          "sha256After": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb",
+          "sha256Before": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb"
+        },
+        "generation": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        },
+        "guidanceProjections": [
+          {
+            "audience": "public",
+            "observation": {
+              "exitCode": 0,
+              "expectedExitCode": 0,
+              "matchesExpectedExitCode": true
+            },
+            "summary": {
+              "accessibilityAbsent": true,
+              "audience": "public",
+              "characteristicIds": [
+                "operator-respecting",
+                "state-explicit"
+              ],
+              "contextIds": [
+                "command-plan",
+                "failure-recovery"
+              ],
+              "decisionIds": [
+                "approve-mantle-voice"
+              ],
+              "downloadIds": [],
+              "foundationAbsent": false,
+              "governanceStates": [
+                "approved"
+              ],
+              "governanceVisibilities": [
+                "public"
+              ],
+              "governedRecordCount": 10,
+              "legalAbsent": true,
+              "localizationAbsent": false,
+              "schema": "identity.brand-guidance/v1",
+              "sectionIds": [],
+              "selectedContext": null,
+              "sha256": "2bd7304796ee35803d3fb38ed5378358a3d17a82f4d9a9669c0d95abb5031b7f"
+            }
+          },
+          {
+            "audience": "review",
+            "observation": {
+              "exitCode": 0,
+              "expectedExitCode": 0,
+              "matchesExpectedExitCode": true
+            },
+            "summary": {
+              "accessibilityAbsent": true,
+              "audience": "review",
+              "characteristicIds": [
+                "operator-respecting",
+                "state-explicit"
+              ],
+              "contextIds": [
+                "command-plan",
+                "failure-recovery"
+              ],
+              "decisionIds": [
+                "approve-mantle-hygienic-badge",
+                "approve-mantle-mark",
+                "approve-mantle-primary",
+                "approve-mantle-repository-banner",
+                "approve-mantle-usage",
+                "approve-mantle-voice"
+              ],
+              "downloadIds": [],
+              "foundationAbsent": false,
+              "governanceStates": [
+                "approved"
+              ],
+              "governanceVisibilities": [
+                "public"
+              ],
+              "governedRecordCount": 10,
+              "legalAbsent": true,
+              "localizationAbsent": false,
+              "schema": "identity.brand-guidance/v1",
+              "sectionIds": [],
+              "selectedContext": null,
+              "sha256": "df8e13b52394b4bcc01a568c979663731f3b5a3ecf7cec5f965c9d9ac6ba2b39"
+            }
+          }
+        ],
+        "id": "usage-null",
+        "keptPhysicalGuidanceFiles": {
+          "usage": {
+            "bytesUnchangedFromRealConsumer": true,
+            "exists": true,
+            "path": ".identity/guidance/usage.json"
+          },
+          "voice": {
+            "bytesUnchangedFromRealConsumer": true,
+            "exists": true,
+            "path": ".identity/guidance/voice.json"
+          }
+        },
+        "patches": [
+          {
+            "from": ".identity/guidance/usage.json",
+            "op": "replace",
+            "path": "/documents/guidance/usage",
+            "value": null
+          }
+        ],
+        "repositoryPresentationKeptDeclared": true,
+        "sourceBytesPreservedAfterPatch": true,
+        "sourceChangesFromRealConsumer": [
+          ".identity/identity.json"
+        ],
+        "sourceDigestAfterPatch": "abc1856df4f4a5e5d02f9a330e1ee1023e7a0501ca8de3668c24d9519d883589",
+        "sourceValidation": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        },
+        "verification": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        }
+      },
+      {
+        "approvalsAddedOrModified": false,
+        "classification": "synthetic noncanonical omission probe on existing consumer source; not an adoption change or new approval",
+        "dependentRepositoryPresentationProjection": {
+          "command": [
+            "python3",
+            "<identity-root>/scripts/render_repository_presentation.py",
+            "--repository-root",
+            "<scratch-root>/consumer-mantle-both-null-probe",
+            "--evidence",
+            "<scratch-root>/consumer-mantle-both-null-probe/evidence/repository-presentation.json",
+            "--output",
+            "<scratch-root>/mantle-both-null-presentation-dependent-proof"
+          ],
+          "exitCode": 1,
+          "expectedExitCode": 1,
+          "matchesExpectedExitCode": true,
+          "qualification": "Optional dependent surface retains its declared usage prerequisite. Source validator and core generation/verification accept the explicit null declaration; a selected repository-presentation projection still requires adopted approved/public usage asset guidance.",
+          "stderr": "repository-presentation projection failed: repository-presentation projection requires declared documents.guidance.usage for the approved public banner asset",
+          "stdout": ""
+        },
+        "factsAdded": false,
+        "freshBinaryReceipt": {
+          "observations": [
+            {
+              "command": [
+                "<identity-root>/target/debug/identity",
+                "v1-generate",
+                "--repository-root",
+                "<scratch-root>/consumer-mantle-both-null-probe",
+                "--output-root",
+                "assets/identity-nullability-proof"
+              ],
+              "exitCode": 0,
+              "stderr": "",
+              "stdout": "Generated 18 v1 Identity projections for mantle"
+            },
+            {
+              "command": [
+                "<identity-root>/target/debug/identity",
+                "v1-verify",
+                "--repository-root",
+                "<scratch-root>/consumer-mantle-both-null-probe",
+                "--output-root",
+                "assets/identity-nullability-proof"
+              ],
+              "exitCode": 0,
+              "stderr": "",
+              "stdout": "Verified v1 Identity projections for mantle"
+            }
+          ],
+          "qualification": "Repeated incremental generation/verification establishes command receipt with freshly built binary; independent clean-generation evidence is owned separately. Initial nullable runs also observed this same binary digest before the run.",
+          "sameAsInitialAllVariantRun": true,
+          "sha256After": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb",
+          "sha256Before": "bcbc16f66e0c593ca11a83bdf813074e4f6846fd14e76b11d5913ab6b03a87bb"
+        },
+        "generation": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        },
+        "guidanceProjections": [
+          {
+            "audience": "public",
+            "observation": {
+              "exitCode": 0,
+              "expectedExitCode": 0,
+              "matchesExpectedExitCode": true
+            },
+            "summary": {
+              "accessibilityAbsent": true,
+              "audience": "public",
+              "characteristicIds": [],
+              "contextIds": [],
+              "decisionIds": [],
+              "downloadIds": [],
+              "foundationAbsent": true,
+              "governanceStates": [],
+              "governanceVisibilities": [],
+              "governedRecordCount": 0,
+              "legalAbsent": true,
+              "localizationAbsent": true,
+              "schema": "identity.brand-guidance/v1",
+              "sectionIds": [],
+              "selectedContext": null,
+              "sha256": "75eebd2f48c84430b9d5f7bb688e31b8f7c28e4f5fff9c5114916f292c225916"
+            }
+          },
+          {
+            "audience": "review",
+            "observation": {
+              "exitCode": 0,
+              "expectedExitCode": 0,
+              "matchesExpectedExitCode": true
+            },
+            "summary": {
+              "accessibilityAbsent": true,
+              "audience": "review",
+              "characteristicIds": [],
+              "contextIds": [],
+              "decisionIds": [
+                "approve-mantle-hygienic-badge",
+                "approve-mantle-mark",
+                "approve-mantle-primary",
+                "approve-mantle-repository-banner",
+                "approve-mantle-usage",
+                "approve-mantle-voice"
+              ],
+              "downloadIds": [],
+              "foundationAbsent": true,
+              "governanceStates": [],
+              "governanceVisibilities": [],
+              "governedRecordCount": 0,
+              "legalAbsent": true,
+              "localizationAbsent": true,
+              "schema": "identity.brand-guidance/v1",
+              "sectionIds": [],
+              "selectedContext": null,
+              "sha256": "ae1bf56eeec44f84dbf16d3dda7ab999eef032c1417acc17f3e3b7a35251bdff"
+            }
+          }
+        ],
+        "id": "both-null",
+        "keptPhysicalGuidanceFiles": {
+          "usage": {
+            "bytesUnchangedFromRealConsumer": true,
+            "exists": true,
+            "path": ".identity/guidance/usage.json"
+          },
+          "voice": {
+            "bytesUnchangedFromRealConsumer": true,
+            "exists": true,
+            "path": ".identity/guidance/voice.json"
+          }
+        },
+        "patches": [
+          {
+            "from": ".identity/guidance/voice.json",
+            "op": "replace",
+            "path": "/documents/guidance/voice",
+            "value": null
+          },
+          {
+            "from": ".identity/guidance/usage.json",
+            "op": "replace",
+            "path": "/documents/guidance/usage",
+            "value": null
+          }
+        ],
+        "repositoryPresentationKeptDeclared": true,
+        "sourceBytesPreservedAfterPatch": true,
+        "sourceChangesFromRealConsumer": [
+          ".identity/identity.json"
+        ],
+        "sourceDigestAfterPatch": "cd987f215e3bc657af14eed15e1fb46f3b9482e607be838a240519dea8455813",
+        "sourceValidation": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        },
+        "verification": {
+          "exitCode": 0,
+          "expectedExitCode": 0,
+          "matchesExpectedExitCode": true
+        }
+      }
+    ],
+    "observedAt": "2026-10-19T11:49:31.685538+00:00",
+    "optionalSurfacePrerequisites": [
+      {
+        "adopted": false,
+        "observation": {
+          "command": [
+            "python3",
+            "<identity-root>/scripts/render_press_kit.py",
+            "--repository-root",
+            "<scratch-root>/consumer-mantle-proof",
+            "--output-directory",
+            "assets/identity-checkpoint3/press-kit"
+          ],
+          "exitCode": 1,
+          "expectedExitCode": 1,
+          "matchesExpectedExitCode": true,
+          "stderr": "ERROR: Press Kit projection requires documents.pressKit source",
+          "stdout": ""
+        },
+        "surface": "Press Kit"
+      },
+      {
+        "adopted": false,
+        "observation": {
+          "command": [
+            "python3",
+            "<identity-root>/scripts/render_design_system.py",
+            "--repository-root",
+            "<scratch-root>/consumer-mantle-proof",
+            "--format",
+            "context-json"
+          ],
+          "exitCode": 1,
+          "expectedExitCode": 1,
+          "matchesExpectedExitCode": true,
+          "stderr": "projection failed: design-system projection requires documents.handbook source",
+          "stdout": ""
+        },
+        "surface": "Handbook/design context"
+      }
+    ],
+    "originalSourceInventoryUnchanged": true,
+    "scope": "Read-only examination of an existing public consumer with generation/probes confined to disposable local copies. No external repository changes, creative decisions, approvals, releases or publication.",
+    "source": {
+      "additionalConsultedFiles": [
+        {
+          "bytes": 9876,
+          "path": "vendor/hygiene/repository-presentation-profile.v1.json",
+          "sha256": "44e0881519350e6747723995939c79c6fb4659e38a74b2c32e409866e7a186ba"
+        }
+      ],
+      "digestExcludedPhysicalFiles": [
+        ".identity/candidates/README.md",
+        ".identity/references/README.md"
+      ],
+      "digestIncludedFileCount": 11,
+      "digestIncludedFiles": [
+        ".identity/brief.md",
+        ".identity/defaults/organization.tokens.json",
+        ".identity/governance/approvals.json",
+        ".identity/governance/provenance.json",
+        ".identity/guidance/repository-presentation.json",
+        ".identity/guidance/usage.json",
+        ".identity/guidance/voice.json",
+        ".identity/identity.json",
+        ".identity/overrides/product.tokens.json",
+        ".identity/sources/mark.svg",
+        ".identity/targets/profiles.json"
+      ],
+      "inventoryQualification": "13 physical .identity files; canonical digest includes 11 under its existing contract. The proof inventory also binds the declared external presentation profile (14 files), including Git revision byte comparison.",
+      "physicalSourceFileCount": 13,
+      "physicalSourceFiles": [
+        {
+          "bytes": 1244,
+          "path": ".identity/brief.md",
+          "sha256": "7dcf30012c15cdc7e3290c1610329095c3781ce2ff9a44e95fe728bdc117998e"
+        },
+        {
+          "bytes": 279,
+          "path": ".identity/candidates/README.md",
+          "sha256": "5c352f6ba603aef2c768e9d5add43da094ccdd90695a29e516c33240e2ca1051"
+        },
+        {
+          "bytes": 1910,
+          "path": ".identity/defaults/organization.tokens.json",
+          "sha256": "4294d68f65264485f05eb326df3260a6ad1a1a19b78e4f735adb8d1542d3660c"
+        },
+        {
+          "bytes": 2528,
+          "path": ".identity/governance/approvals.json",
+          "sha256": "349ec39f19ccba09a469ab54e26533c1f2f1ab49f3ced074ecb3114cd31a1811"
+        },
+        {
+          "bytes": 988,
+          "path": ".identity/governance/provenance.json",
+          "sha256": "1aa69b46b381a226e18bdc025f1171b4d38174f214ed2b02f7b68c18481e277e"
+        },
+        {
+          "bytes": 1180,
+          "path": ".identity/guidance/repository-presentation.json",
+          "sha256": "cd55201b6c453528a19f7aa48ab336c60b87fb0730b9b5b0335fefc90032e2b8"
+        },
+        {
+          "bytes": 3365,
+          "path": ".identity/guidance/usage.json",
+          "sha256": "ef0dc7695dad3dfd28c0e7fb92426fcbcfeb2f79fc0d10b5d26d3e0896faefd5"
+        },
+        {
+          "bytes": 5677,
+          "path": ".identity/guidance/voice.json",
+          "sha256": "5327698b873b011ffcc79999440cd8b4a45a7276d54ba6da2d7bab66c195a84f"
+        },
+        {
+          "bytes": 1414,
+          "path": ".identity/identity.json",
+          "sha256": "b1dc59f0a94db49988e1f5962b0d9bf8e7782718effc95e324df4d9010cf6ae8"
+        },
+        {
+          "bytes": 2017,
+          "path": ".identity/overrides/product.tokens.json",
+          "sha256": "dd984ba76ede1007c9024bf551e5868551d9cd03a6814ab9d707676a5f095d87"
+        },
+        {
+          "bytes": 209,
+          "path": ".identity/references/README.md",
+          "sha256": "5bccd99edff068b39f85ed082a261973c0a277c7c3c7fa1fb9fd96a95bac3dcd"
+        },
+        {
+          "bytes": 777,
+          "path": ".identity/sources/mark.svg",
+          "sha256": "88ca2ab2450bb58a66418eb08f9eff5e5271975a27547bdbfe359be27cd64be8"
+        },
+        {
+          "bytes": 451,
+          "path": ".identity/targets/profiles.json",
+          "sha256": "a482ccdd3d5940de17c3762817d11a2b799b1180651c5a0def7623e9622aabee"
+        }
+      ],
+      "sourceDigest": "fb5b86b632cb47eb160b13da92742687f5e76148b6d5300239a601b7d29147e8",
+      "sourceDigestContract": "egohygiene.identity.source-digest/v1"
+    },
+    "sourceAuthority": {
+      "approvalEvidenceIssue": {
+        "commentCount": 0,
+        "liveObservationLimit": "Issue closure does not independently establish the content of each historical human review.",
+        "liveObservedState": "closed",
+        "liveObservedStateReason": "completed",
+        "number": 27,
+        "repository": "egohygiene/mantle",
+        "url": "https://github.com/egohygiene/mantle/issues/27"
+      },
+      "classification": "Existing declared governance records preserved byte-for-byte; validation checks structural and referential consistency, not independent human ratification or new legal/creative approval.",
+      "decisions": [
+        {
+          "candidate": ".identity/sources/mark.svg",
+          "evidence": "https://github.com/egohygiene/mantle/issues/27",
+          "id": "approve-mantle-mark",
+          "notes": "Approved layered shell mark for the governed Mantle branding implementation.",
+          "reviewedAt": "2026-08-31T12:11:03Z",
+          "reviewedBy": "Ego Hygiene maintainer",
+          "status": "approved",
+          "subject": "mark",
+          "supersedes": null
+        },
+        {
+          "candidate": "token:color.brand.primary@mantle-product",
+          "evidence": "https://github.com/egohygiene/mantle/issues/27",
+          "id": "approve-mantle-primary",
+          "notes": "Approved cyan-led product distinction with violet and rose supporting layers.",
+          "reviewedAt": "2026-08-31T12:11:03Z",
+          "reviewedBy": "Ego Hygiene maintainer",
+          "status": "approved",
+          "subject": "token:color.brand.primary",
+          "supersedes": null
+        },
+        {
+          "candidate": "guidance:mantle-voice/v1",
+          "evidence": "https://github.com/egohygiene/mantle/issues/27",
+          "id": "approve-mantle-voice",
+          "notes": "Approved explicit, calm, operator-respecting voice.",
+          "reviewedAt": "2026-08-31T12:11:03Z",
+          "reviewedBy": "Ego Hygiene maintainer",
+          "status": "approved",
+          "subject": "voice:mantle",
+          "supersedes": null
+        },
+        {
+          "candidate": "guidance:mantle-usage/v1",
+          "evidence": "https://github.com/egohygiene/mantle/issues/27",
+          "id": "approve-mantle-usage",
+          "notes": "Approved layered-shell usage and accessibility guidance.",
+          "reviewedAt": "2026-08-31T12:11:03Z",
+          "reviewedBy": "Ego Hygiene maintainer",
+          "status": "approved",
+          "subject": "usage:mantle",
+          "supersedes": null
+        },
+        {
+          "candidate": "repository-presentation:mantle-banner/v1",
+          "evidence": "https://github.com/egohygiene/mantle/issues/27",
+          "id": "approve-mantle-repository-banner",
+          "notes": "Approved the governed Mantle mark as the repository-banner source.",
+          "reviewedAt": "2026-08-31T12:11:03Z",
+          "reviewedBy": "Ego Hygiene maintainer",
+          "status": "approved",
+          "subject": "repository-presentation-banner-default",
+          "supersedes": null
+        },
+        {
+          "candidate": "egohygiene.repository-presentation-profile/v1@1.0.0-alpha.1",
+          "evidence": "https://github.com/egohygiene/mantle/issues/27",
+          "id": "approve-mantle-hygienic-badge",
+          "notes": "Approved consumption of the proposed, digest-pinned Hygiene profile without claiming certification.",
+          "reviewedAt": "2026-08-31T12:11:03Z",
+          "reviewedBy": "Ego Hygiene maintainer",
+          "status": "approved",
+          "subject": "repository-presentation-badge-profile",
+          "supersedes": null
+        }
+      ]
+    }
+  }
+}

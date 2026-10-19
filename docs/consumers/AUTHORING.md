@@ -199,9 +199,10 @@ Optional packages have their own projection and integrity checks; core
 The audit's internal-asset exposure finding G03 and advertised-but-unselected
 archive finding G04 remain implementation/regression work in #101/#105. Do not
 infer safe generic public selection or a complete kit from these examples.
-Checkpoint 3 still owns the representative real-consumer authoring proof and
-the bounded v1 initializer/EgoLint handoff follow-ups. This worksheet is the
-checkpoint 2 preparation, not that completed proof, a release, or publication.
+The [Mantle walkthrough](MANTLE_AUTHORING_PROOF.md) exercises this worksheet
+against pinned real source. Its evidence and the [initialization/validation
+handoffs](INITIALIZATION_AND_VALIDATION_HANDOFFS.md) supply checkpoint 3
+evidence for review within its stated boundary; they establish no release or publication.
 
 Adopt handbooks, channels, social surfaces, repository presentation, mascots,
 supporting visuals, and templates only for a concrete consumer need under

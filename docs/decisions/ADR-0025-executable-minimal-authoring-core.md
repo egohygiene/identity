@@ -14,7 +14,7 @@ supersedes: []
 superseded_by: []
 affected_repositories: [egohygiene/identity]
 affected_contracts: []
-implementation_status: in_progress
+implementation_status: implemented
 evidence:
   - type: pull_request
     url: https://github.com/egohygiene/identity/pull/114
@@ -22,6 +22,9 @@ evidence:
   - type: documentation
     url: https://github.com/egohygiene/identity/blob/1b46f01308d63f38068ce5327d36ac94b0840077/contracts/v1/project.schema.json
     description: The existing closed project schema requires voice/usage keys but permits an explicit null for either document path.
+  - type: pull_request
+    url: https://github.com/egohygiene/identity/pull/117
+    description: Merged checkpoint 2 aligns nullable guidance, producer diagnostics and authoring examples; merge does not approve this proposal.
 approval: null
 exceptions: []
 ---
@@ -98,6 +101,17 @@ dependent projection errors. The source and guidance contracts describe the
 bounded behavior; examples and tests exercise it. Exact executed checks and the
 reviewed commit belong in the PR and CONTINUITY.md. This proposed record does
 not infer human disposition from implementation, testing or a future merge.
+
+### Dated implementation outcome — 2026-10-19
+
+Checkpoint 2 merged in [PR #117](https://github.com/egohygiene/identity/pull/117)
+at `03eaeac72e2cf69c7bf205dd80f53ca25d1629e4`. The checkpoint 3 candidate adds
+a [pinned Mantle walkthrough](../consumers/MANTLE_AUTHORING_PROOF.md),
+[execution receipt](../evidence/identity-authoring-mantle-2026-10-19.json) and
+[initialization/validation handoffs](../consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md).
+The runtime implementation is present; the new evidence remains subject to
+checkpoint 3 review. This update records implementation and bounded outcomes,
+while the decision remains proposed with no approval.
 
 ## Replacement or exit strategy
 

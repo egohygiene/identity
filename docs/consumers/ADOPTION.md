@@ -9,6 +9,9 @@ Start with the [authoring worksheet](AUTHORING.md) and the
 fields to their authorities and selected consumers. The
 [#99 checkpoint 1 field review](../reviews/identity-fields-2026-10-18.md) retains
 the dated audit; its output gaps remain tracked separately from source authoring.
+The [Mantle walkthrough](MANTLE_AUTHORING_PROOF.md) records a pinned real-consumer
+rehearsal. [Initialization and validation handoffs](INITIALIZATION_AND_VALIDATION_HANDOFFS.md)
+explain the supported manual v1 route and remaining integration owners.
 
 ## Outcome and authority
 
