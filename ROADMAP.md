@@ -37,13 +37,13 @@ updated: 2026-10-18
 -->
 ## 2026-10-18 execution snapshot
 
-Reviewed source: [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. This is the source-review date; a later collector run does not renew its freshness. Repository Markdown owns intent; generated views remain projections.
+The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #74's shared source-digest contract and #75's optional guidance/release binding merged in PRs #111/#112 (IDN-Q13/14). Implement and review #76's artifact-path/download-base boundary (IDN-Q15).
+**Current gate:** #74/#75/#76 merged in PRs #111/#112/#113 (IDN-Q13–15). Review #99 checkpoint 1's field catalog and observed gaps before selecting compatible contract changes (IDN-Q29). #78 remains ready; its implementation is paused while this selected contract checkpoint is reviewed.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
-There are 28 open issues: fifteen remaining audit work items (#74–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. #71–#73 are complete on merged main through [PR #89](https://github.com/egohygiene/identity/pull/89); those repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) has an early independent reconciliation and a final checkpoint after #76/#77. The separate steps preserve that distinction.
+The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
 
 ### Visual roadmap publication
 
@@ -58,12 +58,13 @@ These are roadmap publication intent, not evidence that the central roadmap rout
 | Order | Work | Exit |
 | --- | --- | --- |
 | 0 | #83 early pass (IDN-Q09) | Current roadmap, capability summaries, continuity, and publication boundaries agree. |
-| 1 | #74 → #75 → #76 → #78 → #79 → #77 | Source/release/download and transaction/recovery contracts have actual regression evidence. |
-| 2 | #81 → #80 → #82 → #84 → finish #83 | Qualified setup/browser environments and accurate final contract documentation. |
-| 3 | #99 → #100 → #103 → #101 → #102 → #104 → #105 | A useful complete kit for a real consumer; maintenance extraction is not a blanket gate. |
-| 4 | #85 → #86 → #87 → #88 → close #70 | Smaller modules preserve the repaired invariants and first-kit behavior. |
-| 5 | #109 → #108 → #106 → #107 | Reviewed ownership and bounded optional use cases or explicit owner dispositions. |
-| 6 | Final self-dogfood, release, and canary upgrade → close #98 | Repeatable adoption is supported by current artifacts and consumer evidence. |
+| 1 | #99 checkpoints 1 → 2 → 3 | Review the field/coverage catalog, implement only agreed compatible gaps, then demonstrate guided consumer authoring. Review each checkpoint before starting the next. |
+| 2 | #78 → #79 → #77 | Transaction confinement, writer and recovery behavior have actual regression evidence; #74/#75/#76 are already merged. |
+| 3 | #81 → #80 → #82 → #84 → finish #83 | Qualified setup/browser environments and accurate final contract documentation. |
+| 4 | #100 → #103 → #101 → #102 → #104 → #105 | A useful complete kit for a real consumer, including the field audit's generic-public-asset and advertised-download gaps; maintenance extraction is not a blanket gate. |
+| 5 | #85 → #86 → #87 → #88 → close #70 | Smaller modules preserve the repaired invariants and first-kit behavior. |
+| 6 | #109 → #108 → #106 → #107 | Reviewed ownership and bounded optional use cases or explicit owner dispositions. |
+| 7 | Final self-dogfood, release, and canary upgrade → close #98 | Repeatable adoption is supported by current artifacts and consumer evidence. |
 
 The sequence expresses priority. Machine-readable `depends_on` fields express required prerequisites, including the repaired input boundaries exercised by kit downloads and optional design guidance. Independent ready work can be selected deliberately without changing ownership. `planned` optional steps still require a concrete use case or scope decision.
 
@@ -389,7 +390,7 @@ issues: [75]
 
 <!-- roadmap-step
 id: IDN-Q15
-status: active
+status: complete
 depends_on: []
 issues: [76]
 -->
@@ -399,9 +400,9 @@ issues: [76]
 
 **Exit criteria:**
 
-- [ ] Adversarial path cases fail before rendering and supported route-prefixed/CDN downloads pass.
+- [x] Adversarial path cases fail before rendering and supported route-prefixed/CDN downloads pass.
 
-**Evidence and scope:** [#76](https://github.com/egohygiene/identity/issues/76). This is independent work and supplies the download boundary for IDN-Q31/IDN-Q35.
+**Evidence and scope:** [#76](https://github.com/egohygiene/identity/issues/76), [PR #113](https://github.com/egohygiene/identity/pull/113), merged at `063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`. All 279 renderer tests, six hosted Chromium checks and three-platform release/clean-room gates pass. ADR-0024 remains proposed. This supplies the URL-path boundary for IDN-Q31/IDN-Q35, not complete selected-file or public-asset coverage.
 
 <!-- roadmap-step
 id: IDN-Q16
@@ -615,7 +616,7 @@ issues: [70]
 
 <!-- roadmap-step
 id: IDN-Q29
-status: ready
+status: active
 depends_on: []
 issues: [99]
 -->
@@ -627,7 +628,7 @@ issues: [99]
 
 - [ ] Coverage/ownership inventory, minimal/expanded fixtures, compatibility, useful diagnostics, and only demonstrated source gaps are complete.
 
-**Evidence and scope:** [#99](https://github.com/egohygiene/identity/issues/99). Schedule after IDN-Q13; reuse its inventory rules. Inventory the real approved self-brand source and publication configuration.
+**Evidence and scope:** [#99](https://github.com/egohygiene/identity/issues/99) is the selected current priority after IDN-Q13–15. [Checkpoint 1](docs/reviews/identity-fields-2026-10-18.md) inventories source/schema/entry-point/consumer coverage and records synthetic gap probes; its field-layout and requiredness recommendations await review. Checkpoint 2 handles agreed compatible contract/examples; checkpoint 3 proves guided authoring and scopes initializer/EgoLint handoff follow-ups. No schema or runtime change is part of checkpoint 1. Root self-brand source remains a later explicit adoption task.
 
 <!-- roadmap-step
 id: IDN-Q30

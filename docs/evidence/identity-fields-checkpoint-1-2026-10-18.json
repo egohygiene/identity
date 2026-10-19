@@ -1,0 +1,142 @@
+{
+  "reviewed_revision": "063a4c70fcaccc6c15393f28ac2aabe62b34e1e7",
+  "source_fixture": "tests/fixtures/v1/valid/minimal",
+  "binary_sha256": "b42b444163f804d0d1d1b01827e4ddb245bf707bd8a301cbe10ec32f6dc0086d",
+  "cases": [
+    {
+      "case": "baseline",
+      "source_validation_exit": 0,
+      "diagnostics": [],
+      "generation_exit": 0,
+      "generation_message": "Generated 13 v1 Identity projections for example-product",
+      "canonical_source_unchanged": true,
+      "advertised_packages": [
+        {
+          "path": "packages/brand-kit/brand-kit.zip",
+          "exists": false
+        },
+        {
+          "path": "packages/tokens/tokens.json",
+          "exists": true
+        },
+        {
+          "path": "packages/metadata/metadata.json",
+          "exists": true
+        },
+        {
+          "path": "packages/guidance/README.md",
+          "exists": true
+        }
+      ],
+      "source_asset_ids": [
+        "legacy-wordmark",
+        "mark",
+        "mascot-kern"
+      ],
+      "nonpublic_assets_in_generic_renderer": [
+        {
+          "id": "legacy-wordmark",
+          "declared_availability": "internal",
+          "declared_visibility": "internal",
+          "declared_lifecycle": "superseded",
+          "embedded_source_present": true
+        }
+      ]
+    },
+    {
+      "case": "null-guidance",
+      "source_validation_exit": 1,
+      "diagnostics": [
+        {
+          "code": "IDN1003",
+          "message": "path must be normalized and repository-relative",
+          "path": "/documents/guidance/usage",
+          "recovery": "Use a path without absolute roots, dot segments, repeated separators, or backslashes.",
+          "severity": "error"
+        },
+        {
+          "code": "IDN1003",
+          "message": "path must be normalized and repository-relative",
+          "path": "/documents/guidance/voice",
+          "recovery": "Use a path without absolute roots, dot segments, repeated separators, or backslashes.",
+          "severity": "error"
+        }
+      ],
+      "generation_exit": null,
+      "generation_message": null,
+      "canonical_source_unchanged": true,
+      "project_json_schema_accepts": true
+    },
+    {
+      "case": "raster-source",
+      "source_validation_exit": 0,
+      "diagnostics": [],
+      "generation_exit": 1,
+      "generation_message": "error: IDN3301: approved source must be UTF-8: invalid utf-8 sequence of 1 bytes from index 0",
+      "canonical_source_unchanged": true
+    },
+    {
+      "case": "unknown-short-name",
+      "source_validation_exit": 1,
+      "diagnostics": [
+        {
+          "code": "IDN1101",
+          "message": "unknown fields: shortName",
+          "path": "/project",
+          "recovery": "Remove unknown fields or move versioned data into a namespaced extension.",
+          "severity": "error"
+        }
+      ],
+      "generation_exit": null,
+      "generation_message": null,
+      "canonical_source_unchanged": true
+    },
+    {
+      "case": "optional-documents-omitted",
+      "source_validation_exit": 0,
+      "diagnostics": [],
+      "generation_exit": 0,
+      "generation_message": "Generated 13 v1 Identity projections for example-product",
+      "canonical_source_unchanged": true,
+      "advertised_packages": [
+        {
+          "path": "packages/brand-kit/brand-kit.zip",
+          "exists": false
+        },
+        {
+          "path": "packages/tokens/tokens.json",
+          "exists": true
+        },
+        {
+          "path": "packages/metadata/metadata.json",
+          "exists": true
+        },
+        {
+          "path": "packages/guidance/README.md",
+          "exists": true
+        }
+      ],
+      "source_asset_ids": [
+        "legacy-wordmark",
+        "mark",
+        "mascot-kern"
+      ],
+      "nonpublic_assets_in_generic_renderer": [
+        {
+          "id": "legacy-wordmark",
+          "declared_availability": "internal",
+          "declared_visibility": "internal",
+          "declared_lifecycle": "superseded",
+          "embedded_source_present": true
+        }
+      ]
+    }
+  ],
+  "observed_at": "2026-10-18T14:27:09Z",
+  "scope": "Synthetic local source/consumer probes for issue 99 checkpoint 1; not deployment or whole-contract conformance evidence.",
+  "build_command": "cargo build --locked --bin identity",
+  "commands": [
+    "python3 scripts/validate_identity.py --repository-root CONSUMER --format json",
+    "identity v1-generate --repository-root CONSUMER (only after successful source validation)"
+  ]
+}

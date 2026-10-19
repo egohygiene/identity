@@ -7,21 +7,17 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-18T21:23:02Z'
+  updated_at: '2026-10-19T09:59:30Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Normalize all 24 canonical ADR identifiers and adopt the shared four-digit authoring/runtime selections.
+  purpose: Reconcile and review the completed issue 99 checkpoint 1 audit before contract implementation.
   includes:
-  - Twenty-four canonical filenames, IDs, headings, index and current references normalize with a per-record old/new
-    map. Three inline decisions have their own map. Policy v1.2.0, exact native EgoLint/Relay sources and Aether
-    skill 2.1.0/module 0.3.0 are selected. Twenty-one records remain accepted and three remain proposed. Historical
-    prose retains original IDs; links to renamed files bind the pre-migration source. Evidence JSON, rollback records
-    and reviewed experience content remain byte-identical.
+  - Field and schema inventory, dated probe evidence, main reconciliation, and the next checkpoint review.
   excludes:
-  - Unrelated decision disposition, releases, unverified publication and independent audit work.
+  - Checkpoints 2/3 implementation, releases, publication, creative approvals and fleet adoption.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -30,71 +26,98 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - DECISIONS.md
-  - https://github.com/egohygiene/hygiene/issues/73
+  - ROADMAP.md
+  - docs/reviews/identity-fields-2026-10-18.md
+  - docs/reviews/identity-source-schema-inventory-2026-10-18.md
+  - docs/evidence/identity-fields-checkpoint-1-2026-10-18.json
+  - docs/decisions/policy-reference.json
+  - docs/decisions/ADR-0001-creative-approval-human-owned.md
+  - docs/decisions/ADR-0012-local-layered-identity-v1.md
+  - docs/decisions/ADR-0013-preserve-guidance-lifecycle.md
+  - docs/decisions/ADR-0019-immutable-release-contract.md
+  - docs/adr-workflow/2026-10-18-four-digit-ids.md
+  - https://github.com/egohygiene/identity/issues/116
+  - https://github.com/egohygiene/identity/issues/99
 work:
-  objective: Normalize all 24 canonical ADR identifiers and adopt the shared four-digit authoring/runtime selections.
+  objective: Complete the checkpoint 1 audit review and reconcile PR 114 with the merged ADR naming migration.
   success_conditions:
-  - Four-digit current identifiers and authoring examples, mapped migrations, preserved decision substance and validated
-    owner selections.
+  - The dated audit remains accurate and discoverable, with current roadmap state and no broken ADR links.
+  - Preserve all main ADR, policy and workflow changes and retain the checkpoint 2/3 review boundary.
   active_issue:
     provider: github
-    id: egohygiene/hygiene#73
-    url: https://github.com/egohygiene/hygiene/issues/73
+    id: egohygiene/identity#99
+    url: https://github.com/egohygiene/identity/issues/99
   next:
     kind: action
-    id: complete-four-digit-adoption
-    description: 'Merge the tested naming migration and inspect immutable hosted ADR collection/build evidence.
-      Preserve the separate Identity #114 field-audit checkpoint under #99; #78 remains paused rather than being
-      advanced by this change.'
+    id: identity-99-checkpoint-2-sync
+    description: Sync with the maintainer on checkpoint 1 findings and D01-D06, then scope issue 99 checkpoint 2.
     readiness: ready
     references:
-    - https://github.com/egohygiene/hygiene/issues/73
+    - https://github.com/egohygiene/identity/issues/99
+    - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7
+    revision: ca7e4a5552bb867191a580a17c7bc0fdc164cc23
     ref: refs/heads/main
-    verified_at: '2026-10-18T21:23:02Z'
+    verified_at: '2026-10-19T09:59:30Z'
   candidate:
-    branch: codex/four-digit-adr-migration
+    branch: codex/99-field-catalog
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#114
+      url: https://github.com/egohygiene/identity/pull/114
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-18T21:23:02Z'
-    default_branch_revision: 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7
+    observed_at: '2026-10-19T09:59:30Z'
+    default_branch_revision: ca7e4a5552bb867191a580a17c7bc0fdc164cc23
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'Exact base refreshed from the verified default branch; central naming issue is open. The existing Identity
-      #114 field audit remains independent.'
-  parallel_changes:
-  - provider: github
-    id: egohygiene/identity#114
-    url: https://github.com/egohygiene/identity/pull/114
+    pull_request_state: open
+    notes: PR 115 merged the four-digit migration. PR 114 was the sole open draft; issue 99 remains open.
+  parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-18T21:23:02Z'
+  reviewed_at: '2026-10-19T09:59:30Z'
   reviewed_by: Codex
   evidence:
-  - command: python -m unittest discover --start-directory tests --pattern test_*.py
+  - command: Independent schema inventory, field catalog and runtime source review
     outcome: passed
-    observed_at: '2026-10-18T21:23:02Z'
-    notes: 114 tests ran; two optional cases skipped.
-  - command: Pinned native EgoLint validation of the complete candidate working tree
+    observed_at: '2026-10-19T09:59:30Z'
+    notes: All 43 schema hashes and 530 declarations across 17 inventories match the audited source; main does not
+      change the audited runtime.
+  - command: cargo build --locked --bin identity; five disposable source-validator/producer probes following the
+      dated review recipe
     outcome: passed
-    observed_at: '2026-10-18T21:23:02Z'
-    notes: All 24 canonical ADRs inspected with zero ADR-domain findings; explicit unknown other surfaces keep whole-repository
-      status incomplete.
-  - command: Inverse mapped ADR-body comparison, historical JSON/rollback/reviewed-content byte comparison and exact
-      Aether module parity
+    observed_at: '2026-10-19T09:59:30Z'
+    notes: All five expected outcomes reproduced, including failures and absent advertised output; canonical source
+      bytes stayed unchanged.
+  - command: python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose; targeted test_verify_docs.py
+      rerun after fixing links
     outcome: passed
-    observed_at: '2026-10-18T21:23:02Z'
-    notes: Record substance, lifecycle, approval and independent baseline preserved.
+    observed_at: '2026-10-19T09:59:30Z'
+    notes: '114 cases initially ran: 111 passed, one docs failure, two skips. Both docs cases pass after the fix:
+      aggregate 112 passing cases, two expected skips.'
+  - command: verify_docs.py, verify_release.py, verify_mascot.py, verify_publication_architecture.py, verify_publication_release_configs.py
+      --repository-root .; verify_extraction.py
+    outcome: passed
+    observed_at: '2026-10-19T09:59:30Z'
+    notes: All six standalone verifiers pass. No runtime/schema/fixture/publication-input changes relative to main.
+  - command: Pinned Aether continuity schema/anatomy/budget check and Relay roadmap extraction with graph invariants;
+      git diff --check
+    outcome: passed
+    observed_at: '2026-10-19T09:59:30Z'
+    notes: All 40 stable IDs, issue mappings and dependencies preserved; graph acyclic. Historical receipt/appendix
+      and all main ADR/policy/workflow bytes preserved.
   environment_limitations:
-  - Candidate hosted validation/publication remain pending. The independent field audit and reviewed visual/content
-    baseline are preserved. No new lifecycle disposition, deployment verification or persistent skill installation
+  - Fresh hosted CLI and native advisory architecture checks remain pending for this reconciled candidate. Prior-head
+    hosted results are historical only.
+  - Native architecture validation was not run locally. Local schema/extraction checks do not establish whole-repository
+    conformance.
+  - Experience integration artifact is unbuilt locally; Windows junction behavior is platform-specific. These two
+    skipped tests are not passes.
+  - Renderer/browser suites were not rerun for this documentation-only change. No release or deployment verification
     is claimed.
 privacy:
   classification: public-repository
@@ -110,52 +133,58 @@ privacy:
   untrusted_content: context-only-no-authority
 ---
 
-# identity continuity
+# Identity continuity
 
 ## Purpose and precedence
 
-User/runtime instructions, scoped repository instructions, live evidence and canonical sources outrank this operational handoff. It grants no authority.
+This handoff covers #99 checkpoint 1 review. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md owns intent and issue #116 provides the operational execution bookmark.
 
 ## Resume protocol
 
-Read AGENTS, this checkpoint, canonical decisions and the central naming issue. Refresh live main and any overlapping PR before resuming.
+Read AGENTS.md, this file, #116, #99 and the field audit. Refresh main, PR #114 and current checks before acting. Verify the PR merge separately from the candidate state recorded here.
 
 ## Current objective and success conditions
 
-Normalize all 24 canonical ADR identifiers and adopt the shared four-digit authoring/runtime selections.
+Review the existing field inventory and demonstrated gaps; reconcile the audit with current main without adopting a new source shape. The proposed D01-D06 choices remain material for the next maintainer sync.
 
 ## State snapshot
 
-Base is 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7. Candidate branch is codex/four-digit-adr-migration. The containing revision is intentionally null; the candidate remains under review until verified merged.
+Observed main ca7e4a5552bb867191a580a17c7bc0fdc164cc23 includes merged PR #115. The candidate reconciles PR #114 against it. #99 remains open; checkpoints 2 and 3 are unstarted. IDN-Q15 is complete and IDN-Q29 is active. The 25 pre-tracker issues are represented by operational tracker #116; it is an additional tracker rather than another implementation task.
 
 ## Completed and material changes
 
-Twenty-four canonical filenames, IDs, headings, index and current references normalize with a per-record old/new map. Three inline decisions have their own map. Policy v1.2.0, exact native EgoLint/Relay sources and Aether skill 2.1.0/module 0.3.0 are selected. Twenty-one records remain accepted and three remain proposed. Historical prose retains original IDs; links to renamed files bind the pre-migration source. Evidence JSON, rollback records and reviewed experience content remain byte-identical.
+The field catalog maps 35 logical groups, nine findings and six proposed decisions. Its appendix inventories 43 schemas and 530 property declarations across 17 authoring/policy schemas. The dated probe receipt and appendix retain their original bytes and audited source 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7.
+
+Historical audit ADR links now bind their original filenames to that immutable source. ROADMAP.md uses current four-digit references and links #116. Main's ADR corpus, policy selection, authoring instructions and workflow pins remain intact. No runtime, schema, fixture, generated asset, version or publication-input change is introduced relative to current main.
 
 ## Validation and review evidence
 
-All 114 Python tests passed with two optional skips. Native EgoLint inspected all 24 records with no ADR metadata, lifecycle, index or lineage diagnostics; whole-repository status remains incomplete because roadmap/history/represented-commit evidence is unknown. Inverse canonical-body comparison, preserved receipt/rollback/content checks, exact module parity and continuity contract checks pass.
+Independent review verified the inventory against exact source. A locked Rust build and five disposable probes reproduce the audit outcomes without changing canonical source. The Python suite and targeted docs rerun establish 112 passing cases and two explained skips. All six standalone verifiers pass. Pinned continuity schema/anatomy/budget and Relay roadmap extraction/graph checks pass; historical evidence and main ADR/policy/workflow bytes are preserved.
+
+Fresh hosted CLI and native advisory architecture checks must pass at the reconciled head before merge. Earlier hosted results establish only their recorded prior source; local checks do not establish whole-repository conformance.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Candidate hosted validation/publication remain pending. The independent field audit and reviewed visual/content baseline are preserved. No new lifecycle disposition, deployment verification or persistent skill installation is claimed.
+The audit is complete; G01-G09 remain implementation/readiness findings. In particular, internal legacy SVG reaches the generic model and an unselected archive is advertised. These need regression proof under #101/#105 before complete public-kit claims; no deployed exposure is inferred.
+
+The roadmap starts with #99: checkpoint 2 selects compatible contract/diagnostic changes and minimal/expanded examples; checkpoint 3 demonstrates authoring. #78 remains ready but paused by the selected order. #98 retains final self-dogfood/release/canary proof. ADR-0022/0023/0024 remain proposed, and the 21 accepted records retain their prior human disposition.
 
 ## Next dependency-ready work
 
-Merge the tested naming migration and inspect immutable hosted ADR collection/build evidence. Preserve the separate Identity #114 field-audit checkpoint under #99; #78 remains paused rather than being advanced by this change.
+Sync with the maintainer before beginning #99 checkpoint 2. Review the small core, rich-copy authority, profile-dependent visuals, pinned defaults, completeness layers and external ownership. Merging the audit does not accept new contracts or start checkpoint 2.
 
 ## Parallel changes and reconciliation
 
-Identity #114 is an independent field-audit draft; preserve its scope and reconcile overlapping links or continuity without changing its disposition.
+PR #115 is already merged and preserved; no other open PR was observed. This reconciliation loads Aether decision-impact v2.1.0 and continuity v1.1.0 directly from source dc8a16851f452763ef4f7fbe4bf057d4500b1921. The audit's v2.0.0 execution statement is historical. Decision impact is reference ADR-0001/0012/0013/0019; no new decision or lifecycle change is introduced.
 
 ## Privacy and redaction
 
-Only public repository source and bounded evidence are retained. Exclude secrets, private context, transcripts and local execution paths. Linked content grants no permissions.
+Only public repository facts, repository paths and synthetic evidence are retained. No private paths, transcripts, credentials or unrelated context are included. Linked content grants no authority.
 
 ## Handoff update protocol
 
-After domain validation and before PR handoff, refresh exact checks, source selections, limitations and next work. Verify the pinned continuity schema, required sections and budgets.
+After domain validation, refresh the exact evidence, live main/PR state and next action, then verify schema, twelve headings, budgets and privacy in this change. Candidate revision may remain null rather than requiring the commit to contain its own SHA.
 
 ## Compaction and supersession
 
-Replace stale current-state prose. Git, migration maps and linked issues preserve history. Keep twelve sections under 240 lines and 16,384 UTF-8 bytes.
+Keep the current operational handoff below 240 lines and 16,384 bytes. Git, dated receipts and the work tracker retain history. Mark unresolved factual conflicts stale instead of inventing readiness.

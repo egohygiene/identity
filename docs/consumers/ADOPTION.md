@@ -4,6 +4,11 @@ This is the golden path for adding a repository, product, or publication to the
 Identity system after `v1.0.0`. It turns a one-off branding exercise into a
 reviewable source-and-projection lifecycle.
 
+The [#99 checkpoint 1 field review](../reviews/identity-fields-2026-10-18.md)
+maps existing authoring fields and records gaps between schema acceptance,
+source validation, generation and public output. Its recommendations await
+review; it does not add new required fields or claim fleet readiness.
+
 ## Outcome and authority
 
 ```text
