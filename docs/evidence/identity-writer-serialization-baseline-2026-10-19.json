@@ -1,0 +1,337 @@
+{
+  "observedAt": "2026-10-19T22:02:53.598496Z",
+  "scope": "Bounded deterministic baseline coordination in disposable ordinary generated-state fixtures. The observed test execution modified no candidate production/test files or GitHub state; this receipt and its exact test-only patch are later review artifacts.",
+  "baselineRevision": "417865a449678f887237d94aaa019a10bcc16612",
+  "classification": "Instrumented baseline test build, not a pristine shipping-runtime attestation.",
+  "implementationProvenance": {
+    "archive": "git archive of immutable baseline revision",
+    "sourceFiles": [
+      {
+        "path": "src/compiler/filesystem.rs",
+        "baselineSha256": "9d69832c31704fd3cdb866d1c0855dff5e473dd9b079a087ac4e5a38b534272e",
+        "instrumentedSha256": "4a5987693fcf7793c151ee8533ba522bd930abac9b427090a73e636083b2e388"
+      },
+      {
+        "path": "src/compiler/filesystem/tests.rs",
+        "baselineSha256": "23631297373e6bdf9c66dae5d22ac3c7a3de5cba9ca72711978b3e088e480a9c",
+        "instrumentedSha256": "97e88119cdb2e39c934fb14957bfc3b6f98e6735146eabf98a1de111b496761e"
+      }
+    ],
+    "exactTestOnlyPatchSha256": "02ff0a3545fdaa44f15850f6bacf8b170f2df43162bca784526f50a9c9635c59",
+    "artifacts": [
+      {
+        "artifactKind": "instrumented-test-executable",
+        "bytes": 6979040,
+        "sha256": "f2ccea31b586dc3d17354c469dd3a84afc6b193c9a19c2d7422be86790ab2a52"
+      },
+      {
+        "artifactKind": "instrumented-test-executable",
+        "bytes": 63271872,
+        "sha256": "d6568d1f82d9b891cedf07f8d17ad2c4cfa7841ab9fc1474c242505855a88fa3"
+      },
+      {
+        "artifactKind": "instrumented-test-executable",
+        "bytes": 61021096,
+        "sha256": "2227b4e084df8546f6637d2a3673da837dddec282e22bf84d9ea0a3e7c1df7b9"
+      }
+    ],
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "platform": "Linux",
+    "exactTestOnlyPatchPath": "docs/evidence/identity-writer-serialization-baseline-2026-10-19.patch"
+  },
+  "command": "cargo test --locked q79_coordinated -- --nocapture --test-threads=1",
+  "coordination": "Two independent LocalArtifactStore instances in separate threads. A cfg(test) barrier stops both after real baseline prechecks; an explicit release condition runs the first operation to completion before releasing the second from the already-passed boundary. No sleeps, directory replacement, symlinks, altered journals, or host data are used.",
+  "inventoryConvention": "Nonempty ordinary synthetic fixture files only; no fixture file is empty. Directory entries are omitted from these derived inventories. Each SHA-256 hashes the recorded file bytes.",
+  "outcome": {
+    "testsPassed": 2,
+    "testsFailed": 0
+  },
+  "observations": [
+    {
+      "afterSecondWriter": [
+        {
+          "bytes": 17,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/backup/assets/identity/replaced.json",
+          "sha256": "3acb38af1d340ee5faf77a06b8a7697aaf54a4ec9eca2a87d2522b40ad24432a"
+        },
+        {
+          "bytes": 1139,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/staged/assets/identity/.identity-manifest.json",
+          "sha256": "7464b1678c1685965e02cb1e8de3cd473d634fe01ac35890a2c8196a27fcb187"
+        },
+        {
+          "bytes": 16,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/staged/assets/identity/created.json",
+          "sha256": "4281b27a7bc8a1842c11eb2107d431b24c8fef4c008e9f5937cfe3b004be51b4"
+        },
+        {
+          "bytes": 17,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/staged/assets/identity/replaced.json",
+          "sha256": "3acb38af1d340ee5faf77a06b8a7697aaf54a4ec9eca2a87d2522b40ad24432a"
+        },
+        {
+          "bytes": 19,
+          "path": ".identity/sentinel",
+          "sha256": "58e0adf2803b2db7f48616f54de2ac47884d5a90df0aaf44aaf65eeee7639a17"
+        },
+        {
+          "bytes": 1139,
+          "path": "assets/identity/.identity-manifest.json",
+          "sha256": "7464b1678c1685965e02cb1e8de3cd473d634fe01ac35890a2c8196a27fcb187"
+        },
+        {
+          "bytes": 16,
+          "path": "assets/identity/created.json",
+          "sha256": "4281b27a7bc8a1842c11eb2107d431b24c8fef4c008e9f5937cfe3b004be51b4"
+        },
+        {
+          "bytes": 17,
+          "path": "assets/identity/replaced.json",
+          "sha256": "3acb38af1d340ee5faf77a06b8a7697aaf54a4ec9eca2a87d2522b40ad24432a"
+        }
+      ],
+      "before": [
+        {
+          "bytes": 19,
+          "path": ".identity/sentinel",
+          "sha256": "58e0adf2803b2db7f48616f54de2ac47884d5a90df0aaf44aaf65eeee7639a17"
+        },
+        {
+          "bytes": 12,
+          "path": "assets/identity/.identity-manifest.json",
+          "sha256": "917e1297245f39d0b7b5fcde724a295a9767397338f0f6cdaf0e2e1bd2d19baf"
+        },
+        {
+          "bytes": 11,
+          "path": "assets/identity/removed.json",
+          "sha256": "3dd218ef3e09019e7e0bdeb8cd00abbbb7729bf68670b793309bc2698f1bc349"
+        },
+        {
+          "bytes": 12,
+          "path": "assets/identity/replaced.json",
+          "sha256": "784347f9b4a4e09ad78603261d114f7bc3ccec35fd9a03991ad870b61da94799"
+        }
+      ],
+      "canonicalSourcePreserved": true,
+      "coordination": "Both stores passed recovery_required=false and current-output preconditions; writer one was released and joined before writer two was released from that same boundary.",
+      "externalSentinelPreserved": true,
+      "firstWriter": {
+        "success": true
+      },
+      "generatedTreeAfterFirst": [
+        {
+          "bytes": 1139,
+          "path": ".identity-manifest.json",
+          "sha256": "7464b1678c1685965e02cb1e8de3cd473d634fe01ac35890a2c8196a27fcb187"
+        },
+        {
+          "bytes": 16,
+          "path": "created.json",
+          "sha256": "4281b27a7bc8a1842c11eb2107d431b24c8fef4c008e9f5937cfe3b004be51b4"
+        },
+        {
+          "bytes": 17,
+          "path": "replaced.json",
+          "sha256": "3acb38af1d340ee5faf77a06b8a7697aaf54a4ec9eca2a87d2522b40ad24432a"
+        }
+      ],
+      "generatedTreeAfterSecond": [
+        {
+          "bytes": 1139,
+          "path": ".identity-manifest.json",
+          "sha256": "7464b1678c1685965e02cb1e8de3cd473d634fe01ac35890a2c8196a27fcb187"
+        },
+        {
+          "bytes": 16,
+          "path": "created.json",
+          "sha256": "4281b27a7bc8a1842c11eb2107d431b24c8fef4c008e9f5937cfe3b004be51b4"
+        },
+        {
+          "bytes": 17,
+          "path": "replaced.json",
+          "sha256": "3acb38af1d340ee5faf77a06b8a7697aaf54a4ec9eca2a87d2522b40ad24432a"
+        }
+      ],
+      "generatedTreeUnchangedBySecond": true,
+      "pendingAfterFirst": false,
+      "pendingAfterSecond": true,
+      "recoveryAfterBoth": {
+        "diagnosticCodes": [
+          "IDN2324"
+        ],
+        "kind": "Failed",
+        "success": false
+      },
+      "scenario": "same-plan-two-writers",
+      "secondWriter": {
+        "diagnosticCodes": [
+          "IDN2339"
+        ],
+        "kind": "Failed",
+        "success": false
+      }
+    },
+    {
+      "afterSecondRecoverer": [
+        {
+          "bytes": 19,
+          "path": ".identity/sentinel",
+          "sha256": "58e0adf2803b2db7f48616f54de2ac47884d5a90df0aaf44aaf65eeee7639a17"
+        },
+        {
+          "bytes": 12,
+          "path": "assets/identity/.identity-manifest.json",
+          "sha256": "917e1297245f39d0b7b5fcde724a295a9767397338f0f6cdaf0e2e1bd2d19baf"
+        },
+        {
+          "bytes": 11,
+          "path": "assets/identity/removed.json",
+          "sha256": "3dd218ef3e09019e7e0bdeb8cd00abbbb7729bf68670b793309bc2698f1bc349"
+        },
+        {
+          "bytes": 12,
+          "path": "assets/identity/replaced.json",
+          "sha256": "784347f9b4a4e09ad78603261d114f7bc3ccec35fd9a03991ad870b61da94799"
+        }
+      ],
+      "before": [
+        {
+          "bytes": 12,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/backup/assets/identity/.identity-manifest.json",
+          "sha256": "917e1297245f39d0b7b5fcde724a295a9767397338f0f6cdaf0e2e1bd2d19baf"
+        },
+        {
+          "bytes": 11,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/backup/assets/identity/removed.json",
+          "sha256": "3dd218ef3e09019e7e0bdeb8cd00abbbb7729bf68670b793309bc2698f1bc349"
+        },
+        {
+          "bytes": 12,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/backup/assets/identity/replaced.json",
+          "sha256": "784347f9b4a4e09ad78603261d114f7bc3ccec35fd9a03991ad870b61da94799"
+        },
+        {
+          "bytes": 3376,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/journal.json",
+          "sha256": "9d9e4d15e50a879ab1510b4fc603c4731a2a83e49858982a82fcdff5cfdb7ecb"
+        },
+        {
+          "bytes": 1139,
+          "path": ".cache/identity/transactions/0e9dbffe5c8a85de476de9f7306bd7cb3ddfc27aa1968a13dbd510b9634382af/staged/assets/identity/.identity-manifest.json",
+          "sha256": "7464b1678c1685965e02cb1e8de3cd473d634fe01ac35890a2c8196a27fcb187"
+        },
+        {
+          "bytes": 19,
+          "path": ".identity/sentinel",
+          "sha256": "58e0adf2803b2db7f48616f54de2ac47884d5a90df0aaf44aaf65eeee7639a17"
+        },
+        {
+          "bytes": 12,
+          "path": "assets/identity/.identity-manifest.json",
+          "sha256": "917e1297245f39d0b7b5fcde724a295a9767397338f0f6cdaf0e2e1bd2d19baf"
+        },
+        {
+          "bytes": 16,
+          "path": "assets/identity/created.json",
+          "sha256": "4281b27a7bc8a1842c11eb2107d431b24c8fef4c008e9f5937cfe3b004be51b4"
+        },
+        {
+          "bytes": 11,
+          "path": "assets/identity/removed.json",
+          "sha256": "3dd218ef3e09019e7e0bdeb8cd00abbbb7729bf68670b793309bc2698f1bc349"
+        },
+        {
+          "bytes": 17,
+          "path": "assets/identity/replaced.json",
+          "sha256": "3acb38af1d340ee5faf77a06b8a7697aaf54a4ec9eca2a87d2522b40ad24432a"
+        }
+      ],
+      "canonicalSourcePreserved": true,
+      "coordination": "Both stores completed full batch preflight over the same interrupted journal before either applied cached recovery; recoverer one was released and joined before recoverer two was released.",
+      "externalSentinelPreserved": true,
+      "firstRecoveredTransactions": 1,
+      "firstRecoverer": {
+        "success": true
+      },
+      "generatedTreeAfterFirst": [
+        {
+          "bytes": 12,
+          "path": ".identity-manifest.json",
+          "sha256": "917e1297245f39d0b7b5fcde724a295a9767397338f0f6cdaf0e2e1bd2d19baf"
+        },
+        {
+          "bytes": 11,
+          "path": "removed.json",
+          "sha256": "3dd218ef3e09019e7e0bdeb8cd00abbbb7729bf68670b793309bc2698f1bc349"
+        },
+        {
+          "bytes": 12,
+          "path": "replaced.json",
+          "sha256": "784347f9b4a4e09ad78603261d114f7bc3ccec35fd9a03991ad870b61da94799"
+        }
+      ],
+      "generatedTreeAfterSecond": [
+        {
+          "bytes": 12,
+          "path": ".identity-manifest.json",
+          "sha256": "917e1297245f39d0b7b5fcde724a295a9767397338f0f6cdaf0e2e1bd2d19baf"
+        },
+        {
+          "bytes": 11,
+          "path": "removed.json",
+          "sha256": "3dd218ef3e09019e7e0bdeb8cd00abbbb7729bf68670b793309bc2698f1bc349"
+        },
+        {
+          "bytes": 12,
+          "path": "replaced.json",
+          "sha256": "784347f9b4a4e09ad78603261d114f7bc3ccec35fd9a03991ad870b61da94799"
+        }
+      ],
+      "generatedTreeUnchangedBySecond": true,
+      "pendingAfterBoth": false,
+      "scenario": "two-recoverers-one-journal",
+      "secondRecoveredTransactions": 1,
+      "secondRecoverer": {
+        "success": true
+      },
+      "workspaceAbsentBeforeSecond": true
+    }
+  ],
+  "limits": [
+    "The hooks deliberately expose a supported interleaving; they do not claim observed spontaneous production timing.",
+    "No simultaneous destructive writes or corrupted final generated output were observed in these two schedules.",
+    "Results establish shared prechecks are not exclusive ownership; they do not establish arbitrary hostile filesystem safety, process-kill safety, power-loss durability, or every possible writer interleaving.",
+    "Linux local execution only; process-level ownership and native Windows/macOS coverage belong to candidate regression validation."
+  ],
+  "proposedRegressionMatrix": [
+    "Writer versus writer on one repository; a contender returns a clear busy diagnostic and changes no outputs, staging, journal, or backup.",
+    "Generation versus recovery and recovery versus recovery use the same ownership authority.",
+    "Custom output roots share the repository transaction cache and therefore contend under one repository authority.",
+    "Canonical path aliases resolve to the same lock authority.",
+    "Current destination/recovery preconditions are evaluated again only after ownership acquisition; stale plans reject without a transaction workspace.",
+    "Ownership covers no-op commits, complete generation, complete recovery preflight/application/cleanup, and releases on every Result error.",
+    "A child process holding ownership excludes a second process; termination releases kernel ownership without deleting or stealing the persistent lock inode.",
+    "Unexpected, linked, reparse, nonregular, or unsupported lock entries fail without mutating canonical or external files.",
+    "Read-only verification does not create cache directories or acquire a writer lock."
+  ],
+  "reproduction": {
+    "status": "Instructions for replay, not a claim of an additional execution.",
+    "preconditions": [
+      "Use an existing reviewed Identity checkout containing this receipt and patch, plus a new empty sibling location outside that checkout. Replace the two placeholder paths before executing.",
+      "The immutable baseline must be available in the reviewed checkout Git object store; use the repository-pinned Rust 1.97.1 toolchain and Cargo.lock.",
+      "The patch is intentionally applied only to the disposable baseline source tree, never to the candidate production source.",
+      "Executable hashes identify the observed local test build. Compiler/build path differences may change executable bytes; source/patch hashes and fixture observations are the replay boundaries."
+    ],
+    "commands": [
+      "identity_checkout=\"/path/to/reviewed/identity\"",
+      "baseline_checkout=\"/path/to/fresh/identity-writer-baseline\"",
+      "git -C \"$identity_checkout\" archive --format=tar --output=\"$baseline_checkout.tar\" \"417865a449678f887237d94aaa019a10bcc16612\"",
+      "mkdir \"$baseline_checkout\"",
+      "tar --extract --file=\"$baseline_checkout.tar\" --directory=\"$baseline_checkout\"",
+      "git -C \"$baseline_checkout\" apply \"$identity_checkout/docs/evidence/identity-writer-serialization-baseline-2026-10-19.patch\"",
+      "cd \"$baseline_checkout\"",
+      "cargo test --locked q79_coordinated -- --nocapture --test-threads=1"
+    ],
+    "expectedEvidence": "Two passing bounded coordination tests emit Q79_BASELINE_OBSERVATION JSON. Compare scenario names, diagnostics, ownership-precheck facts, generated file inventories, source preservation, and recovery reports with this receipt. No production timing or corruption claim follows."
+  }
+}

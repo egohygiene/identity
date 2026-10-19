@@ -5,6 +5,8 @@ use super::*;
 use crate::compiler::{ManifestOutput, PlanAction};
 use tempfile::TempDir;
 
+mod process_tests;
+
 const OUTPUT: &str = "assets/identity";
 
 fn write_fixture(path: &Path, bytes: &[u8]) -> std::io::Result<()> {
@@ -148,7 +150,16 @@ fn rewrite(transaction: &Path, mut journal: TransactionJournal, rehash: bool) ->
 }
 
 fn tree(root: &Path) -> BTreeMap<PathBuf, Vec<u8>> {
-    fn collect(root: &Path, path: &Path, entries: &mut BTreeMap<PathBuf, Vec<u8>>) {
+    tree_with_writer_lock_metadata(root, false)
+}
+
+fn tree_with_writer_lock_metadata(root: &Path, metadata_only: bool) -> BTreeMap<PathBuf, Vec<u8>> {
+    fn collect(
+        root: &Path,
+        path: &Path,
+        entries: &mut BTreeMap<PathBuf, Vec<u8>>,
+        metadata_only: bool,
+    ) {
         for entry in fs::read_dir(path).unwrap() {
             let entry = entry.unwrap();
             let path = entry.path();
@@ -166,10 +177,19 @@ fn tree(root: &Path) -> BTreeMap<PathBuf, Vec<u8>> {
                     .as_bytes()
                     .to_vec()
             } else if kind.is_dir() {
-                collect(root, &path, entries);
+                collect(root, &path, entries, metadata_only);
                 Vec::new()
             } else if kind.is_file() {
-                fs::read(&path).unwrap()
+                if metadata_only
+                    && path.strip_prefix(root).unwrap() == Path::new(".cache/identity/writer.lock")
+                {
+                    // Windows native locks can deny byte reads while held. Keep
+                    // the path/type and length in active-owner snapshots; process
+                    // tests verify exact coordination bytes after releasing it.
+                    path.metadata().unwrap().len().to_le_bytes().to_vec()
+                } else {
+                    fs::read(&path).unwrap()
+                }
             } else {
                 b"non-regular filesystem entry".to_vec()
             };
@@ -177,8 +197,20 @@ fn tree(root: &Path) -> BTreeMap<PathBuf, Vec<u8>> {
         }
     }
     let mut result = BTreeMap::new();
-    collect(root, root, &mut result);
+    collect(root, root, &mut result, metadata_only);
     result
+}
+
+fn assert_only_writer_lock_created(root: &Path, mut before: BTreeMap<PathBuf, Vec<u8>>) {
+    let lock = PathBuf::from(".cache/identity/writer.lock");
+    assert!(!before.contains_key(&lock));
+    assert_eq!(fs::read(root.join(&lock)).unwrap(), b"");
+    before.insert(lock, Vec::new());
+    assert_eq!(
+        tree(root),
+        before,
+        "only the persistent empty coordination file may appear"
+    );
 }
 
 fn assert_blocked_without_mutation(root: &Path) {
@@ -604,7 +636,7 @@ fn commit_never_reuses_a_preexisting_empty_or_populated_workspace() {
         let error = store.commit(&plan, &artifacts, &manifest).unwrap_err();
         assert_eq!(error.kind, FailureKind::Blocked);
         assert_eq!(error.diagnostics[0].code, "IDN2301");
-        assert_eq!(tree(root.path()), before, "{marker:?}");
+        assert_only_writer_lock_created(root.path(), before);
     }
 }
 
@@ -833,7 +865,7 @@ fn transaction_paths_reject_special_entries_without_opening_them() {
         let before = tree(root.path());
         assert!(store.checked_transaction_path(&destination).is_err());
         assert!(store.recover().is_err());
-        assert_eq!(tree(root.path()), before, "{relative}");
+        assert_only_writer_lock_created(root.path(), before);
     }
 }
 

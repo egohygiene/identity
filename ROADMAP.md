@@ -40,7 +40,7 @@ updated: 2026-10-18
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #99 completed through PRs #114/#117/#118; checkpoint 3 merged at `8816294e9d9c43f250d771e9fa627c4b1861e78a`. #78 transaction-path confinement (IDN-Q17) is the active authorized issue. #79 writer serialization follows its reviewed completion.
+**Current gate:** #99 completed through PRs #114/#117/#118. #78 transaction-path confinement merged through #119 at `417865a449678f887237d94aaa019a10bcc16612` and is closed. #79 writer serialization (IDN-Q18) is the active authorized issue; #77 follows its reviewed completion.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -422,7 +422,7 @@ issues: [77]
 
 <!-- roadmap-step
 id: IDN-Q17
-status: active
+status: complete
 depends_on: [IDN-Q12]
 issues: [78]
 -->
@@ -432,13 +432,13 @@ issues: [78]
 
 **Exit criteria:**
 
-- [ ] Runtime redirection evidence is recorded, unsafe paths fail before writes, and valid generation/recovery remains supported.
+- [x] Runtime redirection evidence is recorded, unsafe paths fail before writes, and valid generation/recovery remains supported.
 
-**Evidence and scope:** [#78](https://github.com/egohygiene/identity/issues/78) is active from main `8816294e9d9c43f250d771e9fa627c4b1861e78a`. Current serialized Unix cache-symlink cases are already guarded by #73; the candidate records actual runtime evidence and tightens per-operation checks, metadata failure handling and Windows reparse-point rejection. The fixed repository-local cache remains the supported contract; redirected external caches are refused. IDN-Q17 stays active pending review/merge; per-consumer writer serialization remains IDN-Q18/#79.
+**Evidence and scope:** [#78](https://github.com/egohygiene/identity/issues/78) closed through [PR #119](https://github.com/egohygiene/identity/pull/119), merged at `417865a449678f887237d94aaa019a10bcc16612`. The dated confinement review/receipt distinguishes baseline rejection from inconclusive timing probes. Per-operation checks, fresh workspace/file reservations, metadata failure handling and all Windows reparse-point rejection pass fresh Linux/macOS/Windows release gates, both Windows junction matrices, 84 Rust tests and 138 Python cases (136 pass/two existing skips on Linux). The fixed local cache refuses external redirection. Writer serialization remains IDN-Q18/#79.
 
 <!-- roadmap-step
 id: IDN-Q18
-status: blocked
+status: active
 depends_on: [IDN-Q17]
 issues: [79]
 -->
@@ -450,7 +450,7 @@ issues: [79]
 
 - [ ] Coordinated writers and concurrent recovery safely reject or serialize without mixed state; interrupted locks preserve active work.
 
-**Evidence and scope:** [#79](https://github.com/egohygiene/identity/issues/79). Record pre-fix behavior and retain bounded durability claims.
+**Evidence and scope:** [#79](https://github.com/egohygiene/identity/issues/79) is active from main `417865a449678f887237d94aaa019a10bcc16612`. The [instrumented baseline receipt](docs/evidence/identity-writer-serialization-baseline-2026-10-19.json) reproduces stale writer prechecks leaving an unjournaled workspace and duplicate recovery reporting, without observed output corruption. The candidate adds one persistent repository-wide native lock shared by generation/recovery, with bounded child-process regressions and proposed ADR-0026. See the [review](docs/reviews/writer-serialization-2026-10-19.md). Keep Q18 active until review/merge; no hostile-filesystem or power-loss guarantee is inferred.
 
 <!-- roadmap-step
 id: IDN-Q19

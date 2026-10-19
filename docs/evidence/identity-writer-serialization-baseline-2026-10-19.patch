@@ -1,0 +1,211 @@
+--- a/src/compiler/filesystem.rs
++++ b/src/compiler/filesystem.rs
+@@ -26,6 +26,8 @@
+     output_root: String,
+     fail_after_mutations: Option<usize>,
+     completed_mutations: usize,
++    #[cfg(test)]
++    q79_coordination: Option<(std::sync::Arc<tests::Q79Coordination>, usize)>,
+ }
+ 
+ impl LocalArtifactStore {
+@@ -71,6 +73,8 @@
+             output_root: output_root.to_owned(),
+             fail_after_mutations: None,
+             completed_mutations: 0,
++            #[cfg(test)]
++            q79_coordination: None,
+         })
+     }
+ 
+@@ -789,6 +793,11 @@
+             }
+         }
+ 
++        #[cfg(test)]
++        if let Some((coordination, slot)) = &self.q79_coordination {
++            coordination.wait_for_release(*slot);
++        }
++
+         if !plan.has_mutations() {
+             verify_manifested_outputs(self, manifest)?;
+             return Ok(());
+@@ -976,6 +985,11 @@
+                 }
+             }
+         }
++        #[cfg(test)]
++        if let Some((coordination, slot)) = &self.q79_coordination {
++            coordination.wait_for_release(*slot);
++        }
++
+         let mut report = RecoveryReport::default();
+         for transaction in &transactions {
+             self.apply_recovery(transaction)?;
+--- a/src/compiler/filesystem/tests.rs
++++ b/src/compiler/filesystem/tests.rs
+@@ -914,3 +914,164 @@
+         assert_eq!(tree(external.path()), external_before, "{location}");
+     }
+ }
++
++// Q79 BASELINE-ONLY COORDINATION. This code is not part of the candidate.
++// Both stores complete their existing prechecks before the test releases either.
++#[derive(Debug)]
++pub(crate) struct Q79Coordination {
++    arrived: std::sync::Barrier,
++    permits: std::sync::Mutex<[bool; 2]>,
++    changed: std::sync::Condvar,
++}
++
++impl Q79Coordination {
++    fn new() -> std::sync::Arc<Self> {
++        std::sync::Arc::new(Self {
++            arrived: std::sync::Barrier::new(3),
++            permits: std::sync::Mutex::new([false; 2]),
++            changed: std::sync::Condvar::new(),
++        })
++    }
++
++    pub(crate) fn wait_for_release(&self, slot: usize) {
++        self.arrived.wait();
++        let permits = self.permits.lock().unwrap();
++        let (permits, timeout) = self.changed.wait_timeout_while(
++            permits,
++            std::time::Duration::from_secs(20),
++            |permits| !permits[slot],
++        ).unwrap();
++        assert!(!timeout.timed_out() && permits[slot], "bounded coordination timed out");
++    }
++
++    fn release(&self, slot: usize) {
++        self.permits.lock().unwrap()[slot] = true;
++        self.changed.notify_all();
++    }
++}
++
++fn q79_result<T>(result: &CompilerResult<T>) -> serde_json::Value {
++    match result {
++        Ok(_) => serde_json::json!({"success": true}),
++        Err(error) => serde_json::json!({
++            "success": false,
++            "kind": format!("{:?}", error.kind),
++            "diagnosticCodes": error.diagnostics.iter().map(|diagnostic| diagnostic.code.clone()).collect::<Vec<_>>()
++        }),
++    }
++}
++
++fn q79_inventory(root: &Path) -> serde_json::Value {
++    serde_json::Value::Array(tree(root).into_iter().map(|(path, bytes)| {
++        serde_json::json!({"path": path.to_str().unwrap(), "sha256": sha256_hex(&bytes), "bytes": bytes.len()})
++    }).collect())
++}
++
++#[test]
++fn q79_coordinated_same_plan_writers_baseline() {
++    let root = TempDir::new().unwrap();
++    let external = TempDir::new().unwrap();
++    write_fixture(&root.path().join(".identity/sentinel"), b"canonical unchanged").unwrap();
++    write_fixture(&external.path().join("sentinel"), b"external unchanged").unwrap();
++    let source_before = tree(&root.path().join(".identity"));
++    let external_before = tree(external.path());
++    let (plan, artifacts, manifest) = fixture(root.path(), OUTPUT);
++    let coordination = Q79Coordination::new();
++    let first = LocalArtifactStore::new(root.path()).unwrap();
++    let second = LocalArtifactStore::new(root.path()).unwrap();
++    let before = q79_inventory(root.path());
++    let (first_result, second_result, generated_after_first, generated_after_second, pending_after_first, pending_after_second) = std::thread::scope(|scope| {
++        let mut first = first;
++        let mut second = second;
++        first.q79_coordination = Some((coordination.clone(), 0));
++        second.q79_coordination = Some((coordination.clone(), 1));
++        let plan_ref = &plan;
++        let artifacts_ref = &artifacts;
++        let manifest_ref = &manifest;
++        let a = scope.spawn(move || first.commit(plan_ref, artifacts_ref, manifest_ref));
++        let b = scope.spawn(move || second.commit(plan_ref, artifacts_ref, manifest_ref));
++        coordination.arrived.wait();
++        coordination.release(0);
++        let first_result = a.join().unwrap();
++        let generated_after_first = q79_inventory(&root.path().join(OUTPUT));
++        let pending_after_first = LocalArtifactStore::new(root.path()).unwrap().recovery_required().unwrap();
++        coordination.release(1);
++        let second_result = b.join().unwrap();
++        let generated_after_second = q79_inventory(&root.path().join(OUTPUT));
++        let pending_after_second = LocalArtifactStore::new(root.path()).unwrap().recovery_required().unwrap();
++        (first_result, second_result, generated_after_first, generated_after_second, pending_after_first, pending_after_second)
++    });
++    assert!(first_result.is_ok(), "{first_result:?}");
++    assert_eq!(source_before, tree(&root.path().join(".identity")));
++    assert_eq!(external_before, tree(external.path()));
++    let after = q79_inventory(root.path());
++    let recovery_result = LocalArtifactStore::new(root.path()).unwrap().recover();
++    println!("Q79_BASELINE_OBSERVATION {}", serde_json::json!({
++        "scenario": "same-plan-two-writers",
++        "coordination": "Both stores passed recovery_required=false and current-output preconditions; writer one was released and joined before writer two was released from that same boundary.",
++        "firstWriter": q79_result(&first_result),
++        "secondWriter": q79_result(&second_result),
++        "pendingAfterFirst": pending_after_first,
++        "pendingAfterSecond": pending_after_second,
++        "generatedTreeAfterFirst": generated_after_first,
++        "generatedTreeAfterSecond": generated_after_second,
++        "generatedTreeUnchangedBySecond": generated_after_first == generated_after_second,
++        "recoveryAfterBoth": q79_result(&recovery_result),
++        "canonicalSourcePreserved": true,
++        "externalSentinelPreserved": true,
++        "before": before,
++        "afterSecondWriter": after
++    }));
++}
++
++#[test]
++fn q79_coordinated_two_recoverers_baseline() {
++    let root = TempDir::new().unwrap();
++    let external = TempDir::new().unwrap();
++    write_fixture(&root.path().join(".identity/sentinel"), b"canonical unchanged").unwrap();
++    write_fixture(&external.path().join("sentinel"), b"external unchanged").unwrap();
++    let source_before = tree(&root.path().join(".identity"));
++    let external_before = tree(external.path());
++    let transaction = interrupted(root.path(), OUTPUT, 2);
++    let coordination = Q79Coordination::new();
++    let first = LocalArtifactStore::new(root.path()).unwrap();
++    let second = LocalArtifactStore::new(root.path()).unwrap();
++    let before = q79_inventory(root.path());
++    let (first_result, second_result, generated_after_first, generated_after_second, workspace_absent_before_second) = std::thread::scope(|scope| {
++        let mut first = first;
++        let mut second = second;
++        first.q79_coordination = Some((coordination.clone(), 0));
++        second.q79_coordination = Some((coordination.clone(), 1));
++        let a = scope.spawn(move || first.recover());
++        let b = scope.spawn(move || second.recover());
++        coordination.arrived.wait();
++        coordination.release(0);
++        let first_result = a.join().unwrap();
++        let generated_after_first = q79_inventory(&root.path().join(OUTPUT));
++        let workspace_absent_before_second = !transaction.exists();
++        coordination.release(1);
++        let second_result = b.join().unwrap();
++        let generated_after_second = q79_inventory(&root.path().join(OUTPUT));
++        (first_result, second_result, generated_after_first, generated_after_second, workspace_absent_before_second)
++    });
++    assert!(first_result.is_ok(), "{first_result:?}");
++    assert_eq!(source_before, tree(&root.path().join(".identity")));
++    assert_eq!(external_before, tree(external.path()));
++    println!("Q79_BASELINE_OBSERVATION {}", serde_json::json!({
++        "scenario": "two-recoverers-one-journal",
++        "coordination": "Both stores completed full batch preflight over the same interrupted journal before either applied cached recovery; recoverer one was released and joined before recoverer two was released.",
++        "firstRecoverer": q79_result(&first_result),
++        "firstRecoveredTransactions": first_result.as_ref().ok().map(|report| report.recovered_transactions),
++        "secondRecoverer": q79_result(&second_result),
++        "secondRecoveredTransactions": second_result.as_ref().ok().map(|report| report.recovered_transactions),
++        "workspaceAbsentBeforeSecond": workspace_absent_before_second,
++        "generatedTreeAfterFirst": generated_after_first,
++        "generatedTreeAfterSecond": generated_after_second,
++        "generatedTreeUnchangedBySecond": generated_after_first == generated_after_second,
++        "pendingAfterBoth": LocalArtifactStore::new(root.path()).unwrap().recovery_required().unwrap(),
++        "canonicalSourcePreserved": true,
++        "externalSentinelPreserved": true,
++        "before": before,
++        "afterSecondRecoverer": q79_inventory(root.path())
++    }));
++}
