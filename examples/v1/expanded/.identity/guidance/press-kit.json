@@ -1,0 +1,98 @@
+{
+  "$schema": "../../../../../contracts/v1/press-kit.schema.json",
+  "schema": "identity.press-kit-source/v1",
+  "boilerplates": [
+    {
+      "id": "short",
+      "kind": "short",
+      "text": "Example Expanded demonstrates reviewed identity source and selected generated packages.",
+      "governance": {
+        "subject": "press-kit:boilerplate:short",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-press-short-approval"
+      }
+    },
+    {
+      "id": "long",
+      "kind": "long",
+      "text": "Example Expanded is a fictional repository for learning Identity v1. Its local token layers, governed artwork and guidance show how maintainers can keep source facts reviewable while generating reusable packages.",
+      "governance": {
+        "subject": "press-kit:boilerplate:long",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-press-long-approval"
+      }
+    }
+  ],
+  "facts": [],
+  "links": [
+    {
+      "id": "website",
+      "label": "Example website",
+      "url": "https://example.invalid/expanded",
+      "kind": "website",
+      "governance": {
+        "subject": "press-kit:link:website",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-press-website-approval"
+      }
+    }
+  ],
+  "contacts": [
+    {
+      "id": "media",
+      "label": "Example media contact",
+      "kind": "email",
+      "value": "press@example.invalid",
+      "notes": "Fictional contact for demonstrating the contract.",
+      "governance": {
+        "subject": "press-kit:contact:media",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-press-media-approval"
+      }
+    }
+  ],
+  "team": [],
+  "assets": [
+    {
+      "id": "mark",
+      "assetId": "mark",
+      "label": "Example mark",
+      "notes": "Use with the reviewed usage guidance.",
+      "governance": {
+        "subject": "press-kit:asset:mark",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-press-mark-approval"
+      }
+    }
+  ]
+}

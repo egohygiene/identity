@@ -2,7 +2,9 @@
 
 ## Source boundary
 
-Every `identity.project/v1` source names two required, local guidance documents:
+Every `identity.project/v1` source declares `documents.guidance.voice` and
+`documents.guidance.usage`. Each key names a local document or is explicitly
+`null` when that guidance is not declared:
 
 - `identity.voice/v1` records purpose, positioning, audience, personality,
   characteristics, contextual tone and mechanics, examples, anti-examples, and
@@ -10,9 +12,21 @@ Every `identity.project/v1` source names two required, local guidance documents:
 - `identity.usage/v1` records renderer-ready do/don't rules, current downloads,
   legacy assets, accessibility requirements, and legal/license notes.
 
-Both documents are canonical consumer-owned source under `.identity/guidance/`.
+Adopted documents are canonical consumer-owned source under `.identity/guidance/`.
 The renderer reads them only after the complete project validates. It never
 generates, paraphrases, or overwrites reviewed prose.
+
+Null voice and usage are independent and produce no fabricated text or approval.
+The source schema, stdlib validator, Rust consumer and standalone renderer agree
+on this state. Existing populated documents retain complete validation and
+governance requirements. Missing keys, invalid paths and malformed adopted source
+remain errors. A requested `--context` still must identify an actual declared
+voice context; absence does not invent one. An adopted dependent projection must
+meet its own required usage/voice inputs or report an actionable error.
+
+This executable omission behavior requires the post-`v1.0.0` #99 checkpoint 2
+implementation and matching scripts; pin its reviewed immutable commit until a
+new stable release contains it.
 
 ## Governance envelope
 
@@ -87,7 +101,10 @@ top-level keys: a withheld foundation, localization, accessibility, or legal
 record is `null`. Markdown and HTML omit that section; HTML uses language `und`
 when no public localization declares a language. Public context examples,
 anti-examples, and characteristic references may be empty after filtering.
-Review models retain the complete required records and source array constraints.
+Review models retain the complete records and source array constraints for
+declared documents. An undeclared document uses empty collections and null
+singleton fields in both public and review models; absence never weakens the
+schemas or governance of a supplied document.
 Raw voice/usage package projections omit withheld object fields. Consumers must
 not interpret withheld guidance as newly reviewed prose or missing canonical source.
 

@@ -103,6 +103,63 @@ class IdentityV1ValidatorTests(unittest.TestCase):
     def test_complete_v1_fixture_is_valid(self) -> None:
         self.assertEqual(validator.validate_identity(VALID_FIXTURE), [])
 
+    def test_guidance_paths_accept_independent_explicit_null_declarations(self) -> None:
+        for declared_voice in (False, True):
+            for declared_usage in (False, True):
+                with (
+                    self.subTest(voice=declared_voice, usage=declared_usage),
+                    tempfile.TemporaryDirectory() as temporary,
+                ):
+                    repository = Path(temporary) / "consumer"
+                    shutil.copytree(VALID_FIXTURE, repository)
+                    project_path = repository / ".identity/identity.json"
+                    project = json.loads(project_path.read_text(encoding="utf-8"))
+                    for field, declared in (("voice", declared_voice), ("usage", declared_usage)):
+                        if not declared:
+                            (repository / project["documents"]["guidance"][field]).unlink()
+                            project["documents"]["guidance"][field] = None
+                    write_json(project_path, project)
+                    diagnostics, snapshot = validator.validate_snapshot(repository)
+                    self.assertEqual(diagnostics, [])
+                    snapshot.verify()
+                    for field, declared in (("voice", declared_voice), ("usage", declared_usage)):
+                        self.assertEqual(f".identity/guidance/{field}.json" in snapshot.files, declared)
+
+    def test_optional_guidance_keeps_required_keys_and_present_path_diagnostics(self) -> None:
+        for field in ("voice", "usage"):
+            for value in ("missing-key", "", False, 7, "../escape.json", ".identity/guidance/missing.json"):
+                with (
+                    self.subTest(field=field, value=value),
+                    tempfile.TemporaryDirectory() as temporary,
+                ):
+                    repository = Path(temporary) / "consumer"
+                    shutil.copytree(VALID_FIXTURE, repository)
+                    project_path = repository / ".identity/identity.json"
+                    project = json.loads(project_path.read_text(encoding="utf-8"))
+                    if value == "missing-key":
+                        del project["documents"]["guidance"][field]
+                    else:
+                        project["documents"]["guidance"][field] = value
+                    write_json(project_path, project)
+                    diagnostics = validator.validate_identity(repository)
+                    expected = "IDN1101" if value == "missing-key" else "IDN1003"
+                    self.assertIn(expected, {item.code for item in diagnostics})
+
+    def test_null_guidance_does_not_validate_unadopted_files_or_change_digest_inventory(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            project_path = repository / ".identity/identity.json"
+            project = json.loads(project_path.read_text(encoding="utf-8"))
+            project["documents"]["guidance"] = {"voice": None, "usage": None}
+            write_json(project_path, project)
+            unused = repository / ".identity/guidance/voice.json"
+            unused.write_text("unadopted source bytes", encoding="utf-8")
+            self.assertEqual(validator.validate_identity(repository), [])
+            before = validator.canonical_source_digest(repository)
+            unused.write_text("changed unadopted source bytes", encoding="utf-8")
+            self.assertNotEqual(validator.canonical_source_digest(repository), before)
+
     def test_checked_in_invalid_fixtures_emit_stable_codes(self) -> None:
         for fixture_path in sorted(INVALID_FIXTURES.glob("*.json")):
             with (

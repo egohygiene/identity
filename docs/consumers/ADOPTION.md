@@ -4,10 +4,11 @@ This is the golden path for adding a repository, product, or publication to the
 Identity system after `v1.0.0`. It turns a one-off branding exercise into a
 reviewable source-and-projection lifecycle.
 
-The [#99 checkpoint 1 field review](../reviews/identity-fields-2026-10-18.md)
-maps existing authoring fields and records gaps between schema acceptance,
-source validation, generation and public output. Its recommendations await
-review; it does not add new required fields or claim fleet readiness.
+Start with the [authoring worksheet](AUTHORING.md) and the
+[minimal/expanded examples](../../examples/v1/README.md). They map existing
+fields to their authorities and selected consumers. The
+[#99 checkpoint 1 field review](../reviews/identity-fields-2026-10-18.md) retains
+the dated audit; its output gaps remain tracked separately from source authoring.
 
 ## Outcome and authority
 
@@ -62,6 +63,13 @@ Snapshot organization defaults locally and pin their SHA-256 digest. Product
 differences belong in the final override layer and require a reason plus an
 approval identifier. Candidates and references are separate trust zones; do
 not promote either by copying it into generated output.
+
+The `documents.guidance.voice` and `usage` keys stay required; use explicit
+`null` independently for guidance that is not adopted. A supplied document still
+needs its full existing governance and validation. Other optional document
+properties are omitted until selected. Empty or malformed paths are errors.
+See the [source/producer capability table](../contracts/IDENTITY_V1.md#source-authority-and-producer-capabilities)
+before treating a validated asset format as compiler-supported input.
 
 ## 3. Preserve human creative authority
 

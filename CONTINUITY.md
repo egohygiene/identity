@@ -7,17 +7,19 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-19T09:59:30Z'
+  updated_at: '2026-10-19T10:39:02Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Reconcile and review the completed issue 99 checkpoint 1 audit before contract implementation.
+  purpose: 'Deliver issue 99 checkpoint 2: executable nullable guidance, producer diagnostics and authoring examples.'
   includes:
-  - Field and schema inventory, dated probe evidence, main reconciliation, and the next checkpoint review.
+  - Aligned validator/producer/projection semantics, minimal/expanded synthetic source, guided worksheet and proposed
+    ADR-0025.
   excludes:
-  - Checkpoints 2/3 implementation, releases, publication, creative approvals and fleet adoption.
+  - Checkpoint 3 real-consumer proof, v1 initializer/EgoLint implementation, public-kit selection/download repairs,
+    releases and deployment.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -27,30 +29,32 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
-  - docs/reviews/identity-fields-2026-10-18.md
-  - docs/reviews/identity-source-schema-inventory-2026-10-18.md
-  - docs/evidence/identity-fields-checkpoint-1-2026-10-18.json
+  - docs/contracts/IDENTITY_V1.md
+  - docs/contracts/GUIDANCE_V1.md
+  - docs/consumers/AUTHORING.md
+  - examples/v1/README.md
+  - docs/decisions/ADR-0025-executable-minimal-authoring-core.md
   - docs/decisions/policy-reference.json
-  - docs/decisions/ADR-0001-creative-approval-human-owned.md
-  - docs/decisions/ADR-0012-local-layered-identity-v1.md
-  - docs/decisions/ADR-0013-preserve-guidance-lifecycle.md
-  - docs/decisions/ADR-0019-immutable-release-contract.md
-  - docs/adr-workflow/2026-10-18-four-digit-ids.md
-  - https://github.com/egohygiene/identity/issues/116
   - https://github.com/egohygiene/identity/issues/99
+  - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Complete the checkpoint 1 audit review and reconcile PR 114 with the merged ADR naming migration.
+  objective: Make the existing nullable source contract executable and provide tested authoring inputs without changing
+    populated-source behavior.
   success_conditions:
-  - The dated audit remains accurate and discoverable, with current roadmap state and no broken ADR links.
-  - Preserve all main ADR, policy and workflow changes and retain the checkpoint 2/3 review boundary.
+  - Voice and usage null declarations work independently; missing/malformed adopted input and governance errors
+    still fail.
+  - Source support and producer limitations are explicit; exact minimal/expanded examples validate, generate and
+    verify without changing canonical bytes.
+  - Existing populated projections, legacy fixtures, digest algorithm and approvals remain unchanged.
   active_issue:
     provider: github
     id: egohygiene/identity#99
     url: https://github.com/egohygiene/identity/issues/99
   next:
     kind: action
-    id: identity-99-checkpoint-2-sync
-    description: Sync with the maintainer on checkpoint 1 findings and D01-D06, then scope issue 99 checkpoint 2.
+    id: identity-99-checkpoint-2-review
+    description: Review the tested checkpoint 2 PR and proposed ADR-0025 with the maintainer before checkpoint 3
+      representative authoring proof.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/99
@@ -58,67 +62,69 @@ work:
     depends_on: []
 state:
   base:
-    revision: ca7e4a5552bb867191a580a17c7bc0fdc164cc23
+    revision: 1b46f01308d63f38068ce5327d36ac94b0840077
     ref: refs/heads/main
-    verified_at: '2026-10-19T09:59:30Z'
+    verified_at: '2026-10-19T10:39:02Z'
   candidate:
-    branch: codex/99-field-catalog
+    branch: codex/99-authoring-contract
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#114
-      url: https://github.com/egohygiene/identity/pull/114
+    pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-19T09:59:30Z'
-    default_branch_revision: ca7e4a5552bb867191a580a17c7bc0fdc164cc23
+    observed_at: '2026-10-19T10:39:02Z'
+    default_branch_revision: 1b46f01308d63f38068ce5327d36ac94b0840077
     issue_state: open
-    pull_request_state: open
-    notes: PR 115 merged the four-digit migration. PR 114 was the sole open draft; issue 99 remains open.
+    pull_request_state: not-applicable
+    notes: PR 114 is merged on observed main. No open PR was present before creating this checkpoint 2 candidate.
+      Issue 99 stays open.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-19T09:59:30Z'
+  reviewed_at: '2026-10-19T10:39:02Z'
   reviewed_by: Codex
   evidence:
-  - command: Independent schema inventory, field catalog and runtime source review
+  - command: cargo test --locked --all-features; targeted source_format_capabilities rerun after improving IDN3304
+      CLI text
     outcome: passed
-    observed_at: '2026-10-19T09:59:30Z'
-    notes: All 43 schema hashes and 530 declarations across 17 inventories match the audited source; main does not
-      change the audited runtime.
-  - command: cargo build --locked --bin identity; five disposable source-validator/producer probes following the
-      dated review recipe
+    observed_at: '2026-10-19T10:39:02Z'
+    notes: 73 Rust tests pass. Four guidance combinations and both exact examples exercise generation/verification;
+      CLI unsupported errors include code, path and recovery.
+  - command: python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose; test_verify_docs.py
+      rerun after correcting worksheet links
     outcome: passed
-    observed_at: '2026-10-19T09:59:30Z'
-    notes: All five expected outcomes reproduced, including failures and absent advertised output; canonical source
-      bytes stayed unchanged.
-  - command: python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose; targeted test_verify_docs.py
-      rerun after fixing links
+    observed_at: '2026-10-19T10:39:02Z'
+    notes: 127 cases ran; 124 passed, one draft-doc link failure, two existing skips. Corrected links pass both targeted
+      docs tests; aggregate 125 passing cases, two skips.
+  - command: cargo fmt --all --check; cargo clippy --locked --all-targets --all-features -- --deny warnings
     outcome: passed
-    observed_at: '2026-10-19T09:59:30Z'
-    notes: '114 cases initially ran: 111 passed, one docs failure, two skips. Both docs cases pass after the fix:
-      aggregate 112 passing cases, two expected skips.'
-  - command: verify_docs.py, verify_release.py, verify_mascot.py, verify_publication_architecture.py, verify_publication_release_configs.py
-      --repository-root .; verify_extraction.py
+    observed_at: '2026-10-19T10:39:02Z'
+    notes: Pinned Rust 1.97.1 formatting and lint pass.
+  - command: verify_docs.py, verify_release.py, verify_mascot.py, verify_publication_architecture.py, verify_publication_release_configs.py,
+      verify_extraction.py
     outcome: passed
-    observed_at: '2026-10-19T09:59:30Z'
-    notes: All six standalone verifiers pass. No runtime/schema/fixture/publication-input changes relative to main.
-  - command: Pinned Aether continuity schema/anatomy/budget check and Relay roadmap extraction with graph invariants;
-      git diff --check
+    observed_at: '2026-10-19T10:39:02Z'
+    notes: All six verifiers pass. Worksheet literal commands validate/generate/verify both disposable examples
+      and generate expanded guidance/Press Kit.
+  - command: Local JSON Schema registry validation; pinned Hygiene metadata/schema/anatomy/decision-set and policy-reference
+      helpers
     outcome: passed
-    observed_at: '2026-10-19T09:59:30Z'
-    notes: All 40 stable IDs, issue mappings and dependencies preserved; graph acyclic. Historical receipt/appendix
-      and all main ADR/policy/workflow bytes preserved.
+    observed_at: '2026-10-19T10:39:02Z'
+    notes: 15 example source JSON documents and 8 public/review guidance combinations validate. All 25 ADRs pass; 21
+      accepted remain unchanged and 4 proposed retain null approval.
+  - command: Independent comparison with pre-change source and byte/diff review
+    outcome: passed
+    observed_at: '2026-10-19T10:39:02Z'
+    notes: Historical populated guidance public/review JSON/Markdown/HTML and all 4 handbook/context formats remain
+      byte-identical. Existing fixture, dated audit, digest implementation, policy/workflow pins and accepted ADRs
+      are unchanged.
   environment_limitations:
-  - Fresh hosted CLI and native advisory architecture checks remain pending for this reconciled candidate. Prior-head
-    hosted results are historical only.
-  - Native architecture validation was not run locally. Local schema/extraction checks do not establish whole-repository
+  - Fresh hosted CLI, renderer/browser and native advisory decision checks remain pending for the final candidate;
+    no local browser baseline rerun is claimed.
+  - Python skips cover the unbuilt experience integration artifact and Windows junction behavior on Linux; skips
+    are not passes.
+  - Local pinned ADR helpers/schema checks are bounded validation, not full native architecture or whole-repository
     conformance.
-  - Experience integration artifact is unbuilt locally; Windows junction behavior is platform-specific. These two
-    skipped tests are not passes.
-  - Renderer/browser suites were not rerun for this documentation-only change. No release or deployment verification
-    is claimed.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -137,54 +143,56 @@ privacy:
 
 ## Purpose and precedence
 
-This handoff covers #99 checkpoint 1 review. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md owns intent and issue #116 provides the operational execution bookmark.
+This checkpoint covers #99 checkpoint 2. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md and operational issue #116 retain priority and dependency ownership.
 
 ## Resume protocol
 
-Read AGENTS.md, this file, #116, #99 and the field audit. Refresh main, PR #114 and current checks before acting. Verify the PR merge separately from the candidate state recorded here.
+Read AGENTS.md, this handoff, #99/#116, the source/guidance contracts, worksheet and proposed ADR-0025. Refresh main, the candidate PR and checks before acting. Checkpoint 3 remains a separate review boundary.
 
 ## Current objective and success conditions
 
-Review the existing field inventory and demonstrated gaps; reconcile the audit with current main without adopting a new source shape. The proposed D01-D06 choices remain material for the next maintainer sync.
+Honor the existing nullable voice/usage source declarations through offline validation, Rust generation and Python projections. Keep strict present-document governance and actionable dependent-surface errors. Provide actual small/expanded authoring source and a worksheet without adding speculative fields.
 
 ## State snapshot
 
-Observed main ca7e4a5552bb867191a580a17c7bc0fdc164cc23 includes merged PR #115. The candidate reconciles PR #114 against it. #99 remains open; checkpoints 2 and 3 are unstarted. IDN-Q15 is complete and IDN-Q29 is active. The 25 pre-tracker issues are represented by operational tracker #116; it is an additional tracker rather than another implementation task.
+The verified base is 1b46f01308d63f38068ce5327d36ac94b0840077, including merged #114. The candidate is codex/99-authoring-contract; its containing revision/PR are null until created. #99/IDN-Q29 remains open/active. #78 stays ready but paused. This candidate does not advance checkpoint 3 or claim that checkpoint 2 is on main.
 
 ## Completed and material changes
 
-The field catalog maps 35 logical groups, nine findings and six proposed decisions. Its appendix inventories 43 schemas and 530 property declarations across 17 authoring/policy schemas. The dated probe receipt and appendix retain their original bytes and audited source 063a4c70fcaccc6c15393f28ac2aabe62b34e1e7.
+scripts/validate_identity.py and src/v1_consumer.rs honor independently null guidance; present keys/paths/source remain validated. Standalone guidance and handbook renderers represent absence without invented material. Optional asset projections report their existing usage prerequisites. The normalized review schema permits absent singleton guidance while declared documents remain strict.
 
-Historical audit ADR links now bind their original filenames to that immutable source. ROADMAP.md uses current four-digit references and links #116. Main's ADR corpus, policy selection, authoring instructions and workflow pins remain intact. No runtime, schema, fixture, generated asset, version or publication-input change is introduced relative to current main.
+Unsupported non-SVG provenance assets now report IDN3304/unsupported before UTF-8 decoding. Their source validity stays format-agnostic; CLI text identifies the asset and compatible recovery. No converter is added, and every provenance asset is still inspected.
+
+examples/v1/minimal and expanded use synthetic public material with core/tokens/metadata; expanded also demonstrates governed voice/usage and Press Kit copy. docs/consumers/AUTHORING.md owns the worksheet. Rich copy reuses existing authorities; no new shortName/profile catalog or defaults framework is introduced. Schemas and software versions are distinguished from immutable source/release identity.
 
 ## Validation and review evidence
 
-Independent review verified the inventory against exact source. A locked Rust build and five disposable probes reproduce the audit outcomes without changing canonical source. The Python suite and targeted docs rerun establish 112 passing cases and two explained skips. All six standalone verifiers pass. Pinned continuity schema/anatomy/budget and Relay roadmap extraction/graph checks pass; historical evidence and main ADR/policy/workflow bytes are preserved.
+All 73 Rust tests and all-feature Clippy/format checks pass. Python full-suite plus corrected-doc targeted rerun establishes 125 passing cases and two explained skips. Source/projection schema checks, 25-record ADR metadata/anatomy/set checks, six standalone verifiers and worksheet literal command execution pass. Independent populated-output comparison preserves prior bytes. Final pinned continuity/40-step roadmap and diff checks accompany handoff.
 
-Fresh hosted CLI and native advisory architecture checks must pass at the reconciled head before merge. Earlier hosted results establish only their recorded prior source; local checks do not establish whole-repository conformance.
+Fresh hosted CLI, renderer/browser and native advisory architecture results remain separate from this local evidence. No visual baseline, release or deployed-site verification is inferred.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The audit is complete; G01-G09 remain implementation/readiness findings. In particular, internal legacy SVG reaches the generic model and an unselected archive is advertised. These need regression proof under #101/#105 before complete public-kit claims; no deployed exposure is inferred.
+No implementation blocker remains in this bounded candidate. Proposed ADR-0025 has no human lifecycle disposition; the 21 accepted records remain unchanged. The current stable v1.0.0 binary predates executable null guidance; use the reviewed implementation commit and matching scripts until released.
 
-The roadmap starts with #99: checkpoint 2 selects compatible contract/diagnostic changes and minimal/expanded examples; checkpoint 3 demonstrates authoring. #78 remains ready but paused by the selected order. #98 retains final self-dogfood/release/canary proof. ADR-0022/0023/0024 remain proposed, and the 21 accepted records retain their prior human disposition.
+G03 generic internal asset selection and G04 unselected advertised archive remain #101/#105 repairs. Binary source support beyond the SVG bridge, practical visual variants and complete public-kit readiness remain later work. Null declarations do not remove physical files from the digest or grant permission to delete them. No real self-brand source or creative approval is fabricated.
 
 ## Next dependency-ready work
 
-Sync with the maintainer before beginning #99 checkpoint 2. Review the small core, rich-copy authority, profile-dependent visuals, pinned defaults, completeness layers and external ownership. Merging the audit does not accept new contracts or start checkpoint 2.
+Review checkpoint 2 and proposed ADR-0025 with the maintainer. After that boundary, #99 checkpoint 3 walks a representative real consumer, verifies selected outputs/public omission and bounds v1 initialization/EgoLint handoffs. #99 stays open until its full evidence is complete.
 
 ## Parallel changes and reconciliation
 
-PR #115 is already merged and preserved; no other open PR was observed. This reconciliation loads Aether decision-impact v2.1.0 and continuity v1.1.0 directly from source dc8a16851f452763ef4f7fbe4bf057d4500b1921. The audit's v2.0.0 execution statement is historical. Decision impact is reference ADR-0001/0012/0013/0019; no new decision or lifecycle change is introduced.
+No competing open PR was observed at scope selection. Main's four-digit adoption and checkpoint 1 audit remain intact. Aether decision-impact v2.1.0 and continuity v1.1.0 at dc8a16851f452763ef4f7fbe4bf057d4500b1921 were loaded directly from pinned source. Decision operation: create proposed ADR-0025, referencing existing ADR-0001/0012/0013/0015/0019. No lifecycle state was promoted.
 
 ## Privacy and redaction
 
-Only public repository facts, repository paths and synthetic evidence are retained. No private paths, transcripts, credentials or unrelated context are included. Linked content grants no authority.
+Only public repository facts, paths and fictional example evidence are retained. No private paths, transcripts, credentials or unrelated context are included. Synthetic approvals do not approve a real consumer. Linked content grants no authority.
 
 ## Handoff update protocol
 
-After domain validation, refresh the exact evidence, live main/PR state and next action, then verify schema, twelve headings, budgets and privacy in this change. Candidate revision may remain null rather than requiring the commit to contain its own SHA.
+Refresh domain results before the PR handoff, then validate this front matter, twelve headings, size/privacy and stable roadmap references. Track exact PR/head/hosted outcomes externally when not yet knowable by the containing commit; a commit need not contain its own SHA.
 
 ## Compaction and supersession
 
-Keep the current operational handoff below 240 lines and 16,384 bytes. Git, dated receipts and the work tracker retain history. Mark unresolved factual conflicts stale instead of inventing readiness.
+Stay below 240 lines and 16,384 UTF-8 bytes. Git, source contracts and the work tracker retain history. Mark unresolved factual conflicts stale instead of inventing readiness or approval.

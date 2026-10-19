@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../../../contracts/v1/tokens.schema.json",
+  "$extensions": {
+    "org.egohygiene.identity": {
+      "schema": "identity.tokens/v1",
+      "layer": {
+        "id": "example-organization",
+        "kind": "organization-defaults",
+        "priority": 0
+      }
+    }
+  },
+  "color": {
+    "$type": "color",
+    "brand": {
+      "primary": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.16,
+            0.24,
+            0.58
+          ],
+          "alpha": 1
+        }
+      }
+    },
+    "canvas": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "alpha": 1
+      }
+    },
+    "text": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.05,
+          0.06,
+          0.1
+        ],
+        "alpha": 1
+      }
+    }
+  }
+}

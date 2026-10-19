@@ -87,6 +87,19 @@ def png_dimensions(value: bytes) -> tuple[int, int]:
 class RepositoryPresentationProjectionTests(unittest.TestCase):
     """Prove the visual projection never acquires evidence authority."""
 
+    def test_banner_requires_declared_public_usage(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            prepare(repository)
+            project_path = repository / ".identity/identity.json"
+            project = json.loads(project_path.read_text(encoding="utf-8"))
+            project["documents"]["guidance"]["usage"] = None
+            write_json(project_path, project)
+            before = source_digests(repository)
+            with self.assertRaisesRegex(renderer.ProjectionError, "declared documents.guidance.usage"):
+                renderer.build_projection(repository, FIXTURES / "evidence.organization-default.json")
+            self.assertEqual(source_digests(repository), before)
+
     def test_organization_default_projects_accessible_theme_and_width_variants(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             repository = Path(temporary) / "consumer"

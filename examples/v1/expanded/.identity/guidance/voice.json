@@ -1,0 +1,136 @@
+{
+  "$schema": "../../../../../contracts/v1/voice.schema.json",
+  "schema": "identity.voice/v1",
+  "foundation": {
+    "purpose": "Make reviewed identity source understandable to maintainers.",
+    "positioning": "A fictional repository used to demonstrate Identity authoring.",
+    "audience": [
+      "Repository maintainers"
+    ],
+    "personality": [
+      "Clear",
+      "Practical"
+    ],
+    "governance": {
+      "subject": "voice:example-core",
+      "state": "approved",
+      "visibility": "public",
+      "provenance": {
+        "method": "human-authored",
+        "source": ".identity/brief.md",
+        "capturedAt": "2026-10-19T10:30:00Z"
+      },
+      "approval": "example-voice-approval"
+    }
+  },
+  "characteristics": [
+    {
+      "id": "clear",
+      "label": "Clear",
+      "description": "Name concrete actions and outcomes.",
+      "governance": {
+        "subject": "voice:example-core",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-voice-approval"
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "id": "readme",
+      "label": "Repository README",
+      "audience": "A maintainer evaluating the repository.",
+      "intent": "Explain the repository purpose and a useful next step.",
+      "tone": "Direct and considerate.",
+      "characteristics": [
+        "clear"
+      ],
+      "preferredVocabulary": [
+        "source",
+        "review",
+        "verify"
+      ],
+      "avoidedLanguage": [
+        "revolutionary"
+      ],
+      "naming": "Use Example Expanded on first reference, then Example.",
+      "capitalization": "Use sentence case.",
+      "punctuation": "Use complete sentences and periods.",
+      "examples": [
+        {
+          "id": "concrete-outcome",
+          "text": "Review the source, then verify the selected outputs.",
+          "rationale": "The reader can identify the next action.",
+          "governance": {
+            "subject": "voice:example-core",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-10-19T10:30:00Z"
+            },
+            "approval": "example-voice-approval"
+          }
+        }
+      ],
+      "antiExamples": [
+        {
+          "id": "unsupported-hype",
+          "text": "The most revolutionary identity system ever.",
+          "rationale": "The claim has no measurable support.",
+          "governance": {
+            "subject": "voice:example-core",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-10-19T10:30:00Z"
+            },
+            "approval": "example-voice-approval"
+          }
+        }
+      ],
+      "governance": {
+        "subject": "voice:example-core",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-voice-approval"
+      }
+    }
+  ],
+  "localization": {
+    "sourceLanguage": "en",
+    "supportedLanguages": [
+      {
+        "tag": "en",
+        "coverage": "reviewed",
+        "notes": "Synthetic English guidance only."
+      }
+    ],
+    "fallback": "Keep project names unchanged and request review for other languages.",
+    "governance": {
+      "subject": "voice:example-core",
+      "state": "approved",
+      "visibility": "public",
+      "provenance": {
+        "method": "human-authored",
+        "source": ".identity/brief.md",
+        "capturedAt": "2026-10-19T10:30:00Z"
+      },
+      "approval": "example-voice-approval"
+    }
+  }
+}

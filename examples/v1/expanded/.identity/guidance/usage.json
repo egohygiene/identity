@@ -1,0 +1,96 @@
+{
+  "$schema": "../../../../../contracts/v1/usage.schema.json",
+  "schema": "identity.usage/v1",
+  "sections": [
+    {
+      "id": "marks",
+      "title": "Mark use",
+      "description": "Preserve legibility and proportion.",
+      "rules": [
+        {
+          "id": "preserve-mark",
+          "kind": "do",
+          "category": "mark",
+          "instruction": "Use the mark at its original proportions and preserve clear space.",
+          "rationale": "Consistent proportions preserve recognition.",
+          "details": [
+            "Minimum width: 16 CSS pixels"
+          ],
+          "contexts": [
+            "all"
+          ],
+          "governance": {
+            "subject": "usage:example-core",
+            "state": "approved",
+            "visibility": "public",
+            "provenance": {
+              "method": "human-authored",
+              "source": ".identity/brief.md",
+              "capturedAt": "2026-10-19T10:30:00Z"
+            },
+            "approval": "example-usage-approval"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "mark",
+      "label": "Example mark",
+      "kind": "mark",
+      "path": ".identity/sources/mark.svg",
+      "status": "active",
+      "availability": "public",
+      "replacement": null,
+      "downloadName": "example-expanded-mark.svg",
+      "notes": "Synthetic current public asset selection.",
+      "governance": {
+        "subject": "mark",
+        "state": "approved",
+        "visibility": "public",
+        "provenance": {
+          "method": "human-authored",
+          "source": ".identity/brief.md",
+          "capturedAt": "2026-10-19T10:30:00Z"
+        },
+        "approval": "example-mark-approval"
+      }
+    }
+  ],
+  "accessibility": {
+    "summary": "Keep content understandable without brand styling.",
+    "rules": [
+      "Provide contextual alternative text",
+      "Never encode state by color alone"
+    ],
+    "governance": {
+      "subject": "usage:example-core",
+      "state": "approved",
+      "visibility": "public",
+      "provenance": {
+        "method": "human-authored",
+        "source": ".identity/brief.md",
+        "capturedAt": "2026-10-19T10:30:00Z"
+      },
+      "approval": "example-usage-approval"
+    }
+  },
+  "legal": {
+    "trademark": "The fictional name and mark confer no real endorsement.",
+    "copyright": "Copyright 2026 Example. This is synthetic fixture content.",
+    "attribution": "Preserve each asset's recorded attribution.",
+    "thirdPartyLicenses": [],
+    "governance": {
+      "subject": "usage:example-core",
+      "state": "approved",
+      "visibility": "public",
+      "provenance": {
+        "method": "human-authored",
+        "source": ".identity/brief.md",
+        "capturedAt": "2026-10-19T10:30:00Z"
+      },
+      "approval": "example-usage-approval"
+    }
+  }
+}

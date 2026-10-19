@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../../../contracts/v1/tokens.schema.json",
+  "$description": "No inherited token is replaced; no override approval is needed.",
+  "$extensions": {
+    "org.egohygiene.identity": {
+      "schema": "identity.tokens/v1",
+      "layer": {
+        "id": "example-minimal",
+        "kind": "product-override",
+        "priority": 10
+      }
+    }
+  }
+}

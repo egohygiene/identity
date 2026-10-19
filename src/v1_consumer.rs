@@ -58,8 +58,6 @@ impl V1ConsumerPipeline {
         let approvals_path = path_field(documents, "approvals", "documents.approvals")?;
         let provenance_path = path_field(documents, "provenance", "documents.provenance")?;
         let guidance = object_field(documents, "guidance", "documents.guidance")?;
-        let voice_path = path_field(guidance, "voice", "documents.guidance.voice")?;
-        let usage_path = path_field(guidance, "usage", "documents.guidance.usage")?;
 
         let source_digest = canonical_source_digest(repository_root)?;
         let profiles = profile_selection(repository_root, &targets_path)?;
@@ -68,8 +66,8 @@ impl V1ConsumerPipeline {
         let (sources, source_governance) =
             source_assets(repository_root, &provenance_path, &approvals)?;
         let guidance = BrandKitGuidance {
-            voice: Some(read_json(&repository_root.join(&voice_path), &voice_path)?),
-            usage: Some(read_json(&repository_root.join(&usage_path), &usage_path)?),
+            voice: optional_document(repository_root, guidance, "voice")?,
+            usage: optional_document(repository_root, guidance, "usage")?,
         };
         let project_model = BrandKitProject {
             display_name: string_field(project_metadata, "displayName", "project.displayName")?
@@ -371,6 +369,7 @@ fn source_assets(
         let entry = object(entry, provenance_path)?;
         let id = string_field(entry, "id", "provenance asset.id")?.to_owned();
         let path = path_field(entry, "path", "provenance asset.path")?;
+        let media_type = media_type(&path)?;
         let bytes = fs::read(repository_root.join(&path)).map_err(|error| {
             invalid(&path, format!("cannot read approved source asset: {error}"))
         })?;
@@ -398,7 +397,7 @@ fn source_assets(
         sources.insert(
             id.clone(),
             BrandKitSourceAsset {
-                media_type: media_type(&path)?.to_owned(),
+                media_type: media_type.to_owned(),
                 text,
                 sha256: actual,
                 alt_text: string_field(accessibility, "altText", "asset alt text")?.to_owned(),
@@ -483,12 +482,32 @@ fn path_field(object: &Map<String, Value>, field: &str, label: &str) -> Compiler
     Ok(value.to_owned())
 }
 
+fn optional_document(
+    repository_root: &Path,
+    guidance: &Map<String, Value>,
+    field: &str,
+) -> CompilerResult<Option<Value>> {
+    if guidance.get(field).is_some_and(Value::is_null) {
+        return Ok(None);
+    }
+    let path = path_field(guidance, field, "documents.guidance")?;
+    read_json(&repository_root.join(&path), &path).map(Some)
+}
+
 fn media_type(path: &str) -> CompilerResult<&'static str> {
     match Path::new(path).extension().and_then(|value| value.to_str()) {
         Some("svg") => Ok("image/svg+xml"),
-        _ => Err(invalid(
-            path,
-            "only canonical SVG source assets are packageable in v1",
+        _ => Err(CompilerError::new(
+            FailureKind::Unsupported,
+            Diagnostic::error(
+                "IDN3304",
+                FailureKind::Unsupported,
+                Some(path.to_owned()),
+                format!(
+                    "Unsupported source asset {path:?}: the v1 package producer inspects every provenance asset and supports only canonical UTF-8 .svg input. Use a reviewed UTF-8 .svg master or a separate producer that supports this format; renaming an extension does not convert the content."
+                ),
+                "Use a reviewed UTF-8 .svg master for v1 package generation, or a separate producer that supports this format. This producer inspects every provenance asset; renaming an extension does not convert the content.",
+            ),
         )),
     }
 }

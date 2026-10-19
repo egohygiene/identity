@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../../../contracts/v1/provenance.schema.json",
+  "schema": "identity.provenance/v1",
+  "assets": [
+    {
+      "id": "mark",
+      "path": ".identity/sources/mark.svg",
+      "kind": "mark",
+      "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+      "license": {
+        "spdx": "MIT",
+        "status": "approved",
+        "attribution": "Copyright 2026 Example"
+      },
+      "origin": {
+        "creator": "Fictional Example Organization",
+        "method": "first-party",
+        "source": "https://example.invalid/synthetic-artwork/mark",
+        "capturedAt": "2026-10-19T10:30:00Z"
+      },
+      "accessibility": {
+        "altText": "A violet diamond nested inside a rounded square."
+      },
+      "usage": {
+        "safeZone": "Keep one quarter of the mark width clear on every side.",
+        "minimumSize": "16 CSS pixels for the standalone mark.",
+        "restrictions": [
+          "Synthetic example artwork only; replace for a real identity."
+        ]
+      },
+      "approval": "example-mark-approval"
+    }
+  ]
+}

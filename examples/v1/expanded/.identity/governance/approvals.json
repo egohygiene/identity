@@ -1,0 +1,105 @@
+{
+  "$schema": "../../../../../contracts/v1/approvals.schema.json",
+  "schema": "identity.approvals/v1",
+  "decisions": [
+    {
+      "id": "example-mark-approval",
+      "subject": "mark",
+      "candidate": ".identity/sources/mark.svg",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-mark-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-color-approval",
+      "subject": "token:color.brand.primary",
+      "candidate": "token:color.brand.primary@product-override",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-color-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-voice-approval",
+      "subject": "voice:example-core",
+      "candidate": ".identity/guidance/voice.json",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-voice-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-usage-approval",
+      "subject": "usage:example-core",
+      "candidate": ".identity/guidance/usage.json",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-usage-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-press-short-approval",
+      "subject": "press-kit:boilerplate:short",
+      "candidate": "press-kit:short/v1",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-press-short-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-press-long-approval",
+      "subject": "press-kit:boilerplate:long",
+      "candidate": "press-kit:long/v1",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-press-long-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-press-website-approval",
+      "subject": "press-kit:link:website",
+      "candidate": "press-kit:website/v1",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-press-website-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-press-media-approval",
+      "subject": "press-kit:contact:media",
+      "candidate": "press-kit:media/v1",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-press-media-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    },
+    {
+      "id": "example-press-mark-approval",
+      "subject": "press-kit:asset:mark",
+      "candidate": "press-kit:mark/v1",
+      "status": "approved",
+      "reviewedBy": "fictional-example-reviewer",
+      "reviewedAt": "2026-10-19T10:30:00Z",
+      "evidence": "https://example.invalid/synthetic-reviews/example-press-mark-approval",
+      "supersedes": null,
+      "notes": "Synthetic example decision only; this does not approve any real project."
+    }
+  ]
+}

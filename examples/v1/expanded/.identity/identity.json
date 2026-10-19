@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../contracts/v1/project.schema.json",
+  "schema": "identity.project/v1",
+  "project": {
+    "id": "example-expanded",
+    "displayName": "Example Expanded",
+    "repository": "https://example.invalid/example-expanded",
+    "tagline": "A synthetic expanded Identity v1 authoring example.",
+    "kind": "repository"
+  },
+  "layers": [
+    {
+      "id": "example-organization",
+      "kind": "organization-defaults",
+      "priority": 0,
+      "tokens": ".identity/defaults/organization.tokens.json",
+      "sha256": "f0d51e176b5e1be72657a29b7b6d6edec4ed5ab858a81267ab57f9cc9f49ec82"
+    },
+    {
+      "id": "example-expanded",
+      "kind": "product-override",
+      "priority": 10,
+      "tokens": ".identity/overrides/product.tokens.json",
+      "sha256": "ff5043c2512ef8f73c9f9df1c37aafd15bd47f0c7205b1010dd9ebb2a78f46ca"
+    }
+  ],
+  "documents": {
+    "brief": ".identity/brief.md",
+    "targets": ".identity/targets/profiles.json",
+    "provenance": ".identity/governance/provenance.json",
+    "approvals": ".identity/governance/approvals.json",
+    "guidance": {
+      "voice": ".identity/guidance/voice.json",
+      "usage": ".identity/guidance/usage.json"
+    },
+    "pressKit": ".identity/guidance/press-kit.json"
+  },
+  "directories": {
+    "sources": ".identity/sources",
+    "candidates": ".identity/candidates",
+    "references": ".identity/references"
+  },
+  "compatibility": {
+    "acceptedSchemaMajor": 1,
+    "migrationFrom": []
+  }
+}

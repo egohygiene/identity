@@ -123,9 +123,11 @@ def resolved_tokens(
     return context, entries, tokens
 
 
-def public_voice_entries(voice: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def public_voice_entries(voice: dict[str, Any] | None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Return public context facts and handbook entries from reviewed voice source."""
 
+    if voice is None:
+        return [], []
     contexts: list[dict[str, Any]] = []
     entries: list[dict[str, Any]] = []
     foundation = voice["foundation"]
@@ -187,9 +189,11 @@ def public_voice_entries(voice: dict[str, Any]) -> tuple[list[dict[str, Any]], l
     return contexts, entries
 
 
-def public_usage_entries(usage: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def public_usage_entries(usage: dict[str, Any] | None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Return public usage facts and handbook entries from reviewed source."""
 
+    if usage is None:
+        return [], []
     rules = [
         rule
         for section in usage["sections"]
@@ -349,8 +353,10 @@ def build_projections(repository_root: Path) -> tuple[dict[str, Any], dict[str, 
         raise ProjectionError("design-system projection requires documents.handbook source")
     design_system = load_json(repository_root / handbook_paths["designSystem"])
     references = load_json(repository_root / handbook_paths["references"])
-    voice = load_json(repository_root / documents["guidance"]["voice"])
-    usage = load_json(repository_root / documents["guidance"]["usage"])
+    voice_path = documents["guidance"]["voice"]
+    usage_path = documents["guidance"]["usage"]
+    voice = load_json(repository_root / voice_path) if voice_path is not None else None
+    usage = load_json(repository_root / usage_path) if usage_path is not None else None
     targets = load_json(repository_root / documents["targets"])
 
     token_context, token_entries, tokens = resolved_tokens(project, repository_root)

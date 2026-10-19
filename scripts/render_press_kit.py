@@ -179,7 +179,10 @@ def build_projection(repository_root: Path) -> tuple[dict[str, Any], dict[str, b
     if not isinstance(press_path, str):
         raise ProjectionError("Press Kit projection requires documents.pressKit source")
     source = load_json(repository_root / press_path)
-    usage = load_json(repository_root / documents["guidance"]["usage"])
+    usage_path = documents["guidance"]["usage"]
+    if usage_path is None:
+        raise ProjectionError("Press Kit projection requires declared documents.guidance.usage for public assets and legal guidance")
+    usage = load_json(repository_root / usage_path)
     provenance = load_json(repository_root / documents["provenance"])
     approvals_document = load_json(repository_root / documents["approvals"])
     approvals = {

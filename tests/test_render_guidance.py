@@ -60,6 +60,46 @@ def governance_states(value: object) -> set[str]:
 class BrandGuidanceRendererTests(unittest.TestCase):
     """Prove deterministic views, context lookup, and authority boundaries."""
 
+    def test_nullable_guidance_renders_each_audience_without_inventing_records(self) -> None:
+        for declared_voice in (False, True):
+            for declared_usage in (False, True):
+                with (
+                    self.subTest(voice=declared_voice, usage=declared_usage),
+                    tempfile.TemporaryDirectory() as temporary,
+                ):
+                    repository = Path(temporary) / "consumer"
+                    shutil.copytree(VALID_FIXTURE, repository)
+                    project_path = repository / ".identity/identity.json"
+                    project = json.loads(project_path.read_text(encoding="utf-8"))
+                    for field, declared in (("voice", declared_voice), ("usage", declared_usage)):
+                        if not declared:
+                            (repository / project["documents"]["guidance"][field]).unlink()
+                            project["documents"]["guidance"][field] = None
+                    project_path.write_text(json.dumps(project, indent=2) + "\n", encoding="utf-8")
+                    before = source_digests(repository)
+                    for audience in ("public", "review"):
+                        model = renderer.build_view_model(repository, audience=audience)
+                        if not declared_voice:
+                            for field in ("foundation", "localization"):
+                                self.assertIsNone(model[field])
+                            for field in ("characteristics", "contexts"):
+                                self.assertEqual(model[field], [])
+                            with self.assertRaisesRegex(renderer.GuidanceError, "unknown context"):
+                                renderer.build_view_model(repository, "repository-readme", audience)
+                        if not declared_usage:
+                            for field in ("accessibility", "legal"):
+                                self.assertIsNone(model[field])
+                            for field in ("sections", "doDont", "downloads", "legacyAssets"):
+                                self.assertEqual(model[field], [])
+                        if not declared_voice and not declared_usage and audience == "public":
+                            self.assertEqual(model["decisions"], [])
+                        for output_format in ("json", "markdown", "html"):
+                            rendered = renderer.render(model, output_format)
+                            self.assertIn("Example Product", rendered)
+                        if not declared_voice:
+                            self.assertIn('<html lang="und">', renderer.render_html(model))
+                    self.assertEqual(source_digests(repository), before)
+
     def test_all_formats_match_reviewed_golden_outputs(self) -> None:
         model = renderer.build_view_model(VALID_FIXTURE)
         schema = json.loads(
@@ -256,7 +296,7 @@ class BrandGuidanceRendererTests(unittest.TestCase):
         for field in ("foundation", "localization", "accessibility", "legal"):
             variants = schema["properties"][field]["oneOf"]
             self.assertIn({"type": "null"}, variants)
-            self.assertIn(review["then"]["properties"][field], variants)
+            self.assertEqual(review["then"]["properties"][field]["oneOf"], variants)
 
 
 if __name__ == "__main__":
