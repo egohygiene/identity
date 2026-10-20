@@ -49,43 +49,123 @@ root need appropriate ownership before switching to an unprivileged user.
 
 ## Custom base image add-on
 
-The base owns OS packages, Node, Python, certificates, and user provisioning.
-The default is `node:24-bookworm`; supply your own tag or immutable image digest
-with `BASE_IMAGE`. In a network using a TLS proxy, provision its trusted CA in
-the base image's OS and Node trust stores. Docker build containers must also
-be able to resolve and reach that proxy; forward proxy build arguments when
-required by your Docker host. Do not disable certificate verification.
-The add-on owns this repository's pinned Rust toolchain, pnpm dependencies,
-and builds. It preserves the base's entrypoint and command.
+The base owns OS packages, Node, Python, certificates and user provisioning.
+The default in [`dev/Dockerfile`](../dev/Dockerfile) is the official Node 24
+Bookworm image pinned by its OCI index digest. The
+[dated registry receipt](evidence/identity-development-base-registry-2026-10-20.json)
+records the verified index, selected Linux/amd64 manifest and image-config
+identities. The [qualification review](reviews/development-base-2026-10-20.md)
+records executed build/runtime evidence. An index containing other architectures
+does not qualify those architectures; this checkpoint targets `linux/amd64`.
+
+The add-on owns this repository's pinned Rust toolchain, pnpm dependencies and
+builds. It preserves the base's `USER`, `ENTRYPOINT` and `CMD`; it does not
+provision a user or install OS packages unless browser installation is explicitly
+selected. `BASE_IMAGE` remains an explicit override, including a locally prepared
+custom base. Record an immutable identity for a shared or reproducible build;
+mutable local tags are exploratory inputs and do not replace the qualified default.
 
 ```bash
-docker build -f dev/Dockerfile \
-  --build-arg BASE_IMAGE=your-dev-base:version \
-  -t identity-dev .
-
-# Optional browser-enabled image, on a supported Playwright Linux distribution:
-docker build -f dev/Dockerfile \
-  --build-arg BASE_IMAGE=your-dev-base:version \
-  --build-arg WITH_BROWSERS=1 -t identity-dev-browser .
-
+docker build --file dev/Dockerfile --tag identity-dev .
 docker run --rm identity-dev \
   bash /opt/identity/scripts/dev-env.sh exec cargo --version
+
+# A custom base with a pre-provisioned UID/GID 1000 development user:
+docker build --file dev/Dockerfile \
+  --build-arg BASE_IMAGE="registry.example/your-dev-base@sha256:<approved-digest>" \
+  --build-arg IDENTITY_DEV_UID=1000 --build-arg IDENTITY_DEV_GID=1000 \
+  --tag identity-dev-custom .
+
+# Optional browser installation on a supported Playwright Linux distribution:
+docker build --file dev/Dockerfile \
+  --build-arg BASE_IMAGE=your-reviewed-browser-base:version \
+  --build-arg WITH_BROWSERS=1 --tag identity-dev-browser .
 ```
 
-For an existing Dockerfile, copy this checkout to a writable directory and
-run `bash scripts/dev-env.sh setup` there. Set `IDENTITY_DEV_PREFIX` before
-installation to retain tooling separately from checkout files. Browser OS
-installation requires root or supported sudo access. No application secrets,
-service startup, or publication is performed during image construction.
-If mounting a fresh checkout over the baked checkout, rerun `setup`: the
-tooling remains in its prefix, while build outputs and renderer dependencies
-belong to the checkout. A cloud task already has an isolated checkout; do not
-create a Git worktree unless explicitly requested.
+### Development-user and cache ownership
 
-Required network destinations include sh.rustup.rs, static.rust-lang.org,
-index.crates.io, static.crates.io, and registry.npmjs.org. Browser setup also
-uses cdn.playwright.dev, storage.googleapis.com, and
-playwright.download.prss.microsoft.com. Keep TLS and package verification enabled.
+The default base builds/runs as root, as declared by that upstream image. For an
+unprivileged build, the custom base must provision the inherited numeric UID/GID,
+a writable home, and writable `/opt/identity` and `/opt/identity-dev` directories.
+Set `IDENTITY_DEV_UID`/`IDENTITY_DEV_GID` to that same numeric identity so copied
+checkout files are writable during setup. The add-on's default copy owner is
+`0:0`; the arguments change ownership of copied files, not the inherited user.
+The [qualification base](../dev/qualification/Dockerfile) demonstrates a
+`1000:1000` user without duplicating repository setup.
+
+The active user must be able to create and update the checkout's Rust target and
+renderer dependencies/outputs, the development prefix, and every selected tool
+home/cache. These include `CARGO_HOME`, `RUSTUP_HOME`, `COREPACK_HOME`,
+`PLAYWRIGHT_BROWSERS_PATH`, `npm_config_cache`, `XDG_CACHE_HOME` and the prefix's
+`pnpm-store`. Existing bindings remain authoritative. Provision ownership in the
+base or mount configuration before setup; a root-built image cannot be switched
+to an arbitrary `docker run --user` and assumed writable. Qualification checks
+actual writes under the inherited user for both the default and custom image.
+Host bind mounts retain their host ownership and can hide baked checkout files;
+matching permissions and rerunning `setup` for the mounted checkout remain the
+operator's responsibility.
+
+For an existing Dockerfile, copy the checkout with matching ownership to a
+writable directory and run `bash scripts/dev-env.sh setup` there. Set
+`IDENTITY_DEV_PREFIX` before installation to retain tooling separately from
+checkout files. Browser OS installation requires root or supported sudo access.
+No application secrets, service startup or publication occurs during construction.
+A cloud task already has an isolated checkout; do not create a Git worktree
+unless explicitly requested.
+
+### Proxy trust
+
+The Docker host/builder must reach the registry and any required proxy. The base
+owner provisions a TLS proxy's trusted **public CA certificate** into the OS
+trust store used by curl/Rust and Node's trust configuration (for example,
+`NODE_EXTRA_CA_CERTS` pointing to a readable certificate file when required).
+Forward proxy build arguments only when the host requires them. The installer
+preserves supplied proxy/cache bindings and enables Node environment-proxy
+handling on supported Node versions. It never disables TLS verification or
+imports private host credentials. Do not bake proxy credentials into the image
+or publish their values in receipts. A successful public-network build does not
+qualify a private proxy CA; check that trust in the owning environment.
+
+Required network destinations include the selected image registry,
+sh.rustup.rs, static.rust-lang.org, index.crates.io, static.crates.io and
+registry.npmjs.org. Browser setup separately uses cdn.playwright.dev,
+storage.googleapis.com and playwright.download.prss.microsoft.com. Keep TLS and
+package verification enabled.
+
+### Qualification and refresh
+
+Repository maintainers own refresh proposals under the
+[dependency policy](DEPENDENCY_POLICY.md): monthly maintenance review, or prompt
+review for a relevant security fix. Resolve the official index and selected
+platform manifest/config through the authenticated registry pull API, verify
+raw response SHA-256 values against their digest identities, and review the
+upstream Node image source/release and applicable license/security changes.
+Update the default digest and dated registry receipt together in a scoped PR.
+Do not silently follow the mutable tag or rewrite prior receipts.
+
+On a Linux Docker host, run:
+
+```bash
+python3 scripts/qualify_dev_image.py \
+  --receipt /tmp/identity-dev-qualification.json
+```
+
+The same script runs in the bounded
+[development-image workflow](../.github/workflows/development-image.yml). It builds
+the default without an override and an explicitly selected custom base with an
+unprivileged development user, through the same add-on/setup implementation.
+It checks inherited configuration, writable tool/cache paths, runtime versions,
+synthetic localhost CA rejection/explicit trust with curl and Node, CLI help and repeatable v1 generation/verification, plus renderer source checks,
+unit tests, build and public validation. Retain the receipt with exact source
+hashes and hosted run evidence; review failures before changing the pin. Keep
+the previous reviewed digest and receipt available in Git for rollback.
+
+This is development-image qualification, not an image release, SBOM/security
+audit, hermetic bootstrap or browser/font/screenshot qualification. Rust and
+JavaScript locks still govern repository dependencies; the base digest alone
+does not freeze bootstrap network services or qualify arbitrary custom bases.
+#80 owns the reproducible browser environment and reviewed visual baseline;
+#82 owns the broader standalone/Make/Task/Docker entrypoint matrix.
 
 The separate Holon-based `experience/` workflow remains optional; see its
 README for its additional repository and dependencies.

@@ -1,0 +1,56 @@
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Qualify development image
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/development-image.yml"
+      - ".dockerignore"
+      - "dev/**"
+      - "scripts/dev-env.sh"
+      - "scripts/qualify_dev_image.py"
+      - "tests/test_qualify_dev_image.py"
+      - "docs/evidence/identity-development-base-registry-*.json"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "rust-toolchain.toml"
+      - "src/**"
+      - "scripts/**"
+      - "contracts/**"
+      - "tests/fixtures/**"
+      - "renderer/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "identity-development-image-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  qualify:
+    name: Qualify pinned default and non-root custom base
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+      - name: Checkout Identity
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Build and qualify development images
+        run: python3 scripts/qualify_dev_image.py --receipt "${{ runner.temp }}/identity-development-image.json"
+      - name: Upload bounded qualification evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: development-image-${{ github.run_id }}-${{ github.run_attempt }}
+          path: "${{ runner.temp }}/identity-development-image.json"
+          if-no-files-found: warn
+          retention-days: 14
