@@ -8,7 +8,7 @@ decision_scope: repository
 visibility: public
 owners: [egohygiene/identity]
 issue: https://github.com/egohygiene/identity/issues/100
-pull_request: null
+pull_request: https://github.com/egohygiene/identity/pull/124
 related: [ADR-0001, ADR-0003, ADR-0005, ADR-0010, ADR-0013, ADR-0015, ADR-0025]
 supersedes: []
 superseded_by: []
@@ -16,6 +16,9 @@ affected_repositories: [egohygiene/identity]
 affected_contracts: []
 implementation_status: implemented
 evidence:
+  - type: pull_request
+    url: https://github.com/egohygiene/identity/pull/124
+    description: Candidate implements readable governed profiles and optional paragraph reuse; focused checks and review are recorded without implying human ADR acceptance or full CI qualification.
   - type: issue
     url: https://github.com/egohygiene/identity/issues/100
     description: Requests supplied one-sentence, paragraph and longer descriptions while preserving existing copy authority and public filtering.

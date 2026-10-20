@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-20T18:05:51Z'
+  updated_at: '2026-10-20T18:08:28Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -57,6 +57,7 @@ scope:
   - docs/contracts/BRAND_KIT_RENDERER_V1.md
   - renderer/tests/project-copy.test.js
   - renderer/tests/guidance.integration.test.js
+  - https://github.com/egohygiene/identity/pull/124
 work:
   objective: Present approved voice/naming and usage guidance readably, expose exact supplied copy and support
     optional paragraph boilerplate through governed Press Kit outputs.
@@ -71,11 +72,12 @@ work:
     url: https://github.com/egohygiene/identity/issues/100
   next:
     kind: action
-    id: identity-100-review-handoff
-    description: 'Review the bounded #100 candidate and its focused evidence; publish a scoped PR, then proceed
-      to #103 after reviewed completion.'
+    id: identity-100-pr124-review
+    description: 'Review PR #124 and the focused implementation evidence, verify current external head/status,
+      then continue #103 after reviewed completion.'
     readiness: ready
     references:
+    - https://github.com/egohygiene/identity/pull/124
     - https://github.com/egohygiene/identity/issues/100
     - https://github.com/egohygiene/identity/issues/103
     - https://github.com/egohygiene/identity/issues/116
@@ -84,28 +86,32 @@ state:
   base:
     revision: 2d18ed114d3799da3867260d69d8c70bf05d428d
     ref: refs/heads/main
-    verified_at: '2026-10-20T17:58:49Z'
+    verified_at: '2026-10-20T18:08:28Z'
   candidate:
     branch: codex/100-project-profiles
-    revision: null
-    pull_request: null
-    handoff_state: ready-for-review
+    revision: 90165635066a3b3519712bc3ff13398c29eecdfa
+    pull_request:
+      provider: github
+      id: egohygiene/identity#124
+      url: https://github.com/egohygiene/identity/pull/124
+    handoff_state: review-reference-recorded
   live:
     status: verified
-    observed_at: '2026-10-20T17:58:49Z'
+    observed_at: '2026-10-20T18:08:28Z'
     default_branch_revision: 2d18ed114d3799da3867260d69d8c70bf05d428d
     issue_state: open
-    pull_request_state: not-applicable
-    notes: '#100 is open after closed prerequisite #99. Candidate starts from merged #122/main; no #100 PR/revision
-      exists before publication. Draft #123/#80 remains separately unmerged with local-Docker acceptance/review
-      deferred. Focused local checks pass; no hosted CI or later containing-head outcome is asserted.'
+    pull_request_state: draft
+    notes: 'PR #124 is open/draft at verified implementation head 90165635066a3b3519712bc3ff13398c29eecdfa, tree
+      62e23a4badb22a7cdd5ee705fcdd49a92b9fc9a7. Main is unchanged. The implementation revision anchors the known
+      source before this later documentation-only refresh; current PR head/status must be checked externally.
+      PR #123 remains draft/open and unmerged at 400846db7f10823d4b5bc1629213caf03960b59c. No CI outcome is asserted.'
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-20T18:05:51Z'
+  reviewed_at: '2026-10-20T18:08:28Z'
   reviewed_by: Codex
   evidence:
   - command: python3 -m unittest discover -s tests -p test_render_press_kit.py -v
@@ -183,7 +189,7 @@ Present approved structured voice foundations/contexts and usage sections/rules 
 
 ## State snapshot
 
-Base/main is 2d18ed114d3799da3867260d69d8c70bf05d428d, including merged #122; #81/Q20 is complete. #100/Q30 is active on codex/100-project-profiles and ready for scoped review. Revision/PR remain null before publication; #99/Q29, its sole prerequisite, is complete.
+Base/main remains 2d18ed114d3799da3867260d69d8c70bf05d428d, including merged #122; #81/Q20 is complete. #100/Q30 is active in draft [PR #124](https://github.com/egohygiene/identity/pull/124). Its verified implementation revision is 90165635066a3b3519712bc3ff13398c29eecdfa on codex/100-project-profiles; #99/Q29 is complete. That known revision anchors source before this documentation-only refresh; the containing commit cannot name itself, so inspect current PR head/status externally.
 
 Draft #123/#80 stays unmerged. Actual local-Docker acceptance/review are deferred; Q19 is blocked with exit unchecked. Q21/#82 and Q27/#88 retain that unmet dependency. Preserve 40 IDs/88 edges/mappings: 19 complete, 1 active, 3 ready, 12 blocked, 5 planned.
 
@@ -209,7 +215,7 @@ Authoring-workspace Docker was unavailable at the last probe. Draft #123's hoste
 
 ## Next dependency-ready work
 
-Review/publish this bounded #100 candidate with its focused evidence. After reviewed completion, continue #103, #101/#102/#104/#105 and selected optional scope in ROADMAP order. Finish deferred environment/CI/refactor/docs work and #70's complete quality replay before #98 release/dogfood closeout.
+Review PR #124 with its focused evidence and verify its current external head/status. After reviewed completion, continue #103, #101/#102/#104/#105 and selected optional scope in ROADMAP order. Finish deferred environment/CI/refactor/docs work and #70's complete quality replay before #98 release/dogfood closeout.
 
 ## Parallel changes and reconciliation
 
@@ -221,7 +227,7 @@ Retain only necessary public repository facts, synthetic checks, relative paths 
 
 ## Handoff update protocol
 
-Include this refreshed checkpoint in the scoped PR after focused validation. Verify schema, 12 headings, budgets/privacy and graph/ADR/PNG preservation. Record deferred checks honestly; final #70 validation remains required. Leave unknown revision/PR null and record later exact-head outcomes externally.
+Retain this refreshed checkpoint in PR #124 after focused validation. Verify schema, 12 headings, budgets/privacy and graph/ADR/PNG preservation. Record deferred checks honestly; final #70 validation remains required. Preserve the known implementation anchor; record later containing-head outcomes externally rather than naming an unknowable future commit.
 
 ## Compaction and supersession
 
