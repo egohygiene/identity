@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-10-18
+updated: 2026-10-20
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -33,14 +33,14 @@ repository: egohygiene/identity
 visibility: public
 publication: central
 route: /roadmap/identity/
-updated: 2026-10-18
+updated: 2026-10-20
 -->
 ## 2026-10-18 execution snapshot
 
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #99 completed through PRs #114/#117/#118. #78 closed through #119; #79 writer serialization closed through #120 at `44bf13bc45916d51ae5de10e9af2ce894d3be486`. #77 inspection and explicit recovery (IDN-Q16) is the active authorized issue.
+**Current gate:** #99 completed through PRs #114/#117/#118. #78 closed through #119; #79 writer serialization closed through #120. #77 inspection and explicit recovery closed through #121 at `1ae867af6db65732e43689f4832d560a327f1857`. #81 immutable development-base qualification (IDN-Q20) is the active authorized issue. #83/IDN-Q22 is dependency-ready but retains its final-documentation position after #81/#80/#82/#84.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -406,7 +406,7 @@ issues: [76]
 
 <!-- roadmap-step
 id: IDN-Q16
-status: active
+status: complete
 depends_on: [IDN-Q12, IDN-Q17, IDN-Q18]
 issues: [77]
 -->
@@ -416,9 +416,9 @@ issues: [77]
 
 **Exit criteria:**
 
-- [ ] Inspection is read-only; documented recovery/regeneration preserves canonical and unrelated files and diagnoses corrupt/active workspaces.
+- [x] Inspection is read-only; documented recovery/regeneration preserves canonical and unrelated files and diagnoses corrupt/active workspaces.
 
-**Evidence and scope:** [#77](https://github.com/egohygiene/identity/issues/77) is active from `44bf13bc45916d51ae5de10e9af2ce894d3be486`. The candidate exposes human-only `v1-inspect` and `v1-recover`, sharing complete preflight and independent output-root authority. Inspection creates no cache/lock files; explicit rollback uses the existing exclusive writer guard. See the [consumer recovery guide](docs/consumers/RECOVERY.md). Keep Q16 active until review/merge; these commands do not change historical releases or promise a new machine-readable report.
+**Evidence and scope:** [#77](https://github.com/egohygiene/identity/issues/77) closed through [PR #121](https://github.com/egohygiene/identity/pull/121), merged at `1ae867af6db65732e43689f4832d560a327f1857`. Human-only `v1-inspect` and `v1-recover` share complete preflight and independent output-root authority. Inspection creates no cache/lock files; explicit rollback obtains fresh exclusive ownership. The [review](docs/reviews/consumer-recovery-2026-10-19.md), [runtime receipt](docs/evidence/identity-consumer-recovery-2026-10-19.json) and [consumer guide](docs/consumers/RECOVERY.md) bind synthetic regressions separately from the actual interrupted-producer/24-command standalone replay. Fresh Linux/macOS/Windows gates pass at reviewed head `e8a109ddbca98d835ba66a1b7f643669d8b3e05a`; canonical/unrelated bytes and complete generated inventories are preserved. These source commands do not change historical releases or establish a machine-readable report, hostile-filesystem or power-loss guarantee.
 
 <!-- roadmap-step
 id: IDN-Q17
@@ -470,7 +470,7 @@ issues: [80]
 
 <!-- roadmap-step
 id: IDN-Q20
-status: ready
+status: active
 depends_on: []
 issues: [81]
 -->
@@ -482,7 +482,7 @@ issues: [81]
 
 - [ ] The pinned base builds, smoke checks pass, and refresh/trust/cache/permission ownership is documented.
 
-**Evidence and scope:** [#81](https://github.com/egohygiene/identity/issues/81). Independent of browser qualification and deferred Realm consolidation.
+**Evidence and scope:** [#81](https://github.com/egohygiene/identity/issues/81) is active from merged #121 at `1ae867af6db65732e43689f4832d560a327f1857`. Qualify an immutable default within the existing portable add-on design, preserve explicit `BASE_IMAGE` selection, and record CLI/renderer runtime smoke plus refresh/trust/cache/development-user ownership. Keep Q20 active until the qualification evidence is reviewed and merged. Browser/screenshot qualification remains #80; Realm consolidation remains deferred.
 
 <!-- roadmap-step
 id: IDN-Q21
@@ -502,7 +502,7 @@ issues: [82]
 
 <!-- roadmap-step
 id: IDN-Q22
-status: blocked
+status: ready
 depends_on: [IDN-Q09, IDN-Q10, IDN-Q15, IDN-Q16]
 issues: [83]
 -->
@@ -514,7 +514,7 @@ issues: [83]
 
 - [ ] Final #76/#77 behavior is documented across help, consumer guides, architecture, and publication boundaries; relevant validators pass.
 
-**Evidence and scope:** [#83](https://github.com/egohygiene/identity/issues/83). IDN-Q09 can merge early. This final checkpoint keeps #83 open until the actual download/recovery behavior exists.
+**Evidence and scope:** [#83](https://github.com/egohygiene/identity/issues/83) is dependency-ready after #77 merged through #121; the early IDN-Q09 pass and repaired download/recovery prerequisites are complete. The execution order still places this final reconciliation after #81/#80/#82/#84. Keep #83 open until its final current-contract, publication and setup claims are reviewed against the completed behavior; dependency readiness does not authorize starting it.
 
 <!-- roadmap-step
 id: IDN-Q23

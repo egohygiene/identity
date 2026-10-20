@@ -61,6 +61,10 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- Pin the existing Node/Bookworm development base by OCI digest, qualify default
+  and unprivileged custom-base builds, and make copied checkout ownership explicit
+  without replacing the base user, entrypoint or command (#81).
+
 - Reject non-UTF-8 CLI output roots and preserve literal Unix backslashes for
   portable-path rejection, so recovery cannot silently authorize a different root.
 
