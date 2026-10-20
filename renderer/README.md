@@ -134,6 +134,21 @@ The page deliberately labels:
 Approved assets expose their format, dimensions, intended use, availability,
 digest, safe zone, license, provenance, approval, and download status.
 
+## Qualified browser evidence
+
+From the repository root:
+
+```bash
+python3 scripts/qualify_browser.py \
+  --output-directory /tmp/identity-browser-evidence
+```
+
+This uses the same digest-pinned browser/font/render profile as CI and checks
+the unchanged approved screenshot plus deliberate visual-drift rejection.
+See [the browser environment guide](../docs/BROWSER_ENVIRONMENT.md) for output,
+runtime requirements, evidence and human baseline-review boundaries. Raw host
+E2E runs remain diagnostic when their fonts/libraries differ.
+
 ## Validation
 
 Vitest covers contract rendering, missing-data states, asset metadata,

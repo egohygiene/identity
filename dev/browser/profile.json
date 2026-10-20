@@ -1,0 +1,29 @@
+{
+  "kind": "qualified browser environment",
+  "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+  "platform": "linux/amd64",
+  "playwright": "1.62.1",
+  "packageManager": "pnpm@11.21.0",
+  "settings": {
+    "locale": "en-US",
+    "timezoneId": "UTC",
+    "deviceScaleFactor": 1,
+    "colorScheme": "light",
+    "reducedMotion": "no-preference",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "chromium": {
+    "revision": "1234",
+    "version": "151.0.7922.34",
+    "colorProfile": "srgb"
+  },
+  "baseline": {
+    "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+    "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+    "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87"
+  },
+  "registryReceipt": "docs/evidence/identity-browser-registry-2026-10-20.json"
+}

@@ -9,6 +9,10 @@ on:
   pull_request:
     paths:
       - ".github/workflows/reference-renderer.yml"
+      - "dev/browser/**"
+      - "scripts/qualify_browser.py"
+      - "tests/test_qualify_browser.py"
+      - "docs/evidence/identity-browser-registry-*.json"
       - ".github/workflows/publish-brand-kit.yml"
       - "assets/identity/**"
       - "publication/**"
@@ -51,6 +55,10 @@ on:
       - main
     paths:
       - ".github/workflows/reference-renderer.yml"
+      - "dev/browser/**"
+      - "scripts/qualify_browser.py"
+      - "tests/test_qualify_browser.py"
+      - "docs/evidence/identity-browser-registry-*.json"
       - ".github/workflows/publish-brand-kit.yml"
       - "assets/identity/**"
       - "publication/**"
@@ -132,13 +140,18 @@ jobs:
         working-directory: renderer
         run: pnpm install --frozen-lockfile
 
-      - name: Install pinned Chromium
+      - name: Validate renderer contracts, behavior and public output
         working-directory: renderer
-        run: pnpm exec playwright install --with-deps chromium
+        run: |
+          pnpm run check
+          pnpm test
+          pnpm run build
+          pnpm run validate:public
 
-      - name: Validate renderer
-        working-directory: renderer
-        run: pnpm run validate
+      - name: Qualify the shared browser environment
+        run: python3 scripts/qualify_browser.py --mode ci --output-directory "${{ runner.temp }}/identity-browser-ci"
+      - name: Replay the documented local browser entrypoint
+        run: python3 scripts/qualify_browser.py --output-directory "${{ runner.temp }}/identity-browser-local"
 
       - name: Upload renderer evidence
         if: always()
@@ -149,5 +162,7 @@ jobs:
             renderer/dist/
             renderer/playwright-report/
             renderer/test-results/
+            ${{ runner.temp }}/identity-browser-ci/
+            ${{ runner.temp }}/identity-browser-local/
           if-no-files-found: warn
           retention-days: 14
