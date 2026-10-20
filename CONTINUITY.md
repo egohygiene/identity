@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-20T22:19:54Z'
+  updated_at: '2026-10-20T22:21:55Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -51,6 +51,7 @@ scope:
   - https://github.com/egohygiene/identity/issues/116
   - docs/decisions/ADR-0028-asset-rights-projection.md
   - renderer/scripts/build-public-site.mjs
+  - https://github.com/egohygiene/identity/pull/125
 work:
   objective: Present traceable supplied rights and existing authoritative references without fabricated licensing
     or parallel policy source.
@@ -68,9 +69,10 @@ work:
   next:
     kind: action
     id: identity-103-review
-    description: 'Review the scoped rights/policy candidate and focused evidence before authorized merge; #101 follows.'
+    description: 'Review draft PR125 and its focused evidence before authorized merge; #101 follows.'
     readiness: ready
     references:
+    - https://github.com/egohygiene/identity/pull/125
     - https://github.com/egohygiene/identity/issues/103
     - https://github.com/egohygiene/identity/issues/99
     - https://github.com/egohygiene/identity/issues/116
@@ -83,33 +85,36 @@ state:
     verified_at: '2026-10-20T22:15:29Z'
   candidate:
     branch: codex/103-rights-and-policy
-    revision: null
-    pull_request: null
-    handoff_state: ready-for-review
+    revision: 26d42caaa054a616b63ab05d90876bac5360e8a2
+    pull_request:
+      provider: github
+      id: egohygiene/identity#125
+      url: https://github.com/egohygiene/identity/pull/125
+    handoff_state: review-reference-recorded
   live:
     status: verified
-    observed_at: '2026-10-20T22:15:29Z'
+    observed_at: '2026-10-20T22:21:55Z'
     default_branch_revision: 4db8766ba01b742353c617720aebec6a11f88888
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'PR124 merged and #100 closed; main base tree matches the reviewed124 tree050f701005e405918edf1384fa36bb3c12a8440e.
-      #103 is open and sole prerequisite99 closed. No103 PR exists at this checkpoint. Draft123/#80 is unmerged
-      with local-Docker acceptance/review deferred.'
+    pull_request_state: draft
+    notes: 'PR125 is draft/open at implementation anchor26d42caaa054a616b63ab05d90876bac5360e8a2; tree1fb56a2d40c86d58a08a12a4e47d9244bda882a4
+      verified. Main remains4db8766; #103 open/#99 complete; draft123 parked. Later handoff-only containing commit
+      cannot know itself; inspect PR125 for current head/status. No103 CI result claimed.'
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-20T22:19:54Z'
+  reviewed_at: '2026-10-20T22:21:55Z'
   reviewed_by: Codex
   evidence:
-  - command: 'Live PR #124/#123, issues #100/#103 and exact-head #124 workflow inspection'
+  - command: Live PR125 draft/head/base inspection; prior merged124/closed100/parked123 inspection
     outcome: passed
-    observed_at: '2026-10-20T22:15:29Z'
-    notes: 'PR124 merged at4db8766ba01b742353c617720aebec6a11f88888; #100 closed/#103 open. Draft123 remains unmerged
-      at400846db7f10823d4b5bc1629213caf03960b59c. All five124 workflows pass after one recorded CLI rerun; these
-      are not103 results.'
+    observed_at: '2026-10-20T22:21:55Z'
+    notes: 'PR125 is draft/open at26d42caaa054a616b63ab05d90876bac5360e8a2 against4db8766. #100 closed after124;
+      #103 open; draft123 unmerged. All five124 checks passed after one recorded CLI rerun; those prior results
+      do not certify125.'
   - command: python3 -m unittest discover --start-directory tests --pattern test_render_press_kit.py --verbose
     outcome: passed
     observed_at: '2026-10-20T22:19:54Z'
@@ -191,7 +196,7 @@ Expose supplied rights, attribution, usage restrictions and configured policy/su
 
 ## State snapshot
 
-Base/main is4db8766ba01b742353c617720aebec6a11f88888, verified #124 merge; #100/Q30 is complete. Its tree050f701005e405918edf1384fa36bb3c12a8440e equals reviewed head5502106f301ed69c62396ccf4033342078412a46. #103/Q33 is active on codex/103-rights-and-policy; revision/PR stay null before publication. Its sole prerequisite99/Q29 is complete. Draft123/#80 remains unmerged at400846db7f10823d4b5bc1629213caf03960b59c. Local-Docker acceptance/review is deferred; Q19 stays blocked and Q21/#82/Q27/#88 retain that dependency. Preserve40 IDs/88 edges/mappings:20 complete,1 active,3 ready,11 blocked,5 planned.
+Base/main is4db8766ba01b742353c617720aebec6a11f88888, verified #124 merge; #100/Q30 is complete. Its tree050f701005e405918edf1384fa36bb3c12a8440e equals reviewed head5502106f301ed69c62396ccf4033342078412a46. #103/Q33 is active in draft PR125 on codex/103-rights-and-policy. Implementation anchor26d42caaa054a616b63ab05d90876bac5360e8a2 has verified tree1fb56a2d40c86d58a08a12a4e47d9244bda882a4; the later handoff-only containing commit cannot name itself. Inspect PR125 for current head/status. Its sole prerequisite99/Q29 is complete. Draft123/#80 remains unmerged at400846db7f10823d4b5bc1629213caf03960b59c. Local-Docker acceptance/review is deferred; Q19 stays blocked and Q21/#82/Q27/#88 retain that dependency. Preserve40 IDs/88 edges/mappings:20 complete,1 active,3 ready,11 blocked,5 planned.
 
 ## Completed and material changes
 
@@ -207,7 +212,7 @@ No bounded implementation blocker remains. ADR-0028 is implemented but proposed 
 
 ## Next dependency-ready work
 
-Review this scoped #103 candidate and focused evidence before authorized merge. #101 approved mark/download work follows, then #102/#104/#105 and optional scope. Deferred #70 full quality checks remain required before #98 release closeout.
+Review draft PR125 and its focused #103 evidence before authorized merge. #101 approved mark/download work follows, then #102/#104/#105 and optional scope. Deferred #70 full quality checks remain required before #98 release closeout.
 
 ## Parallel changes and reconciliation
 
@@ -219,7 +224,7 @@ Keep necessary public repository facts, synthetic checks, relative paths and has
 
 ## Handoff update protocol
 
-Refresh after domain checks and before PR presentation. Verify schema, exact12 headings, budgets/privacy and graph/ADR/PNG preservation. Record known revision/PR without demanding the containing commit name itself. Deferred/unavailable checks never become passes; final #70 replay remains required.
+Refresh after domain checks and before PR presentation. Verify schema, exact12 headings, budgets/privacy and graph/ADR/PNG preservation. The recorded revision anchors tested implementation; later handoff-only changes do not claim fresh full CI. Inspect PR125 for its current head instead of demanding the containing commit name itself. Deferred/unavailable checks never become passes; final #70 replay remains required.
 
 ## Compaction and supersession
 

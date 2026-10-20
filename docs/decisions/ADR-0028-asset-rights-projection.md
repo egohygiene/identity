@@ -8,7 +8,7 @@ decision_scope: repository
 visibility: public
 owners: [egohygiene/identity]
 issue: https://github.com/egohygiene/identity/issues/103
-pull_request: null
+pull_request: https://github.com/egohygiene/identity/pull/125
 related: [ADR-0001, ADR-0003, ADR-0007, ADR-0010, ADR-0012, ADR-0013, ADR-0015, ADR-0019]
 supersedes: []
 superseded_by: []
@@ -16,6 +16,9 @@ affected_repositories: [egohygiene/identity]
 affected_contracts: []
 implementation_status: implemented
 evidence:
+  - type: pull_request
+    url: https://github.com/egohygiene/identity/pull/125
+    description: Candidate projects existing rights and restrictions, exposes unresolved metadata and retains legacy release bytes; focused evidence does not imply human acceptance or legal permission.
   - type: issue
     url: https://github.com/egohygiene/identity/issues/103
     description: Requests traceable asset rights, explicit unresolved permissions and authoritative policy/contact references without adopting legal policy.
