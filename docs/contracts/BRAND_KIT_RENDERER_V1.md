@@ -87,10 +87,18 @@ When a consumer supplies a generated Press Kit directory, the renderer may
 also consume its `press-kit.json` projection and the packaged assets named by
 that projection. It validates the Press Kit schema, shared project identity,
 and the exact immutable source digest before adding an optional Press and media
-kit section. It presents only the approved boilerplate, facts, links, contacts,
+kit section. It presents only the approved short/optional paragraph/long
+boilerplate, facts, links, contacts,
 team biographies, selected assets, usage/legal guidance, and generated
 downloads present in the projection. It cannot discover or publish source
 facts from `.identity/`.
+
+Copy controls use exact projected boilerplate and fact values. Structured voice
+foundation, characteristics, naming rules and practical examples remain
+readable under their declared contexts; no profile text is inferred from a fact
+label or from another description length. See the
+[authoring field map](../consumers/AUTHORING.md#3-adopt-rich-copy-and-usage-when-needed)
+and [Press Kit compatibility notes](PRESS_KIT_V1.md#compatibility).
 
 The renderer must not read `.identity/`, infer missing brand facts, or reach into
 a sibling repository.

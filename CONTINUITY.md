@@ -7,20 +7,21 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-20T04:31:12Z'
+  updated_at: '2026-10-20T18:08:28Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Qualify issue81 immutable default development base within the existing portable Docker add-on.
+  purpose: 'Deliver readable approved voice/usage guidance, exact-copy controls and optional paragraph boilerplate
+    for #100.'
   includes:
-  - Official Node24/Bookworm digest identity and selected Linux/amd64 registry evidence.
-  - Default and explicit unprivileged custom-base build/runtime smoke, copy ownership, CA and tool/cache checks.
-  - Refresh/ownership documentation and bounded hosted qualification evidence.
+  - Structured voice foundation/context and usage section/rule presentation, preserving other usage keys.
+  - Exact supplied-copy controls and optional governed paragraph boilerplate; short/long stay required.
+  - Public filtering/optional omission, targeted functional checks and product-first priority.
   excludes:
-  - Browser/font/screenshot qualification, broader entrypoint matrix, new platform adoption, other issues, release
-    and deployment.
+  - Invented brand facts, values, rights, approvals, artwork or a competing copy catalog.
+  - 'Deferred #80 acceptance, setup/workflow CI, refactors, broad full-suite replay, release and deployment.'
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -30,114 +31,134 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
-  - dev/Dockerfile
-  - dev/qualification/Dockerfile
-  - dev/qualification/smoke.py
-  - scripts/dev-env.sh
-  - scripts/qualify_dev_image.py
-  - .github/workflows/development-image.yml
-  - tests/test_qualify_dev_image.py
-  - docs/DEVELOPMENT.md
-  - docs/DEPENDENCY_POLICY.md
-  - docs/reviews/development-base-2026-10-20.md
-  - docs/evidence/identity-development-base-registry-2026-10-20.json
-  - docs/evidence/identity-development-image-2026-10-20.json
   - docs/decisions/policy-reference.json
-  - https://github.com/egohygiene/identity/issues/81
+  - docs/decisions/ADR-0003-deterministic-projection-boundary.md
+  - docs/decisions/ADR-0025-executable-minimal-authoring-core.md
+  - docs/contracts/IDENTITY_V1.md
+  - docs/contracts/GUIDANCE_V1.md
+  - docs/contracts/PRESS_KIT_V1.md
+  - docs/consumers/AUTHORING.md
+  - contracts/v1/project.schema.json
+  - contracts/v1/press-kit.schema.json
+  - scripts/validate_identity.py
+  - scripts/render_press_kit.py
+  - renderer/src/press-kit.js
+  - renderer/tests/press-kit.test.js
+  - renderer/tests/press-kit.integration.test.js
+  - https://github.com/egohygiene/identity/issues/100
+  - https://github.com/egohygiene/identity/issues/70
   - https://github.com/egohygiene/identity/issues/116
+  - https://github.com/egohygiene/identity/pull/123
+  - renderer/src/app.js
+  - docs/decisions/ADR-0013-preserve-guidance-lifecycle.md
+  - docs/decisions/ADR-0015-press-kit-projection-boundary.md
+  - docs/decisions/ADR-0027-optional-paragraph-boilerplate.md
+  - contracts/v1/press-kit-projection.schema.json
+  - docs/contracts/BRAND_KIT_RENDERER_V1.md
+  - renderer/tests/project-copy.test.js
+  - renderer/tests/guidance.integration.test.js
+  - https://github.com/egohygiene/identity/pull/124
 work:
-  objective: Replace the mutable default base with a qualified digest while preserving the custom-base setup and
-    inherited user/configuration.
+  objective: Present approved voice/naming and usage guidance readably, expose exact supplied copy and support
+    optional paragraph boilerplate through governed Press Kit outputs.
   success_conditions:
-  - Default image is digest-bound to verified official registry identities and passes recorded CLI/renderer smoke.
-  - Explicit custom-base setup preserves USER/ENTRYPOINT/CMD and runs as its provisioned unprivileged user with
-    writable checkout/tool/cache paths.
-  - Refresh ownership and proxy trust are documented and checked without claiming unrelated architecture, browser,
-    private-proxy or release qualification.
+  - Structured voice/usage guidance renders readable approved text; copy controls retain exact supplied wording.
+  - Paragraph remains optional with existing governance/filtering/output integrity; short and long remain required.
+  - Focused behavior/schema/projection checks pass; existing 26 ADR bytes and the new proposed ADR-0027/index
+    remain valid.
   active_issue:
     provider: github
-    id: egohygiene/identity#81
-    url: https://github.com/egohygiene/identity/issues/81
+    id: egohygiene/identity#100
+    url: https://github.com/egohygiene/identity/issues/100
   next:
     kind: action
-    id: identity-81-review
-    description: Review the scoped base qualification PR and exact hosted evidence before merge; issue80 is next
-      in the execution order.
+    id: identity-100-pr124-review
+    description: 'Review PR #124 and the focused implementation evidence, verify current external head/status,
+      then continue #103 after reviewed completion.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/81
-    - https://github.com/egohygiene/identity/issues/80
+    - https://github.com/egohygiene/identity/pull/124
+    - https://github.com/egohygiene/identity/issues/100
+    - https://github.com/egohygiene/identity/issues/103
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 1ae867af6db65732e43689f4832d560a327f1857
+    revision: 2d18ed114d3799da3867260d69d8c70bf05d428d
     ref: refs/heads/main
-    verified_at: '2026-10-20T04:18:49Z'
+    verified_at: '2026-10-20T18:08:28Z'
   candidate:
-    branch: codex/81-qualified-docker-base
-    revision: null
+    branch: codex/100-project-profiles
+    revision: 90165635066a3b3519712bc3ff13398c29eecdfa
     pull_request:
       provider: github
-      id: egohygiene/identity#122
-      url: https://github.com/egohygiene/identity/pull/122
-    handoff_state: ready-for-review
+      id: egohygiene/identity#124
+      url: https://github.com/egohygiene/identity/pull/124
+    handoff_state: review-reference-recorded
   live:
     status: verified
-    observed_at: '2026-10-20T04:31:12Z'
-    default_branch_revision: 1ae867af6db65732e43689f4832d560a327f1857
+    observed_at: '2026-10-20T18:08:28Z'
+    default_branch_revision: 2d18ed114d3799da3867260d69d8c70bf05d428d
     issue_state: open
-    pull_request_state: open
-    notes: PR122 is draft/open at head4d9d520ba7fe6434f36a887f2a39dc22b899fc78 before this documentation-only receipt
-      update. Hosted run39369572073 qualifies both images at represented merge3101cd87666d75977e380e2e4533880602e8be4a.
-      CLI/advisory pass; release Windows is still in progress. Exact final-head results belong in the PR.
-  parallel_changes: []
+    pull_request_state: draft
+    notes: 'PR #124 is open/draft at verified implementation head 90165635066a3b3519712bc3ff13398c29eecdfa, tree
+      62e23a4badb22a7cdd5ee705fcdd49a92b9fc9a7. Main is unchanged. The implementation revision anchors the known
+      source before this later documentation-only refresh; current PR head/status must be checked externally.
+      PR #123 remains draft/open and unmerged at 400846db7f10823d4b5bc1629213caf03960b59c. No CI outcome is asserted.'
+  parallel_changes:
+  - provider: github
+    id: egohygiene/identity#123
+    url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-20T04:31:12Z'
+  reviewed_at: '2026-10-20T18:08:28Z'
   reviewed_by: Codex
   evidence:
-  - command: Official registry index/selected manifest/config raw SHA-256 verification
+  - command: python3 -m unittest discover -s tests -p test_render_press_kit.py -v
     outcome: passed
-    observed_at: '2026-10-20T04:31:12Z'
-    notes: Dated registry receipt binds the immutable official Node24/Bookworm index and selected Linux/amd64 config.
-      Runtime qualification is separately recorded.
-  - command: python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose; targeted correction
-      checks
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: 12 focused Python cases pass; paragraph output/filtering and required short/long behavior remain covered.
+  - command: pnpm exec vitest run tests/press-kit.test.js tests/press-kit.integration.test.js (renderer)
     outcome: passed
-    observed_at: '2026-10-20T04:31:12Z'
-    notes: 143 cases:141 passes/two existing skips, including five qualification failure-boundary cases. Corrected
-      renderer-scoped pnpm probe was independently reviewed and passes actual image smoke.
-  - command: Six standalone verifiers; cargo fmt --all --check; Python compileall/py_compile; git diff --check
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: 41 focused cases pass. Report this suite separately from the later overlapping renderer suite.
+  - command: pnpm exec vitest run tests/app.test.js tests/guidance.integration.test.js tests/project-copy.test.js
+      tests/press-kit.integration.test.js (renderer)
     outcome: passed
-    observed_at: '2026-10-20T04:31:12Z'
-    notes: Existing release/extraction/publication and dependency/output contracts remain unchanged. No Rust production
-      source changes.
-  - command: Hosted development-image run39369572073/job118454149412
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: Four files/21 cases pass after the bounded structured-usage fix; readable guidance, exact-copy controls
+      and omission behavior are covered.
+  - command: Draft 2020-12 source/projection schema checks and actual generated Press Kit validation
     outcome: passed
-    observed_at: '2026-10-20T04:31:12Z'
-    notes: Head4d9d520ba7fe6434f36a887f2a39dc22b899fc78; merge3101cd87666d75977e380e2e4533880602e8be4a. Default0:0/custom1000:1000
-      each build and pass29 commands,12 writable locations,17 preserved source files and equal14-file output inventories.
-      Each passes279 renderer tests;13 critical hashes/331 inputs bind the retained receipt.
-  - command: Pinned continuity/ADR/roadmap schema and invariant checks; runtime receipt source-hash replay
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: Source and generated projection validate with and without paragraph; an unknown-kind negative is rejected.
+      Existing public governance/filtering and required short/long records remain intact.
+  - command: Documentation local-link/anchor inspection; independent actual-diff review; git diff --check
     outcome: passed
-    observed_at: '2026-10-20T04:31:12Z'
-    notes: All40 IDs/88edges/mappings and26 exact ADR bytes/dispositions/approval/lineage preserved. Receipt critical/input
-      hashes reproduce after documentation-only changes.
-  - command: Fresh exact-head hosted checks after the containing documentation-only update
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: 64 local links/anchors pass. Final bounded review inspected the usage fix, required kinds, public filtering
+      and import/export behavior; no unresolved blocker. This is not full CI/browser proof.
+  - command: Pinned owner continuity/ADR/roadmap schema, index/lineage, byte-preservation and approved-PNG checks
+    outcome: passed
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: '19 owner inputs verify against pinned Git blobs. All 26 existing ADR bytes are unchanged; new ADR-0027
+      is proposed with null approval. Corpus: 27 records, 21 accepted/six proposed. Preserve 40 IDs/88 edges/mappings,
+      counts 19 complete/1 active/3 ready/12 blocked/5 planned and PNG.'
+  - command: Broad full lint/test/integrity/platform/browser CI and Docker replay
+    outcome: not-run
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: 'Owner-deferred to final #70 quality work after product changes and deferred maintenance/docs. Focused
+      checks above pass; deferral is neither a full-suite pass nor an acceptance waiver.'
+  - command: 'Deferred #80 actual local-Docker acceptance/review'
     outcome: limited
-    observed_at: '2026-10-20T04:31:12Z'
-    notes: The containing commit cannot know its own head/run IDs. Inspect final CLI, development-image, release-platform/public-smoke
-      and advisory results externally before review handoff.
+    observed_at: '2026-10-20T18:05:51Z'
+    notes: 'Draft #123 stays unmerged; actual local-Docker acceptance remains unavailable/deferred and Q19 exit
+      unchecked. Prior hosted local-mode proof does not establish the missing execution or reviewed merge.'
   environment_limitations:
-  - Local Docker is unavailable; real image proof comes from the named hosted run and retained source-bound receipt.
-  - Only native Linux/amd64 default and the recorded derived custom base are qualified, not arbitrary images or
-    other OCI-index architectures.
-  - Synthetic localhost CA rejection/explicit trust does not qualify a private TLS proxy; global trust and certificate/key
-    bytes are not retained.
-  - The base digest does not freeze bootstrap network services or establish hermetic/browser/font/screenshot/security-audit
-    conformance.
-  - Pinned owner checks remain bounded structure/invariant evidence, not native whole-repository conformance.
+  - Evidence is scoped to named focused checks and review; broad CI/browser/Docker replay remains deferred.
+  - 'No #100 hosted checks, final-head CI, full-kit completion, release or deployment are claimed.'
+  - ADR-0025 and ADR-0027 remain proposed/unapproved; implementation/testing cannot accept them.
+  - Only supplied approved facts/copy become public; absent or withheld optional content remains omitted.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -156,52 +177,58 @@ privacy:
 
 ## Purpose and precedence
 
-This checkpoint covers #81. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md and issue #116 own execution order and dependencies.
+This checkpoint covers #100. Instructions, verified live state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priorities.
 
 ## Resume protocol
 
-Read AGENTS.md, this handoff, #81/#116, development/dependency guides, Dockerfile, qualification code and dated receipts. Refresh main, PR122 head and hosted jobs. The maintainer authorized merging #121 and starting #81; subsequent issues retain review boundaries.
+Read AGENTS.md, this handoff, #100/#116, the authoring worksheet, project/guidance/Press Kit/renderer contracts and cited ADRs. Inspect source and focused evidence. Refresh main and the separate draft #123 before acting; its unfinished acceptance is not merged into this branch.
 
 ## Current objective and success conditions
 
-Qualify the digest-pinned default within the existing Node24/Bookworm add-on. Preserve BASE_IMAGE and one setup implementation, inherited USER/ENTRYPOINT/CMD, writable tool/cache/checkouts, source preservation and repeated outputs. Record actual versions and refresh/proxy/user ownership.
+Present approved structured voice foundations/contexts and usage sections/rules readably; preserve remaining usage keys. Offer exact-copy controls. Add optional paragraph boilerplate through the existing Press Kit source/projection and public outputs while retaining mandatory short/long records, lifecycle filtering and clean optional omission.
 
 ## State snapshot
 
-Main is 1ae867af6db65732e43689f4832d560a327f1857, including merged #121; #77 is closed/Q16 complete. #81/Q20 is active in draft PR122. Before this receipt update the head is 4d9d520ba7fe6434f36a887f2a39dc22b899fc78; the containing revision stays null. All 40 IDs/88 edges/mappings remain intact. Q22/#83 is ready for its later final-docs position; Q26/#87 retains post-kit priority. Neither is authorized work.
+Base/main remains 2d18ed114d3799da3867260d69d8c70bf05d428d, including merged #122; #81/Q20 is complete. #100/Q30 is active in draft [PR #124](https://github.com/egohygiene/identity/pull/124). Its verified implementation revision is 90165635066a3b3519712bc3ff13398c29eecdfa on codex/100-project-profiles; #99/Q29 is complete. That known revision anchors source before this documentation-only refresh; the containing commit cannot name itself, so inspect current PR head/status externally.
+
+Draft #123/#80 stays unmerged. Actual local-Docker acceptance/review are deferred; Q19 is blocked with exit unchecked. Q21/#82 and Q27/#88 retain that unmet dependency. Preserve 40 IDs/88 edges/mappings: 19 complete, 1 active, 3 ready, 12 blocked, 5 planned.
 
 ## Completed and material changes
 
-dev/Dockerfile pins the existing official base by verified OCI index digest and applies numeric copy ownership without changing the base user, entrypoint or command. The custom fixture provisions UID/GID1000 with writable paths and reuses the same setup. docs/DEVELOPMENT.md owns supported users, caches, CA trust and refresh. No runtime dependency, lockfile, output contract or visual baseline changes.
+renderer/src/app.js replaces object/raw foundation presentation with readable approved voice fields, context naming/examples and structured usage sections/rules. Other usage keys retain their prior presentation. Accessible copy controls carry exact supplied descriptions, facts and selected guidance without generating prose.
 
-The qualifier binds the default/registry/pulled config, builds default/custom add-ons, checks inherited configuration and invokes smoke. Receipt writes stay outside the checkout. Smoke probes actual writes/versions, copied CLI generation and verification twice, canonical/unrelated preservation and renderer checks. The corrected pnpm version probe uses its owning renderer workspace. A disposable TLS server tests CA rejection/explicit trust without private proxy access or global trust mutation.
+The existing Press Kit source/projection schemas, validator, projector and renderer accept optional paragraph boilerplate. Short/long remain required, kinds remain unique and each record retains subject-matched governance. Supplied paragraph text flows verbatim through JSON/Markdown/ZIP and page controls; absent, internal or unapproved paragraph is omitted. No competing profile catalog or new project fields are introduced. Authoring/contracts describe compatible tool-set requirements; older closed schemas/renderers do not gain support from unchanged identifiers.
+
+ROADMAP.md records product-first work, then deferred #80 acceptance, #82/#84 CI, #85–#88 refactors, final #83 docs and #70's full quality pass. #98 retains release/self-dogfood/adoption acceptance. Priority changes add no hard edge or acceptance waiver.
 
 ## Validation and review evidence
 
-Local Python completes 143 cases: 141 pass/two existing skips, including five failure-boundary cases. Six verifiers, formatting, Python compilation and whitespace checks pass. Independent review found no remaining implementation blocker and independently exercised the synthetic CA probe. Registry identity proof and image runtime proof remain separate dated receipts.
+Focused Python Press Kit tests pass 12 cases. Renderer Press Kit suites pass 41 cases; the later four-file app/guidance/copy/Press Kit suite passes 21 cases after the usage fix. These overlap and are not a unique aggregate total. Draft 2020-12 schema checks and actual source/projection validation pass with and without paragraph; unknown kind is rejected.
 
-Hosted run 39369572073 passes both Linux/amd64 builds and all 29 commands per image:default UID/GID 0:0/custom 1000:1000, 12 writable locations, 17 preserved canonical files, unrelated sentinel and identical complete 14-file output inventories. Each image passes 279 renderer cases, source checks, build and public validation. Runtime versions and exact source identities/hashes are retained in docs/evidence/identity-development-image-2026-10-20.json. All 13 critical hashes and the 331-file inventory reproduce after this documentation-only receipt update. Fresh final-head hosted results belong externally in PR122.
+Documentation inspection passes 64 local links/anchors. Independent final diff review reports no unresolved blocker after inspecting usage rendering, required kinds, public filtering and import/export behavior. Owner checks verify 19 pinned inputs, all 26 unchanged existing ADRs plus proposed ADR-0027/index/lineage, the 40-step/88-edge graph and approved PNG. Broad CI/browser/Docker replay was not run and remains deferred to #70; no prior/future head certifies this containing candidate.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No bounded implementation blocker remains; final exact-head hosted checks are still required. Local Docker is unavailable, so host-only tests are not image proof. Qualification covers Linux/amd64 and one derived custom base; index availability is not other-platform qualification. Runtime user overrides and host mounts need matching ownership. Synthetic CA checks prove trust bindings, not a private organization's proxy. Base pinning is not hermetic bootstrap, browser/font/screenshot qualification or vulnerability/license audit. Stable v1.0.0 remains unchanged; no registry push, release or deployment occurs.
+No unresolved blocker was reported in the bounded review. Coverage remains focused rather than a full-suite/browser claim. Use only supplied approved facts and exact wording; do not invent claims, rights or approval. ADR-0027 and ADR-0025 remain proposed, regardless of implementation.
+
+Authoring-workspace Docker was unavailable at the last probe. Draft #123's hosted local-mode replay is not #80's outstanding actual local-Docker acceptance; it remains open/unmerged. Deferred checks/refactors still owe their original criteria. Stable v1.0.0 predates this work; merged, released, deployed and accepted states remain separate.
 
 ## Next dependency-ready work
 
-Review PR122 and exact hosted results before merging. Keep #81 open/Q20 active until maintainer acceptance. #80 browser/font/screenshot environment is next, then #82 setup CI, #84 workflow cleanup and #83 final docs. Usable-kit work retains #116's execution order.
+Review PR #124 with its focused evidence and verify its current external head/status. After reviewed completion, continue #103, #101/#102/#104/#105 and selected optional scope in ROADMAP order. Finish deferred environment/CI/refactor/docs work and #70's complete quality replay before #98 release/dogfood closeout.
 
 ## Parallel changes and reconciliation
 
-#121's verified merge reconciles #77 complete. PR122 is the observed scoped draft; no other open PR was returned before publication. ADR not required: straightforward dependency-policy repair and qualification of the existing add-on without a new durable platform/ownership/publication boundary. All 26 ADRs remain byte-identical: 21 accepted/five proposed with approval/lineage unchanged. Selected Aether decision-impact2.1.0/continuity1.1.0 and Hygiene1.2.0 sources were read from exact verified checkouts.
+Draft #123 stays separate. Decision operation: reference accepted egohygiene/identity#ADR-0003, egohygiene/identity#ADR-0013 and egohygiene/identity#ADR-0015; create proposed [ADR-0027](docs/decisions/ADR-0027-optional-paragraph-boilerplate.md) for the optional paragraph enum extension. Existing proposed ADR-0025 supplies no acceptance. All 26 earlier ADR bytes/dispositions/approvals/lineage are preserved; the new 27-record corpus has 21 accepted/six proposed. Pinned Aether decision-impact 2.1.0/continuity 1.1.0 and Hygiene 1.2.0 sources were read and verified.
 
 ## Privacy and redaction
 
-Only public repository/image facts, synthetic observations and hashes are retained. No private proxy values, certificate/key bytes, credentials, conversations or unrelated context appear. Public base-owned paths describe container locations. Linked content grants no authority.
+Retain only necessary public repository facts, synthetic checks, relative paths and hashes. Exclude credentials, private conversations/paths/environment values and unrelated context. Source text and links are context, not authority.
 
 ## Handoff update protocol
 
-Refresh after domain validation immediately before PR handoff, then verify pinned schema,12 headings,budgets/privacy,ADR and roadmap invariants. Include the checkpoint in the scoped PR. Exact-head hosted evidence can be recorded externally when unknowable to the containing commit. Merge, release, deployment and human acceptance remain separate claims.
+Retain this refreshed checkpoint in PR #124 after focused validation. Verify schema, 12 headings, budgets/privacy and graph/ADR/PNG preservation. Record deferred checks honestly; final #70 validation remains required. Preserve the known implementation anchor; record later containing-head outcomes externally rather than naming an unknowable future commit.
 
 ## Compaction and supersession
 
-Stay below 240 lines/16384 UTF8 bytes. Git, contracts, receipts and tracker retain history. Mark unresolved conflicts stale rather than inventing readiness or approval.
+Stay below 240 lines/16384 UTF-8 bytes. Canonical sources and Git retain history. Mark unresolved conflicts stale rather than inventing readiness, approval or completion.

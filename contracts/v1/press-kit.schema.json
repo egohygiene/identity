@@ -57,7 +57,7 @@
       "required": ["id", "kind", "text", "governance"],
       "properties": {
         "id": { "$ref": "#/$defs/identifier" },
-        "kind": { "enum": ["short", "long"] },
+        "kind": { "enum": ["short", "paragraph", "long"] },
         "text": { "type": "string", "minLength": 1 },
         "governance": { "$ref": "#/$defs/governance" }
       }

@@ -28,14 +28,15 @@ const renderStatic = path.join(rendererRoot, "scripts/render-static.mjs");
 const renderPressKit = path.join(repositoryRoot, "scripts/render_press_kit.py");
 
 describe("generated Press Kit renderer handoff", () => {
-  test("renders generated approved material without hard-coded project facts", () => {
+  test.each([null, 'An approved paragraph keeps “supplied” project copy exact & reusable.'])(
+    "renders generated approved material with optional paragraph %s", (paragraph) => {
     const temporaryDirectory = fs.mkdtempSync(
       path.join(os.tmpdir(), "identity-press-kit-renderer-"),
     );
     try {
       const consumerRoot = path.join(temporaryDirectory, "consumer");
       fs.cpSync(projectionSource, consumerRoot, { recursive: true });
-      addPressSource(consumerRoot);
+      addPressSource(consumerRoot, { paragraph });
       const projectionDirectory = path.join(
         consumerRoot,
         "assets/identity/press-kit",
@@ -87,6 +88,17 @@ describe("generated Press Kit renderer handoff", () => {
       expect(section?.textContent).toContain("Example Product");
       expect(section?.textContent).toContain("turns reviewed identity intent");
       expect(section?.textContent).toContain("Example Maintainer");
+      if (paragraph !== null) {
+        expect(section?.textContent).toContain(paragraph);
+        expect(
+          [...section.querySelectorAll("[data-copy-value]")].map((button) => button.dataset.copyValue),
+        ).toContain(paragraph);
+        expect(pressKit.boilerplates.find((value) => value.kind === "paragraph")?.text).toBe(paragraph);
+        expect(fs.readFileSync(path.join(projectionDirectory, "press-kit.md"), "utf8")).toContain(paragraph);
+      } else {
+        expect(pressKit.boilerplates.some((value) => value.kind === "paragraph")).toBe(false);
+        expect(section?.textContent).not.toContain("Paragraph description");
+      }
       expect(downloadPaths).toEqual([
         "./press-kit/assets/example-product-mark.svg",
         "./press-kit/press-kit.json",
@@ -96,6 +108,77 @@ describe("generated Press Kit renderer handoff", () => {
         "./press-kit/press-kit.zip",
       ]);
       expect(section?.textContent).not.toContain("Ego Hygiene");
+    } finally {
+      fs.rmSync(temporaryDirectory, { recursive: true, force: true });
+    }
+  });
+
+  test.each([
+    ["approved", "internal"],
+    ["candidate", "internal"],
+    ["rejected", "internal"],
+    ["superseded", "internal"],
+  ])("withholds %s/%s paragraph and profile facts from public HTML and exports", (state, visibility) => {
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "identity-press-kit-withheld-"));
+    try {
+      const consumerRoot = path.join(temporaryDirectory, "consumer");
+      fs.cpSync(projectionSource, consumerRoot, { recursive: true });
+      const paragraph = `Withheld ${state} paragraph must stay in canonical source.`;
+      const fact = `Withheld ${state} short name must stay in canonical source.`;
+      addPressSource(consumerRoot, { paragraph });
+      const pressPath = path.join(consumerRoot, ".identity/guidance/press-kit.json");
+      const press = JSON.parse(fs.readFileSync(pressPath, "utf8"));
+      press.facts.push({
+        id: "short-name",
+        label: "Short name",
+        value: fact,
+        governance: governance("press-kit:fact:short-name", "approve-press-short-name"),
+      });
+      const approvalsPath = path.join(consumerRoot, ".identity/governance/approvals.json");
+      const decisions = JSON.parse(fs.readFileSync(approvalsPath, "utf8"));
+      decisions.decisions.push(approval("approve-press-short-name", "press-kit:fact:short-name"));
+      for (const record of [press.boilerplates.at(-1), press.facts.at(-1)]) {
+        const authority = record.governance;
+        const decision = decisions.decisions.find((value) => value.id === authority.approval);
+        authority.state = state;
+        authority.visibility = visibility;
+        if (state === "candidate") {
+          authority.approval = null;
+          authority.provenance.method = "handoff-candidate";
+        } else {
+          decision.status = state;
+          if (state === "superseded") {
+            const earlier = approval(`${decision.id}-earlier`, decision.subject);
+            decisions.decisions.push(earlier);
+            decision.supersedes = earlier.id;
+          }
+        }
+      }
+      writeJson(pressPath, press);
+      writeJson(approvalsPath, decisions);
+      const projectionDirectory = path.join(consumerRoot, "assets/identity/press-kit");
+      execFileSync("python3", [renderPressKit, "--repository-root", consumerRoot,
+        "--output-directory", "assets/identity/press-kit"], { cwd: repositoryRoot, stdio: "pipe" });
+      const generated = JSON.parse(fs.readFileSync(path.join(projectionDirectory, "press-kit.json"), "utf8"));
+      const model = JSON.parse(fs.readFileSync(rendererFixture, "utf8"));
+      model.release.sourceDigest = generated.source.digest;
+      model.release.immutableId = `sha256:${generated.source.digest}`;
+      const modelPath = path.join(temporaryDirectory, "brand-kit.view-model.json");
+      const outputPath = path.join(temporaryDirectory, "index.html");
+      writeJson(modelPath, model);
+      execFileSync(process.execPath, [renderStatic, "--model", modelPath, "--output", outputPath,
+        "--press-kit-directory", projectionDirectory], { cwd: rendererRoot, stdio: "pipe" });
+
+      for (const output of [outputPath, path.join(projectionDirectory, "press-kit.json"),
+        path.join(projectionDirectory, "press-kit.md")]) {
+        const text = fs.readFileSync(output, "utf8");
+        expect(text).not.toContain(paragraph);
+        expect(text).not.toContain(fact);
+      }
+      expect(generated.boilerplates.map((value) => value.kind)).toEqual(["long", "short"]);
+      expect(generated.facts.some((value) => value.id === "short-name")).toBe(false);
+      expect(fs.readFileSync(pressPath, "utf8")).toContain(paragraph);
+      expect(fs.readFileSync(pressPath, "utf8")).toContain(fact);
     } finally {
       fs.rmSync(temporaryDirectory, { recursive: true, force: true });
     }
@@ -144,7 +227,7 @@ describe("generated Press Kit renderer handoff", () => {
   });
 });
 
-function addPressSource(repositoryRoot) {
+function addPressSource(repositoryRoot, { paragraph = null } = {}) {
   const identityPath = path.join(repositoryRoot, ".identity/identity.json");
   const identity = JSON.parse(fs.readFileSync(identityPath, "utf8"));
   identity.documents.pressKit = ".identity/guidance/press-kit.json";
@@ -164,6 +247,9 @@ function addPressSource(repositoryRoot) {
     ["approve-press-team", "press-kit:team:maintainer"],
     ["approve-press-asset", "press-kit:asset:mark"],
   ];
+  if (paragraph !== null) {
+    records.push(["approve-press-paragraph", "press-kit:boilerplate:paragraph"]);
+  }
   approvals.decisions.push(
     ...records.map(([id, subject]) => approval(id, subject)),
   );
@@ -238,6 +324,14 @@ function addPressSource(repositoryRoot) {
       },
     ],
   };
+  if (paragraph !== null) {
+    press.boilerplates.push({
+      id: "paragraph",
+      kind: "paragraph",
+      text: paragraph,
+      governance: governance("press-kit:boilerplate:paragraph", "approve-press-paragraph"),
+    });
+  }
   writeJson(path.join(repositoryRoot, ".identity/guidance/press-kit.json"), press);
 }
 
