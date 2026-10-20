@@ -13,7 +13,7 @@ read → validate → resolve → plan → render → verify → manifest
 ```
 
 `init`, `validate`, `plan`, and `handoff` remain the existing v0 CLI surface.
-The v1 consumer boundary adds `v1-generate` and `v1-verify`: the former uses
+The v1 consumer boundary includes `v1-generate` and `v1-verify`: the former uses
 the published source adapter and selected versioned profiles to apply one
 transactional package build, while the latter is read-only and fails on missing
 or drifted generated state. Both commands and `V1ConsumerPipeline::load` invoke
@@ -22,6 +22,13 @@ codes, paths, messages, and recovery guidance. Python 3.11+ is required at runti
 (`python3` on Unix, `python` on Windows, or the executable in `IDENTITY_PYTHON`).
 Isolated mode disables consumer imports and site packages; the executable needs
 neither a source checkout nor network access. There is no unchecked fallback.
+
+`v1-inspect` and `v1-recover` use the artifact store directly with the same
+`--repository-root` and `--output-root` scope. They require neither canonical
+source nor Python, so source damage cannot prevent interruption diagnosis or
+validated rollback. They provide human output, with nonzero failures retaining
+the existing diagnostic codes and recovery guidance; no new JSON report is
+introduced. Use a reviewed source/release containing these commands.
 
 Source preflight and producer capability are separate: a governed PNG/font can
 be valid canonical input while unsupported by the SVG-only Rust source bridge.
@@ -212,6 +219,27 @@ state while any writer is active. Network filesystem qualification, hostile
 filesystem mutation and power-loss durability are outside this contract.
 See proposed [ADR-0026](../decisions/ADR-0026-local-writer-serialization.md).
 
+### Read-only interruption inspection
+
+`LocalArtifactStore::inspect_recovery` and `identity v1-inspect` create no files
+or directories, write no bytes and clean no workspaces. An existing regular
+coordination file is opened read-only and held with a nonblocking native shared
+lock while inspecting. This excludes participating generation/recovery writers;
+an active writer returns `IDN2346` without touching its evidence. Shared
+inspection also temporarily excludes exclusive writers; wait and retry.
+
+If the file is absent, inspection is explicitly an uncoordinated observation.
+It checks again afterward and repeats full preflight under a shared guard if
+the lock appeared. Remaining absence cannot guarantee future inactivity. Neither
+inspection result nor plan digest grants later rollback authority.
+
+Inspection and recovery reuse complete enumeration, journal/backup/destination
+preflight and cross-transaction conflict detection. Inspection reports validated
+workspace names, pending and empty-orphan counts, plan digests and proposed
+restore/remove paths, without exposing backup bytes. Invalid, conflicting,
+legacy or wrong-root evidence fails while preserving the entire tree, including
+absence of coordination metadata. Valid pending state is a successful report.
+
 Before publishing generated output, the store:
 
 1. rechecks every planned current checksum to reject stale plans;
@@ -263,9 +291,11 @@ an older recovery implementation against unreviewed journal data.
 Plan hashes detect inconsistent evidence; the independently supplied output root
 limits mutation authority. Journals are not authenticated signatures, and this
 boundary relies on the separately held native lock to serialize cooperating
-generation and recovery writers. The current CLI still has no supported
-inspection/recovery command; [#77](https://github.com/egohygiene/identity/issues/77)
-owns that surface. Library recovery remains explicit.
+generation and recovery writers. `identity v1-recover` explicitly invokes the
+same library rollback, acquires exclusive ownership and preflights again. It
+does not resume the interrupted plan, validate brand source or generate new
+output. After reviewing rollback, run `v1-generate` and `v1-verify` with the same
+repository/output root. See the [consumer procedure](../consumers/RECOVERY.md).
 
 ## Failure states and diagnostic families
 

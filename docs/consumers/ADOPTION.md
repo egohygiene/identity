@@ -115,6 +115,12 @@ Generation writes transactionally beneath `assets/identity/` and never mutates
 `.identity/`. Verification is read-only and fails when selected output is
 missing, stale, or drifted.
 
+If generation was interrupted, follow the [inspection and recovery guide](RECOVERY.md).
+`v1-inspect` is read-only; `v1-recover` explicitly rolls back validated generated
+state before regeneration. Use the same `--repository-root` and `--output-root`
+throughout. These commands are in current source; select an exact reviewed
+commit or a later release that includes them.
+
 Select only profiles the consumer needs. A repository-only tool commonly uses
 `core`, `github`, `docs`, `tokens`, `metadata`, and `archive`, while declaring
 `web`, `pwa`, and `social` inapplicable until those surfaces exist.

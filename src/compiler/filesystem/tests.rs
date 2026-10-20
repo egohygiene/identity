@@ -5,6 +5,7 @@ use super::*;
 use crate::compiler::{ManifestOutput, PlanAction};
 use tempfile::TempDir;
 
+mod inspection_tests;
 mod process_tests;
 
 const OUTPUT: &str = "assets/identity";
@@ -592,6 +593,13 @@ fn commit_rejects_each_redirected_cache_component_without_touching_either_tree()
         let before = tree(root.path());
         let external_before = tree(external.path());
         let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        assert!(store.inspect_recovery().is_err());
+        assert_eq!(tree(root.path()), before, "inspection {relative}");
+        assert_eq!(
+            tree(external.path()),
+            external_before,
+            "inspection {relative}"
+        );
         assert!(store.commit(&plan, &artifacts, &manifest).is_err());
         assert!(store.recovery_required().is_err());
         assert!(store.recover().is_err());
@@ -898,6 +906,13 @@ fn windows_junction_cache_components_are_rejected_without_redirected_writes() {
         let before = tree(root.path());
         let external_before = tree(external.path());
         let mut store = LocalArtifactStore::new(root.path()).unwrap();
+        assert!(store.inspect_recovery().is_err());
+        assert_eq!(tree(root.path()), before, "inspection {relative}");
+        assert_eq!(
+            tree(external.path()),
+            external_before,
+            "inspection {relative}"
+        );
         assert!(store.commit(&plan, &artifacts, &manifest).is_err());
         assert!(store.recover().is_err());
         if relative.starts_with(&format!("{TRANSACTION_ROOT}/")) {

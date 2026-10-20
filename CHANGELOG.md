@@ -8,6 +8,12 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Human-oriented `v1-inspect` and explicit `v1-recover` commands for retained
+  compiler transactions, with shared read-only inspection, source/Python-independent
+  rollback, actionable diagnostics and consistent repository/output-root authority.
+- Standalone CLI and real interrupted-compiler evidence for default/custom roots,
+  active writers, damaged journals, safe rollback and unchanged regeneration.
+
 - A canonical v1 Ego Hygiene social and community channel registry with
   distinct lifecycle and verification states, fail-closed activation and
   evidence rules, role-only recovery ownership, and planned records for X,
@@ -54,6 +60,9 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   fallbacks, framework-neutral descriptors, manifests, and checksums.
 
 ### Fixed
+
+- Reject non-UTF-8 CLI output roots and preserve literal Unix backslashes for
+  portable-path rejection, so recovery cannot silently authorize a different root.
 
 - Validate generic and optional renderer artifact paths with one bundle-relative
   contract (#76), rejecting traversal, URL-shaped paths, encoded separators,

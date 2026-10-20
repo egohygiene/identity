@@ -28,17 +28,45 @@ enum TestCheckpoint {
     Mutation(usize),
 }
 
-struct WriterGuard {
+struct FileLockGuard {
     file: fs::File,
 }
 
-impl Drop for WriterGuard {
+impl Drop for FileLockGuard {
     fn drop(&mut self) {
         // End ownership on ordinary return even if a concurrently forked child
         // briefly inherited the descriptor before exec. Closing remains the
         // fallback, and process death relies on native handle lifetime rules.
         let _ = self.file.unlock();
     }
+}
+
+/// Read-only recovery observations; recovery always obtains fresh mutation authority.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct RecoveryInspection {
+    /// Whether an existing shared lock protected the complete preflight.
+    pub coordinated: bool,
+    pub workspaces: Vec<RecoveryWorkspaceInspection>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct RecoveryWorkspaceInspection {
+    pub workspace: String,
+    /// Empty orphan workspaces have no validated journal plan.
+    pub plan_digest: Option<String>,
+    pub actions: Vec<RecoveryActionInspection>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct RecoveryActionInspection {
+    pub path: String,
+    pub operation: RecoveryOperation,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum RecoveryOperation {
+    Restore,
+    Remove,
 }
 
 #[derive(Debug)]
@@ -105,6 +133,95 @@ impl LocalArtifactStore {
         self
     }
 
+    /// Observe complete recovery preflight without creating or changing any files.
+    ///
+    /// Existing coordination files are opened read-only and shared-locked. If no
+    /// lock exists, observations are uncoordinated and may change immediately;
+    /// they never authorize a later rollback without fresh exclusive preflight.
+    pub fn inspect_recovery(&self) -> CompilerResult<RecoveryInspection> {
+        let inspection_guard = self.try_inspection_lock()?;
+        if inspection_guard.is_some() {
+            return Self::inspection_report(&self.preflight_recovery_batch()?, true);
+        }
+
+        let observations = self.preflight_recovery_batch();
+        // A participating writer may have reserved its persistent coordination
+        // file during the unlocked observation. If so, repeat every check while
+        // shared ownership is held, or report the active operation as blocked.
+        if let Some(_inspection_guard) = self.try_inspection_lock()? {
+            return Self::inspection_report(&self.preflight_recovery_batch()?, true);
+        }
+        Self::inspection_report(&observations?, false)
+    }
+
+    fn try_inspection_lock(&self) -> CompilerResult<Option<FileLockGuard>> {
+        let lock_path = self.checked_writer_lock_path()?;
+        let file = match fs::File::open(&lock_path) {
+            Ok(file) => file,
+            Err(error) if error.kind() == ErrorKind::NotFound => return Ok(None),
+            Err(error) => {
+                return Err(writer_lock_io_error(
+                    "cannot open existing writer lock for read-only inspection",
+                    &error,
+                ));
+            }
+        };
+        self.checked_writer_lock_path()?;
+        let metadata = file
+            .metadata()
+            .map_err(|error| writer_lock_io_error("cannot inspect opened writer lock", &error))?;
+        if !metadata.is_file() || is_link(&metadata) {
+            return Err(writer_lock_error(
+                "opened writer lock is not a regular file",
+                FailureKind::Failed,
+            ));
+        }
+        match file.try_lock_shared() {
+            Ok(()) => Ok(Some(FileLockGuard { file })),
+            Err(fs::TryLockError::WouldBlock) => Err(writer_busy_error()),
+            Err(fs::TryLockError::Error(error)) => Err(writer_lock_io_error(
+                "cannot acquire native inspection lock",
+                &error,
+            )),
+        }
+    }
+
+    fn inspection_report(
+        transactions: &[RecoveryTransaction],
+        coordinated: bool,
+    ) -> CompilerResult<RecoveryInspection> {
+        let workspaces = transactions
+            .iter()
+            .map(|transaction| {
+                let workspace = transaction
+                    .directory
+                    .file_name()
+                    .and_then(|name| name.to_str())
+                    .ok_or_else(|| recovery_error("transaction name is not valid UTF-8"))?;
+                Ok(RecoveryWorkspaceInspection {
+                    workspace: workspace.to_owned(),
+                    plan_digest: transaction.plan_digest.clone(),
+                    actions: transaction
+                        .restores
+                        .iter()
+                        .map(|action| RecoveryActionInspection {
+                            path: action.path.clone(),
+                            operation: if action.bytes.is_some() {
+                                RecoveryOperation::Restore
+                            } else {
+                                RecoveryOperation::Remove
+                            },
+                        })
+                        .collect(),
+                })
+            })
+            .collect::<CompilerResult<Vec<_>>>()?;
+        Ok(RecoveryInspection {
+            coordinated,
+            workspaces,
+        })
+    }
+
     #[cfg(test)]
     fn pause_at(mut self, checkpoint: TestCheckpoint) -> Self {
         self.pause_at = Some(checkpoint);
@@ -161,7 +278,7 @@ impl LocalArtifactStore {
         Ok(lock_path)
     }
 
-    fn acquire_writer_lock(&self) -> CompilerResult<WriterGuard> {
+    fn acquire_writer_lock(&self) -> CompilerResult<FileLockGuard> {
         let lock_path = self.checked_writer_lock_path()?;
         let parent = lock_path
             .parent()
@@ -207,17 +324,8 @@ impl LocalArtifactStore {
             ));
         }
         match file.try_lock() {
-            Ok(()) => Ok(WriterGuard { file }),
-            Err(fs::TryLockError::WouldBlock) => Err(CompilerError::new(
-                FailureKind::Blocked,
-                Diagnostic::error(
-                    "IDN2346",
-                    FailureKind::Blocked,
-                    Some(WRITER_LOCK.to_owned()),
-                    "another writer owns this repository's compiler transaction namespace",
-                    "Wait for generation or recovery to finish, then retry. Do not delete the lock file or another writer's transaction workspace.",
-                ),
-            )),
+            Ok(()) => Ok(FileLockGuard { file }),
+            Err(fs::TryLockError::WouldBlock) => Err(writer_busy_error()),
             Err(fs::TryLockError::Error(error)) => Err(writer_lock_io_error(
                 "cannot acquire native writer lock",
                 &error,
@@ -328,7 +436,7 @@ impl LocalArtifactStore {
                     "IDN2313",
                     Some(path.display().to_string()),
                     format!("cannot reserve fresh transaction file: {error}"),
-                    "Preserve existing transaction evidence and recover before retrying.",
+                    "Preserve existing transaction evidence. Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, then explicitly run identity v1-recover with the same arguments before retrying.",
                 )
             })
     }
@@ -386,7 +494,7 @@ impl LocalArtifactStore {
                 "IDN2318",
                 Some(path.display().to_string()),
                 format!("cannot remove generated artifact: {error}"),
-                "Check local filesystem permissions and recover the transaction if necessary.",
+                "Check local filesystem permissions. Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, then explicitly run identity v1-recover with the same arguments if recovery is pending.",
             )),
         }
     }
@@ -403,7 +511,7 @@ impl LocalArtifactStore {
                     "IDN2319",
                     Some(parent.display().to_string()),
                     format!("cannot create generated output directory: {error}"),
-                    "Check local filesystem permissions and recover if necessary.",
+                    "Check local filesystem permissions. Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, then explicitly run identity v1-recover with the same arguments if recovery is pending.",
                 )
             })?;
         }
@@ -414,7 +522,7 @@ impl LocalArtifactStore {
                 "IDN2320",
                 Some(destination.display().to_string()),
                 format!("cannot promote staged artifact: {error}"),
-                "Run recovery to restore the previous generated state, then retry.",
+                "Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, then explicitly run identity v1-recover with the same arguments to restore the previous generated state before retrying.",
             )
         })?;
         self.after_mutation()
@@ -429,7 +537,7 @@ impl LocalArtifactStore {
                 "IDN2399",
                 None,
                 "simulated interruption after filesystem mutation",
-                "Create a fresh local artifact store and run explicit recovery.",
+                "Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, then explicitly run identity v1-recover with the same arguments.",
             ));
         }
         Ok(())
@@ -736,7 +844,7 @@ impl LocalArtifactStore {
                     FailureKind::Unsupported,
                     Some(journal_path.display().to_string()),
                     "unsupported transaction journal; legacy v1 journals lack recovery authority evidence",
-                    "Preserve the workspace and restore files from independently reviewed backups; see docs/contracts/COMPILER_V1.md. Do not relabel the journal schema.",
+                    "Preserve the workspace and restore files from independently reviewed backups; see docs/contracts/COMPILER_V1.md. Do not relabel the journal schema. identity v1-inspect --repository-root <consumer> --output-root <authorized-root> diagnoses retained state, but identity v1-recover with those same arguments cannot automatically recover legacy journals.",
                 ),
             ));
         }
@@ -823,6 +931,52 @@ impl LocalArtifactStore {
         })
     }
 
+    fn preflight_recovery_batch(&self) -> CompilerResult<Vec<RecoveryTransaction>> {
+        let root = self.resolve(TRANSACTION_ROOT)?;
+        let entries = match fs::read_dir(&root) {
+            Ok(entries) => entries,
+            Err(error) if error.kind() == ErrorKind::NotFound => return Ok(Vec::new()),
+            Err(error) => {
+                return Err(fs_error(
+                    "IDN2342",
+                    Some(root.display().to_string()),
+                    format!("cannot list compiler transactions: {error}"),
+                    "Check local filesystem permissions, then use identity v1-inspect or identity v1-recover with the same --repository-root and --output-root arguments.",
+                ));
+            }
+        };
+        let mut directories = entries
+            .map(|entry| entry.map(|value| value.path()))
+            .collect::<Result<Vec<_>, _>>()
+            .map_err(|error| {
+                fs_error(
+                    "IDN2343",
+                    Some(root.display().to_string()),
+                    format!("cannot enumerate compiler transactions: {error}"),
+                    "Check local filesystem permissions, then use identity v1-inspect or identity v1-recover with the same --repository-root and --output-root arguments.",
+                )
+            })?;
+        directories.sort();
+
+        // Inspection and mutation share the complete batch preflight. Neither
+        // exposes partial success or cleans an orphan before every check passes.
+        let transactions = directories
+            .iter()
+            .map(|directory| self.preflight_recovery(directory))
+            .collect::<CompilerResult<Vec<_>>>()?;
+        let mut destinations = BTreeSet::new();
+        for transaction in &transactions {
+            for action in &transaction.restores {
+                if !destinations.insert(action.path.to_ascii_lowercase()) {
+                    return Err(recovery_error(
+                        "transactions have conflicting recovery destinations",
+                    ));
+                }
+            }
+        }
+        Ok(transactions)
+    }
+
     fn apply_recovery(&mut self, transaction: &RecoveryTransaction) -> CompilerResult<()> {
         for action in &transaction.restores {
             let destination = self.resolve(&action.path)?;
@@ -904,7 +1058,7 @@ impl ArtifactStore for LocalArtifactStore {
                     FailureKind::Blocked,
                     None,
                     "a previous compiler transaction requires recovery",
-                    "Run explicit recovery before applying another plan.",
+                    "Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, review the reported rollback, then explicitly run identity v1-recover with the same arguments before applying another plan.",
                 ),
             ));
         }
@@ -1079,7 +1233,7 @@ impl ArtifactStore for LocalArtifactStore {
                 "IDN2341",
                 Some(transaction.display().to_string()),
                 format!("commit succeeded but transaction cleanup failed: {error}"),
-                "Remove the completed transaction workspace before the next compiler operation.",
+                "Preserve the completed transaction workspace. Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, review the rollback, then explicitly run identity v1-recover with the same arguments before the next compiler operation.",
             )
         })?;
         Ok(())
@@ -1091,49 +1245,7 @@ impl ArtifactStore for LocalArtifactStore {
         let _writer_guard = self.acquire_writer_lock()?;
         #[cfg(test)]
         self.pause_at_checkpoint(TestCheckpoint::WriterLocked);
-        let root = self.resolve(TRANSACTION_ROOT)?;
-        let entries = match fs::read_dir(&root) {
-            Ok(entries) => entries,
-            Err(error) if error.kind() == ErrorKind::NotFound => {
-                return Ok(RecoveryReport::default());
-            }
-            Err(error) => {
-                return Err(fs_error(
-                    "IDN2342",
-                    Some(root.display().to_string()),
-                    format!("cannot list compiler transactions: {error}"),
-                    "Check local filesystem permissions and retry recovery.",
-                ));
-            }
-        };
-        let mut directories = entries
-            .map(|entry| entry.map(|value| value.path()))
-            .collect::<Result<Vec<_>, _>>()
-            .map_err(|error| {
-                fs_error(
-                    "IDN2343",
-                    Some(root.display().to_string()),
-                    format!("cannot enumerate compiler transactions: {error}"),
-                    "Check local filesystem permissions and retry recovery.",
-                )
-            })?;
-        directories.sort();
-
-        // Complete the entire batch preflight before rollback or orphan cleanup.
-        let transactions = directories
-            .iter()
-            .map(|directory| self.preflight_recovery(directory))
-            .collect::<CompilerResult<Vec<_>>>()?;
-        let mut destinations = BTreeSet::new();
-        for transaction in &transactions {
-            for action in &transaction.restores {
-                if !destinations.insert(action.path.to_ascii_lowercase()) {
-                    return Err(recovery_error(
-                        "transactions have conflicting recovery destinations",
-                    ));
-                }
-            }
-        }
+        let transactions = self.preflight_recovery_batch()?;
         let mut report = RecoveryReport::default();
         for transaction in &transactions {
             self.apply_recovery(transaction)?;
@@ -1179,7 +1291,20 @@ fn recovery_error(message: impl Into<String>) -> CompilerError {
         "IDN2324",
         None,
         message,
-        "Preserve the journal, outputs, and backups; restore trusted evidence and use the explicitly authorized output root before retrying recovery.",
+        "Preserve the journal, outputs, and backups; restore trusted evidence and use the explicitly authorized output root. Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root> before retrying identity v1-recover with those same arguments.",
+    )
+}
+
+fn writer_busy_error() -> CompilerError {
+    CompilerError::new(
+        FailureKind::Blocked,
+        Diagnostic::error(
+            "IDN2346",
+            FailureKind::Blocked,
+            Some(WRITER_LOCK.to_owned()),
+            "another operation owns this repository's compiler transaction namespace",
+            "Wait for generation, inspection or recovery to finish, then retry with the same --repository-root and --output-root arguments. Do not delete the lock file or another operation's transaction workspace.",
+        ),
     )
 }
 
@@ -1191,7 +1316,7 @@ fn writer_lock_error(message: impl Into<String>, kind: FailureKind) -> CompilerE
             kind,
             Some(WRITER_LOCK.to_owned()),
             message,
-            "Use inspectable regular local cache paths and a filesystem with working native exclusive locks. Preserve the lock file, outputs, and transaction evidence; no unlocked fallback is supported.",
+            "Use inspectable regular local cache paths and a filesystem with working native file locks. Preserve the lock file, outputs, and transaction evidence; no unlocked fallback is supported. After correcting the environment, retry identity v1-inspect or identity v1-recover with the same --repository-root and --output-root arguments.",
         ),
     )
 }
@@ -1233,7 +1358,7 @@ fn verify_manifested_outputs(
                 "IDN2344",
                 Some(output.path.clone()),
                 "verified manifest output is missing after commit",
-                "Run recovery if pending, then rebuild the generated output.",
+                "Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>; if recovery is pending, explicitly run identity v1-recover with the same arguments, then rebuild the generated output.",
             )
         })?;
         if sha256_hex(&bytes) != output.sha256 {
@@ -1244,7 +1369,7 @@ fn verify_manifested_outputs(
                     FailureKind::Drifted,
                     Some(output.path.clone()),
                     "generated output checksum differs from the compiler manifest",
-                    "Run recovery if pending, then rebuild from canonical source.",
+                    "Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>; if recovery is pending, explicitly run identity v1-recover with the same arguments, then rebuild from canonical source.",
                 ),
             ));
         }

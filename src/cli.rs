@@ -32,6 +32,16 @@ pub enum Command {
     V1Generate(V1CompilationArguments),
     /// Verify that selected v1 Brand Kit projections are present and free of drift.
     V1Verify(V1CompilationArguments),
+    /// Inspect interrupted v1 transactions without creating, changing, or cleaning files.
+    #[command(
+        after_help = "Inspection reports retained transaction state without source validation or Python. Use the same --repository-root and --output-root with v1-recover; recovery revalidates under exclusive ownership."
+    )]
+    V1Inspect(V1CompilationArguments),
+    /// Explicitly roll back interrupted v1 transactions beneath the authorized output root.
+    #[command(
+        after_help = "Review v1-inspect first. Recovery restores validated prior generated state; it does not resume generation. Then run v1-generate and v1-verify with the same --repository-root and --output-root."
+    )]
+    V1Recover(V1CompilationArguments),
 }
 
 #[derive(Debug, Args)]
@@ -110,7 +120,7 @@ pub struct V1CompilationArguments {
     /// Root of the consumer repository.
     #[arg(long, default_value = ".")]
     pub repository_root: PathBuf,
-    /// Repository-relative root for generated Identity projections.
+    /// Repository-relative authorized root for generated Identity projections.
     #[arg(long, default_value = "assets/identity")]
     pub output_root: PathBuf,
 }

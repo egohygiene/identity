@@ -15,7 +15,9 @@ use crate::cli::{
     HandoffArguments, InitArguments, PlanArguments, PlanFormat, RepositoryArguments,
     StudioReviewArguments, V1CompilationArguments,
 };
-use crate::compiler::{AdapterRegistry, Compiler, LocalArtifactStore};
+use crate::compiler::{
+    AdapterRegistry, ArtifactStore, Compiler, LocalArtifactStore, RecoveryOperation,
+};
 use crate::contract::{
     ProjectSpec, ResolvedPlan, ValidatedProject, reject_symlink_components, resolve_plan,
     valid_identifier, validate_relative_path, validate_repository,
@@ -234,6 +236,75 @@ pub fn v1_verify(arguments: &V1CompilationArguments) -> Result<()> {
     Ok(())
 }
 
+pub fn v1_inspect(arguments: &V1CompilationArguments) -> Result<()> {
+    let repository_root = v1_repository_root(arguments)?;
+    let output_root = v1_output_root(arguments)?;
+    let store = LocalArtifactStore::with_output_root(&repository_root, &output_root)
+        .map_err(compiler_error)?;
+    let inspection = store.inspect_recovery().map_err(compiler_error)?;
+    let pending = inspection
+        .workspaces
+        .iter()
+        .filter(|workspace| workspace.plan_digest.is_some())
+        .count();
+    println!("Output root: {output_root}");
+    println!(
+        "Writer coordination: {}",
+        if inspection.coordinated {
+            "shared lock held during inspection"
+        } else {
+            "uncoordinated observation (no existing writer lock); state may change"
+        }
+    );
+    println!("Pending transactions: {pending}");
+    println!(
+        "Empty workspaces: {}",
+        inspection.workspaces.len() - pending
+    );
+    for workspace in &inspection.workspaces {
+        println!("Workspace: {}", workspace.workspace);
+        if let Some(plan_digest) = &workspace.plan_digest {
+            println!("Plan: {plan_digest}");
+        } else {
+            println!("Empty workspace; explicit recovery may remove it.");
+        }
+        for action in &workspace.actions {
+            let operation = match &action.operation {
+                RecoveryOperation::Restore => "Restore",
+                RecoveryOperation::Remove => "Remove",
+            };
+            println!("{operation}: {}", action.path);
+        }
+    }
+    if inspection.workspaces.is_empty() {
+        println!("No pending compiler transaction workspaces observed.");
+    } else {
+        println!(
+            "Use identity v1-recover with the same --repository-root and --output-root to explicitly roll back this scope. Recovery revalidates all evidence under exclusive ownership."
+        );
+    }
+    Ok(())
+}
+
+pub fn v1_recover(arguments: &V1CompilationArguments) -> Result<()> {
+    let repository_root = v1_repository_root(arguments)?;
+    let output_root = v1_output_root(arguments)?;
+    let mut store = LocalArtifactStore::with_output_root(&repository_root, &output_root)
+        .map_err(compiler_error)?;
+    let report = store.recover().map_err(compiler_error)?;
+    println!(
+        "Recovered {} v1 Identity transactions",
+        report.recovered_transactions
+    );
+    for plan_digest in &report.plan_digests {
+        println!("Recovered plan: {plan_digest}");
+    }
+    println!(
+        "Review the recovered outputs, then use identity v1-generate with the same --repository-root and --output-root."
+    );
+    Ok(())
+}
+
 fn v1_repository_root(arguments: &V1CompilationArguments) -> Result<PathBuf> {
     arguments.repository_root.canonicalize().with_context(|| {
         format!(
@@ -247,18 +318,48 @@ fn v1_request(
     arguments: &V1CompilationArguments,
     pipeline: &V1ConsumerPipeline,
 ) -> Result<crate::compiler::CompilerRequest> {
-    validate_relative_path(&arguments.output_root, "v1 output root")?;
-    if arguments.output_root.starts_with(".identity") {
-        bail!("v1 output root must not write canonical .identity source");
-    }
-    let output_root = arguments.output_root.to_string_lossy().replace('\\', "/");
+    let output_root = v1_output_root(arguments)?;
     Ok(with_reference_renderer(
         compiler_request(output_root, pipeline.profiles()).map_err(compiler_error)?,
     ))
 }
 
+fn v1_output_root(arguments: &V1CompilationArguments) -> Result<String> {
+    validate_relative_path(&arguments.output_root, "v1 output root")?;
+    if arguments.output_root.starts_with(".identity") {
+        bail!("v1 output root must not write canonical .identity source");
+    }
+    let output_root = arguments
+        .output_root
+        .to_str()
+        .context("v1 output root must use valid UTF-8")?;
+    // Backslash is a native separator on Windows. On Unix it is a literal
+    // filename byte and must reach portable validation unchanged for rejection.
+    #[cfg(windows)]
+    let output_root = output_root.replace('\\', "/");
+    #[cfg(not(windows))]
+    let output_root = output_root.to_owned();
+    Ok(output_root)
+}
+
 fn compiler_error(error: crate::compiler::CompilerError) -> anyhow::Error {
-    anyhow::Error::new(error)
+    if !error
+        .diagnostics
+        .iter()
+        .any(|diagnostic| diagnostic.code.starts_with("IDN23"))
+    {
+        return anyhow::Error::new(error);
+    }
+    // CompilerError's library Display stays concise. Transaction failures need
+    // their existing path and recovery guidance at the consumer CLI boundary.
+    let mut message = error.to_string();
+    for diagnostic in &error.diagnostics {
+        if let Some(path) = &diagnostic.path {
+            let _ = write!(message, "\nPath: {path}");
+        }
+        let _ = write!(message, "\nRecovery: {}", diagnostic.recovery);
+    }
+    anyhow::Error::msg(message)
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

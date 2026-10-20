@@ -28,5 +28,7 @@ pub fn run() -> Result<()> {
         Command::StudioReview(arguments) => commands::studio_review(&arguments),
         Command::V1Generate(arguments) => commands::v1_generate(&arguments),
         Command::V1Verify(arguments) => commands::v1_verify(&arguments),
+        Command::V1Inspect(arguments) => commands::v1_inspect(&arguments),
+        Command::V1Recover(arguments) => commands::v1_recover(&arguments),
     }
 }

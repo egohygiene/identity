@@ -5,23 +5,23 @@
     {
       "destination": "src/cli.rs",
       "baseline_sha256": "af7594d834fae7c9f618bff2b06c08744ae12f598cade665e716b3c5191dd8dd",
-      "current_sha256": "74685e44d1ed776fa5ba91e07c2694b1d5d68e9d16ed9514d5953237137b4a12",
-      "issue": "https://github.com/egohygiene/identity/issues/17",
-      "reason": "Add explicit v1 generation and read-only verification commands so pinned consumers can consume selected versioned packages without copying compiler internals or mutating canonical source."
+      "current_sha256": "4755b09fcd8e2fe316ba6d6c47dde7f9c5f96cbfc6b32094b645f359aaa3d752",
+      "issue": "https://github.com/egohygiene/identity/issues/77",
+      "reason": "Preserve the v0 and v1 commands introduced in #17 while adding explicit v1 interruption inspection and recovery in #77 with the same independently supplied repository/output scope."
     },
     {
       "destination": "src/commands.rs",
       "baseline_sha256": "01f0fe85a4fa1fa3c09db4db237b087912f8e73fe4d536cc24a87a56dbb87c32",
-      "current_sha256": "3c87d039c0e2aa9695e0a11918bfacd48213ae3b2c4c02de8c052d6f396f4306",
-      "issue": "https://github.com/egohygiene/identity/issues/73",
-      "reason": "Preserve the v1 consumer and reference-renderer integration introduced in #17 while binding the local artifact store to the explicitly selected output root, so journals cannot broaden commit or recovery authority."
+      "current_sha256": "a5370fe0bf64668b015470811fc1ce67710e0ef002a8b24fa647b2a27f9025b1",
+      "issue": "https://github.com/egohygiene/identity/issues/77",
+      "reason": "Preserve #17 consumer/renderer integration and #73 independent output-root authority while exposing read-only inspection and explicit validated rollback in #77. Reject lossy or nonportable CLI output-root spellings before recovery authority is granted."
     },
     {
       "destination": "src/lib.rs",
       "baseline_sha256": "696dfac6faa771c3068c38d45893f19b0ea6e6f9301be0e627a1aff4c9f3eb11",
-      "current_sha256": "cae040924bbf740a2ab3dd7f7e7c2d4eb4de4c958f058918221b44f7caf10fbd",
-      "issue": "https://github.com/egohygiene/identity/issues/17",
-      "reason": "Export the v1 consumer adapter and register the bounded generation and verification commands while preserving the original Empathy extraction digest and v0 CLI behavior."
+      "current_sha256": "dd8c8fd26e7b34280fe009b159d37d8275d65cbb020b013338446a9a6c1ed70e",
+      "issue": "https://github.com/egohygiene/identity/issues/77",
+      "reason": "Preserve the original Empathy extraction digest, v0 command dispatch and #17 consumer exports while dispatching the explicit v1 inspection/recovery commands from #77."
     }
   ]
 }

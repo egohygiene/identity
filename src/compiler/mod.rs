@@ -11,7 +11,10 @@ mod filesystem;
 #[cfg(test)]
 mod tests;
 
-pub use filesystem::LocalArtifactStore;
+pub use filesystem::{
+    LocalArtifactStore, RecoveryActionInspection, RecoveryInspection, RecoveryOperation,
+    RecoveryWorkspaceInspection,
+};
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::error::Error;
@@ -545,7 +548,7 @@ impl<'a> Compiler<'a> {
                     FailureKind::Blocked,
                     None,
                     "a previous compiler transaction requires recovery",
-                    "Run the explicit recovery operation before planning new mutations.",
+                    "Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, review the reported rollback, then explicitly run identity v1-recover with the same arguments before planning new mutations.",
                 ),
             ));
         }
@@ -641,7 +644,7 @@ impl<'a> Compiler<'a> {
                     FailureKind::Blocked,
                     None,
                     "a previous compiler transaction requires recovery",
-                    "Run the explicit recovery operation before applying the plan.",
+                    "Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, review the reported rollback, then explicitly run identity v1-recover with the same arguments before applying the plan.",
                 ),
             ));
         }

@@ -43,6 +43,8 @@ versions in consumer toolchain configuration before execution.
 | The same command with `--snapshot` | Additionally records digests of consulted source files and declared directory paths. This read-set is not the canonical source digest or an output-verification receipt. |
 | `identity v1-verify --repository-root "path/to/consumer"` | Embedded source preflight, producer-capability checks and read-only drift verification of selected core outputs at `assets/identity/`. |
 | `identity v1-generate --repository-root "path/to/consumer"` | Explicit source preflight and transactional generation of selected core outputs; never a lint-time repair operation. |
+| `identity v1-inspect --repository-root "path/to/consumer"` | Read-only retained-transaction inspection, independent of source validation; human output is not a delegated source-validation classification. |
+| `identity v1-recover --repository-root "path/to/consumer"` | Explicit generated-state rollback under exclusive writer ownership; never an automatic lint-time operation. See [recovery](RECOVERY.md) and use a source/release containing these commands. |
 | `--output-root "generated/identity"` on either v1 command | Selects a normalized repository-relative generated root outside `.identity/`; verification must select the consumer's actual root. |
 | `identity::v1_consumer::V1ConsumerPipeline::load` and compiler library APIs | Structured Rust source/producer and planning boundaries for a deliberately compiled compatible consumer; not a new stable CLI JSON interface. |
 
