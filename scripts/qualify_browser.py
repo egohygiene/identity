@@ -24,6 +24,11 @@ APPROVED_BASELINE_SHA256 = "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233
 PLATFORM = "linux/amd64"
 CONTAINER_MARKER = "IDENTITY_BROWSER_RECEIPT="
 HOST_MARKER = "IDENTITY_BROWSER_HOST_RECEIPT="
+FONT_PACKAGE_NAMES = frozenset(("fonts-dejavu-core", "fonts-dejavu-mono"))
+FONT_FILE_PATHS = frozenset("/usr/share/fonts/truetype/dejavu/" + name for name in (
+    "DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "DejaVuSerif.ttf", "DejaVuSerif-Bold.ttf",
+    "DejaVuSansMono.ttf", "DejaVuSansMono-Bold.ttf", "DejaVuSansMono-Oblique.ttf", "DejaVuSansMono-BoldOblique.ttf",
+))
 
 
 def sha256(data: bytes) -> str:
@@ -75,6 +80,53 @@ def validate_profile(profile: dict[str, object], package: dict[str, object], reg
         raise ValueError("The screenshot approval revision must be an immutable Git revision")
     if not isinstance(profile.get("chromium"), dict) or profile["chromium"].get("colorProfile") != "srgb":
         raise ValueError("The qualified Chromium color profile must be explicit sRGB")
+    packages = profile.get("fontPackages")
+    if not isinstance(packages, list) or len(packages) != len(FONT_PACKAGE_NAMES):
+        raise ValueError("The browser profile must pin both DejaVu font packages")
+    names = []
+    for font in packages:
+        if not isinstance(font, dict) or set(font) != {"name", "version", "url", "sha256", "bytes"}:
+            raise ValueError("Every font package must pin its name, version, HTTPS archive, checksum and byte count")
+        name, version = font["name"], font["version"]
+        if not isinstance(name, str) or name not in FONT_PACKAGE_NAMES or not isinstance(version, str) or not re.fullmatch(r"[0-9][A-Za-z0-9.+:~-]*", version):
+            raise ValueError("Font packages require supported names and exact Debian versions")
+        expected_url = f"https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/{name}_{version}_all.deb"
+        if font["url"] != expected_url or not isinstance(font["sha256"], str) or not re.fullmatch(r"[0-9a-f]{64}", font["sha256"]) or type(font["bytes"]) is not int or font["bytes"] <= 0:
+            raise ValueError("Font packages require exact official HTTPS archives, SHA-256 and positive byte counts")
+        names.append(name)
+    if set(names) != FONT_PACKAGE_NAMES:
+        raise ValueError("Font package pins cannot be missing or duplicated")
+    files = profile.get("fontFiles")
+    if not isinstance(files, list) or len(files) != len(FONT_FILE_PATHS):
+        raise ValueError("The browser profile must pin every installed DejaVu font file")
+    paths = []
+    for font in files:
+        if not isinstance(font, dict) or set(font) != {"path", "sha256"} or not isinstance(font["path"], str) or font["path"] not in FONT_FILE_PATHS or not isinstance(font["sha256"], str) or not re.fullmatch(r"[0-9a-f]{64}", font["sha256"]):
+            raise ValueError("Expected font files require supported paths and SHA-256 checksums")
+        paths.append(font["path"])
+    if set(paths) != FONT_FILE_PATHS:
+        raise ValueError("Expected font file pins cannot be missing or duplicated")
+    receipt = profile.get("fontSourceReceipt")
+    if not isinstance(receipt, str) or not re.fullmatch(r"docs/evidence/[A-Za-z0-9._-]+\.json", receipt):
+        raise ValueError("The browser profile must name its retained font source receipt")
+
+
+def verify_font_source_binding(profile: dict[str, object], source: dict[str, object]) -> None:
+    packages = source.get("packages") if isinstance(source, dict) else None
+    if not isinstance(packages, list) or len(packages) != len(profile["fontPackages"]):
+        raise ValueError("The retained font source package inventory is incomplete")
+    identities = []
+    for package in packages:
+        if not isinstance(package, dict) or package.get("architecture") != "all":
+            raise ValueError("The retained font source must select architecture-independent packages")
+        identities.append({"name": package.get("package"), **{key: package.get(key) for key in ("version", "url", "sha256", "bytes")}})
+    if sorted(identities, key=lambda item: str(item["name"])) != sorted(profile["fontPackages"], key=lambda item: item["name"]):
+        raise ValueError("The font package pins differ from their retained source observation")
+    files = source.get("installed_font_files")
+    if not isinstance(files, list) or not all(isinstance(font, dict) and set(font) == {"path", "sha256"} for font in files):
+        raise ValueError("The retained font source file inventory is unavailable")
+    if sorted(files, key=lambda item: str(item["path"])) != sorted(profile["fontFiles"], key=lambda item: item["path"]):
+        raise ValueError("The expected font file pins differ from their retained source observation")
 
 
 def image_identity(image: dict[str, object]) -> dict[str, object]:
@@ -130,6 +182,16 @@ def container_receipt(output: str, profile: dict[str, object], directory: Path) 
         raise RuntimeError("The observed browser settings differ from the qualified profile")
     if not isinstance(fonts, dict) or not fonts.get("files") or not fonts.get("configuration") or not browser.get("renderedFonts"):
         raise RuntimeError("The browser receipt lacks font/runtime provenance")
+    packages = fonts.get("packages")
+    expected_packages = [{"name": package["name"], "version": package["version"]} for package in profile["fontPackages"]]
+    if not isinstance(packages, list) or not all(isinstance(package, dict) and set(package) == {"name", "version"} for package in packages) or sorted(packages, key=lambda item: str(item["name"])) != sorted(expected_packages, key=lambda item: item["name"]):
+        raise RuntimeError("The installed font package names or versions differ from the profile")
+    files = fonts["files"]
+    if not isinstance(files, list) or not all(isinstance(font, dict) and isinstance(font.get("path"), str) and isinstance(font.get("sha256"), str) and re.fullmatch(r"[0-9a-f]{64}", font["sha256"]) for font in files):
+        raise RuntimeError("The installed font file inventory is malformed")
+    hashes = {font["path"]: font["sha256"] for font in files}
+    if len(hashes) != len(files) or any(hashes.get(font["path"]) != font["sha256"] for font in profile["fontFiles"]):
+        raise RuntimeError("The installed font file checksums differ from the profile")
     phases = (("positive", 0, 6, 0), ("negative", 1, 0, 1), ("restored", 0, 1, 0))
     for name, exit_code, passed, failed in phases:
         phase = receipt.get(name, {})
@@ -162,7 +224,7 @@ def source_evidence(profile: dict[str, object]) -> dict[str, object]:
         "renderer/playwright.config.js", "renderer/scripts/qualify-browser.mjs",
         "renderer/tests/e2e/renderer.spec.js", BASELINE_PATH,
         "renderer/package.json", "renderer/pnpm-lock.yaml", ".dockerignore",
-        profile["registryReceipt"],
+        "dev/browser/install-fonts.mjs", profile["registryReceipt"], profile["fontSourceReceipt"],
     }
     critical.update(path.relative_to(REPOSITORY).as_posix() for path in (REPOSITORY / ".github/workflows").glob("*.yml"))
     files = subprocess.check_output(["git", "ls-files", "--cached", "-z"], cwd=REPOSITORY).decode().split("\0")
@@ -178,7 +240,7 @@ def source_evidence(profile: dict[str, object]) -> dict[str, object]:
         "build_source_inventory": {
             "files": len(inventory), "sha256": sha256(payload),
             "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
-            "scope": "Critical browser/profile/registry/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry receipt.",
+            "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
         },
     }
 
@@ -239,6 +301,8 @@ def main() -> int:
         registry = json.loads(repository_path(profile["registryReceipt"]).read_text())
         package = json.loads((REPOSITORY / "renderer/package.json").read_text())
         validate_profile(profile, package, registry)
+        font_source = json.loads(repository_path(profile["fontSourceReceipt"]).read_text())
+        verify_font_source_binding(profile, font_source)
         defaults = re.findall(r"^ARG BROWSER_IMAGE=(\S+)\s*$", (REPOSITORY / "dev/browser/Dockerfile").read_text(), re.MULTILINE)
         if defaults != [profile["image"]]:
             raise RuntimeError("The browser Dockerfile default differs from its immutable profile")

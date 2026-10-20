@@ -1,0 +1,99 @@
+{
+  "kind": "dated official Ubuntu Noble font package source observation",
+  "observed_at": "2026-10-20T13:24:46.976943+00:00",
+  "index": {
+    "url": "https://archive.ubuntu.com/ubuntu/dists/noble/main/binary-amd64/Packages.xz",
+    "sha256": "2a6a199e1031a5c279cb346646d594993f35b1c03dd4a82aaa0323980dd92451",
+    "bytes": 1401160,
+    "last_modified": null,
+    "limits": "HTTPS official archive bytes and listed package hashes verified; this observation did not independently verify the Ubuntu archive signature chain."
+  },
+  "packages": [
+    {
+      "package": "fonts-dejavu-core",
+      "version": "2.37-8",
+      "architecture": "all",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-8_all.deb",
+      "bytes": 835172,
+      "sha256": "40049660c194f3b8a2541fc7369efebb10e9f94bdac836a2f38fafedd10fa73a",
+      "metadata_stanza": "Package: fonts-dejavu-core\nArchitecture: all\nVersion: 2.37-8\nMulti-Arch: foreign\nPriority: optional\nSection: fonts\nSource: fonts-dejavu\nOrigin: Ubuntu\nMaintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>\nOriginal-Maintainer: Debian Fonts Task Force <debian-fonts@lists.debian.org>\nBugs: https://bugs.launchpad.net/ubuntu/+filebug\nInstalled-Size: 2292\nDepends: fonts-dejavu-mono\nFilename: pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-8_all.deb\nSize: 835172\nMD5sum: 1e0fea0990de06245989e024b39d62de\nSHA1: da8534992a25716a7a82f2e8db5477990e2d0765\nSHA256: 40049660c194f3b8a2541fc7369efebb10e9f94bdac836a2f38fafedd10fa73a\nSHA512: 324761b82c50d0ffefcfe21b58e820641cd7fde85d3b3835f91ab96883bc34d88594294804b990ad2696c19b4e2f4f906be7fad754574eb56276f283ead65a88\nHomepage: https://dejavu-fonts.github.io/\nDescription: Vera font family derivate with additional characters\nTask: ubuntu-desktop-minimal, ubuntu-desktop, ubuntu-wsl, print-server, ubuntu-desktop-raspi, kubuntu-desktop, xubuntu-minimal, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntukylin-desktop-minimal, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop-minimal, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi, ubuntu-unity-desktop, edubuntu-desktop-gnome-minimal, edubuntu-desktop-gnome-raspi, ubuntucinnamon-desktop-minimal, ubuntucinnamon-desktop-raspi\nDescription-md5: fabd7972085fa376b4ae7723cf936a76"
+    },
+    {
+      "package": "fonts-dejavu-mono",
+      "version": "2.37-8",
+      "architecture": "all",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-mono_2.37-8_all.deb",
+      "bytes": 502232,
+      "sha256": "8a599d6553307db7ecb795d2f0e5a301e03234afc75c7358b0ba43466454c89a",
+      "metadata_stanza": "Package: fonts-dejavu-mono\nArchitecture: all\nVersion: 2.37-8\nMulti-Arch: foreign\nPriority: optional\nSection: fonts\nSource: fonts-dejavu\nOrigin: Ubuntu\nMaintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>\nOriginal-Maintainer: Debian Fonts Task Force <debian-fonts@lists.debian.org>\nBugs: https://bugs.launchpad.net/ubuntu/+filebug\nInstalled-Size: 1281\nBreaks: fonts-dejavu-core (<< 2.37-7~), fonts-dejavu-extra (<< 2.37-7~)\nReplaces: fonts-dejavu-core (<< 2.37-7~), fonts-dejavu-extra (<< 2.37-7~)\nFilename: pool/main/f/fonts-dejavu/fonts-dejavu-mono_2.37-8_all.deb\nSize: 502232\nMD5sum: eba1835ff3d6120622501ca10f0bfa1d\nSHA1: 69dafc2177445d21cf61d433e3350d1b2e620d89\nSHA256: 8a599d6553307db7ecb795d2f0e5a301e03234afc75c7358b0ba43466454c89a\nSHA512: 3484a198967295f2a0d34a5163b14a49f56b338cd1a5542413fe9460002c97f62a206f64942c81b1fa6e664b34fc7dea386e2e57c0de850ba773ce280a0f445f\nHomepage: https://dejavu-fonts.github.io/\nDescription: Vera font family derivate with additional characters\nTask: ubuntu-desktop-minimal, ubuntu-desktop, ubuntu-wsl, print-server, ubuntu-desktop-raspi, kubuntu-desktop, xubuntu-minimal, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntukylin-desktop-minimal, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop-minimal, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi, ubuntu-unity-desktop, edubuntu-desktop-gnome-minimal, edubuntu-desktop-gnome-raspi, ubuntucinnamon-desktop-minimal, ubuntucinnamon-desktop-raspi\nDescription-md5: 71ffe129fe1b744ba2a213b16f126d42"
+    }
+  ],
+  "inspected_core_font_files": [
+    {
+      "package_path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "bytes": 708920,
+      "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+    },
+    {
+      "package_path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+      "bytes": 759720,
+      "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+    },
+    {
+      "package_path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+      "bytes": 356668,
+      "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+    },
+    {
+      "package_path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+      "bytes": 380660,
+      "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+    }
+  ],
+  "license": {
+    "package_path": "/usr/share/doc/fonts-dejavu-core/copyright",
+    "sha256": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
+    "text": "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/\nUpstream-Name: DejaVu fonts\nUpstream-Author: Stepan Roh <src@users.sourceforge.net> (original author),\n                  see /usr/share/doc/fonts-dejavu-core/AUTHORS for full list\nSource: https://dejavu-fonts.github.io/\n\nFiles: *\nCopyright: Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. \n Bitstream Vera is a trademark of Bitstream, Inc.\n DejaVu changes are in public domain.\nLicense: bitstream-vera\n Permission is hereby granted, free of charge, to any person obtaining a copy\n of the fonts accompanying this license (\"Fonts\") and associated\n documentation files (the \"Font Software\"), to reproduce and distribute the\n Font Software, including without limitation the rights to use, copy, merge,\n publish, distribute, and/or sell copies of the Font Software, and to permit\n persons to whom the Font Software is furnished to do so, subject to the\n following conditions:\n .\n The above copyright and trademark notices and this permission notice shall\n be included in all copies of one or more of the Font Software typefaces.\n .\n The Font Software may be modified, altered, or added to, and in particular\n the designs of glyphs or characters in the Fonts may be modified and\n additional glyphs or characters may be added to the Fonts, only if the fonts\n are renamed to names not containing either the words \"Bitstream\" or the word\n \"Vera\".\n .\n This License becomes null and void to the extent applicable to Fonts or Font\n Software that has been modified and is distributed under the \"Bitstream\n Vera\" names.\n .\n The Font Software may be sold as part of a larger software package but no\n copy of one or more of the Font Software typefaces may be sold by itself.\n .\n THE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\n OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,\n FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,\n TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME\n FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING\n ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,\n WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF\n THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE\n FONT SOFTWARE.\n .\n Except as contained in this notice, the names of Gnome, the Gnome\n Foundation, and Bitstream Inc., shall not be used in advertising or\n otherwise to promote the sale, use or other dealings in this Font Software\n without prior written authorization from the Gnome Foundation or Bitstream\n Inc., respectively. For further information, contact: fonts at gnome dot\n org.\n\nFiles: debian/*\nCopyright: (C) 2005-2006 Peter Cernak <pce@users.sourceforge.net> \n           (C) 2006-2011 Davide Viti <zinosat@tiscali.it>\n           (C) 2011-2013 Christian Perrier <bubulle@debian.org>\n           (C) 2013 Fabian Greffrath <fabian+debian@greffrath.com>\nLicense: GPL-2+\n This program is free software; you can redistribute it\n and/or modify it under the terms of the GNU General Public\n License as published by the Free Software Foundation; either\n version 2 of the License, or (at your option) any later\n version.\n .\n This program is distributed in the hope that it will be\n useful, but WITHOUT ANY WARRANTY; without even the implied\n warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR\n PURPOSE.  See the GNU General Public License for more\n details.\n .\n You should have received a copy of the GNU General Public\n License along with this package; if not, write to the Free\n Software Foundation, Inc., 51 Franklin St, Fifth Floor,\n Boston, MA  02110-1301 USA\n .\n On Debian systems, the full text of the GNU General Public\n License version 2 can be found in the file\n /usr/share/common-licenses/GPL-2'.\n",
+    "upstream_url": "https://dejavu-fonts.github.io/License.html",
+    "summary": "Fonts: Bitstream Vera permission terms, DejaVu changes public domain. Packaging debian/*: GPL-2+. Install intact packages so copyright/permission notices stay present."
+  },
+  "qualification_limits": [
+    "This source observation does not prove screenshot passage.",
+    "Actual historical human baseline environment was not recorded by baseline commit85f650f; DejaVu identification is a pixel/metrics inference to verify through unchanged-baseline comparison.",
+    "This observation is separate from subsequent image installation and screenshot qualification."
+  ],
+  "installed_font_files": [
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+      "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+      "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+      "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+      "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+      "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+      "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+    },
+    {
+      "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+      "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+    }
+  ]
+}

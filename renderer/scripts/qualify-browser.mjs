@@ -190,6 +190,14 @@ function inventory(paths) {
 
 async function browserEvidence(profile, runRoot) {
   const { chromium, devices } = await import("@playwright/test");
+  const previewUrl = "http://127.0.0.1:4173";
+  let occupied = false;
+  try {
+    const response = await fetch(previewUrl, { signal: AbortSignal.timeout(1000) });
+    await response.body?.cancel();
+    occupied = true;
+  } catch { /* An unoccupied loopback port is required before starting our child. */ }
+  if (occupied) throw new Error("Qualification preview port is already serving another process");
   const server = spawn(process.execPath, [path.join(rendererRoot, "node_modules/vite/bin/vite.js"), "preview", "--host", "127.0.0.1", "--port", "4173", "--strictPort"], {
     cwd: rendererRoot, env: { ...process.env, CI: "1", TZ: "UTC" }, stdio: ["ignore", "pipe", "pipe"],
   });
@@ -201,10 +209,16 @@ async function browserEvidence(profile, runRoot) {
     let ready = false;
     for (let attempt = 0; attempt < 100; attempt += 1) {
       if (server.exitCode !== null || server.signalCode !== null) throw new Error(`Qualification preview failed: ${serverLog}`);
-      if (serverLog.includes("http://127.0.0.1:4173/")) {
-        try { const response = await fetch("http://127.0.0.1:4173", { signal: AbortSignal.timeout(1000) }); ready = response.ok; } catch { /* Await only this owned preview. */ }
+      try {
+        const response = await fetch(previewUrl, { signal: AbortSignal.timeout(1000) });
+        ready = response.ok;
+        await response.body?.cancel();
+      } catch { /* Probe the owned strict-port preview independently of log formatting. */ }
+      if (ready) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        if (server.exitCode !== null || server.signalCode !== null) throw new Error(`Qualification preview failed: ${serverLog}`);
+        break;
       }
-      if (ready) break;
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
     if (!ready) throw new Error("Qualification preview did not become ready");
@@ -290,7 +304,7 @@ async function main(arguments_) {
     receipt.runtimes = { node: process.version, pnpm, playwright: playwrightVersion, osRelease: readFileSync("/etc/os-release", "utf8"), fontconfig: checked("fc-cache", ["--version"]) };
     receipt.settings = profile.settings;
     receipt.source = Object.fromEntries([
-      "dev/browser/profile.json", "renderer/package.json", "renderer/pnpm-lock.yaml", "renderer/playwright.config.js",
+      "dev/browser/profile.json", "dev/browser/install-fonts.mjs", "renderer/package.json", "renderer/pnpm-lock.yaml", "renderer/playwright.config.js",
       "renderer/scripts/qualify-browser.mjs", "renderer/scripts/render-static.mjs", "renderer/src/styles.css",
       "renderer/tests/e2e/renderer.spec.js", profile.baseline.path,
     ].map((file) => [file, sha256(readFileSync(path.join(repositoryRoot, file)))]));
@@ -302,7 +316,25 @@ async function main(arguments_) {
       files: inventory(fontFiles), configuration: inventory(["/etc/fonts", "/usr/share/fontconfig"]),
       activeConfiguration: checked("fc-conflist", []),
       resolutions: Object.fromEntries(["Inter", "system-ui", "sans-serif", "monospace", "Liberation Mono"].map((family) => [family, checked("fc-match", ["--format", "%{family}\t%{file}\n", family])])),
+      packages: [],
     };
+    if (!Array.isArray(profile.fontPackages) || profile.fontPackages.length === 0 ||
+        !Array.isArray(profile.fontFiles) || profile.fontFiles.length === 0) {
+      throw new Error("The qualified profile must pin its required font packages and files");
+    }
+    for (const package_ of profile.fontPackages) {
+      const version = checked("dpkg-query", ["--show", "--showformat=${Version}", package_.name]);
+      receipt.fonts.packages.push({ name: package_.name, version });
+      const status = checked("dpkg-query", ["--show", "--showformat=${db:Status-Status}", package_.name]);
+      if (status !== "installed" || version !== package_.version) {
+        throw new Error(`Installed font package ${package_.name} differs from the qualified profile`);
+      }
+    }
+    for (const expected of profile.fontFiles) {
+      if (!receipt.fonts.files.some((file) => file.path === expected.path && file.sha256 === expected.sha256)) {
+        throw new Error(`Required qualified font file is missing or changed: ${expected.path}`);
+      }
+    }
     receipt.browser = await browserEvidence(profile, runRoot);
     receipt.positive = phase("positive", runRoot, profile, { passed: 6 });
     const cssFiles = readdirSync(path.join(rendererRoot, "dist/assets")).filter((file) => file.endsWith(".css"));

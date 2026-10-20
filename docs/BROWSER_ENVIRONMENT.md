@@ -45,7 +45,13 @@ existing sRGB launch switch is verified. No pixel-threshold relaxation,
 max-difference allowance or browser/font package update is introduced to make
 a comparison pass.
 
-The image freezes browser binaries, system libraries and installed fonts.
+The base image freezes browser binaries and system libraries. The qualified
+image adds the exact Ubuntu Noble fonts-dejavu-core and fonts-dejavu-mono
+2.37-8 archives, each checked against its recorded byte count and SHA-256 before
+installation. The [font source receipt](evidence/identity-browser-fonts-2026-10-20.json)
+retains official package metadata and copyright. Installed package versions and
+all eight supplied font files are checked against the profile; intact packages
+preserve their license notices. No moving apt font install is used.
 Runtime receipts record actual Node, pnpm, Playwright, Chromium/headless-shell
 versions and executable hashes; font files and fontconfig configuration hashes;
 fc-match substitutions; and representative rendered fonts through Chromium's

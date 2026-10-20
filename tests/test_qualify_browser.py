@@ -22,10 +22,20 @@ def inputs():
         "packageManager": "pnpm@11.21.0", "chromium": {"colorProfile": "srgb", "version": "151.0.7922.34"},
         "settings": {"locale": "en-US", "timezoneId": "UTC"},
         "baseline": {"path": QUALIFY.BASELINE_PATH, "sha256": QUALIFY.APPROVED_BASELINE_SHA256, "approvalRevision": "b" * 40},
+        "fontSourceReceipt": "docs/evidence/synthetic-font-source.json",
+        "fontPackages": [{"name": name, "version": "2.37-8", "url": f"https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/{name}_2.37-8_all.deb", "sha256": "d" * 64, "bytes": 100} for name in ("fonts-dejavu-core", "fonts-dejavu-mono")],
+        "fontFiles": [{"path": "/usr/share/fonts/truetype/dejavu/" + name, "sha256": "f" * 64} for name in ("DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "DejaVuSerif.ttf", "DejaVuSerif-Bold.ttf", "DejaVuSansMono.ttf", "DejaVuSansMono-Bold.ttf", "DejaVuSansMono-Oblique.ttf", "DejaVuSansMono-BoldOblique.ttf")],
     }
     package = {"devDependencies": {"@playwright/test": "1.62.1"}, "packageManager": "pnpm@11.21.0"}
     registry = {"image": image, "platform": "linux/amd64", "index_digest": "sha256:" + "a" * 64}
     return profile, package, registry
+
+
+def font_source(profile):
+    return {
+        "packages": [{"package": package["name"], "architecture": "all", **{key: package[key] for key in ("version", "url", "sha256", "bytes")}} for package in profile["fontPackages"]],
+        "installed_font_files": copy.deepcopy(profile["fontFiles"]),
+    }
 
 
 def proof(directory, profile):
@@ -41,7 +51,7 @@ def proof(directory, profile):
         "settings": profile["settings"],
         "runtimes": {"playwright": profile["playwright"], "pnpm": "11.21.0"},
         "browser": {"version": profile["chromium"]["version"], "executableSha256": "e" * 64, "commandLine": ["--force-color-profile=srgb"], "settings": profile["settings"], "renderedFonts": [{"selector": "h1", "fonts": [{"familyName": "Arial"}]}]},
-        "fonts": {"files": [{"path": "/font.ttf", "sha256": "f" * 64}], "configuration": [{"path": "/fonts.conf", "sha256": "d" * 64}]},
+        "fonts": {"packages": [{"name": package["name"], "version": package["version"]} for package in reversed(profile["fontPackages"])], "files": copy.deepcopy(profile["fontFiles"]), "configuration": [{"path": "/fonts.conf", "sha256": "d" * 64}]},
         "positive": {"exitCode": 0, "passed": 6, "failed": 0, "skipped": 0, "report": "positive/report.json"},
         "negative": {"exitCode": 1, "passed": 0, "failed": 1, "skipped": 0, "report": "negative/report.json", "expectedFailure": "screenshot-comparison", "baselineUnchanged": True, "diffArtifacts": [{"path": "negative/brand-kit-page-diff.png", "sha256": QUALIFY.sha256(diff.read_bytes())}]},
         "restored": {"exitCode": 0, "passed": 1, "failed": 0, "skipped": 0, "report": "restored/report.json"},
@@ -91,6 +101,22 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
         for key, value in (("image", "mcr.microsoft.com/playwright:latest"), ("playwright", "1.62.2"), ("packageManager", "pnpm@12.0.0"), ("platform", "linux/arm64"), ("chromium", {})):
             cases.append(dict(profile, **{key: value}))
         cases.append(dict(profile, baseline=dict(profile["baseline"], sha256="c" * 64)))
+        cases.extend(dict(profile, **{key: []}) for key in ("fontPackages", "fontFiles"))
+        cases.append(dict(profile, fontSourceReceipt="../external.json"))
+        for key, value in (("name", "fonts-unreviewed"), ("version", "2.*"), ("url", "http://archive.ubuntu.com/font.deb"), ("url", profile["fontPackages"][0]["url"] + "?latest=true"), ("sha256", "unpinned"), ("bytes", 0), ("bytes", True)):
+            candidate = copy.deepcopy(profile)
+            candidate["fontPackages"][0][key] = value
+            cases.append(candidate)
+        candidate = copy.deepcopy(profile)
+        candidate["fontPackages"][1] = copy.deepcopy(candidate["fontPackages"][0])
+        cases.append(candidate)
+        for key, value in (("path", "/usr/share/fonts/unreviewed.ttf"), ("sha256", "")):
+            candidate = copy.deepcopy(profile)
+            candidate["fontFiles"][0][key] = value
+            cases.append(candidate)
+        candidate = copy.deepcopy(profile)
+        candidate["fontFiles"][1] = copy.deepcopy(candidate["fontFiles"][0])
+        cases.append(candidate)
         for candidate in cases:
             with self.subTest(candidate=candidate):
                 with self.assertRaises(ValueError):
@@ -99,6 +125,18 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
             QUALIFY.validate_profile(profile, package, dict(registry, index_digest="sha256:" + "d" * 64))
         with self.assertRaises(ValueError):
             QUALIFY.validate_profile([], package, registry)
+        source = font_source(profile)
+        QUALIFY.verify_font_source_binding(profile, source)
+        for key, value in (("version", "2.37-9"), ("sha256", "e" * 64), ("bytes", 101), ("architecture", "amd64")):
+            candidate = copy.deepcopy(source)
+            candidate["packages"][0][key] = value
+            with self.subTest(font_source_key=key):
+                with self.assertRaises(ValueError):
+                    QUALIFY.verify_font_source_binding(profile, candidate)
+        candidate = copy.deepcopy(source)
+        candidate["installed_font_files"][0]["sha256"] = "e" * 64
+        with self.assertRaises(ValueError):
+            QUALIFY.verify_font_source_binding(profile, candidate)
 
     def test_pulled_config_platform_and_digest_must_match_the_registry(self):
         profile, _, registry = inputs()
@@ -133,6 +171,20 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
                 with self.subTest(missing=missing):
                     with self.assertRaises(RuntimeError):
                         QUALIFY.container_receipt(output(candidate, directory), profile, directory)
+            for field, value in (("packages", []), ("packages", [{"name": "fonts-dejavu-core", "version": "2.37-9"}]), ("packages", valid["fonts"]["packages"] * 2), ("files", valid["fonts"]["files"][1:]), ("files", valid["fonts"]["files"] * 2)):
+                candidate = copy.deepcopy(valid)
+                candidate["fonts"][field] = value
+                with self.subTest(font_field=field, value=value):
+                    with self.assertRaises(RuntimeError):
+                        QUALIFY.container_receipt(output(candidate, directory), profile, directory)
+            candidate = copy.deepcopy(valid)
+            candidate["fonts"]["packages"][0]["version"] = "2.37-9"
+            with self.assertRaises(RuntimeError):
+                QUALIFY.container_receipt(output(candidate, directory), profile, directory)
+            candidate = copy.deepcopy(valid)
+            candidate["fonts"]["files"][0]["sha256"] = "a" * 64
+            with self.assertRaises(RuntimeError):
+                QUALIFY.container_receipt(output(candidate, directory), profile, directory)
 
     def test_negative_difference_must_exist_inside_evidence_and_match_its_hash(self):
         profile, _, _ = inputs()

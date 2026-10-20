@@ -7,6 +7,7 @@ ENV CI=1 TZ=UTC LANG=C.UTF-8 LC_ALL=C.UTF-8 PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 ENV PATH=/opt/identity-browser-tools/bin:/opt/identity-browser-tools/corepack/node_modules/.bin:$PATH
 WORKDIR /opt/identity
 COPY . .
+RUN node dev/browser/install-fonts.mjs
 WORKDIR /opt/identity/renderer
 # Reuse the digest-pinned base tool; use the repository's existing fallback if absent.
 RUN mkdir -p /opt/identity-browser-tools/bin \
