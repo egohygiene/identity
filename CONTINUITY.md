@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-20T04:18:49Z'
+  updated_at: '2026-10-20T04:25:17Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -76,21 +76,24 @@ state:
   candidate:
     branch: codex/81-qualified-docker-base
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#122
+      url: https://github.com/egohygiene/identity/pull/122
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-20T04:18:49Z'
+    observed_at: '2026-10-20T04:25:17Z'
     default_branch_revision: 1ae867af6db65732e43689f4832d560a327f1857
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Maintainer authorized merging121 and starting81. PR121 merged at the base revision and issue77 is closed.
-      Issue81 is open; no open PR was returned before publication. Fresh exact-head hosted evidence follows this
-      local checkpoint.
+    pull_request_state: open
+    notes: PR122 is draft/open at head6ccc4bc8e2b3cc4160390be2953caf20c78ed782 before this correction. First hosted
+      Docker run39369152128 verified the pinned base and built the default image, then failed its unscoped pnpm
+      version probe. The corrected probe uses the owning renderer workspace; full qualification remains pending.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-10-20T04:18:49Z'
+  reviewed_at: '2026-10-20T04:25:17Z'
   reviewed_by: Codex
   evidence:
   - command: Official registry index/manifest/config pulls and raw SHA-256 verification
@@ -123,6 +126,16 @@ review:
     observed_at: '2026-10-20T04:18:49Z'
     notes: All40 IDs/88edges and issue mappings preserved; all26 ADR bytes, dispositions, approval and lineage unchanged.
       Q16complete,Q20active,Q22ready,Q26ready; final-docs/refactor priority remains in116.
+  - command: Hosted development-image run39369152128 at initial head6ccc4bc8e2b3cc4160390be2953caf20c78ed782
+    outcome: failed
+    observed_at: '2026-10-20T04:25:17Z'
+    notes: Default build passed; smoke observed an unpinned global pnpm because the version probe ran outside renderer.
+      The probe now uses the same renderer workspace as setup. This run is not full image qualification.
+  - command: Five focused qualification tests; Python py_compile; docs verifier; git diff --check after workspace-probe
+      correction
+    outcome: passed
+    observed_at: '2026-10-20T04:25:17Z'
+    notes: No setup/runtime pin or dependency changes; only the qualification probe and evidence documentation change.
   environment_limitations:
   - Local tests do not establish image builds; exact-head hosted development-image evidence must be checked before
     claiming qualification.
@@ -162,7 +175,7 @@ Qualify a digest-pinned default within the existing Node24/Bookworm add-on. Pres
 
 ## State snapshot
 
-Main is 1ae867af6db65732e43689f4832d560a327f1857, including merged #121; #77 is closed/Q16 complete. #81/Q20 is active. Candidate codex/81-qualified-docker-base is locally checked before PR creation; containing revision/PR remain null. All40 IDs/88edges/mappings remain intact. Q22/#83 is now ready but retains its later final-docs position; Q26/#87 retains post-kit priority. Neither is authorized work.
+Main is 1ae867af6db65732e43689f4832d560a327f1857, including merged #121; #77 is closed/Q16 complete. #81/Q20 is active. Draft PR122 contains candidate codex/81-qualified-docker-base. Its containing revision remains null; the initial head and failed first hosted run are separately recorded in review evidence. All40 IDs/88edges/mappings remain intact. Q22/#83 is now ready but retains its later final-docs position; Q26/#87 retains post-kit priority. Neither is authorized work.
 
 ## Completed and material changes
 
@@ -174,7 +187,7 @@ The qualification script binds the default to the dated registry observation and
 
 Local Python completes143 cases:141pass/two existing skips, including five meaningful failure-boundary regressions. Six verifiers, Rust formatting, Python compilation, JSON relationships and whitespace checks pass. Independent review found no remaining implementation blocker and independently executed the synthetic CA mechanism probe. Registry raw-byte hashes and immutable upstream provenance are retained separately from runtime qualification.
 
-Actual image qualification is pending hosted execution: no Docker-compatible engine exists in this workspace. The real local qualification invocation fails with an unavailable-Docker receipt; it is not a passing build. Exact source-bound hosted results belong in the PR and dated review/receipt when available.
+The first hosted run built the default image, then failed because the pnpm version probe ran outside its owning renderer workspace and observed a global default. The corrected probe now uses the setup/renderer workspace. Focused checks pass; complete corrected default/custom qualification remains pending. No local Docker engine exists; unavailable local evidence is not a build pass. Exact source-bound hosted results belong in the PR and dated review/receipt.
 
 ## Blockers, risks, unknowns, and deferred work
 
@@ -186,7 +199,7 @@ Review the scoped #81 PR and exact hosted qualification before merge. Keep #81 o
 
 ## Parallel changes and reconciliation
 
-#121's verified merge reconciles #77 complete. No open PR was returned before candidate publication. Decision impact is ADR not required: straightforward dependency-policy repair and qualification of the existing portable add-on, without a new durable platform/ownership/publication boundary. All26 existing ADRs remain byte-identical:21accepted/fiveproposed with approval/lineage unchanged. The selected Aether decision-impact2.1.0/continuity1.1.0 and Hygiene1.2.0 sources were read from exact verified checkouts.
+#121's verified merge reconciles #77 complete. PR122 is the observed scoped draft; no other open PR was returned before publication. Decision impact is ADR not required: straightforward dependency-policy repair and qualification of the existing portable add-on, without a new durable platform/ownership/publication boundary. All26 existing ADRs remain byte-identical:21accepted/fiveproposed with approval/lineage unchanged. The selected Aether decision-impact2.1.0/continuity1.1.0 and Hygiene1.2.0 sources were read from exact verified checkouts.
 
 ## Privacy and redaction
 

@@ -140,8 +140,9 @@ review for a relevant security fix. Resolve the official index and selected
 platform manifest/config through the authenticated registry pull API, verify
 raw response SHA-256 values against their digest identities, and review the
 upstream Node image source/release and applicable license/security changes.
-Update the default digest and dated registry receipt together in a scoped PR.
-Do not silently follow the mutable tag or rewrite prior receipts.
+Add a new dated registry receipt, update the qualifier's `REGISTRY_RECEIPT`
+pointer and the default digest together in a scoped PR. Do not silently follow
+the mutable tag or rewrite prior receipts.
 
 On a Linux Docker host, run:
 

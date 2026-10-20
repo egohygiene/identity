@@ -42,11 +42,18 @@ index's other architectures are not qualified by this Linux/amd64 checkpoint.
 
 ## Executed qualification
 
-Pending the first hosted image run. This workspace has no Docker-compatible
-engine/socket, so local checks are not image-build evidence. The candidate
-script builds default and custom images, inspects inherited configuration and
-runs the CLI/renderer smoke inside each image. Exact source-bound hosted
-results and runtime versions will be recorded before the review handoff.
+The first [hosted run](https://github.com/egohygiene/identity/actions/runs/39369152128)
+verified the registry binding and built the default image, then stopped on a
+qualification-harness error: its pnpm version probe ran from the root instead
+of the renderer workspace and observed Corepack's unpinned global default.
+The probe now runs in the same owning renderer workspace as setup and renderer
+validation. This changes no installer/runtime dependency. That run is failed
+qualification evidence, not a passing image qualification. Full default/custom
+runtime checks are pending the corrected hosted run.
+
+This workspace has no Docker-compatible engine/socket; local checks alone are
+not image-build evidence. Exact source-bound results and runtime versions will
+be recorded before the review handoff.
 
 ## Local checks and review
 

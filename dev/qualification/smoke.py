@@ -193,7 +193,8 @@ def main() -> None:
         ("curl", ["curl", "--version"]),
         ("libc", ["getconf", "GNU_LIBC_VERSION"]),
     ):
-        versions[name] = run(command)
+        # Corepack selects packageManager from the owning renderer workspace.
+        versions[name] = run(command, cwd=REPOSITORY / "renderer" if name == "pnpm" else REPOSITORY)
     expected_rust = tomllib.loads((REPOSITORY / "rust-toolchain.toml").read_text())["toolchain"]["channel"]
     expected_pnpm = json.loads((REPOSITORY / "renderer/package.json").read_text())["packageManager"].split("@", 1)[1]
     if not versions["rustc"].startswith(f"rustc {expected_rust} "):
