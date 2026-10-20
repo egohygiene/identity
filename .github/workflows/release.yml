@@ -9,6 +9,11 @@ on:
   pull_request:
     paths:
       - ".github/workflows/release.yml"
+      - "dev/browser/**"
+      - "scripts/qualify_browser.py"
+      - "tests/test_qualify_browser.py"
+      - "docs/evidence/identity-browser-registry-*.json"
+      - "docs/evidence/identity-browser-fonts-*.json"
       - "Cargo.lock"
       - "Cargo.toml"
       - ".gitattributes"
@@ -253,10 +258,22 @@ jobs:
         working-directory: renderer
         run: pnpm install --frozen-lockfile
 
-      - name: Install pinned Chromium
+      - name: Validate renderer contracts, behavior and public output
         working-directory: renderer
-        run: pnpm exec playwright install --with-deps chromium
+        run: |
+          pnpm run check
+          pnpm test
+          pnpm run build
+          pnpm run validate:public
 
-      - name: Validate renderer and browser smoke surface
-        working-directory: renderer
-        run: pnpm run validate
+      - name: Qualify the shared browser environment
+        run: python3 scripts/qualify_browser.py --mode ci --output-directory "${{ runner.temp }}/identity-browser-ci"
+
+      - name: Retain browser qualification evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: release-browser-${{ github.run_id }}-${{ github.run_attempt }}
+          path: "${{ runner.temp }}/identity-browser-ci/"
+          if-no-files-found: warn
+          retention-days: 14

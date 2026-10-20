@@ -1,0 +1,3627 @@
+{
+  "kind": "dated source-bound browser environment qualification evidence",
+  "observed_at": "2026-10-20T13:41:59.385Z",
+  "source_head": "c2107af9244d16a8f1511f28a5f71ce8d5a19729",
+  "represented_merge": "2a15468bc4b0da8272316fb1bd7fad5ecd0b5056",
+  "base_revision": "2d18ed114d3799da3867260d69d8c70bf05d428d",
+  "pull_request": "https://github.com/egohygiene/identity/pull/123",
+  "executions": [
+    {
+      "workflow": "Validate reference renderer",
+      "run_id": 39431712372,
+      "job_id": 118658145375,
+      "run_url": "https://github.com/egohygiene/identity/actions/runs/39431712372",
+      "host": {
+        "approved_baseline_after_sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+        "artifact_files_sha256": {
+          "browser-ek79z2/negative/artifacts/.last-run.json": "f1e1860b159e970da86c936a625e84e254ea2147d8f2b8410572804abe955271",
+          "browser-ek79z2/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png": "adba2dcc7f173f7a6336de43e7278b2c35b4681b584de459407683072aff7b5a",
+          "browser-ek79z2/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png": "5940286f9ecaeb144bd86b00b638950e7e748118d8bd6400f8f4994d2820b4f5",
+          "browser-ek79z2/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+          "browser-ek79z2/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md": "8dd4da89c8c8682e2b2989564179f3f525acd6ee02c43340e8fe400153e52d58",
+          "browser-ek79z2/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip": "d36ad74750e55f70e183c8f3a0c5ccaf9f251aa78d6162df9b53418e2f4904e2",
+          "browser-ek79z2/negative/command.log": "3946556d9f4d3dd87a6c90dce1424d046e31dd21b8e8f925a65b939dedbd6a43",
+          "browser-ek79z2/negative/report.json": "5f42b458e0bdc6cb6556b73ce405e0472c07f225baad61d87f0486be652dbd74",
+          "browser-ek79z2/positive/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "browser-ek79z2/positive/command.log": "e63efa12458e7878881a4cd15dd704e4f9d4b9eb609a70f4aa25e3ce68619820",
+          "browser-ek79z2/positive/report.json": "eb31f44a3e9501a90d69cb43e53ba488cf73479d2feceee8b2e424d90b08de0d",
+          "browser-ek79z2/preview.log": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88",
+          "browser-ek79z2/restored/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "browser-ek79z2/restored/command.log": "723101fa03dbe4804570b2cdb24c410468cf6b385c2e0f579edf1a0e4f03ad1c",
+          "browser-ek79z2/restored/report.json": "594a3da69d6217436a67918a141e842743c286d6561d5c4ab9b3e36624f43a9b",
+          "qualification.json": "72d4993d271b9423f8402c862abf47eefcac315a55671eaa63cb1f444f9840d7"
+        },
+        "artifact_inventory_excludes_host_receipt": true,
+        "base_image": {
+          "architecture": "amd64",
+          "cmd": [
+            "/bin/bash"
+          ],
+          "entrypoint": null,
+          "id": "sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb",
+          "os": "linux",
+          "repo_digests": [
+            "mcr.microsoft.com/playwright@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+          ],
+          "user": ""
+        },
+        "built_image": {
+          "architecture": "amd64",
+          "cmd": [
+            "/bin/bash"
+          ],
+          "entrypoint": null,
+          "id": "sha256:947a8ecc893d3b2247d9c8fbb8dbf5681fea738cc267f07a46891b99dcd26b53",
+          "os": "linux",
+          "repo_digests": [],
+          "user": ""
+        },
+        "commands": [
+          {
+            "command": [
+              "docker",
+              "version",
+              "--format",
+              "{{json .Server}}"
+            ],
+            "exit_code": 0,
+            "output_sha256": "79b585fa9dc788d645c7c11506cd0e2b0c3dc62b50bc876d172662dceb7f619d"
+          },
+          {
+            "command": [
+              "docker",
+              "pull",
+              "--platform",
+              "linux/amd64",
+              "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+            ],
+            "exit_code": 0,
+            "output_sha256": "56860da0199878756c85c1f555344d3afb10e6c777b33404269ee25ce4198532"
+          },
+          {
+            "command": [
+              "docker",
+              "image",
+              "inspect",
+              "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+            ],
+            "exit_code": 0,
+            "output_sha256": "d691513bbf1a44d3464251dd6d32bc048f057fe5dadd87b8bb38ef21d0cb20ab"
+          },
+          {
+            "command": [
+              "docker",
+              "build",
+              "--pull",
+              "--platform",
+              "linux/amd64",
+              "--file",
+              "dev/browser/Dockerfile",
+              "--build-arg",
+              "BROWSER_IMAGE=mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+              "--tag",
+              "identity-browser-qualification:14f560bdbefb",
+              "."
+            ],
+            "exit_code": 0,
+            "output_sha256": "cadfabb9234a5c8bb1456efd493660c46909218434fae535be99399ba9cb3d48"
+          },
+          {
+            "command": [
+              "docker",
+              "image",
+              "inspect",
+              "identity-browser-qualification:14f560bdbefb"
+            ],
+            "exit_code": 0,
+            "output_sha256": "505b1ae2025bf1a68daa6b7204f0f472018ae106b976a8d8b8f2e13c9a5e6a51"
+          },
+          {
+            "command": [
+              "docker",
+              "run",
+              "--rm",
+              "--init",
+              "--platform",
+              "linux/amd64",
+              "--network",
+              "none",
+              "--shm-size",
+              "1gb",
+              "--env",
+              "CI=1",
+              "--env",
+              "TZ=UTC",
+              "--env",
+              "LANG=C.UTF-8",
+              "--env",
+              "LC_ALL=C.UTF-8",
+              "--mount",
+              "type=bind,source=<output-directory>,target=/evidence",
+              "identity-browser-qualification:14f560bdbefb",
+              "node",
+              "scripts/qualify-browser.mjs",
+              "--output-directory",
+              "/evidence"
+            ],
+            "exit_code": 0,
+            "output_sha256": "d1bebd9821fbf0abfdede4eaa2807c4e8a13d1d5e059e4c078184e763a21e283"
+          }
+        ],
+        "docker_server": {
+          "Arch": "amd64",
+          "KernelVersion": "7.0.0-1017-azure",
+          "Os": "linux",
+          "Version": "28.0.4"
+        },
+        "engine_platform_relation": "native-amd64",
+        "execution_context": "github-actions-ci",
+        "kind": "dated browser-environment qualification host receipt",
+        "limits": [
+          "The invocation mode labels a caller; both use identical image/rendering settings.",
+          "A hosted local-entrypoint replay is not an actual Docker run in an unavailable developer workspace.",
+          "Only the recorded image/platform/fonts/settings and unchanged approved baseline are qualified.",
+          "No baseline regeneration, tolerance relaxation, release, deployment or human approval occurs."
+        ],
+        "mode": "ci",
+        "observed_at": "2026-10-20T13:35:55.528430+00:00",
+        "own_image_cleanup_exit_code": 0,
+        "platform": "linux/amd64",
+        "profile": {
+          "baseline": {
+            "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+            "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+            "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+          },
+          "chromium": {
+            "colorProfile": "srgb",
+            "revision": "1234",
+            "version": "151.0.7922.34"
+          },
+          "fontFiles": [
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+              "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+              "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+              "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+              "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+              "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+              "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+              "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+            }
+          ],
+          "fontPackages": [
+            {
+              "bytes": 502232,
+              "name": "fonts-dejavu-mono",
+              "sha256": "8a599d6553307db7ecb795d2f0e5a301e03234afc75c7358b0ba43466454c89a",
+              "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-mono_2.37-8_all.deb",
+              "version": "2.37-8"
+            },
+            {
+              "bytes": 835172,
+              "name": "fonts-dejavu-core",
+              "sha256": "40049660c194f3b8a2541fc7369efebb10e9f94bdac836a2f38fafedd10fa73a",
+              "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-8_all.deb",
+              "version": "2.37-8"
+            }
+          ],
+          "fontSourceReceipt": "docs/evidence/identity-browser-fonts-2026-10-20.json",
+          "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "kind": "qualified browser environment",
+          "packageManager": "pnpm@11.21.0",
+          "platform": "linux/amd64",
+          "playwright": "1.62.1",
+          "registryReceipt": "docs/evidence/identity-browser-registry-2026-10-20.json",
+          "settings": {
+            "colorScheme": "light",
+            "deviceScaleFactor": 1,
+            "locale": "en-US",
+            "reducedMotion": "no-preference",
+            "timezoneId": "UTC",
+            "viewport": {
+              "height": 1000,
+              "width": 1440
+            }
+          }
+        },
+        "qualification": {
+          "baseline": {
+            "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+            "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+            "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "unchanged": true
+          },
+          "browser": {
+            "commandLine": [
+              "/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+              "--disable-field-trial-config",
+              "--disable-background-networking",
+              "--disable-background-timer-throttling",
+              "--disable-backgrounding-occluded-windows",
+              "--disable-back-forward-cache",
+              "--disable-breakpad",
+              "--disable-client-side-phishing-detection",
+              "--disable-component-extensions-with-background-pages",
+              "--disable-component-update",
+              "--no-default-browser-check",
+              "--disable-default-apps",
+              "--disable-dev-shm-usage",
+              "--disable-edgeupdater",
+              "--disable-extensions",
+              "--disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion",
+              "--enable-features=CDPScreenshotNewSurface",
+              "--allow-pre-commit-input",
+              "--disable-hang-monitor",
+              "--disable-ipc-flooding-protection",
+              "--disable-popup-blocking",
+              "--disable-prompt-on-repost",
+              "--disable-renderer-backgrounding",
+              "--disable-updater-scheduler",
+              "--force-color-profile=srgb",
+              "--metrics-recording-only",
+              "--no-first-run",
+              "--password-store=basic",
+              "--use-mock-keychain",
+              "--no-service-autorun",
+              "--export-tagged-pdf",
+              "--disable-search-engine-choice-screen",
+              "--unsafely-disable-devtools-self-xss-warnings",
+              "--edge-skip-compat-layer-relaunch",
+              "--disable-infobars",
+              "--disable-search-engine-choice-screen",
+              "--disable-sync",
+              "--enable-unsafe-swiftshader",
+              "--headless",
+              "--hide-scrollbars",
+              "--mute-audio",
+              "--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4",
+              "--no-sandbox",
+              "--user-data-dir=<disposable-browser-profile>",
+              "--remote-debugging-pipe",
+              "--no-startup-window"
+            ],
+            "executable": "/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+            "executableSha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+            "process": {
+              "parentPid": 7,
+              "pid": 531,
+              "source": "Linux /proc direct-child observation"
+            },
+            "renderedFonts": [
+              {
+                "declaredFamily": "Inter, system-ui, sans-serif",
+                "fonts": [],
+                "selector": "body"
+              },
+              {
+                "declaredFamily": "Inter, system-ui, sans-serif",
+                "fonts": [
+                  {
+                    "familyName": "DejaVu Sans",
+                    "glyphCount": 14,
+                    "isCustomFont": false,
+                    "postScriptName": "DejaVuSans-Bold"
+                  }
+                ],
+                "selector": "h1"
+              },
+              {
+                "declaredFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", monospace",
+                "fonts": [
+                  {
+                    "familyName": "Liberation Mono",
+                    "glyphCount": 7,
+                    "isCustomFont": false,
+                    "postScriptName": "LiberationMono"
+                  }
+                ],
+                "selector": ".token-value"
+              },
+              {
+                "declaredFamily": "ui-monospace, monospace",
+                "fonts": [
+                  {
+                    "familyName": "DejaVu Sans Mono",
+                    "glyphCount": 76,
+                    "isCustomFont": false,
+                    "postScriptName": "DejaVuSansMono"
+                  }
+                ],
+                "selector": ".studio textarea"
+              }
+            ],
+            "settings": {
+              "colorDepth": 24,
+              "colorScheme": "light",
+              "deviceScaleFactor": 1,
+              "locale": "en-US",
+              "reducedMotion": "no-preference",
+              "timezoneId": "UTC",
+              "viewport": {
+                "height": 1000,
+                "width": 1440
+              }
+            },
+            "version": "151.0.7922.34"
+          },
+          "commands": [
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "--version"
+              ],
+              "exitCode": 0,
+              "outputSha256": "4d24606a920d1175b8017de83c5a19847bd8cfe47aeb71cf43efaa75c1e5a2ec",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-cache",
+                "--version"
+              ],
+              "exitCode": 0,
+              "outputSha256": "da1a137c08d945a75c0dd6aeacf2ff1a716f8bec9e351c0400e7ceeb15b161e7",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-list",
+                "--format",
+                "%{file}\n"
+              ],
+              "exitCode": 0,
+              "outputSha256": "340b9fb2d1ba5f3126efbd49fb40ce6db50ce1527a58bbb460038dedc8155e18",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-conflist"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a376ac931a8a2f4e56b03bfea67e60fa886ef5c10435d4651b6771e1c4d16055",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "Inter"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "system-ui"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "sans-serif"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "monospace"
+              ],
+              "exitCode": 0,
+              "outputSha256": "9a54d28f0592c054fe5e2e24370498d773eb8c4e0596d18238b56a36e122dd7f",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "Liberation Mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "d4e93680bd5485d70d2920b716cfb7eb4f5f47f17f6ed987f0bdb80bf580ccde",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${Version}",
+                "fonts-dejavu-mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "379912dee34feeb32bed164829c26b786dd079e1c3df7c7fc6fb7e29521cec65",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${db:Status-Status}",
+                "fonts-dejavu-mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a51a6c19a1ffc7416827e89adf20749d23ad42452c396cf7e627409f2896922c",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${Version}",
+                "fonts-dejavu-core"
+              ],
+              "exitCode": 0,
+              "outputSha256": "379912dee34feeb32bed164829c26b786dd079e1c3df7c7fc6fb7e29521cec65",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${db:Status-Status}",
+                "fonts-dejavu-core"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a51a6c19a1ffc7416827e89adf20749d23ad42452c396cf7e627409f2896922c",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-ek79z2/positive/artifacts"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e63efa12458e7878881a4cd15dd704e4f9d4b9eb609a70f4aa25e3ce68619820",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-ek79z2/negative/artifacts",
+                "--grep",
+                "matches the reviewed desktop viewport baseline$"
+              ],
+              "exitCode": 1,
+              "outputSha256": "3946556d9f4d3dd87a6c90dce1424d046e31dd21b8e8f925a65b939dedbd6a43",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-ek79z2/restored/artifacts",
+                "--grep",
+                "matches the reviewed desktop viewport baseline$"
+              ],
+              "exitCode": 0,
+              "outputSha256": "723101fa03dbe4804570b2cdb24c410468cf6b385c2e0f579edf1a0e4f03ad1c",
+              "signal": null
+            }
+          ],
+          "fonts": {
+            "activeConfiguration": "+ /etc/fonts/conf.d/10-hinting-slight.conf: Set hintslight to hintstyle\n+ /etc/fonts/conf.d/10-scale-bitmap-fonts.conf: Bitmap scaling\n+ /etc/fonts/conf.d/10-sub-pixel-rgb.conf: Enable sub-pixel rendering with the RGB stripes layout\n+ /etc/fonts/conf.d/10-yes-antialias.conf: Enable antialiasing\n+ /etc/fonts/conf.d/11-lcdfilter-default.conf: Use lcddefault as default for LCD filter\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans-mono.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-serif.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-vera.conf: Disable hinting for Bitstream Vera fonts when the size is less than 8ppem\n+ /etc/fonts/conf.d/25-wqy-zenhei.conf: No description\n+ /etc/fonts/conf.d/30-metric-aliases.conf: Set substitutions for similar/metric-compatible families\n+ /etc/fonts/conf.d/40-nonlatin.conf: Set substitutions for non-Latin fonts\n+ /etc/fonts/conf.d/45-generic.conf: Set substitutions for emoji/math fonts\n+ /etc/fonts/conf.d/45-latin.conf: Set substitutions for Latin fonts\n+ /etc/fonts/conf.d/48-spacing.conf: Add mono to the family when spacing is 100\n+ /etc/fonts/conf.d/49-sansserif.conf: Add sans-serif to the family when no generic name\n+ /etc/fonts/conf.d/50-user.conf: Load per-user customization files\n+ /etc/fonts/conf.d/51-local.conf: Load local customization file\n+ /etc/fonts/conf.d/57-dejavu-sans-mono.conf: No description\n+ /etc/fonts/conf.d/57-dejavu-sans.conf: No description\n+ /etc/fonts/conf.d/57-dejavu-serif.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-sans-mono.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-sans.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-serif.conf: No description\n+ /etc/fonts/conf.d/60-generic.conf: Set preferable fonts for emoji/math fonts\n+ /etc/fonts/conf.d/60-latin.conf: Set preferable fonts for Latin\n+ /etc/fonts/conf.d/64-wqy-zenhei.conf: No description\n+ /etc/fonts/conf.d/65-fonts-ipafont-gothic.conf: No description\n+ /etc/fonts/conf.d/65-fonts-persian.conf: No description\n+ /etc/fonts/conf.d/65-nonlatin.conf: Set preferable fonts for non-Latin\n+ /etc/fonts/conf.d/69-unifont.conf: No description\n+ /etc/fonts/conf.d/70-no-bitmaps-except-emoji.conf: Reject bitmap fonts except bitmap emoji fonts\n+ /etc/fonts/conf.d/80-delicious.conf: No description\n+ /etc/fonts/conf.d/90-synthetic.conf: No description\n+ /etc/fonts/fonts.conf: Default configuration file\n- /usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf: Re-define fonts dirs sample\n- /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf: Enable autohinter if font doesn't have any hinting\n- /usr/share/fontconfig/conf.avail/10-autohint.conf: Enable autohinter\n- /usr/share/fontconfig/conf.avail/10-hinting-full.conf: Set hintfull to hintstyle\n- /usr/share/fontconfig/conf.avail/10-hinting-medium.conf: Set hintmedium to hintstyle\n- /usr/share/fontconfig/conf.avail/10-hinting-none.conf: Set hintnone to hintstyle\n- /usr/share/fontconfig/conf.avail/10-no-antialias.conf: Disable antialiasing\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf: Enable sub-pixel rendering with the BGR stripes layout\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf: Disable sub-pixel rendering\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf: Enable sub-pixel rendering with the vertical BGR stripes layout\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf: Enable sub-pixel rendering with the vertical RGB stripes layout\n- /usr/share/fontconfig/conf.avail/10-unhinted.conf: Disable hinting\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf: Use lcdlegacy as default for LCD filter\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf: Use lcdlight as default for LCD filter\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-none.conf: Use lcdnone as default for LCD filter\n- /usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf: Disable hinting for CJK fonts\n- /usr/share/fontconfig/conf.avail/35-lang-normalize.conf: No description\n- /usr/share/fontconfig/conf.avail/53-monospace-lcd-filter.conf: No description\n- /usr/share/fontconfig/conf.avail/65-khmer.conf: No description\n- /usr/share/fontconfig/conf.avail/70-force-bitmaps.conf: Accept bitmap fonts\n- /usr/share/fontconfig/conf.avail/70-no-bitmaps-and-emoji.conf: Reject bitmap fonts, including bitmap emoji fonts\n- /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf: Reject bitmap fonts except bitmap emoji fonts (deprecated; use 70-no-bitmaps-except-emoji.conf)\n- /usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf: No description",
+            "configuration": [
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans-mono.conf",
+                "sha256": "0a6b0f1c1f5d1c06a811b517a3d2690700bba8e961cd55dd2c7648cde3605a21"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans.conf",
+                "sha256": "144619057c0a040de247c74cf09f230d737b9c1c534f3ba8804fdd3ddeded8b0"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-serif.conf",
+                "sha256": "977c24eb43f10d21263bbdb624649e5edf63147bd7bb4f84db97ce7d53bb9054"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-sans-mono.conf",
+                "sha256": "3e90c9c36beef46f10d1529251f8683b9c4ac900695adbb4a23a4b6036f938a5"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-sans.conf",
+                "sha256": "0d9c177b6a85daa9957ed6750d4eb26122604da18d340e7ba31e6f4d24f963ed"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-serif.conf",
+                "sha256": "68777b1705ec7a05a86430def4be093668e84e305cc7e11291df52403a7318cc"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/25-wqy-zenhei.conf",
+                "sha256": "101497940c4e0254172038f23cbe488740081f6c6703d8243c3cc5218b5f6e9a"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-sans-mono.conf",
+                "sha256": "1f2ead86f8203d809abfc9d88d92b04316edd67b6291795ea74ea8a0c3c2e04d"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-sans.conf",
+                "sha256": "f6285e2d336f93086acfa2ac7895ef75ef5ff34f833ba5a63c09fb2841aedc27"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-serif.conf",
+                "sha256": "7c596f7e202090ded38fded904c4a17d5a189b6c9cc914a2e88554116f6474ca"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-sans-mono.conf",
+                "sha256": "807e5222c6d11a72ad527ebc088f42daf2a807e7718c8f7ff227cbfecafd3d70"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-sans.conf",
+                "sha256": "ecde2093f005c73d7da21cdd7b80c791910050609db36cb5eea84a4ba8da5cef"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-serif.conf",
+                "sha256": "e685632c3edbb6868a7ca5275e7c71f25486a8cfd16113a478194a5631205619"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/63-wqy-zenhei-sharp.conf",
+                "sha256": "7dacd60b359d88684c9642710da5166d8298a21814784bd15583a3fb0430f14a"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/64-wqy-zenhei.conf",
+                "sha256": "7c187a99ad7f4b5ee80930c60399d3952e41ea7bbee8d9322ab685596d351a94"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/65-fonts-ipafont-gothic.conf",
+                "sha256": "95b425396cd7afefc03f668229b425a703d0c57b078a00111b7a289bb68513cf"
+              },
+              {
+                "path": "/etc/fonts/conf.d/README",
+                "sha256": "fdc29a3ebd8816eb07ed04c2cbe151076e95a7b0b2a0ec8fe94e5c8a67931d3c"
+              },
+              {
+                "path": "/etc/fonts/fonts.conf",
+                "sha256": "93a23ba073996edb8b42d6c89ebc2ec5fd2101ce82cb65ba0db358dabf55ca22"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf",
+                "sha256": "7dae5045441ce7ab4ce9ee0ccbee84e2ae90daee9cfd2ac64cd887ee85c528df"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf",
+                "sha256": "f04d1737c2a85925a6294f4b966597d03a30c9e4c551c7a8c270eaad514b2689"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-autohint.conf",
+                "sha256": "9ae4308a18941969ea42f5881c202be052fe12da3fb1fb4fc4b940642ec74db0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-full.conf",
+                "sha256": "aa01699d6a43a1be2996233e67daf1570b9000bd1a59763463d3a12b852cdc3a"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-medium.conf",
+                "sha256": "f0eaec3db6879f3460bd0e1ef3e09dd965168ca460a79d098eb0648c6740095d"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-none.conf",
+                "sha256": "5970fa53c69874ee51349300ef3412592e46e7f133c06074befcf6ab2a3ef6e2"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-slight.conf",
+                "sha256": "d138eca2bac3f78d45ff7cfb649ad792caa4a6e61f73cea7cf0ea54b091f1ef4"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-no-antialias.conf",
+                "sha256": "75412c70f3a78ad090c79a9dc63cce6aae41b2cfc2f67f4a1a1b533526216d2e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-scale-bitmap-fonts.conf",
+                "sha256": "df8e99abb6f82384c61978906a45a95794940545da95790d87f01d9391e0894b"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf",
+                "sha256": "719006f7887a958da8efe5ad010a2cde689313074607ae20f0be4cd9e8bfffad"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf",
+                "sha256": "0f00b5cf0ce07062ec65b9b340aa888f6c5fbc215aafebd26781be2d5a13ff6a"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf",
+                "sha256": "e4cfc04f5fc5093d2ba20c40f8709c9dfc099997313d0f96bc8256597a15d057"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf",
+                "sha256": "15178eb45f3206433bace02053214d5750b9d74a4ece727f48c7fbc8f8c9adb3"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf",
+                "sha256": "049680ed134d34c560be493a47301bf6542050e7e89c27d3df25145b41f8133e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-unhinted.conf",
+                "sha256": "dca27a149268da3aeaa3416dc236fd1d76e2f997b1ba91e1292297e78c9281d4"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-yes-antialias.conf",
+                "sha256": "e6d82a642d1b37f7d24dc37f938b999f00ff7aa4303b2602d04164d53f221005"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf",
+                "sha256": "76aec9d8dac48faabe1bbde9e887cfb09fa45f30be5f8826e945a394a0097e48"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf",
+                "sha256": "0768fd57ae0a50d54f2f2e5efae98437ae8623573b652f246ac22e574d5f38b0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf",
+                "sha256": "0708443f97406b100a5ccfa67ea8a1c1473ff60ff03848e536bc62e2b2ddcea3"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-none.conf",
+                "sha256": "8c2b7c2db7bf8e54fb4f449e726ad97d824195085f97a5c19d75914ad7b4b074"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/20-unhint-small-vera.conf",
+                "sha256": "278732c68c16177f2aa3c7e4ea318b9f720aee13a433c32eb15ba626806c609d"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf",
+                "sha256": "8b8c05318fb3f4893a9522e7989dd9280d14233adbc21be867bd173add4a0d5c"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/30-metric-aliases.conf",
+                "sha256": "3baf25c82e1a14c606d45c212296852be06ae9795d60e84aab573226151450a2"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/35-lang-normalize.conf",
+                "sha256": "fb06f0e9206cc711a68719940e670a3756ae6656ea9b73197f3bbc0c921ee433"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/40-nonlatin.conf",
+                "sha256": "9c56aeed6490db1d29602d7f8e028742b5e7a0268eaaa60de2fde582c6403715"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/45-generic.conf",
+                "sha256": "24de9f68189d544bb4cc084d9bd8f3a59d8b988a9dc44b11e9877d5add5fc948"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/45-latin.conf",
+                "sha256": "807638284032d8d8f6ed8b014a0edae79a4d4f3c4e70317fdb0bfa8edd66779e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/48-spacing.conf",
+                "sha256": "99d839cd8aa28854e8f54f26e7200b6e57951f39f56791a0ed473662488bcef6"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/49-sansserif.conf",
+                "sha256": "7849a11ce5243e8bb3d06bcad558737a8682e5122e73c8e427f4c011a2054818"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/50-user.conf",
+                "sha256": "449137ccce57d60bca178d57519ba54e1942d757ad171f3a88cd78df2161c970"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/51-local.conf",
+                "sha256": "dca9d917e1f66f73bfa495943b4d1eaab2d93810a51bc8e600cf4d4e9df03e67"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/53-monospace-lcd-filter.conf",
+                "sha256": "c04ec3f2b651d31f3968fd725787d10c8bc2eab02203979b6b961477de3fdbd5"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/60-generic.conf",
+                "sha256": "195bc8605dd23289d42c10d79cc13a5ce4a4b3cf965df5b30ecc0b7149bb951f"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/60-latin.conf",
+                "sha256": "2de7c687e03b1fedf9fd016aa14ed8088f52578896a73f06158dda8acd264f09"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-fonts-persian.conf",
+                "sha256": "c675fab143a3638346874798be45f51f6878ebec591b4362d83cfffb828ec4ca"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-khmer.conf",
+                "sha256": "0bc1c077ef01cb409f51f95218b97b144278c0568b5de03683047b2a1963c590"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-nonlatin.conf",
+                "sha256": "e309e38d7fb47cc3f639f4313b19e72c9be4d1f2db92d7d892ea65bfdd0cbd30"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/69-unifont.conf",
+                "sha256": "fa97c0cf5f79d70e2dc3dc48155d4c9220cd7c6a8bc95b89c4ebcc517f97479e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-force-bitmaps.conf",
+                "sha256": "46fb68f9ec27605f880379b753c1afcc1cacfc75021e3a288f4cf62c945e394f"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps-and-emoji.conf",
+                "sha256": "313260028904353a026faa457bacea58df88ceff7dc97b269e526130dc797a7e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps-except-emoji.conf",
+                "sha256": "bb5df65896bf3011b2f2935b63ab12db1ecf078674ff73a533123445f122a92b"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps.conf",
+                "sha256": "5994ce306887448ec29b2d6624696bb2dd7e333dd51cc5818f9ebe72abc077da"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf",
+                "sha256": "87228113c2e8ffbf5565ffaa80d5e5fde33b14f0725accf69e1e31c80df398c0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/80-delicious.conf",
+                "sha256": "34f27b7fe9cd83b2b6d46f16ef9c477412f2d7ef63634f86b9b38b79bc4f81ad"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/90-synthetic.conf",
+                "sha256": "cdd0aac7840c664a7127b64db66bdfe8dc22be3774d10bc22f4a41c98de5d85e"
+              }
+            ],
+            "files": [
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0419bt_.pfb",
+                "sha256": "0e15626ca60d95e49ac15352f5c7f1837eb6dc9b6a353357012ce54a5b37015c"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0582bt_.pfb",
+                "sha256": "9ecc1d370c5ee96c8b58d144d92a9fbeb416e2a33746f4ef86ed4e7490389dc6"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0583bt_.pfb",
+                "sha256": "708bbc1a259fbdf4f8c0fde683dd604f1e0677a72078567d70328f9a428248b7"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0611bt_.pfb",
+                "sha256": "69dd50c4078f8b7c3d50dedc85dec8e4316c0b4f86df1737c3af9b9b8aa51eef"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0632bt_.pfb",
+                "sha256": "c50fd6e717599f306b8b3261d309c56849f4366771c1983c875eabf46bc2b956"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0633bt_.pfb",
+                "sha256": "3e0c9ed37732c1ebcbed4e582fd70f5673ca415161396276097eca1cda87104b"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0648bt_.pfb",
+                "sha256": "8ac5bad34cad9b59b087eebfaf9087c16901b0761f7f9cc538f2f65567fc3959"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0649bt_.pfb",
+                "sha256": "0c3e189c6a52401c62c9fcde32f453a4dc95836d8c6e03fe8908100d854f3a83"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf",
+                "sha256": "503af4a8b84d1079b8e2e358dc7f7a7fb8cb7a1f212f35eaef6782dbfc75a55e"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/ipafont-gothic/ipagp.ttf",
+                "sha256": "a63f6153841e56ec9df1b31a54d98d3f41d8aaa1c3d8df30a33502296f5b8068"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-Bold.otf",
+                "sha256": "16f3cdd73f47abf8bde2aafd9569b36388f6ae388e98088a77c3312fbaa98b80"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-BoldOblique.otf",
+                "sha256": "d7e3ba82a6605b3e6f126d4a77b78cbf0694f17a5a79fb8e9709936234b04700"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-Oblique.otf",
+                "sha256": "133e6af2dcdfea629bc734f2bbbbd7d66cff2040ffb0b197571740c23d87e3c6"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma.otf",
+                "sha256": "e14126fe603116a6da8fb54822e8521589983d17d78cae489e98faed4b2f4cd2"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont.otf",
+                "sha256": "2498b80f9664fef91e6988d7e082146a2082a7e7bb4a2deb2fbf9a365aa2970c"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_csur.otf",
+                "sha256": "065b75985f258df8573371bd9bda0a37a39ac85a38b0062a37f15654c2eb7341"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_jp.otf",
+                "sha256": "218eb241082aa4f47399f7c2058e25abffa8d081b312542bc91740681f006597"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_jp_sample.otf",
+                "sha256": "80668b601ceffe8030eef4215e9148b9ddc5c3802e3dba86a306c76fc1f7f9d4"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_sample.otf",
+                "sha256": "5b73116f46a3fc4726e4b2f0a51f9c163526444d55b8db88c4ab8ec9453fcb20"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_upper.otf",
+                "sha256": "f9a49517cb5a06e02692b403bc21f96ea767128db52f089d31261a8968d3ace8"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_upper_sample.otf",
+                "sha256": "68dfc1d34d533c8dada07a8dd84294635afdc4790904fa956ea735ca1d20c127"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+                "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+                "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+                "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+                "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+                "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+                "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMono.ttf",
+                "sha256": "9691040d4d89266db211cd9da1094cf1991beaaf5e01cc752bc1dab84d483534"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf",
+                "sha256": "7a5ded6ffe5ba84c7c478de521ad0653efae4d2b92b251216bc390c6022e91ac"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoBoldOblique.ttf",
+                "sha256": "04d540f1fe223d24a391f1c50f98eab6529b2a8fa670d628fad7e8443224967b"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoOblique.ttf",
+                "sha256": "c350255406bf9dd314c8261d49118b2d44c38d7c2555884eba43dffea7bd7313"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+                "sha256": "350badd6ab6a58e7fd7a0ea2ae0c10174941a08e1cd06b3c6010e10b3d5ae319"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+                "sha256": "e0a07c1e9495262c430fde74e80daadd0b2a353eb444a47b265c62f5a5836af5"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansBoldOblique.ttf",
+                "sha256": "f26d93f22f70bd97270a6b5506497a8c9e84c64399343cf1c08a50e4016cf967"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansOblique.ttf",
+                "sha256": "31f2e994c6bb0f6c8a8f1d27ae25b4b754ef072154220bb4db2a69e8e3d1193f"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
+                "sha256": "c57bf5de095af4e070c2acb5bce634316409ed4203b5098f4fdadb691dc7b3d2"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf",
+                "sha256": "f078f2ac5d38addc71e2c123d86584341360b5bf27bc1cf238574ebe4f5a0f4d"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifBoldItalic.ttf",
+                "sha256": "c59455ea29607bbf62b0cfdffdc118ade887acd86a68c2c9873fb1187b021e58"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifItalic.ttf",
+                "sha256": "775b2ed7b9026f288b60f2479e07ee8e3147daa89d75848f11eb21faab662070"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
+                "sha256": "626655e94dd82f3f42549daf995c921b0915fa8ab1f4b839559e8892ea41d240"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-BoldItalic.ttf",
+                "sha256": "15eb161953e3ecc7fc05a3fec8a59e0f4e0a54a4e375736adf8e98d65981f813"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Italic.ttf",
+                "sha256": "a71b2c25c89da05cf0e7c4dbba8d473fdead0b181ae56165217747d2c1f39215"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+                "sha256": "395fa5ab8d40c8eba390ced528744ea75a7f69aabf3e68b6f925ca0e39a27370"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+                "sha256": "3973aa5054fb467dd5627245d3dc82e37bf16fe075756156a570455871351582"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf",
+                "sha256": "c80fa7f2ffa0e01d4d8dcd6a6d1e43eda665222d1b4db597dde1174c456006cf"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf",
+                "sha256": "830c5fa600505fb4c1a271b4271c53c44bae43f492b2a240d0e98a3a7a380121"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+                "sha256": "4659bc0c58c5028dd488ec928d41d9265db43d9b669fc14ca8b0832daca7b144"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
+                "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-BoldItalic.ttf",
+                "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf",
+                "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
+                "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf",
+                "sha256": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+                "sha256": "79c18ebe7b811951e8311bad7103ebeae8c337ed9988ea69e8a78a66cfe029b9"
+              }
+            ],
+            "packages": [
+              {
+                "name": "fonts-dejavu-mono",
+                "version": "2.37-8"
+              },
+              {
+                "name": "fonts-dejavu-core",
+                "version": "2.37-8"
+              }
+            ],
+            "resolutions": {
+              "Inter": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "Liberation Mono": "Liberation Mono\t/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+              "monospace": "DejaVu Sans Mono\t/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+              "sans-serif": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "system-ui": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+            }
+          },
+          "kind": "dated browser environment qualification receipt",
+          "limits": [
+            "Only the recorded Linux/amd64 image and immutable source inputs are qualified.",
+            "The deliberately changed built CSS is disposable and restored; no baseline regeneration or tolerance relaxation occurs.",
+            "Automated browser evidence does not supply human creative approval or complete accessibility conformance."
+          ],
+          "negative": {
+            "baselineUnchanged": true,
+            "diffArtifacts": [
+              {
+                "path": "browser-ek79z2/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+                "sha256": "5940286f9ecaeb144bd86b00b638950e7e748118d8bd6400f8f4994d2820b4f5"
+              }
+            ],
+            "exitCode": 1,
+            "expectedFailure": "screenshot-comparison",
+            "failed": 1,
+            "passed": 0,
+            "report": "browser-ek79z2/negative/report.json",
+            "skipped": 0
+          },
+          "observedAt": "2026-10-20T13:36:42.909Z",
+          "platform": "linux/amd64",
+          "positive": {
+            "diffArtifacts": [],
+            "exitCode": 0,
+            "failed": 0,
+            "passed": 6,
+            "report": "browser-ek79z2/positive/report.json",
+            "skipped": 0
+          },
+          "profileSha256": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+          "restored": {
+            "diffArtifacts": [],
+            "exitCode": 0,
+            "failed": 0,
+            "passed": 1,
+            "report": "browser-ek79z2/restored/report.json",
+            "skipped": 0
+          },
+          "runtimes": {
+            "fontconfig": "fontconfig version 2.15.0",
+            "node": "v24.18.1",
+            "osRelease": "PRETTY_NAME=\"Ubuntu 24.04.4 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.4 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+            "playwright": "1.62.1",
+            "pnpm": "11.21.0"
+          },
+          "settings": {
+            "colorScheme": "light",
+            "deviceScaleFactor": 1,
+            "locale": "en-US",
+            "reducedMotion": "no-preference",
+            "timezoneId": "UTC",
+            "viewport": {
+              "height": 1000,
+              "width": 1440
+            }
+          },
+          "source": {
+            "dev/browser/install-fonts.mjs": "6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa",
+            "dev/browser/profile.json": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+            "renderer/package.json": "d2c2260f2a4cdd9a06f2effbd1c1bd2f5493a3116ae95de0e92fcb4b7ed8481e",
+            "renderer/playwright.config.js": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "renderer/scripts/qualify-browser.mjs": "e8e7743cbe10c9f41e5ec76b0eb352791b63d8e5cd83e4cc2a3500db339e2db5",
+            "renderer/scripts/render-static.mjs": "f28c574102014d54bbb72e8f38564ae80601e1f6617fce52539866713bf71b01",
+            "renderer/src/styles.css": "6869e33bb559a14d18d9b13587d35b3f254133005eacadfc2f65a9670cd5a522",
+            "renderer/tests/e2e/__snapshots__/brand-kit-page.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "renderer/tests/e2e/renderer.spec.js": "5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e"
+          },
+          "status": "passed"
+        },
+        "registry": {
+          "config_digest": "sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb",
+          "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "index_digest": "sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "manifest_digest": "sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac",
+          "platform": "linux/amd64"
+        },
+        "source": {
+          "build_source_inventory": {
+            "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+            "files": 339,
+            "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+            "sha256": "b4755fdd30d9ba6859b0965b2369c5ac8a73cee74e8250949406c7e906b50ae8"
+          },
+          "critical_files_sha256": {
+            ".dockerignore": "af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",
+            ".github/workflows/decision-validation.yml": "4b490e6ee629afce4df22eb3d1aa11de55d17d0bcd88a73e4a371850043422e4",
+            ".github/workflows/development-image.yml": "ece82019d02c21505cf5742f5e44742326b76a172ce4f18847a0fbb611a43c2d",
+            ".github/workflows/identity-experience.yml": "7a5968888eb338cf8c804c211171bee63e33d0444417c6aa338b378ef98ea2a1",
+            ".github/workflows/publish-brand-kit.yml": "e8b0e26e404c36adbad67f7b233ee142651fb3a07061ce6a163a61f0a0af7903",
+            ".github/workflows/reference-renderer.yml": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+            ".github/workflows/refine-guidance-docs-v2.yml": "33387e49b354c4372d0076d81aa9275d229e2f8cb08dc2e52bfb97a47e6359b9",
+            ".github/workflows/refine-guidance-docs.yml": "7243020e1f264593d5765b8f6d84bec100c686ef89660e0a79a02f046dbcc4dd",
+            ".github/workflows/release.yml": "20bf17098be9b1647d15a4cfde48e0f6eda2991e1ffc9968f1333926cd16398b",
+            ".github/workflows/validate.yml": "1067364d5f3a6518ce1544bce0536342fe4108f0cfc5ba6c07ae4fb0301a04d3",
+            "dev/browser/Dockerfile": "509037057211eedd9e9df387149d1ac51b4e2e8b0e98c8c02e60d6df2bfb9f99",
+            "dev/browser/install-fonts.mjs": "6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa",
+            "dev/browser/profile.json": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+            "docs/evidence/identity-browser-fonts-2026-10-20.json": "191f09a07796a9d14e71b249b9a6837900ceae6b391a32d590f51b1856f5c711",
+            "docs/evidence/identity-browser-registry-2026-10-20.json": "9f1e06793ef3641db2986f2efe0c0f0fe5bebffe4008e155619fb8adb6fe0ec9",
+            "renderer/package.json": "d2c2260f2a4cdd9a06f2effbd1c1bd2f5493a3116ae95de0e92fcb4b7ed8481e",
+            "renderer/playwright.config.js": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "renderer/scripts/qualify-browser.mjs": "e8e7743cbe10c9f41e5ec76b0eb352791b63d8e5cd83e4cc2a3500db339e2db5",
+            "renderer/tests/e2e/__snapshots__/brand-kit-page.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "renderer/tests/e2e/renderer.spec.js": "5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e",
+            "scripts/qualify_browser.py": "2cefd63a6d02c993fb83b716d7590415c3905d2e3645ec03c2b36cc02f5e1a4b"
+          },
+          "git_revision": "2a15468bc4b0da8272316fb1bd7fad5ecd0b5056",
+          "git_worktree_clean": true
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "workflow": "Validate reference renderer",
+      "run_id": 39431712372,
+      "job_id": 118658145375,
+      "run_url": "https://github.com/egohygiene/identity/actions/runs/39431712372",
+      "host": {
+        "approved_baseline_after_sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+        "artifact_files_sha256": {
+          "browser-Zv1bKy/negative/artifacts/.last-run.json": "f1e1860b159e970da86c936a625e84e254ea2147d8f2b8410572804abe955271",
+          "browser-Zv1bKy/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png": "adba2dcc7f173f7a6336de43e7278b2c35b4681b584de459407683072aff7b5a",
+          "browser-Zv1bKy/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png": "5940286f9ecaeb144bd86b00b638950e7e748118d8bd6400f8f4994d2820b4f5",
+          "browser-Zv1bKy/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+          "browser-Zv1bKy/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md": "8dd4da89c8c8682e2b2989564179f3f525acd6ee02c43340e8fe400153e52d58",
+          "browser-Zv1bKy/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip": "ae27a2c8dd7921d2d5874fb2667a89eecd86f8b4be752dc2f48d78b58c5ff67b",
+          "browser-Zv1bKy/negative/command.log": "9e118079a7a2773cd7dde51134a97ab6849ac13f86d56006396a59a177f91119",
+          "browser-Zv1bKy/negative/report.json": "67b1ac9d923303d135f4e58e33f2bc24927e5552f8f50f9fe77283ee835c73dc",
+          "browser-Zv1bKy/positive/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "browser-Zv1bKy/positive/command.log": "252a1147cedb98897869535a31e1c8ff8c003607badc0711f8c19dcb8de17bf1",
+          "browser-Zv1bKy/positive/report.json": "20294bfdb074354f5452a803a1568d47283801e441e943c605e863808638c042",
+          "browser-Zv1bKy/preview.log": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88",
+          "browser-Zv1bKy/restored/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "browser-Zv1bKy/restored/command.log": "723101fa03dbe4804570b2cdb24c410468cf6b385c2e0f579edf1a0e4f03ad1c",
+          "browser-Zv1bKy/restored/report.json": "891df8c1613fd27a05ff3f3c85786e14c70c3c5a1d6ffa209089df0d2e549b04",
+          "qualification.json": "6fd1d7cc005b857bb7c39635b24f42779fd9b7415eae21844b2d22fa3cf4bcd9"
+        },
+        "artifact_inventory_excludes_host_receipt": true,
+        "base_image": {
+          "architecture": "amd64",
+          "cmd": [
+            "/bin/bash"
+          ],
+          "entrypoint": null,
+          "id": "sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb",
+          "os": "linux",
+          "repo_digests": [
+            "mcr.microsoft.com/playwright@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+          ],
+          "user": ""
+        },
+        "built_image": {
+          "architecture": "amd64",
+          "cmd": [
+            "/bin/bash"
+          ],
+          "entrypoint": null,
+          "id": "sha256:947a8ecc893d3b2247d9c8fbb8dbf5681fea738cc267f07a46891b99dcd26b53",
+          "os": "linux",
+          "repo_digests": [],
+          "user": ""
+        },
+        "commands": [
+          {
+            "command": [
+              "docker",
+              "version",
+              "--format",
+              "{{json .Server}}"
+            ],
+            "exit_code": 0,
+            "output_sha256": "79b585fa9dc788d645c7c11506cd0e2b0c3dc62b50bc876d172662dceb7f619d"
+          },
+          {
+            "command": [
+              "docker",
+              "pull",
+              "--platform",
+              "linux/amd64",
+              "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+            ],
+            "exit_code": 0,
+            "output_sha256": "990389ff3599cf916791529cd52cd1e24cd18b4a38c694bc968b76442a2796a9"
+          },
+          {
+            "command": [
+              "docker",
+              "image",
+              "inspect",
+              "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+            ],
+            "exit_code": 0,
+            "output_sha256": "d691513bbf1a44d3464251dd6d32bc048f057fe5dadd87b8bb38ef21d0cb20ab"
+          },
+          {
+            "command": [
+              "docker",
+              "build",
+              "--pull",
+              "--platform",
+              "linux/amd64",
+              "--file",
+              "dev/browser/Dockerfile",
+              "--build-arg",
+              "BROWSER_IMAGE=mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+              "--tag",
+              "identity-browser-qualification:6fce2b24f849",
+              "."
+            ],
+            "exit_code": 0,
+            "output_sha256": "596cb28193f55551c29f3686e1728d0e8d4af71676223e4b0de25473584b2a0e"
+          },
+          {
+            "command": [
+              "docker",
+              "image",
+              "inspect",
+              "identity-browser-qualification:6fce2b24f849"
+            ],
+            "exit_code": 0,
+            "output_sha256": "ed9f7a76d0ea48ef9dd984f2f5d5d226d8e2018469abd665ed39e6d3bf7d6e52"
+          },
+          {
+            "command": [
+              "docker",
+              "run",
+              "--rm",
+              "--init",
+              "--platform",
+              "linux/amd64",
+              "--network",
+              "none",
+              "--shm-size",
+              "1gb",
+              "--env",
+              "CI=1",
+              "--env",
+              "TZ=UTC",
+              "--env",
+              "LANG=C.UTF-8",
+              "--env",
+              "LC_ALL=C.UTF-8",
+              "--mount",
+              "type=bind,source=<output-directory>,target=/evidence",
+              "identity-browser-qualification:6fce2b24f849",
+              "node",
+              "scripts/qualify-browser.mjs",
+              "--output-directory",
+              "/evidence"
+            ],
+            "exit_code": 0,
+            "output_sha256": "649f433299b0dc0faececaaec762e36b08a69e5ec1aead3f75fde30385e8f167"
+          }
+        ],
+        "docker_server": {
+          "Arch": "amd64",
+          "KernelVersion": "7.0.0-1017-azure",
+          "Os": "linux",
+          "Version": "28.0.4"
+        },
+        "engine_platform_relation": "native-amd64",
+        "execution_context": "hosted-local-entrypoint-replay",
+        "kind": "dated browser-environment qualification host receipt",
+        "limits": [
+          "The invocation mode labels a caller; both use identical image/rendering settings.",
+          "A hosted local-entrypoint replay is not an actual Docker run in an unavailable developer workspace.",
+          "Only the recorded image/platform/fonts/settings and unchanged approved baseline are qualified.",
+          "No baseline regeneration, tolerance relaxation, release, deployment or human approval occurs."
+        ],
+        "mode": "local",
+        "observed_at": "2026-10-20T13:37:03.723155+00:00",
+        "own_image_cleanup_exit_code": 0,
+        "platform": "linux/amd64",
+        "profile": {
+          "baseline": {
+            "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+            "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+            "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+          },
+          "chromium": {
+            "colorProfile": "srgb",
+            "revision": "1234",
+            "version": "151.0.7922.34"
+          },
+          "fontFiles": [
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+              "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+              "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+              "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+              "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+              "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+              "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+              "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+            }
+          ],
+          "fontPackages": [
+            {
+              "bytes": 502232,
+              "name": "fonts-dejavu-mono",
+              "sha256": "8a599d6553307db7ecb795d2f0e5a301e03234afc75c7358b0ba43466454c89a",
+              "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-mono_2.37-8_all.deb",
+              "version": "2.37-8"
+            },
+            {
+              "bytes": 835172,
+              "name": "fonts-dejavu-core",
+              "sha256": "40049660c194f3b8a2541fc7369efebb10e9f94bdac836a2f38fafedd10fa73a",
+              "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-8_all.deb",
+              "version": "2.37-8"
+            }
+          ],
+          "fontSourceReceipt": "docs/evidence/identity-browser-fonts-2026-10-20.json",
+          "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "kind": "qualified browser environment",
+          "packageManager": "pnpm@11.21.0",
+          "platform": "linux/amd64",
+          "playwright": "1.62.1",
+          "registryReceipt": "docs/evidence/identity-browser-registry-2026-10-20.json",
+          "settings": {
+            "colorScheme": "light",
+            "deviceScaleFactor": 1,
+            "locale": "en-US",
+            "reducedMotion": "no-preference",
+            "timezoneId": "UTC",
+            "viewport": {
+              "height": 1000,
+              "width": 1440
+            }
+          }
+        },
+        "qualification": {
+          "baseline": {
+            "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+            "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+            "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "unchanged": true
+          },
+          "browser": {
+            "commandLine": [
+              "/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+              "--disable-field-trial-config",
+              "--disable-background-networking",
+              "--disable-background-timer-throttling",
+              "--disable-backgrounding-occluded-windows",
+              "--disable-back-forward-cache",
+              "--disable-breakpad",
+              "--disable-client-side-phishing-detection",
+              "--disable-component-extensions-with-background-pages",
+              "--disable-component-update",
+              "--no-default-browser-check",
+              "--disable-default-apps",
+              "--disable-dev-shm-usage",
+              "--disable-edgeupdater",
+              "--disable-extensions",
+              "--disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion",
+              "--enable-features=CDPScreenshotNewSurface",
+              "--allow-pre-commit-input",
+              "--disable-hang-monitor",
+              "--disable-ipc-flooding-protection",
+              "--disable-popup-blocking",
+              "--disable-prompt-on-repost",
+              "--disable-renderer-backgrounding",
+              "--disable-updater-scheduler",
+              "--force-color-profile=srgb",
+              "--metrics-recording-only",
+              "--no-first-run",
+              "--password-store=basic",
+              "--use-mock-keychain",
+              "--no-service-autorun",
+              "--export-tagged-pdf",
+              "--disable-search-engine-choice-screen",
+              "--unsafely-disable-devtools-self-xss-warnings",
+              "--edge-skip-compat-layer-relaunch",
+              "--disable-infobars",
+              "--disable-search-engine-choice-screen",
+              "--disable-sync",
+              "--enable-unsafe-swiftshader",
+              "--headless",
+              "--hide-scrollbars",
+              "--mute-audio",
+              "--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4",
+              "--no-sandbox",
+              "--user-data-dir=<disposable-browser-profile>",
+              "--remote-debugging-pipe",
+              "--no-startup-window"
+            ],
+            "executable": "/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+            "executableSha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+            "process": {
+              "parentPid": 7,
+              "pid": 531,
+              "source": "Linux /proc direct-child observation"
+            },
+            "renderedFonts": [
+              {
+                "declaredFamily": "Inter, system-ui, sans-serif",
+                "fonts": [],
+                "selector": "body"
+              },
+              {
+                "declaredFamily": "Inter, system-ui, sans-serif",
+                "fonts": [
+                  {
+                    "familyName": "DejaVu Sans",
+                    "glyphCount": 14,
+                    "isCustomFont": false,
+                    "postScriptName": "DejaVuSans-Bold"
+                  }
+                ],
+                "selector": "h1"
+              },
+              {
+                "declaredFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", monospace",
+                "fonts": [
+                  {
+                    "familyName": "Liberation Mono",
+                    "glyphCount": 7,
+                    "isCustomFont": false,
+                    "postScriptName": "LiberationMono"
+                  }
+                ],
+                "selector": ".token-value"
+              },
+              {
+                "declaredFamily": "ui-monospace, monospace",
+                "fonts": [
+                  {
+                    "familyName": "DejaVu Sans Mono",
+                    "glyphCount": 76,
+                    "isCustomFont": false,
+                    "postScriptName": "DejaVuSansMono"
+                  }
+                ],
+                "selector": ".studio textarea"
+              }
+            ],
+            "settings": {
+              "colorDepth": 24,
+              "colorScheme": "light",
+              "deviceScaleFactor": 1,
+              "locale": "en-US",
+              "reducedMotion": "no-preference",
+              "timezoneId": "UTC",
+              "viewport": {
+                "height": 1000,
+                "width": 1440
+              }
+            },
+            "version": "151.0.7922.34"
+          },
+          "commands": [
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "--version"
+              ],
+              "exitCode": 0,
+              "outputSha256": "4d24606a920d1175b8017de83c5a19847bd8cfe47aeb71cf43efaa75c1e5a2ec",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-cache",
+                "--version"
+              ],
+              "exitCode": 0,
+              "outputSha256": "da1a137c08d945a75c0dd6aeacf2ff1a716f8bec9e351c0400e7ceeb15b161e7",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-list",
+                "--format",
+                "%{file}\n"
+              ],
+              "exitCode": 0,
+              "outputSha256": "340b9fb2d1ba5f3126efbd49fb40ce6db50ce1527a58bbb460038dedc8155e18",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-conflist"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a376ac931a8a2f4e56b03bfea67e60fa886ef5c10435d4651b6771e1c4d16055",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "Inter"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "system-ui"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "sans-serif"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "monospace"
+              ],
+              "exitCode": 0,
+              "outputSha256": "9a54d28f0592c054fe5e2e24370498d773eb8c4e0596d18238b56a36e122dd7f",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "Liberation Mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "d4e93680bd5485d70d2920b716cfb7eb4f5f47f17f6ed987f0bdb80bf580ccde",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${Version}",
+                "fonts-dejavu-mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "379912dee34feeb32bed164829c26b786dd079e1c3df7c7fc6fb7e29521cec65",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${db:Status-Status}",
+                "fonts-dejavu-mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a51a6c19a1ffc7416827e89adf20749d23ad42452c396cf7e627409f2896922c",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${Version}",
+                "fonts-dejavu-core"
+              ],
+              "exitCode": 0,
+              "outputSha256": "379912dee34feeb32bed164829c26b786dd079e1c3df7c7fc6fb7e29521cec65",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${db:Status-Status}",
+                "fonts-dejavu-core"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a51a6c19a1ffc7416827e89adf20749d23ad42452c396cf7e627409f2896922c",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-Zv1bKy/positive/artifacts"
+              ],
+              "exitCode": 0,
+              "outputSha256": "252a1147cedb98897869535a31e1c8ff8c003607badc0711f8c19dcb8de17bf1",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-Zv1bKy/negative/artifacts",
+                "--grep",
+                "matches the reviewed desktop viewport baseline$"
+              ],
+              "exitCode": 1,
+              "outputSha256": "9e118079a7a2773cd7dde51134a97ab6849ac13f86d56006396a59a177f91119",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-Zv1bKy/restored/artifacts",
+                "--grep",
+                "matches the reviewed desktop viewport baseline$"
+              ],
+              "exitCode": 0,
+              "outputSha256": "723101fa03dbe4804570b2cdb24c410468cf6b385c2e0f579edf1a0e4f03ad1c",
+              "signal": null
+            }
+          ],
+          "fonts": {
+            "activeConfiguration": "+ /etc/fonts/conf.d/10-hinting-slight.conf: Set hintslight to hintstyle\n+ /etc/fonts/conf.d/10-scale-bitmap-fonts.conf: Bitmap scaling\n+ /etc/fonts/conf.d/10-sub-pixel-rgb.conf: Enable sub-pixel rendering with the RGB stripes layout\n+ /etc/fonts/conf.d/10-yes-antialias.conf: Enable antialiasing\n+ /etc/fonts/conf.d/11-lcdfilter-default.conf: Use lcddefault as default for LCD filter\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans-mono.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-serif.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-vera.conf: Disable hinting for Bitstream Vera fonts when the size is less than 8ppem\n+ /etc/fonts/conf.d/25-wqy-zenhei.conf: No description\n+ /etc/fonts/conf.d/30-metric-aliases.conf: Set substitutions for similar/metric-compatible families\n+ /etc/fonts/conf.d/40-nonlatin.conf: Set substitutions for non-Latin fonts\n+ /etc/fonts/conf.d/45-generic.conf: Set substitutions for emoji/math fonts\n+ /etc/fonts/conf.d/45-latin.conf: Set substitutions for Latin fonts\n+ /etc/fonts/conf.d/48-spacing.conf: Add mono to the family when spacing is 100\n+ /etc/fonts/conf.d/49-sansserif.conf: Add sans-serif to the family when no generic name\n+ /etc/fonts/conf.d/50-user.conf: Load per-user customization files\n+ /etc/fonts/conf.d/51-local.conf: Load local customization file\n+ /etc/fonts/conf.d/57-dejavu-sans-mono.conf: No description\n+ /etc/fonts/conf.d/57-dejavu-sans.conf: No description\n+ /etc/fonts/conf.d/57-dejavu-serif.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-sans-mono.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-sans.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-serif.conf: No description\n+ /etc/fonts/conf.d/60-generic.conf: Set preferable fonts for emoji/math fonts\n+ /etc/fonts/conf.d/60-latin.conf: Set preferable fonts for Latin\n+ /etc/fonts/conf.d/64-wqy-zenhei.conf: No description\n+ /etc/fonts/conf.d/65-fonts-ipafont-gothic.conf: No description\n+ /etc/fonts/conf.d/65-fonts-persian.conf: No description\n+ /etc/fonts/conf.d/65-nonlatin.conf: Set preferable fonts for non-Latin\n+ /etc/fonts/conf.d/69-unifont.conf: No description\n+ /etc/fonts/conf.d/70-no-bitmaps-except-emoji.conf: Reject bitmap fonts except bitmap emoji fonts\n+ /etc/fonts/conf.d/80-delicious.conf: No description\n+ /etc/fonts/conf.d/90-synthetic.conf: No description\n+ /etc/fonts/fonts.conf: Default configuration file\n- /usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf: Re-define fonts dirs sample\n- /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf: Enable autohinter if font doesn't have any hinting\n- /usr/share/fontconfig/conf.avail/10-autohint.conf: Enable autohinter\n- /usr/share/fontconfig/conf.avail/10-hinting-full.conf: Set hintfull to hintstyle\n- /usr/share/fontconfig/conf.avail/10-hinting-medium.conf: Set hintmedium to hintstyle\n- /usr/share/fontconfig/conf.avail/10-hinting-none.conf: Set hintnone to hintstyle\n- /usr/share/fontconfig/conf.avail/10-no-antialias.conf: Disable antialiasing\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf: Enable sub-pixel rendering with the BGR stripes layout\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf: Disable sub-pixel rendering\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf: Enable sub-pixel rendering with the vertical BGR stripes layout\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf: Enable sub-pixel rendering with the vertical RGB stripes layout\n- /usr/share/fontconfig/conf.avail/10-unhinted.conf: Disable hinting\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf: Use lcdlegacy as default for LCD filter\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf: Use lcdlight as default for LCD filter\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-none.conf: Use lcdnone as default for LCD filter\n- /usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf: Disable hinting for CJK fonts\n- /usr/share/fontconfig/conf.avail/35-lang-normalize.conf: No description\n- /usr/share/fontconfig/conf.avail/53-monospace-lcd-filter.conf: No description\n- /usr/share/fontconfig/conf.avail/65-khmer.conf: No description\n- /usr/share/fontconfig/conf.avail/70-force-bitmaps.conf: Accept bitmap fonts\n- /usr/share/fontconfig/conf.avail/70-no-bitmaps-and-emoji.conf: Reject bitmap fonts, including bitmap emoji fonts\n- /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf: Reject bitmap fonts except bitmap emoji fonts (deprecated; use 70-no-bitmaps-except-emoji.conf)\n- /usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf: No description",
+            "configuration": [
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans-mono.conf",
+                "sha256": "0a6b0f1c1f5d1c06a811b517a3d2690700bba8e961cd55dd2c7648cde3605a21"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans.conf",
+                "sha256": "144619057c0a040de247c74cf09f230d737b9c1c534f3ba8804fdd3ddeded8b0"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-serif.conf",
+                "sha256": "977c24eb43f10d21263bbdb624649e5edf63147bd7bb4f84db97ce7d53bb9054"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-sans-mono.conf",
+                "sha256": "3e90c9c36beef46f10d1529251f8683b9c4ac900695adbb4a23a4b6036f938a5"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-sans.conf",
+                "sha256": "0d9c177b6a85daa9957ed6750d4eb26122604da18d340e7ba31e6f4d24f963ed"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-serif.conf",
+                "sha256": "68777b1705ec7a05a86430def4be093668e84e305cc7e11291df52403a7318cc"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/25-wqy-zenhei.conf",
+                "sha256": "101497940c4e0254172038f23cbe488740081f6c6703d8243c3cc5218b5f6e9a"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-sans-mono.conf",
+                "sha256": "1f2ead86f8203d809abfc9d88d92b04316edd67b6291795ea74ea8a0c3c2e04d"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-sans.conf",
+                "sha256": "f6285e2d336f93086acfa2ac7895ef75ef5ff34f833ba5a63c09fb2841aedc27"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-serif.conf",
+                "sha256": "7c596f7e202090ded38fded904c4a17d5a189b6c9cc914a2e88554116f6474ca"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-sans-mono.conf",
+                "sha256": "807e5222c6d11a72ad527ebc088f42daf2a807e7718c8f7ff227cbfecafd3d70"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-sans.conf",
+                "sha256": "ecde2093f005c73d7da21cdd7b80c791910050609db36cb5eea84a4ba8da5cef"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-serif.conf",
+                "sha256": "e685632c3edbb6868a7ca5275e7c71f25486a8cfd16113a478194a5631205619"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/63-wqy-zenhei-sharp.conf",
+                "sha256": "7dacd60b359d88684c9642710da5166d8298a21814784bd15583a3fb0430f14a"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/64-wqy-zenhei.conf",
+                "sha256": "7c187a99ad7f4b5ee80930c60399d3952e41ea7bbee8d9322ab685596d351a94"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/65-fonts-ipafont-gothic.conf",
+                "sha256": "95b425396cd7afefc03f668229b425a703d0c57b078a00111b7a289bb68513cf"
+              },
+              {
+                "path": "/etc/fonts/conf.d/README",
+                "sha256": "fdc29a3ebd8816eb07ed04c2cbe151076e95a7b0b2a0ec8fe94e5c8a67931d3c"
+              },
+              {
+                "path": "/etc/fonts/fonts.conf",
+                "sha256": "93a23ba073996edb8b42d6c89ebc2ec5fd2101ce82cb65ba0db358dabf55ca22"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf",
+                "sha256": "7dae5045441ce7ab4ce9ee0ccbee84e2ae90daee9cfd2ac64cd887ee85c528df"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf",
+                "sha256": "f04d1737c2a85925a6294f4b966597d03a30c9e4c551c7a8c270eaad514b2689"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-autohint.conf",
+                "sha256": "9ae4308a18941969ea42f5881c202be052fe12da3fb1fb4fc4b940642ec74db0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-full.conf",
+                "sha256": "aa01699d6a43a1be2996233e67daf1570b9000bd1a59763463d3a12b852cdc3a"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-medium.conf",
+                "sha256": "f0eaec3db6879f3460bd0e1ef3e09dd965168ca460a79d098eb0648c6740095d"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-none.conf",
+                "sha256": "5970fa53c69874ee51349300ef3412592e46e7f133c06074befcf6ab2a3ef6e2"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-slight.conf",
+                "sha256": "d138eca2bac3f78d45ff7cfb649ad792caa4a6e61f73cea7cf0ea54b091f1ef4"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-no-antialias.conf",
+                "sha256": "75412c70f3a78ad090c79a9dc63cce6aae41b2cfc2f67f4a1a1b533526216d2e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-scale-bitmap-fonts.conf",
+                "sha256": "df8e99abb6f82384c61978906a45a95794940545da95790d87f01d9391e0894b"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf",
+                "sha256": "719006f7887a958da8efe5ad010a2cde689313074607ae20f0be4cd9e8bfffad"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf",
+                "sha256": "0f00b5cf0ce07062ec65b9b340aa888f6c5fbc215aafebd26781be2d5a13ff6a"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf",
+                "sha256": "e4cfc04f5fc5093d2ba20c40f8709c9dfc099997313d0f96bc8256597a15d057"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf",
+                "sha256": "15178eb45f3206433bace02053214d5750b9d74a4ece727f48c7fbc8f8c9adb3"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf",
+                "sha256": "049680ed134d34c560be493a47301bf6542050e7e89c27d3df25145b41f8133e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-unhinted.conf",
+                "sha256": "dca27a149268da3aeaa3416dc236fd1d76e2f997b1ba91e1292297e78c9281d4"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-yes-antialias.conf",
+                "sha256": "e6d82a642d1b37f7d24dc37f938b999f00ff7aa4303b2602d04164d53f221005"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf",
+                "sha256": "76aec9d8dac48faabe1bbde9e887cfb09fa45f30be5f8826e945a394a0097e48"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf",
+                "sha256": "0768fd57ae0a50d54f2f2e5efae98437ae8623573b652f246ac22e574d5f38b0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf",
+                "sha256": "0708443f97406b100a5ccfa67ea8a1c1473ff60ff03848e536bc62e2b2ddcea3"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-none.conf",
+                "sha256": "8c2b7c2db7bf8e54fb4f449e726ad97d824195085f97a5c19d75914ad7b4b074"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/20-unhint-small-vera.conf",
+                "sha256": "278732c68c16177f2aa3c7e4ea318b9f720aee13a433c32eb15ba626806c609d"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf",
+                "sha256": "8b8c05318fb3f4893a9522e7989dd9280d14233adbc21be867bd173add4a0d5c"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/30-metric-aliases.conf",
+                "sha256": "3baf25c82e1a14c606d45c212296852be06ae9795d60e84aab573226151450a2"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/35-lang-normalize.conf",
+                "sha256": "fb06f0e9206cc711a68719940e670a3756ae6656ea9b73197f3bbc0c921ee433"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/40-nonlatin.conf",
+                "sha256": "9c56aeed6490db1d29602d7f8e028742b5e7a0268eaaa60de2fde582c6403715"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/45-generic.conf",
+                "sha256": "24de9f68189d544bb4cc084d9bd8f3a59d8b988a9dc44b11e9877d5add5fc948"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/45-latin.conf",
+                "sha256": "807638284032d8d8f6ed8b014a0edae79a4d4f3c4e70317fdb0bfa8edd66779e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/48-spacing.conf",
+                "sha256": "99d839cd8aa28854e8f54f26e7200b6e57951f39f56791a0ed473662488bcef6"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/49-sansserif.conf",
+                "sha256": "7849a11ce5243e8bb3d06bcad558737a8682e5122e73c8e427f4c011a2054818"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/50-user.conf",
+                "sha256": "449137ccce57d60bca178d57519ba54e1942d757ad171f3a88cd78df2161c970"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/51-local.conf",
+                "sha256": "dca9d917e1f66f73bfa495943b4d1eaab2d93810a51bc8e600cf4d4e9df03e67"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/53-monospace-lcd-filter.conf",
+                "sha256": "c04ec3f2b651d31f3968fd725787d10c8bc2eab02203979b6b961477de3fdbd5"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/60-generic.conf",
+                "sha256": "195bc8605dd23289d42c10d79cc13a5ce4a4b3cf965df5b30ecc0b7149bb951f"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/60-latin.conf",
+                "sha256": "2de7c687e03b1fedf9fd016aa14ed8088f52578896a73f06158dda8acd264f09"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-fonts-persian.conf",
+                "sha256": "c675fab143a3638346874798be45f51f6878ebec591b4362d83cfffb828ec4ca"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-khmer.conf",
+                "sha256": "0bc1c077ef01cb409f51f95218b97b144278c0568b5de03683047b2a1963c590"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-nonlatin.conf",
+                "sha256": "e309e38d7fb47cc3f639f4313b19e72c9be4d1f2db92d7d892ea65bfdd0cbd30"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/69-unifont.conf",
+                "sha256": "fa97c0cf5f79d70e2dc3dc48155d4c9220cd7c6a8bc95b89c4ebcc517f97479e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-force-bitmaps.conf",
+                "sha256": "46fb68f9ec27605f880379b753c1afcc1cacfc75021e3a288f4cf62c945e394f"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps-and-emoji.conf",
+                "sha256": "313260028904353a026faa457bacea58df88ceff7dc97b269e526130dc797a7e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps-except-emoji.conf",
+                "sha256": "bb5df65896bf3011b2f2935b63ab12db1ecf078674ff73a533123445f122a92b"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps.conf",
+                "sha256": "5994ce306887448ec29b2d6624696bb2dd7e333dd51cc5818f9ebe72abc077da"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf",
+                "sha256": "87228113c2e8ffbf5565ffaa80d5e5fde33b14f0725accf69e1e31c80df398c0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/80-delicious.conf",
+                "sha256": "34f27b7fe9cd83b2b6d46f16ef9c477412f2d7ef63634f86b9b38b79bc4f81ad"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/90-synthetic.conf",
+                "sha256": "cdd0aac7840c664a7127b64db66bdfe8dc22be3774d10bc22f4a41c98de5d85e"
+              }
+            ],
+            "files": [
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0419bt_.pfb",
+                "sha256": "0e15626ca60d95e49ac15352f5c7f1837eb6dc9b6a353357012ce54a5b37015c"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0582bt_.pfb",
+                "sha256": "9ecc1d370c5ee96c8b58d144d92a9fbeb416e2a33746f4ef86ed4e7490389dc6"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0583bt_.pfb",
+                "sha256": "708bbc1a259fbdf4f8c0fde683dd604f1e0677a72078567d70328f9a428248b7"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0611bt_.pfb",
+                "sha256": "69dd50c4078f8b7c3d50dedc85dec8e4316c0b4f86df1737c3af9b9b8aa51eef"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0632bt_.pfb",
+                "sha256": "c50fd6e717599f306b8b3261d309c56849f4366771c1983c875eabf46bc2b956"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0633bt_.pfb",
+                "sha256": "3e0c9ed37732c1ebcbed4e582fd70f5673ca415161396276097eca1cda87104b"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0648bt_.pfb",
+                "sha256": "8ac5bad34cad9b59b087eebfaf9087c16901b0761f7f9cc538f2f65567fc3959"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0649bt_.pfb",
+                "sha256": "0c3e189c6a52401c62c9fcde32f453a4dc95836d8c6e03fe8908100d854f3a83"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf",
+                "sha256": "503af4a8b84d1079b8e2e358dc7f7a7fb8cb7a1f212f35eaef6782dbfc75a55e"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/ipafont-gothic/ipagp.ttf",
+                "sha256": "a63f6153841e56ec9df1b31a54d98d3f41d8aaa1c3d8df30a33502296f5b8068"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-Bold.otf",
+                "sha256": "16f3cdd73f47abf8bde2aafd9569b36388f6ae388e98088a77c3312fbaa98b80"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-BoldOblique.otf",
+                "sha256": "d7e3ba82a6605b3e6f126d4a77b78cbf0694f17a5a79fb8e9709936234b04700"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-Oblique.otf",
+                "sha256": "133e6af2dcdfea629bc734f2bbbbd7d66cff2040ffb0b197571740c23d87e3c6"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma.otf",
+                "sha256": "e14126fe603116a6da8fb54822e8521589983d17d78cae489e98faed4b2f4cd2"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont.otf",
+                "sha256": "2498b80f9664fef91e6988d7e082146a2082a7e7bb4a2deb2fbf9a365aa2970c"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_csur.otf",
+                "sha256": "065b75985f258df8573371bd9bda0a37a39ac85a38b0062a37f15654c2eb7341"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_jp.otf",
+                "sha256": "218eb241082aa4f47399f7c2058e25abffa8d081b312542bc91740681f006597"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_jp_sample.otf",
+                "sha256": "80668b601ceffe8030eef4215e9148b9ddc5c3802e3dba86a306c76fc1f7f9d4"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_sample.otf",
+                "sha256": "5b73116f46a3fc4726e4b2f0a51f9c163526444d55b8db88c4ab8ec9453fcb20"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_upper.otf",
+                "sha256": "f9a49517cb5a06e02692b403bc21f96ea767128db52f089d31261a8968d3ace8"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_upper_sample.otf",
+                "sha256": "68dfc1d34d533c8dada07a8dd84294635afdc4790904fa956ea735ca1d20c127"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+                "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+                "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+                "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+                "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+                "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+                "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMono.ttf",
+                "sha256": "9691040d4d89266db211cd9da1094cf1991beaaf5e01cc752bc1dab84d483534"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf",
+                "sha256": "7a5ded6ffe5ba84c7c478de521ad0653efae4d2b92b251216bc390c6022e91ac"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoBoldOblique.ttf",
+                "sha256": "04d540f1fe223d24a391f1c50f98eab6529b2a8fa670d628fad7e8443224967b"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoOblique.ttf",
+                "sha256": "c350255406bf9dd314c8261d49118b2d44c38d7c2555884eba43dffea7bd7313"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+                "sha256": "350badd6ab6a58e7fd7a0ea2ae0c10174941a08e1cd06b3c6010e10b3d5ae319"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+                "sha256": "e0a07c1e9495262c430fde74e80daadd0b2a353eb444a47b265c62f5a5836af5"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansBoldOblique.ttf",
+                "sha256": "f26d93f22f70bd97270a6b5506497a8c9e84c64399343cf1c08a50e4016cf967"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansOblique.ttf",
+                "sha256": "31f2e994c6bb0f6c8a8f1d27ae25b4b754ef072154220bb4db2a69e8e3d1193f"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
+                "sha256": "c57bf5de095af4e070c2acb5bce634316409ed4203b5098f4fdadb691dc7b3d2"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf",
+                "sha256": "f078f2ac5d38addc71e2c123d86584341360b5bf27bc1cf238574ebe4f5a0f4d"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifBoldItalic.ttf",
+                "sha256": "c59455ea29607bbf62b0cfdffdc118ade887acd86a68c2c9873fb1187b021e58"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifItalic.ttf",
+                "sha256": "775b2ed7b9026f288b60f2479e07ee8e3147daa89d75848f11eb21faab662070"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
+                "sha256": "626655e94dd82f3f42549daf995c921b0915fa8ab1f4b839559e8892ea41d240"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-BoldItalic.ttf",
+                "sha256": "15eb161953e3ecc7fc05a3fec8a59e0f4e0a54a4e375736adf8e98d65981f813"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Italic.ttf",
+                "sha256": "a71b2c25c89da05cf0e7c4dbba8d473fdead0b181ae56165217747d2c1f39215"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+                "sha256": "395fa5ab8d40c8eba390ced528744ea75a7f69aabf3e68b6f925ca0e39a27370"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+                "sha256": "3973aa5054fb467dd5627245d3dc82e37bf16fe075756156a570455871351582"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf",
+                "sha256": "c80fa7f2ffa0e01d4d8dcd6a6d1e43eda665222d1b4db597dde1174c456006cf"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf",
+                "sha256": "830c5fa600505fb4c1a271b4271c53c44bae43f492b2a240d0e98a3a7a380121"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+                "sha256": "4659bc0c58c5028dd488ec928d41d9265db43d9b669fc14ca8b0832daca7b144"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
+                "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-BoldItalic.ttf",
+                "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf",
+                "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
+                "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf",
+                "sha256": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+                "sha256": "79c18ebe7b811951e8311bad7103ebeae8c337ed9988ea69e8a78a66cfe029b9"
+              }
+            ],
+            "packages": [
+              {
+                "name": "fonts-dejavu-mono",
+                "version": "2.37-8"
+              },
+              {
+                "name": "fonts-dejavu-core",
+                "version": "2.37-8"
+              }
+            ],
+            "resolutions": {
+              "Inter": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "Liberation Mono": "Liberation Mono\t/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+              "monospace": "DejaVu Sans Mono\t/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+              "sans-serif": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "system-ui": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+            }
+          },
+          "kind": "dated browser environment qualification receipt",
+          "limits": [
+            "Only the recorded Linux/amd64 image and immutable source inputs are qualified.",
+            "The deliberately changed built CSS is disposable and restored; no baseline regeneration or tolerance relaxation occurs.",
+            "Automated browser evidence does not supply human creative approval or complete accessibility conformance."
+          ],
+          "negative": {
+            "baselineUnchanged": true,
+            "diffArtifacts": [
+              {
+                "path": "browser-Zv1bKy/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+                "sha256": "5940286f9ecaeb144bd86b00b638950e7e748118d8bd6400f8f4994d2820b4f5"
+              }
+            ],
+            "exitCode": 1,
+            "expectedFailure": "screenshot-comparison",
+            "failed": 1,
+            "passed": 0,
+            "report": "browser-Zv1bKy/negative/report.json",
+            "skipped": 0
+          },
+          "observedAt": "2026-10-20T13:37:04.149Z",
+          "platform": "linux/amd64",
+          "positive": {
+            "diffArtifacts": [],
+            "exitCode": 0,
+            "failed": 0,
+            "passed": 6,
+            "report": "browser-Zv1bKy/positive/report.json",
+            "skipped": 0
+          },
+          "profileSha256": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+          "restored": {
+            "diffArtifacts": [],
+            "exitCode": 0,
+            "failed": 0,
+            "passed": 1,
+            "report": "browser-Zv1bKy/restored/report.json",
+            "skipped": 0
+          },
+          "runtimes": {
+            "fontconfig": "fontconfig version 2.15.0",
+            "node": "v24.18.1",
+            "osRelease": "PRETTY_NAME=\"Ubuntu 24.04.4 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.4 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+            "playwright": "1.62.1",
+            "pnpm": "11.21.0"
+          },
+          "settings": {
+            "colorScheme": "light",
+            "deviceScaleFactor": 1,
+            "locale": "en-US",
+            "reducedMotion": "no-preference",
+            "timezoneId": "UTC",
+            "viewport": {
+              "height": 1000,
+              "width": 1440
+            }
+          },
+          "source": {
+            "dev/browser/install-fonts.mjs": "6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa",
+            "dev/browser/profile.json": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+            "renderer/package.json": "d2c2260f2a4cdd9a06f2effbd1c1bd2f5493a3116ae95de0e92fcb4b7ed8481e",
+            "renderer/playwright.config.js": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "renderer/scripts/qualify-browser.mjs": "e8e7743cbe10c9f41e5ec76b0eb352791b63d8e5cd83e4cc2a3500db339e2db5",
+            "renderer/scripts/render-static.mjs": "f28c574102014d54bbb72e8f38564ae80601e1f6617fce52539866713bf71b01",
+            "renderer/src/styles.css": "6869e33bb559a14d18d9b13587d35b3f254133005eacadfc2f65a9670cd5a522",
+            "renderer/tests/e2e/__snapshots__/brand-kit-page.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "renderer/tests/e2e/renderer.spec.js": "5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e"
+          },
+          "status": "passed"
+        },
+        "registry": {
+          "config_digest": "sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb",
+          "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "index_digest": "sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "manifest_digest": "sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac",
+          "platform": "linux/amd64"
+        },
+        "source": {
+          "build_source_inventory": {
+            "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+            "files": 339,
+            "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+            "sha256": "b4755fdd30d9ba6859b0965b2369c5ac8a73cee74e8250949406c7e906b50ae8"
+          },
+          "critical_files_sha256": {
+            ".dockerignore": "af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",
+            ".github/workflows/decision-validation.yml": "4b490e6ee629afce4df22eb3d1aa11de55d17d0bcd88a73e4a371850043422e4",
+            ".github/workflows/development-image.yml": "ece82019d02c21505cf5742f5e44742326b76a172ce4f18847a0fbb611a43c2d",
+            ".github/workflows/identity-experience.yml": "7a5968888eb338cf8c804c211171bee63e33d0444417c6aa338b378ef98ea2a1",
+            ".github/workflows/publish-brand-kit.yml": "e8b0e26e404c36adbad67f7b233ee142651fb3a07061ce6a163a61f0a0af7903",
+            ".github/workflows/reference-renderer.yml": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+            ".github/workflows/refine-guidance-docs-v2.yml": "33387e49b354c4372d0076d81aa9275d229e2f8cb08dc2e52bfb97a47e6359b9",
+            ".github/workflows/refine-guidance-docs.yml": "7243020e1f264593d5765b8f6d84bec100c686ef89660e0a79a02f046dbcc4dd",
+            ".github/workflows/release.yml": "20bf17098be9b1647d15a4cfde48e0f6eda2991e1ffc9968f1333926cd16398b",
+            ".github/workflows/validate.yml": "1067364d5f3a6518ce1544bce0536342fe4108f0cfc5ba6c07ae4fb0301a04d3",
+            "dev/browser/Dockerfile": "509037057211eedd9e9df387149d1ac51b4e2e8b0e98c8c02e60d6df2bfb9f99",
+            "dev/browser/install-fonts.mjs": "6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa",
+            "dev/browser/profile.json": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+            "docs/evidence/identity-browser-fonts-2026-10-20.json": "191f09a07796a9d14e71b249b9a6837900ceae6b391a32d590f51b1856f5c711",
+            "docs/evidence/identity-browser-registry-2026-10-20.json": "9f1e06793ef3641db2986f2efe0c0f0fe5bebffe4008e155619fb8adb6fe0ec9",
+            "renderer/package.json": "d2c2260f2a4cdd9a06f2effbd1c1bd2f5493a3116ae95de0e92fcb4b7ed8481e",
+            "renderer/playwright.config.js": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "renderer/scripts/qualify-browser.mjs": "e8e7743cbe10c9f41e5ec76b0eb352791b63d8e5cd83e4cc2a3500db339e2db5",
+            "renderer/tests/e2e/__snapshots__/brand-kit-page.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "renderer/tests/e2e/renderer.spec.js": "5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e",
+            "scripts/qualify_browser.py": "2cefd63a6d02c993fb83b716d7590415c3905d2e3645ec03c2b36cc02f5e1a4b"
+          },
+          "git_revision": "2a15468bc4b0da8272316fb1bd7fad5ecd0b5056",
+          "git_worktree_clean": true
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "workflow": "Release Identity browser smoke",
+      "run_id": 39431711965,
+      "job_id": 118658139539,
+      "run_url": "https://github.com/egohygiene/identity/actions/runs/39431711965",
+      "host": {
+        "approved_baseline_after_sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+        "artifact_files_sha256": {
+          "browser-1FbY0f/negative/artifacts/.last-run.json": "f1e1860b159e970da86c936a625e84e254ea2147d8f2b8410572804abe955271",
+          "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png": "adba2dcc7f173f7a6336de43e7278b2c35b4681b584de459407683072aff7b5a",
+          "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png": "5940286f9ecaeb144bd86b00b638950e7e748118d8bd6400f8f4994d2820b4f5",
+          "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+          "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md": "8dd4da89c8c8682e2b2989564179f3f525acd6ee02c43340e8fe400153e52d58",
+          "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip": "5f8c995f6514c573aa85fb5e8134ebd33483771c53d544dd0405c8d20de7534b",
+          "browser-1FbY0f/negative/command.log": "6a406d39c528ff34b1bb7f69178e4549a4b0f377bdb49d2bc871b2d4b3ca82c5",
+          "browser-1FbY0f/negative/report.json": "2cf070df1da3dffb0ed02f605de600992e1b35799fe2f7114b05bcc80ff5e923",
+          "browser-1FbY0f/positive/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "browser-1FbY0f/positive/command.log": "4eac145de95bba0b9a9f20e9154d330fc07df8e3082c126d6f094c15d010d848",
+          "browser-1FbY0f/positive/report.json": "cc8300875d9f4e575e3c83502e9b194e65a2a3349db8970c362f697328a9b14c",
+          "browser-1FbY0f/preview.log": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88",
+          "browser-1FbY0f/restored/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "browser-1FbY0f/restored/command.log": "28a852181f9228aca22451d5cfe316b0a2c247ae45afef666179578355814e74",
+          "browser-1FbY0f/restored/report.json": "e703a73ef172af4e3bba0325f1420ac310be4bbd457fcb191effd16b22559612",
+          "qualification.json": "f96dbb54fdd586fb77bcadecb972b502509bee83d82f43f0abf187cd710da455"
+        },
+        "artifact_inventory_excludes_host_receipt": true,
+        "base_image": {
+          "architecture": "amd64",
+          "cmd": [
+            "/bin/bash"
+          ],
+          "entrypoint": null,
+          "id": "sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb",
+          "os": "linux",
+          "repo_digests": [
+            "mcr.microsoft.com/playwright@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+          ],
+          "user": ""
+        },
+        "built_image": {
+          "architecture": "amd64",
+          "cmd": [
+            "/bin/bash"
+          ],
+          "entrypoint": null,
+          "id": "sha256:af21f46ed9cff95b4e75205625cd4b083a46497006c50cfd05c86e2dbfce55c7",
+          "os": "linux",
+          "repo_digests": [],
+          "user": ""
+        },
+        "commands": [
+          {
+            "command": [
+              "docker",
+              "version",
+              "--format",
+              "{{json .Server}}"
+            ],
+            "exit_code": 0,
+            "output_sha256": "79b585fa9dc788d645c7c11506cd0e2b0c3dc62b50bc876d172662dceb7f619d"
+          },
+          {
+            "command": [
+              "docker",
+              "pull",
+              "--platform",
+              "linux/amd64",
+              "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+            ],
+            "exit_code": 0,
+            "output_sha256": "312f67d2c824c61e6cf63241f31e250062ef580083ab4d6444b7b87bd9c89168"
+          },
+          {
+            "command": [
+              "docker",
+              "image",
+              "inspect",
+              "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"
+            ],
+            "exit_code": 0,
+            "output_sha256": "c798c1d2b5e2a2e62bc367e0bcea12a07d4d50b4604782ebb123a1478905b709"
+          },
+          {
+            "command": [
+              "docker",
+              "build",
+              "--pull",
+              "--platform",
+              "linux/amd64",
+              "--file",
+              "dev/browser/Dockerfile",
+              "--build-arg",
+              "BROWSER_IMAGE=mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+              "--tag",
+              "identity-browser-qualification:e63dd0e8a5e6",
+              "."
+            ],
+            "exit_code": 0,
+            "output_sha256": "e91eec993f80472ef8c2a5f16e092426c6f2d0f356ce162a3cf3ffbced7452ed"
+          },
+          {
+            "command": [
+              "docker",
+              "image",
+              "inspect",
+              "identity-browser-qualification:e63dd0e8a5e6"
+            ],
+            "exit_code": 0,
+            "output_sha256": "e394145c1411ffe6ad5d95cbfb359afed411e86e9d42a4db0f9d55b85b1a9c6b"
+          },
+          {
+            "command": [
+              "docker",
+              "run",
+              "--rm",
+              "--init",
+              "--platform",
+              "linux/amd64",
+              "--network",
+              "none",
+              "--shm-size",
+              "1gb",
+              "--env",
+              "CI=1",
+              "--env",
+              "TZ=UTC",
+              "--env",
+              "LANG=C.UTF-8",
+              "--env",
+              "LC_ALL=C.UTF-8",
+              "--mount",
+              "type=bind,source=<output-directory>,target=/evidence",
+              "identity-browser-qualification:e63dd0e8a5e6",
+              "node",
+              "scripts/qualify-browser.mjs",
+              "--output-directory",
+              "/evidence"
+            ],
+            "exit_code": 0,
+            "output_sha256": "cc8fe13625ae40688f85a03f0d6581e345ebc017b1da94ccb3f0e7b9c74028b8"
+          }
+        ],
+        "docker_server": {
+          "Arch": "amd64",
+          "KernelVersion": "7.0.0-1017-azure",
+          "Os": "linux",
+          "Version": "28.0.4"
+        },
+        "engine_platform_relation": "native-amd64",
+        "execution_context": "github-actions-ci",
+        "kind": "dated browser-environment qualification host receipt",
+        "limits": [
+          "The invocation mode labels a caller; both use identical image/rendering settings.",
+          "A hosted local-entrypoint replay is not an actual Docker run in an unavailable developer workspace.",
+          "Only the recorded image/platform/fonts/settings and unchanged approved baseline are qualified.",
+          "No baseline regeneration, tolerance relaxation, release, deployment or human approval occurs."
+        ],
+        "mode": "ci",
+        "observed_at": "2026-10-20T13:35:54.109961+00:00",
+        "own_image_cleanup_exit_code": 0,
+        "platform": "linux/amd64",
+        "profile": {
+          "baseline": {
+            "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+            "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+            "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+          },
+          "chromium": {
+            "colorProfile": "srgb",
+            "revision": "1234",
+            "version": "151.0.7922.34"
+          },
+          "fontFiles": [
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+              "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+              "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+              "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+              "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+              "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+              "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+            },
+            {
+              "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+              "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+            }
+          ],
+          "fontPackages": [
+            {
+              "bytes": 502232,
+              "name": "fonts-dejavu-mono",
+              "sha256": "8a599d6553307db7ecb795d2f0e5a301e03234afc75c7358b0ba43466454c89a",
+              "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-mono_2.37-8_all.deb",
+              "version": "2.37-8"
+            },
+            {
+              "bytes": 835172,
+              "name": "fonts-dejavu-core",
+              "sha256": "40049660c194f3b8a2541fc7369efebb10e9f94bdac836a2f38fafedd10fa73a",
+              "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-8_all.deb",
+              "version": "2.37-8"
+            }
+          ],
+          "fontSourceReceipt": "docs/evidence/identity-browser-fonts-2026-10-20.json",
+          "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "kind": "qualified browser environment",
+          "packageManager": "pnpm@11.21.0",
+          "platform": "linux/amd64",
+          "playwright": "1.62.1",
+          "registryReceipt": "docs/evidence/identity-browser-registry-2026-10-20.json",
+          "settings": {
+            "colorScheme": "light",
+            "deviceScaleFactor": 1,
+            "locale": "en-US",
+            "reducedMotion": "no-preference",
+            "timezoneId": "UTC",
+            "viewport": {
+              "height": 1000,
+              "width": 1440
+            }
+          }
+        },
+        "qualification": {
+          "baseline": {
+            "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+            "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+            "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "unchanged": true
+          },
+          "browser": {
+            "commandLine": [
+              "/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+              "--disable-field-trial-config",
+              "--disable-background-networking",
+              "--disable-background-timer-throttling",
+              "--disable-backgrounding-occluded-windows",
+              "--disable-back-forward-cache",
+              "--disable-breakpad",
+              "--disable-client-side-phishing-detection",
+              "--disable-component-extensions-with-background-pages",
+              "--disable-component-update",
+              "--no-default-browser-check",
+              "--disable-default-apps",
+              "--disable-dev-shm-usage",
+              "--disable-edgeupdater",
+              "--disable-extensions",
+              "--disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion",
+              "--enable-features=CDPScreenshotNewSurface",
+              "--allow-pre-commit-input",
+              "--disable-hang-monitor",
+              "--disable-ipc-flooding-protection",
+              "--disable-popup-blocking",
+              "--disable-prompt-on-repost",
+              "--disable-renderer-backgrounding",
+              "--disable-updater-scheduler",
+              "--force-color-profile=srgb",
+              "--metrics-recording-only",
+              "--no-first-run",
+              "--password-store=basic",
+              "--use-mock-keychain",
+              "--no-service-autorun",
+              "--export-tagged-pdf",
+              "--disable-search-engine-choice-screen",
+              "--unsafely-disable-devtools-self-xss-warnings",
+              "--edge-skip-compat-layer-relaunch",
+              "--disable-infobars",
+              "--disable-search-engine-choice-screen",
+              "--disable-sync",
+              "--enable-unsafe-swiftshader",
+              "--headless",
+              "--hide-scrollbars",
+              "--mute-audio",
+              "--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4",
+              "--no-sandbox",
+              "--user-data-dir=<disposable-browser-profile>",
+              "--remote-debugging-pipe",
+              "--no-startup-window"
+            ],
+            "executable": "/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+            "executableSha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+            "process": {
+              "parentPid": 7,
+              "pid": 536,
+              "source": "Linux /proc direct-child observation"
+            },
+            "renderedFonts": [
+              {
+                "declaredFamily": "Inter, system-ui, sans-serif",
+                "fonts": [],
+                "selector": "body"
+              },
+              {
+                "declaredFamily": "Inter, system-ui, sans-serif",
+                "fonts": [
+                  {
+                    "familyName": "DejaVu Sans",
+                    "glyphCount": 14,
+                    "isCustomFont": false,
+                    "postScriptName": "DejaVuSans-Bold"
+                  }
+                ],
+                "selector": "h1"
+              },
+              {
+                "declaredFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", monospace",
+                "fonts": [
+                  {
+                    "familyName": "Liberation Mono",
+                    "glyphCount": 7,
+                    "isCustomFont": false,
+                    "postScriptName": "LiberationMono"
+                  }
+                ],
+                "selector": ".token-value"
+              },
+              {
+                "declaredFamily": "ui-monospace, monospace",
+                "fonts": [
+                  {
+                    "familyName": "DejaVu Sans Mono",
+                    "glyphCount": 76,
+                    "isCustomFont": false,
+                    "postScriptName": "DejaVuSansMono"
+                  }
+                ],
+                "selector": ".studio textarea"
+              }
+            ],
+            "settings": {
+              "colorDepth": 24,
+              "colorScheme": "light",
+              "deviceScaleFactor": 1,
+              "locale": "en-US",
+              "reducedMotion": "no-preference",
+              "timezoneId": "UTC",
+              "viewport": {
+                "height": 1000,
+                "width": 1440
+              }
+            },
+            "version": "151.0.7922.34"
+          },
+          "commands": [
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "--version"
+              ],
+              "exitCode": 0,
+              "outputSha256": "4d24606a920d1175b8017de83c5a19847bd8cfe47aeb71cf43efaa75c1e5a2ec",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-cache",
+                "--version"
+              ],
+              "exitCode": 0,
+              "outputSha256": "da1a137c08d945a75c0dd6aeacf2ff1a716f8bec9e351c0400e7ceeb15b161e7",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-list",
+                "--format",
+                "%{file}\n"
+              ],
+              "exitCode": 0,
+              "outputSha256": "340b9fb2d1ba5f3126efbd49fb40ce6db50ce1527a58bbb460038dedc8155e18",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-conflist"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a376ac931a8a2f4e56b03bfea67e60fa886ef5c10435d4651b6771e1c4d16055",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "Inter"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "system-ui"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "sans-serif"
+              ],
+              "exitCode": 0,
+              "outputSha256": "e243350599aa0fe6f4c03c2ef4b7d288000473cb873a4984e129ec0a76f13127",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "monospace"
+              ],
+              "exitCode": 0,
+              "outputSha256": "9a54d28f0592c054fe5e2e24370498d773eb8c4e0596d18238b56a36e122dd7f",
+              "signal": null
+            },
+            {
+              "command": [
+                "fc-match",
+                "--format",
+                "%{family}\t%{file}\n",
+                "Liberation Mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "d4e93680bd5485d70d2920b716cfb7eb4f5f47f17f6ed987f0bdb80bf580ccde",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${Version}",
+                "fonts-dejavu-mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "379912dee34feeb32bed164829c26b786dd079e1c3df7c7fc6fb7e29521cec65",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${db:Status-Status}",
+                "fonts-dejavu-mono"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a51a6c19a1ffc7416827e89adf20749d23ad42452c396cf7e627409f2896922c",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${Version}",
+                "fonts-dejavu-core"
+              ],
+              "exitCode": 0,
+              "outputSha256": "379912dee34feeb32bed164829c26b786dd079e1c3df7c7fc6fb7e29521cec65",
+              "signal": null
+            },
+            {
+              "command": [
+                "dpkg-query",
+                "--show",
+                "--showformat=${db:Status-Status}",
+                "fonts-dejavu-core"
+              ],
+              "exitCode": 0,
+              "outputSha256": "a51a6c19a1ffc7416827e89adf20749d23ad42452c396cf7e627409f2896922c",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-1FbY0f/positive/artifacts"
+              ],
+              "exitCode": 0,
+              "outputSha256": "4eac145de95bba0b9a9f20e9154d330fc07df8e3082c126d6f094c15d010d848",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-1FbY0f/negative/artifacts",
+                "--grep",
+                "matches the reviewed desktop viewport baseline$"
+              ],
+              "exitCode": 1,
+              "outputSha256": "6a406d39c528ff34b1bb7f69178e4549a4b0f377bdb49d2bc871b2d4b3ca82c5",
+              "signal": null
+            },
+            {
+              "command": [
+                "corepack",
+                "pnpm",
+                "exec",
+                "playwright",
+                "test",
+                "--project=chromium",
+                "--retries=0",
+                "--reporter=json",
+                "--update-snapshots=none",
+                "--output=/evidence/browser-1FbY0f/restored/artifacts",
+                "--grep",
+                "matches the reviewed desktop viewport baseline$"
+              ],
+              "exitCode": 0,
+              "outputSha256": "28a852181f9228aca22451d5cfe316b0a2c247ae45afef666179578355814e74",
+              "signal": null
+            }
+          ],
+          "fonts": {
+            "activeConfiguration": "+ /etc/fonts/conf.d/10-hinting-slight.conf: Set hintslight to hintstyle\n+ /etc/fonts/conf.d/10-scale-bitmap-fonts.conf: Bitmap scaling\n+ /etc/fonts/conf.d/10-sub-pixel-rgb.conf: Enable sub-pixel rendering with the RGB stripes layout\n+ /etc/fonts/conf.d/10-yes-antialias.conf: Enable antialiasing\n+ /etc/fonts/conf.d/11-lcdfilter-default.conf: Use lcddefault as default for LCD filter\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans-mono.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-serif.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf: No description\n+ /etc/fonts/conf.d/20-unhint-small-vera.conf: Disable hinting for Bitstream Vera fonts when the size is less than 8ppem\n+ /etc/fonts/conf.d/25-wqy-zenhei.conf: No description\n+ /etc/fonts/conf.d/30-metric-aliases.conf: Set substitutions for similar/metric-compatible families\n+ /etc/fonts/conf.d/40-nonlatin.conf: Set substitutions for non-Latin fonts\n+ /etc/fonts/conf.d/45-generic.conf: Set substitutions for emoji/math fonts\n+ /etc/fonts/conf.d/45-latin.conf: Set substitutions for Latin fonts\n+ /etc/fonts/conf.d/48-spacing.conf: Add mono to the family when spacing is 100\n+ /etc/fonts/conf.d/49-sansserif.conf: Add sans-serif to the family when no generic name\n+ /etc/fonts/conf.d/50-user.conf: Load per-user customization files\n+ /etc/fonts/conf.d/51-local.conf: Load local customization file\n+ /etc/fonts/conf.d/57-dejavu-sans-mono.conf: No description\n+ /etc/fonts/conf.d/57-dejavu-sans.conf: No description\n+ /etc/fonts/conf.d/57-dejavu-serif.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-sans-mono.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-sans.conf: No description\n+ /etc/fonts/conf.d/58-dejavu-lgc-serif.conf: No description\n+ /etc/fonts/conf.d/60-generic.conf: Set preferable fonts for emoji/math fonts\n+ /etc/fonts/conf.d/60-latin.conf: Set preferable fonts for Latin\n+ /etc/fonts/conf.d/64-wqy-zenhei.conf: No description\n+ /etc/fonts/conf.d/65-fonts-ipafont-gothic.conf: No description\n+ /etc/fonts/conf.d/65-fonts-persian.conf: No description\n+ /etc/fonts/conf.d/65-nonlatin.conf: Set preferable fonts for non-Latin\n+ /etc/fonts/conf.d/69-unifont.conf: No description\n+ /etc/fonts/conf.d/70-no-bitmaps-except-emoji.conf: Reject bitmap fonts except bitmap emoji fonts\n+ /etc/fonts/conf.d/80-delicious.conf: No description\n+ /etc/fonts/conf.d/90-synthetic.conf: No description\n+ /etc/fonts/fonts.conf: Default configuration file\n- /usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf: Re-define fonts dirs sample\n- /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf: Enable autohinter if font doesn't have any hinting\n- /usr/share/fontconfig/conf.avail/10-autohint.conf: Enable autohinter\n- /usr/share/fontconfig/conf.avail/10-hinting-full.conf: Set hintfull to hintstyle\n- /usr/share/fontconfig/conf.avail/10-hinting-medium.conf: Set hintmedium to hintstyle\n- /usr/share/fontconfig/conf.avail/10-hinting-none.conf: Set hintnone to hintstyle\n- /usr/share/fontconfig/conf.avail/10-no-antialias.conf: Disable antialiasing\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf: Enable sub-pixel rendering with the BGR stripes layout\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf: Disable sub-pixel rendering\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf: Enable sub-pixel rendering with the vertical BGR stripes layout\n- /usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf: Enable sub-pixel rendering with the vertical RGB stripes layout\n- /usr/share/fontconfig/conf.avail/10-unhinted.conf: Disable hinting\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf: Use lcdlegacy as default for LCD filter\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf: Use lcdlight as default for LCD filter\n- /usr/share/fontconfig/conf.avail/11-lcdfilter-none.conf: Use lcdnone as default for LCD filter\n- /usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf: Disable hinting for CJK fonts\n- /usr/share/fontconfig/conf.avail/35-lang-normalize.conf: No description\n- /usr/share/fontconfig/conf.avail/53-monospace-lcd-filter.conf: No description\n- /usr/share/fontconfig/conf.avail/65-khmer.conf: No description\n- /usr/share/fontconfig/conf.avail/70-force-bitmaps.conf: Accept bitmap fonts\n- /usr/share/fontconfig/conf.avail/70-no-bitmaps-and-emoji.conf: Reject bitmap fonts, including bitmap emoji fonts\n- /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf: Reject bitmap fonts except bitmap emoji fonts (deprecated; use 70-no-bitmaps-except-emoji.conf)\n- /usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf: No description",
+            "configuration": [
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans-mono.conf",
+                "sha256": "0a6b0f1c1f5d1c06a811b517a3d2690700bba8e961cd55dd2c7648cde3605a21"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans.conf",
+                "sha256": "144619057c0a040de247c74cf09f230d737b9c1c534f3ba8804fdd3ddeded8b0"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-serif.conf",
+                "sha256": "977c24eb43f10d21263bbdb624649e5edf63147bd7bb4f84db97ce7d53bb9054"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-sans-mono.conf",
+                "sha256": "3e90c9c36beef46f10d1529251f8683b9c4ac900695adbb4a23a4b6036f938a5"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-sans.conf",
+                "sha256": "0d9c177b6a85daa9957ed6750d4eb26122604da18d340e7ba31e6f4d24f963ed"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/20-unhint-small-dejavu-serif.conf",
+                "sha256": "68777b1705ec7a05a86430def4be093668e84e305cc7e11291df52403a7318cc"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/25-wqy-zenhei.conf",
+                "sha256": "101497940c4e0254172038f23cbe488740081f6c6703d8243c3cc5218b5f6e9a"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-sans-mono.conf",
+                "sha256": "1f2ead86f8203d809abfc9d88d92b04316edd67b6291795ea74ea8a0c3c2e04d"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-sans.conf",
+                "sha256": "f6285e2d336f93086acfa2ac7895ef75ef5ff34f833ba5a63c09fb2841aedc27"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/57-dejavu-serif.conf",
+                "sha256": "7c596f7e202090ded38fded904c4a17d5a189b6c9cc914a2e88554116f6474ca"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-sans-mono.conf",
+                "sha256": "807e5222c6d11a72ad527ebc088f42daf2a807e7718c8f7ff227cbfecafd3d70"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-sans.conf",
+                "sha256": "ecde2093f005c73d7da21cdd7b80c791910050609db36cb5eea84a4ba8da5cef"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/58-dejavu-lgc-serif.conf",
+                "sha256": "e685632c3edbb6868a7ca5275e7c71f25486a8cfd16113a478194a5631205619"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/63-wqy-zenhei-sharp.conf",
+                "sha256": "7dacd60b359d88684c9642710da5166d8298a21814784bd15583a3fb0430f14a"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/64-wqy-zenhei.conf",
+                "sha256": "7c187a99ad7f4b5ee80930c60399d3952e41ea7bbee8d9322ab685596d351a94"
+              },
+              {
+                "path": "/etc/fonts/conf.avail/65-fonts-ipafont-gothic.conf",
+                "sha256": "95b425396cd7afefc03f668229b425a703d0c57b078a00111b7a289bb68513cf"
+              },
+              {
+                "path": "/etc/fonts/conf.d/README",
+                "sha256": "fdc29a3ebd8816eb07ed04c2cbe151076e95a7b0b2a0ec8fe94e5c8a67931d3c"
+              },
+              {
+                "path": "/etc/fonts/fonts.conf",
+                "sha256": "93a23ba073996edb8b42d6c89ebc2ec5fd2101ce82cb65ba0db358dabf55ca22"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf",
+                "sha256": "7dae5045441ce7ab4ce9ee0ccbee84e2ae90daee9cfd2ac64cd887ee85c528df"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf",
+                "sha256": "f04d1737c2a85925a6294f4b966597d03a30c9e4c551c7a8c270eaad514b2689"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-autohint.conf",
+                "sha256": "9ae4308a18941969ea42f5881c202be052fe12da3fb1fb4fc4b940642ec74db0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-full.conf",
+                "sha256": "aa01699d6a43a1be2996233e67daf1570b9000bd1a59763463d3a12b852cdc3a"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-medium.conf",
+                "sha256": "f0eaec3db6879f3460bd0e1ef3e09dd965168ca460a79d098eb0648c6740095d"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-none.conf",
+                "sha256": "5970fa53c69874ee51349300ef3412592e46e7f133c06074befcf6ab2a3ef6e2"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-hinting-slight.conf",
+                "sha256": "d138eca2bac3f78d45ff7cfb649ad792caa4a6e61f73cea7cf0ea54b091f1ef4"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-no-antialias.conf",
+                "sha256": "75412c70f3a78ad090c79a9dc63cce6aae41b2cfc2f67f4a1a1b533526216d2e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-scale-bitmap-fonts.conf",
+                "sha256": "df8e99abb6f82384c61978906a45a95794940545da95790d87f01d9391e0894b"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-bgr.conf",
+                "sha256": "719006f7887a958da8efe5ad010a2cde689313074607ae20f0be4cd9e8bfffad"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-none.conf",
+                "sha256": "0f00b5cf0ce07062ec65b9b340aa888f6c5fbc215aafebd26781be2d5a13ff6a"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf",
+                "sha256": "e4cfc04f5fc5093d2ba20c40f8709c9dfc099997313d0f96bc8256597a15d057"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-vbgr.conf",
+                "sha256": "15178eb45f3206433bace02053214d5750b9d74a4ece727f48c7fbc8f8c9adb3"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-sub-pixel-vrgb.conf",
+                "sha256": "049680ed134d34c560be493a47301bf6542050e7e89c27d3df25145b41f8133e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-unhinted.conf",
+                "sha256": "dca27a149268da3aeaa3416dc236fd1d76e2f997b1ba91e1292297e78c9281d4"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/10-yes-antialias.conf",
+                "sha256": "e6d82a642d1b37f7d24dc37f938b999f00ff7aa4303b2602d04164d53f221005"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf",
+                "sha256": "76aec9d8dac48faabe1bbde9e887cfb09fa45f30be5f8826e945a394a0097e48"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-legacy.conf",
+                "sha256": "0768fd57ae0a50d54f2f2e5efae98437ae8623573b652f246ac22e574d5f38b0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-light.conf",
+                "sha256": "0708443f97406b100a5ccfa67ea8a1c1473ff60ff03848e536bc62e2b2ddcea3"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/11-lcdfilter-none.conf",
+                "sha256": "8c2b7c2db7bf8e54fb4f449e726ad97d824195085f97a5c19d75914ad7b4b074"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/20-unhint-small-vera.conf",
+                "sha256": "278732c68c16177f2aa3c7e4ea318b9f720aee13a433c32eb15ba626806c609d"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/25-unhint-nonlatin.conf",
+                "sha256": "8b8c05318fb3f4893a9522e7989dd9280d14233adbc21be867bd173add4a0d5c"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/30-metric-aliases.conf",
+                "sha256": "3baf25c82e1a14c606d45c212296852be06ae9795d60e84aab573226151450a2"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/35-lang-normalize.conf",
+                "sha256": "fb06f0e9206cc711a68719940e670a3756ae6656ea9b73197f3bbc0c921ee433"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/40-nonlatin.conf",
+                "sha256": "9c56aeed6490db1d29602d7f8e028742b5e7a0268eaaa60de2fde582c6403715"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/45-generic.conf",
+                "sha256": "24de9f68189d544bb4cc084d9bd8f3a59d8b988a9dc44b11e9877d5add5fc948"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/45-latin.conf",
+                "sha256": "807638284032d8d8f6ed8b014a0edae79a4d4f3c4e70317fdb0bfa8edd66779e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/48-spacing.conf",
+                "sha256": "99d839cd8aa28854e8f54f26e7200b6e57951f39f56791a0ed473662488bcef6"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/49-sansserif.conf",
+                "sha256": "7849a11ce5243e8bb3d06bcad558737a8682e5122e73c8e427f4c011a2054818"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/50-user.conf",
+                "sha256": "449137ccce57d60bca178d57519ba54e1942d757ad171f3a88cd78df2161c970"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/51-local.conf",
+                "sha256": "dca9d917e1f66f73bfa495943b4d1eaab2d93810a51bc8e600cf4d4e9df03e67"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/53-monospace-lcd-filter.conf",
+                "sha256": "c04ec3f2b651d31f3968fd725787d10c8bc2eab02203979b6b961477de3fdbd5"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/60-generic.conf",
+                "sha256": "195bc8605dd23289d42c10d79cc13a5ce4a4b3cf965df5b30ecc0b7149bb951f"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/60-latin.conf",
+                "sha256": "2de7c687e03b1fedf9fd016aa14ed8088f52578896a73f06158dda8acd264f09"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-fonts-persian.conf",
+                "sha256": "c675fab143a3638346874798be45f51f6878ebec591b4362d83cfffb828ec4ca"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-khmer.conf",
+                "sha256": "0bc1c077ef01cb409f51f95218b97b144278c0568b5de03683047b2a1963c590"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/65-nonlatin.conf",
+                "sha256": "e309e38d7fb47cc3f639f4313b19e72c9be4d1f2db92d7d892ea65bfdd0cbd30"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/69-unifont.conf",
+                "sha256": "fa97c0cf5f79d70e2dc3dc48155d4c9220cd7c6a8bc95b89c4ebcc517f97479e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-force-bitmaps.conf",
+                "sha256": "46fb68f9ec27605f880379b753c1afcc1cacfc75021e3a288f4cf62c945e394f"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps-and-emoji.conf",
+                "sha256": "313260028904353a026faa457bacea58df88ceff7dc97b269e526130dc797a7e"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps-except-emoji.conf",
+                "sha256": "bb5df65896bf3011b2f2935b63ab12db1ecf078674ff73a533123445f122a92b"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-no-bitmaps.conf",
+                "sha256": "5994ce306887448ec29b2d6624696bb2dd7e333dd51cc5818f9ebe72abc077da"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf",
+                "sha256": "87228113c2e8ffbf5565ffaa80d5e5fde33b14f0725accf69e1e31c80df398c0"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/80-delicious.conf",
+                "sha256": "34f27b7fe9cd83b2b6d46f16ef9c477412f2d7ef63634f86b9b38b79bc4f81ad"
+              },
+              {
+                "path": "/usr/share/fontconfig/conf.avail/90-synthetic.conf",
+                "sha256": "cdd0aac7840c664a7127b64db66bdfe8dc22be3774d10bc22f4a41c98de5d85e"
+              }
+            ],
+            "files": [
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0419bt_.pfb",
+                "sha256": "0e15626ca60d95e49ac15352f5c7f1837eb6dc9b6a353357012ce54a5b37015c"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0582bt_.pfb",
+                "sha256": "9ecc1d370c5ee96c8b58d144d92a9fbeb416e2a33746f4ef86ed4e7490389dc6"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0583bt_.pfb",
+                "sha256": "708bbc1a259fbdf4f8c0fde683dd604f1e0677a72078567d70328f9a428248b7"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0611bt_.pfb",
+                "sha256": "69dd50c4078f8b7c3d50dedc85dec8e4316c0b4f86df1737c3af9b9b8aa51eef"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0632bt_.pfb",
+                "sha256": "c50fd6e717599f306b8b3261d309c56849f4366771c1983c875eabf46bc2b956"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0633bt_.pfb",
+                "sha256": "3e0c9ed37732c1ebcbed4e582fd70f5673ca415161396276097eca1cda87104b"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0648bt_.pfb",
+                "sha256": "8ac5bad34cad9b59b087eebfaf9087c16901b0761f7f9cc538f2f65567fc3959"
+              },
+              {
+                "path": "/usr/share/fonts/X11/Type1/c0649bt_.pfb",
+                "sha256": "0c3e189c6a52401c62c9fcde32f453a4dc95836d8c6e03fe8908100d854f3a83"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf",
+                "sha256": "503af4a8b84d1079b8e2e358dc7f7a7fb8cb7a1f212f35eaef6782dbfc75a55e"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/ipafont-gothic/ipagp.ttf",
+                "sha256": "a63f6153841e56ec9df1b31a54d98d3f41d8aaa1c3d8df30a33502296f5b8068"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-Bold.otf",
+                "sha256": "16f3cdd73f47abf8bde2aafd9569b36388f6ae388e98088a77c3312fbaa98b80"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-BoldOblique.otf",
+                "sha256": "d7e3ba82a6605b3e6f126d4a77b78cbf0694f17a5a79fb8e9709936234b04700"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma-Oblique.otf",
+                "sha256": "133e6af2dcdfea629bc734f2bbbbd7d66cff2040ffb0b197571740c23d87e3c6"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/tlwg/Loma.otf",
+                "sha256": "e14126fe603116a6da8fb54822e8521589983d17d78cae489e98faed4b2f4cd2"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont.otf",
+                "sha256": "2498b80f9664fef91e6988d7e082146a2082a7e7bb4a2deb2fbf9a365aa2970c"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_csur.otf",
+                "sha256": "065b75985f258df8573371bd9bda0a37a39ac85a38b0062a37f15654c2eb7341"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_jp.otf",
+                "sha256": "218eb241082aa4f47399f7c2058e25abffa8d081b312542bc91740681f006597"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_jp_sample.otf",
+                "sha256": "80668b601ceffe8030eef4215e9148b9ddc5c3802e3dba86a306c76fc1f7f9d4"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_sample.otf",
+                "sha256": "5b73116f46a3fc4726e4b2f0a51f9c163526444d55b8db88c4ab8ec9453fcb20"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_upper.otf",
+                "sha256": "f9a49517cb5a06e02692b403bc21f96ea767128db52f089d31261a8968d3ace8"
+              },
+              {
+                "path": "/usr/share/fonts/opentype/unifont/unifont_upper_sample.otf",
+                "sha256": "68dfc1d34d533c8dada07a8dd84294635afdc4790904fa956ea735ca1d20c127"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+                "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+                "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+                "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+                "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+                "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+                "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMono.ttf",
+                "sha256": "9691040d4d89266db211cd9da1094cf1991beaaf5e01cc752bc1dab84d483534"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf",
+                "sha256": "7a5ded6ffe5ba84c7c478de521ad0653efae4d2b92b251216bc390c6022e91ac"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoBoldOblique.ttf",
+                "sha256": "04d540f1fe223d24a391f1c50f98eab6529b2a8fa670d628fad7e8443224967b"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeMonoOblique.ttf",
+                "sha256": "c350255406bf9dd314c8261d49118b2d44c38d7c2555884eba43dffea7bd7313"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+                "sha256": "350badd6ab6a58e7fd7a0ea2ae0c10174941a08e1cd06b3c6010e10b3d5ae319"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+                "sha256": "e0a07c1e9495262c430fde74e80daadd0b2a353eb444a47b265c62f5a5836af5"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansBoldOblique.ttf",
+                "sha256": "f26d93f22f70bd97270a6b5506497a8c9e84c64399343cf1c08a50e4016cf967"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSansOblique.ttf",
+                "sha256": "31f2e994c6bb0f6c8a8f1d27ae25b4b754ef072154220bb4db2a69e8e3d1193f"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
+                "sha256": "c57bf5de095af4e070c2acb5bce634316409ed4203b5098f4fdadb691dc7b3d2"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf",
+                "sha256": "f078f2ac5d38addc71e2c123d86584341360b5bf27bc1cf238574ebe4f5a0f4d"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifBoldItalic.ttf",
+                "sha256": "c59455ea29607bbf62b0cfdffdc118ade887acd86a68c2c9873fb1187b021e58"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/freefont/FreeSerifItalic.ttf",
+                "sha256": "775b2ed7b9026f288b60f2479e07ee8e3147daa89d75848f11eb21faab662070"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
+                "sha256": "626655e94dd82f3f42549daf995c921b0915fa8ab1f4b839559e8892ea41d240"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-BoldItalic.ttf",
+                "sha256": "15eb161953e3ecc7fc05a3fec8a59e0f4e0a54a4e375736adf8e98d65981f813"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Italic.ttf",
+                "sha256": "a71b2c25c89da05cf0e7c4dbba8d473fdead0b181ae56165217747d2c1f39215"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+                "sha256": "395fa5ab8d40c8eba390ced528744ea75a7f69aabf3e68b6f925ca0e39a27370"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+                "sha256": "3973aa5054fb467dd5627245d3dc82e37bf16fe075756156a570455871351582"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf",
+                "sha256": "c80fa7f2ffa0e01d4d8dcd6a6d1e43eda665222d1b4db597dde1174c456006cf"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf",
+                "sha256": "830c5fa600505fb4c1a271b4271c53c44bae43f492b2a240d0e98a3a7a380121"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+                "sha256": "4659bc0c58c5028dd488ec928d41d9265db43d9b669fc14ca8b0832daca7b144"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
+                "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-BoldItalic.ttf",
+                "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf",
+                "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
+                "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf",
+                "sha256": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+              },
+              {
+                "path": "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+                "sha256": "79c18ebe7b811951e8311bad7103ebeae8c337ed9988ea69e8a78a66cfe029b9"
+              }
+            ],
+            "packages": [
+              {
+                "name": "fonts-dejavu-mono",
+                "version": "2.37-8"
+              },
+              {
+                "name": "fonts-dejavu-core",
+                "version": "2.37-8"
+              }
+            ],
+            "resolutions": {
+              "Inter": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "Liberation Mono": "Liberation Mono\t/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+              "monospace": "DejaVu Sans Mono\t/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+              "sans-serif": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+              "system-ui": "DejaVu Sans\t/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+            }
+          },
+          "kind": "dated browser environment qualification receipt",
+          "limits": [
+            "Only the recorded Linux/amd64 image and immutable source inputs are qualified.",
+            "The deliberately changed built CSS is disposable and restored; no baseline regeneration or tolerance relaxation occurs.",
+            "Automated browser evidence does not supply human creative approval or complete accessibility conformance."
+          ],
+          "negative": {
+            "baselineUnchanged": true,
+            "diffArtifacts": [
+              {
+                "path": "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+                "sha256": "5940286f9ecaeb144bd86b00b638950e7e748118d8bd6400f8f4994d2820b4f5"
+              }
+            ],
+            "exitCode": 1,
+            "expectedFailure": "screenshot-comparison",
+            "failed": 1,
+            "passed": 0,
+            "report": "browser-1FbY0f/negative/report.json",
+            "skipped": 0
+          },
+          "observedAt": "2026-10-20T13:36:42.141Z",
+          "platform": "linux/amd64",
+          "positive": {
+            "diffArtifacts": [],
+            "exitCode": 0,
+            "failed": 0,
+            "passed": 6,
+            "report": "browser-1FbY0f/positive/report.json",
+            "skipped": 0
+          },
+          "profileSha256": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+          "restored": {
+            "diffArtifacts": [],
+            "exitCode": 0,
+            "failed": 0,
+            "passed": 1,
+            "report": "browser-1FbY0f/restored/report.json",
+            "skipped": 0
+          },
+          "runtimes": {
+            "fontconfig": "fontconfig version 2.15.0",
+            "node": "v24.18.1",
+            "osRelease": "PRETTY_NAME=\"Ubuntu 24.04.4 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.4 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+            "playwright": "1.62.1",
+            "pnpm": "11.21.0"
+          },
+          "settings": {
+            "colorScheme": "light",
+            "deviceScaleFactor": 1,
+            "locale": "en-US",
+            "reducedMotion": "no-preference",
+            "timezoneId": "UTC",
+            "viewport": {
+              "height": 1000,
+              "width": 1440
+            }
+          },
+          "source": {
+            "dev/browser/install-fonts.mjs": "6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa",
+            "dev/browser/profile.json": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+            "renderer/package.json": "d2c2260f2a4cdd9a06f2effbd1c1bd2f5493a3116ae95de0e92fcb4b7ed8481e",
+            "renderer/playwright.config.js": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "renderer/scripts/qualify-browser.mjs": "e8e7743cbe10c9f41e5ec76b0eb352791b63d8e5cd83e4cc2a3500db339e2db5",
+            "renderer/scripts/render-static.mjs": "f28c574102014d54bbb72e8f38564ae80601e1f6617fce52539866713bf71b01",
+            "renderer/src/styles.css": "6869e33bb559a14d18d9b13587d35b3f254133005eacadfc2f65a9670cd5a522",
+            "renderer/tests/e2e/__snapshots__/brand-kit-page.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "renderer/tests/e2e/renderer.spec.js": "5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e"
+          },
+          "status": "passed"
+        },
+        "registry": {
+          "config_digest": "sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb",
+          "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "index_digest": "sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+          "manifest_digest": "sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac",
+          "platform": "linux/amd64"
+        },
+        "source": {
+          "build_source_inventory": {
+            "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+            "files": 339,
+            "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+            "sha256": "b4755fdd30d9ba6859b0965b2369c5ac8a73cee74e8250949406c7e906b50ae8"
+          },
+          "critical_files_sha256": {
+            ".dockerignore": "af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",
+            ".github/workflows/decision-validation.yml": "4b490e6ee629afce4df22eb3d1aa11de55d17d0bcd88a73e4a371850043422e4",
+            ".github/workflows/development-image.yml": "ece82019d02c21505cf5742f5e44742326b76a172ce4f18847a0fbb611a43c2d",
+            ".github/workflows/identity-experience.yml": "7a5968888eb338cf8c804c211171bee63e33d0444417c6aa338b378ef98ea2a1",
+            ".github/workflows/publish-brand-kit.yml": "e8b0e26e404c36adbad67f7b233ee142651fb3a07061ce6a163a61f0a0af7903",
+            ".github/workflows/reference-renderer.yml": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+            ".github/workflows/refine-guidance-docs-v2.yml": "33387e49b354c4372d0076d81aa9275d229e2f8cb08dc2e52bfb97a47e6359b9",
+            ".github/workflows/refine-guidance-docs.yml": "7243020e1f264593d5765b8f6d84bec100c686ef89660e0a79a02f046dbcc4dd",
+            ".github/workflows/release.yml": "20bf17098be9b1647d15a4cfde48e0f6eda2991e1ffc9968f1333926cd16398b",
+            ".github/workflows/validate.yml": "1067364d5f3a6518ce1544bce0536342fe4108f0cfc5ba6c07ae4fb0301a04d3",
+            "dev/browser/Dockerfile": "509037057211eedd9e9df387149d1ac51b4e2e8b0e98c8c02e60d6df2bfb9f99",
+            "dev/browser/install-fonts.mjs": "6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa",
+            "dev/browser/profile.json": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+            "docs/evidence/identity-browser-fonts-2026-10-20.json": "191f09a07796a9d14e71b249b9a6837900ceae6b391a32d590f51b1856f5c711",
+            "docs/evidence/identity-browser-registry-2026-10-20.json": "9f1e06793ef3641db2986f2efe0c0f0fe5bebffe4008e155619fb8adb6fe0ec9",
+            "renderer/package.json": "d2c2260f2a4cdd9a06f2effbd1c1bd2f5493a3116ae95de0e92fcb4b7ed8481e",
+            "renderer/playwright.config.js": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "renderer/scripts/qualify-browser.mjs": "e8e7743cbe10c9f41e5ec76b0eb352791b63d8e5cd83e4cc2a3500db339e2db5",
+            "renderer/tests/e2e/__snapshots__/brand-kit-page.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+            "renderer/tests/e2e/renderer.spec.js": "5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e",
+            "scripts/qualify_browser.py": "2cefd63a6d02c993fb83b716d7590415c3905d2e3645ec03c2b36cc02f5e1a4b"
+          },
+          "git_revision": "2a15468bc4b0da8272316fb1bd7fad5ecd0b5056",
+          "git_worktree_clean": true
+        },
+        "status": "passed"
+      }
+    }
+  ],
+  "authoring_workspace_probe": {
+    "observed_at": "2026-10-20T13:30:41.026931+00:00",
+    "source_head": "c63f152f2d5d7b213e3ccd3cb0c8a4f7fbf25263",
+    "execution_context": "local-host",
+    "mode": "local",
+    "status": "unavailable",
+    "failure": "FileNotFoundError: [Errno 2] No such file or directory: 'docker'",
+    "approved_baseline_after_sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+    "limits": "This unavailable local probe is not a passed image execution. The default local entrypoint is tested separately by the hosted-local-entrypoint-replay execution above."
+  },
+  "prior_failed_attempts": [
+    {
+      "source_head": "c22ba90f9066f4da9ba5391506315f5bc8ef865a",
+      "run_id": 39428532246,
+      "status": "failed",
+      "reason": "Harness stopped before browser comparison: strict pnpm transitive metadata resolution; root-owned temporary evidence directory also blocked artifact collection."
+    },
+    {
+      "source_head": "b0eb3c414aec4c22c8b376f54b04eafe5081d200",
+      "run_id": 39429093327,
+      "status": "failed",
+      "positive_passed": 5,
+      "positive_failed": 1,
+      "observed_differing_pixels": 78987,
+      "reason": "The unmodified official image lacked DejaVu and failed the approved screenshot. Original PNG and comparison tolerance were preserved."
+    },
+    {
+      "source_head": "3bd55dc1e149b910862298474c53c64e2aff7cfb",
+      "run_id": 39429739659,
+      "status": "failed",
+      "reason": "Font diagnostics showed WenQuanYi Zen Hei generic fallback; the preview-readiness probe depended on Vite log formatting."
+    },
+    {
+      "source_head": "c63f152f2d5d7b213e3ccd3cb0c8a4f7fbf25263",
+      "run_id": 39430936660,
+      "status": "failed",
+      "reason": "Exact DejaVu packages/files verified, but a CDP metadata command required an unset automation flag. The corrected probe inspects only the owned browser process and does not change launch flags."
+    }
+  ],
+  "artifact_delivery": {
+    "canonical_artifact": {
+      "run_id": 39431711965,
+      "artifact_id": 12268551545,
+      "sha256": "ff566230452aa0ec63a765721526a1450accf2e8e7ede84d603db63ad1582438"
+    },
+    "verified_present_files": 13,
+    "omitted_hidden_state_files": [
+      {
+        "path": "browser-1FbY0f/negative/artifacts/.last-run.json",
+        "sha256": "f1e1860b159e970da86c936a625e84e254ea2147d8f2b8410572804abe955271"
+      },
+      {
+        "path": "browser-1FbY0f/positive/artifacts/.last-run.json",
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      },
+      {
+        "path": "browser-1FbY0f/restored/artifacts/.last-run.json",
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      }
+    ],
+    "limits": "The artifact action excludes three .last-run.json state files by default. Their observed hashes remain in host receipts; all required phase reports and screenshot proof files were present and checksum-verified. The selected durable files below are retained independently of artifact expiry."
+  },
+  "retained_artifacts": [
+    {
+      "path": "docs/evidence/browser-environment-2026-10-20/positive-report.json",
+      "sha256": "cc8300875d9f4e575e3c83502e9b194e65a2a3349db8970c362f697328a9b14c",
+      "source_run_id": 39431711965,
+      "artifact_id": 12268551545,
+      "archive_member": "browser-1FbY0f/positive/report.json"
+    },
+    {
+      "path": "docs/evidence/browser-environment-2026-10-20/negative-report.json",
+      "sha256": "2cf070df1da3dffb0ed02f605de600992e1b35799fe2f7114b05bcc80ff5e923",
+      "source_run_id": 39431711965,
+      "artifact_id": 12268551545,
+      "archive_member": "browser-1FbY0f/negative/report.json"
+    },
+    {
+      "path": "docs/evidence/browser-environment-2026-10-20/restored-report.json",
+      "sha256": "e703a73ef172af4e3bba0325f1420ac310be4bbd457fcb191effd16b22559612",
+      "source_run_id": 39431711965,
+      "artifact_id": 12268551545,
+      "archive_member": "browser-1FbY0f/restored/report.json"
+    },
+    {
+      "path": "docs/evidence/browser-environment-2026-10-20/deliberate-change-actual.png",
+      "sha256": "adba2dcc7f173f7a6336de43e7278b2c35b4681b584de459407683072aff7b5a",
+      "source_run_id": 39431711965,
+      "artifact_id": 12268551545,
+      "archive_member": "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png"
+    },
+    {
+      "path": "docs/evidence/browser-environment-2026-10-20/deliberate-change-diff.png",
+      "sha256": "5940286f9ecaeb144bd86b00b638950e7e748118d8bd6400f8f4994d2820b4f5",
+      "source_run_id": 39431711965,
+      "artifact_id": 12268551545,
+      "archive_member": "browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png"
+    },
+    {
+      "path": "docs/evidence/browser-environment-2026-10-20/initial-font-mismatch-actual.png",
+      "sha256": "c2191cffa26f7b535d219256eef98d597fbe938bda0769d1bcc1b3f21368b22c",
+      "source_run_id": 39429093086,
+      "artifact_id": 12266629561,
+      "archive_member": "browser-nqGRzy/positive/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png"
+    },
+    {
+      "path": "docs/evidence/browser-environment-2026-10-20/initial-font-mismatch-diff.png",
+      "sha256": "35e163df1f3f08b9160fc11f8db83af4025603a5c9451f5799afb3421e834896",
+      "source_run_id": 39429093086,
+      "artifact_id": 12266629561,
+      "archive_member": "browser-nqGRzy/positive/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png"
+    }
+  ],
+  "limits": [
+    "Qualification is limited to the recorded native Linux/amd64 image, exact font additions, fixed settings and existing fixture/assertions.",
+    "CI mode and the documented local entrypoint use the same environment. Hosted-local-entrypoint-replay is not an actual Docker run in the unavailable authoring workspace.",
+    "The historical human baseline environment was not recorded. The DejaVu diagnosis is confirmed by unchanged-baseline comparison, without reconstructing historical approval facts.",
+    "No baseline regeneration, tolerance relaxation, creative approval, full accessibility conformance, release or deployment is supplied."
+  ]
+}

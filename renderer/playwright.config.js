@@ -1,7 +1,13 @@
 // Copyright 2026 Ego Hygiene
 // SPDX-License-Identifier: MIT
 
+import { readFileSync } from "node:fs";
+
 import { defineConfig, devices } from "@playwright/test";
+
+const profile = JSON.parse(
+  readFileSync(new URL("../dev/browser/profile.json", import.meta.url), "utf8"),
+);
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -9,7 +15,8 @@ export default defineConfig({
   snapshotPathTemplate: "{testDir}/__snapshots__/{arg}{ext}",
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  retries: 0,
+  updateSnapshots: "none",
   workers: 1,
   reporter: process.env.CI ? [["line"], ["html", { open: "never" }]] : "list",
   use: {
@@ -19,13 +26,13 @@ export default defineConfig({
   webServer: {
     command: "corepack pnpm run preview -- --host 127.0.0.1 --port 4173",
     url: "http://127.0.0.1:4173",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120_000,
   },
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: { ...devices["Desktop Chrome"], ...profile.settings },
     },
   ],
 });

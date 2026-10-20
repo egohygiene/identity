@@ -8,6 +8,10 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- A shared digest-pinned browser/font/render profile and local/CI qualification
+  command, retaining the approved screenshot and proving deliberate visual drift
+  fails without baseline regeneration or tolerance relaxation (#80).
+
 - Human-oriented `v1-inspect` and explicit `v1-recover` commands for retained
   compiler transactions, with shared read-only inspection, source/Python-independent
   rollback, actionable diagnostics and consistent repository/output-root authority.

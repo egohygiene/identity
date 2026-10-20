@@ -40,7 +40,7 @@ updated: 2026-10-20
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #99 completed through PRs #114/#117/#118. #78 closed through #119; #79 writer serialization closed through #120. #77 inspection and explicit recovery closed through #121 at `1ae867af6db65732e43689f4832d560a327f1857`. #81 immutable development-base qualification (IDN-Q20) is the active authorized issue. #83/IDN-Q22 is dependency-ready but retains its final-documentation position after #81/#80/#82/#84.
+**Current gate:** #99 completed through PRs #114/#117/#118. #78 closed through #119; #79 writer serialization closed through #120; #77 inspection and explicit recovery closed through #121. #81 immutable development-base qualification closed through #122 at `2d18ed114d3799da3867260d69d8c70bf05d428d`. #80 browser/font/screenshot qualification (IDN-Q19) is the active authorized issue. #82/IDN-Q21 and #88/IDN-Q27 remain blocked on reviewed #80 completion. #83/IDN-Q22 retains its later final-documentation position.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -454,7 +454,7 @@ issues: [79]
 
 <!-- roadmap-step
 id: IDN-Q19
-status: ready
+status: active
 depends_on: []
 issues: [80]
 -->
@@ -466,11 +466,11 @@ issues: [80]
 
 - [ ] Unchanged approved baselines pass locally and in CI; a deliberate change fails without tolerance relaxation or automatic baseline updates.
 
-**Evidence and scope:** [#80](https://github.com/egohygiene/identity/issues/80). Pin the qualified browser, fonts, locale, timezone, scale, and color settings.
+**Evidence and scope:** [#80](https://github.com/egohygiene/identity/issues/80) is active from merged #122 at `2d18ed114d3799da3867260d69d8c70bf05d428d`. Implement [ADR-0011](docs/decisions/ADR-0011-accessibility-and-visual-evidence.md)'s existing pinned browser/container, fonts, locale, timezone, scale and color requirements. Preserve the approved screenshot bytes and human-owned baseline review; qualify unchanged output and deliberate-change rejection in the same local/CI profile without tolerance relaxation or automatic regeneration. Keep Q19 active until the bounded evidence is reviewed and merged; #82/#88 remain blocked on that completion.
 
 <!-- roadmap-step
 id: IDN-Q20
-status: active
+status: complete
 depends_on: []
 issues: [81]
 -->
@@ -480,9 +480,9 @@ issues: [81]
 
 **Exit criteria:**
 
-- [ ] The pinned base builds, smoke checks pass, and refresh/trust/cache/permission ownership is documented.
+- [x] The pinned base builds, smoke checks pass, and refresh/trust/cache/permission ownership is documented.
 
-**Evidence and scope:** [#81](https://github.com/egohygiene/identity/issues/81) is active from merged #121 at `1ae867af6db65732e43689f4832d560a327f1857`. Qualify an immutable default within the existing portable add-on design, preserve explicit `BASE_IMAGE` selection, and record CLI/renderer runtime smoke plus refresh/trust/cache/development-user ownership. Keep Q20 active until the qualification evidence is reviewed and merged. Browser/screenshot qualification remains #80; Realm consolidation remains deferred.
+**Evidence and scope:** [#81](https://github.com/egohygiene/identity/issues/81) closed through [PR #122](https://github.com/egohygiene/identity/pull/122), merged at `2d18ed114d3799da3867260d69d8c70bf05d428d`. The [review](docs/reviews/development-base-2026-10-20.md), [registry observation](docs/evidence/identity-development-base-registry-2026-10-20.json) and [runtime receipt](docs/evidence/identity-development-image-2026-10-20.json) qualify the digest-pinned official default and explicit derived unprivileged custom base on Linux/amd64 through one setup implementation. Inherited user/entrypoint/command, writable tool/cache paths, synthetic CA trust bindings, 17 unchanged source files and equal complete 14-file outputs pass. All four fresh hosted workflows pass at reviewed head `26a096c16c3fc116c7a5cffc7fa789762bfc9a66`, including Linux/macOS/Windows source-install and clean-room gates. The [development guide](docs/DEVELOPMENT.md) owns refresh/trust/cache/permission requirements. Browser/screenshot qualification remains #80; arbitrary custom bases, other architectures and private proxy environments are not qualified. Realm consolidation remains deferred.
 
 <!-- roadmap-step
 id: IDN-Q21
@@ -498,7 +498,7 @@ issues: [82]
 
 - [ ] Bounded setup, repeated activation, representative dispatch, and qualified clean-base checks pass and catch an intentional fault.
 
-**Evidence and scope:** [#82](https://github.com/egohygiene/identity/issues/82). Distinguish local check coverage from full integrity validation.
+**Evidence and scope:** [#82](https://github.com/egohygiene/identity/issues/82). #81/Q20 is complete through #122; #80/Q19 remains the unmet prerequisite. Keep Q21 blocked until reviewed browser qualification is complete, and distinguish local check coverage from full integrity validation.
 
 <!-- roadmap-step
 id: IDN-Q22
