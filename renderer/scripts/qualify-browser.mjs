@@ -294,6 +294,16 @@ async function main(arguments_) {
       "renderer/scripts/qualify-browser.mjs", "renderer/scripts/render-static.mjs", "renderer/src/styles.css",
       "renderer/tests/e2e/renderer.spec.js", profile.baseline.path,
     ].map((file) => [file, sha256(readFileSync(path.join(repositoryRoot, file)))]));
+    // Retain the actual rendering environment even when the approved screenshot
+    // comparison fails; those observations explain drift without rewriting it.
+    const fontFiles = [...new Set(checked("fc-list", ["--format", "%{file}\n"]).split("\n").filter(Boolean))];
+    if (fontFiles.length === 0) throw new Error("The qualified image has no Fontconfig font inventory");
+    receipt.fonts = {
+      files: inventory(fontFiles), configuration: inventory(["/etc/fonts", "/usr/share/fontconfig"]),
+      activeConfiguration: checked("fc-conflist", []),
+      resolutions: Object.fromEntries(["Inter", "system-ui", "sans-serif", "monospace", "Liberation Mono"].map((family) => [family, checked("fc-match", ["--format", "%{family}\t%{file}\n", family])])),
+    };
+    receipt.browser = await browserEvidence(profile, runRoot);
     receipt.positive = phase("positive", runRoot, profile, { passed: 6 });
     const cssFiles = readdirSync(path.join(rendererRoot, "dist/assets")).filter((file) => file.endsWith(".css"));
     if (cssFiles.length !== 1) throw new Error("The visual mutation requires one unambiguous built CSS file");
@@ -311,14 +321,6 @@ async function main(arguments_) {
       baselineGuard(profile);
     }
     receipt.restored = phase("restored", runRoot, profile, { passed: 1, title: screenshotTitle });
-    receipt.browser = await browserEvidence(profile, runRoot);
-    const fontFiles = [...new Set(checked("fc-list", ["--format", "%{file}\n"]).split("\n").filter(Boolean))];
-    if (fontFiles.length === 0) throw new Error("The qualified image has no Fontconfig font inventory");
-    receipt.fonts = {
-      files: inventory(fontFiles), configuration: inventory(["/etc/fonts", "/usr/share/fontconfig"]),
-      activeConfiguration: checked("fc-conflist", []),
-      resolutions: Object.fromEntries(["Inter", "system-ui", "sans-serif", "monospace", "Liberation Mono"].map((family) => [family, checked("fc-match", ["--format", "%{family}\t%{file}\n", family])])),
-    };
     baselineGuard(profile);
     receipt.baseline.unchanged = true;
     receipt.status = "passed";
