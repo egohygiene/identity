@@ -55,7 +55,7 @@ Bookworm image pinned by its OCI index digest. The
 [dated registry receipt](evidence/identity-development-base-registry-2026-10-20.json)
 records the verified index, selected Linux/amd64 manifest and image-config
 identities. The [qualification review](reviews/development-base-2026-10-20.md)
-records executed build/runtime evidence. An index containing other architectures
+records executed build/runtime evidence and the\n[runtime receipt](evidence/identity-development-image-2026-10-20.json) retains\nactual versions, user/cache checks and source hashes. An index containing other architectures
 does not qualify those architectures; this checkpoint targets `linux/amd64`.
 
 The add-on owns this repository's pinned Rust toolchain, pnpm dependencies and

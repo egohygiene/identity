@@ -42,18 +42,51 @@ index's other architectures are not qualified by this Linux/amd64 checkpoint.
 
 ## Executed qualification
 
-The first [hosted run](https://github.com/egohygiene/identity/actions/runs/39369152128)
-verified the registry binding and built the default image, then stopped on a
-qualification-harness error: its pnpm version probe ran from the root instead
-of the renderer workspace and observed Corepack's unpinned global default.
-The probe now runs in the same owning renderer workspace as setup and renderer
-validation. This changes no installer/runtime dependency. That run is failed
-qualification evidence, not a passing image qualification. Full default/custom
-runtime checks are pending the corrected hosted run.
+The corrected [hosted run 39369572073](https://github.com/egohygiene/identity/actions/runs/39369572073),
+job 118454149412, passes at head
+4d9d520ba7fe6434f36a887f2a39dc22b899fc78, represented merge candidate
+3101cd87666d75977e380e2e4533880602e8be4a. The
+[source-bound runtime receipt](../evidence/identity-development-image-2026-10-20.json)
+records the Docker engine, base/add-on identities, 13 critical source hashes
+and a 331-file build-input inventory. Later documentation-only evidence updates
+must reproduce those hashes; they do not retroactively change the observed
+source revision. A fresh final-head hosted check remains required in the PR.
 
-This workspace has no Docker-compatible engine/socket; local checks alone are
-not image-build evidence. Exact source-bound results and runtime versions will
-be recorded before the review handoff.
+Both the unmodified default route (UID/GID 0:0) and explicit derived custom base
+(1000:1000) build through the same add-on/setup implementation and pass all
+29 recorded in-container commands. Expected nonzero TLS-rejection probes are
+recorded as such. Each preserves inherited USER/ENTRYPOINT/CMD, proves 12
+checkout/tool/cache write locations, and runs copied CLI help plus two
+generate/verify cycles. All 17 canonical source files and the unrelated sentinel
+remain unchanged. The complete 14-file output inventories, hidden manifest
+included, agree within and across the images. Each image passes renderer source
+checks, all 279 unit cases, build and public validation.
+
+| Runtime | Both qualified images |
+| --- | --- |
+| OS/platform | Debian 12 Bookworm, Linux/amd64, glibc 2.36 |
+| Node/npm | 24.22.0 / 11.19.1 |
+| Python | 3.11.2 |
+| Corepack/pnpm | 0.36.0 / 11.21.0 |
+| Rust/Cargo | 1.97.1 / 1.97.1 |
+| rustup | 1.29.1 |
+| C compiler | Debian GCC 12.2.0 |
+| curl/OpenSSL | 7.88.1 Debian security revision 10+deb12u15 / 3.0.22 |
+| Docker host | Engine 28.0.4, Linux/amd64 |
+
+The public-network setup exercises ordinary verified HTTPS. Inside each image,
+a disposable synthetic TLS server separately proves that curl/Node reject
+an unknown CA and accept explicit trust. Global trust is not modified and no
+certificate/key bytes are retained. This mechanism check is not qualification
+of a private organization's proxy.
+
+The first [run 39369152128](https://github.com/egohygiene/identity/actions/runs/39369152128)
+built the default image but failed a harness check: the pnpm version probe ran
+from root, outside the renderer package-manager pin. The corrected probe uses
+the same owning renderer workspace as setup and all renderer operations; no
+installer/dependency change was needed. The earlier run remains failed
+qualification evidence. This workspace has no Docker engine, so its local
+unavailable result is also never a passing build.
 
 ## Local checks and review
 
