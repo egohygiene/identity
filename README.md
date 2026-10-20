@@ -270,7 +270,11 @@ projection adapters are rejected from the compiler-owned path.
 The [compiler v1 contract](docs/contracts/COMPILER_V1.md) documents the public
 Rust ports plus `identity.compiler-plan/v1` and
 `identity.compiler-manifest/v1`. The `v1-generate` and `v1-verify` commands
-are the narrow consumer boundary for this package flow; the existing v0 CLI
+build and check the selected package flow. `v1-inspect` performs read-only
+interruption inspection; `v1-recover` explicitly rolls back validated interrupted
+transactions. Both use the same repository/output-root authority and operate
+without requiring valid brand source or Python. See the
+[consumer recovery guide](docs/consumers/RECOVERY.md). The existing v0 CLI
 commands retain their extraction-parity contract.
 
 ## Brand Kit packages
@@ -383,8 +387,9 @@ authority repairs merged through [PR #89](https://github.com/egohygiene/identity
 The latest published stable release remains `v1.0.0`; merged implementation,
 released artifacts, deployed pages, and accepted ADRs are separate evidence.
 The stabilization and complete-kit sequence is maintained in
-[ROADMAP.md](ROADMAP.md). #83's final download/recovery wording follows #76
-and #77; the current CLI does not expose an inspection or recovery command.
+[ROADMAP.md](ROADMAP.md). Current source adds `v1-inspect` and `v1-recover` for
+supported interruption handling; select an exact reviewed commit or a later
+release containing them. #83 retains broader final documentation reconciliation.
 
 | Capability | State | Tracking |
 | --- | --- | --- |

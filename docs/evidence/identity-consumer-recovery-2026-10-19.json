@@ -1,0 +1,613 @@
+{
+  "observedAt": "2026-10-20T01:04:46.779199Z",
+  "baseRevision": "44bf13bc45916d51ae5de10e9af2ce894d3be486",
+  "platform": "Linux",
+  "replayHarnessSha256": "e45f1c7d0acb73d0d995405f104463be6ad3b696a169bf0668de4fe036c50bc5",
+  "scope": "Genuine published runtime journal from test-only interrupted compiler execution; copied unmodified shipping CLI performs all inspection/recovery/regeneration.",
+  "shippingBinarySha256": "3dac856233621232909183711e481ab864d25cec2eeca1691da705184fed5090",
+  "workerExecutableSha256": "3ff733b3eadea134a58458e07aeeeffd9692dca9f27f912e4203829d43e61f4d",
+  "sourceFiles": [
+    {
+      "path": "src/cli.rs",
+      "sha256": "4755b09fcd8e2fe316ba6d6c47dde7f9c5f96cbfc6b32094b645f359aaa3d752"
+    },
+    {
+      "path": "src/commands.rs",
+      "sha256": "a5370fe0bf64668b015470811fc1ce67710e0ef002a8b24fa647b2a27f9025b1"
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "dd8c8fd26e7b34280fe009b159d37d8275d65cbb020b013338446a9a6c1ed70e"
+    },
+    {
+      "path": "src/compiler/mod.rs",
+      "sha256": "462733c8c6a508e6642f03eeea35d14cf47e8588d8ed3309a2570e615e89fa49"
+    },
+    {
+      "path": "src/compiler/filesystem.rs",
+      "sha256": "a4af1714eca221d40e4c60ab08a492d453d09cd6d8685bda394f6c20778d8f03"
+    },
+    {
+      "path": "src/compiler/filesystem/tests/inspection_tests.rs",
+      "sha256": "009c06811978deb033d7b704e69f5c67cc084d65cdc7b54065548e8b41127e86"
+    },
+    {
+      "path": "tests/consumer_recovery.rs",
+      "sha256": "aec39f7818b8f9c86ef114def5c80752faa688794212bb09fd78449846653ba1"
+    }
+  ],
+  "scenarios": [
+    {
+      "outputRoot": "assets/identity",
+      "worker": "compiler::filesystem::tests::inspection_tests::interrupted_consumer_worker",
+      "coordination": "Explicit test-only first-mutation readiness; killed and reaped before inspection/recovery.",
+      "publishedJournalSha256": "f70efa6dbaca457974cd769684ccd34944909e0d329ba1c647f28311d7d8e244",
+      "publishedJournalPreservedUntilExplicitRecovery": true,
+      "activeContendersRejectedWithoutMutation": true,
+      "inspectionChangesNoFilesOrDirectories": true,
+      "canonicalFiles": 17,
+      "canonicalAndUnrelatedBytesPreserved": true,
+      "repeatRecoveryIsZeroAndUnchanged": true,
+      "generatedInventory": [
+        {
+          "path": ".identity-manifest.json",
+          "bytes": 11072,
+          "sha256": "86ee54abafc5b12e0cf096ac2d7c93ecc2d6455accd7c9b635bf1b4c49ab438c"
+        },
+        {
+          "path": "brand/mark.svg",
+          "bytes": 263,
+          "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad"
+        },
+        {
+          "path": "packages/guidance/README.md",
+          "bytes": 20090,
+          "sha256": "72de4e2cc95c2a1f6e2f788ed6bb15cbc69406f0d8eb571dc4ab54439211824d"
+        },
+        {
+          "path": "packages/guidance/voice-and-usage.json",
+          "bytes": 21266,
+          "sha256": "3bf4c7cff181589933894af641d4ff43d2cc05e9b164ce6a043926cf40584e8d"
+        },
+        {
+          "path": "packages/metadata/metadata.json",
+          "bytes": 348,
+          "sha256": "22ef9ae360dc554ded4b6dace7cac0cef7ac0a6ab10d1bb17ab7c1df0285c8fa"
+        },
+        {
+          "path": "packages/metadata/open-graph.html",
+          "bytes": 408,
+          "sha256": "2df473ddcfcfbb806f539f21778e000f1ec1131cfbad4bc3fbba854b467fff5f"
+        },
+        {
+          "path": "packages/metadata/package.json",
+          "bytes": 342,
+          "sha256": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f"
+        },
+        {
+          "path": "packages/renderer/brand-kit.view-model.json",
+          "bytes": 31305,
+          "sha256": "a08d2784c0e0930e2bd53f0bc6bd52f9df50703b2941b08435fb657e46662cbb"
+        },
+        {
+          "path": "packages/tokens/package.json",
+          "bytes": 414,
+          "sha256": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843"
+        },
+        {
+          "path": "packages/tokens/tailwind.theme.json",
+          "bytes": 363,
+          "sha256": "0ab35788a542e279f92ef3ea93eaff323bbc75814d5931b7a2f3a21e8baa57a0"
+        },
+        {
+          "path": "packages/tokens/tokens.css",
+          "bytes": 376,
+          "sha256": "83423fb81f57a4f2176ae4ec417900a9427b0daf10ddd9ace27663221573ba1b"
+        },
+        {
+          "path": "packages/tokens/tokens.d.ts",
+          "bytes": 344,
+          "sha256": "3e8f23156481845d31e3964c302887c503da69041a2e5af3779ddd08a75290ea"
+        },
+        {
+          "path": "packages/tokens/tokens.js",
+          "bytes": 856,
+          "sha256": "648c947db230166a181db4ca21ffd7ebb981598da806a58c56e3c44ef5205c1a"
+        },
+        {
+          "path": "packages/tokens/tokens.json",
+          "bytes": 3307,
+          "sha256": "6fb60127c6433f7e8ba91999c7c54bd4ed754458013e1acf23e7e2f0036e96b9"
+        }
+      ],
+      "generatedFilesIncludingHiddenManifest": 14,
+      "defaultInventoryMatchesPriorReviewedReceipt": true,
+      "verificationAndIncrementalGenerationPreserveCompleteConsumerInventory": true,
+      "commands": [
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Output root: assets/identity\nWriter coordination: uncoordinated observation (no existing writer lock); state may change\nPending transactions: 0\nEmpty workspaces: 0\nNo pending compiler transaction workspaces observed.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 1,
+          "stdout": "",
+          "stderr": "error: IDN2346: another operation owns this repository's compiler transaction namespace\nPath: .cache/identity/writer.lock\nRecovery: Wait for generation, inspection or recovery to finish, then retry with the same --repository-root and --output-root arguments. Do not delete the lock file or another operation's transaction workspace.\n"
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-recover",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 1,
+          "stdout": "",
+          "stderr": "error: IDN2346: another operation owns this repository's compiler transaction namespace\nPath: .cache/identity/writer.lock\nRecovery: Wait for generation, inspection or recovery to finish, then retry with the same --repository-root and --output-root arguments. Do not delete the lock file or another operation's transaction workspace.\n"
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Output root: assets/identity\nWriter coordination: shared lock held during inspection\nPending transactions: 1\nEmpty workspaces: 0\nWorkspace: 1582c1f568b197be7c730f29b340731def58bce196a888a059d47a221a2369dc\nPlan: 1582c1f568b197be7c730f29b340731def58bce196a888a059d47a221a2369dc\nRemove: assets/identity/packages/tokens/tokens.json\nRemove: assets/identity/packages/tokens/tokens.js\nRemove: assets/identity/packages/tokens/tokens.d.ts\nRemove: assets/identity/packages/tokens/tokens.css\nRemove: assets/identity/packages/tokens/tailwind.theme.json\nRemove: assets/identity/packages/tokens/package.json\nRemove: assets/identity/packages/renderer/brand-kit.view-model.json\nRemove: assets/identity/packages/metadata/package.json\nRemove: assets/identity/packages/metadata/open-graph.html\nRemove: assets/identity/packages/metadata/metadata.json\nRemove: assets/identity/packages/guidance/voice-and-usage.json\nRemove: assets/identity/packages/guidance/README.md\nRemove: assets/identity/brand/mark.svg\nRemove: assets/identity/.identity-manifest.json\nUse identity v1-recover with the same --repository-root and --output-root to explicitly roll back this scope. Recovery revalidates all evidence under exclusive ownership.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-generate",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 1,
+          "stdout": "",
+          "stderr": "error: IDN2301: a previous compiler transaction requires recovery\nRecovery: Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, review the reported rollback, then explicitly run identity v1-recover with the same arguments before planning new mutations.\n"
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-recover",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Recovered 1 v1 Identity transactions\nRecovered plan: 1582c1f568b197be7c730f29b340731def58bce196a888a059d47a221a2369dc\nReview the recovered outputs, then use identity v1-generate with the same --repository-root and --output-root.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-recover",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Recovered 0 v1 Identity transactions\nReview the recovered outputs, then use identity v1-generate with the same --repository-root and --output-root.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Output root: assets/identity\nWriter coordination: shared lock held during inspection\nPending transactions: 0\nEmpty workspaces: 0\nNo pending compiler transaction workspaces observed.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-generate",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Generated 13 v1 Identity projections for example-product\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-verify",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Verified v1 Identity projections for example-product\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-generate",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Generated 13 v1 Identity projections for example-product\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-verify",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "assets/identity"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Verified v1 Identity projections for example-product\n",
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "outputRoot": "generated/branding",
+      "worker": "compiler::filesystem::tests::inspection_tests::interrupted_consumer_worker",
+      "coordination": "Explicit test-only first-mutation readiness; killed and reaped before inspection/recovery.",
+      "publishedJournalSha256": "ee6b7c393991977052022aa023e4febb3d81a67587474c5fdd9652f7b6de1181",
+      "publishedJournalPreservedUntilExplicitRecovery": true,
+      "activeContendersRejectedWithoutMutation": true,
+      "inspectionChangesNoFilesOrDirectories": true,
+      "canonicalFiles": 17,
+      "canonicalAndUnrelatedBytesPreserved": true,
+      "repeatRecoveryIsZeroAndUnchanged": true,
+      "generatedInventory": [
+        {
+          "path": ".identity-manifest.json",
+          "bytes": 11111,
+          "sha256": "a132714d9163db25827b01cac76a6e0650229316941d428e8819bae555efce78"
+        },
+        {
+          "path": "brand/mark.svg",
+          "bytes": 263,
+          "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad"
+        },
+        {
+          "path": "packages/guidance/README.md",
+          "bytes": 20090,
+          "sha256": "72de4e2cc95c2a1f6e2f788ed6bb15cbc69406f0d8eb571dc4ab54439211824d"
+        },
+        {
+          "path": "packages/guidance/voice-and-usage.json",
+          "bytes": 21266,
+          "sha256": "3bf4c7cff181589933894af641d4ff43d2cc05e9b164ce6a043926cf40584e8d"
+        },
+        {
+          "path": "packages/metadata/metadata.json",
+          "bytes": 348,
+          "sha256": "22ef9ae360dc554ded4b6dace7cac0cef7ac0a6ab10d1bb17ab7c1df0285c8fa"
+        },
+        {
+          "path": "packages/metadata/open-graph.html",
+          "bytes": 408,
+          "sha256": "2df473ddcfcfbb806f539f21778e000f1ec1131cfbad4bc3fbba854b467fff5f"
+        },
+        {
+          "path": "packages/metadata/package.json",
+          "bytes": 342,
+          "sha256": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f"
+        },
+        {
+          "path": "packages/renderer/brand-kit.view-model.json",
+          "bytes": 31305,
+          "sha256": "a08d2784c0e0930e2bd53f0bc6bd52f9df50703b2941b08435fb657e46662cbb"
+        },
+        {
+          "path": "packages/tokens/package.json",
+          "bytes": 414,
+          "sha256": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843"
+        },
+        {
+          "path": "packages/tokens/tailwind.theme.json",
+          "bytes": 363,
+          "sha256": "0ab35788a542e279f92ef3ea93eaff323bbc75814d5931b7a2f3a21e8baa57a0"
+        },
+        {
+          "path": "packages/tokens/tokens.css",
+          "bytes": 376,
+          "sha256": "83423fb81f57a4f2176ae4ec417900a9427b0daf10ddd9ace27663221573ba1b"
+        },
+        {
+          "path": "packages/tokens/tokens.d.ts",
+          "bytes": 344,
+          "sha256": "3e8f23156481845d31e3964c302887c503da69041a2e5af3779ddd08a75290ea"
+        },
+        {
+          "path": "packages/tokens/tokens.js",
+          "bytes": 856,
+          "sha256": "648c947db230166a181db4ca21ffd7ebb981598da806a58c56e3c44ef5205c1a"
+        },
+        {
+          "path": "packages/tokens/tokens.json",
+          "bytes": 3307,
+          "sha256": "6fb60127c6433f7e8ba91999c7c54bd4ed754458013e1acf23e7e2f0036e96b9"
+        }
+      ],
+      "generatedFilesIncludingHiddenManifest": 14,
+      "defaultInventoryMatchesPriorReviewedReceipt": null,
+      "verificationAndIncrementalGenerationPreserveCompleteConsumerInventory": true,
+      "commands": [
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Output root: generated/branding\nWriter coordination: uncoordinated observation (no existing writer lock); state may change\nPending transactions: 0\nEmpty workspaces: 0\nNo pending compiler transaction workspaces observed.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 1,
+          "stdout": "",
+          "stderr": "error: IDN2346: another operation owns this repository's compiler transaction namespace\nPath: .cache/identity/writer.lock\nRecovery: Wait for generation, inspection or recovery to finish, then retry with the same --repository-root and --output-root arguments. Do not delete the lock file or another operation's transaction workspace.\n"
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-recover",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 1,
+          "stdout": "",
+          "stderr": "error: IDN2346: another operation owns this repository's compiler transaction namespace\nPath: .cache/identity/writer.lock\nRecovery: Wait for generation, inspection or recovery to finish, then retry with the same --repository-root and --output-root arguments. Do not delete the lock file or another operation's transaction workspace.\n"
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Output root: generated/branding\nWriter coordination: shared lock held during inspection\nPending transactions: 1\nEmpty workspaces: 0\nWorkspace: 6fbf02ae683e3a3f66ca967284f70f3c2b45b58088aecec181b45631c03a5400\nPlan: 6fbf02ae683e3a3f66ca967284f70f3c2b45b58088aecec181b45631c03a5400\nRemove: generated/branding/packages/tokens/tokens.json\nRemove: generated/branding/packages/tokens/tokens.js\nRemove: generated/branding/packages/tokens/tokens.d.ts\nRemove: generated/branding/packages/tokens/tokens.css\nRemove: generated/branding/packages/tokens/tailwind.theme.json\nRemove: generated/branding/packages/tokens/package.json\nRemove: generated/branding/packages/renderer/brand-kit.view-model.json\nRemove: generated/branding/packages/metadata/package.json\nRemove: generated/branding/packages/metadata/open-graph.html\nRemove: generated/branding/packages/metadata/metadata.json\nRemove: generated/branding/packages/guidance/voice-and-usage.json\nRemove: generated/branding/packages/guidance/README.md\nRemove: generated/branding/brand/mark.svg\nRemove: generated/branding/.identity-manifest.json\nUse identity v1-recover with the same --repository-root and --output-root to explicitly roll back this scope. Recovery revalidates all evidence under exclusive ownership.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-generate",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 1,
+          "stdout": "",
+          "stderr": "error: IDN2301: a previous compiler transaction requires recovery\nRecovery: Run identity v1-inspect --repository-root <consumer> --output-root <authorized-root>, review the reported rollback, then explicitly run identity v1-recover with the same arguments before planning new mutations.\n"
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-recover",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Recovered 1 v1 Identity transactions\nRecovered plan: 6fbf02ae683e3a3f66ca967284f70f3c2b45b58088aecec181b45631c03a5400\nReview the recovered outputs, then use identity v1-generate with the same --repository-root and --output-root.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-recover",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Recovered 0 v1 Identity transactions\nReview the recovered outputs, then use identity v1-generate with the same --repository-root and --output-root.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-inspect",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": true,
+          "exitCode": 0,
+          "stdout": "Output root: generated/branding\nWriter coordination: shared lock held during inspection\nPending transactions: 0\nEmpty workspaces: 0\nNo pending compiler transaction workspaces observed.\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-generate",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Generated 13 v1 Identity projections for example-product\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-verify",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Verified v1 Identity projections for example-product\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-generate",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Generated 13 v1 Identity projections for example-product\n",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "identity",
+            "v1-verify",
+            "--repository-root",
+            "<consumer>",
+            "--output-root",
+            "generated/branding"
+          ],
+          "pythonUnavailable": false,
+          "exitCode": 0,
+          "stdout": "Verified v1 Identity projections for example-product\n",
+          "stderr": ""
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Linux local execution only; native macOS/Windows behavior requires fresh hosted checks.",
+    "The producer is the real compiler under a cfg(test) checkpoint; this is not a pristine shipping CLI killed by spontaneous timing.",
+    "Shipping inspection/recovery binary has no test hook and runs from a separate copied location.",
+    "Inventories compare file bytes, paths and directories; timestamps, inode identity and read-access metadata are not asserted.",
+    "Participating local processes only; no hostile filesystem, network-filesystem or power-loss guarantee."
+  ],
+  "externalSentinelPreserved": true,
+  "candidateSourceState": "Working-tree candidate over the full base revision; source and executable hashes identify the executed bytes. Exact immutable PR head and represented merge candidate are recorded separately after publication.",
+  "validation": {
+    "rust": {
+      "command": "cargo test --locked --all-features --target-dir separate-clean-validation-target",
+      "passed": 112,
+      "failed": 0,
+      "ignoredHelpers": 3,
+      "filesystemCases": 42,
+      "shippingCliCases": 9
+    },
+    "lint": {
+      "command": "cargo clippy --locked --all-targets --all-features --target-dir separate-clean-validation-target -- --deny warnings",
+      "outcome": "passed"
+    },
+    "format": {
+      "command": "cargo fmt --all --check",
+      "outcome": "passed"
+    },
+    "python": {
+      "command": "python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose",
+      "total": 138,
+      "passed": 136,
+      "skipped": 2,
+      "skipReasons": [
+        "unbuilt experience artifact",
+        "Windows-only junction case on Linux"
+      ]
+    },
+    "integrity": "Six standalone verifiers, valid source fixture, compileall and JSON checks pass; extraction baseline is preserved and three evolved CLI hashes/rationales are updated.",
+    "independentReview": "No remaining production blockers; review discovered and verified the fix for lossy/native output-root aliasing.",
+    "hosted": "Fresh Linux/macOS/Windows source-install/clean-room, public smoke and advisory runs are required for the exact PR candidate; local Linux does not establish native platform evidence."
+  },
+  "testEvidenceClasses": {
+    "integration": "Synthetic valid v2 retained-journal fixtures exercised through a copied shipping CLI; not a spontaneous interruption claim.",
+    "runtimeReplay": "Real compiler/pipeline and journal publication with a cfg(test) first-mutation pause; producer killed/reaped and unmodified shipping CLI executes inspection/recovery.",
+    "artifactIsolation": "Final full suite, strict lint and replay artifacts built in an independent clean target directory. Earlier shared-target stale-binary/ExecutableFileBusy observations are not passing evidence; no busy/spawn retry was added."
+  },
+  "decisionImpact": {
+    "operation": "reference",
+    "governingRecords": [
+      "ADR-0012",
+      "ADR-0019",
+      "ADR-0026"
+    ],
+    "newSchemaOrDecision": false,
+    "records": 26,
+    "accepted": 21,
+    "proposed": 5,
+    "existingDispositionApprovalLineage": "unchanged"
+  }
+}

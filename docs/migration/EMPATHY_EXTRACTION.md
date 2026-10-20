@@ -24,6 +24,11 @@ byte-identical and requires every intentionally evolved file to match its
 explicitly recorded current digest. This preserves extraction provenance without
 turning the extraction snapshot into a permanent implementation freeze.
 
+Issue #77 evolves the three existing CLI entries for inspection/recovery dispatch,
+complete transaction error guidance and exact native output-root handling. The
+registry preserves each original baseline digest and records the new current
+digest; the original extraction manifest and v0 behavior remain unchanged.
+
 ## Preserved behavior
 
 | Surface | Incubated evidence | Extracted evidence |

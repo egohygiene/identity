@@ -40,7 +40,7 @@ updated: 2026-10-18
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #99 completed through PRs #114/#117/#118. #78 transaction-path confinement merged through #119 at `417865a449678f887237d94aaa019a10bcc16612` and is closed. #79 writer serialization (IDN-Q18) is the active authorized issue; #77 follows its reviewed completion.
+**Current gate:** #99 completed through PRs #114/#117/#118. #78 closed through #119; #79 writer serialization closed through #120 at `44bf13bc45916d51ae5de10e9af2ce894d3be486`. #77 inspection and explicit recovery (IDN-Q16) is the active authorized issue.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -406,7 +406,7 @@ issues: [76]
 
 <!-- roadmap-step
 id: IDN-Q16
-status: blocked
+status: active
 depends_on: [IDN-Q12, IDN-Q17, IDN-Q18]
 issues: [77]
 -->
@@ -418,7 +418,7 @@ issues: [77]
 
 - [ ] Inspection is read-only; documented recovery/regeneration preserves canonical and unrelated files and diagnoses corrupt/active workspaces.
 
-**Evidence and scope:** [#77](https://github.com/egohygiene/identity/issues/77). Current CLI source has no inspection/recovery command; do not advertise a future command.
+**Evidence and scope:** [#77](https://github.com/egohygiene/identity/issues/77) is active from `44bf13bc45916d51ae5de10e9af2ce894d3be486`. The candidate exposes human-only `v1-inspect` and `v1-recover`, sharing complete preflight and independent output-root authority. Inspection creates no cache/lock files; explicit rollback uses the existing exclusive writer guard. See the [consumer recovery guide](docs/consumers/RECOVERY.md). Keep Q16 active until review/merge; these commands do not change historical releases or promise a new machine-readable report.
 
 <!-- roadmap-step
 id: IDN-Q17
@@ -438,7 +438,7 @@ issues: [78]
 
 <!-- roadmap-step
 id: IDN-Q18
-status: active
+status: complete
 depends_on: [IDN-Q17]
 issues: [79]
 -->
@@ -448,9 +448,9 @@ issues: [79]
 
 **Exit criteria:**
 
-- [ ] Coordinated writers and concurrent recovery safely reject or serialize without mixed state; interrupted locks preserve active work.
+- [x] Coordinated writers and concurrent recovery safely reject or serialize without mixed state; interrupted locks preserve active work.
 
-**Evidence and scope:** [#79](https://github.com/egohygiene/identity/issues/79) is active from main `417865a449678f887237d94aaa019a10bcc16612`. The [instrumented baseline receipt](docs/evidence/identity-writer-serialization-baseline-2026-10-19.json) reproduces stale writer prechecks leaving an unjournaled workspace and duplicate recovery reporting, without observed output corruption. The candidate adds one persistent repository-wide native lock shared by generation/recovery, with bounded child-process regressions and proposed ADR-0026. See the [review](docs/reviews/writer-serialization-2026-10-19.md). Keep Q18 active until review/merge; no hostile-filesystem or power-loss guarantee is inferred.
+**Evidence and scope:** [#79](https://github.com/egohygiene/identity/issues/79) closed through [PR #120](https://github.com/egohygiene/identity/pull/120), merged at `44bf13bc45916d51ae5de10e9af2ce894d3be486`. The [baseline receipt](docs/evidence/identity-writer-serialization-baseline-2026-10-19.json) records unjournaled leftovers and duplicate recovery reporting without observed output corruption. One persistent native lock coordinates generation/recovery; the [review](docs/reviews/writer-serialization-2026-10-19.md) and candidate receipt bind independent-process, 20-replay and unchanged 14-file output evidence. Fresh CLI and Linux/macOS/Windows source-install/clean-room gates pass, including nine Windows process cases; advisory retains five known warnings. ADR-0026 remains proposed. No hostile-filesystem or power-loss guarantee is inferred.
 
 <!-- roadmap-step
 id: IDN-Q19
@@ -566,7 +566,7 @@ issues: [86]
 
 <!-- roadmap-step
 id: IDN-Q26
-status: blocked
+status: ready
 depends_on: [IDN-Q12, IDN-Q13, IDN-Q17, IDN-Q18]
 issues: [87]
 -->
@@ -578,7 +578,7 @@ issues: [87]
 
 - [ ] Formatting, Clippy, behavior, deterministic output, approvals, drift, confinement, writer, recovery, and provenance checks pass.
 
-**Evidence and scope:** [#87](https://github.com/egohygiene/identity/issues/87). Use small extractions after invariant repairs, without stronger durability claims.
+**Evidence and scope:** [#87](https://github.com/egohygiene/identity/issues/87). Its #73/#74/#78/#79 prerequisites are complete, so it is dependency-ready. The execution order still places refactors after the first usable kit; readiness does not authorize starting it. Use small extractions without stronger durability claims.
 
 <!-- roadmap-step
 id: IDN-Q27

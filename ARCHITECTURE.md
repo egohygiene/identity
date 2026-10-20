@@ -166,11 +166,17 @@ The compiler still rejects network-dependent or nondeterministic adapters. The
 package layer does not make its output canonical or publish implicitly. Its
 narrow `v1-generate` command is a consumer-owned transactional build boundary,
 and `v1-verify` detects missing or drifted generated state without mutation.
-On current source both commands and the public v1 loader run the complete
+`v1-inspect` and `v1-recover` expose the artifact-store boundary directly:
+read-only complete preflight versus explicit exclusive rollback, independent
+of canonical-source/Python availability. Inspection takes a shared lock only
+when the persistent coordination file already exists; an absent lock yields a
+qualified observation. Recovery always revalidates under exclusive ownership.
+On current source generation, verification and the public v1 loader run the complete
 embedded Python preflight automatically. PR #89 repaired public/review
 filtering, source authority, and journal authority on main; it did not change
-historical release bytes. #74–#79 retain the remaining digest, renderer-input,
-transaction workspace, writer, and distributed recovery work.
+historical release bytes. Later #74–#79 repairs preserve digest, renderer-input,
+transaction workspace, writer and distributed recovery boundaries; their current
+states and evidence are recorded in ROADMAP.md, separately from released bytes.
 
 The #12 quality layer sits downstream of the resolved Brand Kit and compiler
 manifest. It owns `identity.quality-report/v1`, package/publication scopes,
