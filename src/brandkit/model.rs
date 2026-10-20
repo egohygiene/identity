@@ -51,10 +51,20 @@ pub struct BrandKitOrigin {
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct BrandKitAssetUsage {
+    pub safe_zone: String,
+    pub minimum_size: String,
+    pub restrictions: Vec<String>,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BrandKitSourceGovernance {
     pub license: BrandKitLicense,
     pub origin: BrandKitOrigin,
     pub approval: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub usage: Option<BrandKitAssetUsage>,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]

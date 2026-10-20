@@ -66,6 +66,30 @@ fn published_v1_source_contract_drives_selected_package_profiles() {
     )
     .expect("read generated CSS");
     assert!(css.contains("--identity-color-brand-primary: #6b33b8;"));
+
+    let renderer: Value = serde_json::from_slice(
+        &fs::read(
+            temporary
+                .path()
+                .join("assets/identity/packages/renderer/brand-kit.view-model.json"),
+        )
+        .expect("read renderer model"),
+    )
+    .expect("parse renderer model");
+    let provenance: Value = serde_json::from_slice(
+        &fs::read(fixture_root().join(".identity/governance/provenance.json"))
+            .expect("read source provenance"),
+    )
+    .expect("parse source provenance");
+    for asset in provenance["assets"].as_array().expect("source assets") {
+        let projected = renderer["assets"]
+            .as_array()
+            .expect("renderer assets")
+            .iter()
+            .find(|projected| projected["id"] == asset["id"])
+            .expect("renderer source asset");
+        assert_eq!(projected["usage"], asset["usage"]);
+    }
 }
 
 fn copy_tree(source: &Path, destination: &Path) {

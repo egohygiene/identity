@@ -11,7 +11,9 @@ use std::collections::{BTreeMap, BTreeSet};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::brandkit::{BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitSourceAsset};
+use crate::brandkit::{
+    BrandKitAssetUsage, BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitSourceAsset,
+};
 use crate::compiler::{
     AdapterDescriptor, AdapterKind, AdapterPlan, AdapterRegistry, COMPILER_API_MAJOR,
     CompilerError, CompilerRequest, CompilerResult, Diagnostic, DiagnosticSeverity, EvidenceRecord,
@@ -72,6 +74,8 @@ pub struct BrandKitViewAsset {
     pub origin: Option<BrandKitOrigin>,
     #[serde(default)]
     pub approval: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub usage: Option<BrandKitAssetUsage>,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -172,6 +176,7 @@ impl BrandKitViewModel {
                     license: governance.map(|entry| entry.license.clone()),
                     origin: governance.map(|entry| entry.origin.clone()),
                     approval: governance.map(|entry| entry.approval.clone()),
+                    usage: governance.and_then(|entry| entry.usage.clone()),
                 }
             })
             .collect();

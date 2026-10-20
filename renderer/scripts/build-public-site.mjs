@@ -216,18 +216,11 @@ async function buildViewModel(packageManifest, designSystem, pressKit) {
         text: embeddedText ? contents.toString("utf8") : "",
         availability: "generated-download",
         downloadPath: sourcePath,
-        license: asset.license || {
-          spdx: "MIT",
-          status: "approved",
-          attribution: "Ego Hygiene contributors",
-        },
-        origin: asset.origin || {
-          creator: "Ego Hygiene",
-          method: "deterministic vector projection",
-          source: `assets/identity/${sourcePath}`,
-          capturedAt: "2026-08-22",
-        },
-        approval: asset.approval || "human-approved-visual-direction",
+        // Release-owned byte selection does not supply missing rights metadata.
+        license: asset.license ?? null,
+        origin: asset.origin ?? null,
+        approval: asset.approval ?? null,
+        ...(asset.usage === undefined ? {} : { usage: asset.usage }),
       };
     }),
   );

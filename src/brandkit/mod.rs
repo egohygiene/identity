@@ -28,8 +28,8 @@ use crate::compiler::{
 
 pub use guidance::GuidanceAudience;
 pub use model::{
-    BRAND_KIT_MODEL_SCHEMA, BrandKitGuidance, BrandKitLicense, BrandKitModel, BrandKitOrigin,
-    BrandKitProject, BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken,
+    BRAND_KIT_MODEL_SCHEMA, BrandKitAssetUsage, BrandKitGuidance, BrandKitLicense, BrandKitModel,
+    BrandKitOrigin, BrandKitProject, BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken,
 };
 pub use profiles::{
     BRAND_KIT_PROFILE_VERSION, ProfileDescriptor, ProfileSelection, all_profiles, compiler_request,

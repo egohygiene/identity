@@ -218,6 +218,20 @@
         }
       }
     },
+    "assetUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["safeZone", "minimumSize", "restrictions"],
+      "properties": {
+        "safeZone": { "type": "string", "minLength": 1 },
+        "minimumSize": { "type": "string", "minLength": 1 },
+        "restrictions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
     "asset": {
       "type": "object",
       "additionalProperties": false,
@@ -308,6 +322,12 @@
           "type": [
             "string",
             "null"
+          ]
+        },
+        "usage": {
+          "oneOf": [
+            { "$ref": "#/$defs/assetUsage" },
+            { "type": "null" }
           ]
         }
       }

@@ -160,6 +160,42 @@ the approved mark. Empty facts/team arrays demonstrate genuine optionality.
 Its synthetic review and rights evidence is for exercising this example only;
 it cannot approve real consumer copy, artwork, licenses, or people.
 
+### Rights, policy references and font acquisition
+
+Keep software licensing, trademark rules and third-party asset rights distinct.
+The repository's software license is not blanket permission to reuse its name,
+marks or fonts. Use the existing governed homes rather than copying policies
+into a second catalog:
+
+| Supplied material | Authoritative home and consumer behavior |
+| --- | --- |
+| Distributed asset rights, attribution, creator/source and restrictions | The asset's provenance `license`, `origin`, `usage` and `approval`; Press Kit reuses the rights and digest with its own asset-selection approval, while the core renderer carries the source approval |
+| Trademark, copyright and third-party notices | Approved/public usage `legal.{trademark,copyright,attribution,thirdPartyLicenses}`; preserve supplied wording and the rights owner's authority |
+| Software license, governance, Code of Conduct, security-reporting and contribution documents | Approved/public Press Kit `links[]` with `kind: "documentation"` or `"other"`, an explicit label and the authoritative HTTPS URL |
+| Support/community destinations and official contacts | Approved/public Press Kit `links[]` and `contacts[]`; use `kind: "support"` where applicable and the channel registry for adopted social-account links |
+| A font that consumers must acquire separately | An approved/public external Press Kit link, with a clear supplied label and explanatory usage/legal guidance where needed; the link is not a redistribution approval |
+| Permissions that have not been established | An approved explanatory fact or guidance statement describing that uncertainty; do not invent an approved license or place unresolved bytes among selected public assets |
+
+Link IDs and labels do not select policy semantics. The renderer preserves the
+configured label and destination; it does not fetch, copy, verify or rewrite
+the linked policy. Omit absent optional references. Changes to a policy or its
+owner remain with that policy's existing repository or organization owner.
+
+Canonical provenance requires `license.status: "approved"` and an actual
+subject-matched asset decision. There is no invented `unresolved` license
+status that makes unknown rights distributable. Keep acquisition-only fonts
+outside local selected assets until the owner has approved the actual bytes,
+license evidence and checksums. A font family name or provider URL supplies no
+such approval; builds do not download fonts. The optional inspection/subsetting
+adapters in [ADR-0007](../decisions/ADR-0007-font-tooling-boundaries.md) are not
+implemented by this presentation work.
+
+The separate legacy release publisher can have missing rights metadata. Its
+page now exposes that absence rather than manufacturing a license or approval;
+its existing archive selection is unchanged. This does not establish those
+permissions or withhold the already-selected bytes. See the
+[publication rights boundary](../publication/IDENTITY_PAGES.md#rights-metadata-and-release-selection).
+
 ## 4. Rehearse on a disposable copy
 
 Start in the exact reviewed Identity source checkout identified by your pin.
