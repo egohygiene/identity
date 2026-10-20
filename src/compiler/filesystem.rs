@@ -19,6 +19,27 @@ use super::{
 
 const TRANSACTION_SCHEMA: &str = "identity.compiler-transaction/v2";
 const TRANSACTION_ROOT: &str = ".cache/identity/transactions";
+const WRITER_LOCK: &str = ".cache/identity/writer.lock";
+
+#[cfg(test)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum TestCheckpoint {
+    WriterLocked,
+    Mutation(usize),
+}
+
+struct WriterGuard {
+    file: fs::File,
+}
+
+impl Drop for WriterGuard {
+    fn drop(&mut self) {
+        // End ownership on ordinary return even if a concurrently forked child
+        // briefly inherited the descriptor before exec. Closing remains the
+        // fallback, and process death relies on native handle lifetime rules.
+        let _ = self.file.unlock();
+    }
+}
 
 #[derive(Debug)]
 pub struct LocalArtifactStore {
@@ -26,6 +47,8 @@ pub struct LocalArtifactStore {
     output_root: String,
     fail_after_mutations: Option<usize>,
     completed_mutations: usize,
+    #[cfg(test)]
+    pause_at: Option<TestCheckpoint>,
 }
 
 impl LocalArtifactStore {
@@ -71,6 +94,8 @@ impl LocalArtifactStore {
             output_root: output_root.to_owned(),
             fail_after_mutations: None,
             completed_mutations: 0,
+            #[cfg(test)]
+            pause_at: None,
         })
     }
 
@@ -78,6 +103,126 @@ impl LocalArtifactStore {
     pub(crate) fn fail_after_mutations(mut self, mutations: usize) -> Self {
         self.fail_after_mutations = Some(mutations);
         self
+    }
+
+    #[cfg(test)]
+    fn pause_at(mut self, checkpoint: TestCheckpoint) -> Self {
+        self.pause_at = Some(checkpoint);
+        self
+    }
+
+    #[cfg(test)]
+    fn pause_at_checkpoint(&self, checkpoint: TestCheckpoint) {
+        if self.pause_at == Some(checkpoint) {
+            use std::io::Read;
+
+            println!("IDENTITY_PROCESS_READY");
+            std::io::stdout().flush().expect("flush process checkpoint");
+            std::io::stdin()
+                .read_exact(&mut [0_u8; 1])
+                .expect("release process checkpoint");
+        }
+    }
+
+    fn checked_writer_lock_path(&self) -> CompilerResult<PathBuf> {
+        // Validate both namespaces before creating coordination metadata. An unsafe
+        // retained transaction root must not cause even a new lock file to appear.
+        let transaction_root = self.resolve(TRANSACTION_ROOT)?;
+        match transaction_root.symlink_metadata() {
+            Ok(metadata) if !metadata.is_dir() || is_link(&metadata) => {
+                return Err(writer_lock_error(
+                    "transaction root is not a real repository-local directory",
+                    FailureKind::Failed,
+                ));
+            }
+            Ok(_) => {}
+            Err(error) if error.kind() == ErrorKind::NotFound => {}
+            Err(error) => {
+                return Err(writer_lock_io_error(
+                    "cannot inspect transaction root",
+                    &error,
+                ));
+            }
+        }
+        let lock_path = self.resolve(WRITER_LOCK)?;
+        match lock_path.symlink_metadata() {
+            Ok(metadata) if !metadata.is_file() || is_link(&metadata) => {
+                return Err(writer_lock_error(
+                    "writer lock is not a regular repository-local file",
+                    FailureKind::Failed,
+                ));
+            }
+            Ok(_) => {}
+            Err(error) if error.kind() == ErrorKind::NotFound => {}
+            Err(error) => {
+                return Err(writer_lock_io_error("cannot inspect writer lock", &error));
+            }
+        }
+        Ok(lock_path)
+    }
+
+    fn acquire_writer_lock(&self) -> CompilerResult<WriterGuard> {
+        let lock_path = self.checked_writer_lock_path()?;
+        let parent = lock_path
+            .parent()
+            .expect("fixed writer lock path has a parent");
+        fs::create_dir_all(parent)
+            .map_err(|error| writer_lock_io_error("cannot create writer lock directory", &error))?;
+        self.checked_writer_lock_path()?;
+        // A persistent inode is essential: unlinking it would let another writer
+        // lock a replacement while this handle still owns the original lock.
+        // Opening an existing regular file never changes any of its bytes, even
+        // if it has another hard-linked name. No PID or timestamp grants ownership.
+        let file = match fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create_new(true)
+            .open(&lock_path)
+        {
+            Ok(file) => file,
+            Err(error) if error.kind() == ErrorKind::AlreadyExists => {
+                // Another cooperating writer may have reserved the inode after
+                // inspection. Revalidate and open it without creation or truncation.
+                self.checked_writer_lock_path()?;
+                fs::OpenOptions::new()
+                    .read(true)
+                    .write(true)
+                    .open(&lock_path)
+                    .map_err(|error| {
+                        writer_lock_io_error("cannot open existing writer lock", &error)
+                    })?
+            }
+            Err(error) => {
+                return Err(writer_lock_io_error("cannot reserve writer lock", &error));
+            }
+        };
+        self.checked_writer_lock_path()?;
+        let metadata = file
+            .metadata()
+            .map_err(|error| writer_lock_io_error("cannot inspect opened writer lock", &error))?;
+        if !metadata.is_file() || is_link(&metadata) {
+            return Err(writer_lock_error(
+                "opened writer lock is not a regular file",
+                FailureKind::Failed,
+            ));
+        }
+        match file.try_lock() {
+            Ok(()) => Ok(WriterGuard { file }),
+            Err(fs::TryLockError::WouldBlock) => Err(CompilerError::new(
+                FailureKind::Blocked,
+                Diagnostic::error(
+                    "IDN2346",
+                    FailureKind::Blocked,
+                    Some(WRITER_LOCK.to_owned()),
+                    "another writer owns this repository's compiler transaction namespace",
+                    "Wait for generation or recovery to finish, then retry. Do not delete the lock file or another writer's transaction workspace.",
+                ),
+            )),
+            Err(fs::TryLockError::Error(error)) => Err(writer_lock_io_error(
+                "cannot acquire native writer lock",
+                &error,
+            )),
+        }
     }
 
     fn transaction_root(&self) -> PathBuf {
@@ -277,6 +422,8 @@ impl LocalArtifactStore {
 
     fn after_mutation(&mut self) -> CompilerResult<()> {
         self.completed_mutations += 1;
+        #[cfg(test)]
+        self.pause_at_checkpoint(TestCheckpoint::Mutation(self.completed_mutations));
         if self.fail_after_mutations == Some(self.completed_mutations) {
             return Err(fs_error(
                 "IDN2399",
@@ -741,6 +888,14 @@ impl ArtifactStore for LocalArtifactStore {
         artifacts: &[RenderedArtifact],
         manifest: &CompilerManifest,
     ) -> CompilerResult<()> {
+        // Request and path validation remain mutation-free, including cache metadata.
+        self.validate_plan(plan)?;
+        Self::validate_artifacts(plan, artifacts, manifest)?;
+        // Keep this independent handle alive until every return, including the
+        // unchanged path, post-apply verification and transaction cleanup.
+        let _writer_guard = self.acquire_writer_lock()?;
+        #[cfg(test)]
+        self.pause_at_checkpoint(TestCheckpoint::WriterLocked);
         if self.recovery_required()? {
             return Err(CompilerError::new(
                 FailureKind::Blocked,
@@ -754,12 +909,10 @@ impl ArtifactStore for LocalArtifactStore {
             ));
         }
 
-        self.validate_plan(plan)?;
         let artifacts_by_path = artifacts
             .iter()
             .map(|artifact| (artifact.path.as_str(), artifact))
             .collect::<BTreeMap<_, _>>();
-        Self::validate_artifacts(plan, artifacts, manifest)?;
         for action in &plan.actions {
             self.verify_current(action)?;
             if matches!(
@@ -933,6 +1086,11 @@ impl ArtifactStore for LocalArtifactStore {
     }
 
     fn recover(&mut self) -> CompilerResult<RecoveryReport> {
+        // Recovery owns the same namespace as generation, before enumeration or
+        // preflight can mistake an active writer's workspace for interrupted work.
+        let _writer_guard = self.acquire_writer_lock()?;
+        #[cfg(test)]
+        self.pause_at_checkpoint(TestCheckpoint::WriterLocked);
         let root = self.resolve(TRANSACTION_ROOT)?;
         let entries = match fs::read_dir(&root) {
             Ok(entries) => entries,
@@ -1023,6 +1181,28 @@ fn recovery_error(message: impl Into<String>) -> CompilerError {
         message,
         "Preserve the journal, outputs, and backups; restore trusted evidence and use the explicitly authorized output root before retrying recovery.",
     )
+}
+
+fn writer_lock_error(message: impl Into<String>, kind: FailureKind) -> CompilerError {
+    CompilerError::new(
+        kind,
+        Diagnostic::error(
+            "IDN2347",
+            kind,
+            Some(WRITER_LOCK.to_owned()),
+            message,
+            "Use inspectable regular local cache paths and a filesystem with working native exclusive locks. Preserve the lock file, outputs, and transaction evidence; no unlocked fallback is supported.",
+        ),
+    )
+}
+
+fn writer_lock_io_error(operation: &str, error: &std::io::Error) -> CompilerError {
+    let kind = if error.kind() == ErrorKind::Unsupported {
+        FailureKind::Unsupported
+    } else {
+        FailureKind::Failed
+    };
+    writer_lock_error(format!("{operation}: {error}"), kind)
 }
 
 fn append_portable(root: &Path, relative_path: &str) -> PathBuf {

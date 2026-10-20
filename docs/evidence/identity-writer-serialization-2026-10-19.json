@@ -1,0 +1,451 @@
+{
+  "observedAt": "2026-10-19T22:09:01.926966Z",
+  "scope": "Independent pristine baseline and frozen candidate shipping CLI generation, verification, and incremental no-op proof using disposable copies of the actual v1 fixture.",
+  "baselineRevision": "417865a449678f887237d94aaa019a10bcc16612",
+  "platform": "Linux",
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "buildIsolation": "Baseline and candidate use separate Cargo target directories. The successful candidate artifact was independently compiled; shared-target artifacts were not used for its observations.",
+  "commands": [
+    "cargo build --locked --bin identity --manifest-path \"<pristine-baseline>/Cargo.toml\"",
+    "cargo build --locked --bin identity --manifest-path \"<frozen-candidate>/Cargo.toml\"",
+    "identity v1-generate --repository-root \"<disposable-consumer>\" --output-root \"assets/identity\"",
+    "identity v1-verify --repository-root \"<disposable-consumer>\" --output-root \"assets/identity\"",
+    "identity v1-generate --repository-root \"<disposable-consumer>\" --output-root \"assets/identity\"",
+    "identity v1-verify --repository-root \"<disposable-consumer>\" --output-root \"assets/identity\""
+  ],
+  "inventoryConvention": "Paths are relative, case-preserved POSIX strings. File SHA-256 hashes raw bytes, including hidden files. Complete inventories include sorted file records and directory paths; inventory SHA-256 hashes compact key-sorted JSON of that object. This local evidence digest is distinct from the canonical sourceDigest contract.",
+  "observations": [
+    {
+      "label": "baseline",
+      "source": {
+        "baselineRevision": "417865a449678f887237d94aaa019a10bcc16612",
+        "qualification": "Pristine immutable archive; no coordination instrumentation.",
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "ceeb25ebbf9848f19d296d67a695559c9ab5b002eb6fb472928826fccd07dd28",
+            "bytes": 797
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "7fdbc3cc28d1da2b1299fdcca6a2b5e8c055522261f0d84ff71e01233e830450",
+            "bytes": 20172
+          },
+          {
+            "path": "rust-toolchain.toml",
+            "sha256": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+            "bytes": 86
+          },
+          {
+            "path": "src/compiler/filesystem.rs",
+            "sha256": "9d69832c31704fd3cdb866d1c0855dff5e473dd9b079a087ac4e5a38b534272e",
+            "bytes": 42969
+          },
+          {
+            "path": "scripts/validate_identity.py",
+            "sha256": "4f8a8a8b4f209695d7a5e651a919e78cad3a346d7d38dde9c6e192f1c515f456",
+            "bytes": 188605
+          }
+        ]
+      },
+      "binary": {
+        "profile": "dev shipping CLI (cargo build --locked --bin identity)",
+        "sha256": "1d50fac97a859336cbb3bc276e33206d728364298b98649f77b4400740fcd147",
+        "bytes": 63263136,
+        "preservedDuringRun": true
+      },
+      "fixture": {
+        "path": "tests/fixtures/v1/valid/minimal",
+        "inventorySha256": "e9fa0e7faa64caf5cf15bebd4e23f5fcfe81c6d5b011292d1da9c9cb65f6b3a9",
+        "canonicalFileCount": 17,
+        "canonicalInventorySha256": "b5d611ba5a0760f39dc744e29686dcc9b0ab01ef16e95cbceaa2074219113f10",
+        "canonicalSourcePreserved": true,
+        "originalFixturePreserved": true
+      },
+      "operations": [
+        {
+          "operation": "v1-generate",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+        },
+        {
+          "operation": "v1-verify",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+        },
+        {
+          "operation": "v1-generate",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+        },
+        {
+          "operation": "v1-verify",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+        }
+      ],
+      "freshGeneratedFileCount": 14,
+      "manifestedOutputCount": 13,
+      "includesHiddenManifest": true,
+      "sourceDigest": "1002ff75ea51f6e016929894ea30cc96565bdbbca749a0e7fff1ebd0d2f21353",
+      "generatedInventory": [
+        {
+          "path": ".identity-manifest.json",
+          "bytes": 11072,
+          "sha256": "86ee54abafc5b12e0cf096ac2d7c93ecc2d6455accd7c9b635bf1b4c49ab438c"
+        },
+        {
+          "path": "brand/mark.svg",
+          "bytes": 263,
+          "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad"
+        },
+        {
+          "path": "packages/guidance/README.md",
+          "bytes": 20090,
+          "sha256": "72de4e2cc95c2a1f6e2f788ed6bb15cbc69406f0d8eb571dc4ab54439211824d"
+        },
+        {
+          "path": "packages/guidance/voice-and-usage.json",
+          "bytes": 21266,
+          "sha256": "3bf4c7cff181589933894af641d4ff43d2cc05e9b164ce6a043926cf40584e8d"
+        },
+        {
+          "path": "packages/metadata/metadata.json",
+          "bytes": 348,
+          "sha256": "22ef9ae360dc554ded4b6dace7cac0cef7ac0a6ab10d1bb17ab7c1df0285c8fa"
+        },
+        {
+          "path": "packages/metadata/open-graph.html",
+          "bytes": 408,
+          "sha256": "2df473ddcfcfbb806f539f21778e000f1ec1131cfbad4bc3fbba854b467fff5f"
+        },
+        {
+          "path": "packages/metadata/package.json",
+          "bytes": 342,
+          "sha256": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f"
+        },
+        {
+          "path": "packages/renderer/brand-kit.view-model.json",
+          "bytes": 31305,
+          "sha256": "a08d2784c0e0930e2bd53f0bc6bd52f9df50703b2941b08435fb657e46662cbb"
+        },
+        {
+          "path": "packages/tokens/package.json",
+          "bytes": 414,
+          "sha256": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843"
+        },
+        {
+          "path": "packages/tokens/tailwind.theme.json",
+          "bytes": 363,
+          "sha256": "0ab35788a542e279f92ef3ea93eaff323bbc75814d5931b7a2f3a21e8baa57a0"
+        },
+        {
+          "path": "packages/tokens/tokens.css",
+          "bytes": 376,
+          "sha256": "83423fb81f57a4f2176ae4ec417900a9427b0daf10ddd9ace27663221573ba1b"
+        },
+        {
+          "path": "packages/tokens/tokens.d.ts",
+          "bytes": 344,
+          "sha256": "3e8f23156481845d31e3964c302887c503da69041a2e5af3779ddd08a75290ea"
+        },
+        {
+          "path": "packages/tokens/tokens.js",
+          "bytes": 856,
+          "sha256": "648c947db230166a181db4ca21ffd7ebb981598da806a58c56e3c44ef5205c1a"
+        },
+        {
+          "path": "packages/tokens/tokens.json",
+          "bytes": 3307,
+          "sha256": "6fb60127c6433f7e8ba91999c7c54bd4ed754458013e1acf23e7e2f0036e96b9"
+        }
+      ],
+      "generatedInventorySha256": "92387029e1d78beaa2b10c08769d71046c0ac757a88cf2966bdc29687f6104b6",
+      "verificationPreservesCompleteConsumerInventory": true,
+      "incrementalNoopPreservesCompleteConsumerInventory": true,
+      "generatedInventoryUnchangedAfterNoop": true,
+      "sourceInventoryUnchangedAfterNoop": true,
+      "initialConsumerInventorySha256": "e9fa0e7faa64caf5cf15bebd4e23f5fcfe81c6d5b011292d1da9c9cb65f6b3a9",
+      "postGenerationCompleteConsumerInventorySha256": "73b8fe4537b2f1d16ec1d46cba370d8ff14ed7062febca50a5d48d0e7666fbb2",
+      "postNoopCompleteConsumerInventorySha256": "73b8fe4537b2f1d16ec1d46cba370d8ff14ed7062febca50a5d48d0e7666fbb2",
+      "cacheInventoryAfterGeneration": {
+        "files": [],
+        "directories": [
+          "identity",
+          "identity/transactions"
+        ]
+      }
+    },
+    {
+      "label": "candidate",
+      "source": {
+        "baselineRevision": "417865a449678f887237d94aaa019a10bcc16612",
+        "qualification": "Frozen uncommitted candidate source after implementation agent stability confirmation; exact source hashes identify this build.",
+        "files": [
+          {
+            "path": "Cargo.toml",
+            "sha256": "ceeb25ebbf9848f19d296d67a695559c9ab5b002eb6fb472928826fccd07dd28",
+            "bytes": 797
+          },
+          {
+            "path": "Cargo.lock",
+            "sha256": "7fdbc3cc28d1da2b1299fdcca6a2b5e8c055522261f0d84ff71e01233e830450",
+            "bytes": 20172
+          },
+          {
+            "path": "rust-toolchain.toml",
+            "sha256": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+            "bytes": 86
+          },
+          {
+            "path": "src/compiler/filesystem.rs",
+            "sha256": "e237e69203be8bcb764a115f28278cfb84ba3fa63c0568e8bfc27447aa477178",
+            "bytes": 50224
+          },
+          {
+            "path": "scripts/validate_identity.py",
+            "sha256": "4f8a8a8b4f209695d7a5e651a919e78cad3a346d7d38dde9c6e192f1c515f456",
+            "bytes": 188605
+          }
+        ]
+      },
+      "binary": {
+        "profile": "dev shipping CLI (cargo build --locked --bin identity)",
+        "sha256": "ff07ca50ce18494a4aa9448b463f2eb8b32c872bfc1ca519e7f18dcbff16272c",
+        "bytes": 63287632,
+        "preservedDuringRun": true
+      },
+      "fixture": {
+        "path": "tests/fixtures/v1/valid/minimal",
+        "inventorySha256": "e9fa0e7faa64caf5cf15bebd4e23f5fcfe81c6d5b011292d1da9c9cb65f6b3a9",
+        "canonicalFileCount": 17,
+        "canonicalInventorySha256": "b5d611ba5a0760f39dc744e29686dcc9b0ab01ef16e95cbceaa2074219113f10",
+        "canonicalSourcePreserved": true,
+        "originalFixturePreserved": true
+      },
+      "operations": [
+        {
+          "operation": "v1-generate",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+        },
+        {
+          "operation": "v1-verify",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+        },
+        {
+          "operation": "v1-generate",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+        },
+        {
+          "operation": "v1-verify",
+          "exitCode": 0,
+          "stderrEmpty": true,
+          "stdoutSha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+        }
+      ],
+      "freshGeneratedFileCount": 14,
+      "manifestedOutputCount": 13,
+      "includesHiddenManifest": true,
+      "sourceDigest": "1002ff75ea51f6e016929894ea30cc96565bdbbca749a0e7fff1ebd0d2f21353",
+      "generatedInventory": [
+        {
+          "path": ".identity-manifest.json",
+          "bytes": 11072,
+          "sha256": "86ee54abafc5b12e0cf096ac2d7c93ecc2d6455accd7c9b635bf1b4c49ab438c"
+        },
+        {
+          "path": "brand/mark.svg",
+          "bytes": 263,
+          "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad"
+        },
+        {
+          "path": "packages/guidance/README.md",
+          "bytes": 20090,
+          "sha256": "72de4e2cc95c2a1f6e2f788ed6bb15cbc69406f0d8eb571dc4ab54439211824d"
+        },
+        {
+          "path": "packages/guidance/voice-and-usage.json",
+          "bytes": 21266,
+          "sha256": "3bf4c7cff181589933894af641d4ff43d2cc05e9b164ce6a043926cf40584e8d"
+        },
+        {
+          "path": "packages/metadata/metadata.json",
+          "bytes": 348,
+          "sha256": "22ef9ae360dc554ded4b6dace7cac0cef7ac0a6ab10d1bb17ab7c1df0285c8fa"
+        },
+        {
+          "path": "packages/metadata/open-graph.html",
+          "bytes": 408,
+          "sha256": "2df473ddcfcfbb806f539f21778e000f1ec1131cfbad4bc3fbba854b467fff5f"
+        },
+        {
+          "path": "packages/metadata/package.json",
+          "bytes": 342,
+          "sha256": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f"
+        },
+        {
+          "path": "packages/renderer/brand-kit.view-model.json",
+          "bytes": 31305,
+          "sha256": "a08d2784c0e0930e2bd53f0bc6bd52f9df50703b2941b08435fb657e46662cbb"
+        },
+        {
+          "path": "packages/tokens/package.json",
+          "bytes": 414,
+          "sha256": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843"
+        },
+        {
+          "path": "packages/tokens/tailwind.theme.json",
+          "bytes": 363,
+          "sha256": "0ab35788a542e279f92ef3ea93eaff323bbc75814d5931b7a2f3a21e8baa57a0"
+        },
+        {
+          "path": "packages/tokens/tokens.css",
+          "bytes": 376,
+          "sha256": "83423fb81f57a4f2176ae4ec417900a9427b0daf10ddd9ace27663221573ba1b"
+        },
+        {
+          "path": "packages/tokens/tokens.d.ts",
+          "bytes": 344,
+          "sha256": "3e8f23156481845d31e3964c302887c503da69041a2e5af3779ddd08a75290ea"
+        },
+        {
+          "path": "packages/tokens/tokens.js",
+          "bytes": 856,
+          "sha256": "648c947db230166a181db4ca21ffd7ebb981598da806a58c56e3c44ef5205c1a"
+        },
+        {
+          "path": "packages/tokens/tokens.json",
+          "bytes": 3307,
+          "sha256": "6fb60127c6433f7e8ba91999c7c54bd4ed754458013e1acf23e7e2f0036e96b9"
+        }
+      ],
+      "generatedInventorySha256": "92387029e1d78beaa2b10c08769d71046c0ac757a88cf2966bdc29687f6104b6",
+      "verificationPreservesCompleteConsumerInventory": true,
+      "incrementalNoopPreservesCompleteConsumerInventory": true,
+      "generatedInventoryUnchangedAfterNoop": true,
+      "sourceInventoryUnchangedAfterNoop": true,
+      "initialConsumerInventorySha256": "e9fa0e7faa64caf5cf15bebd4e23f5fcfe81c6d5b011292d1da9c9cb65f6b3a9",
+      "postGenerationCompleteConsumerInventorySha256": "bc46746e7cdf21db2f23ba61f4f62788cc04a9053001b46a22ca7e033039f07e",
+      "postNoopCompleteConsumerInventorySha256": "bc46746e7cdf21db2f23ba61f4f62788cc04a9053001b46a22ca7e033039f07e",
+      "cacheInventoryAfterGeneration": {
+        "files": [
+          {
+            "path": "identity/writer.lock",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "directories": [
+          "identity",
+          "identity/transactions"
+        ]
+      }
+    }
+  ],
+  "comparison": {
+    "actualFixtureIdentical": true,
+    "completeGeneratedInventoriesByteIdentical": true,
+    "generatedFilesIncludingHiddenManifest": 14,
+    "manifestedOutputs": 13,
+    "canonicalSourcePreservedInBothConsumers": true,
+    "verificationPreservesBothCompleteConsumerInventories": true,
+    "incrementalNoopPreservesBothCompleteConsumerInventories": true
+  },
+  "limits": [
+    "Local Linux run with pinned Rust 1.97.1 and Python 3.12; native macOS/Windows behavior requires hosted checks.",
+    "Candidate source was frozen before its final commit; the recorded production source hashes must still match the review candidate.",
+    "Shipping CLI proof exercises normal generation, verification and no-op behavior. Deterministic contention/recovery ownership proof is separate.",
+    "File content and directory inventories are compared; filesystem timestamps and inode identity are not asserted."
+  ],
+  "baselineCoordinationEvidence": {
+    "receipt": "identity-writer-serialization-baseline-2026-10-19.json",
+    "sha256": "b563edc9cf923deba2ab6181f625209560a6b1ac687c1444fb29235f72078ec7",
+    "testOnlyPatch": "identity-writer-serialization-baseline-2026-10-19.patch",
+    "observations": "Controlled independent-store thread schedules, not pristine runtime or child-process evidence. Stale prechecks leave unjournaled state; concurrent preflight permits duplicate recovery reporting. No output corruption observed."
+  },
+  "candidateValidation": {
+    "status": "passed local validation; fresh exact-head hosted platform/advisory evidence is recorded separately in the PR",
+    "scope": "Participating local writers only; independent child processes with explicit checkpoint readiness/release and bounded termination/reaping.",
+    "workerHelper": "One intentionally ignored test is invoked explicitly by parent cases; it is not counted as a passing coverage case.",
+    "observedAt": "2026-10-19T22:11:40.650335Z",
+    "sourceFiles": [
+      {
+        "path": "src/compiler/filesystem.rs",
+        "sha256": "e237e69203be8bcb764a115f28278cfb84ba3fa63c0568e8bfc27447aa477178"
+      },
+      {
+        "path": "src/compiler/filesystem/tests.rs",
+        "sha256": "fdfebbcb0ace6adbc44e29f506f3b6b2a03a08fb8a96fdc3c1c75367d24eb657"
+      },
+      {
+        "path": "src/compiler/filesystem/tests/process_tests.rs",
+        "sha256": "43ab67a9dad1fb13b2e9e829fb61044bbf8d4fdaf418ac8f3b29d7816cdffa4a"
+      }
+    ],
+    "checks": [
+      {
+        "command": "cargo test --locked --all-features",
+        "result": "94 passed, 0 failed; one intentionally ignored child worker helper. Includes all 33 filesystem cases (10 parent process cases on Linux)."
+      },
+      {
+        "command": "cargo fmt --all --check",
+        "result": "passed"
+      },
+      {
+        "command": "cargo clippy --locked --all-targets --all-features --target-dir separate-clean-validation-target -- --deny warnings",
+        "result": "passed in independent clean target directory; no warnings or errors"
+      },
+      {
+        "command": "python3 -m unittest discover --start-directory tests --pattern test_*.py --verbose",
+        "result": "138 cases complete: 136 passed, 2 existing skips (unbuilt experience artifact and Windows-only junction case)"
+      },
+      {
+        "command": "six standalone docs/release/mascot/publication architecture/release config/extraction verifiers; Python compileall; JSON parsing",
+        "result": "passed; 106 JSON documents parse"
+      },
+      {
+        "command": "pinned Hygiene ADR schema/metadata/set/index/lifecycle and Relay roadmap extraction/invariant checks",
+        "result": "26 ADRs (21 accepted, 5 proposed), prior 25 lifecycle/approval/lineage unchanged, 40 stable roadmap steps and 88 dependencies preserved"
+      },
+      {
+        "command": "cargo test --locked --all-features compiler::filesystem::tests (20 bounded default-parallel replays)",
+        "result": "33 passing filesystem cases and 1 ignored worker per replay; 660 successful case executions, no busy retry"
+      }
+    ],
+    "scenarios": [
+      "Active generation excludes same-plan, changed-plan and custom-root commits plus recovery; canonical repository alias participates on Unix.",
+      "After owner completion, stale plan fails IDN2308 without mutation, then valid custom-root generation succeeds, including release on error.",
+      "Active recovery excludes generation and a second recoverer.",
+      "No-op commit acquires the same guard and leaves every byte unchanged.",
+      "Killing a writer after first promotion preserves the original journal, releases native ownership, leaves new generation blocked IDN2301, and permits explicit rollback followed by zero recovery.",
+      "Killing recovery after a rollback mutation preserves original journal and permits repeated original rollback.",
+      "Persistent empty lock and parents are the only new coordination metadata for empty recovery; subsequent recovery is unchanged.",
+      "Regular hard-linked lock aliases preserve bytes and share exclusion across repositories.",
+      "Preexisting directory, Unix symlink/dangling symlink and FIFO lock entries reject without mutation; Windows junction case requires fresh hosted execution."
+    ],
+    "limits": [
+      "Native macOS and Windows execution is a fresh hosted requirement, not inferred from Linux.",
+      "While ownership is active, snapshots retain only the regular lock entry kind/length because Windows may deny byte reads; all other paths/bytes are compared. Exact lock and alias bytes are verified after release.",
+      "Ordinary guard drop explicitly unlocks then closes. Termination relies on native lifetime of every inherited/duplicated handle; the tested worker does not spawn descendants.",
+      "One transient busy result occurred before explicit-unlock guard cleanup. A separate controlled Unix primitive experiment confirms inherited-descriptor retention is possible; the original test interleaving is unproven. Final 20 replays pass without retry.",
+      "No power-loss, hostile directory replacement, network filesystem or arbitrary nonparticipating writer guarantee."
+    ],
+    "firstHostedWindowsObservation": {
+      "head": "121c248aa56d60fc06c93592de0485612b5170e8",
+      "representedMergeCandidate": "95ef4c0d3fa912e4b7c67649e36b9a6b842323fb",
+      "run": "https://github.com/egohygiene/identity/actions/runs/39333401726",
+      "result": "failed one legacy workspace-junction snapshot assertion: outputs/junction/external bytes remained unchanged, but the permitted new empty writer.lock was not in the old expected snapshot. All nine new Windows process cases passed; this failed gate is not an overall native platform pass.",
+      "correction": "Only tests.rs changes: the workspace-child junction case permits exactly a newly created empty writer.lock. Cache/cache-identity/transaction-root cases and all external trees retain strict equality. Production source unchanged; focused Linux33 filesystem cases, formatting and clean-target strict Clippy pass. Fresh Windows replay remains required."
+    }
+  }
+}

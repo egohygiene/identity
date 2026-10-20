@@ -136,9 +136,10 @@ No timestamp, random id, absolute machine path, ambient environment value, or ne
 
 ## Transaction and recovery boundary
 
-`LocalArtifactStore` keeps transient state under:
+`LocalArtifactStore` keeps coordination and transient state under:
 
 ```text
+.cache/identity/writer.lock
 .cache/identity/transactions/<plan-digest>/
 ```
 
@@ -157,17 +158,59 @@ Generation checks cache/workspace paths, reserves a new plan directory and
 creates staging, backup and pending-journal files without overwriting an
 existing leaf. Each transaction operation rechecks its confined path; recovery
 checks the complete retained tree before rollback or cleanup. Unsupported
-preexisting paths are rejected without changing consumer or external files.
+preexisting cache-root or lock paths are rejected before creating coordination
+metadata; deeper invalid transaction evidence is preserved as described below.
 No fallback cache, automatic relocation, installation or journal migration is
 performed.
 
-These checks apply to serialized local operations. They do not make pathname
+These checks apply to cooperating local operations. They do not make pathname
 checks atomic against another process replacing directory components between
-inspection and use. Per-consumer writer serialization and stale-owner handling
-remain [#79](https://github.com/egohygiene/identity/issues/79); stronger protection
-against hostile concurrent filesystem mutation is not claimed. Promotion still
+inspection and use; protection against hostile concurrent filesystem mutation
+is not claimed. Promotion still
 requires filesystem rename support between staging and output; an unsupported
 move retains transaction evidence for recovery.
+
+### Exclusive writer ownership
+
+Generation and recovery share a nonblocking native exclusive file lock on
+`.cache/identity/writer.lock` beneath the canonical repository root. All output
+roots share this ownership boundary. Mutation-free request/path validation precedes
+acquisition; pending-workspace checks, current-checksum validation, staging,
+backups, journal publication, output changes, verification and cleanup happen
+while the guard is held. No-op commits and empty recovery acquire ownership too.
+
+The coordination file is persistent and is not a transaction workspace. Its
+presence is not proof of an active or stale owner. Create a missing regular file
+exclusively; open an existing regular file without truncating or writing bytes.
+Never unlink, replace or edit it to unblock a writer. Existing hard-linked
+regular files retain their aliases and bytes; they may serialize multiple
+repositories. Symlinks, Windows reparse points and special entries remain
+unsupported. Lock and transaction-root paths are checked before any mkdir.
+
+Contention fails as `blocked` / `IDN2346` without changing the active owner's
+workspace, journal, backups or outputs. Wait for that process to finish, then
+retry. Acquisition errors use `IDN2347`; unavailable native locking is
+`unsupported`, with no unlocked fallback. The supported environment must
+provide the native locking semantics used by Rust's `File::try_lock`.
+
+Ordinary guard cleanup explicitly unlocks, then closes its handle. Process
+termination closes its handles; ownership ends after all inherited or duplicated
+handles are closed. The store does not clone its guard handle. There is
+no PID/age heuristic, lock stealing or automatic workspace deletion. After an
+interruption, the next owner still encounters pending transaction evidence and
+must explicitly recover before generation. The empty coordination file and its
+parents may newly exist after an empty recovery or a failure after acquisition;
+this is the only added coordination metadata, not permission to alter rejected
+transaction evidence or generated/canonical files.
+
+Construction, reads, `recovery_required`, preparation and `v1-verify` do not
+acquire this exclusive guard or create cache metadata. Their observations are
+not consistent snapshots while a writer is active; commit rechecks its plan
+under ownership. Cooperating writers must use this protocol. Do not run older
+binaries or other uncoordinated writers concurrently, or manually change cache
+state while any writer is active. Network filesystem qualification, hostile
+filesystem mutation and power-loss durability are outside this contract.
+See proposed [ADR-0026](../decisions/ADR-0026-local-writer-serialization.md).
 
 Before publishing generated output, the store:
 
@@ -201,7 +244,8 @@ It validates plan identities, scope, unique actions, the manifest, every require
 backup checksum, and current destinations. A destination must be absent or match
 the recorded before/after bytes; unrelated edits block rollback. Backups are read
 into memory during preflight. Invalid or incomplete evidence leaves outputs,
-source files, backups, journals, and other workspaces untouched. Recovery can be
+source files, backups, journals, and other workspaces untouched; acquisition may
+create only the coordination metadata described above. Recovery can be
 retried after interruption; calling it again after successful recovery is a no-op.
 Only empty orphan workspaces are automatically removed. A populated workspace
 without a journal is retained for diagnosis.
@@ -218,7 +262,10 @@ an older recovery implementation against unreviewed journal data.
 
 Plan hashes detect inconsistent evidence; the independently supplied output root
 limits mutation authority. Journals are not authenticated signatures, and this
-boundary does not serialize concurrent writers (tracked separately in #79).
+boundary relies on the separately held native lock to serialize cooperating
+generation and recovery writers. The current CLI still has no supported
+inspection/recovery command; [#77](https://github.com/egohygiene/identity/issues/77)
+owns that surface. Library recovery remains explicit.
 
 ## Failure states and diagnostic families
 
@@ -244,5 +291,10 @@ The compiler unit suite uses only local memory, temporary directories, and fixtu
 - verification failures mutate nothing;
 - an injected mid-transaction interruption is recoverable while canonical `.identity/` bytes remain unchanged; and
 - duplicate adapter identities are rejected.
+
+The [dated writer review](../reviews/writer-serialization-2026-10-19.md) records
+controlled pre-fix behavior and independent child-process contention, ownership
+release and recovery evidence. These bounded checks do not claim power-loss or
+hostile-filesystem durability.
 
 Actual DTCG/CSS/Tailwind/metadata/vector/raster/package golden fixtures belong to #11, which consumes this library boundary rather than changing it implicitly.
