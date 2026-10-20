@@ -3,7 +3,7 @@
 
 import { createHash } from "node:crypto";
 import {
-  existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync,
+  chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync,
   realpathSync, statSync, writeFileSync,
 } from "node:fs";
 import { createRequire } from "node:module";
@@ -20,6 +20,18 @@ const commands = [];
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const require = createRequire(import.meta.url);
+
+export function installedBrowserMetadata() {
+  // pnpm exposes each package's declared dependencies only from that package.
+  const testPackage = require.resolve("@playwright/test/package.json");
+  const testRequire = createRequire(testPackage);
+  const playwrightRequire = createRequire(testRequire.resolve("playwright/package.json"));
+  const corePackage = playwrightRequire.resolve("playwright-core/package.json");
+  return {
+    playwrightVersion: JSON.parse(readFileSync(testPackage, "utf8")).version,
+    browsers: JSON.parse(readFileSync(path.join(path.dirname(corePackage), "browsers.json"), "utf8")),
+  };
+}
 
 function inside(root, candidate) {
   const relative = path.relative(root, candidate);
@@ -255,6 +267,9 @@ async function main(arguments_) {
   if (arguments_.length !== 2 || arguments_[0] !== "--output-directory") throw new Error("Usage: node scripts/qualify-browser.mjs --output-directory /evidence");
   const output = outputDirectory(arguments_[1]);
   const runRoot = mkdtempSync(path.join(output, "browser-"));
+  // This directory contains only public synthetic evidence and must be readable
+  // by the host artifact collector when the container runs as root.
+  chmodSync(runRoot, 0o755);
   const receipt = { kind: "dated browser environment qualification receipt", status: "failed", platform: "linux/amd64", observedAt: new Date().toISOString(), commands };
   let profile;
   try {
@@ -265,8 +280,7 @@ async function main(arguments_) {
     receipt.baseline = { ...profile.baseline, unchanged: false };
     receipt.profileSha256 = sha256(readFileSync(profilePath));
     const package_ = JSON.parse(readFileSync(path.join(rendererRoot, "package.json"), "utf8"));
-    const playwrightVersion = require("@playwright/test/package.json").version;
-    const browsers = JSON.parse(readFileSync(path.join(path.dirname(require.resolve("playwright-core/package.json")), "browsers.json"), "utf8"));
+    const { playwrightVersion, browsers } = installedBrowserMetadata();
     const shell = browsers.browsers.find((browser) => browser.name === "chromium-headless-shell");
     if (playwrightVersion !== profile.playwright || package_.packageManager !== profile.packageManager || shell.revision !== String(profile.chromium.revision) || shell.browserVersion !== profile.chromium.version) {
       throw new Error("Installed browser/package pins differ from the qualification profile");

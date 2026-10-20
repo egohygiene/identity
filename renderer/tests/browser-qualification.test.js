@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
 
-import { validateReport } from "../scripts/qualify-browser.mjs";
+import { installedBrowserMetadata, validateReport } from "../scripts/qualify-browser.mjs";
 
 const screenshotTitle = "matches the reviewed desktop viewport baseline";
 const approvedBaseline = fileURLToPath(new URL(
@@ -98,6 +98,15 @@ function negativeOptions() {
 }
 
 describe("qualified browser report evidence", () => {
+  test("resolves real frozen-install browser metadata through declared pnpm dependencies", () => {
+    const profile = JSON.parse(fs.readFileSync(new URL("../../dev/browser/profile.json", import.meta.url), "utf8"));
+    const { playwrightVersion, browsers } = installedBrowserMetadata();
+    expect(playwrightVersion).toBe(profile.playwright);
+    expect(browsers.browsers.find((browser) => browser.name === "chromium-headless-shell")).toMatchObject({
+      revision: String(profile.chromium.revision), browserVersion: profile.chromium.version,
+    });
+  });
+
   test("accepts the exact nested positive suite without retries or skips", () => {
     const result = validateReport(report({ count: 6 }), {
       expectedPassed: 6,
