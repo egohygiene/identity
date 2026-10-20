@@ -78,7 +78,8 @@ baseline update. Qualification never regenerates or approves a baseline.
 Receipts, positive/negative/restored reports and diff/actual screenshots go to
 the external output directory and CI artifact. Keep durable source-bound
 receipts with the PR; temporary CI artifacts alone may expire. See the
-[qualification review](reviews/browser-environment-2026-10-20.md).
+[qualification review](reviews/browser-environment-2026-10-20.md) and
+[dated runtime receipt](evidence/identity-browser-environment-2026-10-20.json).
 
 ## Development, refresh and rollback
 
