@@ -86,6 +86,45 @@ describe("Press Kit renderer view", () => {
       createPressKitView({ pressKit: value, artifactDirectory: "press-kit" }),
     ).toThrow("must be a non-empty bundle-relative path");
   });
+
+  test("retains an optional supplied paragraph without changing existing boilerplates", () => {
+    const pressKit = projection();
+    const paragraph = {
+      id: "paragraph",
+      kind: "paragraph",
+      text: "A supplied approved paragraph, copied exactly.",
+    };
+    pressKit.boilerplates.push(paragraph);
+    const view = createPressKitView({ pressKit, artifactDirectory: "press-kit" });
+
+    expect(view.pressKit.boilerplates).toEqual(pressKit.boilerplates);
+    expect(view.pressKit.boilerplates.find((value) => value.kind === "paragraph")).toEqual(paragraph);
+    expect(assertPressKitView(view)).toBe(view);
+  });
+
+  test.each(["duplicate-short", "duplicate-paragraph", "unknown", "missing-short", "missing-long"])(
+    "rejects %s boilerplate kinds before rendering or importing a view", (invalid) => {
+      const mutate = (pressKit) => {
+        if (invalid.startsWith("missing-")) {
+          pressKit.boilerplates = pressKit.boilerplates.filter(
+            (value) => value.kind !== invalid.slice("missing-".length),
+          );
+        } else {
+          const kind = invalid === "unknown" ? "unknown" : invalid.slice("duplicate-".length);
+          const value = { id: "extra", kind, text: "Extra supplied copy." };
+          pressKit.boilerplates.push(value);
+          if (kind === "paragraph") pressKit.boilerplates.push({ ...value, id: "another-paragraph" });
+        }
+      };
+      const pressKit = projection();
+      mutate(pressKit);
+      expect(() => createPressKitView({ pressKit, artifactDirectory: "press-kit" })).toThrow(/boilerplate/u);
+
+      const view = createPressKitView({ pressKit: projection(), artifactDirectory: "press-kit" });
+      mutate(view.pressKit);
+      expect(() => assertPressKitView(view)).toThrow(/boilerplate/u);
+    },
+  );
 });
 
 function projection() {

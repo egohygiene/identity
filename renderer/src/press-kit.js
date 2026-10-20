@@ -97,6 +97,14 @@ function assertProjection(pressKit) {
     normalizeArtifactPath(artifact?.path, "Press Kit projection artifact path");
   }
   const kinds = new Set(pressKit.boilerplates.map((value) => value?.kind));
+  if (
+    kinds.size !== pressKit.boilerplates.length
+    || [...kinds].some((kind) => !["short", "paragraph", "long"].includes(kind))
+  ) {
+    throw new TypeError(
+      "Press Kit boilerplate kinds must be unique short, paragraph, or long values.",
+    );
+  }
   if (!kinds.has("short") || !kinds.has("long")) {
     throw new TypeError("Press Kit projection must include short and long boilerplates.");
   }

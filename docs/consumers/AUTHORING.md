@@ -113,9 +113,37 @@ Use the existing governed homes when a consumer needs richer material:
 | `assets[]` | Required nonempty array when usage is adopted; ID, label, kind, path, status, availability, replacement, downloadName, notes, governance | H; match existing source provenance/approval | Public guidance downloads require active/public/approved records; legacy assets require a replacement and separate labeling |
 | `accessibility.{summary,rules,governance}` | Required summary string and nonempty rules array when adopted | H; governed bundle | Approved/public accessibility guidance |
 | `legal.{trademark,copyright,attribution,thirdPartyLicenses,governance}` | Required strings, third-party-license array, governance when adopted | H; governed bundle; actual rights owners | Approved/public legal guidance; authoritative policy documents retain their owners |
-| `.identity/guidance/press-kit.json` → `boilerplates[]` | Optional document; exactly one short and one long nonempty text record required for a public kit | H; each has ID, kind, text, governance | Canonical short/long descriptions in the Press Kit projection |
+| `.identity/guidance/press-kit.json` → `boilerplates[]` | Optional document; exactly one `short` and one `long` nonempty text record required for a public kit; at most one optional `paragraph` record | H; each has ID, kind, text, governance | Canonical supplied descriptions in the Press Kit projection, page, Markdown and ZIP |
 | `facts`, `links`, `contacts`, `team`, `assets` in that Press Kit source | Required arrays in the adopted document; may be empty | H; each supplied record governed; assets reference existing `assetId` | Only affirmative reviewed facts/contacts/bios and explicitly selected public assets; absence stays explicit |
 | `.identity/guidance/channel-registry.json`, selected by `documents.channelRegistry` | Optional document; follow its closed schema and contract | H; actual account lifecycle, verification and record governance | Authoritative social URLs/handles for registry, Press Kit and social consumers; do not duplicate registry social links in Press Kit source |
+
+For the project profile, use these homes consistently:
+
+| Supplied material | Authoritative home |
+| --- | --- |
+| Official name, tagline, repository | Project `displayName`, `tagline`, `repository` |
+| Website and contact | Press Kit `links[]` with `kind: "website"` and `contacts[]` |
+| Audience, positioning, personality | Voice `foundation` fields above |
+| Short name, distinct mission statement, values, pronunciation | Optional Press Kit `facts[]`; choose an explicit human-readable label and exact approved value for each supplied fact |
+| Purpose or mission already expressed by the approved purpose | Voice `foundation.purpose`; reuse it rather than maintaining a second version |
+| Terminology and capitalization | The relevant voice context's `preferredVocabulary`, `avoidedLanguage` and `capitalization` |
+| Official naming and unofficial-extension naming rules | The relevant context's `naming`; use governed usage rules for additional constraints |
+| Practical voice examples | The relevant context's separately governed `examples[]` and `antiExamples[]` |
+
+Fact IDs and labels do not select special renderer behavior: a supplied
+"Short name" or "Pronunciation" fact appears under that exact label. The
+renderer does not derive a mission, shorten a name, infer values, pronounce a
+name, or grant unofficial extensions permission to use it. Owners must supply
+the actual rule and its approval before that guidance appears publicly.
+
+Use `short` for the supplied one-sentence description, optional `paragraph` for
+a separately approved paragraph, and `long` for the longer description. These
+are editorial labels, not sentence-count or length validators. Copy controls
+reuse the projected text exactly; no description is generated from another.
+An absent or withheld paragraph adds no placeholder. The optional paragraph
+extension requires matching updated schemas, producer and renderer; older
+pinned tools can reject it or omit it. See the
+[Press Kit compatibility notes](../contracts/PRESS_KIT_V1.md#compatibility).
 
 Every governed record includes
 `governance.{subject,state,visibility,provenance,approval}`. Provenance supplies

@@ -78,7 +78,7 @@ def governance(subject: str, identifier: str | None) -> dict[str, object]:
     }
 
 
-def add_press_source(repository_root: Path) -> None:
+def add_press_source(repository_root: Path, *, paragraph: str | None = None) -> None:
     """Add a complete governed Press Kit source to a copied base fixture."""
 
     identity_path = repository_root / ".identity/identity.json"
@@ -96,6 +96,8 @@ def add_press_source(repository_root: Path) -> None:
         approval("approve-press-founder", "press-kit:team:founder"),
         approval("approve-press-mark", "press-kit:asset:mark"),
     ]
+    if paragraph is not None:
+        decisions.append(approval("approve-press-paragraph", "press-kit:boilerplate:paragraph"))
     approvals["decisions"].extend(decisions)
     write_json(approvals_path, approvals)
     press = {
@@ -167,6 +169,13 @@ def add_press_source(repository_root: Path) -> None:
             }
         ],
     }
+    if paragraph is not None:
+        press["boilerplates"].append({
+            "id": "paragraph",
+            "kind": "paragraph",
+            "text": paragraph,
+            "governance": governance("press-kit:boilerplate:paragraph", "approve-press-paragraph"),
+        })
     write_json(repository_root / ".identity/guidance/press-kit.json", press)
 
 
@@ -234,6 +243,123 @@ class PressKitProjectionTests(unittest.TestCase):
                 self.assertIn("assets/example-product-mark.svg", archive.namelist())
                 exported = json.loads(archive.read("press-kit.json"))
             self.assertEqual([value["id"] for value in exported["facts"]], ["founded"])
+
+    def test_optional_paragraph_round_trips_exactly_and_omits_cleanly(self) -> None:
+        paragraph = 'Example Product keeps approved copy exact: “reviewed”, reusable & local.'
+        for supplied in (None, paragraph):
+            with self.subTest(supplied=supplied is not None), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                add_press_source(repository, paragraph=supplied)
+                before = source_digests(repository)
+                model, assets = renderer.build_projection(repository)
+                payload = renderer.build_package(model, assets)
+                exported = json.loads(payload["press-kit.json"])
+                paragraphs = [item for item in exported["boilerplates"] if item["kind"] == "paragraph"]
+                self.assertEqual([item["text"] for item in paragraphs], [paragraph] if supplied else [])
+                markdown = payload["press-kit.md"].decode("utf-8")
+                self.assertEqual("## Paragraph boilerplate" in markdown, supplied is not None)
+                if supplied is not None:
+                    self.assertIn(paragraph, markdown)
+                    self.assertLess(markdown.index("## Short boilerplate"), markdown.index("## Paragraph boilerplate"))
+                    self.assertLess(markdown.index("## Paragraph boilerplate"), markdown.index("## Long boilerplate"))
+                with zipfile.ZipFile(BytesIO(payload["press-kit.zip"])) as archive:
+                    for filename in ("press-kit.json", "press-kit.md"):
+                        self.assertEqual(archive.read(filename), payload[filename])
+                self.assertEqual(source_digests(repository), before)
+
+    def test_optional_paragraph_and_profile_facts_preserve_public_lifecycle_boundary(self) -> None:
+        cases = (
+            ("approved", "public", True),
+            ("approved", "internal", False),
+            ("candidate", "internal", False),
+            ("rejected", "internal", False),
+            ("superseded", "internal", False),
+        )
+        paragraph = "Supplied optional paragraph with its own review lifecycle."
+        fact = "Supplied optional short name with its own review lifecycle."
+        for state, visibility, public in cases:
+            with self.subTest(state=state, visibility=visibility), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                add_press_source(repository, paragraph=paragraph)
+                press_path = repository / ".identity/guidance/press-kit.json"
+                press = json.loads(press_path.read_text(encoding="utf-8"))
+                press["facts"].append({
+                    "id": "short-name",
+                    "label": "Short name",
+                    "value": fact,
+                    "governance": governance("press-kit:fact:short-name", "approve-press-short-name"),
+                })
+                decisions_path = repository / ".identity/governance/approvals.json"
+                decisions = json.loads(decisions_path.read_text(encoding="utf-8"))
+                decisions["decisions"].append(approval("approve-press-short-name", "press-kit:fact:short-name"))
+                for record in (press["boilerplates"][-1], press["facts"][-1]):
+                    authority = record["governance"]
+                    decision = next(item for item in decisions["decisions"] if item["id"] == authority["approval"])
+                    authority["state"] = state
+                    authority["visibility"] = visibility
+                    if state == "candidate":
+                        authority["approval"] = None
+                        authority["provenance"]["method"] = "handoff-candidate"
+                    else:
+                        decision["status"] = state
+                        if state == "superseded":
+                            earlier = approval(f"{decision['id']}-earlier", decision["subject"])
+                            decisions["decisions"].append(earlier)
+                            decision["supersedes"] = earlier["id"]
+                write_json(press_path, press)
+                write_json(decisions_path, decisions)
+                before = source_digests(repository)
+                self.assertEqual(renderer.validator.validate_identity(repository), [])
+                payload = renderer.build_package(*renderer.build_projection(repository))
+                exported = json.loads(payload["press-kit.json"])
+                self.assertEqual(any(item["kind"] == "paragraph" for item in exported["boilerplates"]), public)
+                self.assertEqual(any(item["id"] == "short-name" for item in exported["facts"]), public)
+                with zipfile.ZipFile(BytesIO(payload["press-kit.zip"])) as archive:
+                    contents = [archive.read(name) for name in archive.namelist()]
+                for phrase in (paragraph, fact):
+                    if public:
+                        for filename in ("press-kit.json", "press-kit.md"):
+                            self.assertIn(phrase.encode("utf-8"), payload[filename])
+                    else:
+                        for output in [*payload.values(), *contents]:
+                            self.assertNotIn(phrase.encode("utf-8"), output)
+                self.assertEqual(source_digests(repository), before)
+
+    def test_source_rejects_duplicate_unknown_and_missing_required_boilerplate_kinds(self) -> None:
+        for invalid in ("duplicate-paragraph", "unknown-kind", "missing-short", "missing-long"):
+            with self.subTest(invalid=invalid), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                add_press_source(repository, paragraph="A supplied reviewed paragraph.")
+                press_path = repository / ".identity/guidance/press-kit.json"
+                press = json.loads(press_path.read_text(encoding="utf-8"))
+                if invalid == "duplicate-paragraph":
+                    duplicate = {**press["boilerplates"][-1], "id": "another-paragraph"}
+                    press["boilerplates"].append(duplicate)
+                elif invalid == "unknown-kind":
+                    press["boilerplates"][-1]["kind"] = "unknown"
+                else:
+                    missing = invalid.removeprefix("missing-")
+                    press["boilerplates"] = [item for item in press["boilerplates"] if item["kind"] != missing]
+                write_json(press_path, press)
+                with self.assertRaisesRegex(renderer.ProjectionError, "IDN1801.*boilerplate"):
+                    renderer.build_projection(repository)
+
+    def test_public_paragraph_cannot_replace_withheld_required_boilerplates(self) -> None:
+        for kind in ("short", "long"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                add_press_source(repository, paragraph="A supplied reviewed paragraph.")
+                press_path = repository / ".identity/guidance/press-kit.json"
+                press = json.loads(press_path.read_text(encoding="utf-8"))
+                next(item for item in press["boilerplates"] if item["kind"] == kind)["governance"]["visibility"] = "internal"
+                write_json(press_path, press)
+                self.assertEqual(renderer.validator.validate_identity(repository), [])
+                with self.assertRaisesRegex(renderer.ProjectionError, "requires approved public short and long"):
+                    renderer.build_projection(repository)
 
     def test_generated_output_cannot_mutate_or_enter_canonical_source(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

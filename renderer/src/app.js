@@ -410,29 +410,47 @@ function PressKitSection({ pressKit: view, assetBaseUrl }) {
         "article",
         { className: "panel" },
         h("h3", null, "Approved boilerplate"),
-        h("h4", null, "Short"),
-        h("p", null, boilerplates.get("short")?.text),
-        h(
-          "p",
-          { className: "support-note" },
-          `Approval: ${boilerplates.get("short")?.approval?.id}`,
-        ),
-        h("h4", null, "Long"),
-        h("p", null, boilerplates.get("long")?.text),
-        h(
-          "p",
-          { className: "support-note" },
-          `Approval: ${boilerplates.get("long")?.approval?.id}`,
-        ),
+        ...["short", "paragraph", "long"].flatMap((kind) => {
+          const boilerplate = boilerplates.get(kind);
+          return boilerplate
+            ? [h(
+                "section",
+                { key: kind },
+                h("h4", null, humanize(kind)),
+                h("p", null, boilerplate.text),
+                h(CopyControl, {
+                  label: `${humanize(kind)} description`,
+                  value: boilerplate.text,
+                }),
+                boilerplate.approval?.id
+                  ? h(
+                      "p",
+                      { className: "support-note" },
+                      `Approval: ${boilerplate.approval.id}`,
+                    )
+                  : null,
+              )]
+            : [];
+        }),
       ),
       pressKit.facts.length
         ? h(
             "article",
             { className: "panel" },
             h("h3", null, "Key facts"),
-            h(DefinitionList, {
-              entries: pressKit.facts.map((fact) => [fact.label, fact.value]),
-            }),
+            h(
+              "dl",
+              { className: "definition-list" },
+              ...pressKit.facts.flatMap((fact) => [
+                h("dt", { key: `${fact.id}-label` }, fact.label),
+                h(
+                  "dd",
+                  { key: `${fact.id}-value` },
+                  h("p", null, fact.value),
+                  h(CopyControl, { label: fact.label, value: fact.value }),
+                ),
+              ]),
+            ),
           )
         : h(
             "article",
@@ -836,12 +854,185 @@ function GuidanceSection({ id, title, guidance }) {
     Section,
     { id, title, canonical: true },
     declared
-      ? h(GuidanceValue, { value: guidance.value })
+      ? id === "voice" && isStructuredVoice(guidance.value)
+        ? h(StructuredVoice, { value: guidance.value })
+        : id === "usage" && Array.isArray(guidance.value.sections)
+          ? h(StructuredUsage, { value: guidance.value })
+          : h(GuidanceValue, { value: guidance.value })
       : h(EmptyState, {
           title: `${title} not declared`,
           message:
             "The canonical Identity source does not currently declare this guidance. The renderer does not infer or invent it.",
         }),
+  );
+}
+
+function isStructuredVoice(value) {
+  return value && typeof value === "object" && !Array.isArray(value)
+    && ["foundation", "characteristics", "contexts", "localization"].some(
+      (key) => Object.hasOwn(value, key),
+    );
+}
+
+function StructuredVoice({ value }) {
+  const { foundation, localization } = value;
+  const characteristics = value.characteristics || [];
+  const characteristicLabels = new Map(
+    characteristics.map((entry) => [entry.id, entry.label]),
+  );
+  return h(
+    "div",
+    { className: "section-stack" },
+    foundation
+      ? h(
+          "article",
+          { className: "panel", "data-voice-foundation": true },
+          h("h3", null, "Project profile"),
+          h(VoiceText, { title: "Purpose", value: foundation.purpose, copy: true }),
+          h(VoiceText, { title: "Positioning", value: foundation.positioning, copy: true }),
+          h(VoiceList, { title: "Audience", values: foundation.audience }),
+          h(VoiceList, { title: "Personality", values: foundation.personality }),
+        )
+      : null,
+    characteristics.length
+      ? h(
+          "article",
+          { className: "panel" },
+          h("h3", null, "Voice characteristics"),
+          ...characteristics.map((entry) => h(
+            "section",
+            { key: entry.id },
+            h("h4", null, entry.label),
+            h("p", null, entry.description),
+          )),
+        )
+      : null,
+    ...(value.contexts || []).map((context) => h(
+      "article",
+      { className: "panel", key: context.id, "data-voice-context": context.id },
+      h("h3", null, context.label),
+      ...["audience", "intent", "tone", "naming", "capitalization", "punctuation"]
+        .map((key) => h(VoiceText, {
+          key,
+          title: humanize(key),
+          value: context[key],
+        })),
+      h(VoiceList, {
+        title: "Characteristics",
+        values: context.characteristics?.map((id) => characteristicLabels.get(id) || id),
+      }),
+      h(VoiceList, { title: "Preferred vocabulary", values: context.preferredVocabulary }),
+      h(VoiceList, { title: "Avoided language", values: context.avoidedLanguage }),
+      h(VoiceExamples, { title: "Approved examples", examples: context.examples, copy: true }),
+      h(VoiceExamples, { title: "Anti-examples", examples: context.antiExamples }),
+    )),
+    localization
+      ? h(
+          "article",
+          { className: "panel", "data-voice-localization": true },
+          h("h3", null, "Localization"),
+          h(VoiceText, { title: "Source language", value: localization.sourceLanguage }),
+          localization.supportedLanguages?.length
+            ? h(
+                "section",
+                null,
+                h("h4", null, "Supported languages"),
+                h(
+                  "ul",
+                  { className: "guidance-list" },
+                  ...localization.supportedLanguages.map((language) => h(
+                    "li",
+                    { key: language.tag },
+                    `${language.tag} · ${language.coverage}`,
+                    language.notes ? h("p", null, language.notes) : null,
+                  )),
+                ),
+              )
+            : null,
+          h(VoiceText, { title: "Fallback", value: localization.fallback }),
+        )
+      : null,
+  );
+}
+
+function VoiceText({ title, value, copy = false }) {
+  return typeof value === "string" && value.length
+    ? h(
+        "section",
+        null,
+        h("h4", null, title),
+        h("p", null, value),
+        copy ? h(CopyControl, { label: title, value }) : null,
+      )
+    : null;
+}
+
+function VoiceList({ title, values }) {
+  return values?.length
+    ? h(
+        "section",
+        null,
+        h("h4", null, title),
+        h(
+          "ul",
+          { className: "guidance-list" },
+          ...values.map((value) => h("li", { key: value }, value)),
+        ),
+      )
+    : null;
+}
+
+function VoiceExamples({ title, examples, copy = false }) {
+  return examples?.length
+    ? h(
+        "section",
+        null,
+        h("h4", null, title),
+        h(
+          "ul",
+          { className: "guidance-list" },
+          ...examples.map((example) => h(
+            "li",
+            { key: example.id },
+            h("p", null, example.text),
+            h("p", { className: "support-note" }, example.rationale),
+            copy ? h(CopyControl, { label: `${title}: ${example.id}`, value: example.text }) : null,
+          )),
+        ),
+      )
+    : null;
+}
+
+function StructuredUsage({ value }) {
+  const { sections, ...remaining } = value;
+  return h(
+    "div",
+    { className: "section-stack" },
+    ...sections.map((section) => h(
+      "article",
+      { className: "panel", key: section.id, "data-usage-section": section.id },
+      h("h3", null, section.title),
+      h("p", null, section.description),
+      ...section.rules.map((rule) => h(
+        "section",
+        {
+          key: rule.id,
+          "data-usage-rule": rule.id,
+          "data-usage-kind": rule.kind,
+          "data-usage-category": rule.category,
+        },
+        h("h4", null, `${rule.kind === "do" ? "Do" : "Don't"} · ${rule.category}`),
+        h("p", null, rule.instruction),
+        h("p", { className: "support-note" }, rule.rationale),
+        h(
+          "ul",
+          { className: "guidance-list" },
+          ...rule.details.map((detail) => h("li", { key: detail }, detail)),
+        ),
+        h("p", null, h("strong", null, "Contexts: "), rule.contexts.join(", ")),
+      )),
+    )),
+    Object.keys(remaining).length ? h(GuidanceValue, { value: remaining }) : null,
   );
 }
 

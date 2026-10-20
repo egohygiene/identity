@@ -193,7 +193,7 @@ def build_projection(repository_root: Path) -> tuple[dict[str, Any], dict[str, b
 
     boilerplates = public_records(source, "boilerplates", approvals)
     boilerplate_kinds = {value["kind"] for value in boilerplates}
-    if boilerplate_kinds != {"short", "long"}:
+    if not {"short", "long"}.issubset(boilerplate_kinds):
         raise ProjectionError(
             "Press Kit projection requires approved public short and long boilerplates"
         )
@@ -526,21 +526,19 @@ def render_markdown(model: dict[str, Any]) -> str:
         "",
         f"Source digest: `{model['source']['digest']}`",
         "",
-        "## Short boilerplate",
-        "",
-        boilerplates["short"]["text"],
-        "",
-        f"Approval: `{boilerplates['short']['approval']['id']}`",
-        "",
-        "## Long boilerplate",
-        "",
-        boilerplates["long"]["text"],
-        "",
-        f"Approval: `{boilerplates['long']['approval']['id']}`",
-        "",
-        "## Key facts",
-        "",
     ]
+    for kind, label in (("short", "Short"), ("paragraph", "Paragraph"), ("long", "Long")):
+        if kind in boilerplates:
+            value = boilerplates[kind]
+            lines.extend([
+                f"## {label} boilerplate",
+                "",
+                value["text"],
+                "",
+                f"Approval: `{value['approval']['id']}`",
+                "",
+            ])
+    lines.extend(["## Key facts", ""])
     if model["facts"]:
         lines.extend(["| Fact | Value |", "| --- | --- |"])
         lines.extend(

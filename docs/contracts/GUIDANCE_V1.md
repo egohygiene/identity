@@ -61,6 +61,16 @@ The renderer's `--context` option selects one voice context and only the usage
 rules that name that context or `all`. Consumer applications receive the same
 selection through `identity.brand-guidance/v1` JSON.
 
+The reference Brand Kit page presents approved foundation fields,
+characteristics, context naming/capitalization/vocabulary and practical examples
+as readable guidance. Its copy controls preserve the supplied purpose,
+positioning and positive example text exactly. Anti-examples remain labeled as
+material to avoid. Unofficial-extension naming rules appear only when supplied
+in an approved public context or applicable usage rule; rendering a rule grants
+no additional rights or approval. Optional profile facts and descriptions use
+the existing [Press Kit projection](PRESS_KIT_V1.md), rather than a competing
+profile catalog or renderer-authored copy.
+
 ## Renderer model
 
 `identity.brand-guidance/v1` is a framework-neutral projection containing:

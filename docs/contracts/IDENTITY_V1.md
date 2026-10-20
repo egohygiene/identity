@@ -70,7 +70,8 @@ under the same human approval model as voice and usage. See the
 
 `documents.pressKit` is an optional additive v1 path. It names one local,
 reviewed Press and Media Kit source document. The source can contain approved
-short and long boilerplate, facts, links, contacts, optional team bios, and
+short and long boilerplate, an optional paragraph description, facts, links,
+contacts, optional team bios, and
 explicit selections from already-approved public assets. It never makes a
 candidate record, unapproved fact, or unspecified asset public. See the
 [Press Kit contract](PRESS_KIT_V1.md).

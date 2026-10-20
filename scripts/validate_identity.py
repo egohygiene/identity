@@ -3428,17 +3428,17 @@ def validate_press_kit(
     for index, item in enumerate(boilerplates):
         kind = item.get("kind")
         pointer = f"{path_value}#/boilerplates/{index}/kind"
-        if kind not in {"short", "long"} or kind in kinds:
+        if kind not in {"short", "paragraph", "long"} or kind in kinds:
             diagnostic(
                 diagnostics,
                 "IDN1801",
                 pointer,
-                "Press Kit boilerplate kind must be one unique short or long value",
-                "Declare exactly one reviewed short boilerplate and one reviewed long boilerplate.",
+                "Press Kit boilerplate kind must be one unique short, paragraph, or long value",
+                "Declare one short and one long boilerplate, with at most one optional paragraph.",
             )
         elif isinstance(kind, str):
             kinds.add(kind)
-    if kinds != {"short", "long"}:
+    if not {"short", "long"}.issubset(kinds):
         diagnostic(
             diagnostics,
             "IDN1801",
