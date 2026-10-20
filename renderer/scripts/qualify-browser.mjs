@@ -188,6 +188,35 @@ function inventory(paths) {
   return [...files].sort().map((file) => ({ path: file, sha256: sha256(readFileSync(file)) }));
 }
 
+function ownedChildPids() {
+  return readFileSync(`/proc/${process.pid}/task/${process.pid}/children`, "utf8")
+    .trim().split(/\s+/u).filter(Boolean).map(Number);
+}
+
+function ownedBrowserProcess(profile, priorChildren) {
+  const candidates = [];
+  const prefix = `/ms-playwright/chromium_headless_shell-${profile.chromium.revision}/`;
+  for (const pid of ownedChildPids().filter((child) => !priorChildren.has(child))) {
+    let executable;
+    try { executable = realpathSync(`/proc/${pid}/exe`); } catch (error) {
+      if (error.code === "ENOENT" || error.code === "ESRCH") continue;
+      throw error;
+    }
+    if (!executable.startsWith(prefix) || path.basename(executable) !== "chrome-headless-shell") continue;
+    const parentPid = () => Number(readFileSync(`/proc/${pid}/status`, "utf8").match(/^PPid:\s+(\d+)$/mu)?.[1]);
+    if (parentPid() !== process.pid) throw new Error("The observed browser is not this qualifier's direct child");
+    const commandLine = readFileSync(`/proc/${pid}/cmdline`, "utf8").split("\0");
+    if (commandLine.at(-1) === "") commandLine.pop();
+    if (!path.isAbsolute(commandLine[0]) || realpathSync(commandLine[0]) !== executable ||
+        parentPid() !== process.pid || realpathSync(`/proc/${pid}/exe`) !== executable) {
+      throw new Error("The observed browser argv is not bound to this qualifier's direct child executable");
+    }
+    candidates.push({ executable, commandLine, process: { pid, parentPid: process.pid, source: "Linux /proc direct-child observation" } });
+  }
+  if (candidates.length !== 1) throw new Error("The qualifier did not observe exactly one newly launched image-owned headless shell");
+  return candidates[0];
+}
+
 async function browserEvidence(profile, runRoot) {
   const { chromium, devices } = await import("@playwright/test");
   const previewUrl = "http://127.0.0.1:4173";
@@ -222,15 +251,12 @@ async function browserEvidence(profile, runRoot) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
     if (!ready) throw new Error("Qualification preview did not become ready");
+    const priorChildren = new Set(ownedChildPids());
     browser = await chromium.launch({ headless: true });
     if (browser.version() !== profile.chromium.version) throw new Error("The launched Chromium version differs from the qualified profile");
-    const browserSession = await browser.newBrowserCDPSession();
-    const commandLine = (await browserSession.send("Browser.getBrowserCommandLine")).arguments;
+    const observed = ownedBrowserProcess(profile, priorChildren);
+    const { commandLine, executable } = observed;
     if (!commandLine.includes("--force-color-profile=srgb")) throw new Error("The actual browser lacks the qualified sRGB rendering flag");
-    const executable = realpathSync(commandLine[0]);
-    if (!executable.startsWith(`/ms-playwright/chromium_headless_shell-${profile.chromium.revision}/`)) {
-      throw new Error("The actual executable is not the profile's image-owned Chromium headless shell");
-    }
     const context = await browser.newContext({ ...devices["Desktop Chrome"], ...profile.settings });
     const page = await context.newPage();
     await page.goto("http://127.0.0.1:4173");
@@ -262,6 +288,7 @@ async function browserEvidence(profile, runRoot) {
     }
     return {
       version: browser.version(), executable, executableSha256: sha256(readFileSync(executable)),
+      process: observed.process,
       commandLine: commandLine.map((value) => value.startsWith("--user-data-dir=") ? "--user-data-dir=<disposable-browser-profile>" : value),
       settings, renderedFonts,
     };
@@ -335,7 +362,6 @@ async function main(arguments_) {
         throw new Error(`Required qualified font file is missing or changed: ${expected.path}`);
       }
     }
-    receipt.browser = await browserEvidence(profile, runRoot);
     receipt.positive = phase("positive", runRoot, profile, { passed: 6 });
     const cssFiles = readdirSync(path.join(rendererRoot, "dist/assets")).filter((file) => file.endsWith(".css"));
     if (cssFiles.length !== 1) throw new Error("The visual mutation requires one unambiguous built CSS file");
@@ -353,6 +379,7 @@ async function main(arguments_) {
       baselineGuard(profile);
     }
     receipt.restored = phase("restored", runRoot, profile, { passed: 1, title: screenshotTitle });
+    receipt.browser = await browserEvidence(profile, runRoot);
     baselineGuard(profile);
     receipt.baseline.unchanged = true;
     receipt.status = "passed";
