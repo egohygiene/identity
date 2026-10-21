@@ -783,3 +783,14 @@ main {
 .foundation-type-sample {
   overflow-wrap: anywhere;
 }
+
+.presentation-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.presentation-copy {
+  overflow-wrap: anywhere;
+}

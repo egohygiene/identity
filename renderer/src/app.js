@@ -6,6 +6,7 @@ import React from "react";
 import { normalizeArtifactPath, normalizeAssetBaseUrl } from "./artifact-paths.js";
 import { foundationTokens } from "./foundations.js";
 import { ColorFoundations, TypographyFoundations } from "./foundations-view.js";
+import { PresentationProfiles, selectedPresentationProfiles } from "./presentation.js";
 
 import {
   SECTION_DEFINITIONS,
@@ -136,6 +137,11 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
               assetBaseUrl,
             })
           : null,
+        selectedPresentationProfiles(model).length
+          ? h(Section, { id: "presentation", title: "Selected presentation profiles" },
+              h(PresentationProfiles, { model, assetBaseUrl, CopyControl, DefinitionList, AssetRights }),
+            )
+          : null,
         h(StudioSection, { model }),
         h(DownloadsSection, {
           packages: model.packages,
@@ -207,6 +213,9 @@ function SectionNavigation({ model }) {
     }
     if (id === "press-kit") {
       return Boolean(model.pressKit);
+    }
+    if (id === "presentation") {
+      return selectedPresentationProfiles(model).length > 0;
     }
     return true;
   });

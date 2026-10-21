@@ -143,6 +143,51 @@ fn generate_request(
 }
 
 #[test]
+fn github_profile_generates_an_uploadable_source_bound_preview_without_other_platforms() {
+    let repository = TempDir::new().unwrap();
+    copy_tree(&fixture_root(), repository.path());
+    let pipeline = V1ConsumerPipeline::load(repository.path()).unwrap();
+    let profiles = ["github", "metadata"].map(|id| ProfileSelection {
+        id: id.to_owned(),
+        version: "1.0.0".to_owned(),
+    });
+    let request = compiler_request("assets/identity", &profiles).unwrap();
+    let renderer = generate_request(repository.path(), &pipeline, request.clone());
+    let preview = repository
+        .path()
+        .join("assets/identity/github/social-preview.png");
+    let bytes = fs::read(&preview).unwrap();
+    assert!(bytes.starts_with(b"\x89PNG\r\n\x1a\n"));
+    assert_eq!(u32::from_be_bytes(bytes[16..20].try_into().unwrap()), 1280);
+    assert_eq!(u32::from_be_bytes(bytes[20..24].try_into().unwrap()), 640);
+    assert!(bytes.len() < 1_000_000, "GitHub upload must be under 1 MB");
+    let downloads = renderer["downloads"].as_array().unwrap();
+    assert_eq!(downloads.len(), 1);
+    assert_eq!(downloads[0]["id"], "github-social-preview");
+    assert_eq!(
+        downloads[0]["sourceSha256"],
+        renderer["assets"][0]["sha256"]
+    );
+    let metadata: Value = serde_json::from_slice(
+        &fs::read(
+            repository
+                .path()
+                .join("assets/identity/packages/metadata/metadata.json"),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(
+        metadata["social"],
+        serde_json::json!({"githubPreview": "github/social-preview.png"})
+    );
+    assert!(!repository.path().join("assets/identity/social").exists());
+    let second = generate_request(repository.path(), &pipeline, request);
+    assert_eq!(second, renderer);
+    assert_eq!(fs::read(preview).unwrap(), bytes);
+}
+
+#[test]
 fn selected_outputs_bind_public_downloads_and_standalone_metadata() {
     let repository = TempDir::new().unwrap();
     copy_tree(&fixture_root(), repository.path());

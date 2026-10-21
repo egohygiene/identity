@@ -225,18 +225,22 @@ fn pwa_profile() -> ProfileDescriptor {
 }
 
 fn github_profile() -> ProfileDescriptor {
+    let mut preview = raster_target(
+        "github-social-preview",
+        "github",
+        "github/social-preview.png",
+        1280,
+        640,
+        "social-card",
+        false,
+    );
+    // GitHub requires an upload under 1 MB. This conservative bound is below
+    // both decimal and binary interpretations; other raster targets retain theirs.
+    preview.maximum_bytes = Some(999_999);
     profile(
         "github",
         "GitHub repository social preview projection.",
-        vec![raster_target(
-            "github-social-preview",
-            "github",
-            "github/social-preview.png",
-            1280,
-            640,
-            "social-card",
-            false,
-        )],
+        vec![preview],
     )
 }
 

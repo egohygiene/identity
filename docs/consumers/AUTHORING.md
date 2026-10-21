@@ -188,6 +188,14 @@ profiles and inspect their actual output inventory. This work adds no new
 universal ICO or avatar adapter; the legacy release publisher can expose its
 already-existing avatar SVG through explicit release configuration.
 
+For an actual GitHub preview or generic card, follow the
+[selected presentation profiles](PRESENTATION_PROFILES.md) walkthrough. It
+reuses existing output selections and Press Kit copy/facts/links, including
+explicitly supplied official package identifiers and discovery keywords.
+It adds no registry publisher, account manager, inferred tags or new source
+catalog. Keep absent/withheld metadata absent and inspect the destination's
+current requirements before using the generated handoff.
+
 The renderer receives the actual selected compiler targets. It advertises
 their package/source/raster paths, dimensions and source binding, and omits an
 archive when its underlying mark is not selected for public use. A bare model
