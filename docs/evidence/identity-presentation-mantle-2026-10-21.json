@@ -134,7 +134,7 @@
     "rendererInputs": [
       {
         "path": "renderer/src/app.js",
-        "sha256": "f493e4ab1efcae1c398ddebc63ea12d7e835a14b03f61ed01236bec06f91d0f0"
+        "sha256": "9a2be14247d2a4bb93cd30ebef5113018d6e898c368676439d2c00e1ec8ba090"
       },
       {
         "path": "renderer/src/model.js",
@@ -180,6 +180,6 @@
     "sourceRightsAndRestrictionsRetained": true,
     "unselectedSocialProfileOmitted": true
   },
-  "observedAt": "2026-10-21T11:18:14-04:00",
+  "observedAt": "2026-10-21T11:30:54-04:00",
   "recordPurpose": "Identity #104 bounded development proof and generated renderer fixture; no new contract, approval, release, upload or deployment."
 }

@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T11:25:32-04:00'
+  updated_at: '2026-10-21T11:30:41-04:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -38,12 +38,9 @@ scope:
   - docs/decisions/ADR-0016-pinned-social-surface-projection-boundary.md
   - docs/decisions/ADR-0020-channel-registry-governance.md
   - docs/consumers/PRESENTATION_PROFILES.md
-  - docs/contracts/BRAND_KIT_PACKAGES_V1.md
-  - docs/contracts/BRAND_KIT_RENDERER_V1.md
   - docs/evidence/identity-presentation-mantle-2026-10-21.json
   - src/brandkit/profiles.rs
   - renderer/src/presentation.js
-  - renderer/fixtures/mantle-presentation/README.md
   - renderer/tests/presentation.test.js
   - renderer/tests/e2e/presentation.spec.js
   - https://github.com/egohygiene/identity/issues/104
@@ -51,6 +48,8 @@ scope:
   - https://github.com/egohygiene/identity/issues/70
   - contracts/v1/brand-kit-view-model.schema.json
   - docs/references/github/README.md
+  - docs/decisions/ADR-0005-json-schema-contract.md
+  - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
 work:
   objective: Make a small existing opt-in target set usable from the kit without new authored brand facts
     or a platform catalog.
@@ -86,7 +85,7 @@ state:
     verified_at: '2026-10-21T11:05:50-04:00'
   candidate:
     branch: codex/104-presentation-profiles
-    revision: 0328e112e279b0cb996e26003319ebb88b4a4ef0
+    revision: 0e9498ec2c83306da6036447e3225b62d31d8929
     pull_request:
       provider: github
       id: egohygiene/identity#128
@@ -98,18 +97,17 @@ state:
     default_branch_revision: 12985216d34d71a2c09adfa2fe1e43481b3252ee
     issue_state: open
     pull_request_state: draft
-    notes: 'PR128 is draft/open at0328e112e279b0cb996e26003319ebb88b4a4ef0 through merge4c303ca8ff1ab06663bf64616d9d708394f42677;
-      main1298521 is unchanged. Unit suites pass394 cases. Two browser-fixture delivery attempts failed: initial
-      download fallback HTML, then the existing preview server did not serve the inserted PNG. This containing
-      correction uses a dedicated HTTP fixture with the real built bundle/native PNG; fresh checks are required.
-      Parked123 is unchanged.'
+    notes: PR128 is draft/open at0e9498ec2c83306da6036447e3225b62d31d8929 through merge57caec1b7e2e01811646f678e870f1b4a95eee8c;
+      main1298521 is unchanged. Real preview, keyboard copy and exact download pass. Full-page axe identifies
+      existing unfocusable guidance scrollers. This candidate adds keyboard focus and an actual horizontal-scroll
+      assertion; fresh containing-head checks are required. Parked123 is unchanged.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-21T11:25:32-04:00'
+  reviewed_at: '2026-10-21T11:30:41-04:00'
   reviewed_by: Codex
   evidence:
   - command: 'Live PR127/parked123 and #99/#100/#101/#103/#104 inspection'
@@ -144,13 +142,14 @@ review:
     observed_at: '2026-10-21T11:05:50-04:00'
     notes: 'Local JS dependencies remain absent from the recorded registry/cache block; existing hosted suites
       must execute the added cases. Broader quality stays #70 and parked #80/123.'
-  - command: https://github.com/egohygiene/identity/actions/runs/39623214621; https://github.com/egohygiene/identity/actions/runs/39624788651
+  - command: https://github.com/egohygiene/identity/actions/runs/39623214621; https://github.com/egohygiene/identity/actions/runs/39624788651;
+      https://github.com/egohygiene/identity/actions/runs/39625660870
     outcome: failed
     observed_at: '2026-10-21T11:13:46-04:00'
-    notes: Sources65bc0c8/0328e11:394 unit cases and seven prior browser checks pass. The new fixture first
-      downloads fallback HTML; seeding a running preview tree then leaves the image unavailable. The corrected
-      test serves actual built JS/CSS and the exact native PNG via its own loopback HTTP fixture. Dimensions/download
-      equality/axe/narrow assertions remain unchanged and need fresh execution.
+    notes: Sources65bc0c8/0328e11 have test-fixture delivery failures. Source0e9498e fixes real HTTP preview/download
+      and keyboard copy, then axe finds two existing scrollable guidance pre blocks without keyboard focus.
+      This candidate supplies tabIndex0 and verifies ArrowRight scrolling.394 unit cases/seven prior browser
+      checks pass; fresh new-case axe/narrow execution remains required.
   - command: Offline Draft202012Validator schema/model/GitHub specialization checks; uploaded-template byte
       comparison
     outcome: passed
@@ -200,7 +199,7 @@ Main/base12985216d34d71a2c09adfa2fe1e43481b3252ee is the verified owner-authoriz
 
 ## Completed and material changes
 
-renderer/src/presentation.js consumes only the two existing native target IDs with matching profile/PNG/public source binding. It presents declared paths/dimensions/rights and exact project/Press Kit copy without inferring registry identities, tags or accounts. The optional section/navigation is absent from legacy/no-target models; their existing preview markup and approved PNG remain unchanged.
+renderer/src/presentation.js consumes only the two existing native target IDs with matching profile/PNG/public source binding. It presents declared paths/dimensions/rights and exact project/Press Kit copy without inferring registry identities, tags or accounts. The optional section/navigation is absent from legacy/no-target models; their visual layout and approved PNG are preserved. Existing guidance pre blocks gain keyboard focus for scrolling.
 
 src/brandkit/profiles.rs repairs the GitHub target's inherited generic2MB budget to999999bytes, below GitHub's documented1MB upload limit. Format, dimensions, path, composition and other profiles retain their existing contracts. The dated official source and regeneration caveat are in docs/consumers/PRESENTATION_PROFILES.md. Generic1200x630 is an Identity choice, not a platform requirement.
 
@@ -210,11 +209,11 @@ The real Mantle fixture retains exact generated model/PNG bytes from unchanged b
 
 All14 focused native consumer cases pass. Two independent fresh Mantle generations and read-only verifies agree on all19 output files including the compiler manifest; all14 consumed source inputs match raw Git. The1280x640 GitHub PNG is16698bytes, SHA25639a01b2242100703c238fd4719201719eddd2ae94f882c56c697b1f43dccf79f. Every manifested output matches bytes. A deliberately damaged PNG fails without repair; a disposable GitHub/social-exclusion variant validates/generates/verifies without those targets. The complete original checkout is preserved.
 
-All35 JS sources parse, docs links and whitespace pass. Added renderer cases cover selection, exact source paths/rights, approved copy reuse, absent/unselected inputs and real fixture integrity. The Chromium case uses that real model/PNG for hydration, navigation/keyboard copy, actual download bytes, axe and narrow layout. The first hosted run passed394 unit cases/seven existing browser checks; the new exact-download assertion found fallback HTML. The corrected isolated HTTP fixture serves the actual built renderer and native PNG without modifying a running preview tree; exact equality is preserved. Fresh containing-head runtime checks remain required.
+All35 JS sources parse, docs links and whitespace pass. Added renderer cases cover selection, exact source paths/rights, approved copy reuse, absent/unselected inputs and real fixture integrity. The Chromium case uses that real model/PNG for hydration, navigation/keyboard copy, actual download bytes, axe and narrow layout. The first fixture attempts fail delivery; source0e9498e passes real preview/copy/download before axe finds unfocusable guidance scrollers. This candidate gives them keyboard access and checks ArrowRight scrolling.394 unit cases/seven prior browser checks pass; fresh full new-case execution is pending.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Fresh hosted execution of the dedicated real-HTTP download fixture is the remaining scoped validation gate. Unavailable package/account facts stay absent; supplied metadata and manual upload instructions do not prove registry publication, ownership, uploaded preview or human visual approval. Device/destination cropping and length limits require review.
+Fresh hosted execution of keyboard-scroll access and the new-case axe/narrow checks is the remaining scoped gate. Unavailable package/account facts stay absent; supplied metadata and manual upload instructions do not prove registry publication, ownership, uploaded preview or human visual approval. Device/destination cropping and length limits require review.
 
 The Aether catalog was rechecked through its live file and matches the pinned source's empty experimental/rights-rejected/release-excluded record. Closed Aether52/53 do not satisfy ADR0016 admission. Future external surfaces retain that owner boundary. The owner-supplied GitHub Repo Card Template is retained byte-for-byte under docs/references/github with source/checksum and reference-only status; no screenshot or account/browser context is committed. The additive githubSocialPreviewDownload definition names the existing native artifact without changing source/download fields or generic compatibility. All29 prior ADR bytes/dispositions/approvals remain unchanged (21accepted/8proposed), including proposed ADR0029 after merge127. Complete public-kit/release acceptance remains #105/#98; Docker, full lint/testing/CI, refactors and final reconciliation remain #70. No release/deployment or creative approval occurs.
 
@@ -224,7 +223,7 @@ Publish the scoped draft, inspect its exact-head checks and review #104 before a
 
 ## Parallel changes and reconciliation
 
-Parked123 supplies no merged Docker/browser acceptance. Decision impact is reference: accepted ADR0005/0008/0010/0015/0016/0020 already govern typed profiles, immutable renderer inputs, public Press Kit facts, external catalogs and account lifecycle. This change presents existing outputs and repairs an existing provider byte limit; source/download fields and existing generic compatibility remain unchanged; the named artifact definition exposes an existing supported output. No platform ownership or approval boundary changes. Recheck that classification against the final diff. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified owner checkouts; authoring guidance remains draft.
+Parked123 supplies no merged Docker/browser acceptance. Decision impact is reference: accepted ADR0005/0008/0010/0011/0015/0016/0020 already govern typed profiles, immutable renderer inputs, public Press Kit facts, external catalogs and account lifecycle. This change presents existing outputs and repairs an existing provider byte limit; source/download fields and existing generic compatibility remain unchanged; the named artifact definition exposes an existing supported output. No platform ownership or approval boundary changes. Recheck that classification against the final diff. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified owner checkouts; authoring guidance remains draft.
 
 ## Privacy and redaction
 

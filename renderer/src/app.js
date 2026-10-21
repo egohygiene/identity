@@ -1214,7 +1214,7 @@ function GuidanceValue({ value }) {
             )
           : h(
               "pre",
-              { className: "structured-value" },
+              { className: "structured-value", tabIndex: 0 },
               JSON.stringify(entry, null, 2),
             ),
       ),

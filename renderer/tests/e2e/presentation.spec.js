@@ -86,6 +86,16 @@ test("selected presentation preview hydrates, downloads and copies with keyboard
   const download = await completed;
   expect(download.suggestedFilename()).toBe("social-preview.png");
   expect(fs.readFileSync(await download.path()).equals(png), "Download must equal the exact native PNG bytes").toBe(true);
+  const guidanceValues = page.locator(".structured-value");
+  const scrollable = await guidanceValues.evaluateAll((values) => values.findIndex(
+    (value) => value.scrollWidth > value.clientWidth,
+  ));
+  expect(scrollable).toBeGreaterThanOrEqual(0);
+  const guidance = guidanceValues.nth(scrollable);
+  await guidance.focus();
+  await expect(guidance).toBeFocused();
+  await guidance.press("ArrowRight");
+  await expect.poll(() => guidance.evaluate((value) => value.scrollLeft)).toBeGreaterThan(0);
   await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
   const accessibility = await page.evaluate(async () => window.axe.run(document));
   expect(accessibility.violations).toEqual([]);
