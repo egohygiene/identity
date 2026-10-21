@@ -339,6 +339,23 @@ truthful missing-data label does not withhold those bytes or establish their
 permissions. See the
 [publication rights boundary](../publication/IDENTITY_PAGES.md#rights-metadata-and-release-selection).
 
+## Selected presentation profiles
+
+When the immutable model's existing public `downloads[]` contains the native
+`github-social-preview` or `social-card-1200x630` target with its matching profile,
+PNG media type and source asset/digest, the renderer presents that selected
+image, supplied dimensions and source rights. It uses the declared artifact
+path under the configured base; it does not discover or guess a file.
+
+The same view copies project name/tagline/repository and existing generated
+Press Kit boilerplates, facts and links exactly. Labels do not activate registry
+or account behavior. Empty/absent downloads retain the prior kit and omit this
+section/navigation. Source and view-model fields are unchanged; the schema adds
+an optional named `githubSocialPreviewDownload` definition for the existing
+GitHub artifact, linked to its retained layout reference.
+See the [selected-profile guide](../consumers/PRESENTATION_PROFILES.md) for
+bounded targets, actual consumer proof and manual upload requirements.
+
 ## Theming
 
 The renderer derives CSS custom properties from semantic tokens when present and

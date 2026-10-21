@@ -40,7 +40,7 @@ updated: 2026-10-21
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #99 is complete through #114/#117/#118; #78/#79/#77 through #119/#120/#121; #81/Q20 through #122; #100/Q30 through #124; #103/Q33 through #125. #101/Q31 closed after [PR #126](https://github.com/egohygiene/identity/pull/126) merged at `a637ac689469a5910896766c18dc6d337d46b162`. #102/Q32 is the active product issue. The owner has deferred actual local-Docker acceptance and review of #80/draft #123, CI work and refactors to the final stabilization phase. #80/Q19 is blocked with its exit unchecked; #82/Q21 and #88/Q27 retain their unmet #80 prerequisite. Existing #70/Q28 owns the final full quality pass; #98/Q40 retains release and dogfood acceptance.
+**Current gate:** #99 is complete through #114/#117/#118; #78/#79/#77 through #119/#120/#121; #81/Q20 through #122; #100/Q30 through #124; #103/Q33 through #125. #101/Q31 closed after [PR #126](https://github.com/egohygiene/identity/pull/126) merged at `a637ac689469a5910896766c18dc6d337d46b162`. #102/Q32 closed after PR #127 merged at `12985216d34d71a2c09adfa2fe1e43481b3252ee`; #104/Q34 is the active product issue. The owner has deferred actual local-Docker acceptance and review of #80/draft #123, CI work and refactors to the final stabilization phase. #80/Q19 is blocked with its exit unchecked; #82/Q21 and #88/Q27 retain their unmet #80 prerequisite. Existing #70/Q28 owns the final full quality pass; #98/Q40 retains release and dogfood acceptance.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -665,7 +665,7 @@ issues: [101]
 
 <!-- roadmap-step
 id: IDN-Q32
-status: active
+status: complete
 depends_on: [IDN-Q29, IDN-Q14]
 issues: [102]
 -->
@@ -675,9 +675,9 @@ issues: [102]
 
 **Exit criteria:**
 
-- [ ] Role/value examples, supported combinations, font/fallback availability and licensing, and release-matched guidance are verified.
+- [x] Role/value examples, supported combinations, font/fallback availability and licensing, and release-matched guidance are verified.
 
-**Evidence and scope:** [#102](https://github.com/egohygiene/identity/issues/102) is active from merged #126. Reuse existing source-bound handbook token entries for color roles/pairs/thresholds and typography license/language/legibility constraints. Verify displayed, context and handbook token agreement; measure only declared supported color pairs, preserve fallback order and preview explicit composite type values. Missing combinations, font acquisition data and type scales stay undeclared. #99 defines the core; #74/#75 govern source and release binding. No new source schema, token catalog, font download, component library or creative approval is introduced. Accepted ADR-0004/0007/0010/0011/0014 govern this implementation.
+**Evidence and scope:** [#102](https://github.com/egohygiene/identity/issues/102) closed after [PR #127](https://github.com/egohygiene/identity/pull/127) merged at `12985216d34d71a2c09adfa2fe1e43481b3252ee`. All four applicable workflows passed on reviewed head `d2dba5394cfa2c351418fdcaaf8bdf0ff47dd071`, including 383 renderer tests and seven Chromium checks. Existing handbook facts supply color roles/pairs/thresholds and font license/language/legibility guidance. Displayed/context/handbook token agreement, unrounded contrast decisions, fallback order and explicit composite previews are verified. Missing combinations, acquisition data and type scales remain undeclared. Accepted ADR-0004/0007/0010/0011/0014 govern this implementation; all 29 ADR bytes/dispositions and the approved screenshot remain unchanged. No new schema, font, rights, creative approval, complete-kit delivery or release is claimed.
 
 <!-- roadmap-step
 id: IDN-Q33
@@ -697,7 +697,7 @@ issues: [103]
 
 <!-- roadmap-step
 id: IDN-Q34
-status: ready
+status: active
 depends_on: [IDN-Q29, IDN-Q30, IDN-Q31, IDN-Q33]
 issues: [104]
 -->
@@ -709,7 +709,7 @@ issues: [104]
 
 - [ ] At least one actual target works end to end with explicit constraints, rights, and no-profile fallback.
 
-**Evidence and scope:** [#104](https://github.com/egohygiene/identity/issues/104). Reuse pinned Aether surface facts; account management and package publication retain their owners.
+**Evidence and scope:** [#104](https://github.com/egohygiene/identity/issues/104) is active from merged #127. The [selected-profile guide](docs/consumers/PRESENTATION_PROFILES.md) reuses the existing native GitHub preview and generic-card targets, source-bound public downloads and existing approved Press Kit copy/facts/links. A real Mantle target provides bounded generation, omission and integrity proof. The existing GitHub Social preview artifact is explicit in the schema, with the supplied template preserved as a reference. No new source fields, profile matrix, account activation or registry publishing adapter is introduced. Accepted ADR-0005/0008/0010/0015/0016/0020 retain the boundaries; the inspected experimental rights-rejected Aether catalog remains inadmissible for production social-surface projection. #109/Q39 now has closed prerequisites but remains planned at its later priority; no dependency edges change.
 
 <!-- roadmap-step
 id: IDN-Q35

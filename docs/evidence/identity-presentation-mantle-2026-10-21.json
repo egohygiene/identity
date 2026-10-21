@@ -1,0 +1,185 @@
+{
+  "consumer": {
+    "consumedFilesCompared": 14,
+    "consumedFilesMatchRevision": true,
+    "contentComparison": "raw Git blobs; no consumer clean/smudge filters, diff drivers or textconv",
+    "entireCheckoutPreservedExcludingGitMetadata": true,
+    "inputs": {
+      ".identity": {
+        "kind": "directory"
+      },
+      ".identity/brief.md": {
+        "bytes": 1244,
+        "kind": "file",
+        "sha256": "7dcf30012c15cdc7e3290c1610329095c3781ce2ff9a44e95fe728bdc117998e"
+      },
+      ".identity/candidates": {
+        "kind": "directory"
+      },
+      ".identity/candidates/README.md": {
+        "bytes": 279,
+        "kind": "file",
+        "sha256": "5c352f6ba603aef2c768e9d5add43da094ccdd90695a29e516c33240e2ca1051"
+      },
+      ".identity/defaults": {
+        "kind": "directory"
+      },
+      ".identity/defaults/organization.tokens.json": {
+        "bytes": 1910,
+        "kind": "file",
+        "sha256": "4294d68f65264485f05eb326df3260a6ad1a1a19b78e4f735adb8d1542d3660c"
+      },
+      ".identity/governance": {
+        "kind": "directory"
+      },
+      ".identity/governance/approvals.json": {
+        "bytes": 2528,
+        "kind": "file",
+        "sha256": "349ec39f19ccba09a469ab54e26533c1f2f1ab49f3ced074ecb3114cd31a1811"
+      },
+      ".identity/governance/provenance.json": {
+        "bytes": 988,
+        "kind": "file",
+        "sha256": "1aa69b46b381a226e18bdc025f1171b4d38174f214ed2b02f7b68c18481e277e"
+      },
+      ".identity/guidance": {
+        "kind": "directory"
+      },
+      ".identity/guidance/repository-presentation.json": {
+        "bytes": 1180,
+        "kind": "file",
+        "sha256": "cd55201b6c453528a19f7aa48ab336c60b87fb0730b9b5b0335fefc90032e2b8"
+      },
+      ".identity/guidance/usage.json": {
+        "bytes": 3365,
+        "kind": "file",
+        "sha256": "ef0dc7695dad3dfd28c0e7fb92426fcbcfeb2f79fc0d10b5d26d3e0896faefd5"
+      },
+      ".identity/guidance/voice.json": {
+        "bytes": 5677,
+        "kind": "file",
+        "sha256": "5327698b873b011ffcc79999440cd8b4a45a7276d54ba6da2d7bab66c195a84f"
+      },
+      ".identity/identity.json": {
+        "bytes": 1414,
+        "kind": "file",
+        "sha256": "b1dc59f0a94db49988e1f5962b0d9bf8e7782718effc95e324df4d9010cf6ae8"
+      },
+      ".identity/overrides": {
+        "kind": "directory"
+      },
+      ".identity/overrides/product.tokens.json": {
+        "bytes": 2017,
+        "kind": "file",
+        "sha256": "dd984ba76ede1007c9024bf551e5868551d9cd03a6814ab9d707676a5f095d87"
+      },
+      ".identity/references": {
+        "kind": "directory"
+      },
+      ".identity/references/README.md": {
+        "bytes": 209,
+        "kind": "file",
+        "sha256": "5bccd99edff068b39f85ed082a261973c0a277c7c3c7fa1fb9fd96a95bac3dcd"
+      },
+      ".identity/sources": {
+        "kind": "directory"
+      },
+      ".identity/sources/mark.svg": {
+        "bytes": 777,
+        "kind": "file",
+        "sha256": "88ca2ab2450bb58a66418eb08f9eff5e5271975a27547bdbfe359be27cd64be8"
+      },
+      ".identity/targets": {
+        "kind": "directory"
+      },
+      ".identity/targets/profiles.json": {
+        "bytes": 451,
+        "kind": "file",
+        "sha256": "a482ccdd3d5940de17c3762817d11a2b799b1180651c5a0def7623e9622aabee"
+      },
+      "vendor/hygiene/repository-presentation-profile.v1.json": {
+        "bytes": 9876,
+        "kind": "file",
+        "sha256": "44e0881519350e6747723995939c79c6fb4659e38a74b2c32e409866e7a186ba"
+      }
+    },
+    "repository": "egohygiene/mantle",
+    "revision": "b08045acc1e982dd9424c1d8c91b0badd64744e8",
+    "revisionEvidence": "checkout HEAD verified",
+    "sourceDigest": "fb5b86b632cb47eb160b13da92742687f5e76148b6d5300239a601b7d29147e8",
+    "sourceInventorySha256": "92a0071ca8f5e09a4ddbb8108e01343576b55f9cbcb9781b35604f2d75a4d9cb"
+  },
+  "generatedFixtures": [
+    {
+      "bytes": 22234,
+      "path": "renderer/fixtures/mantle-presentation/brand-kit.view-model.json",
+      "sha256": "1bd9491969d9c115bba017a35d455b036e6e5fa365e493e7cb917c311aebcdab"
+    },
+    {
+      "bytes": 16698,
+      "path": "renderer/fixtures/mantle-presentation/github/social-preview.png",
+      "sha256": "39a01b2242100703c238fd4719201719eddd2ae94f882c56c697b1f43dccf79f"
+    }
+  ],
+  "implementation": {
+    "baseRevision": "12985216d34d71a2c09adfa2fe1e43481b3252ee",
+    "binaryOrigin": "Local locked offline Cargo build/test of the named base plus runtime override; this receipt is not a release attestation.",
+    "binarySha256": "690f259321a416289371cf2a91ae44719baca2337f6883e613dcd12ff5217130",
+    "nativeRuntimeOverrides": [
+      {
+        "path": "src/brandkit/profiles.rs",
+        "sha256": "07453a6687864f9a6dfe1fc5e8c03d331c5e2f261c2e77faaa10eec8800d6cff"
+      }
+    ],
+    "rendererInputs": [
+      {
+        "path": "renderer/src/app.js",
+        "sha256": "9a2be14247d2a4bb93cd30ebef5113018d6e898c368676439d2c00e1ec8ba090"
+      },
+      {
+        "path": "renderer/src/model.js",
+        "sha256": "06e7dddfafc1ca679c86184070b19ed4ecf7c76ea86cd9c3a2a8049b4de4294e"
+      },
+      {
+        "path": "renderer/src/presentation.js",
+        "sha256": "982d4a2dc007dbc301a702899454b9ac964ec05d356a42da73089bfc82b18ebd"
+      },
+      {
+        "path": "renderer/src/styles.css",
+        "sha256": "4eeea66cc214a5263ad8b27d1f0df344d8f15abd59fabb056927282b679f4d5a"
+      }
+    ]
+  },
+  "limits": [
+    "Browser/static-renderer runtime evidence is recorded separately by exact PR-head checks.",
+    "Only the selected GitHub target is demonstrated for the real consumer; generic social output uses existing synthetic contract tests.",
+    "Mantle has no Press Kit or account/registry facts; no new facts or approvals were added.",
+    "Fixture contains only the exact generated model and selected PNG for tests, not a complete standalone kit.",
+    "No external catalog, account activation, package publication, media upload, release or deployment was performed."
+  ],
+  "nativeProof": {
+    "corruptedPreviewFailsReadOnlyVerification": true,
+    "everyManifestedOutputMatchesActualBytes": true,
+    "generatedFileCountIncludingCompilerManifest": 19,
+    "generatedInventoryEntryCountIncludingDirectories": 28,
+    "generatedInventorySha256": "656eea37bf567a2a190961e4af3ab176dee58ef16eeeff1564946e2b4a86409e",
+    "generationAndReadOnlyVerificationPass": true,
+    "identicalCompleteGeneratedInventories": true,
+    "independentGenerations": 2,
+    "noPresentationProfileVariant": "Disposable intent-only target exclusion; generation and read-only verification pass, with no GitHub/social outputs or download descriptors; original source unchanged.",
+    "preview": {
+      "bytes": 16698,
+      "height": 640,
+      "maximumBytes": 999999,
+      "path": "assets/identity/github/social-preview.png",
+      "sha256": "39a01b2242100703c238fd4719201719eddd2ae94f882c56c697b1f43dccf79f",
+      "sourceAssetId": "mark",
+      "sourceSha256": "88ca2ab2450bb58a66418eb08f9eff5e5271975a27547bdbfe359be27cd64be8",
+      "width": 1280
+    },
+    "sourceRightsAndRestrictionsRetained": true,
+    "unselectedSocialProfileOmitted": true
+  },
+  "observedAt": "2026-10-21T11:30:54-04:00",
+  "recordPurpose": "Identity #104 bounded development proof and generated renderer fixture; no new contract, approval, release, upload or deployment."
+}

@@ -18,6 +18,7 @@ export const SECTION_DEFINITIONS = Object.freeze([
   ["creative-direction", "Motion, imagery, and mascot"],
   ["design-system", "Design system"],
   ["press-kit", "Press and media kit"],
+  ["presentation", "Presentation profiles"],
   ["studio", "Review candidate assets"],
   ["downloads", "Downloads"],
   ["provenance", "Provenance and support"],

@@ -57,6 +57,7 @@
       }
     },
     "downloads": {
+      "description": "Selected public generated artifacts. The native GitHub Social preview artifact is described by $defs.githubSocialPreviewDownload; other existing downloads remain valid.",
       "type": "array",
       "items": { "$ref": "#/$defs/download" }
     }
@@ -360,6 +361,22 @@
         "sourceSha256": { "$ref": "#/$defs/digest" },
         "dimensions": { "type": "string", "minLength": 1 }
       }
+    },
+    "githubSocialPreviewDownload": {
+      "title": "Native GitHub repository Social preview artifact",
+      "description": "The existing github@1.0.0 output for repository Settings > Social preview: 1280 by 640 PNG, with a native compiler budget of 999999 bytes. The repository retains its layout reference at docs/references/github/repository-open-graph-template.png. This additive named specialization introduces no new source or download fields.",
+      "allOf": [
+        { "$ref": "#/$defs/download" },
+        {
+          "properties": {
+            "id": { "const": "github-social-preview" },
+            "profile": { "const": "github" },
+            "path": { "const": "github/social-preview.png" },
+            "mediaType": { "const": "image/png" },
+            "dimensions": { "const": "1280 × 640 pixels" }
+          }
+        }
+      ]
     },
     "guidanceSection": {
       "type": "object",

@@ -7,20 +7,20 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T08:04:47-04:00'
+  updated_at: '2026-10-21T11:42:24-04:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: 'Publish source-bound color and typography foundations for #102.'
+  purpose: 'Present selected native GitHub and generic-card profiles for #104.'
   includes:
-  - Readable existing color roles, declared pairs and contrast results.
-  - Supplied font/fallback, license/language/legibility and explicit composite type previews.
-  - Agreement of displayed/context/handbook tokens and exact-source hosted renderer/CLI/image/advisory evidence.
+  - Selected native GitHub/generic-card images, supplied copy and source rights.
+  - Real unchanged Mantle generation, omission, integrity and browser handoff evidence.
+  - Named existing GitHub Social preview schema and byte-preserved supplied reference template.
   excludes:
-  - New canonical token/schema fields, artwork, font acquisition/bundling, components or approval authority.
-  - Deferred broad Docker/CI/refactoring campaign, release and deployment.
+  - New authored fields, registry publishing, account management or an external platform matrix.
+  - Deferred broad Docker/CI/refactoring, creative approval, upload, release and deployment.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -31,130 +31,131 @@ scope:
   - AGENTS.md
   - ROADMAP.md
   - docs/decisions/policy-reference.json
-  - docs/decisions/ADR-0004-dtcg-token-contract.md
-  - docs/decisions/ADR-0007-font-tooling-boundaries.md
-  - docs/decisions/ADR-0010-reference-renderer-boundary.md
-  - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
-  - docs/decisions/ADR-0014-design-system-projection-boundary.md
-  - docs/contracts/DESIGN_SYSTEM_V1.md
-  - docs/contracts/BRAND_KIT_RENDERER_V1.md
-  - docs/consumers/AUTHORING.md
-  - contracts/v1/tokens.schema.json
-  - scripts/render_design_system.py
-  - renderer/src/foundations.js
-  - renderer/src/foundations-view.js
-  - renderer/src/model.js
-  - renderer/src/app.js
-  - renderer/tests/foundations.test.js
-  - renderer/tests/design-system.integration.test.js
-  - renderer/tests/e2e/foundations.spec.js
-  - https://github.com/egohygiene/identity/issues/102
+  - docs/consumers/PRESENTATION_PROFILES.md
+  - docs/evidence/identity-presentation-mantle-2026-10-21.json
+  - contracts/v1/brand-kit-view-model.schema.json
+  - docs/references/github/README.md
+  - https://github.com/egohygiene/identity/issues/104
   - https://github.com/egohygiene/identity/issues/116
   - https://github.com/egohygiene/identity/issues/70
 work:
-  objective: Make existing approved color/type facts usable without a competing token catalog or invented guidance.
+  objective: Make a small existing opt-in target set usable from the kit without new authored brand facts or a platform
+    catalog.
   success_conditions:
-  - Displayed roles, pairs and font constraints come from the matching reviewed handbook.
-  - Contrast precision, unsupported/absent values, fallback order and concrete type specimens are truthful.
-  - Displayed/context/handbook disagreement fails before replacement; focused renderer checks pass.
+  - Present only selected public source-bound downloads, exact copy and supplied rights.
+  - Verify real generation, omission, integrity and keyboard/browser handoff with canonical source preserved.
   active_issue:
     provider: github
-    id: egohygiene/identity#102
-    url: https://github.com/egohygiene/identity/issues/102
+    id: egohygiene/identity#104
+    url: https://github.com/egohygiene/identity/issues/104
   next:
     kind: action
-    id: identity-102-review
-    description: 'Inspect the containing documentation commit checks and review draft PR127 before authorized
-      merge; #104 follows.'
+    id: identity-104-review
+    description: 'Inspect the containing head checks and review draft PR128; authorized merge precedes #105.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/pull/127
+    - https://github.com/egohygiene/identity/pull/128
     - https://github.com/egohygiene/identity/issues/104
+    - https://github.com/egohygiene/identity/issues/105
     - https://github.com/egohygiene/identity/issues/116
     depends_on:
     - egohygiene/identity#99
-    - egohygiene/identity#75
+    - egohygiene/identity#100
+    - egohygiene/identity#101
+    - egohygiene/identity#103
 state:
   base:
-    revision: a637ac689469a5910896766c18dc6d337d46b162
+    revision: 12985216d34d71a2c09adfa2fe1e43481b3252ee
     ref: refs/heads/main
-    verified_at: '2026-10-21T08:04:47-04:00'
+    verified_at: '2026-10-21T11:42:24-04:00'
   candidate:
-    branch: codex/102-color-typography
-    revision: f3ca41fb0ecb95cd740f5571e5e303e357cb8612
+    branch: codex/104-presentation-profiles
+    revision: a83ad9e315b09a053ec129699ed12694c62259dc
     pull_request:
       provider: github
-      id: egohygiene/identity#127
-      url: https://github.com/egohygiene/identity/pull/127
+      id: egohygiene/identity#128
+      url: https://github.com/egohygiene/identity/pull/128
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-21T08:04:47-04:00'
-    default_branch_revision: a637ac689469a5910896766c18dc6d337d46b162
+    observed_at: '2026-10-21T11:42:24-04:00'
+    default_branch_revision: 12985216d34d71a2c09adfa2fe1e43481b3252ee
     issue_state: open
     pull_request_state: draft
-    notes: PR127 open/draft at source f3ca41fb0ecb95cd740f5571e5e303e357cb8612, tested through merge a08de8a87d2c31eda48115df0b9bc2dcdcb87e3a;
-      base/main remains a637ac689469a5910896766c18dc6d337d46b162. This anchor precedes the containing continuity
-      commit, whose checks require inspection. PR126 merged/#101 closed/#102 open; parked123 remains unmerged.
+    notes: PR128 is draft/open/mergeable at the named source/merge; main is unchanged. Four source workflows pass;
+      release validation waits behind prior39626619513/macOS. Inspect this containing head. PR127 is merged/#102
+      closed; parked123 remains draft/unmerged at400846db7f10823d4b5bc1629213caf03960b59c.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
-  status: passed
-  reviewed_at: '2026-10-21T08:04:47-04:00'
+  status: partial
+  reviewed_at: '2026-10-21T11:42:24-04:00'
   reviewed_by: Codex
   evidence:
-  - command: 'Live PR127/base, merged126 and #101/#102/#99/#75 inspection'
+  - command: 'Live PR128/127/parked123 and #102/#104/#116 inspection'
     outcome: passed
-    observed_at: '2026-10-21T08:04:47-04:00'
-    notes: 'Main/base a637ac6 is verified; PR127 is draft/open, #101 closed and #102 active. Source/head observations
-      are time-bound and grant no merge authority.'
-  - command: https://github.com/egohygiene/identity/actions/runs/39596128927
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: 'Base1298521 is unchanged, PR127 merged, #102 closed, #104 open. PR128 remains draft/unmerged; no later
+      issue started.'
+  - command: cargo test --locked --offline --test v1_consumer; retained Mantle proof
     outcome: passed
-    observed_at: '2026-10-21T08:04:47-04:00'
-    notes: Exact source f3ca41fb0ecb95cd740f5571e5e303e357cb8612/merge a08de8a87d2c31eda48115df0b9bc2dcdcb87e3a:383
-      Vitest cases in16 files and7 Chromium checks pass, including new foundation hydration, keyboard copy,
-      accessibility and narrow-layout coverage. Public build/verification and the existing legacy screenshot
-      pass.
-  - command: https://github.com/egohygiene/identity/actions/runs/39596128936
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: All 14 focused native tests pass. All 14 consumed Mantle files match raw Git at b08045acc1e982dd9424c1d8c91b0badd64744e8.
+      Two fresh 19-file generations and read-only verifies agree; manifests match actual bytes. Corruption rejects;
+      disposable target omission passes; entire original checkout is preserved.
+  - command: Offline Draft202012Validator and template/receipt byte checks
     outcome: passed
-    observed_at: '2026-10-21T08:04:47-04:00'
-    notes: 'Exact source f3ca41f: all CLI steps pass,117 Rust passes/3 ignored; Python152 total=150 pass/2
-      skips. Formatting, Clippy, docs, source and provenance checks pass. No fresh release-platform matrix
-      is claimed for this JS-only scope.'
-  - command: https://github.com/egohygiene/identity/actions/runs/39596128881; https://github.com/egohygiene/identity/actions/runs/39596129446
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: Real model and named GitHub artifact validate; five wrong-field variants reject. Original 51,470-byte template
+      matches SHA2565259d6e413242c63afe88027122eed783612ff9a9e48b9a9c51313f6bf66fb94. Receipt runtime/fixture hashes
+      match current files.
+  - command: node renderer/scripts/check-source.mjs; python3 scripts/verify_docs.py; git diff --check; scoped pinned-owner
+      preservation review
     outcome: passed
-    observed_at: '2026-10-21T08:04:47-04:00'
-    notes: 'Exact source f3ca41f: existing hosted image and decision workflows pass. Decisions retain5 advisory
-      warnings/no errors; image success does not qualify the authoring-workspace Docker acceptance.'
-  - command: Copied-consumer v1-generate/v1-verify/render_design_system.py; Node agreement/contrast/font probes;
-      JS parsing/docs/diff checks
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: All 35 JS files parse. Documentation/whitespace,19 pinned owner inputs, continuity schema/12 headings/privacy,29
+      ADR bytes,40 roadmap IDs/88 edges/mappings and approved PNG pass. Only Q32/Q34 lifecycle and Q32 exit reconcile;
+      no whole-repository conformance claim.
+  - command: https://github.com/egohygiene/identity/actions/runs/39627524474
     outcome: passed
-    observed_at: '2026-10-21T08:04:47-04:00'
-    notes: Fresh native/Python projections agree with canonical bytes unchanged; eight same-digest disagreements
-      reject. Actual pair18.34223494997549 and unrounded4.499511688376184 boundary pass.32 JS files parse;
-      font ordering/aliases/safe references and documentation links pass.
-  - command: 'Pinned #102 continuity/ADR/roadmap/PNG structure and preservation check'
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: Source a83ad9e315b09a053ec129699ed12694c62259dc through merge 96b52e944799049b096aa70975fb726187993e09:394
+      renderer tests/17files and all8 Chromium checks pass without retries. Actual native PNG preview/dimensions/download
+      equality, keyboard navigation/copy/scroll, full-page axe,390px layout and prior screenshot pass.
+  - command: https://github.com/egohygiene/identity/actions/runs/39627524769; https://github.com/egohygiene/identity/actions/runs/39627526154;
+      https://github.com/egohygiene/identity/actions/runs/39627524813
     outcome: passed
-    observed_at: '2026-10-21T08:04:47-04:00'
-    notes: 19 exact owner inputs; all29 ADR bytes preserved (21accepted/8proposed);40 roadmap IDs/88 edges/mappings,
-      only Q31/Q32/Q34 lifecycle reconciliation and approved PNG preserved. Scope-bounded checks, not whole-repository
-      conformance.
-  - command: Local Vitest/Chromium; full final quality/refactoring/CI campaign and actual local-Docker acceptance
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: 'Same source/merge: CLI 118 Rust tests pass/3 ignored; Python152 total,150 pass/2 existing skips. Advisory
+      decisions retain 5 known warning annotations/0errors. Hosted image qualification passes; it does not replace
+      deferred actual local-Docker acceptance.'
+  - command: https://github.com/egohygiene/identity/actions/runs/39627524757
     outcome: not-run
-    observed_at: '2026-10-21T08:04:47-04:00'
-    notes: 'Local JS dependencies remain absent; the recorded hosted suite executed the focused cases. The
-      broader owner-deferred campaign remains #70 and parked #80/123; these existing candidate checks do not
-      complete it.'
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: Source release workflow is pending behind earlier39626619513. Earlier sourcebcae3ba passed Linux/Windows
+      gates and public smoke; macOS stays queued. Earlier smoke has7clean browser passes and1new-case pass on retry;
+      current source explicitly brings the lazy image into view. Pending work is not a current-source pass.
+  - command: https://github.com/egohygiene/identity/actions/runs/39623214621; https://github.com/egohygiene/identity/actions/runs/39624788651;
+      https://github.com/egohygiene/identity/actions/runs/39625660870
+    outcome: failed
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: Historical sources65bc0c8/0328e11 fail fixture delivery. Source0e9498e fixes real HTTP preview/download
+      then full-page axe finds unfocusable guidance scrollers. Current source fixes keyboard access; source 394/8
+      pass above supersedes these failures without relaxing assertions.
+  - command: Local Vitest/Chromium and broad final quality/refactoring/Docker campaign
+    outcome: not-run
+    observed_at: '2026-10-21T11:42:24-04:00'
+    notes: 'Local JS dependencies remain absent after the prior registry/cache block; hosted runtime evidence is
+      separate. Broad quality remains #70 and actual local-Docker acceptance remains #80/parked123.'
   environment_limitations:
-  - Local renderer dependencies are absent after the recorded frozen registry/cache block; the exact-source
-    hosted suites supplied runtime evidence.
-  - The containing continuity commit must receive current-head check inspection; recorded f3ca41f results certify
-    its implementation source.
-  - No all-browser/manual visual approval, font redistribution approval, complete-kit readiness, release or
-    deployment is asserted.
-  - 'Actual authoring-workspace Docker and unknown legacy rights/acquisition remain unresolved under #70/#80/#105/#98.'
+  - The containing checkpoint requires its own exact-head hosted check inspection; pending release/macOS work is
+    not passed evidence.
+  - No complete WCAG or all-browser conformance, final human visual approval, complete-kit acceptance, external
+    upload, release or deployment is asserted.
+  - Aether social catalog remains empty, experimental, rights-rejected and release-excluded; no external matrix
+    is admitted.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -173,56 +174,56 @@ privacy:
 
 ## Purpose and precedence
 
-This scoped review checkpoint covers #102. User/runtime instructions, scoped instructions, live evidence and canonical sources outrank it. ROADMAP.md and #116 own dependencies and the product-first priority.
+This scoped #104 checkpoint covers selected presentation outputs. User/runtime instructions, scoped instructions, live state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priority.
 
 ## Resume protocol
 
-Read AGENTS.md, this file, #102/#116 and the foundation contracts/source. Verify main, the candidate and parked123. Distinguish authored tests, local execution and hosted results; never promote a previous head or a digest string alone into current validation.
+Read AGENTS.md, this file, #104/#116, the selected-profile guide, contracts and actual source. Verify main, PR128 and parked123. Inspect the containing provider head/checks before acting; dated source evidence, authored tests and fresh checks remain distinct.
 
 ## Current objective and success conditions
 
-Render existing handbook color/type constraints as practical public guidance. Show only declared pairs, their actual displayed sRGB contrast and limits, supplied font facts/fallbacks and explicit concrete composite typography. Reject displayed/context/handbook token disagreement before page replacement. Do not create a second token catalog or source contract.
+Present selected native GitHub previews/generic cards with declared paths, dimensions and public source rights. Reuse exact canonical project metadata and approved Press Kit descriptions/facts/links. Keep absent inputs absent and legacy generation usable. Do not infer package identifiers, keywords, account ownership or shortened bios.
 
 ## State snapshot
 
-Main/base a637ac689469a5910896766c18dc6d337d46b162 is the verified #126 merge; #101/Q31 is complete and #102/Q32 active on codex/102-color-typography. #99 and #75 prerequisites are closed. #104/Q34 is dependency-ready but follows #102 by priority. Draft PR127 is open at source f3ca41fb0ecb95cd740f5571e5e303e357cb8612, tested through merge a08de8a87d2c31eda48115df0b9bc2dcdcb87e3a. Its ready-for-review phase is distinct from the provider draft state; the containing continuity commit needs its own checks. Preserve40 IDs/88 edges/mappings:22complete,1active,4ready,8blocked,5planned. Parked123/#80 remains unmerged; Q19/Q21/Q27 stay blocked and actual local-Docker acceptance stays unchecked.
+Base/main 12985216d34d71a2c09adfa2fe1e43481b3252ee is the authorized #127 merge. #102/Q32 is complete and #104/Q34 active on codex/104-presentation-profiles; all four prerequisites are closed. #105 awaits reviewed #104 completion. #109/Q39 has closed prerequisites but stays planned at its later priority. Preserve 40 IDs/88 edges/mappings: 23 complete, 1 active, 3 ready, 8 blocked, 5 planned. Parked #123 remains unmerged; Q19/Q21/Q27 and actual local-Docker acceptance stay incomplete.
 
 ## Completed and material changes
 
-Existing handbook token entries already carry contrast and font constraints. The candidate presents those entries in the color/type sections and checks their token identities against the displayed model and compact context, including values, layers, override reasons and approvals. Matching digest/project checks remain in force; no public schema or source fields change.
+renderer/src/presentation.js presents only the two existing selected native target IDs, matched to the expected profile/PNG and public source hash. It consumes existing downloads, dimensions, rights and copy values under the configured asset base. No-target models omit its section/navigation. Legacy visual layout and the approved screenshot remain preserved. Existing guidance pre blocks gain tabIndex 0 so keyboard users can scroll; the browser test exercises ArrowRight and full-page axe.
 
-Only explicit foreground/background pairs introduce contrast results. Reciprocal pairs use the stricter declared minimum; comparisons use unrounded ratios from the actual rounded8-bit CSS values. Unsupported color spaces/alpha, missing targets and conflicting roles remain unmeasured. Source thresholds and AA normal/large-text results are separate; specimens do not define a brand scale or approve unlisted themes.
+src/brandkit/profiles.rs repairs the GitHub profile's inherited 2 MB bound to 999,999 bytes, below GitHub's documented 1 MB limit. Dimensions 1280×640, output path, composition and other profiles remain unchanged. The dated provider reference and regeneration caveat are in docs/consumers/PRESENTATION_PROFILES.md. Generic 1200×630 is Identity's choice, not a named platform requirement.
 
-Font specimens preserve supplied fallback order and explicit composite properties without assigning neighboring scalar tokens by name. License/language/legibility notes remain supplied facts; reference links do not grant redistribution/subsetting approval. No font is fetched/bundled and no acquisition URL is inferred. The independent legacy preview and approved screenshot remain unchanged.
+The additive githubSocialPreviewDownload schema definition names the existing artifact without adding source/download fields or changing generic compatibility. The owner-supplied template is retained unchanged at docs/references/github/repository-open-graph-template.png, with source/checksum and its printed 40pt border guidance. It is a layout reference outside canonical brand source/generated kits; no browser/account screenshot is committed or new artwork approval supplied.
 
 ## Validation and review evidence
 
-Fresh copied-consumer native generation/verification and Python handbook generation pass with unchanged canonical bytes. Node probes accept the real matching handoff, reject eight same-digest disagreements, and exercise contrast rounding, unsupported alpha, font order, aliases and license URLs.32-file JavaScript parsing, documentation links and whitespace checks pass.
+All 14 local native consumer cases and the unchanged Mantle proof pass. The retained receipt binds all consumed raw-Git inputs, two independent complete output inventories, actual PNG/manifest bytes, read-only corruption rejection, omission and original-checkout preservation. Attribution, alt text and restrictions remain intact; the partial fixture is not a standalone released kit.
 
-All four applicable existing workflows pass at source f3ca41f: renderer39596128927, CLI39596128936, image39596128881 and decisions39596129446. Renderer reports383 Vitest tests in16 files and7 Chromium checks; public build/verification passes. CLI reports117 Rust passes/3 ignored and150 Python passes/2 skips. Decision evidence retains5 warnings/no errors. Local node_modules remains unavailable; hosted frozen dependencies executed the cases. The containing documentation commit needs separately inspected current-head checks.
+Source a83ad9e315b09a053ec129699ed12694c62259dc, represented merge 96b52e944799049b096aa70975fb726187993e09, passes 394 renderer tests/17 files and 8 Chromium checks, CLI 118 Rust tests/3 ignored and 150 Python passes/2 skips, advisory decisions and hosted image qualification. Known advisory 5 warnings/0 errors remain. The new case verifies actual native image bytes, keyboard access/copy/scroll, axe and narrow layout. First fixture-delivery failures and later guidance/lazy-image issues retain dated outcomes above; strong assertions remain enabled. Release validation is pending behind an older queued macOS job. Reinspect the containing head; no pending gate is claimed passed.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No scoped code blocker remains after hosted execution and actual-diff review. Missing font acquisition/license/type-scale facts stay absent rather than borrowing software licensing or inferring provider permissions. Contrast checks cover the listed supported pairs, not every palette combination, state or product. Unsupported composite values remain readable without invented substitution.
+The remaining automated gate is current-source release/platform validation; the provider queue must resolve before merge-readiness claims. Local JS dependencies are absent, so local browser execution is not claimed. Hosted image qualification does not satisfy actual local-host Docker acceptance. Broader lint/testing/CI/refactors stay #70/#80/parked123; complete-kit/release acceptance stays #105/#98. Device/destination cropping and final human review remain distinct from automated passes.
 
-All29 prior ADR bytes/dispositions/approvals remain unchanged:21accepted/8proposed. ADR0029 remains proposed after #126's merge. Actual complete-kit readiness stays with #105/#98. Full quality/CI/refactors, actual local-Docker acceptance and final reconciliation remain with #70; no release, deployment, new rights or artwork is supplied.
+Mantle has no Press Kit/account/registry facts and none are invented. Live Aether catalog bytes match the pinned empty experimental/rights-rejected/release-excluded record; closed Aether #52/#53 do not satisfy ADR-0016 admission. No package publisher, account adapter, external matrix, upload, release or deployment occurs.
 
 ## Next dependency-ready work
 
-Inspect current checks for the containing continuity commit and review PR127 before authorized merge. #104 selected presentation profiles follows by priority; no new dependency edge is introduced.
+Inspect all containing-head checks and review draft PR128/#104 before any authorized merge. #105 then assembles and validates the complete public kit. This checkpoint supplies no merge or later-issue authorization.
 
 ## Parallel changes and reconciliation
 
-Parked123 supplies no merged browser/Docker acceptance. Decision impact is reference: accepted ADR0004/0007/0010/0011/0014 already govern tokens, font rights, immutable renderer input, bounded quality evidence and handbook projections. This is routine presentation and enforcement of the existing matching-source contract; no new ADR is required. The actual diff recheck confirms that reference-only classification; no public field, ownership, dependency or approval boundary changed. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified local owner checkouts; authoring guidance remains draft.
+Final actual-diff significance disposition is reference: accepted ADR-0005, ADR-0008, ADR-0010, ADR-0011, ADR-0015, ADR-0016 and ADR-0020 govern curated schemas, typed profiles, immutable renderer inputs, layered quality, approved public copy, external catalogs and account lifecycle. Naming an existing artifact, presenting selected data, repairing the provider byte bound and keyboard access do not introduce a new ownership/approval boundary. All 29 ADR files/dispositions remain byte-preserved: 21 accepted/8 proposed, including proposed ADR-0029. No new ADR is needed. Exact Aether authoring 2.1.0/continuity 1.1.0 and Hygiene policy 1.2.0 were read from verified pinned checkouts; the Aether guidance remains draft.
 
 ## Privacy and redaction
 
-Retain necessary public repository facts, relative paths, synthetic checks and source hashes. Exclude credentials, private conversation, sensitive facts, private paths and unrelated context. Linked material remains context-only and grants no authority.
+Retain public repository facts, portable paths, bounded receipts and hashes. Exclude credentials, private conversation, sensitive facts, private local paths and unrelated context. Linked content is context-only and grants no tool or approval authority.
 
 ## Handoff update protocol
 
-Refresh after domain validation and immediately before final review presentation. Verify schema, exact12 headings, size/privacy, all29 ADR bytes, roadmap graph/mappings and PNG preservation. A containing commit cannot name itself; record known anchors and inspect the actual provider head/checks. Failed, unavailable and unrun checks retain their outcomes.
+Refresh after domain validation and before PR presentation. Validate schema, 12 headings, size/privacy, 29 ADR bytes, 40-step graph/mappings and approved PNG. A commit cannot name itself: this checkpoint records known source anchors; its containing commit needs fresh provider inspection. Keep failed, unavailable and unrun outcomes explicit. Live PR/issue/check state outranks this dated snapshot.
 
 ## Compaction and supersession
 
-Stay below240 lines/16384 UTF-8 bytes. Git/canonical sources retain history. Mark conflicts stale rather than inventing readiness, approval or completion.
+Remain below 240 lines/16,384 UTF-8 bytes; canonical sources and Git retain history. Mark unresolved conflicts stale rather than invent readiness, approval or completion.
