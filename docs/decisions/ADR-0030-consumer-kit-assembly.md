@@ -8,7 +8,7 @@ decision_scope: repository
 visibility: public
 owners: [egohygiene/identity]
 issue: https://github.com/egohygiene/identity/issues/105
-pull_request: null
+pull_request: https://github.com/egohygiene/identity/pull/129
 related: [ADR-0001, ADR-0003, ADR-0005, ADR-0010, ADR-0011, ADR-0014, ADR-0015, ADR-0017, ADR-0019, ADR-0024, ADR-0028, ADR-0029]
 supersedes: []
 superseded_by: []
@@ -66,7 +66,7 @@ output file hashes/sizes excluding itself. This receipt supplies offline
 integrity, not a signature or an approval source.
 
 Verify the entire output inventory, actual compiler binding, optional JSON/page
-agreement, selected download links and navigation. Reconstruct the native-only
+agreement, handbook Markdown/JSON agreement, selected download links and navigation. Reconstruct the native-only
 Press Kit package to reject changed assets, extra files and ZIP member injection.
 Keep external social-package admission separate. Reject input/output overlap,
 canonical-source destinations and nonempty output replacement before writes.

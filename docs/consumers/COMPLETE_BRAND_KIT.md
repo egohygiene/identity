@@ -78,7 +78,8 @@ checks all selected files, and copies only verified native outputs and explicit
 optional projection files. Neighboring unselected files are excluded.
 Handbook/Press Kit project identity and source digests must agree with the
 native immutable model. The displayed optional JSON must equal its downloadable
-projection. Press Kit verification reconstructs the deterministic package and
+projection; handbook Markdown is reconstructed from those same JSON inputs to
+reject stale or changed guidance. Press Kit verification reconstructs the deterministic package and
 compares every file, including archive bytes, rejecting extra files and ZIP
 member injection. This native-only mode does not admit an external social
 catalog/package; its separate existing admission boundary still applies.

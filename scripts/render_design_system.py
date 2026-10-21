@@ -701,7 +701,32 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Repository-relative generated directory for all handbook and context artifacts.",
     )
+    parser.add_argument(
+        "--verify-directory",
+        type=Path,
+        help="Read-only verification that all four generated handbook/context files agree.",
+    )
     return parser
+
+
+def verify_projection_directory(directory: Path) -> None:
+    """Reject stale Markdown or extra files without reading canonical source."""
+
+    root = directory.resolve(strict=True)
+    expected_paths = set(OUTPUT_FILES.values())
+    actual = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+    if actual != expected_paths:
+        raise ProjectionError("handbook file inventory differs from its four-file projection")
+    for name in expected_paths:
+        if not (root / name).resolve(strict=True).is_relative_to(root):
+            raise ProjectionError("handbook file escapes its projection directory")
+    projections = (
+        load_json(root / "design-system-handbook.json"),
+        load_json(root / "design-context.json"),
+    )
+    for output_format, name in OUTPUT_FILES.items():
+        if (root / name).read_bytes() != render(projections, output_format).encode("utf-8"):
+            raise ProjectionError(f"handbook artifact differs from its projection: {name}")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -710,6 +735,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments = build_parser().parse_args(argv)
     repository_root = arguments.repository_root.resolve()
     try:
+        if arguments.verify_directory is not None:
+            if arguments.output_directory is not None:
+                raise ProjectionError("--verify-directory cannot be combined with --output-directory")
+            verify_projection_directory(arguments.verify_directory)
+            print("Verified generated handbook/context projection")
+            return 0
         projections = build_projections(repository_root)
         if arguments.output_directory is None:
             sys.stdout.write(render(projections, arguments.format))
@@ -717,7 +748,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             written = write_outputs(repository_root, arguments.output_directory, projections)
             for path in written:
                 print(path.relative_to(repository_root).as_posix())
-    except (OSError, UnicodeError, json.JSONDecodeError, ProjectionError) as error:
+    except (OSError, UnicodeError, json.JSONDecodeError, ProjectionError, KeyError, TypeError) as error:
         print(f"projection failed: {error}", file=sys.stderr)
         return 1
     return 0

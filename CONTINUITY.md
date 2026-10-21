@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T14:10:44-04:00'
+  updated_at: '2026-10-21T14:22:24-04:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -73,24 +73,28 @@ state:
     verified_at: '2026-10-21T14:10:44-04:00'
   candidate:
     branch: codex/105-complete-public-kit
-    revision: null
-    pull_request: null
+    revision: 9699fc5e6ddd462d42a5caf6d07d141ff1e53dd4
+    pull_request:
+      provider: github
+      id: egohygiene/identity#129
+      url: https://github.com/egohygiene/identity/pull/129
     handoff_state: in-progress
   live:
     status: verified
-    observed_at: '2026-10-21T14:10:44-04:00'
+    observed_at: '2026-10-21T14:22:24-04:00'
     default_branch_revision: 47995976ae41415226bd6fb9400fbbd02777fca6
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'PR128 is merged/#104 closed and all five #105 prerequisites are verified closed. The local #105 worktree
-      is based on main4799597; no published candidate or PR exists yet. Parked123 remains draft/open/unmerged at400846db7f10823d4b5bc1629213caf03960b59c.'
+    pull_request_state: draft
+    notes: PR129 is draft/open/mergeable at9699fc5e6ddd462d42a5caf6d07d141ff1e53dd4, represented mergebfff24aacb086343790b2d1262d0b4f84c62c65d;
+      base4799597 is unchanged. All five source workflows pass. The current worktree additionally verifies handbook
+      Markdown/JSON agreement and needs fresh containing-head checks. Parked123 remains unmerged.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-21T14:10:44-04:00'
+  reviewed_at: '2026-10-21T14:22:24-04:00'
   reviewed_by: Codex
   evidence:
   - command: 'Live #105/#116/PR128/parked123 and fetched main inspection'
@@ -122,10 +126,6 @@ review:
     notes: Frozen offline dependency restoration fails ERR_PNPM_NO_OFFLINE_META for @asamuzakjp/dom-selector; package
       policy metadata is unavailable. No lock/dependency changes or policy bypass were applied. Local renderer/browser
       execution is unavailable; existing hosted checks must execute the new cases.
-  - command: Current source renderer/browser/platform workflows
-    outcome: not-run
-    observed_at: '2026-10-21T14:10:44-04:00'
-    notes: 'A PR has not yet been published. Previous #104 head results do not validate this candidate.'
   - command: Broad final quality/refactoring/CI campaign; actual local-Docker acceptance
     outcome: not-run
     observed_at: '2026-10-21T14:10:44-04:00'
@@ -133,8 +133,24 @@ review:
       workflows remain required.'
   - command: Pinned-owner continuity, ADR corpus/index and roadmap preservation review
     outcome: passed
-    observed_at: "2026-10-21T14:10:44-04:00"
-    notes: All 19 pinned owner inputs, 12-heading continuity schema/privacy/budgets, 29 prior ADR bytes plus proposed ADR-0030, 40 IDs/88 edges/mappings and approved PNG pass.
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: All 19 pinned owner inputs, 12-heading continuity schema/privacy/budgets, 29 prior ADR bytes plus proposed
+      ADR-0030, 40 IDs/88 edges/mappings and approved PNG pass.
+  - command: https://github.com/egohygiene/identity/actions/runs/39651037182; https://github.com/egohygiene/identity/actions/runs/39651037239;
+      https://github.com/egohygiene/identity/actions/runs/39651037134; https://github.com/egohygiene/identity/actions/runs/39651037139;
+      https://github.com/egohygiene/identity/actions/runs/39651037887
+    outcome: passed
+    observed_at: '2026-10-21T14:22:24-04:00'
+    notes: Source9699fc5 through mergebfff24a passes all five workflows:401 renderer tests/18 files and9 Chromium
+      cases in both runs without retries; CLI118 Rust passes/3ignored and152 Python passes/2skips. Decision attempt1
+      fails dependency acquisition before semantic execution; unchanged-source attempt2 passes with5known warnings/0errors.
+      This does not validate the later handbook Markdown guard.
+  - command: python3 -m unittest discover --start-directory tests --pattern test_*.py --quiet; node renderer/scripts/check-source.mjs;
+      docs/whitespace
+    outcome: passed
+    observed_at: '2026-10-21T14:22:24-04:00'
+    notes: Current handbook-guard worktree completes155 Python cases:153 pass/2existing skips. All41 JS files parse
+      and docs/whitespace pass. Full new-head renderer/browser/platform execution remains pending.
   environment_limitations:
   - Actual renderer/browser execution remains pending in the hosted environment; no complete WCAG or human visual
     acceptance is claimed.
@@ -180,17 +196,17 @@ renderer/scripts/build-kit.mjs uses the native manifest/model and existing optio
 
 Public audience is explicit in server rendering and hydration: absent optional sections and the local review studio are omitted. Default model-only preview behavior and the approved legacy screenshot are preserved. Existing asset/Press Kit archives and handbook/context downloads remain; no new all-in-one product ZIP is introduced. The hero calls the native ZIP an asset package rather than implying optional exports are inside it.
 
-The existing Press Kit generator adds a read-only native-only package verifier that reconstructs deterministic outputs/ZIP bytes and rejects changed/extra/unsafe artifacts. The renderer schema's already-defined Press Kit view is wired into its top-level optional field. The new consumer receipt contract and assembly boundary are documented in proposed ADR-0030; no new authored brand fields, artwork or approval authority are introduced.
+The handbook generator verifies all four files against its JSON projections. The existing Press Kit generator adds a read-only native-only package verifier that reconstructs deterministic outputs/ZIP bytes and rejects changed/extra/unsafe artifacts. The renderer schema's already-defined Press Kit view is wired into its top-level optional field. The new consumer receipt contract and assembly boundary are documented in proposed ADR-0030; no new authored brand fields, artwork or approval authority are introduced.
 
 ## Validation and review evidence
 
 The retained complete-kit receipt binds the native base/binary and every generated fixture byte. Two independent native generations agree for unchanged minimal, a synthetic expanded variant with existing governed handbook/Press Kit facts, and unchanged Mantle at b08045acc1e982dd9424c1d8c91b0badd64744e8. All14 consumed real inputs match raw Git, read-only verification passes and the full original checkout is preserved. Only generated files enter the test transport ZIP; it is not a released product bundle.
 
-All 154 local Python cases complete: 152 pass and two existing skips. All 19 Press Kit cases pass. All 41 JS sources parse; three native/composed model and consumer receipt schema checks, docs and whitespace pass. Local JS dependencies remain incomplete after the exact offline metadata error above. Added tests must still execute actual bundling, all download paths, source/output preservation, repeated inventories, mismatches/tampering, public omission, keyboard copy/download bytes, full-page axe, narrow layout and no-JavaScript essential content. Previous-source green checks are not current evidence.
+All 155 current local Python cases complete: 153 pass and two existing skips. All 19 Press Kit cases pass. All 41 JS sources parse; three native/composed model and consumer receipt schema checks, docs and whitespace pass. Local JS dependencies remain incomplete after the exact offline metadata error above. Source9699fc5 already passes all401 renderer tests and9 Chromium cases in both hosted runs, including actual bundling, all download paths, source/output preservation, repeated inventories, mismatches/tampering, public omission, keyboard copy/download bytes, full-page axe, narrow layout and no-JavaScript essential content. This worktree adds exact handbook Markdown/JSON verification; its new-head runtime checks remain required.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Fresh hosted runtime checks are the remaining scoped gate. A source-bound receipt proves internal byte agreement, not authenticity of rights/approval or remote availability. Device cropping and final human review remain distinct from automated checks.
+Fresh containing-head hosted checks for the handbook Markdown guard are the remaining scoped gate. A source-bound receipt proves internal byte agreement, not authenticity of rights/approval or remote availability. Device cropping and final human review remain distinct from automated checks.
 
 Identity's existing exported logo files have no structured legacy rights metadata. Preserve unknown rights and historical exports; do not backfill a v1 approval/license or replace approved artwork. G09 root self-source and stable release/dogfood/canary acceptance remain #98. Native consumer assembly is demonstrated with governed real Mantle plus explicit synthetic cases. The current stable Brand Kit publisher and site.json, organization /identity/ owner and Intelligence composition retain their separate release/source/route authority. No new publication is performed.
 

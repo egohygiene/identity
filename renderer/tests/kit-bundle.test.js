@@ -68,7 +68,7 @@ describe("complete native consumer Brand Kit", () => {
   }, 30000);
 
   test("rejects a stale handbook and damaged native/Press Kit artifacts before creating output", () => {
-    for (const kind of ["handbook", "native", "press"]) {
+    for (const kind of ["handbook", "handbook-markdown", "native", "press"]) {
       const input = path.join(temporary, `bad-${kind}`);
       fs.cpSync(path.join(temporary, "inputs/expanded"), input, { recursive: true });
       if (kind === "handbook") {
@@ -78,7 +78,8 @@ describe("complete native consumer Brand Kit", () => {
           model.source.digest = "f".repeat(64);
           fs.writeFileSync(target, JSON.stringify(model));
         }
-      } else fs.appendFileSync(path.join(input, kind === "native" ? "native/github/social-preview.png" : "press/press-kit.zip"), "damaged");
+      } else fs.appendFileSync(path.join(input, kind === "native" ? "native/github/social-preview.png"
+        : kind === "handbook-markdown" ? "handbook/design-system-handbook.md" : "press/press-kit.zip"), "damaged");
       const output = path.join(temporary, `bad-${kind}-output`);
       expect(() => buildKit(input, output)).toThrow();
       expect(fs.existsSync(output)).toBe(false);

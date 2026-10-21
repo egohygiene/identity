@@ -62,6 +62,13 @@ export function verifyPressKit(directory) {
   ]);
 }
 
+function verifyHandbook(directory) {
+  run(process.env.IDENTITY_PYTHON || (process.platform === "win32" ? "python" : "python3"), [
+    fileURLToPath(new URL("../../scripts/render_design_system.py", import.meta.url)),
+    "--verify-directory", directory,
+  ]);
+}
+
 /** Read only selected native files and explicitly supplied governed projections. */
 export async function prepareKit({ artifactRoot, designSystemDirectory, pressKitDirectory, browserAssets = {} }) {
   const root = await fs.realpath(artifactRoot);
@@ -87,6 +94,7 @@ export async function prepareKit({ artifactRoot, designSystemDirectory, pressKit
       context: await readJson(directory, "design-context.json"), artifactDirectory: "design-system",
     });
     model = assertBrandKitViewModel({ ...model, designSystem: view });
+    verifyHandbook(directory);
     for (const artifact of view.artifacts) add(artifact.path, await read(directory, artifact.path.slice("design-system/".length)));
   }
   if (pressKitDirectory) {
@@ -141,6 +149,7 @@ export async function verifyKit(directory) {
     artifactRoot: root, manifestPath: path.join(root, COMPILER_MANIFEST), browserAssets,
   });
   if (model.designSystem) {
+    verifyHandbook(path.join(root, "design-system"));
     const expected = createDesignSystemView({
       handbook: await readJson(root, "design-system/design-system-handbook.json"),
       context: await readJson(root, "design-system/design-context.json"), artifactDirectory: "design-system",
