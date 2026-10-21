@@ -15,6 +15,7 @@ export async function verifyArtifactDownloads(model, {
   artifactRoot,
   manifestPath,
   browserAssets = {},
+  includeFiles = false,
 }) {
   const read = await artifactReader(artifactRoot);
   const inventory = manifestPath
@@ -60,7 +61,13 @@ export async function verifyArtifactDownloads(model, {
       advertised.push({ path: relativePath });
     }
   }
-  return { verifiedPaths: [...new Set(advertised.map((entry) => normalizeArtifactPath(entry.path)))] };
+  const verifiedPaths = [...new Set(advertised.map((entry) => normalizeArtifactPath(entry.path)))];
+  return {
+    verifiedPaths,
+    ...(includeFiles ? {
+      files: await Promise.all([...new Set([...(inventory?.keys() || []), ...verifiedPaths])].map(read)),
+    } : {}),
+  };
 }
 
 /** Verify extra emitted links with the same path and filesystem confinement. */

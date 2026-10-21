@@ -50,6 +50,9 @@
     "designSystem": {
       "$ref": "#/$defs/designSystem"
     },
+    "pressKit": {
+      "$ref": "#/$defs/pressKit"
+    },
     "packages": {
       "type": "array",
       "items": {

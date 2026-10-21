@@ -232,6 +232,42 @@ def add_authority_references(repository_root: Path) -> None:
 class PressKitProjectionTests(unittest.TestCase):
     """Prove source authority, deterministic packaging, and honest optional material."""
 
+    def test_standalone_package_verification_is_read_only_and_rejects_archive_injection(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            add_press_source(repository)
+            before = source_digests(repository)
+            payload = renderer.build_package(*renderer.build_projection(repository))
+            renderer.write_outputs(repository, Path("build/press"), payload)
+            directory = repository / "build/press"
+            verified = subprocess.run([sys.executable, str(RENDERER_PATH), "--verify-directory", str(directory)],
+                                      capture_output=True, text=True, check=False)
+            self.assertEqual(verified.returncode, 0, verified.stderr)
+            self.assertEqual({p: (directory / p).read_bytes() for p in payload}, payload)
+            with zipfile.ZipFile(directory / "press-kit.zip", "a") as archive:
+                archive.writestr("private-review.txt", "Not selected for public distribution")
+            with self.assertRaisesRegex(renderer.ProjectionError, "differs from its projection"):
+                renderer.verify_package_directory(directory)
+            self.assertEqual(source_digests(repository), before)
+
+    def test_package_verification_rejects_extra_files_and_unsafe_asset_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            add_press_source(repository)
+            renderer.write_outputs(repository, Path("build/press"), renderer.build_package(*renderer.build_projection(repository)))
+            directory = repository / "build/press"
+            (directory / "unselected.txt").write_text("Not selected", encoding="utf-8")
+            with self.assertRaisesRegex(renderer.ProjectionError, "file inventory"):
+                renderer.verify_package_directory(directory)
+            (directory / "unselected.txt").unlink()
+            model = json.loads((directory / "press-kit.json").read_text())
+            model["assets"][0]["downloadPath"] = "../outside.svg"
+            write_json(directory / "press-kit.json", model)
+            with self.assertRaisesRegex(renderer.ProjectionError, "unsafe Press Kit artifact path"):
+                renderer.verify_package_directory(directory)
+
     def test_projection_requires_opt_in_source(self) -> None:
         with self.assertRaisesRegex(renderer.ProjectionError, "documents.pressKit"):
             renderer.build_projection(VALID_FIXTURE)

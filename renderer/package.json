@@ -16,6 +16,8 @@
     "render": "node scripts/render-static.mjs",
     "build": "pnpm run render && vite build",
     "build:public": "node scripts/build-public-site.mjs",
+    "build:kit": "node scripts/build-kit.mjs",
+    "verify:kit": "node scripts/verify-kit.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:e2e": "playwright test",

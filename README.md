@@ -152,6 +152,13 @@ validator remains available for diagnostic-only use.
 
 ## Governed brand guidance
 
+To assemble native downloads, an optional handbook and an optional Press Kit
+into one usable public page, follow the
+[complete Brand Kit guide](docs/consumers/COMPLETE_BRAND_KIT.md). The builder
+checks actual generated files and source agreement, preserves static content,
+omits absent sections/review controls, and emits an offline-verifiable kit.
+Building a kit remains separate from releasing or deploying it.
+
 Voice, contextual tone, vocabulary, examples, anti-examples, usage rules,
 accessibility, legal notes, localization, legacy assets, and approval state are
 first-class Identity v1 source. Public output includes only approved public

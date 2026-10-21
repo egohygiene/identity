@@ -37,6 +37,9 @@ const openGraphImage = argumentsMap["open-graph-image"] || null;
 const publicationPath = argumentsMap.publication
   ? path.resolve(argumentsMap.publication)
   : null;
+const audience = argumentsMap.audience || "preview";
+if (!["preview", "public"].includes(audience)) throw new Error("--audience must be preview or public.");
+const publicOnly = audience === "public";
 const designSystemDirectory = argumentsMap["design-system-directory"]
   ? path.resolve(argumentsMap["design-system-directory"])
   : null;
@@ -89,7 +92,7 @@ if (artifactRoot) {
   await verifyArtifactDownloads(model, { artifactRoot, manifestPath, browserAssets });
 }
 const markup = renderToStaticMarkup(
-  React.createElement(BrandKitPage, { model, assetBaseUrl, publication }),
+  React.createElement(BrandKitPage, { model, assetBaseUrl, publication, publicOnly }),
 );
 const template = await fs.readFile(templatePath, "utf8");
 const rendered = template
@@ -99,6 +102,7 @@ const rendered = template
   .replaceAll("{{THEME_VARIABLES}}", deriveThemeVariables(model))
   .replaceAll("{{ASSET_BASE_URL}}", escapeHtmlAttribute(assetBaseUrl))
   .replaceAll("{{PUBLICATION_JSON}}", escapeHtmlAttribute(JSON.stringify(publication || {})))
+  .replaceAll("{{PUBLIC_ONLY}}", String(publicOnly))
   .replaceAll("{{BROWSER_ASSET_METADATA}}", browserMetadata)
   .replaceAll(
     "{{CANONICAL_METADATA}}",

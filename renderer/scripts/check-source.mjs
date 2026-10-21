@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
-const sourceRoots = ["src", "scripts", "tests"];
+const sourceRoots = ["src", "scripts", "tests", "lib"];
 const files = sourceRoots
   .flatMap((directory) => collectJavaScript(path.join(rendererRoot, directory)))
   .sort();

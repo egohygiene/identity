@@ -18,8 +18,9 @@ ADR-0026 proposes repository-wide native writer serialization and its persistent
 coordination file. ADR-0027 proposes an optional paragraph description in the
 existing Press Kit boilerplates. ADR-0028 proposes optional asset-usage transport
 and truthful missing rights metadata. ADR-0029 proposes governed public asset
-selection and selected-output download metadata. These eight proposals have no
-lifecycle approval; the corpus contains 21 accepted records and eight proposed records.
+selection and selected-output download metadata. ADR-0030 proposes complete native consumer-kit assembly and an offline output inventory.
+These nine proposals have no lifecycle approval; the corpus contains 21 accepted
+records and nine proposed records.
 
 | ID | Title | Decision status | Date | Canonical record |
 | --- | --- | --- | --- | --- |
@@ -52,6 +53,7 @@ lifecycle approval; the corpus contains 21 accepted records and eight proposed r
 | ADR-0027 | Reuse Press Kit boilerplates for optional paragraph descriptions | proposed | 2026-10-20 | [ADR-0027](ADR-0027-optional-paragraph-boilerplate.md) |
 | ADR-0028 | Project asset rights without inventing missing authority | proposed | 2026-10-20 | [ADR-0028](ADR-0028-asset-rights-projection.md) |
 | ADR-0029 | Bind public downloads to governed assets and selected outputs | proposed | 2026-10-21 | [ADR-0029](ADR-0029-selected-public-downloads.md) |
+| ADR-0030 | Assemble native consumer kits with a complete offline inventory | proposed | 2026-10-21 | [ADR-0030](ADR-0030-consumer-kit-assembly.md) |
 
 ## Ongoing capture
 
