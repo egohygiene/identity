@@ -30,6 +30,7 @@ async function withInputs(check) {
       handbook: read(artifactNames[0]), context: read(artifactNames[2]), artifactDirectory: "design-system",
     });
     model.release.sourceDigest = model.designSystem.handbook.source.digest;
+    model.tokens = structuredClone(model.designSystem.context.tokens);
     model.release.immutableId = `sha256:${model.release.sourceDigest}`;
     const publication = {
       releaseTag: "v1.0.0", releaseUrl: "https://github.com/egohygiene/identity/releases/tag/v1.0.0",

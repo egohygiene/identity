@@ -4,6 +4,8 @@
 import React from "react";
 
 import { normalizeArtifactPath, normalizeAssetBaseUrl } from "./artifact-paths.js";
+import { foundationTokens } from "./foundations.js";
+import { ColorFoundations, TypographyFoundations } from "./foundations-view.js";
 
 import {
   SECTION_DEFINITIONS,
@@ -24,6 +26,7 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
     normalizeArtifactPath(publication.manifestPath, "Publication manifest path");
   }
   const colorTokens = model.tokens.filter((token) => token.type === "color");
+  const foundations = model.designSystem ? foundationTokens(model.designSystem) : null;
   const typographyTokens = model.tokens.filter(
     (token) =>
       token.type === "fontFamily" || token.path.startsWith("typography."),
@@ -105,8 +108,11 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
           downloads: model.downloads || [],
           assetBaseUrl,
         }),
-        h(ColorSection, { tokens: colorTokens }),
-        h(TypographySection, { tokens: typographyTokens }),
+        h(ColorSection, { tokens: colorTokens, foundations }),
+        h(TypographySection, {
+          tokens: typographyTokens, foundations,
+          projectLinksAvailable: Boolean(model.pressKit?.pressKit.links.length),
+        }),
         h(GuidanceSection, {
           id: "voice",
           title: "Voice and personality",
@@ -780,7 +786,11 @@ function AssetDownloads({ asset, downloads, assetBaseUrl }) {
     : null;
 }
 
-function ColorSection({ tokens }) {
+function ColorSection({ tokens, foundations }) {
+  if (foundations) return h(Section,
+    { id: "colors", title: "Color palette and approved pairings", preview: true },
+    h(ColorFoundations, { tokens: foundations, CopyControl, DefinitionList }),
+  );
   return h(
     Section,
     { id: "colors", title: "Color palette and approved pairings", preview: true },
@@ -832,7 +842,11 @@ function ColorSection({ tokens }) {
   );
 }
 
-function TypographySection({ tokens }) {
+function TypographySection({ tokens, foundations, projectLinksAvailable }) {
+  if (foundations) return h(Section,
+    { id: "typography", title: "Typography and type scale", preview: true },
+    h(TypographyFoundations, { tokens: foundations, CopyControl, DefinitionList, projectLinksAvailable }),
+  );
   const hasTypeScale = tokens.some((token) =>
     [".size", ".lineHeight", ".line-height", ".weight", ".scale"].some(
       (fragment) => token.path.includes(fragment),

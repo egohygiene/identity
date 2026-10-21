@@ -167,3 +167,55 @@ describe the same source, and renders only their approved principles,
 inheritance, capability boundaries, and download links. A separate product
 consumer may adopt the same framework-neutral JSON without depending on the
 public HTML.
+
+## Readable color and typography foundations
+
+The Brand Kit's color/type sections consume the existing declared token entries
+in `handbook.sections[].entries[]`, including their `content.constraints`.
+Those entries already carry the source token's contrast intent, supported
+pairings and minimum ratio, plus typography license, language coverage and
+legibility notes. No second token catalog or new source/schema member is added.
+An omitted handbook keeps the independent legacy preview and its explicit
+missing-guidance states.
+
+Before displaying imported guidance, the renderer requires equal token
+inventories and equal path, type, resolved value, source layer, override reason
+and approval across the displayed model, compact context and handbook.
+Duplicate, missing or mismatched tokens fail before replacing an existing page,
+even when all digest strings agree. JSON object key order is immaterial;
+ordered arrays, including font fallbacks, retain their meaning. These checks
+strengthen the existing matching-source handoff rather than reinterpret an old
+release or permit mixing projections.
+
+Color roles and pairs come only from the supplied contrast constraints. The
+renderer deduplicates reciprocal foreground/background declarations and uses
+the stricter declared minimum when both specify one. It measures the rounded
+8-bit opaque sRGB values used by the CSS preview/export, using the
+[WCAG relative-luminance definition](https://www.w3.org/TR/WCAG22/#dfn-relative-luminance).
+Results separately report the source minimum and AA normal/large-text limits;
+comparisons use unrounded ratios. Translucency, unsupported color spaces,
+missing targets and conflicting roles remain unmeasured, with no guessed
+backing color or conversion. Only passing normal/large-text examples are
+rendered as styled text. The sample size is an accessibility example, not an
+approved brand type scale. A passing pair does not establish palette-wide or
+whole-product accessibility; review actual text, states and placement against
+[WCAG contrast guidance](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html).
+Theme relationships are not inferred from token names or luminance.
+
+Font previews preserve the declared family/fallback order. Explicit composite
+`typography` values can preview concrete family, weight, size and line height;
+neighboring scalar token names do not assign a hierarchy. Unresolved aliases
+or unsupported values stay visible without an invented substitution. Supplied
+license/language/legibility notes are readable, with a reference for the declared
+`OFL-1.1` identifier or a supplied safe HTTPS license URL. Other license text
+remains text. License information never establishes artifact provenance,
+redistribution or subsetting approval.
+
+This preview does not fetch or bundle fonts. Font acquisition URLs are not
+invented from family names or observation catalogs; actual approved project
+links, when supplied through the existing Press Kit, remain in its links/contact
+section. When the preferred font is unavailable, use the supplied fallback
+order. Undeclared acquisition, licensing, weight and hierarchy facts remain
+explicit. Existing native/token/handbook exports retain their owners and bytes;
+font tooling and component implementations remain outside this presentation
+change.

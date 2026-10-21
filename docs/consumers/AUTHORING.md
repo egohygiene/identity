@@ -296,6 +296,27 @@ Optional packages have their own projection and integrity checks; core
 
 ## 5. Record what the result proves
 
+For readable color/type foundations, generate the optional handbook/context
+pair from the same consumer snapshot using
+[`render_design_system.py`](../../scripts/render_design_system.py), then supply
+that directory through the renderer's existing `--design-system-directory`
+option. Its token entries already carry the approved source's contrast intent,
+pairings/minimums and typography license/language/legibility constraints. Keep
+the generated pair and displayed core model together: their token inventories,
+resolved values, layers and override metadata must agree as well as their
+project/source digest. Use the existing artifact-root/manifest checks when
+rendering an actual generated bundle.
+
+Only supplied foreground/background pairings are measured; undeclared themes,
+translucent or unsupported colors, font acquisition URLs and type relationships
+are not guessed. A font family is not proof of installed or distributable font
+bytes. Preserve fallback order, review the supplied license and obtain approved
+font files before bundling; otherwise use the declared fallbacks. Add intended
+sizes/weights/line-height relationships in reviewed canonical source rather
+than editing the page or expecting it to infer a hierarchy. The
+[foundation contract](../contracts/DESIGN_SYSTEM_V1.md#readable-color-and-typography-foundations)
+describes supported previews and remaining review limits.
+
 | Check | Evidence and limit |
 | --- | --- |
 | Valid source | Same-commit validator checks closed structure, local bytes/pins, references, rights and decision consistency. It cannot grant creative/legal approval or promise support by every producer. |
@@ -303,9 +324,10 @@ Optional packages have their own projection and integrity checks; core
 | Verified selected outputs | `v1-generate` plus `v1-verify` checks the core selected package state. Inspect its manifest and actual files; verify optional packages through their separate paths. |
 | Public-kit readiness | Requires the real public selection, downloads, rights presentation, visual/accessibility review, and publication integration proof for that consumer. Passing the prior checks does not establish this. |
 
-The audit's internal-asset exposure finding G03 and advertised-but-unselected
-archive finding G04 remain implementation/regression work in #101/#105. Do not
-infer safe generic public selection or a complete kit from these examples.
+Merged [PR #126](https://github.com/egohygiene/identity/pull/126) addresses the
+audit's G03/G04 generic public-asset selection and selected-download findings.
+Keep those boundaries exercised for the actual consumer; a complete public kit
+still requires #105's assembly and acceptance evidence.
 The [Mantle walkthrough](MANTLE_AUTHORING_PROOF.md) exercises this worksheet
 against pinned real source. Its evidence and the [initialization/validation
 handoffs](INITIALIZATION_AND_VALIDATION_HANDOFFS.md) supply checkpoint 3
