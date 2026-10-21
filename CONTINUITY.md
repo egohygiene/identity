@@ -7,20 +7,21 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T11:42:24-04:00'
+  updated_at: '2026-10-21T14:10:44-04:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: 'Present selected native GitHub and generic-card profiles for #104.'
+  purpose: 'Assemble and verify the complete public consumer Brand Kit for #105.'
   includes:
-  - Selected native GitHub/generic-card images, supplied copy and source rights.
-  - Real unchanged Mantle generation, omission, integrity and browser handoff evidence.
-  - Named existing GitHub Social preview schema and byte-preserved supplied reference template.
+  - Native compiler inventory, optional generated handbook/Press Kit and public static presentation.
+  - Complete file receipt and offline verification; minimal, expanded and unchanged Mantle proof.
+  - 'Reconcile #104 completion and preserve prior ADRs, approved artwork and publication ownership.'
   excludes:
-  - New authored fields, registry publishing, account management or an external platform matrix.
-  - Deferred broad Docker/CI/refactoring, creative approval, upload, release and deployment.
+  - New canonical brand fields, artwork, rights grants or approval dispositions.
+  - Stable release/deployment, self-source rights backfill and organization/Intelligence route changes.
+  - Deferred broad lint/testing/CI/refactoring and actual local-Docker acceptance.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -31,131 +32,116 @@ scope:
   - AGENTS.md
   - ROADMAP.md
   - docs/decisions/policy-reference.json
-  - docs/consumers/PRESENTATION_PROFILES.md
-  - docs/evidence/identity-presentation-mantle-2026-10-21.json
-  - contracts/v1/brand-kit-view-model.schema.json
-  - docs/references/github/README.md
-  - https://github.com/egohygiene/identity/issues/104
+  - docs/decisions/ADR-0030-consumer-kit-assembly.md
+  - docs/consumers/COMPLETE_BRAND_KIT.md
+  - contracts/v1/consumer-brand-kit.schema.json
+  - renderer/lib/kit-bundle.mjs
+  - renderer/fixtures/complete-kit/receipt.json
+  - https://github.com/egohygiene/identity/issues/105
   - https://github.com/egohygiene/identity/issues/116
+  - https://github.com/egohygiene/identity/issues/98
   - https://github.com/egohygiene/identity/issues/70
 work:
-  objective: Make a small existing opt-in target set usable from the kit without new authored brand facts or a platform
-    catalog.
+  objective: Obtain supplied copy, public marks, foundations, rights and selected presentations from one source-bound
+    kit.
   success_conditions:
-  - Present only selected public source-bound downloads, exact copy and supplied rights.
-  - Verify real generation, omission, integrity and keyboard/browser handoff with canonical source preserved.
+  - Assemble only actual selected native and explicitly supplied optional generated files.
+  - Preserve source/release agreement, exact download bytes, static essential content and public/review separation.
+  - Verify minimal/expanded and unchanged real consumer handoffs; keep publication/release states distinct.
   active_issue:
     provider: github
-    id: egohygiene/identity#104
-    url: https://github.com/egohygiene/identity/issues/104
+    id: egohygiene/identity#105
+    url: https://github.com/egohygiene/identity/issues/105
   next:
     kind: action
-    id: identity-104-review
-    description: 'Inspect the containing head checks and review draft PR128; authorized merge precedes #105.'
+    id: identity-105-review
+    description: 'Complete exact-head runtime checks and review the #105 candidate before any authorized merge.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/pull/128
-    - https://github.com/egohygiene/identity/issues/104
     - https://github.com/egohygiene/identity/issues/105
     - https://github.com/egohygiene/identity/issues/116
     depends_on:
-    - egohygiene/identity#99
     - egohygiene/identity#100
     - egohygiene/identity#101
+    - egohygiene/identity#102
     - egohygiene/identity#103
+    - egohygiene/identity#104
 state:
   base:
-    revision: 12985216d34d71a2c09adfa2fe1e43481b3252ee
+    revision: 47995976ae41415226bd6fb9400fbbd02777fca6
     ref: refs/heads/main
-    verified_at: '2026-10-21T11:42:24-04:00'
+    verified_at: '2026-10-21T14:10:44-04:00'
   candidate:
-    branch: codex/104-presentation-profiles
-    revision: a83ad9e315b09a053ec129699ed12694c62259dc
-    pull_request:
-      provider: github
-      id: egohygiene/identity#128
-      url: https://github.com/egohygiene/identity/pull/128
-    handoff_state: ready-for-review
+    branch: codex/105-complete-public-kit
+    revision: null
+    pull_request: null
+    handoff_state: in-progress
   live:
     status: verified
-    observed_at: '2026-10-21T11:42:24-04:00'
-    default_branch_revision: 12985216d34d71a2c09adfa2fe1e43481b3252ee
+    observed_at: '2026-10-21T14:10:44-04:00'
+    default_branch_revision: 47995976ae41415226bd6fb9400fbbd02777fca6
     issue_state: open
-    pull_request_state: draft
-    notes: PR128 is draft/open/mergeable at the named source/merge; main is unchanged. Four source workflows pass;
-      release validation waits behind prior39626619513/macOS. Inspect this containing head. PR127 is merged/#102
-      closed; parked123 remains draft/unmerged at400846db7f10823d4b5bc1629213caf03960b59c.
+    pull_request_state: not-applicable
+    notes: 'PR128 is merged/#104 closed and all five #105 prerequisites are verified closed. The local #105 worktree
+      is based on main4799597; no published candidate or PR exists yet. Parked123 remains draft/open/unmerged at400846db7f10823d4b5bc1629213caf03960b59c.'
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-21T11:42:24-04:00'
+  reviewed_at: '2026-10-21T14:10:44-04:00'
   reviewed_by: Codex
   evidence:
-  - command: 'Live PR128/127/parked123 and #102/#104/#116 inspection'
+  - command: 'Live #105/#116/PR128/parked123 and fetched main inspection'
     outcome: passed
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: 'Base1298521 is unchanged, PR127 merged, #102 closed, #104 open. PR128 remains draft/unmerged; no later
-      issue started.'
-  - command: cargo test --locked --offline --test v1_consumer; retained Mantle proof
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: 'Main4799597 is the authorized #128 merge. #104 closed; #105 implementation is authorized; all 25 original
+      tracker items remain represented. No later issue started.'
+  - command: Locked offline native build; renderer/fixtures/complete-kit/generate.py
     outcome: passed
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: All 14 focused native tests pass. All 14 consumed Mantle files match raw Git at b08045acc1e982dd9424c1d8c91b0badd64744e8.
-      Two fresh 19-file generations and read-only verifies agree; manifests match actual bytes. Corruption rejects;
-      disposable target omission passes; entire original checkout is preserved.
-  - command: Offline Draft202012Validator and template/receipt byte checks
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: Three cases have two independent identical native generations and read-only verification. Minimal and
+      real Mantle source are unchanged. Expanded is an explicit synthetic disposable variant using existing governed
+      fixtures/test helpers. Mantle14 inputs match raw Git at b08045acc1e982dd9424c1d8c91b0badd64744e8; its complete
+      original checkout is preserved. Generated native/optional fixture file counts are14/32/19.
+  - command: python3 -m unittest discover --start-directory tests --pattern test_render_press_kit.py --quiet
     outcome: passed
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: Real model and named GitHub artifact validate; five wrong-field variants reject. Original 51,470-byte template
-      matches SHA2565259d6e413242c63afe88027122eed783612ff9a9e48b9a9c51313f6bf66fb94. Receipt runtime/fixture hashes
-      match current files.
-  - command: node renderer/scripts/check-source.mjs; python3 scripts/verify_docs.py; git diff --check; scoped pinned-owner
-      preservation review
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: All19 Press Kit tests pass, including read-only package verification, exact archive reconstruction, extra-file/ZIP
+      injection rejection and unsafe paths.
+  - command: node renderer/scripts/check-source.mjs; offline Draft202012Validator; documentation/whitespace checks
     outcome: passed
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: All 35 JS files parse. Documentation/whitespace,19 pinned owner inputs, continuity schema/12 headings/privacy,29
-      ADR bytes,40 roadmap IDs/88 edges/mappings and approved PNG pass. Only Q32/Q34 lifecycle and Q32 exit reconcile;
-      no whole-repository conformance claim.
-  - command: https://github.com/egohygiene/identity/actions/runs/39627524474
-    outcome: passed
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: Source a83ad9e315b09a053ec129699ed12694c62259dc through merge 96b52e944799049b096aa70975fb726187993e09:394
-      renderer tests/17files and all8 Chromium checks pass without retries. Actual native PNG preview/dimensions/download
-      equality, keyboard navigation/copy/scroll, full-page axe,390px layout and prior screenshot pass.
-  - command: https://github.com/egohygiene/identity/actions/runs/39627524769; https://github.com/egohygiene/identity/actions/runs/39627526154;
-      https://github.com/egohygiene/identity/actions/runs/39627524813
-    outcome: passed
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: 'Same source/merge: CLI 118 Rust tests pass/3 ignored; Python152 total,150 pass/2 existing skips. Advisory
-      decisions retain 5 known warning annotations/0errors. Hosted image qualification passes; it does not replace
-      deferred actual local-Docker acceptance.'
-  - command: https://github.com/egohygiene/identity/actions/runs/39627524757
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: All41 JS sources parse. Three real generated native models and assembled expanded Press Kit data validate;
+      consumer receipt schema examples validate and self-inventory entry rejects. Documentation links/whitespace
+      pass. These are bounded structure/data checks, not executed JavaScript rendering.
+  - command: corepack pnpm install --offline --frozen-lockfile; local Vitest/Chromium
     outcome: not-run
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: Source release workflow is pending behind earlier39626619513. Earlier sourcebcae3ba passed Linux/Windows
-      gates and public smoke; macOS stays queued. Earlier smoke has7clean browser passes and1new-case pass on retry;
-      current source explicitly brings the lazy image into view. Pending work is not a current-source pass.
-  - command: https://github.com/egohygiene/identity/actions/runs/39623214621; https://github.com/egohygiene/identity/actions/runs/39624788651;
-      https://github.com/egohygiene/identity/actions/runs/39625660870
-    outcome: failed
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: Historical sources65bc0c8/0328e11 fail fixture delivery. Source0e9498e fixes real HTTP preview/download
-      then full-page axe finds unfocusable guidance scrollers. Current source fixes keyboard access; source 394/8
-      pass above supersedes these failures without relaxing assertions.
-  - command: Local Vitest/Chromium and broad final quality/refactoring/Docker campaign
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: Frozen offline dependency restoration fails ERR_PNPM_NO_OFFLINE_META for @asamuzakjp/dom-selector; package
+      policy metadata is unavailable. No lock/dependency changes or policy bypass were applied. Local renderer/browser
+      execution is unavailable; existing hosted checks must execute the new cases.
+  - command: Current source renderer/browser/platform workflows
     outcome: not-run
-    observed_at: '2026-10-21T11:42:24-04:00'
-    notes: 'Local JS dependencies remain absent after the prior registry/cache block; hosted runtime evidence is
-      separate. Broad quality remains #70 and actual local-Docker acceptance remains #80/parked123.'
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: 'A PR has not yet been published. Previous #104 head results do not validate this candidate.'
+  - command: Broad final quality/refactoring/CI campaign; actual local-Docker acceptance
+    outcome: not-run
+    observed_at: '2026-10-21T14:10:44-04:00'
+    notes: 'Deferred by the user to #70/#80/parked123. Focused current product checks and ordinary existing hosted
+      workflows remain required.'
+  - command: Pinned-owner continuity, ADR corpus/index and roadmap preservation review
+    outcome: passed
+    observed_at: "2026-10-21T14:10:44-04:00"
+    notes: All 19 pinned owner inputs, 12-heading continuity schema/privacy/budgets, 29 prior ADR bytes plus proposed ADR-0030, 40 IDs/88 edges/mappings and approved PNG pass.
   environment_limitations:
-  - The containing checkpoint requires its own exact-head hosted check inspection; pending release/macOS work is
-    not passed evidence.
-  - No complete WCAG or all-browser conformance, final human visual approval, complete-kit acceptance, external
-    upload, release or deployment is asserted.
-  - Aether social catalog remains empty, experimental, rights-rejected and release-excluded; no external matrix
-    is admitted.
+  - Actual renderer/browser execution remains pending in the hosted environment; no complete WCAG or human visual
+    acceptance is claimed.
+  - New ADR-0030 is proposed/unapproved; all29 prior records retain human dispositions.
+  - 'Legacy Identity logo rights remain unresolved; G09 root self-source and final release/canary acceptance stay
+    #98.'
+  - No new release, deployment, route installation, external catalog admission or creative approval occurs.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -174,56 +160,56 @@ privacy:
 
 ## Purpose and precedence
 
-This scoped #104 checkpoint covers selected presentation outputs. User/runtime instructions, scoped instructions, live state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priority.
+This scoped #105 checkpoint covers complete native consumer-kit assembly. User/runtime instructions, scoped instructions, live tracker state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priority.
 
 ## Resume protocol
 
-Read AGENTS.md, this file, #104/#116, the selected-profile guide, contracts and actual source. Verify main, PR128 and parked123. Inspect the containing provider head/checks before acting; dated source evidence, authored tests and fresh checks remain distinct.
+Read AGENTS.md, this file, #105/#116, the complete-kit guide and actual diff. Verify main, the active candidate and parked123. Distinguish native data proof, authored tests, executed renderer/browser checks, review, merge, release and deployment. Inspect the containing provider head/checks before acting.
 
 ## Current objective and success conditions
 
-Present selected native GitHub previews/generic cards with declared paths, dimensions and public source rights. Reuse exact canonical project metadata and approved Press Kit descriptions/facts/links. Keep absent inputs absent and legacy generation usable. Do not infer package identifiers, keywords, account ownership or shortened bios.
+Assemble the native compiler's actual selected public outputs with explicitly supplied governed handbook/Press Kit projections into one static kit. A visitor can find supplied copy, logo, colors, typography, usage terms and selected presentation images without repository-source reading. Preserve exact source/release agreement and public/optional boundaries without inventing brand facts.
 
 ## State snapshot
 
-Base/main 12985216d34d71a2c09adfa2fe1e43481b3252ee is the authorized #127 merge. #102/Q32 is complete and #104/Q34 active on codex/104-presentation-profiles; all four prerequisites are closed. #105 awaits reviewed #104 completion. #109/Q39 has closed prerequisites but stays planned at its later priority. Preserve 40 IDs/88 edges/mappings: 23 complete, 1 active, 3 ready, 8 blocked, 5 planned. Parked #123 remains unmerged; Q19/Q21/Q27 and actual local-Docker acceptance stay incomplete.
+Base/main47995976ae41415226bd6fb9400fbbd02777fca6 is the authorized #128 merge. #104/Q34 is complete; #105/Q35 is active on codex/105-complete-public-kit. All five direct prerequisites are verified closed. Preserve 40 stable IDs/88 edges/mappings: 24 complete, 1 active, 3 ready, 7 blocked, 5 planned. Q39/#109 stays planned at its existing later priority. Parked123 remains unmerged; Q19/Q21/Q27 and real local-Docker acceptance remain incomplete.
 
 ## Completed and material changes
 
-renderer/src/presentation.js presents only the two existing selected native target IDs, matched to the expected profile/PNG and public source hash. It consumes existing downloads, dimensions, rights and copy values under the configured asset base. No-target models omit its section/navigation. Legacy visual layout and the approved screenshot remain preserved. Existing guidance pre blocks gain tabIndex 0 so keyboard users can scroll; the browser test exercises ArrowRight and full-page axe.
+renderer/scripts/build-kit.mjs uses the native manifest/model and existing optional projection adapters; it copies selected files read-only, builds the real static renderer, and emits kit.json plus the composed existing view model. renderer/lib/kit-bundle.mjs verifies complete file hashes/inventory, compiler binding, optional JSON/page agreement, selected downloads/browser metadata and navigation. Input/output overlap, canonical destinations and nonempty output replacement reject. Neighboring unselected files are excluded.
 
-src/brandkit/profiles.rs repairs the GitHub profile's inherited 2 MB bound to 999,999 bytes, below GitHub's documented 1 MB limit. Dimensions 1280×640, output path, composition and other profiles remain unchanged. The dated provider reference and regeneration caveat are in docs/consumers/PRESENTATION_PROFILES.md. Generic 1200×630 is Identity's choice, not a named platform requirement.
+Public audience is explicit in server rendering and hydration: absent optional sections and the local review studio are omitted. Default model-only preview behavior and the approved legacy screenshot are preserved. Existing asset/Press Kit archives and handbook/context downloads remain; no new all-in-one product ZIP is introduced. The hero calls the native ZIP an asset package rather than implying optional exports are inside it.
 
-The additive githubSocialPreviewDownload schema definition names the existing artifact without adding source/download fields or changing generic compatibility. The owner-supplied template is retained unchanged at docs/references/github/repository-open-graph-template.png, with source/checksum and its printed 40pt border guidance. It is a layout reference outside canonical brand source/generated kits; no browser/account screenshot is committed or new artwork approval supplied.
+The existing Press Kit generator adds a read-only native-only package verifier that reconstructs deterministic outputs/ZIP bytes and rejects changed/extra/unsafe artifacts. The renderer schema's already-defined Press Kit view is wired into its top-level optional field. The new consumer receipt contract and assembly boundary are documented in proposed ADR-0030; no new authored brand fields, artwork or approval authority are introduced.
 
 ## Validation and review evidence
 
-All 14 local native consumer cases and the unchanged Mantle proof pass. The retained receipt binds all consumed raw-Git inputs, two independent complete output inventories, actual PNG/manifest bytes, read-only corruption rejection, omission and original-checkout preservation. Attribution, alt text and restrictions remain intact; the partial fixture is not a standalone released kit.
+The retained complete-kit receipt binds the native base/binary and every generated fixture byte. Two independent native generations agree for unchanged minimal, a synthetic expanded variant with existing governed handbook/Press Kit facts, and unchanged Mantle at b08045acc1e982dd9424c1d8c91b0badd64744e8. All14 consumed real inputs match raw Git, read-only verification passes and the full original checkout is preserved. Only generated files enter the test transport ZIP; it is not a released product bundle.
 
-Source a83ad9e315b09a053ec129699ed12694c62259dc, represented merge 96b52e944799049b096aa70975fb726187993e09, passes 394 renderer tests/17 files and 8 Chromium checks, CLI 118 Rust tests/3 ignored and 150 Python passes/2 skips, advisory decisions and hosted image qualification. Known advisory 5 warnings/0 errors remain. The new case verifies actual native image bytes, keyboard access/copy/scroll, axe and narrow layout. First fixture-delivery failures and later guidance/lazy-image issues retain dated outcomes above; strong assertions remain enabled. Release validation is pending behind an older queued macOS job. Reinspect the containing head; no pending gate is claimed passed.
+All 154 local Python cases complete: 152 pass and two existing skips. All 19 Press Kit cases pass. All 41 JS sources parse; three native/composed model and consumer receipt schema checks, docs and whitespace pass. Local JS dependencies remain incomplete after the exact offline metadata error above. Added tests must still execute actual bundling, all download paths, source/output preservation, repeated inventories, mismatches/tampering, public omission, keyboard copy/download bytes, full-page axe, narrow layout and no-JavaScript essential content. Previous-source green checks are not current evidence.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The remaining automated gate is current-source release/platform validation; the provider queue must resolve before merge-readiness claims. Local JS dependencies are absent, so local browser execution is not claimed. Hosted image qualification does not satisfy actual local-host Docker acceptance. Broader lint/testing/CI/refactors stay #70/#80/parked123; complete-kit/release acceptance stays #105/#98. Device/destination cropping and final human review remain distinct from automated passes.
+Fresh hosted runtime checks are the remaining scoped gate. A source-bound receipt proves internal byte agreement, not authenticity of rights/approval or remote availability. Device cropping and final human review remain distinct from automated checks.
 
-Mantle has no Press Kit/account/registry facts and none are invented. Live Aether catalog bytes match the pinned empty experimental/rights-rejected/release-excluded record; closed Aether #52/#53 do not satisfy ADR-0016 admission. No package publisher, account adapter, external matrix, upload, release or deployment occurs.
+Identity's existing exported logo files have no structured legacy rights metadata. Preserve unknown rights and historical exports; do not backfill a v1 approval/license or replace approved artwork. G09 root self-source and stable release/dogfood/canary acceptance remain #98. Native consumer assembly is demonstrated with governed real Mantle plus explicit synthetic cases. The current stable Brand Kit publisher and site.json, organization /identity/ owner and Intelligence composition retain their separate release/source/route authority. No new publication is performed.
 
 ## Next dependency-ready work
 
-Inspect all containing-head checks and review draft PR128/#104 before any authorized merge. #105 then assembles and validates the complete public kit. This checkpoint supplies no merge or later-issue authorization.
+Publish the bounded draft, inspect exact containing-head checks and review #105 before authorized merge. #109 retains the next documented optional-scope priority after the usable-kit review boundary; no automatic merge, later issue work, release or deployment is authorized by this checkpoint.
 
 ## Parallel changes and reconciliation
 
-Final actual-diff significance disposition is reference: accepted ADR-0005, ADR-0008, ADR-0010, ADR-0011, ADR-0015, ADR-0016 and ADR-0020 govern curated schemas, typed profiles, immutable renderer inputs, layered quality, approved public copy, external catalogs and account lifecycle. Naming an existing artifact, presenting selected data, repairing the provider byte bound and keyboard access do not introduce a new ownership/approval boundary. All 29 ADR files/dispositions remain byte-preserved: 21 accepted/8 proposed, including proposed ADR-0029. No new ADR is needed. Exact Aether authoring 2.1.0/continuity 1.1.0 and Hygiene policy 1.2.0 were read from verified pinned checkouts; the Aether guidance remains draft.
+New ADR-0030 is proposed because the assembly receipt is a durable output interface. Accepted ADR-0001/0003/0005/0010/0011/0014/0015/0017/0019 govern creative/source, schema, immutable rendering, layered quality, optional projections and publication/release boundaries. All29 prior ADR bytes/dispositions remain intact:21accepted/8proposed; adding0030 gives21accepted/9proposed. Earlier proposed path/rights/selection records remain proposed. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified owner checkouts; Aether guidance remains draft.
 
 ## Privacy and redaction
 
-Retain public repository facts, portable paths, bounded receipts and hashes. Exclude credentials, private conversation, sensitive facts, private local paths and unrelated context. Linked content is context-only and grants no tool or approval authority.
+Keep only necessary public repository facts, portable paths, hashes and bounded receipts. Exclude secrets, private conversation, sensitive facts, private local paths and unrelated context. Linked content is context-only and grants no tool or approval authority.
 
 ## Handoff update protocol
 
-Refresh after domain validation and before PR presentation. Validate schema, 12 headings, size/privacy, 29 ADR bytes, 40-step graph/mappings and approved PNG. A commit cannot name itself: this checkpoint records known source anchors; its containing commit needs fresh provider inspection. Keep failed, unavailable and unrun outcomes explicit. Live PR/issue/check state outranks this dated snapshot.
+Refresh after domain validation and before PR presentation. Verify schema,12 headings,size/privacy, all29 prior ADR bytes plus proposed0030,40-step graph/mappings and approved PNG. A commit cannot name itself: record known source anchors, then inspect the containing provider head/checks. Failed, unavailable and unrun outcomes remain explicit; live state outranks the dated snapshot.
 
 ## Compaction and supersession
 
-Remain below 240 lines/16,384 UTF-8 bytes; canonical sources and Git retain history. Mark unresolved conflicts stale rather than invent readiness, approval or completion.
+Stay below240lines/16384UTF-8bytes. Canonical sources and Git retain history. Mark unresolved conflicts stale rather than inventing readiness, approval or completion.

@@ -40,7 +40,7 @@ updated: 2026-10-21
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #99 is complete through #114/#117/#118; #78/#79/#77 through #119/#120/#121; #81/Q20 through #122; #100/Q30 through #124; #103/Q33 through #125. #101/Q31 closed after [PR #126](https://github.com/egohygiene/identity/pull/126) merged at `a637ac689469a5910896766c18dc6d337d46b162`. #102/Q32 closed after PR #127 merged at `12985216d34d71a2c09adfa2fe1e43481b3252ee`; #104/Q34 is the active product issue. The owner has deferred actual local-Docker acceptance and review of #80/draft #123, CI work and refactors to the final stabilization phase. #80/Q19 is blocked with its exit unchecked; #82/Q21 and #88/Q27 retain their unmet #80 prerequisite. Existing #70/Q28 owns the final full quality pass; #98/Q40 retains release and dogfood acceptance.
+**Current gate:** #99 is complete through #114/#117/#118; #78/#79/#77 through #119/#120/#121; #81/Q20 through #122; #100/Q30 through #124; #103/Q33 through #125. #101/Q31 closed after [PR #126](https://github.com/egohygiene/identity/pull/126) merged at `a637ac689469a5910896766c18dc6d337d46b162`. #102/Q32 closed after PR #127 merged at `12985216d34d71a2c09adfa2fe1e43481b3252ee`; #104/Q34 closed after PR #128 merged at `47995976ae41415226bd6fb9400fbbd02777fca6`; #105/Q35 is the active product issue. The owner has deferred actual local-Docker acceptance and review of #80/draft #123, CI work and refactors to the final stabilization phase. #80/Q19 is blocked with its exit unchecked; #82/Q21 and #88/Q27 retain their unmet #80 prerequisite. Existing #70/Q28 owns the final full quality pass; #98/Q40 retains release and dogfood acceptance.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -697,7 +697,7 @@ issues: [103]
 
 <!-- roadmap-step
 id: IDN-Q34
-status: active
+status: complete
 depends_on: [IDN-Q29, IDN-Q30, IDN-Q31, IDN-Q33]
 issues: [104]
 -->
@@ -707,13 +707,13 @@ issues: [104]
 
 **Exit criteria:**
 
-- [ ] At least one actual target works end to end with explicit constraints, rights, and no-profile fallback.
+- [x] At least one actual target works end to end with explicit constraints, rights, and no-profile fallback.
 
-**Evidence and scope:** [#104](https://github.com/egohygiene/identity/issues/104) is active from merged #127. The [selected-profile guide](docs/consumers/PRESENTATION_PROFILES.md) reuses the existing native GitHub preview and generic-card targets, source-bound public downloads and existing approved Press Kit copy/facts/links. A real Mantle target provides bounded generation, omission and integrity proof. The existing GitHub Social preview artifact is explicit in the schema, with the supplied template preserved as a reference. No new source fields, profile matrix, account activation or registry publishing adapter is introduced. Accepted ADR-0005/0008/0010/0015/0016/0020 retain the boundaries; the inspected experimental rights-rejected Aether catalog remains inadmissible for production social-surface projection. #109/Q39 now has closed prerequisites but remains planned at its later priority; no dependency edges change.
+**Evidence and scope:** [#104](https://github.com/egohygiene/identity/issues/104) is complete through [PR #128](https://github.com/egohygiene/identity/pull/128), merged at `47995976ae41415226bd6fb9400fbbd02777fca6`. All five reviewed-head workflows passed, including 394 renderer tests/eight Chromium checks in both browser runs and three-platform gates. The [selected-profile guide](docs/consumers/PRESENTATION_PROFILES.md) reuses the existing native GitHub preview and generic-card targets, source-bound public downloads and existing approved Press Kit copy/facts/links. A real Mantle target provides bounded generation, omission and integrity proof. The existing GitHub Social preview artifact is explicit in the schema, with the supplied template preserved as a reference. No new source fields, profile matrix, account activation or registry publishing adapter is introduced. Accepted ADR-0005/0008/0010/0015/0016/0020 retain the boundaries; the inspected experimental rights-rejected Aether catalog remains inadmissible for production social-surface projection. #109/Q39 now has closed prerequisites but remains planned at its later priority; no dependency edges change.
 
 <!-- roadmap-step
 id: IDN-Q35
-status: blocked
+status: active
 depends_on: [IDN-Q30, IDN-Q31, IDN-Q32, IDN-Q33, IDN-Q34, IDN-Q14, IDN-Q15]
 issues: [105]
 -->
@@ -725,7 +725,7 @@ issues: [105]
 
 - [ ] Minimal/expanded consumers, release binding, downloads, accessibility, public filtering, and publication ownership evidence pass.
 
-**Evidence and scope:** [#105](https://github.com/egohygiene/identity/issues/105). This first usable kit does not wait for IDN-Q24–IDN-Q27 or later optional scope.
+**Evidence and scope:** [#105](https://github.com/egohygiene/identity/issues/105) is active after merged #128. The [complete-kit guide](docs/consumers/COMPLETE_BRAND_KIT.md) describes explicit native assembly, optional governed projections, public-only presentation and complete offline inventory verification. The [fixture receipt](renderer/fixtures/complete-kit/receipt.json) records independent native generations for minimal/expanded synthetic cases and unchanged Mantle source; actual renderer/browser outcomes remain separate exact-head evidence. New ADR-0030 remains proposed. Existing stable publication routes and all prior ADR dispositions are preserved. G09 canonical self-source/rights and final release acceptance remain #98; broader Docker/CI/refactoring remains #70/#80. This first usable kit does not wait for IDN-Q24–IDN-Q27 or later optional scope.
 
 <!-- roadmap-step
 id: IDN-Q36

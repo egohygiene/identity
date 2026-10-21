@@ -20,7 +20,7 @@ import {
 
 const h = React.createElement;
 
-export function BrandKitPage({ model, assetBaseUrl = "./", publication = null }) {
+export function BrandKitPage({ model, assetBaseUrl = "./", publication = null, publicOnly = false }) {
   assertBrandKitViewModel(model);
   assetBaseUrl = normalizeAssetBaseUrl(assetBaseUrl);
   if (publication) {
@@ -36,6 +36,21 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
     ["brand-kit-archive", "complete-brand-kit"].includes(entry.id)
     && entry.mediaType === "application/zip",
   );
+  const sections = SECTION_DEFINITIONS.filter(([id]) => {
+    if (id === "design-system") return Boolean(model.designSystem);
+    if (id === "press-kit") return Boolean(model.pressKit);
+    if (id === "presentation") return selectedPresentationProfiles(model).length > 0;
+    if (!publicOnly) return true;
+    if (id === "studio") return false;
+    if (["voice", "usage"].includes(id)) return model.guidance[id].status === "declared" && Boolean(model.guidance[id].value);
+    if (id === "creative-direction") return Object.values(model.support).some((entry) => entry.status === "declared");
+    if (id === "logos") return model.assets.length > 0;
+    if (id === "colors") return colorTokens.length > 0;
+    if (id === "typography") return typographyTokens.length > 0;
+    if (id === "downloads") return model.packages.length > 0;
+    return true;
+  });
+  const visible = (id) => sections.some(([section]) => section === id);
 
   return h(
     "div",
@@ -92,39 +107,39 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
             ),
             download: true,
           },
-          "Download complete kit",
+          publicOnly ? "Download asset package" : "Download complete kit",
         ) : null,
       ),
     ),
     h(
       "div",
       { className: "layout" },
-      h(SectionNavigation, { model }),
+      h(SectionNavigation, { sections }),
       h(
         "main",
         { id: "main-content", tabIndex: -1 },
         h(OverviewSection, { model }),
-        h(AssetsSection, {
+        visible("logos") ? h(AssetsSection, {
           assets: model.assets,
           downloads: model.downloads || [],
           assetBaseUrl,
-        }),
-        h(ColorSection, { tokens: colorTokens, foundations }),
-        h(TypographySection, {
+        }) : null,
+        visible("colors") ? h(ColorSection, { tokens: colorTokens, foundations }) : null,
+        visible("typography") ? h(TypographySection, {
           tokens: typographyTokens, foundations,
           projectLinksAvailable: Boolean(model.pressKit?.pressKit.links.length),
-        }),
-        h(GuidanceSection, {
+        }) : null,
+        visible("voice") ? h(GuidanceSection, {
           id: "voice",
           title: "Voice and personality",
           guidance: model.guidance.voice,
-        }),
-        h(GuidanceSection, {
+        }) : null,
+        visible("usage") ? h(GuidanceSection, {
           id: "usage",
           title: "Usage rules",
           guidance: model.guidance.usage,
-        }),
-        h(CreativeDirectionSection, { support: model.support }),
+        }) : null,
+        visible("creative-direction") ? h(CreativeDirectionSection, { support: model.support, publicOnly }) : null,
         model.designSystem
           ? h(DesignSystemSection, {
               designSystem: model.designSystem,
@@ -142,11 +157,11 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
               h(PresentationProfiles, { model, assetBaseUrl, CopyControl, DefinitionList, AssetRights }),
             )
           : null,
-        h(StudioSection, { model }),
-        h(DownloadsSection, {
+        visible("studio") ? h(StudioSection, { model }) : null,
+        visible("downloads") ? h(DownloadsSection, {
           packages: model.packages,
           assetBaseUrl,
-        }),
+        }) : null,
         h(ProvenanceSection, { model, assetBaseUrl, publication }),
       ),
     ),
@@ -206,19 +221,7 @@ function SkipLink() {
   );
 }
 
-function SectionNavigation({ model }) {
-  const sections = SECTION_DEFINITIONS.filter(([id]) => {
-    if (id === "design-system") {
-      return Boolean(model.designSystem);
-    }
-    if (id === "press-kit") {
-      return Boolean(model.pressKit);
-    }
-    if (id === "presentation") {
-      return selectedPresentationProfiles(model).length > 0;
-    }
-    return true;
-  });
+function SectionNavigation({ sections }) {
   return h(
     "aside",
     { className: "section-navigation" },
@@ -1222,12 +1225,12 @@ function GuidanceValue({ value }) {
   );
 }
 
-function CreativeDirectionSection({ support }) {
+function CreativeDirectionSection({ support, publicOnly }) {
   const entries = [
     ["Motion", support.motion],
     ["Imagery", support.imagery],
     ["Mascot", support.mascot],
-  ];
+  ].filter(([, entry]) => !publicOnly || entry.status === "declared");
   return h(
     Section,
     {
