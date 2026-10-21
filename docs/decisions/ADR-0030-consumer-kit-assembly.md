@@ -14,7 +14,7 @@ supersedes: []
 superseded_by: []
 affected_repositories: [egohygiene/identity]
 affected_contracts: []
-implementation_status: in_progress
+implementation_status: implemented
 evidence:
   - type: issue
     url: https://github.com/egohygiene/identity/issues/105
@@ -66,7 +66,8 @@ output file hashes/sizes excluding itself. This receipt supplies offline
 integrity, not a signature or an approval source.
 
 Verify the entire output inventory, actual compiler binding, optional JSON/page
-agreement, handbook Markdown/JSON agreement, selected download links and navigation. Reconstruct the native-only
+agreement, handbook Markdown/JSON agreement, selected download links and
+navigation. Reconstruct the native-only
 Press Kit package to reject changed assets, extra files and ZIP member injection.
 Keep external social-package admission separate. Reject input/output overlap,
 canonical-source destinations and nonempty output replacement before writes.
@@ -110,7 +111,10 @@ The [fixture receipt](../../renderer/fixtures/complete-kit/receipt.json) binds
 two independent native generations for minimal/expanded synthetic cases and
 unchanged Mantle source. Runtime results, exact PR source and unavailable
 checks belong in the PR and CONTINUITY.md; authored tests are not executed
-evidence. This record remains proposed with null approval.
+evidence. Source `08cab7b3b8264219128966ff9ea445e95bb88c10` passes all
+five hosted workflows, including 401 renderer cases and nine Chromium cases
+in both runs; Linux/macOS/Windows gates pass. The containing PR checkpoint
+requires fresh provider checks. This record remains proposed with null approval.
 
 ## Replacement or exit strategy
 
