@@ -335,9 +335,7 @@ fn unsafe_or_colliding_public_master_paths_fail_before_output_writes() {
         approve_distinct_master(repository.path(), download_name);
         let pipeline = V1ConsumerPipeline::load(repository.path()).unwrap();
         let request = pipeline.compiler_request("assets/identity");
-        if download_name != "mark.svg" {
-            assert!(request.is_err());
-        } else {
+        if download_name == "mark.svg" {
             let mut registry = AdapterRegistry::new();
             register_builtin_adapters(&mut registry).unwrap();
             register_reference_renderer_adapter(&mut registry).unwrap();
@@ -349,6 +347,8 @@ fn unsafe_or_colliding_public_master_paths_fail_before_output_writes() {
                     .prepare(with_reference_renderer(request.unwrap()))
                     .is_err()
             );
+        } else {
+            assert!(request.is_err());
         }
         assert!(!repository.path().join("assets").exists());
         assert!(!repository.path().join("outside.svg").exists());

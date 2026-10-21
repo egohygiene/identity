@@ -12,7 +12,8 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 use crate::brandkit::{
-    BrandKitAssetUsage, BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitSourceAsset,
+    BrandKitAssetUsage, BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitPublicAsset,
+    BrandKitSourceAsset,
 };
 use crate::compiler::{
     AdapterDescriptor, AdapterKind, AdapterPlan, AdapterRegistry, COMPILER_API_MAJOR,
@@ -177,40 +178,7 @@ impl BrandKitViewModel {
         let public_assets = model.public_assets();
         let assets = public_assets
             .iter()
-            .map(|(role, declaration)| {
-                let source = &model.sources[role];
-                let governance = model.source_governance.get(role);
-                let download_path = targets.iter().find_map(|target| {
-                    (target.adapter_id == "identity-source-svg"
-                        && target.media_type == "image/svg+xml"
-                        && target.parameters.get("role").and_then(Value::as_str)
-                            == Some(role.as_str()))
-                    .then(|| target.relative_path.clone())
-                });
-                BrandKitViewAsset {
-                    id: role.clone(),
-                    label: declaration.label.clone(),
-                    media_type: source.media_type.clone(),
-                    sha256: source.sha256.clone(),
-                    alt_text: source.alt_text.clone(),
-                    dimensions: asset_dimensions(source),
-                    intended_use: declaration.notes.clone(),
-                    safe_zone: source.safe_zone,
-                    text: source.text.clone(),
-                    availability: if download_path.is_some() {
-                        "generated-download".to_owned()
-                    } else {
-                        "embedded-source".to_owned()
-                    },
-                    download_path,
-                    license: governance.map(|entry| entry.license.clone()),
-                    origin: governance.map(|entry| entry.origin.clone()),
-                    approval: governance.map(|entry| entry.approval.clone()),
-                    usage: governance.and_then(|entry| entry.usage.clone()),
-                    kind: Some(declaration.kind.clone()),
-                    notes: Some(declaration.notes.clone()),
-                }
-            })
+            .map(|(role, declaration)| selected_source_asset(model, role, declaration, targets))
             .collect();
 
         Self {
@@ -256,40 +224,85 @@ impl BrandKitViewModel {
                 .collect(),
             downloads: targets
                 .iter()
-                .filter_map(|target| {
-                    let role = match target.adapter_id.as_str() {
-                        "identity-source-svg" if target.media_type == "image/svg+xml" => {
-                            target.parameters.get("role")?
-                        }
-                        "identity-raster" if target.media_type == "image/png" => {
-                            target.parameters.get("sourceRole")?
-                        }
-                        _ => return None,
-                    }
-                    .as_str()?;
-                    public_assets.get(role)?;
-                    let source = model.sources.get(role)?;
-                    let dimensions = if target.adapter_id == "identity-raster" {
-                        let width = target.parameters.get("width")?.as_u64()?;
-                        let height = target.parameters.get("height")?.as_u64()?;
-                        format!("{width} × {height} pixels")
-                    } else {
-                        asset_dimensions(source)
-                    };
-                    Some(BrandKitViewDownload {
-                        id: target.id.clone(),
-                        label: humanize_identifier(&target.id),
-                        path: target.relative_path.clone(),
-                        media_type: target.media_type.clone(),
-                        profile: target.profile.clone(),
-                        source_asset_id: role.to_owned(),
-                        source_sha256: source.sha256.clone(),
-                        dimensions,
-                    })
-                })
+                .filter_map(|target| selected_download(model, &public_assets, target))
                 .collect(),
         }
     }
+}
+
+fn selected_source_asset(
+    model: &BrandKitModel,
+    role: &str,
+    declaration: &BrandKitPublicAsset,
+    targets: &[ProjectionTarget],
+) -> BrandKitViewAsset {
+    let source = &model.sources[role];
+    let governance = model.source_governance.get(role);
+    let download_path = targets.iter().find_map(|target| {
+        (target.adapter_id == "identity-source-svg"
+            && target.media_type == "image/svg+xml"
+            && target.parameters.get("role").and_then(Value::as_str) == Some(role))
+        .then(|| target.relative_path.clone())
+    });
+    BrandKitViewAsset {
+        id: role.to_owned(),
+        label: declaration.label.clone(),
+        media_type: source.media_type.clone(),
+        sha256: source.sha256.clone(),
+        alt_text: source.alt_text.clone(),
+        dimensions: asset_dimensions(source),
+        intended_use: declaration.notes.clone(),
+        safe_zone: source.safe_zone,
+        text: source.text.clone(),
+        availability: if download_path.is_some() {
+            "generated-download".to_owned()
+        } else {
+            "embedded-source".to_owned()
+        },
+        download_path,
+        license: governance.map(|entry| entry.license.clone()),
+        origin: governance.map(|entry| entry.origin.clone()),
+        approval: governance.map(|entry| entry.approval.clone()),
+        usage: governance.and_then(|entry| entry.usage.clone()),
+        kind: Some(declaration.kind.clone()),
+        notes: Some(declaration.notes.clone()),
+    }
+}
+
+fn selected_download(
+    model: &BrandKitModel,
+    public_assets: &BTreeMap<String, BrandKitPublicAsset>,
+    target: &ProjectionTarget,
+) -> Option<BrandKitViewDownload> {
+    let role = match target.adapter_id.as_str() {
+        "identity-source-svg" if target.media_type == "image/svg+xml" => {
+            target.parameters.get("role")?
+        }
+        "identity-raster" if target.media_type == "image/png" => {
+            target.parameters.get("sourceRole")?
+        }
+        _ => return None,
+    }
+    .as_str()?;
+    public_assets.get(role)?;
+    let source = model.sources.get(role)?;
+    let dimensions = if target.adapter_id == "identity-raster" {
+        let width = target.parameters.get("width")?.as_u64()?;
+        let height = target.parameters.get("height")?.as_u64()?;
+        format!("{width} × {height} pixels")
+    } else {
+        asset_dimensions(source)
+    };
+    Some(BrandKitViewDownload {
+        id: target.id.clone(),
+        label: humanize_identifier(&target.id),
+        path: target.relative_path.clone(),
+        media_type: target.media_type.clone(),
+        profile: target.profile.clone(),
+        source_asset_id: role.to_owned(),
+        source_sha256: source.sha256.clone(),
+        dimensions,
+    })
 }
 
 #[must_use]
