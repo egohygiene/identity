@@ -8,14 +8,29 @@ decision_scope: repository
 visibility: public
 owners: [egohygiene/identity]
 issue: https://github.com/egohygiene/identity/issues/101
-pull_request: null
+pull_request: https://github.com/egohygiene/identity/pull/126
 related: [ADR-0001, ADR-0003, ADR-0010, ADR-0012, ADR-0013, ADR-0015, ADR-0019, ADR-0024, ADR-0025, ADR-0028]
 supersedes: []
 superseded_by: []
 affected_repositories: [egohygiene/identity]
 affected_contracts: []
-implementation_status: in_progress
+implementation_status: implemented
 evidence:
+  - type: pull_request
+    url: https://github.com/egohygiene/identity/pull/126
+    description: Implements governed public selection, selected download metadata, existing SVG master copies, explicit browser assets and offline artifact verification; implementation does not accept this proposal.
+  - type: commit
+    url: https://github.com/egohygiene/identity/commit/3f03f9b10dd0a7e6e2c292cadabb737e7902e56f
+    description: Exact candidate source for the completed CLI, renderer and decision workflow evidence below; subsequent evidence-only changes require their own final-head checks.
+  - type: workflow_run
+    url: https://github.com/egohygiene/identity/actions/runs/39574561355
+    description: Completed CLI workflow passes at the cited candidate source, including Rust/Python checks and extracted-source provenance verification; not release or deployment acceptance.
+  - type: workflow_run
+    url: https://github.com/egohygiene/identity/actions/runs/39574561241
+    description: Completed reference-renderer workflow passes at the cited candidate source; this is bounded hosted evidence, not actual authoring-workspace Docker qualification.
+  - type: workflow_run
+    url: https://github.com/egohygiene/identity/actions/runs/39574562283
+    description: Completed decision workflow passes at the cited candidate source; its advisory warnings do not supply missing human acceptance or replace pinned-owner preservation checks.
   - type: issue
     url: https://github.com/egohygiene/identity/issues/101
     description: Requests practical approved logo, wordmark, favicon and avatar downloads without creating new artwork or approval authority.
@@ -132,16 +147,23 @@ its lack of filesystem proof must remain visible in the evidence record.
 
 ## Implementation and evidence links
 
-Issue #101 owns the candidate implementation. The
+Issue #101 and [PR #126](https://github.com/egohygiene/identity/pull/126) own the
+candidate implementation. The
 [renderer contract](../contracts/BRAND_KIT_RENDERER_V1.md),
 [authoring worksheet](../consumers/AUTHORING.md) and
 [publication guide](../publication/IDENTITY_PAGES.md) describe the bounded ports.
-Focused checks must cover public lifecycle selection, nullable absence,
+Focused checks cover public lifecycle selection, nullable absence,
 selected versus unselected outputs, distinct master copies, compatible old
 models, safe deployment bases and actual missing/tampered/source-mismatched
-artifact rejection. Record exact commands, revisions and results in the PR
-and CONTINUITY.md. Implementation, tests or merge do not accept this proposal
-or establish a live deployment/browser qualification result.
+artifact rejection. At candidate source
+`3f03f9b10dd0a7e6e2c292cadabb737e7902e56f`, the completed CLI, reference-renderer
+and decision workflows linked above pass. These results bind that exact source;
+later evidence-only changes require separately recorded final-head checks.
+Exact commands, revisions, outcomes and limitations belong in the PR and
+CONTINUITY.md. The implementation state is implemented, while human disposition
+remains proposed with no approval. This evidence does not claim a completed
+release workflow, image workflow, live deployment, full #70 quality campaign
+or actual authoring-workspace Docker qualification.
 
 ## Replacement or exit strategy
 

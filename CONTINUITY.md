@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T08:58:07Z'
+  updated_at: '2026-10-21T09:14:54Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -17,7 +17,7 @@ scope:
   includes:
   - Governed public asset selection, exact source SVG copies and selected package/raster download inventory.
   - Optional compatible renderer metadata, safe base-aware browser links and local artifact/manifest verification.
-  - Focused Rust/Node checks and a temporary draft for existing hosted frozen-dependency renderer tests.
+  - Focused local checks and existing hosted CLI, renderer, release-gate, image and decision evidence.
   excludes:
   - Invented variants/artwork/permissions, new format adapters, policy or publication authority.
   - Deferred broad CI/refactors, actual local-Docker qualification, release and deployment.
@@ -56,26 +56,28 @@ scope:
   - https://github.com/egohygiene/identity/issues/101
   - https://github.com/egohygiene/identity/issues/70
   - https://github.com/egohygiene/identity/issues/116
+  - migration/empathy-extraction-evolution-v1.json
+  - publication/release-configs/index.json
+  - https://github.com/egohygiene/identity/pull/126
 work:
   objective: Deliver only governed public assets and selected, verifiable download paths without fabricated variants
     or broken links.
   success_conditions:
   - Public models select approved/public active/available usage assets and retain exact rights/source metadata.
   - Selected targets determine source-copy, package and raster links; optional browser references use safe bases.
-  - Local artifact/manifest checks and focused Rust/Node evidence pass; authored Vitest coverage is executed on existing
-    hosted CI before final review handoff.
+  - Local artifact checks and existing hosted Rust, Python, renderer/browser and reproducibility gates pass.
   active_issue:
     provider: github
     id: egohygiene/identity#101
     url: https://github.com/egohygiene/identity/issues/101
   next:
     kind: action
-    id: identity-101-hosted-focused-validation
-    description: 'Open a bounded draft to run the existing hosted renderer checks with frozen dependencies, then refresh
-      and review the exact candidate before merge; #102 follows reviewed completion.'
+    id: identity-101-review
+    description: 'Review PR126 and inspect checks for the containing documentation commit; #102 follows reviewed completion
+      and authorized merge.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/101
+    - https://github.com/egohygiene/identity/pull/126
     - https://github.com/egohygiene/identity/issues/102
     - https://github.com/egohygiene/identity/issues/116
     depends_on:
@@ -85,81 +87,86 @@ state:
   base:
     revision: 828d38b86edcc5015fa1bc27f843870c3b5233fb
     ref: refs/heads/main
-    verified_at: '2026-10-21T08:58:07Z'
+    verified_at: '2026-10-21T09:14:54Z'
   candidate:
     branch: codex/101-approved-downloads
-    revision: null
-    pull_request: null
-    handoff_state: in-progress
+    revision: 3f03f9b10dd0a7e6e2c292cadabb737e7902e56f
+    pull_request:
+      provider: github
+      id: egohygiene/identity#126
+      url: https://github.com/egohygiene/identity/pull/126
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-21T08:58:07Z'
+    observed_at: '2026-10-21T09:14:54Z'
     default_branch_revision: 828d38b86edcc5015fa1bc27f843870c3b5233fb
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Main remains verified merge828d38b86edcc5015fa1bc27f843870c3b5233fb; PR125 merged/#103 closed/#101 open.
-      No101 PR exists before this draft publication. Existing hosted checks are pending; draft123 remains open/unmerged
-      at400846db7f10823d4b5bc1629213caf03960b59c.
+    pull_request_state: draft
+    notes: PR126 open/draft at source 3f03f9b10dd0a7e6e2c292cadabb737e7902e56f, tested via merge 465107d837e3d12e1457f6fdacad2bbbc4ffe213;
+      base/main unchanged. This source anchor precedes the containing continuity/ADR commit, whose new checks must
+      be inspected. PR125 merged/#103 closed/#101 open; parked123 remains unmerged at400846db7f10823d4b5bc1629213caf03960b59c.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
-  status: partial
-  reviewed_at: '2026-10-21T08:58:07Z'
+  status: passed
+  reviewed_at: '2026-10-21T09:14:54Z'
   reviewed_by: Codex
   evidence:
-  - command: Live PR125/#123, issues103/#101 and reviewed125-head workflow inspection
+  - command: Live PR126/#123, issues101/#103 and target-base inspection
     outcome: passed
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: PR125 merged/#103 closed/#101 open; all five125 workflows passed. Draft123 stays unmerged. These prior-head
-      outcomes do not certify101.
-  - command: cargo test --locked --test reference_renderer --test v1_consumer; cargo test --locked --lib --no-run;
-      cargo fmt --all --check
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: PR126 open/draft;101 open/103 closed; base828d38b unchanged. Candidate phase records scoped review readiness,
+      not provider draft conversion, merge or release.
+  - command: https://github.com/egohygiene/identity/actions/runs/39574561355
     outcome: passed
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: Rust1.97.1:17 cases pass(4 renderer+13 v1), library tests compile, formatting passes. Covers public/nullable
-      selection, selected metadata, distinct masters, collisions and URL-reserved filenames before writes.
-  - command: Actual copied-fixture v1-generate/v1-verify; Draft2020-12 emitted-model schema and source-byte checks
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: 'Exact source3f03f9b/merge465107d: all CLI steps pass;117 Rust tests pass/3 ignored; Python152 total=150
+      pass/2 skip. Provenance:17 byte-identical,3 evolved;8 v0 profiles/45 targets. Clippy, formatting, docs and config
+      pins pass.'
+  - command: https://github.com/egohygiene/identity/actions/runs/39574561241; release public smoke job119136742609
     outcome: passed
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: Generated/verified minimal consumer has public mark only,3 actual selected packages and1 download. Emitted
-      model validates; canonical source bytes remain unchanged. Local artifact helper accepts that real output.
-  - command: JavaScript source/syntax checks and pure Node frontend/artifact behavioral probes
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: 'Exact source3f03f9b: frozen dependencies restored;349 Vitest tests in15 files and6 Chromium checks pass,
+      including authored download/helper coverage. Local registry/cache remained unavailable; no lock or dependency-policy
+      change.'
+  - command: https://github.com/egohygiene/identity/actions/runs/39574561234; https://github.com/egohygiene/identity/actions/runs/39574561648
     outcome: passed
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: 28 JS source files pass; positive/negative probes cover selected metadata, exact compiler-model binding,
-      compiler/public inventories and source/project/release/hash/size, missing/path/encoded traversal/symlink/webmanifest/CDN
-      confinement, and both real configs'10 new paths.
-  - command: Authored renderer downloads/artifact-helper/public-site Vitest tests
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: 'Exact source3f03f9b: Linux/macOS/Windows source-install, contracts and clean-room reproducibility gates
+      pass; public smoke and hosted development-image qualification pass. No release/tag/deployment or actual authoring-workspace
+      Docker acceptance is asserted.'
+  - command: https://github.com/egohygiene/identity/actions/runs/39574562283
+    outcome: passed
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: 'Exact source3f03f9b: decision workflow succeeds with5 retained warning annotations and no errors. Advisory
+      findings are not approval or whole-repository conformance.'
+  - command: Focused local Rust17; actual v1-generate/v1-verify/schema/source checks;Node probes;28-file source check;doc
+      links
+    outcome: passed
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: Actual minimal output has public mark only,3 selected packages/1 download and unchanged source bytes. Model/manifest/hash/path/symlink/webmanifest
+      confinement, both configs'10 new paths and release-config digest verification pass. Independent review cleared
+      model-binding and filename findings.
+  - command: Pinned owner continuity/ADR/roadmap schema, index/lineage, preservation and git diff --check
+    outcome: passed
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: 19 owner inputs;29 ADRs(21 accepted/8 proposed);all28 prior bytes/dispositions unchanged. ADR0029 implemented/proposed/null
+      approval;40 IDs/88 edges/mappings and approved PNG preserved. Scope-bounded structural validation.
+  - command: Broad final quality/refactoring/CI campaign and actual local-Docker acceptance
     outcome: not-run
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: '22 frontend cases plus helper coverage are authored but not run locally: registry access and offline package
-      availability block frozen dependency restoration. No lock/policy changes; existing hosted frozen-dependency
-      CI is pending.'
-  - command: Independent final actual-diff review;84 local documentation links/anchors;git diff --check
-    outcome: passed
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: Review cleared compiler-model/manifest binding and selected metadata corrections, URL-filename guard and
-      prior ADR preservation. No unresolved bounded code finding; hosted behavior evidence remains pending.
-  - command: Pinned owner continuity/ADR/roadmap schema, index/lineage and preservation checks
-    outcome: passed
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: 19 exact owner inputs;29 ADRs(21accepted/8proposed), all28 prior bytes/dispositions/lineage unchanged;40
-      IDs/88 edges/mappings, expected counts and approved PNG preserved. Bounded structure is not whole-repository
-      conformance.
-  - command: Broad final lint/test/integrity/platform/browser CI campaign and actual local-Docker qualification
-    outcome: not-run
-    observed_at: '2026-10-21T08:58:07Z'
-    notes: 'Owner-deferred to final #70. Running existing hosted checks for this candidate is focused evidence, not
-      that deferred campaign or #80 local-Docker acceptance.'
+    observed_at: '2026-10-21T09:14:54Z'
+    notes: 'Owner-deferred to #70 and parked #80/123. Existing candidate gates do not complete that campaign, all-browser
+      qualification, complete-kit readiness or #98 release/dogfood acceptance.'
   environment_limitations:
-  - Local Vitest execution is blocked by registry/offline package availability; existing hosted evidence is required
-    before final review handoff.
-  - No101 hosted/final-head CI, qualified-browser run, release or deployment is claimed by this partial draft checkpoint.
-  - 'Actual authoring-workspace Docker was unavailable at the prior probe; #80/draft123 stays open and deferred.'
-  - Unknown legacy publication rights remain unresolved while existing selected release/archive bytes remain distributed;
-    this change grants no permission or publication authority.
+  - Local frozen JavaScript restoration was unavailable; hosted renderer/browser tests executed successfully for the
+    recorded source.
+  - Source3f03f9b precedes this continuity/ADR commit; inspect the actual final provider head and its checks before
+    merge.
+  - 'Actual authoring-workspace Docker remains unqualified; #80/draft123 is open/deferred despite hosted image success.'
+  - Unknown legacy rights remain unresolved while existing release/archive bytes are distributed; no permission is
+    granted.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -178,45 +185,45 @@ privacy:
 
 ## Purpose and precedence
 
-This partial checkpoint covers #101. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priority.
+This scoped review checkpoint covers #101. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priority.
 
 ## Resume protocol
 
-Read AGENTS.md, this handoff, #101/#116, selected-download contracts and proposed ADR-0029. Inspect actual selected targets/public usage and artifact bindings; refresh main, the current candidate and parked123. Do not convert authored tests or prior-head results into executed current evidence.
+Read AGENTS.md, this handoff, #101/#116, selected-download contracts and proposed ADR-0029. Inspect selected targets/public usage and artifact bindings; refresh main, PR126 and parked123. Recheck the provider's actual final head rather than treating a recorded source anchor as perpetual evidence.
 
 ## Current objective and success conditions
 
-Expose only governed public assets and actual selected mark/favicon/PWA/social outputs, retaining exact source/rights/usage. Keep optional variants absent and browser references base-aware. Verify advertised local files and compiler/public manifest bindings without fetching CDN URLs or generating artwork. Existing hosted renderer execution is pending before final review handoff.
+Expose governed public assets and actual selected mark/favicon/PWA/social outputs, retaining exact source/rights/usage. Optional variants stay absent; browser references are explicit and base-aware. Confined local files and compiler/public manifests bind advertised downloads without fetching CDN URLs or generating artwork. Scoped hosted gates pass for the recorded implementation source.
 
 ## State snapshot
 
-Base/main is828d38b86edcc5015fa1bc27f843870c3b5233fb, verified PR125 merge; #103/Q33 is complete and #101/Q31 active on codex/101-approved-downloads. Candidate revision/PR are null before temporary draft publication. #99/Q29 and #76/Q15 prerequisites are complete. Preserve40 IDs/88 edges/mappings:21complete,1active,3ready,10blocked,5planned. Parked123/#80 stays unmerged at400846db7f10823d4b5bc1629213caf03960b59c; actual local-Docker/review acceptance remains deferred and Q19/Q21/Q27 blocked as before.
+Base/main is828d38b86edcc5015fa1bc27f843870c3b5233fb, verified PR125 merge; #103/Q33 is complete and #101/Q31 active. PR126 is open/draft on codex/101-approved-downloads; candidate phase is ready-for-review. Revision3f03f9b10dd0a7e6e2c292cadabb737e7902e56f anchors the implementation tested through merge465107d837e3d12e1457f6fdacad2bbbc4ffe213, before this continuity/ADR commit. #99/Q29 and #76/Q15 prerequisites are complete. Preserve40 IDs/88 edges/mappings:21complete,1active,3ready,10blocked,5planned. Parked123/#80 remains unmerged at400846db7f10823d4b5bc1629213caf03960b59c; Q19/Q21/Q27 remain blocked.
 
 ## Completed and material changes
 
-The v1 bridge selects assets through existing approved/public, active/publicly available usage records, retaining source/provenance and complete local history separately. Missing usage yields empty public assets/downloads without invalidating nullable local generation. Selected CompilerRequest targets determine optional downloads/packages; core copies selected public SVG masters and exposes existing native raster targets. Labels/kind/notes remain supplied metadata; no variant semantics or artwork are inferred.
+The v1 bridge selects existing approved/public, active/publicly available usage assets, retaining source/provenance and complete local history separately. Missing usage yields empty public assets/downloads while nullable local generation stays valid. Selected targets determine optional packages/downloads; core copies distinct public SVG masters and exposes existing native rasters. Labels/kind/notes remain supplied metadata; artwork and variant semantics are not inferred.
 
-The renderer accepts compatible optional download metadata, explicit conditional browser links and artifact-root/manifest verification. Compiler models are bound to the verified renderer output; public inventories bind release/source/project and file hashes/sizes. Safe paths, encoded traversal, symlinks and webmanifest icons are checked offline. Model-only preview remains distinct from file execution proof. Existing legacy publisher byte selection and #103's null missing-rights behavior remain intact.
+The renderer accepts compatible optional download metadata, conditional browser links and artifact-root/manifest verification. Compiler models bind to verified renderer output; public inventories bind release/source/project and file hashes/sizes. Path/encoded traversal, symlink and webmanifest-icon checks run offline. Existing legacy publisher selection and #103's null missing-rights behavior remain intact. Compatibility-config digest and the commands.rs extraction-evolution hash/rationale were refreshed; baseline/other evolved entries and CI code remain unchanged.
 
 ## Validation and review evidence
 
-Focused Rust17 cases, library compilation and formatting pass. Actual minimal v1 generation/verification and Draft2020-12 schema checks pass with mark-only public assets,3 selected packages/1 download and unchanged canonical bytes. Pure Node probes and28-file source/syntax checks pass for metadata, exact manifest/model binding and confinement. Independent review has no unresolved bounded code finding;84 doc links/anchors pass.
+All five existing workflows pass for source3f03f9b: CLI39574561355, renderer39574561241, release gates39574561234, image39574561648 and decision39574562283. CLI records117 Rust passes/3 ignored and150 Python passes/2 skips. Provenance retains17 byte-identical/3 evolved files and8 v0 profiles/45 targets. Renderer and public smoke record349 Vitest tests in15 files plus6 Chromium checks. Linux/macOS/Windows source-install, contracts and clean-room gates pass. Decision evidence retains5 warnings/no errors.
 
-The22 authored frontend Vitest cases and helper coverage have NOT run locally because registry/offline package availability blocks frozen dependency restoration. A temporary draft will run the existing hosted renderer checks; final Refresh/Verify follows that evidence. Pinned checks preserve29 ADRs with proposed/unapproved0029,28 old records,40 IDs/88 edges and approved PNG. No current hosted, browser-qualification, release or deployment pass is asserted here.
+Focused local17 Rust cases, actual minimal generation/verification/schema/source preservation, Node integrity probes,28-file source checks, config pins and doc links pass. Independent review cleared manifest/model and URL-filename findings. Early line-count and extraction-hash blockers were corrected with bounded helper extraction and the existing evolution registry; final source gates pass. Pinned structure checks preserve29 ADRs, all28 prior records,40 IDs/88 edges and the approved PNG. The containing documentation commit needs its own current-head check inspection.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Hosted execution of the authored renderer/helper cases remains the focused evidence gap. Keep the candidate in-progress/partial until actual outcomes arrive; preserve failures and skips. Optional new model members require matching reviewed producer/schema/renderer pins, and source checksum is distinct from derived file checksum. Model-only previews establish no artifact-byte proof.
+No unresolved scoped code finding remains. Optional model members require matching reviewed producer/schema/renderer pins; source checksum differs from derived file checksum. Model-only previews establish no artifact-byte proof. Hosted tests resolve the local JavaScript restoration gap for the recorded source; skips/ignores remain explicit.
 
-ADR-0029 remains proposed with null approval. Legacy unknown rights are neither repaired nor withheld by metadata; #105/#98 still assess actual complete-kit readiness. Broader CI/refactors/full quality, actual local-Docker acceptance and final docs remain with #70. No new legal, creative or publishing authority is supplied.
+ADR-0029 is implemented/proposed with null approval. Legacy unknown rights remain unresolved; #105/#98 still assess actual complete-kit readiness. Broad quality/CI/refactors, actual local-Docker acceptance and final docs remain with #70; hosted image qualification does not close parked #80/123. No release, deployment, creative/legal approval or publishing authority is claimed.
 
 ## Next dependency-ready work
 
-Publish the bounded draft for existing hosted frozen-dependency renderer checks, inspect exact-source outcomes and resolve relevant failures. Then refresh this handoff and review #101 before authorized merge; #102 foundations follows reviewed completion. Deferred #70 quality work remains required before #98 release/dogfood closeout.
+Inspect the final containing commit's provider head/checks and review PR126 before authorized merge. #102 foundations follows reviewed completion. Deferred #70 quality work remains required before #98 release/dogfood closeout.
 
 ## Parallel changes and reconciliation
 
-Merged125 supplies rights/usage transport; parked123 supplies no merged browser feature. Final significance creates proposed0029 for governed public selection/selected-output compatibility and references accepted human approval, deterministic projection, immutable renderer, local source, public lifecycle and release boundaries. All28 prior ADR bytes/dispositions remain unchanged. Exact Aether dc8a168 authoring2.1.0/continuity1.1.0 and Hygiene a05b14f policy1.2.0 sources were read and verified; authoring packages remain draft.
+Merged125 supplies rights/usage transport; parked123 supplies no merged browser feature. Proposed0029 records public selection/selected-output compatibility against accepted human approval, deterministic projection, immutable renderer, local source, public lifecycle and release boundaries. All28 prior ADR bytes/dispositions remain unchanged. Exact Aether dc8a168 authoring2.1.0/continuity1.1.0 and Hygiene a05b14f policy1.2.0 sources were read/verified; authoring packages remain draft.
 
 ## Privacy and redaction
 
@@ -224,7 +231,7 @@ Keep necessary public repository facts, synthetic checks, relative paths and has
 
 ## Handoff update protocol
 
-Refresh after focused hosted/domain validation and before final PR review presentation. Verify schema, exact12 headings, budgets/privacy and graph/ADR/PNG preservation. A containing commit cannot name itself; record known source anchors and inspect current provider head/status. Deferred/unavailable/unrun checks never become passes.
+Refresh before final review presentation or authorized merge reconciliation. Verify schema, exact12 headings, budgets/privacy and graph/ADR/PNG preservation. A containing commit cannot name itself; record known source anchors and inspect actual provider head/status. Deferred, unavailable and unrun checks retain their outcomes.
 
 ## Compaction and supersession
 
