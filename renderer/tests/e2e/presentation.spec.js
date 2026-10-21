@@ -74,6 +74,7 @@ test("selected presentation preview hydrates, downloads and copies with keyboard
   await navigation.focus();
   await navigation.press("Enter");
   await expect(page).toHaveURL(/#presentation$/u);
+  await section.locator("img").scrollIntoViewIfNeeded();
   await expect(section.locator("img")).toHaveJSProperty("naturalWidth", 1280);
   await expect(section.locator("img")).toHaveJSProperty("naturalHeight", 640);
   const copy = section.locator("[data-copy-label='Project tagline']");
