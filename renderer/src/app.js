@@ -545,11 +545,8 @@ function PressKitSection({ pressKit: view, assetBaseUrl }) {
                     null,
                     h("h4", null, asset.label),
                     h("p", { className: "support-note" }, asset.notes),
-                    h(
-                      "p",
-                      { className: "support-note" },
-                      `${asset.mediaType} · ${asset.license.spdx}`,
-                    ),
+                    h("p", { className: "support-note" }, asset.mediaType),
+                    h(AssetRights, { asset }),
                   ),
                   h(
                     "a",
@@ -589,13 +586,7 @@ function PressKitSection({ pressKit: view, assetBaseUrl }) {
             )
           : h("p", { className: "support-note" }, "Public usage rules are not declared."),
         legal.status === "declared"
-          ? h(DefinitionList, {
-              entries: [
-                ["Trademark", legal.value.trademark],
-                ["Copyright", legal.value.copyright],
-                ["Attribution", legal.value.attribution],
-              ],
-            })
+          ? h(LegalGuidance, { legal: legal.value })
           : h("p", { className: "support-note" }, "Public legal guidance is not declared."),
       ),
       h(
@@ -856,7 +847,10 @@ function GuidanceSection({ id, title, guidance }) {
     declared
       ? id === "voice" && isStructuredVoice(guidance.value)
         ? h(StructuredVoice, { value: guidance.value })
-        : id === "usage" && Array.isArray(guidance.value.sections)
+        : id === "usage" && (
+            Array.isArray(guidance.value.sections)
+            || Object.hasOwn(guidance.value, "legal")
+          )
           ? h(StructuredUsage, { value: guidance.value })
           : h(GuidanceValue, { value: guidance.value })
       : h(EmptyState, {
@@ -1004,7 +998,7 @@ function VoiceExamples({ title, examples, copy = false }) {
 }
 
 function StructuredUsage({ value }) {
-  const { sections, ...remaining } = value;
+  const { sections = [], legal, ...remaining } = value;
   return h(
     "div",
     { className: "section-stack" },
@@ -1032,7 +1026,86 @@ function StructuredUsage({ value }) {
         h("p", null, h("strong", null, "Contexts: "), rule.contexts.join(", ")),
       )),
     )),
+    legal
+      ? h(
+          "article",
+          { className: "panel", "data-legal-guidance": true },
+          h("h3", null, "Legal guidance"),
+          h(LegalGuidance, { legal }),
+        )
+      : null,
     Object.keys(remaining).length ? h(GuidanceValue, { value: remaining }) : null,
+  );
+}
+
+function LegalGuidance({ legal }) {
+  return h(
+    "div",
+    null,
+    h(DefinitionList, {
+      entries: [
+        ["Trademark rules", legal.trademark],
+        ["Copyright", legal.copyright],
+        ["Attribution", legal.attribution],
+      ],
+    }),
+    legal.thirdPartyLicenses?.length
+      ? h(
+          "section",
+          { "data-third-party-licenses": true },
+          h("h4", null, "Third-party asset licenses"),
+          h(
+            "ul",
+            { className: "guidance-list" },
+            ...legal.thirdPartyLicenses.map((license) => h(
+              "li",
+              { key: `${license.name}-${license.spdx}` },
+              h("strong", null, license.name),
+              h(DefinitionList, {
+                entries: [
+                  ["Asset license", license.spdx],
+                  ["Attribution", license.attribution],
+                ],
+              }),
+            )),
+          ),
+        )
+      : null,
+  );
+}
+
+function AssetRights({ asset }) {
+  const approval = typeof asset.approval === "string"
+    ? asset.approval
+    : asset.approval?.id;
+  const usage = asset.usage;
+  return h(
+    "div",
+    { "data-asset-rights": asset.assetId || asset.id },
+    h(DefinitionList, {
+      entries: [
+        ["Asset license", asset.license?.spdx || "Not declared"],
+        ["License review", asset.license?.status || "Not declared"],
+        ["Attribution", asset.license?.attribution || "Not declared"],
+        [asset.assetId ? "Selection approval" : "Approval", approval || "Not declared"],
+        ...(asset.approval?.subject ? [["Selection subject", asset.approval.subject]] : []),
+        ["Creator", asset.origin?.creator || "Not declared"],
+        ["Method", asset.origin?.method || "Not declared"],
+        ["Source", asset.origin?.source || "Not declared"],
+        ["Captured", asset.origin?.capturedAt || "Not declared"],
+        ["SHA-256", asset.sha256],
+        ["Safe zone", usage?.safeZone || "Not declared"],
+        ["Minimum size", usage?.minimumSize || "Not declared"],
+      ],
+    }),
+    h("h4", null, "Usage restrictions"),
+    usage?.restrictions?.length
+      ? h(
+          "ul",
+          { className: "guidance-list" },
+          ...usage.restrictions.map((restriction) => h("li", { key: restriction }, restriction)),
+        )
+      : h("p", { className: "support-note" }, "No restrictions declared."),
   );
 }
 
@@ -1221,25 +1294,7 @@ function ProvenanceSection({ model, assetBaseUrl, publication }) {
           "article",
           { className: "panel", key: asset.id },
           h("h3", null, `${asset.label} governance`),
-          h(DefinitionList, {
-            entries: [
-              [
-                "License",
-                asset.license
-                  ? `${asset.license.spdx} · ${asset.license.status}`
-                  : "Not declared",
-              ],
-              [
-                "Attribution",
-                asset.license?.attribution || "Not declared",
-              ],
-              ["Approval", asset.approval || "Not declared"],
-              ["Creator", asset.origin?.creator || "Not declared"],
-              ["Method", asset.origin?.method || "Not declared"],
-              ["Source", asset.origin?.source || "Not declared"],
-              ["Captured", asset.origin?.capturedAt || "Not declared"],
-            ],
-          }),
+          h(AssetRights, { asset }),
         ),
       ),
       h(

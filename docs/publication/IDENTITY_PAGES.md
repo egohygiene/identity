@@ -81,7 +81,7 @@ out an annotated, stable Identity release tag, stages only that tag's
 `assets/identity/` tree, and generates:
 
 - the static reference renderer;
-- individual approved asset downloads;
+- release-selected asset downloads;
 - release-owned mascot assets and their byte-bound character-package manifest;
 - a deterministic `identity-brand-kit-v<version>.zip` archive;
 - a public manifest with release tag, commit, source digest, file inventory,
@@ -100,6 +100,27 @@ The page visibly links its release and publication manifest. `site.json`
 carries the same release, digest, canonical URL, and route-alias information
 for a machine check without scraping HTML and for the `/identity/` composite's
 cross-host release proof.
+
+### Rights metadata and release selection
+
+The release publisher copies explicitly supplied asset license, origin and
+approval metadata. When a legacy configuration omits one of these fields, its
+view model now records null and the page reports that information as not
+declared. It does not invent MIT permission, attribution, a creator/capture
+date or a human approval. A repository's software license is not blanket
+permission for its trademarks or third-party assets.
+
+This corrects the metadata representation only. The publisher still packages
+the selected immutable release tree under its existing publication contract;
+its archive and copied asset bytes are not withheld by a missing-data label.
+Unknown permissions remain unresolved and require the rights owner, rather
+than the renderer, to establish the evidence. The governed v1 Press Kit has
+its separate explicit public/approval selection boundary. Complete consumer
+kit readiness and the later #105/#98 release proof must assess the actual
+distributed bytes and their rights, not infer approval from a successful build.
+Proposed [ADR-0028](../decisions/ADR-0028-asset-rights-projection.md) records this
+bounded distinction; implementation does not accept the proposal or adopt a
+new legal policy.
 
 ## Local preview and verification
 

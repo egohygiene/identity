@@ -7,21 +7,20 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-20T18:08:28Z'
+  updated_at: '2026-10-20T22:21:55Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: 'Deliver readable approved voice/usage guidance, exact-copy controls and optional paragraph boilerplate
-    for #100.'
+  purpose: 'Expose existing approved asset rights, attribution and authoritative policy/support links for #103.'
   includes:
-  - Structured voice foundation/context and usage section/rule presentation, preserving other usage keys.
-  - Exact supplied-copy controls and optional governed paragraph boilerplate; short/long stay required.
-  - Public filtering/optional omission, targeted functional checks and product-first priority.
+  - Transport existing approved asset usage into the public model and readable rights presentation.
+  - Keep software license, trademark, third-party rights and unresolved publisher metadata distinct.
+  - Reuse configured policy/support/font-acquisition links; focused public-filtering and compatibility checks.
   excludes:
-  - Invented brand facts, values, rights, approvals, artwork or a competing copy catalog.
-  - 'Deferred #80 acceptance, setup/workflow CI, refactors, broad full-suite replay, release and deployment.'
+  - New legal policy, inferred permissions/approvals, font acquisition or DCO/CLA enforcement.
+  - Broad CI/refactors, actual local-Docker acceptance, release and deployment.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -33,132 +32,140 @@ scope:
   - ROADMAP.md
   - docs/decisions/policy-reference.json
   - docs/decisions/ADR-0003-deterministic-projection-boundary.md
-  - docs/decisions/ADR-0025-executable-minimal-authoring-core.md
-  - docs/contracts/IDENTITY_V1.md
-  - docs/contracts/GUIDANCE_V1.md
-  - docs/contracts/PRESS_KIT_V1.md
-  - docs/consumers/AUTHORING.md
-  - contracts/v1/project.schema.json
-  - contracts/v1/press-kit.schema.json
-  - scripts/validate_identity.py
-  - scripts/render_press_kit.py
-  - renderer/src/press-kit.js
-  - renderer/tests/press-kit.test.js
-  - renderer/tests/press-kit.integration.test.js
-  - https://github.com/egohygiene/identity/issues/100
-  - https://github.com/egohygiene/identity/issues/70
-  - https://github.com/egohygiene/identity/issues/116
-  - https://github.com/egohygiene/identity/pull/123
-  - renderer/src/app.js
+  - docs/decisions/ADR-0007-font-tooling-boundaries.md
+  - docs/decisions/ADR-0010-reference-renderer-boundary.md
+  - docs/decisions/ADR-0012-local-layered-identity-v1.md
   - docs/decisions/ADR-0013-preserve-guidance-lifecycle.md
   - docs/decisions/ADR-0015-press-kit-projection-boundary.md
-  - docs/decisions/ADR-0027-optional-paragraph-boilerplate.md
-  - contracts/v1/press-kit-projection.schema.json
+  - docs/contracts/PRESS_KIT_V1.md
   - docs/contracts/BRAND_KIT_RENDERER_V1.md
-  - renderer/tests/project-copy.test.js
-  - renderer/tests/guidance.integration.test.js
-  - https://github.com/egohygiene/identity/pull/124
+  - contracts/v1/provenance.schema.json
+  - contracts/v1/brand-kit-view-model.schema.json
+  - src/v1_consumer.rs
+  - src/brandkit/model.rs
+  - src/reference_renderer.rs
+  - scripts/render_press_kit.py
+  - renderer/src/app.js
+  - https://github.com/egohygiene/identity/issues/103
+  - https://github.com/egohygiene/identity/issues/70
+  - https://github.com/egohygiene/identity/issues/116
+  - docs/decisions/ADR-0028-asset-rights-projection.md
+  - renderer/scripts/build-public-site.mjs
+  - https://github.com/egohygiene/identity/pull/125
 work:
-  objective: Present approved voice/naming and usage guidance readably, expose exact supplied copy and support
-    optional paragraph boilerplate through governed Press Kit outputs.
+  objective: Present traceable supplied rights and existing authoritative references without fabricated licensing
+    or parallel policy source.
   success_conditions:
-  - Structured voice/usage guidance renders readable approved text; copy controls retain exact supplied wording.
-  - Paragraph remains optional with existing governance/filtering/output integrity; short and long remain required.
-  - Focused behavior/schema/projection checks pass; existing 26 ADR bytes and the new proposed ADR-0027/index
-    remain valid.
+  - Approved asset licenses, attribution, origin, approval and supplied usage restrictions are readable and transported
+    faithfully.
+  - Existing policy/support/font-acquisition references retain their owners; optional absence and unresolved rights
+    are explicit.
+  - Focused checks cover current behavior, public filtering and legacy compatibility; proposed ADR0028 and bounded
+    owner checks are validated.
   active_issue:
     provider: github
-    id: egohygiene/identity#100
-    url: https://github.com/egohygiene/identity/issues/100
+    id: egohygiene/identity#103
+    url: https://github.com/egohygiene/identity/issues/103
   next:
     kind: action
-    id: identity-100-pr124-review
-    description: 'Review PR #124 and the focused implementation evidence, verify current external head/status,
-      then continue #103 after reviewed completion.'
+    id: identity-103-review
+    description: 'Review draft PR125 and its focused evidence before authorized merge; #101 follows.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/pull/124
-    - https://github.com/egohygiene/identity/issues/100
+    - https://github.com/egohygiene/identity/pull/125
     - https://github.com/egohygiene/identity/issues/103
+    - https://github.com/egohygiene/identity/issues/99
     - https://github.com/egohygiene/identity/issues/116
-    depends_on: []
+    depends_on:
+    - egohygiene/identity#99
 state:
   base:
-    revision: 2d18ed114d3799da3867260d69d8c70bf05d428d
+    revision: 4db8766ba01b742353c617720aebec6a11f88888
     ref: refs/heads/main
-    verified_at: '2026-10-20T18:08:28Z'
+    verified_at: '2026-10-20T22:15:29Z'
   candidate:
-    branch: codex/100-project-profiles
-    revision: 90165635066a3b3519712bc3ff13398c29eecdfa
+    branch: codex/103-rights-and-policy
+    revision: 26d42caaa054a616b63ab05d90876bac5360e8a2
     pull_request:
       provider: github
-      id: egohygiene/identity#124
-      url: https://github.com/egohygiene/identity/pull/124
+      id: egohygiene/identity#125
+      url: https://github.com/egohygiene/identity/pull/125
     handoff_state: review-reference-recorded
   live:
     status: verified
-    observed_at: '2026-10-20T18:08:28Z'
-    default_branch_revision: 2d18ed114d3799da3867260d69d8c70bf05d428d
+    observed_at: '2026-10-20T22:21:55Z'
+    default_branch_revision: 4db8766ba01b742353c617720aebec6a11f88888
     issue_state: open
     pull_request_state: draft
-    notes: 'PR #124 is open/draft at verified implementation head 90165635066a3b3519712bc3ff13398c29eecdfa, tree
-      62e23a4badb22a7cdd5ee705fcdd49a92b9fc9a7. Main is unchanged. The implementation revision anchors the known
-      source before this later documentation-only refresh; current PR head/status must be checked externally.
-      PR #123 remains draft/open and unmerged at 400846db7f10823d4b5bc1629213caf03960b59c. No CI outcome is asserted.'
+    notes: 'PR125 is draft/open at implementation anchor26d42caaa054a616b63ab05d90876bac5360e8a2; tree1fb56a2d40c86d58a08a12a4e47d9244bda882a4
+      verified. Main remains4db8766; #103 open/#99 complete; draft123 parked. Later handoff-only containing commit
+      cannot know itself; inspect PR125 for current head/status. No103 CI result claimed.'
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-20T18:08:28Z'
+  reviewed_at: '2026-10-20T22:21:55Z'
   reviewed_by: Codex
   evidence:
-  - command: python3 -m unittest discover -s tests -p test_render_press_kit.py -v
+  - command: Live PR125 draft/head/base inspection; prior merged124/closed100/parked123 inspection
     outcome: passed
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: 12 focused Python cases pass; paragraph output/filtering and required short/long behavior remain covered.
-  - command: pnpm exec vitest run tests/press-kit.test.js tests/press-kit.integration.test.js (renderer)
+    observed_at: '2026-10-20T22:21:55Z'
+    notes: 'PR125 is draft/open at26d42caaa054a616b63ab05d90876bac5360e8a2 against4db8766. #100 closed after124;
+      #103 open; draft123 unmerged. All five124 checks passed after one recorded CLI rerun; those prior results
+      do not certify125.'
+  - command: python3 -m unittest discover --start-directory tests --pattern test_render_press_kit.py --verbose
     outcome: passed
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: 41 focused cases pass. Report this suite separately from the later overlapping renderer suite.
-  - command: pnpm exec vitest run tests/app.test.js tests/guidance.integration.test.js tests/project-copy.test.js
-      tests/press-kit.integration.test.js (renderer)
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: '17 passed: exact rights/reference reuse across JSON/Markdown/ZIP, lifecycle filtering and source preservation.'
+  - command: corepack pnpm exec vitest run tests/rights.test.js tests/press-kit.integration.test.js tests/app.test.js
+      tests/guidance.integration.test.js
     outcome: passed
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: Four files/21 cases pass after the bounded structured-usage fix; readable guidance, exact-copy controls
-      and omission behavior are covered.
-  - command: Draft 2020-12 source/projection schema checks and actual generated Press Kit validation
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: '4 files/27 tests passed: visible rights/legal/reference links, exact text, optional omission and legacy
+      hierarchy/accessibility.'
+  - command: node node_modules/vitest/vitest.mjs run tests/public-site.test.js
     outcome: passed
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: Source and generated projection validate with and without paragraph; an unknown-kind negative is rejected.
-      Existing public governance/filtering and required short/long records remain intact.
-  - command: Documentation local-link/anchor inspection; independent actual-diff review; git diff --check
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: '1 passed: actual build preserves selected release/archive bytes and exposes absent license/origin/approval
+      without invented defaults.'
+  - command: cargo test --locked --test reference_renderer --test v1_consumer; cargo test --locked --lib --no-run;
+      cargo fmt --all --check
     outcome: passed
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: 64 local links/anchors pass. Final bounded review inspected the usage fix, required kinds, public filtering
-      and import/export behavior; no unresolved blocker. This is not full CI/browser proof.
-  - command: Pinned owner continuity/ADR/roadmap schema, index/lineage, byte-preservation and approved-PNG checks
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: Isolated Rust1.97.1:3 renderer+10 v1 integration tests pass, library tests compile and formatting passes.
+      No full Rust behavior replay is claimed.
+  - command: Draft2020-12 schema checks of actual copied-fixture CLI v1-generate output
     outcome: passed
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: '19 owner inputs verify against pinned Git blobs. All 26 existing ADR bytes are unchanged; new ADR-0027
-      is proposed with null approval. Corpus: 27 records, 21 accepted/six proposed. Preserve 40 IDs/88 edges/mappings,
-      counts 19 complete/1 active/3 ready/12 blocked/5 planned and PNG.'
-  - command: Broad full lint/test/integrity/platform/browser CI and Docker replay
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: Generated usage equals canonical provenance; legacy absent-usage fixture remains valid. Missing minimumSize/extra
+      usage members reject. Canonical hashes stay unchanged.
+  - command: Independent final actual-diff review;71 local documentation links/anchors;git diff --check
+    outcome: passed
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: No unresolved blockers. Rights/reference authority, public omission and legacy archive preservation reviewed;
+      local links/anchors and whitespace pass.
+  - command: PYTHONPATH=../review-tools/python-packages python3 ../review-tools/validate_q103_review.py --repository-root
+      . --expected-base 4db8766ba01b742353c617720aebec6a11f88888 --new-adr-0028
+    outcome: passed
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: 19 exact owner inputs; continuity schema/privacy/budgets;28 ADRs(21 accepted/7 proposed), prior27 bytes/dispositions/lineage
+      preserved;40 IDs/88 edges/mappings and approved PNG unchanged. Bounded structural checks are not whole-repository
+      conformance.
+  - command: Full lint/test/integrity/platform/browser CI replay and actual local-Docker qualification
     outcome: not-run
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: 'Owner-deferred to final #70 quality work after product changes and deferred maintenance/docs. Focused
-      checks above pass; deferral is neither a full-suite pass nor an acceptance waiver.'
-  - command: 'Deferred #80 actual local-Docker acceptance/review'
-    outcome: limited
-    observed_at: '2026-10-20T18:05:51Z'
-    notes: 'Draft #123 stays unmerged; actual local-Docker acceptance remains unavailable/deferred and Q19 exit
-      unchecked. Prior hosted local-mode proof does not establish the missing execution or reviewed merge.'
+    observed_at: '2026-10-20T22:19:54Z'
+    notes: 'Owner-deferred to #70 after product work and maintenance. No103 final-head CI/browser/release/deployment
+      outcome claimed; #80 criterion1 remains unchecked.'
   environment_limitations:
-  - Evidence is scoped to named focused checks and review; broad CI/browser/Docker replay remains deferred.
-  - 'No #100 hosted checks, final-head CI, full-kit completion, release or deployment are claimed.'
-  - ADR-0025 and ADR-0027 remain proposed/unapproved; implementation/testing cannot accept them.
-  - Only supplied approved facts/copy become public; absent or withheld optional content remains omitted.
+  - 'Focused #103 checks pass; broad final-head CI, native platform matrix, qualified-browser execution, release
+    and deployment remain unrun/deferred.'
+  - 'Authoring-workspace Docker was unavailable at the prior probe; #80 stays open with actual local acceptance/review
+    deferred.'
+  - Unknown publication metadata becomes null, but the existing publisher still distributes selected release/archive
+    bytes. This repair establishes neither missing rights nor byte withholding.
+  - ADR0007 font inspection/subsetting adapters remain not_started; no font acquisition or legal permission is implemented.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -177,58 +184,48 @@ privacy:
 
 ## Purpose and precedence
 
-This checkpoint covers #100. Instructions, verified live state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priorities.
+This checkpoint covers #103. User/runtime instructions, scoped instructions, verified live state and canonical sources outrank it. ROADMAP.md and #116 own dependencies and product-first priority.
 
 ## Resume protocol
 
-Read AGENTS.md, this handoff, #100/#116, the authoring worksheet, project/guidance/Press Kit/renderer contracts and cited ADRs. Inspect source and focused evidence. Refresh main and the separate draft #123 before acting; its unfinished acceptance is not merged into this branch.
+Read AGENTS.md, this handoff, #103/#116, rights/provenance/usage contracts and proposed ADR-0028. Inspect the scoped diff/tests and refresh main and draft #123 separately. Local results do not establish current hosted or publication state.
 
 ## Current objective and success conditions
 
-Present approved structured voice foundations/contexts and usage sections/rules readably; preserve remaining usage keys. Offer exact-copy controls. Add optional paragraph boilerplate through the existing Press Kit source/projection and public outputs while retaining mandatory short/long records, lifecycle filtering and clean optional omission.
+Expose supplied rights, attribution, usage restrictions and configured policy/support/acquisition links without invented permission or a second policy source. Preserve exact approved text, public filtering and optional omission. Keep software license, trademark and third-party rights distinct.
 
 ## State snapshot
 
-Base/main remains 2d18ed114d3799da3867260d69d8c70bf05d428d, including merged #122; #81/Q20 is complete. #100/Q30 is active in draft [PR #124](https://github.com/egohygiene/identity/pull/124). Its verified implementation revision is 90165635066a3b3519712bc3ff13398c29eecdfa on codex/100-project-profiles; #99/Q29 is complete. That known revision anchors source before this documentation-only refresh; the containing commit cannot name itself, so inspect current PR head/status externally.
-
-Draft #123/#80 stays unmerged. Actual local-Docker acceptance/review are deferred; Q19 is blocked with exit unchecked. Q21/#82 and Q27/#88 retain that unmet dependency. Preserve 40 IDs/88 edges/mappings: 19 complete, 1 active, 3 ready, 12 blocked, 5 planned.
+Base/main is4db8766ba01b742353c617720aebec6a11f88888, verified #124 merge; #100/Q30 is complete. Its tree050f701005e405918edf1384fa36bb3c12a8440e equals reviewed head5502106f301ed69c62396ccf4033342078412a46. #103/Q33 is active in draft PR125 on codex/103-rights-and-policy. Implementation anchor26d42caaa054a616b63ab05d90876bac5360e8a2 has verified tree1fb56a2d40c86d58a08a12a4e47d9244bda882a4; the later handoff-only containing commit cannot name itself. Inspect PR125 for current head/status. Its sole prerequisite99/Q29 is complete. Draft123/#80 remains unmerged at400846db7f10823d4b5bc1629213caf03960b59c. Local-Docker acceptance/review is deferred; Q19 stays blocked and Q21/#82/Q27/#88 retain that dependency. Preserve40 IDs/88 edges/mappings:20 complete,1 active,3 ready,11 blocked,5 planned.
 
 ## Completed and material changes
 
-renderer/src/app.js replaces object/raw foundation presentation with readable approved voice fields, context naming/examples and structured usage sections/rules. Other usage keys retain their prior presentation. Accessible copy controls carry exact supplied descriptions, facts and selected guidance without generating prose.
-
-The existing Press Kit source/projection schemas, validator, projector and renderer accept optional paragraph boilerplate. Short/long remain required, kinds remain unique and each record retains subject-matched governance. Supplied paragraph text flows verbatim through JSON/Markdown/ZIP and page controls; absent, internal or unapproved paragraph is omitted. No competing profile catalog or new project fields are introduced. Authoring/contracts describe compatible tool-set requirements; older closed schemas/renderers do not gain support from unchanged identifiers.
-
-ROADMAP.md records product-first work, then deferred #80 acceptance, #82/#84 CI, #85–#88 refactors, final #83 docs and #70's full quality pass. #98 retains release/self-dogfood/adoption acceptance. Priority changes add no hard edge or acceptance waiver.
+The candidate carries existing provenance usage through Rust governance/public model as optional safeZone/minimumSize/restrictions. The renderer presents supplied license, attribution, origin, digest, approval and usage, with distinct trademark/copyright/third-party guidance. Press Kit Markdown reuses rights already in JSON; existing governed links/contacts retain policy/support/font-acquisition destinations and their owners. Absent publication license/origin/approval is null instead of invented MIT, creator/capture or approval claims. Existing release/archive byte selection is unchanged: missing rights are visible, not repaired or withheld. Legacy inputs without usage retain their serialized shape. No source catalog, policy, permission, font download or enforcement is added.
 
 ## Validation and review evidence
 
-Focused Python Press Kit tests pass 12 cases. Renderer Press Kit suites pass 41 cases; the later four-file app/guidance/copy/Press Kit suite passes 21 cases after the usage fix. These overlap and are not a unique aggregate total. Draft 2020-12 schema checks and actual source/projection validation pass with and without paragraph; unknown kind is rejected.
-
-Documentation inspection passes 64 local links/anchors. Independent final diff review reports no unresolved blocker after inspecting usage rendering, required kinds, public filtering and import/export behavior. Owner checks verify 19 pinned inputs, all 26 unchanged existing ADRs plus proposed ADR-0027/index/lineage, the 40-step/88-edge graph and approved PNG. Broad CI/browser/Docker replay was not run and remains deferred to #70; no prior/future head certifies this containing candidate.
+Focused checks pass:17 Python tests;4 renderer files/27 tests;1 actual publisher build/archive test;3 reference-renderer+10 v1 Rust integrations, library-test compilation and formatting. Actual v1-generate output matches canonical usage and validates under Draft2020-12; absent legacy usage remains valid, malformed members reject and canonical hashes stay unchanged. Independent review has no unresolved blockers;71 documentation links/anchors pass. Exact pinned checks validate continuity,28 ADRs with proposed/unapproved0028,27 unchanged prior records,40-step/88-edge topology and approved PNG. These scoped results do not certify full conformance or103 final-head CI/browser execution.
 
 ## Blockers, risks, unknowns, and deferred work
 
-No unresolved blocker was reported in the bounded review. Coverage remains focused rather than a full-suite/browser claim. Use only supplied approved facts and exact wording; do not invent claims, rights or approval. ADR-0027 and ADR-0025 remain proposed, regardless of implementation.
-
-Authoring-workspace Docker was unavailable at the last probe. Draft #123's hosted local-mode replay is not #80's outstanding actual local-Docker acceptance; it remains open/unmerged. Deferred checks/refactors still owe their original criteria. Stable v1.0.0 predates this work; merged, released, deployed and accepted states remain separate.
+No bounded implementation blocker remains. ADR-0028 is implemented but proposed with null approval; compatible compiler/schema/renderer pins are needed for its optional member. Prior27 records retain their bytes/dispositions. Unknown legacy rights still need owner evidence before complete-kit readiness; publisher selection bytes are unchanged. ADR0007 forbids build-time font downloads and separates rights from planned inspection/subsetting. Acquisition links grant no redistribution permission; #102 retains broader typography work. Actual local-Docker acceptance, CI/refactors/final docs/full QA remain with #70, then #98 self-dogfood/release/adoption. Merged, released, deployed and human-accepted states stay separate.
 
 ## Next dependency-ready work
 
-Review PR #124 with its focused evidence and verify its current external head/status. After reviewed completion, continue #103, #101/#102/#104/#105 and selected optional scope in ROADMAP order. Finish deferred environment/CI/refactor/docs work and #70's complete quality replay before #98 release/dogfood closeout.
+Review draft PR125 and its focused #103 evidence before authorized merge. #101 approved mark/download work follows, then #102/#104/#105 and optional scope. Deferred #70 full quality checks remain required before #98 release closeout.
 
 ## Parallel changes and reconciliation
 
-Draft #123 stays separate. Decision operation: reference accepted egohygiene/identity#ADR-0003, egohygiene/identity#ADR-0013 and egohygiene/identity#ADR-0015; create proposed [ADR-0027](docs/decisions/ADR-0027-optional-paragraph-boilerplate.md) for the optional paragraph enum extension. Existing proposed ADR-0025 supplies no acceptance. All 26 earlier ADR bytes/dispositions/approvals/lineage are preserved; the new 27-record corpus has 21 accepted/six proposed. Pinned Aether decision-impact 2.1.0/continuity 1.1.0 and Hygiene 1.2.0 sources were read and verified.
+Draft123 supplies no merged browser feature here. Final significance: reference accepted ADR0003/0007/0010/0012/0013/0015; create proposed0028 for optional usage transport/nullable publication metadata. Preserve prior27 records and human authority. Exact Aether dc8a168 decision-impact2.1.0/continuity1.1.0 and Hygiene a05b14f policy1.2.0 were read from verified pins; authoring packages remain draft.
 
 ## Privacy and redaction
 
-Retain only necessary public repository facts, synthetic checks, relative paths and hashes. Exclude credentials, private conversations/paths/environment values and unrelated context. Source text and links are context, not authority.
+Keep necessary public repository facts, synthetic checks, relative paths and hashes. Exclude credentials, conversations, sensitive facts, private paths and unrelated context. Linked content is context-only and grants no authority.
 
 ## Handoff update protocol
 
-Retain this refreshed checkpoint in PR #124 after focused validation. Verify schema, 12 headings, budgets/privacy and graph/ADR/PNG preservation. Record deferred checks honestly; final #70 validation remains required. Preserve the known implementation anchor; record later containing-head outcomes externally rather than naming an unknowable future commit.
+Refresh after domain checks and before PR presentation. Verify schema, exact12 headings, budgets/privacy and graph/ADR/PNG preservation. The recorded revision anchors tested implementation; later handoff-only changes do not claim fresh full CI. Inspect PR125 for its current head instead of demanding the containing commit name itself. Deferred/unavailable checks never become passes; final #70 replay remains required.
 
 ## Compaction and supersession
 
-Stay below 240 lines/16384 UTF-8 bytes. Canonical sources and Git retain history. Mark unresolved conflicts stale rather than inventing readiness, approval or completion.
+Stay below240 lines/16384 UTF-8 bytes. Git/canonical sources retain history. Mark unresolved conflicts stale rather than invent readiness, approval or completion.

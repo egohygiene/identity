@@ -47,7 +47,7 @@ The view model contains only public, approved, renderer-relevant projections:
 - immutable release and source digests;
 - ordered semantic tokens with lineage and approvals;
 - approved source assets with format, dimensions, intended use, download status,
-  and optional license/provenance records;
+  and optional license/provenance/usage records;
 - canonical voice and usage guidance with explicit declaration status;
 - explicit motion, imagery, and mascot support status;
 - versioned package/download paths.
@@ -205,6 +205,35 @@ A required section whose data is absent remains visible and reports
 **Not declared** or **Unsupported**. This includes undeclared color pairings,
 type scales, motion rules, imagery direction, and mascot guidance. The renderer
 never fabricates examples, licenses, provenance, or creative rules.
+
+### Asset rights and compatible inputs
+
+The optional per-asset `usage` object transports existing provenance
+`safeZone`, `minimumSize` and `restrictions` text. It accompanies license,
+attribution, origin, approval and the asset digest; it does not replace the
+separate numeric preview `safeZone` field or derive numeric guarantees from
+prose. Source and reference-renderer models omit `usage` when legacy input has
+none. Missing rights fields remain absent/null and are shown as not declared,
+without a default software license, creator or approval.
+
+The page distinguishes asset rights from trademark guidance and configured
+software-license/policy references. Approved usage legal guidance exposes
+copyright, attribution and third-party notices; optional Press Kit links keep
+the actual policy document and contact owners. The renderer does not infer
+permissions from a label, a repository license or a font family name.
+
+The additive `usage` member retains the v1 model identifier, but older strict
+Rust readers can reject it as unknown. Pin a compatible compiler, schema and
+renderer together before consuming a model that supplies it. Existing models
+without `usage` remain accepted; old release artifacts are not edited. Proposed
+[ADR-0028](../decisions/ADR-0028-asset-rights-projection.md) records this bounded
+compatibility and absence treatment without supplying legal or ADR approval.
+
+The separate release publisher preserves missing configured license, origin and
+approval as null. Its release-owned byte/archive selection is unchanged: a
+truthful missing-data label does not withhold those bytes or establish their
+permissions. See the
+[publication rights boundary](../publication/IDENTITY_PAGES.md#rights-metadata-and-release-selection).
 
 ## Theming
 

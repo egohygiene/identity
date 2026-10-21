@@ -19,8 +19,8 @@ use std::path::{Path, PathBuf};
 use serde_json::{Map, Value};
 
 use crate::brandkit::{
-    BrandKitGuidance, BrandKitLicense, BrandKitOrigin, BrandKitProject, BrandKitSourceAsset,
-    BrandKitSourceGovernance, BrandKitToken, ProfileSelection,
+    BrandKitAssetUsage, BrandKitGuidance, BrandKitLicense, BrandKitOrigin, BrandKitProject,
+    BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken, ProfileSelection,
 };
 use crate::compiler::{
     CompilerError, CompilerResult, Diagnostic, FailureKind, IdentityIntent, IdentityReader,
@@ -376,7 +376,7 @@ fn source_assets(
         let text = String::from_utf8(bytes.clone())
             .map_err(|error| invalid(&path, format!("approved source must be UTF-8: {error}")))?;
         let accessibility = object_field(entry, "accessibility", "provenance asset")?;
-        let _usage = object_field(entry, "usage", "provenance asset")?;
+        let usage = object_field(entry, "usage", "provenance asset")?;
         let license = object_field(entry, "license", "provenance asset")?;
         let origin = object_field(entry, "origin", "provenance asset")?;
         let approval = string_field(entry, "approval", "provenance asset.approval")?.to_owned();
@@ -419,6 +419,18 @@ fn source_assets(
                     captured_at: string_field(origin, "capturedAt", "asset origin")?.to_owned(),
                 },
                 approval,
+                usage: Some(BrandKitAssetUsage {
+                    safe_zone: string_field(usage, "safeZone", "asset usage")?.to_owned(),
+                    minimum_size: string_field(usage, "minimumSize", "asset usage")?.to_owned(),
+                    restrictions: array_field(usage, "restrictions", "asset usage")?
+                        .iter()
+                        .map(|restriction| {
+                            restriction.as_str().map(str::to_owned).ok_or_else(|| {
+                                invalid("asset usage.restrictions", "expected a string restriction")
+                            })
+                        })
+                        .collect::<CompilerResult<Vec<_>>>()?,
+                }),
             },
         );
     }

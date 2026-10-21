@@ -139,6 +139,39 @@ remain ordinary labeled facts; labels and IDs do not activate inferred fields
 or generated copy. Contextual naming and voice guidance retain their existing
 [voice/usage authority](GUIDANCE_V1.md#context-retrieval).
 
+## Rights and authoritative references
+
+Each selected asset retains its existing provenance license identifier/status
+and attribution, creator/method/source/capture time, safe-zone/minimum-size
+guidance, restriction entries and SHA-256 digest. Its projected `approval` is
+the Press Kit asset-selection approval, not a separately exported provenance
+approval; `assetId` and digest bind the rights to the validated source asset. The page
+and Markdown expose these supplied fields alongside the download; JSON and the
+offline ZIP carry the same records. Usage strings remain reviewed prose, not
+inferred numeric constraints or proof of legal permission.
+
+Approved legal guidance presents trademark rules, copyright, attribution and
+every supplied third-party notice separately. An asset's SPDX identifier and
+the project's software license do not imply trademark permission or rights to
+other assets. An empty list or absent optional guidance does not waive rights;
+consumers must use the actual supplied terms and authoritative owner references.
+
+Existing governed `links[]` and `contacts[]` supply official support/community
+destinations, contacts, and references to software-license, governance, Code of
+Conduct, security-reporting and contribution documents. Use an explicit label
+and authoritative HTTPS URL with the existing `documentation`, `support` or
+`other` kind as appropriate. IDs and labels are not machine policy selectors.
+Adopted social links continue to derive from the channel registry. The renderer
+does not fetch a policy, copy its text into source, or change its owner.
+
+A separately acquired font can be an external link with supplied explanatory
+guidance. This creates no local font download, license inference or permission
+to redistribute it. Only explicitly selected, approved local assets enter the
+package. Unresolved permissions belong in truthful governed explanatory
+guidance; they do not satisfy the provenance contract's approved-license and
+asset-approval requirements. See the
+[authoring map](../consumers/AUTHORING.md#rights-policy-references-and-font-acquisition).
+
 ## Missing data and lifecycle behavior
 
 Facts, links, contacts, team bios, and selected assets can be absent. Their

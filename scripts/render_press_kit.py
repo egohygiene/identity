@@ -572,11 +572,35 @@ def render_markdown(model: dict[str, Any]) -> str:
         lines.append("No public team bios are declared in the current source.")
     lines.extend(["", "## Approved assets", ""])
     if model["assets"]:
-        lines.extend(["| Asset | Use | Download |", "| --- | --- | --- |"])
-        lines.extend(
-            f"| {markdown_cell(value['label'])} | {markdown_cell(value['notes'])} | [{value['downloadPath']}]({value['downloadPath']}) |"
-            for value in model["assets"]
-        )
+        for asset in model["assets"]:
+            license_value = asset["license"]
+            origin = asset["origin"]
+            usage = asset["usage"]
+            lines.extend(
+                [
+                    f"### {asset['label']}",
+                    "",
+                    asset["notes"],
+                    "",
+                    f"[Download {asset['label']}]({asset['downloadPath']})",
+                    "",
+                    f"- Asset ID: `{asset['assetId']}`",
+                    f"- License: `{license_value['spdx']}` · {license_value['status']}",
+                    f"- Attribution: {license_value['attribution'] or 'No attribution text is declared.'}",
+                    f"- Creator: {origin['creator']}",
+                    f"- Origin method: {origin['method']}",
+                    f"- Source: {origin['source']}",
+                    f"- Captured: {origin['capturedAt']}",
+                    f"- SHA-256: `{asset['sha256']}`",
+                    f"- Selection approval: `{asset['approval']['id']}`",
+                    f"- Safe zone: {usage['safeZone']}",
+                    f"- Minimum size: {usage['minimumSize']}",
+                ]
+            )
+            lines.extend(f"- Restriction: {restriction}" for restriction in usage["restrictions"])
+            if not usage["restrictions"]:
+                lines.append("- Restrictions: no restriction text is declared.")
+            lines.append("")
     else:
         lines.append("No Press Kit assets are selected in the current source.")
     lines.extend(["", "## Usage and legal guidance", ""])
@@ -596,8 +620,20 @@ def render_markdown(model: dict[str, Any]) -> str:
                 f"Copyright: {value['copyright']}",
                 "",
                 f"Attribution: {value['attribution']}",
+                "",
+                "### Third-party asset notices",
+                "",
             ]
         )
+        for notice in value["thirdPartyLicenses"]:
+            lines.extend(
+                [
+                    f"- **{notice['name']}** — `{notice['spdx']}`",
+                    f"  Attribution: {notice['attribution']}",
+                ]
+            )
+        if not value["thirdPartyLicenses"]:
+            lines.append("No third-party asset notices are declared in the current source.")
     else:
         lines.extend(["", "No public legal guidance is declared in the current source."])
     social = model.get("socialSurfaces")

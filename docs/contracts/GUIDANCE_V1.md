@@ -71,6 +71,15 @@ no additional rights or approval. Optional profile facts and descriptions use
 the existing [Press Kit projection](PRESS_KIT_V1.md), rather than a competing
 profile catalog or renderer-authored copy.
 
+Approved public `legal` guidance is also readable on the page: trademark,
+copyright, attribution and supplied `thirdPartyLicenses` remain distinct
+reviewed fields. Withheld legal guidance is omitted by the existing lifecycle
+boundary, not replaced with a software-license assumption. Policy destinations,
+official contacts and separately acquired fonts use the existing
+[Press Kit references](PRESS_KIT_V1.md#rights-and-authoritative-references);
+rendering those links does not copy their policy text, change its owner or
+grant asset permission.
+
 ## Renderer model
 
 `identity.brand-guidance/v1` is a framework-neutral projection containing:

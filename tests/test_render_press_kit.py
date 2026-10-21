@@ -179,6 +179,56 @@ def add_press_source(repository_root: Path, *, paragraph: str | None = None) -> 
     write_json(repository_root / ".identity/guidance/press-kit.json", press)
 
 
+def add_authority_references(repository_root: Path) -> None:
+    """Add synthetic owner-reviewed references without importing their policy text."""
+
+    press_path = repository_root / ".identity/guidance/press-kit.json"
+    press = json.loads(press_path.read_text(encoding="utf-8"))
+    decisions_path = repository_root / ".identity/governance/approvals.json"
+    decisions = json.loads(decisions_path.read_text(encoding="utf-8"))
+    references = (
+        ("software-license", "Software license", "https://example.invalid/policies/LICENSE", "documentation"),
+        ("governance", "Governance policy", "https://example.invalid/policies/governance", "documentation"),
+        ("code-of-conduct", "Code of Conduct", "https://example.invalid/policies/conduct", "documentation"),
+        ("security", "Security reporting policy", "https://example.invalid/policies/security", "documentation"),
+        ("contributing", "Contribution guide", "https://example.invalid/policies/contributing", "documentation"),
+        ("support", "Official support", "https://example.invalid/support", "support"),
+        ("community", "Official community", "https://example.invalid/community", "other"),
+        ("font-acquisition", "Acquire Example Typeface separately", "https://example.invalid/typefaces/example", "other"),
+    )
+    for identifier, label, url, kind in references:
+        subject = f"press-kit:link:{identifier}"
+        approval_id = f"approve-press-{identifier}"
+        decisions["decisions"].append(approval(approval_id, subject))
+        press["links"].append({
+            "id": identifier,
+            "label": label,
+            "url": url,
+            "kind": kind,
+            "governance": governance(subject, approval_id),
+        })
+    contact_subject = "press-kit:contact:official-support"
+    decisions["decisions"].append(approval("approve-official-support", contact_subject))
+    press["contacts"].append({
+        "id": "official-support",
+        "label": "Official support contact",
+        "kind": "email",
+        "value": "support@example.invalid",
+        "notes": "Use the linked security reporting policy for security reports.",
+        "governance": governance(contact_subject, "approve-official-support"),
+    })
+    font_subject = "press-kit:fact:font-acquisition"
+    decisions["decisions"].append(approval("approve-font-acquisition-note", font_subject))
+    press["facts"].append({
+        "id": "font-acquisition-note",
+        "label": "Font availability",
+        "value": "Example Typeface requires separate acquisition and is not redistributed in this kit.",
+        "governance": governance(font_subject, "approve-font-acquisition-note"),
+    })
+    write_json(press_path, press)
+    write_json(decisions_path, decisions)
+
+
 class PressKitProjectionTests(unittest.TestCase):
     """Prove source authority, deterministic packaging, and honest optional material."""
 
@@ -243,6 +293,172 @@ class PressKitProjectionTests(unittest.TestCase):
                 self.assertIn("assets/example-product-mark.svg", archive.namelist())
                 exported = json.loads(archive.read("press-kit.json"))
             self.assertEqual([value["id"] for value in exported["facts"]], ["founded"])
+
+    def test_markdown_exposes_supplied_asset_rights_and_third_party_notices(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            add_press_source(repository)
+            before = source_digests(repository)
+            model, assets = renderer.build_projection(repository)
+            payload = renderer.build_package(model, assets)
+            markdown = payload["press-kit.md"].decode("utf-8")
+            asset = model["assets"][0]
+            asset_section = markdown.split(f"### {asset['label']}\n", 1)[1].split(
+                "\n## Usage and legal guidance", 1
+            )[0]
+            for supplied in (
+                asset["license"]["spdx"],
+                asset["license"]["status"],
+                asset["license"]["attribution"],
+                *asset["origin"].values(),
+                asset["usage"]["safeZone"],
+                asset["usage"]["minimumSize"],
+                *asset["usage"]["restrictions"],
+                asset["sha256"],
+                asset["approval"]["id"],
+            ):
+                self.assertIn(supplied, asset_section)
+            legal = model["guidance"]["legal"]["value"]
+            self.assertIn("### Third-party asset notices", markdown)
+            notice_section = markdown.split("### Third-party asset notices\n", 1)[1].split(
+                "\n## Downloads", 1
+            )[0]
+            for notice in legal["thirdPartyLicenses"]:
+                for supplied in notice.values():
+                    self.assertIn(supplied, notice_section)
+            exported = json.loads(payload["press-kit.json"])
+            self.assertEqual(exported["assets"][0], asset)
+            with zipfile.ZipFile(BytesIO(payload["press-kit.zip"])) as archive:
+                self.assertEqual(archive.read("press-kit.md"), payload["press-kit.md"])
+                self.assertEqual(archive.read("press-kit.json"), payload["press-kit.json"])
+            self.assertEqual(source_digests(repository), before)
+
+    def test_authority_references_and_font_acquisition_link_without_importing_policy_or_font(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            add_press_source(repository)
+            add_authority_references(repository)
+            policy_body = "Authoritative policy text stays with its owner, not in generated Identity copy."
+            (repository / "GOVERNANCE.md").write_text(policy_body, encoding="utf-8")
+            before = source_digests(repository)
+            model, assets = renderer.build_projection(repository)
+            payload = renderer.build_package(model, assets)
+            markdown = payload["press-kit.md"].decode("utf-8")
+            self.assertEqual(len(model["links"]), 9)
+            for reference in model["links"]:
+                self.assertIn(f"[{reference['label']}]({reference['url']})", markdown)
+            support = next(value for value in model["contacts"] if value["id"] == "official-support")
+            self.assertIn(support["label"], markdown)
+            self.assertIn(support["value"], markdown)
+            font_note = next(value for value in model["facts"] if value["id"] == "font-acquisition-note")
+            self.assertIn(font_note["value"], markdown)
+            exported = json.loads(payload["press-kit.json"])
+            self.assertEqual(exported["links"], model["links"])
+            self.assertEqual(exported["contacts"], model["contacts"])
+            with zipfile.ZipFile(BytesIO(payload["press-kit.zip"])) as archive:
+                self.assertEqual(archive.read("press-kit.md"), payload["press-kit.md"])
+                self.assertEqual(archive.read("press-kit.json"), payload["press-kit.json"])
+                self.assertEqual(
+                    [name for name in archive.namelist() if name.startswith("assets/")],
+                    ["assets/example-product-mark.svg"],
+                )
+                for name in archive.namelist():
+                    self.assertNotIn(policy_body.encode("utf-8"), archive.read(name))
+            self.assertEqual(source_digests(repository), before)
+
+    def test_withheld_authority_references_never_enter_public_package(self) -> None:
+        for state, visibility in (
+            ("approved", "internal"),
+            ("candidate", "internal"),
+            ("rejected", "internal"),
+            ("superseded", "internal"),
+        ):
+            with self.subTest(state=state), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                add_press_source(repository)
+                add_authority_references(repository)
+                press_path = repository / ".identity/guidance/press-kit.json"
+                press = json.loads(press_path.read_text(encoding="utf-8"))
+                decisions_path = repository / ".identity/governance/approvals.json"
+                decisions = json.loads(decisions_path.read_text(encoding="utf-8"))
+                records = [
+                    next(value for value in press["links"] if value["id"] == "security"),
+                    next(value for value in press["links"] if value["id"] == "font-acquisition"),
+                    next(value for value in press["contacts"] if value["id"] == "official-support"),
+                    next(value for value in press["facts"] if value["id"] == "font-acquisition-note"),
+                ]
+                withheld = [value["url"] if "url" in value else value["value"] for value in records]
+                for record in records:
+                    authority = record["governance"]
+                    decision = next(value for value in decisions["decisions"] if value["id"] == authority["approval"])
+                    authority["state"] = state
+                    authority["visibility"] = visibility
+                    if state == "candidate":
+                        authority["approval"] = None
+                        authority["provenance"]["method"] = "handoff-candidate"
+                    else:
+                        decision["status"] = state
+                        if state == "superseded":
+                            earlier = approval(f"{decision['id']}-earlier", decision["subject"])
+                            decisions["decisions"].append(earlier)
+                            decision["supersedes"] = earlier["id"]
+                write_json(press_path, press)
+                write_json(decisions_path, decisions)
+                before = source_digests(repository)
+                self.assertEqual(renderer.validator.validate_identity(repository), [])
+                payload = renderer.build_package(*renderer.build_projection(repository))
+                with zipfile.ZipFile(BytesIO(payload["press-kit.zip"])) as archive:
+                    contents = [archive.read(name) for name in archive.namelist()]
+                for text in withheld:
+                    for output in [*payload.values(), *contents]:
+                        self.assertNotIn(text.encode("utf-8"), output)
+                self.assertEqual(source_digests(repository), before)
+
+    def test_empty_optional_references_and_notices_have_no_invented_substitutes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            add_press_source(repository)
+            press_path = repository / ".identity/guidance/press-kit.json"
+            press = json.loads(press_path.read_text(encoding="utf-8"))
+            for collection in ("facts", "links", "contacts", "team", "assets"):
+                press[collection] = []
+            write_json(press_path, press)
+            usage_path = repository / ".identity/guidance/usage.json"
+            usage = json.loads(usage_path.read_text(encoding="utf-8"))
+            usage["legal"]["thirdPartyLicenses"] = []
+            write_json(usage_path, usage)
+            before = source_digests(repository)
+            payload = renderer.build_package(*renderer.build_projection(repository))
+            markdown = payload["press-kit.md"].decode("utf-8")
+            exported = json.loads(payload["press-kit.json"])
+            for collection in ("facts", "links", "contacts", "team", "assets"):
+                self.assertEqual(exported[collection], [])
+            self.assertIn("No additional public links are declared", markdown)
+            self.assertIn("No public media contact is declared", markdown)
+            self.assertIn("No Press Kit assets are selected", markdown)
+            self.assertIn("No third-party asset notices are declared", markdown)
+            self.assertNotIn("https://example.invalid/policies/", markdown)
+            self.assertNotIn("typefaces/example", markdown)
+            self.assertEqual(source_digests(repository), before)
+
+    def test_unresolved_source_rights_cannot_become_a_distributed_asset(self) -> None:
+        for field, unresolved in (("status", "pending"), ("spdx", "NOASSERTION")):
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                add_press_source(repository)
+                provenance_path = repository / ".identity/governance/provenance.json"
+                provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+                provenance["assets"][0]["license"][field] = unresolved
+                write_json(provenance_path, provenance)
+                before = source_digests(repository)
+                with self.assertRaisesRegex(renderer.ProjectionError, "IDN1402.*license"):
+                    renderer.build_projection(repository)
+                self.assertEqual(source_digests(repository), before)
 
     def test_optional_paragraph_round_trips_exactly_and_omits_cleanly(self) -> None:
         paragraph = 'Example Product keeps approved copy exact: “reviewed”, reusable & local.'
