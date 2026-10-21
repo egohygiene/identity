@@ -78,6 +78,14 @@ pub struct BrandKitSourceAsset {
     pub safe_zone: Option<f64>,
 }
 
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct BrandKitPublicAsset {
+    pub label: String,
+    pub kind: String,
+    pub notes: String,
+    pub download_name: String,
+}
+
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BrandKitGuidance {
@@ -105,6 +113,49 @@ pub struct BrandKitModel {
 }
 
 impl BrandKitModel {
+    /// Select only affirmative current public declarations from governed usage.
+    /// Provenance approval alone does not declare an asset public.
+    #[must_use]
+    pub fn public_assets(&self) -> BTreeMap<String, BrandKitPublicAsset> {
+        self.guidance
+            .usage
+            .as_ref()
+            .and_then(|usage| usage.get("assets"))
+            .and_then(Value::as_array)
+            .into_iter()
+            .flatten()
+            .filter_map(|asset| {
+                let governance = asset.get("governance")?;
+                if asset.get("status")?.as_str()? != "active"
+                    || asset.get("availability")?.as_str()? != "public"
+                    || governance.get("state")?.as_str()? != "approved"
+                    || governance.get("visibility")?.as_str()? != "public"
+                    || !self
+                        .approvals
+                        .contains(governance.get("approval")?.as_str()?)
+                {
+                    return None;
+                }
+                let id = asset.get("id")?.as_str()?;
+                self.sources.get(id)?;
+                let rights = self.source_governance.get(id)?;
+                if rights.license.status != "approved" || !self.approvals.contains(&rights.approval)
+                {
+                    return None;
+                }
+                Some((
+                    id.to_owned(),
+                    BrandKitPublicAsset {
+                        label: asset.get("label")?.as_str()?.to_owned(),
+                        kind: asset.get("kind")?.as_str()?.to_owned(),
+                        notes: asset.get("notes")?.as_str()?.to_owned(),
+                        download_name: asset.get("downloadName")?.as_str()?.to_owned(),
+                    },
+                ))
+            })
+            .collect()
+    }
+
     pub fn from_resolved(identity: &ResolvedIdentity) -> CompilerResult<Self> {
         let project = parse_value::<BrandKitProject>(identity, "project")?;
         let tokens = parse_value::<BTreeMap<String, BrandKitToken>>(identity, "tokens")?;

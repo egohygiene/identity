@@ -49,6 +49,40 @@ export function assertBrandKitViewModel(model) {
       normalizeArtifactPath(asset.downloadPath, "Asset download path");
     }
   }
+  if (model.downloads !== undefined) {
+    if (!Array.isArray(model.downloads)) {
+      throw new TypeError("Brand Kit downloads must be an array when declared.");
+    }
+    const sourceAssets = new Map(model.assets.map((asset) => [asset.id, asset]));
+    if (sourceAssets.size !== model.assets.length) {
+      throw new TypeError("Download source assets must have unique identifiers.");
+    }
+    const identifiers = new Set();
+    const paths = new Set();
+    for (const download of model.downloads) {
+      for (const field of [
+        "id", "label", "path", "mediaType", "profile", "sourceAssetId",
+        "sourceSha256", "dimensions",
+      ]) {
+        if (typeof download?.[field] !== "string" || download[field].length === 0) {
+          throw new TypeError(`Brand Kit download ${field} must be a non-empty string.`);
+        }
+      }
+      const artifactPath = normalizeArtifactPath(download.path, "Download artifact path");
+      if (identifiers.has(download.id) || paths.has(artifactPath)) {
+        throw new TypeError("Brand Kit downloads must have unique identifiers and paths.");
+      }
+      identifiers.add(download.id);
+      paths.add(artifactPath);
+      const source = sourceAssets.get(download.sourceAssetId);
+      if (
+        !source || !/^[0-9a-f]{64}$/u.test(download.sourceSha256)
+        || source.sha256 !== download.sourceSha256
+      ) {
+        throw new TypeError("Download source identity and SHA-256 must match a public model asset.");
+      }
+    }
+  }
   for (const entry of model.packages) {
     normalizeArtifactPath(entry?.path, "Package download path");
   }

@@ -5,8 +5,8 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 
 use identity::brandkit::{
-    BrandKitGuidance, BrandKitLicense, BrandKitOrigin, BrandKitProject, BrandKitSourceAsset,
-    BrandKitSourceGovernance, BrandKitToken, all_profiles, compiler_request,
+    BrandKitGuidance, BrandKitLicense, BrandKitModel, BrandKitOrigin, BrandKitProject,
+    BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken, all_profiles, compiler_request,
     register_builtin_adapters,
 };
 use identity::compiler::{
@@ -123,6 +123,7 @@ fn renderer_fixture_conforms_to_the_rust_contract() {
             && asset.intended_use == "Primary scalable brand mark for approved product surfaces."
     }));
     assert!(model.assets.iter().all(|asset| asset.usage.is_none()));
+    assert!(model.downloads.is_empty());
     let serialized = serde_json::to_value(&model).expect("serialize legacy renderer fixture");
     assert!(
         serialized["assets"]
@@ -131,6 +132,23 @@ fn renderer_fixture_conforms_to_the_rust_contract() {
             .iter()
             .all(|asset| asset.get("usage").is_none())
     );
+    assert!(serialized.get("downloads").is_none());
+}
+
+#[test]
+fn bare_model_does_not_invent_generated_files_or_public_declarations() {
+    let (_, _, resolver) = fixture_pipeline();
+    let mut model = BrandKitModel::from_resolved(&resolver.resolved).unwrap();
+    let view = BrandKitViewModel::from_brand_kit(&model);
+    assert_eq!(view.assets.len(), 1);
+    assert_eq!(view.assets[0].availability, "embedded-source");
+    assert!(view.assets[0].download_path.is_none());
+    assert!(view.packages.is_empty());
+    assert!(view.downloads.is_empty());
+
+    model.guidance.usage = None;
+    assert!(BrandKitViewModel::from_brand_kit(&model).assets.is_empty());
+    assert_eq!(model.sources.len(), 1, "local source remains available");
 }
 
 #[test]
@@ -269,7 +287,14 @@ fn fixture_pipeline() -> (FixtureReader, FixtureValidator, FixtureResolver) {
         })),
         usage: Some(json!({
             "do": ["Use semantic tokens."],
-            "dont": ["Invent unreviewed brand facts."]
+            "dont": ["Invent unreviewed brand facts."],
+            "assets": [{
+                "id": "mark", "label": "Example mark", "kind": "mark",
+                "status": "active", "availability": "public",
+                "downloadName": "example-mark.svg",
+                "notes": "Primary scalable brand mark for approved product surfaces.",
+                "governance": {"state": "approved", "visibility": "public", "approval": "approve-example-mark"}
+            }]
         })),
     };
     let values = BTreeMap::from([

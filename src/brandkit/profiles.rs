@@ -92,11 +92,28 @@ pub fn compiler_request(
             .then_with(|| left.relative_path.cmp(&right.relative_path))
             .then_with(|| left.id.cmp(&right.id))
     });
+    bind_selected_output_targets(&mut targets);
 
     Ok(CompilerRequest {
         output_root: output_root.into(),
         targets,
     })
+}
+
+/// Bind standalone metadata references to raster outputs in this request.
+pub(crate) fn bind_selected_output_targets(targets: &mut [ProjectionTarget]) {
+    let rasters = targets
+        .iter()
+        .filter(|target| target.adapter_id == "identity-raster")
+        .collect::<Vec<_>>();
+    let selected = serde_json::to_value(rasters).expect("compiler targets serialize to JSON");
+    for target in targets {
+        if target.adapter_id == "identity-metadata" {
+            target
+                .parameters
+                .insert("selectedRasterTargets".to_owned(), selected.clone());
+        }
+    }
 }
 
 #[must_use]

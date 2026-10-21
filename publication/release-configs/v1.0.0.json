@@ -2,6 +2,11 @@
   "$schema": "https://json.schemastore.org/json",
   "schema": "identity.public-brand-kit-config/v1",
   "canonicalUrl": "https://identity.egohygiene.io/",
+  "browserAssets": {
+    "icon": "web/icon.svg",
+    "appleTouchIcon": "web/apple-touch-icon.png",
+    "manifest": "web/site.webmanifest"
+  },
   "release": {
     "defaultTag": "v1.0.0",
     "defaultCommit": "aaad8839104704cf57bfa846539b3b875421e03d"
@@ -126,6 +131,96 @@
       "dimensions": "1280 × 640 SVG viewBox units",
       "intendedUse": "Social and link-preview surfaces.",
       "safeZone": 0.08
+    },
+    {
+      "id": "avatar-square",
+      "label": "Square avatar",
+      "sourcePath": "brand/avatar-square.svg",
+      "mediaType": "image/svg+xml",
+      "altText": "The identity crystal prism emblem on a square avatar canvas.",
+      "dimensions": "512 × 512 SVG viewBox units",
+      "intendedUse": "Square profile and avatar surfaces."
+    },
+    {
+      "id": "web-icon",
+      "label": "Browser SVG icon",
+      "sourcePath": "web/icon.svg",
+      "mediaType": "image/svg+xml",
+      "altText": "The identity crystal prism browser icon.",
+      "dimensions": "512 × 512 SVG viewBox units",
+      "intendedUse": "Scalable browser and application icon."
+    },
+    {
+      "id": "web-maskable-icon",
+      "label": "Maskable SVG icon",
+      "sourcePath": "web/maskable-icon.svg",
+      "mediaType": "image/svg+xml",
+      "altText": "The identity crystal prism in a maskable icon canvas.",
+      "dimensions": "512 × 512 SVG viewBox units",
+      "intendedUse": "Maskable application icon."
+    },
+    {
+      "id": "apple-touch-icon",
+      "label": "Apple touch icon",
+      "sourcePath": "web/apple-touch-icon.png",
+      "mediaType": "image/png",
+      "altText": "The identity crystal prism touch icon.",
+      "dimensions": "180 × 180 pixels",
+      "intendedUse": "Apple touch icon."
+    },
+    {
+      "id": "web-icon-192",
+      "label": "192-pixel application icon",
+      "sourcePath": "web/icon-192x192.png",
+      "mediaType": "image/png",
+      "altText": "The identity crystal prism application icon.",
+      "dimensions": "192 × 192 pixels",
+      "intendedUse": "Web application manifest icon."
+    },
+    {
+      "id": "favicon",
+      "label": "Browser favicon",
+      "sourcePath": "web/favicon.png",
+      "mediaType": "image/png",
+      "altText": "The identity crystal prism favicon.",
+      "dimensions": "64 × 64 pixels",
+      "intendedUse": "Browser favicon."
+    },
+    {
+      "id": "favicon-16",
+      "label": "16-pixel favicon",
+      "sourcePath": "web/favicon-16x16.png",
+      "mediaType": "image/png",
+      "altText": "The identity crystal prism favicon.",
+      "dimensions": "16 × 16 pixels",
+      "intendedUse": "Browser favicon."
+    },
+    {
+      "id": "favicon-32",
+      "label": "32-pixel favicon",
+      "sourcePath": "web/favicon-32x32.png",
+      "mediaType": "image/png",
+      "altText": "The identity crystal prism favicon.",
+      "dimensions": "32 × 32 pixels",
+      "intendedUse": "Browser favicon."
+    },
+    {
+      "id": "favicon-48",
+      "label": "48-pixel favicon",
+      "sourcePath": "web/favicon-48x48.png",
+      "mediaType": "image/png",
+      "altText": "The identity crystal prism favicon.",
+      "dimensions": "48 × 48 pixels",
+      "intendedUse": "Browser favicon."
+    },
+    {
+      "id": "favicon-64",
+      "label": "64-pixel favicon",
+      "sourcePath": "web/favicon-64x64.png",
+      "mediaType": "image/png",
+      "altText": "The identity crystal prism favicon.",
+      "dimensions": "64 × 64 pixels",
+      "intendedUse": "Browser favicon."
     }
   ],
   "guidance": {

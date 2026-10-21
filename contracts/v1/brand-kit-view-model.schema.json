@@ -37,7 +37,6 @@
     },
     "assets": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/$defs/asset"
       }
@@ -53,10 +52,13 @@
     },
     "packages": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/$defs/package"
       }
+    },
+    "downloads": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/download" }
     }
   },
   "$defs": {
@@ -329,7 +331,34 @@
             { "$ref": "#/$defs/assetUsage" },
             { "type": "null" }
           ]
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
         }
+      }
+    },
+    "download": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "path", "mediaType", "profile", "sourceAssetId", "sourceSha256", "dimensions"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
+        },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "profile": { "type": "string", "minLength": 1 },
+        "sourceAssetId": { "type": "string", "minLength": 1 },
+        "sourceSha256": { "$ref": "#/$defs/digest" },
+        "dimensions": { "type": "string", "minLength": 1 }
       }
     },
     "guidanceSection": {

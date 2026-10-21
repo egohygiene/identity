@@ -160,6 +160,49 @@ the approved mark. Empty facts/team arrays demonstrate genuine optionality.
 Its synthetic review and rights evidence is for exercising this example only;
 it cannot approve real consumer copy, artwork, licenses, or people.
 
+### Select public masters and downloads
+
+Put each actual reviewed logo, wordmark or variant master in the existing
+sources/provenance/approval records, then select it through usage `assets[]`.
+The generic public renderer requires the matching record's
+`governance.state: "approved"`, `governance.visibility: "public"`,
+`status: "active"` and `availability: "public"`. Source validation binds the
+same asset ID/path to provenance and its byte digest. An approved local source
+alone is not a public selection. Missing usage leaves the public asset and
+download lists empty while preserving local generation and review material.
+
+Use the record's exact `label`, `kind`, `notes` and safe `downloadName` for
+existing variants. Place background, spacing, minimum-size and misuse guidance
+in the existing governed usage rules and provenance usage fields. The compiler
+does not derive dark/light artwork, wordmarks, avatars or permission from a
+filename, ID, label or build. Add a distinct master only when the reviewed
+artwork and approval actually exist.
+
+Selecting `core` copies the selected public SVG masters to
+`brand/<downloadName>` through the existing source adapter; an existing matching
+target is reused and output collisions fail before writes. Other selected
+native profiles provide their existing mechanical exports: `web` favicon
+PNGs at 32/64 pixels, `pwa` icons at 192/512 pixels and a 512-pixel maskable
+icon, and the supported GitHub/social preview PNGs. Select only the required
+profiles and inspect their actual output inventory. This work adds no new
+universal ICO or avatar adapter; the legacy release publisher can expose its
+already-existing avatar SVG through explicit release configuration.
+
+The renderer receives the actual selected compiler targets. It advertises
+their package/source/raster paths, dimensions and source binding, and omits an
+archive when its underlying mark is not selected for public use. A bare model
+without targets supplies no generated-download inventory. After generation,
+verify advertised local files against the artifact root and compiler manifest;
+the source SHA-256 is not a derived PNG's checksum. See the
+[renderer verification options](../contracts/BRAND_KIT_RENDERER_V1.md#browser-metadata-and-local-artifact-verification).
+
+These post-`v1.0.0` changes require the matching reviewed compiler, schema and
+renderer pin. Optional `downloads`, asset `kind` and asset `notes` remain in
+the v1 model family, but older strict readers may reject them. Regenerate the
+complete handoff when upgrading; preserve immutable old releases. Proposed
+[ADR-0029](../decisions/ADR-0029-selected-public-downloads.md) records the
+selection/output boundary without accepting a new decision or creative asset.
+
 ### Rights, policy references and font acquisition
 
 Keep software licensing, trademark rules and third-party asset rights distinct.

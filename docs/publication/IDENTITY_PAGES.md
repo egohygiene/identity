@@ -122,6 +122,35 @@ Proposed [ADR-0028](../decisions/ADR-0028-asset-rights-projection.md) records th
 bounded distinction; implementation does not accept the proposal or adopt a
 new legal policy.
 
+### Selected downloads and browser assets
+
+Publication configuration selects assets that actually exist in the immutable
+release tree, with explicit labels, paths and source metadata. The page exposes
+those selected masters and existing raster/ICO/avatar files; it does not infer
+new artwork, variant roles or approval from filenames. Its emitted download
+catalog and package links describe the built release files. The separate
+generic v1 renderer additionally requires governed approved/public/active/
+publicly available usage asset selections; the legacy missing-rights boundary
+above is unchanged.
+
+Optional configuration `browserAssets` supplies `icon`, `appleTouchIcon` and
+`manifest` bundle-relative paths for actual selected release files. These map
+to the static renderer's `--icon-path`, `--apple-touch-icon-path` and
+`--web-manifest-path` options. All use the configured asset base and normalized
+safe paths. Omitted entries emit no corresponding head link, so publication
+does not imply an unselected favicon/PWA profile exists.
+
+The builder and offline verifier check advertised downloads and browser assets
+against existing nonempty files confined to the staged artifact root. The
+public manifest's inventory/checksums bind actual output bytes and sizes to the
+release source digest; they are not replaced by the master asset's source hash.
+The verifier also checks the emitted download URLs against the configured base
+and local files. These checks do not fetch a CDN or remote download URL and do
+not claim live deployment, browser review or human approval. Standalone
+model-only previews remain possible without filesystem proof. The
+[renderer contract](../contracts/BRAND_KIT_RENDERER_V1.md#browser-metadata-and-local-artifact-verification)
+documents the explicit artifact-root/manifest options for consumer bundles.
+
 ## Local preview and verification
 
 Install the renderer's locked dependencies once, then build and inspect the

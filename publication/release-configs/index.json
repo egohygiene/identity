@@ -4,7 +4,7 @@
     "v1.0.0": {
       "commit": "aaad8839104704cf57bfa846539b3b875421e03d",
       "config": "publication/release-configs/v1.0.0.json",
-      "sha256": "40619c3459768c8cbe931f0638a7b9b7530de49315c5259c3b1d09a6719299ac",
+      "sha256": "0deb43248073fe6cc665b3e16779c23dd4fae5e3ca864285765f5bf226ea1836",
       "reason": "The first stable release predates the release-backed publisher configuration."
     }
   }

@@ -10,6 +10,8 @@ import { fileURLToPath } from "node:url";
 
 import { createDesignSystemView } from "../src/design-system.js";
 import { createPressKitView } from "../src/press-kit.js";
+import { normalizeArtifactPath, normalizeAssetBaseUrl } from "../src/artifact-paths.js";
+import { verifyArtifactPaths } from "../src/download-integrity.js";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
@@ -29,6 +31,15 @@ const config = await readJson(configPath);
 const releaseTag = argumentsMap["release-tag"] || config.release.defaultTag;
 const releaseCommit = argumentsMap["release-commit"] || config.release.defaultCommit;
 const releaseVersion = assertStableRelease(releaseTag, releaseCommit);
+const assetBaseUrl = normalizeAssetBaseUrl(argumentsMap["asset-base-url"] || config.assetBaseUrl || "./");
+const browserAssets = Object.fromEntries(Object.entries(config.browserAssets || {}).map(
+  ([key, value]) => [key, normalizeArtifactPath(value, `Browser asset ${key}`)],
+));
+for (const key of Object.keys(browserAssets)) {
+  if (!["icon", "appleTouchIcon", "manifest"].includes(key)) {
+    throw new Error(`Unknown browser asset role: ${key}`);
+  }
+}
 const designSystemDirectory = argumentsMap["design-system-directory"]
   ? path.resolve(argumentsMap["design-system-directory"])
   : null;
@@ -42,6 +53,10 @@ const modelPath = path.join(buildRoot, "brand-kit.view-model.json");
 const publicationPath = path.join(buildRoot, "publication.json");
 
 await assertDirectory(sourceAssetRoot, "immutable Identity asset root");
+await verifyArtifactPaths([
+  ...config.assets.map((asset) => asset.sourcePath),
+  ...Object.values(browserAssets),
+], { artifactRoot: sourceAssetRoot });
 await fs.rm(buildRoot, { recursive: true, force: true });
 await fs.mkdir(buildRoot, { recursive: true });
 await fs.cp(sourceAssetRoot, publicDirectory, { recursive: true });
@@ -87,6 +102,8 @@ await fs.writeFile(
       sourceDigest: packageManifest.sourceDigest,
       publicationManifest: publication.manifestPath,
       publicationManifestSha256: publication.manifestSha256,
+      assetBaseUrl,
+      browserAssets,
     },
     null,
     2,
@@ -102,7 +119,16 @@ runNode(
     "--output",
     path.join(rendererRoot, "index.html"),
     "--asset-base-url",
-    "./",
+    assetBaseUrl,
+    "--artifact-root",
+    publicDirectory,
+    "--artifact-manifest",
+    packageManifestPath,
+    ...Object.entries({
+      "icon-path": browserAssets.icon,
+      "apple-touch-icon-path": browserAssets.appleTouchIcon,
+      "web-manifest-path": browserAssets.manifest,
+    }).flatMap(([flag, value]) => value === undefined ? [] : [`--${flag}`, value]),
     "--canonical-url",
     config.canonicalUrl,
     "--open-graph-image",
@@ -199,8 +225,8 @@ function runNode(argumentsList, environment) {
 async function buildViewModel(packageManifest, designSystem, pressKit) {
   const assets = await Promise.all(
     config.assets.map(async (asset) => {
-      const sourcePath = safeRelativePath(asset.sourcePath);
-      const contents = await fs.readFile(path.join(sourceAssetRoot, sourcePath));
+      const sourcePath = normalizeArtifactPath(asset.sourcePath, "Public asset path");
+      const contents = await fs.readFile(path.join(sourceAssetRoot, ...sourcePath.split("/").map(decodeURIComponent)));
       const embeddedText = asset.mediaType === "image/svg+xml"
         || asset.mediaType.startsWith("text/")
         || asset.mediaType === "application/json";
@@ -297,17 +323,6 @@ async function readJson(filePath) {
   } catch (error) {
     throw new Error(`Cannot read ${filePath}: ${error.message}`);
   }
-}
-
-function safeRelativePath(value) {
-  if (typeof value !== "string" || value.length === 0 || path.isAbsolute(value)) {
-    throw new Error("A public Brand Kit asset path must be a non-empty relative path.");
-  }
-  const normalized = path.posix.normalize(value);
-  if (normalized === ".." || normalized.startsWith("../")) {
-    throw new Error(`A public Brand Kit asset path escapes its source root: ${value}`);
-  }
-  return normalized;
 }
 
 function sha256(contents) {
