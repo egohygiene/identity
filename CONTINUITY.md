@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T07:55:30-04:00'
+  updated_at: '2026-10-21T08:04:47-04:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -17,7 +17,7 @@ scope:
   includes:
   - Readable existing color roles, declared pairs and contrast results.
   - Supplied font/fallback, license/language/legibility and explicit composite type previews.
-  - Agreement of displayed, context and handbook tokens; focused validation and review handoff.
+  - Agreement of displayed/context/handbook tokens and exact-source hosted renderer/CLI/image/advisory evidence.
   excludes:
   - New canonical token/schema fields, artwork, font acquisition/bundling, components or approval authority.
   - Deferred broad Docker/CI/refactoring campaign, release and deployment.
@@ -63,12 +63,12 @@ work:
     url: https://github.com/egohygiene/identity/issues/102
   next:
     kind: action
-    id: identity-102-hosted-validation
-    description: 'Publish a bounded draft for the existing hosted renderer suite, then refresh/review the exact
-      candidate before merge; #104 follows.'
+    id: identity-102-review
+    description: 'Inspect the containing documentation commit checks and review draft PR127 before authorized
+      merge; #104 follows.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/102
+    - https://github.com/egohygiene/identity/pull/127
     - https://github.com/egohygiene/identity/issues/104
     - https://github.com/egohygiene/identity/issues/116
     depends_on:
@@ -78,65 +78,83 @@ state:
   base:
     revision: a637ac689469a5910896766c18dc6d337d46b162
     ref: refs/heads/main
-    verified_at: '2026-10-21T07:55:30-04:00'
+    verified_at: '2026-10-21T08:04:47-04:00'
   candidate:
     branch: codex/102-color-typography
-    revision: null
-    pull_request: null
-    handoff_state: in-progress
+    revision: f3ca41fb0ecb95cd740f5571e5e303e357cb8612
+    pull_request:
+      provider: github
+      id: egohygiene/identity#127
+      url: https://github.com/egohygiene/identity/pull/127
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-10-21T07:55:30-04:00'
+    observed_at: '2026-10-21T08:04:47-04:00'
     default_branch_revision: a637ac689469a5910896766c18dc6d337d46b162
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'PR126 merged at the recorded base after five reviewed-head workflow successes; #101 closed/#102
-      open. No #102 PR exists before draft publication. Parked draft123 remains unmerged at400846db7f10823d4b5bc1629213caf03960b59c.'
+    pull_request_state: draft
+    notes: PR127 open/draft at source f3ca41fb0ecb95cd740f5571e5e303e357cb8612, tested through merge a08de8a87d2c31eda48115df0b9bc2dcdcb87e3a;
+      base/main remains a637ac689469a5910896766c18dc6d337d46b162. This anchor precedes the containing continuity
+      commit, whose checks require inspection. PR126 merged/#101 closed/#102 open; parked123 remains unmerged.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
-  status: partial
-  reviewed_at: '2026-10-21T07:55:30-04:00'
+  status: passed
+  reviewed_at: '2026-10-21T08:04:47-04:00'
   reviewed_by: Codex
   evidence:
-  - command: 'Live PR126/head workflow inspection, #101/#102/#99/#75 and #116 inspection'
+  - command: 'Live PR127/base, merged126 and #101/#102/#99/#75 inspection'
     outcome: passed
-    observed_at: '2026-10-21T07:55:30-04:00'
-    notes: 'Reviewed126 head a1d62c02f78329450659ff1b3e2783ebb2df792f passed five workflows before merge. These
-      previous-source results do not certify #102.'
-  - command: Copied-consumer v1-generate/v1-verify and render_design_system.py; Node agreement probes
+    observed_at: '2026-10-21T08:04:47-04:00'
+    notes: 'Main/base a637ac6 is verified; PR127 is draft/open, #101 closed and #102 active. Source/head observations
+      are time-bound and grant no merge authority.'
+  - command: https://github.com/egohygiene/identity/actions/runs/39596128927
     outcome: passed
-    observed_at: '2026-10-21T07:55:30-04:00'
-    notes: Fresh native and Python projections agree; canonical source bytes unchanged. Eight same-digest token
-      mismatch cases reject. Declared pair measures18.34223494997549; black/white21 and the4.499511688376184
-      threshold/rounding case pass.
-  - command: Node source check; font/alias/license boundaries; documentation links; git diff --check
+    observed_at: '2026-10-21T08:04:47-04:00'
+    notes: Exact source f3ca41fb0ecb95cd740f5571e5e303e357cb8612/merge a08de8a87d2c31eda48115df0b9bc2dcdcb87e3a:383
+      Vitest cases in16 files and7 Chromium checks pass, including new foundation hydration, keyboard copy,
+      accessibility and narrow-layout coverage. Public build/verification and the existing legacy screenshot
+      pass.
+  - command: https://github.com/egohygiene/identity/actions/runs/39596128936
     outcome: passed
-    observed_at: '2026-10-21T07:55:30-04:00'
-    notes: 32 JavaScript files parse; fallback ordering, unresolved aliases and unsafe license links are exercised.
-      Existing docs resolve; approved screenshot bytes remain unchanged.
-  - command: Authored Vitest, static handoff and focused Playwright foundation coverage
-    outcome: not-run
-    observed_at: '2026-10-21T07:55:30-04:00'
-    notes: Local renderer node_modules lacks React/Vitest. The prior frozen registry/cache block remains documented;
-      existing hosted suites are pending. No dependency/lock/CI policy changes.
+    observed_at: '2026-10-21T08:04:47-04:00'
+    notes: 'Exact source f3ca41f: all CLI steps pass,117 Rust passes/3 ignored; Python152 total=150 pass/2
+      skips. Formatting, Clippy, docs, source and provenance checks pass. No fresh release-platform matrix
+      is claimed for this JS-only scope.'
+  - command: https://github.com/egohygiene/identity/actions/runs/39596128881; https://github.com/egohygiene/identity/actions/runs/39596129446
+    outcome: passed
+    observed_at: '2026-10-21T08:04:47-04:00'
+    notes: 'Exact source f3ca41f: existing hosted image and decision workflows pass. Decisions retain5 advisory
+      warnings/no errors; image success does not qualify the authoring-workspace Docker acceptance.'
+  - command: Copied-consumer v1-generate/v1-verify/render_design_system.py; Node agreement/contrast/font probes;
+      JS parsing/docs/diff checks
+    outcome: passed
+    observed_at: '2026-10-21T08:04:47-04:00'
+    notes: Fresh native/Python projections agree with canonical bytes unchanged; eight same-digest disagreements
+      reject. Actual pair18.34223494997549 and unrounded4.499511688376184 boundary pass.32 JS files parse;
+      font ordering/aliases/safe references and documentation links pass.
   - command: 'Pinned #102 continuity/ADR/roadmap/PNG structure and preservation check'
     outcome: passed
-    observed_at: '2026-10-21T07:55:30-04:00'
-    notes: 19 exact owner inputs verify; all29 ADR bytes preserved (21accepted/8proposed),40 roadmap IDs/88
-      edges/mappings, only Q31/Q32/Q34 lifecycle updates and approved PNG preserved. Scope-bounded checks,
-      not whole-repository conformance.
-  - command: Full final quality/refactoring/CI campaign and actual local-Docker acceptance
+    observed_at: '2026-10-21T08:04:47-04:00'
+    notes: 19 exact owner inputs; all29 ADR bytes preserved (21accepted/8proposed);40 roadmap IDs/88 edges/mappings,
+      only Q31/Q32/Q34 lifecycle reconciliation and approved PNG preserved. Scope-bounded checks, not whole-repository
+      conformance.
+  - command: Local Vitest/Chromium; full final quality/refactoring/CI campaign and actual local-Docker acceptance
     outcome: not-run
-    observed_at: '2026-10-21T07:55:30-04:00'
-    notes: 'Owner-deferred to #70 and parked #80/123. Focused existing candidate checks do not close that campaign.'
+    observed_at: '2026-10-21T08:04:47-04:00'
+    notes: 'Local JS dependencies remain absent; the recorded hosted suite executed the focused cases. The
+      broader owner-deferred campaign remains #70 and parked #80/123; these existing candidate checks do not
+      complete it.'
   environment_limitations:
-  - Local JavaScript test dependencies are absent; hosted execution is required before final review handoff.
-  - 'No current #102 hosted result, visual baseline approval, release or deployment is claimed.'
-  - Unknown legacy font/asset rights and acquisition remain unresolved; metadata does not grant permission.
-  - Actual authoring-workspace Docker remains unqualified despite earlier hosted image success.
+  - Local renderer dependencies are absent after the recorded frozen registry/cache block; the exact-source
+    hosted suites supplied runtime evidence.
+  - The containing continuity commit must receive current-head check inspection; recorded f3ca41f results certify
+    its implementation source.
+  - No all-browser/manual visual approval, font redistribution approval, complete-kit readiness, release or
+    deployment is asserted.
+  - 'Actual authoring-workspace Docker and unknown legacy rights/acquisition remain unresolved under #70/#80/#105/#98.'
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -155,7 +173,7 @@ privacy:
 
 ## Purpose and precedence
 
-This partial checkpoint covers #102. User/runtime instructions, scoped instructions, live evidence and canonical sources outrank it. ROADMAP.md and #116 own dependencies and the product-first priority.
+This scoped review checkpoint covers #102. User/runtime instructions, scoped instructions, live evidence and canonical sources outrank it. ROADMAP.md and #116 own dependencies and the product-first priority.
 
 ## Resume protocol
 
@@ -167,7 +185,7 @@ Render existing handbook color/type constraints as practical public guidance. Sh
 
 ## State snapshot
 
-Main/base a637ac689469a5910896766c18dc6d337d46b162 is the verified #126 merge; #101/Q31 is complete and #102/Q32 active on codex/102-color-typography. #99 and #75 prerequisites are closed. #104/Q34 is dependency-ready but follows #102 by priority. Candidate revision/PR are null before draft publication. Preserve40 IDs/88 edges/mappings:22complete,1active,4ready,8blocked,5planned. Parked123/#80 remains unmerged; Q19/Q21/Q27 stay blocked and actual local-Docker acceptance stays unchecked.
+Main/base a637ac689469a5910896766c18dc6d337d46b162 is the verified #126 merge; #101/Q31 is complete and #102/Q32 active on codex/102-color-typography. #99 and #75 prerequisites are closed. #104/Q34 is dependency-ready but follows #102 by priority. Draft PR127 is open at source f3ca41fb0ecb95cd740f5571e5e303e357cb8612, tested through merge a08de8a87d2c31eda48115df0b9bc2dcdcb87e3a. Its ready-for-review phase is distinct from the provider draft state; the containing continuity commit needs its own checks. Preserve40 IDs/88 edges/mappings:22complete,1active,4ready,8blocked,5planned. Parked123/#80 remains unmerged; Q19/Q21/Q27 stay blocked and actual local-Docker acceptance stays unchecked.
 
 ## Completed and material changes
 
@@ -181,21 +199,21 @@ Font specimens preserve supplied fallback order and explicit composite propertie
 
 Fresh copied-consumer native generation/verification and Python handbook generation pass with unchanged canonical bytes. Node probes accept the real matching handoff, reject eight same-digest disagreements, and exercise contrast rounding, unsupported alpha, font order, aliases and license URLs.32-file JavaScript parsing, documentation links and whitespace checks pass.
 
-Vitest/static/browser cases are authored but not executed locally because required node_modules are absent after the recorded registry/cache limitation. A temporary draft will execute the existing frozen-dependency hosted suite. Final Refresh/Verify follows actual results; no #102 CI or complete visual/accessibility qualification is claimed by this partial checkpoint.
+All four applicable existing workflows pass at source f3ca41f: renderer39596128927, CLI39596128936, image39596128881 and decisions39596129446. Renderer reports383 Vitest tests in16 files and7 Chromium checks; public build/verification passes. CLI reports117 Rust passes/3 ignored and150 Python passes/2 skips. Decision evidence retains5 warnings/no errors. Local node_modules remains unavailable; hosted frozen dependencies executed the cases. The containing documentation commit needs separately inspected current-head checks.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Hosted execution remains the focused evidence gap. Missing font acquisition/license/type-scale facts stay absent rather than borrowing software licensing or inferring provider permissions. Contrast checks cover the listed supported pairs, not every palette combination, state or product. Unsupported composite values remain readable without invented substitution.
+No scoped code blocker remains after hosted execution and actual-diff review. Missing font acquisition/license/type-scale facts stay absent rather than borrowing software licensing or inferring provider permissions. Contrast checks cover the listed supported pairs, not every palette combination, state or product. Unsupported composite values remain readable without invented substitution.
 
 All29 prior ADR bytes/dispositions/approvals remain unchanged:21accepted/8proposed. ADR0029 remains proposed after #126's merge. Actual complete-kit readiness stays with #105/#98. Full quality/CI/refactors, actual local-Docker acceptance and final reconciliation remain with #70; no release, deployment, new rights or artwork is supplied.
 
 ## Next dependency-ready work
 
-Publish the bounded draft, inspect its existing hosted renderer checks, fix relevant regressions, then refresh/review #102 before authorized merge. #104 selected presentation profiles follows by priority; no new dependency edge is introduced.
+Inspect current checks for the containing continuity commit and review PR127 before authorized merge. #104 selected presentation profiles follows by priority; no new dependency edge is introduced.
 
 ## Parallel changes and reconciliation
 
-Parked123 supplies no merged browser/Docker acceptance. Decision impact is reference: accepted ADR0004/0007/0010/0011/0014 already govern tokens, font rights, immutable renderer input, bounded quality evidence and handbook projections. This is routine presentation and enforcement of the existing matching-source contract; no new ADR is required. Repeat that classification against the final diff. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified local owner checkouts; authoring guidance remains draft.
+Parked123 supplies no merged browser/Docker acceptance. Decision impact is reference: accepted ADR0004/0007/0010/0011/0014 already govern tokens, font rights, immutable renderer input, bounded quality evidence and handbook projections. This is routine presentation and enforcement of the existing matching-source contract; no new ADR is required. The actual diff recheck confirms that reference-only classification; no public field, ownership, dependency or approval boundary changed. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified local owner checkouts; authoring guidance remains draft.
 
 ## Privacy and redaction
 
