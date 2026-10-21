@@ -40,7 +40,7 @@ updated: 2026-10-21
 The original execution snapshot reviewed [`55d0339ba5518c7b72154a2aad54a9e5b2bf2fff`](https://github.com/egohygiene/identity/commit/55d0339ba5518c7b72154a2aad54a9e5b2bf2fff), with live issues and publication evidence rechecked on 2026-10-18 UTC. The scoped #99 field audit reviews [`063a4c70fcaccc6c15393f28ac2aabe62b34e1e7`](https://github.com/egohygiene/identity/commit/063a4c70fcaccc6c15393f28ac2aabe62b34e1e7); its findings and later checkpoint evidence are qualified below. A collector timestamp does not renew source-review freshness. Repository Markdown owns intent; generated views remain projections.
 
 **Lifecycle:** `v1.0.0` is published. Current main includes later features and repairs; it is not a new stable release.
-**Current gate:** #99 is complete through #114/#117/#118; #78/#79/#77 through #119/#120/#121; #81/Q20 through #122; #100/Q30 through #124. #103/Q33 closed after [PR #125](https://github.com/egohygiene/identity/pull/125) merged at `828d38b86edcc5015fa1bc27f843870c3b5233fb`. #101/Q31 is the active product issue. The owner has deferred actual local-Docker acceptance and review of #80/draft #123, CI work and refactors to the final stabilization phase. #80/Q19 is blocked with its exit unchecked; #82/Q21 and #88/Q27 retain their unmet #80 prerequisite. Existing #70/Q28 owns the final full quality pass; #98/Q40 retains release and dogfood acceptance.
+**Current gate:** #99 is complete through #114/#117/#118; #78/#79/#77 through #119/#120/#121; #81/Q20 through #122; #100/Q30 through #124; #103/Q33 through #125. #101/Q31 closed after [PR #126](https://github.com/egohygiene/identity/pull/126) merged at `a637ac689469a5910896766c18dc6d337d46b162`. #102/Q32 is the active product issue. The owner has deferred actual local-Docker acceptance and review of #80/draft #123, CI work and refactors to the final stabilization phase. #80/Q19 is blocked with its exit unchecked; #82/Q21 and #88/Q27 retain their unmet #80 prerequisite. Existing #70/Q28 owns the final full quality pass; #98/Q40 retains release and dogfood acceptance.
 **North-star outcome:** A usable, governed Brand Kit proven against Identity's own approved source and a contrasting consumer, followed by repeatable repository adoption.
 
 The original snapshot mapped 28 open issues. At the 2026-10-18 audit, #74/#75/#76 were closed, leaving 25 pre-tracker issues: twelve audit work items (#77–#88), eleven Brand Kit children (#99–#109), and trackers #70/#98. The operational tracker [#116](https://github.com/egohygiene/identity/issues/116), added on 2026-10-19, links these 25 without creating another work item. #71–#73 merged through [PR #89](https://github.com/egohygiene/identity/pull/89); the scoped #99 review records a generic-asset selection gap that needs additional public-boundary proof. Merged repairs are not retroactively contents of `v1.0.0`. [#83](https://github.com/egohygiene/identity/issues/83) retains its final #76/#77 reconciliation gate.
@@ -65,7 +65,7 @@ These are roadmap publication intent, not evidence that the central roadmap rout
 | 5 | Finish #80 → #82 → #84 → #85 → #86 → #87 → #88 → finish #83 → close #70 | Complete deferred local-Docker acceptance, setup/workflow CI, refactors and final docs; run the full lint/test/integrity/CI pass on the final reviewed source before closing stabilization. |
 | 6 | Final self-dogfood, release and canary upgrade → close #98 | Release/consumer/adoption evidence satisfies the existing final acceptance checklist. |
 
-The owner-selected product-first sequence is priority, not a new dependency graph. Preserve every machine-readable `depends_on` prerequisite and acceptance criterion. #100 and #103 are complete; #101 depends on completed #99/#76 and does not wait for #80/#82 or the refactors. #80 remains incomplete: hosted CI and hosted local-entrypoint replay in draft #123 do not satisfy its outstanding actual local-Docker acceptance or review. #82 and #88 remain blocked on it.
+The owner-selected product-first sequence is priority, not a new dependency graph. Preserve every machine-readable `depends_on` prerequisite and acceptance criterion. #100, #103 and #101 are complete; #102 depends on completed #99/#75 and does not wait for #80/#82 or the refactors. #104 is dependency-ready after #101's merge and follows #102 by priority. #80 remains incomplete: hosted CI and hosted local-entrypoint replay in draft #123 do not satisfy its outstanding actual local-Docker acceptance or review. #82 and #88 remain blocked on it.
 
 Broad CI work, refactoring and the full-suite quality replay are deferred to the final stabilization phase. Targeted functional validation needed for each implementation remains part of that work. Existing #70 owns the final complete supported lint/test/integrity/platform/browser CI pass and explicit skips; no duplicate quality issue is added. #98 separately owns kit self-dogfood, release and adoption. `planned` optional steps still require a concrete use case or reviewed scope disposition.
 
@@ -649,7 +649,7 @@ issues: [100]
 
 <!-- roadmap-step
 id: IDN-Q31
-status: active
+status: complete
 depends_on: [IDN-Q29, IDN-Q15]
 issues: [101]
 -->
@@ -659,13 +659,13 @@ issues: [101]
 
 **Exit criteria:**
 
-- [ ] Advertised release-bound files exist; required formats, provenance/rights, configured bases, and missing-variant handling work.
+- [x] Advertised release-bound files exist; required formats, provenance/rights, configured bases, and missing-variant handling work.
 
-**Evidence and scope:** [#101](https://github.com/egohygiene/identity/issues/101) is active from merged #125. Inventory existing approved marks, variants and actual generated outputs before filling demonstrated download gaps. #99/Q29 is the source prerequisite and #76/Q15 supplies the exercised path/base boundary; both are complete. Preserve #71 public filtering, rights/provenance and missing optional variants; do not invent artwork or advertise absent files. Focused checks remain part of this candidate; broader CI/refactors/Docker stay with #70. #102 follows this reviewed checkpoint.
+**Evidence and scope:** [#101](https://github.com/egohygiene/identity/issues/101) closed after [PR #126](https://github.com/egohygiene/identity/pull/126) merged at `a637ac689469a5910896766c18dc6d337d46b162`. The reviewed head `a1d62c02f78329450659ff1b3e2783ebb2df792f` passed all five existing workflows, including 349 renderer tests, six Chromium checks and three-platform reproducible generation. Public assets require approved active/public usage; actual selected targets determine SVG/PNG/package links and metadata. Existing avatar/favicon exports, conditional browser assets and manifest/hash/path verification are exercised. Optional gaps and legacy unresolved rights remain explicit; no artwork or permission was created. ADR-0029 remains proposed; the broader #70 campaign and parked #123 remain deferred.
 
 <!-- roadmap-step
 id: IDN-Q32
-status: blocked
+status: active
 depends_on: [IDN-Q29, IDN-Q14]
 issues: [102]
 -->
@@ -677,7 +677,7 @@ issues: [102]
 
 - [ ] Role/value examples, supported combinations, font/fallback availability and licensing, and release-matched guidance are verified.
 
-**Evidence and scope:** [#102](https://github.com/egohygiene/identity/issues/102). #99 defines the core; #74/#75 govern the optional design guidance used by this path. A component library is outside scope.
+**Evidence and scope:** [#102](https://github.com/egohygiene/identity/issues/102) is active from merged #126. Reuse existing source-bound handbook token entries for color roles/pairs/thresholds and typography license/language/legibility constraints. Verify displayed, context and handbook token agreement; measure only declared supported color pairs, preserve fallback order and preview explicit composite type values. Missing combinations, font acquisition data and type scales stay undeclared. #99 defines the core; #74/#75 govern source and release binding. No new source schema, token catalog, font download, component library or creative approval is introduced. Accepted ADR-0004/0007/0010/0011/0014 govern this implementation.
 
 <!-- roadmap-step
 id: IDN-Q33
@@ -697,7 +697,7 @@ issues: [103]
 
 <!-- roadmap-step
 id: IDN-Q34
-status: blocked
+status: ready
 depends_on: [IDN-Q29, IDN-Q30, IDN-Q31, IDN-Q33]
 issues: [104]
 -->

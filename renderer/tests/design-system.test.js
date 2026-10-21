@@ -27,6 +27,7 @@ function boundModel() {
   ), "utf8"));
   model.release.sourceDigest = pair.handbook.source.digest;
   model.release.immutableId = `sha256:${pair.handbook.source.digest}`;
+  model.tokens = structuredClone(pair.context.tokens);
   model.designSystem = createDesignSystemView(pair);
   return model;
 }

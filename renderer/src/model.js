@@ -4,6 +4,7 @@
 import { assertDesignSystemView } from "./design-system.js";
 import { assertPressKitView } from "./press-kit.js";
 import { normalizeArtifactPath, normalizeAssetBaseUrl } from "./artifact-paths.js";
+import { assertFoundationAgreement } from "./foundations.js";
 
 export const BRAND_KIT_VIEW_MODEL_SCHEMA = "identity.brand-kit-view-model/v1";
 
@@ -111,6 +112,7 @@ export function assertBrandKitViewModel(model) {
         "Design-system source digest must match the Brand Kit immutable release.",
       );
     }
+    assertFoundationAgreement(model.tokens, designSystem);
   }
   if (model.pressKit !== undefined) {
     const pressKit = assertPressKitView(model.pressKit);

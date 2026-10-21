@@ -284,7 +284,25 @@ The renderer labels generated marks, colors, and typography as
 A required section whose data is absent remains visible and reports
 **Not declared** or **Unsupported**. This includes undeclared color pairings,
 type scales, motion rules, imagery direction, and mascot guidance. The renderer
-never fabricates examples, licenses, provenance, or creative rules.
+never fabricates project claims, licenses, provenance, or creative rules.
+
+### Source-bound color and typography previews
+
+When the optional handbook/context pair is supplied, the color and type sections
+read its existing declared token constraints. They show explicit roles,
+foreground/background pair results, fallback order and supplied font
+license/language/legibility notes. Concrete composite typography values can
+produce a specimen; neighboring token names do not invent a hierarchy. Generic
+specimen text and contrast sample sizes are labeled presentation examples,
+not approved project copy or a new type scale.
+
+The displayed token inventory must agree with both projections, in addition to
+the existing project/release/digest binding. A mismatched value, source layer,
+type, approval or token set fails before output replacement. Missing optional
+constraints remain missing, and the independent legacy preview remains valid.
+No source or view-model field is added. See the
+[foundation behavior and limits](DESIGN_SYSTEM_V1.md#readable-color-and-typography-foundations)
+for contrast precision, supported colors, font availability and licensing.
 
 ### Asset rights and compatible inputs
 

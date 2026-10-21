@@ -771,3 +771,15 @@ main {
     box-shadow: none;
   }
 }
+
+/* Source-bound foundation examples do not restyle the legacy preview. */
+.foundation-pair-sample {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.foundation-type-sample {
+  overflow-wrap: anywhere;
+}
