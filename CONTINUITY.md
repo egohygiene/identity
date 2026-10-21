@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T11:19:30-04:00'
+  updated_at: '2026-10-21T11:25:32-04:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -86,7 +86,7 @@ state:
     verified_at: '2026-10-21T11:05:50-04:00'
   candidate:
     branch: codex/104-presentation-profiles
-    revision: 65bc0c8137a54ae9959947cac9c3868953dcb14d
+    revision: 0328e112e279b0cb996e26003319ebb88b4a4ef0
     pull_request:
       provider: github
       id: egohygiene/identity#128
@@ -98,17 +98,18 @@ state:
     default_branch_revision: 12985216d34d71a2c09adfa2fe1e43481b3252ee
     issue_state: open
     pull_request_state: draft
-    notes: PR128 is draft/open at65bc0c8137a54ae9959947cac9c3868953dcb14d through merge3732162c776da4b6b3de798feb72930fd6cebb36;
-      main1298521 is the base. First browser download test received fallback HTML. This checkpoint accompanies
-      corrected fixture delivery and the requested GitHub artifact/template addition; fresh containing-head
-      checks are required. Parked123 is unchanged.
+    notes: 'PR128 is draft/open at0328e112e279b0cb996e26003319ebb88b4a4ef0 through merge4c303ca8ff1ab06663bf64616d9d708394f42677;
+      main1298521 is unchanged. Unit suites pass394 cases. Two browser-fixture delivery attempts failed: initial
+      download fallback HTML, then the existing preview server did not serve the inserted PNG. This containing
+      correction uses a dedicated HTTP fixture with the real built bundle/native PNG; fresh checks are required.
+      Parked123 is unchanged.'
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-21T11:19:30-04:00'
+  reviewed_at: '2026-10-21T11:25:32-04:00'
   reviewed_by: Codex
   evidence:
   - command: 'Live PR127/parked123 and #99/#100/#101/#103/#104 inspection'
@@ -143,13 +144,13 @@ review:
     observed_at: '2026-10-21T11:05:50-04:00'
     notes: 'Local JS dependencies remain absent from the recorded registry/cache block; existing hosted suites
       must execute the added cases. Broader quality stays #70 and parked #80/123.'
-  - command: https://github.com/egohygiene/identity/actions/runs/39623214621; https://github.com/egohygiene/identity/actions/runs/39623214627
+  - command: https://github.com/egohygiene/identity/actions/runs/39623214621; https://github.com/egohygiene/identity/actions/runs/39624788651
     outcome: failed
     observed_at: '2026-10-21T11:13:46-04:00'
-    notes: First source65bc0c8:394 tests/17files pass; seven existing Chromium checks pass. The new browser
-      case reaches hydrated preview/keyboard copy but exact download is fallback HTML. Repair serves the retained
-      PNG through the real generated preview tree and restores prior bytes afterward; equality remains exact.
-      Axe/narrow checks for this new case require fresh execution.
+    notes: Sources65bc0c8/0328e11:394 unit cases and seven prior browser checks pass. The new fixture first
+      downloads fallback HTML; seeding a running preview tree then leaves the image unavailable. The corrected
+      test serves actual built JS/CSS and the exact native PNG via its own loopback HTTP fixture. Dimensions/download
+      equality/axe/narrow assertions remain unchanged and need fresh execution.
   - command: Offline Draft202012Validator schema/model/GitHub specialization checks; uploaded-template byte
       comparison
     outcome: passed
@@ -203,17 +204,17 @@ renderer/src/presentation.js consumes only the two existing native target IDs wi
 
 src/brandkit/profiles.rs repairs the GitHub target's inherited generic2MB budget to999999bytes, below GitHub's documented1MB upload limit. Format, dimensions, path, composition and other profiles retain their existing contracts. The dated official source and regeneration caveat are in docs/consumers/PRESENTATION_PROFILES.md. Generic1200x630 is an Identity choice, not a platform requirement.
 
-The real Mantle fixture retains exact generated model/PNG bytes from unchanged b08045acc1e982dd9424c1d8c91b0badd64744e8, including supplied MIT attribution, alt text and restrictions. It contains only the test handoff, not a full standalone kit. The receipt distinguishes base plus runtime override/file hashes from a release build attestation. No consumer pin/source or human disposition is changed.
+The real Mantle fixture retains exact generated model/PNG bytes from unchanged b08045acc1e982dd9424c1d8c91b0badd64744e8, including supplied MIT attribution, alt text and restrictions. The fixture is partial; its receipt separates base/runtime file hashes from a release attestation. No consumer pin/source or human disposition is changed.
 
 ## Validation and review evidence
 
 All14 focused native consumer cases pass. Two independent fresh Mantle generations and read-only verifies agree on all19 output files including the compiler manifest; all14 consumed source inputs match raw Git. The1280x640 GitHub PNG is16698bytes, SHA25639a01b2242100703c238fd4719201719eddd2ae94f882c56c697b1f43dccf79f. Every manifested output matches bytes. A deliberately damaged PNG fails without repair; a disposable GitHub/social-exclusion variant validates/generates/verifies without those targets. The complete original checkout is preserved.
 
-All35 JS sources parse, docs links and whitespace pass. Added renderer cases cover selection, exact source paths/rights, approved copy reuse, absent/unselected inputs and real fixture integrity. The Chromium case uses that real model/PNG for hydration, navigation/keyboard copy, actual download bytes, axe and narrow layout. The first hosted run passed394 unit cases/seven existing browser checks; the new exact-download assertion found fallback HTML. Corrected fixture delivery preserves exact equality and prior generated bytes. Fresh containing-head runtime checks remain required.
+All35 JS sources parse, docs links and whitespace pass. Added renderer cases cover selection, exact source paths/rights, approved copy reuse, absent/unselected inputs and real fixture integrity. The Chromium case uses that real model/PNG for hydration, navigation/keyboard copy, actual download bytes, axe and narrow layout. The first hosted run passed394 unit cases/seven existing browser checks; the new exact-download assertion found fallback HTML. The corrected isolated HTTP fixture serves the actual built renderer and native PNG without modifying a running preview tree; exact equality is preserved. Fresh containing-head runtime checks remain required.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Fresh hosted execution of the corrected download fixture is the remaining scoped validation gate. Unavailable package/account facts stay absent; supplied metadata and manual upload instructions do not prove registry publication, ownership, uploaded preview or human visual approval. Device/destination cropping and length limits require review.
+Fresh hosted execution of the dedicated real-HTTP download fixture is the remaining scoped validation gate. Unavailable package/account facts stay absent; supplied metadata and manual upload instructions do not prove registry publication, ownership, uploaded preview or human visual approval. Device/destination cropping and length limits require review.
 
 The Aether catalog was rechecked through its live file and matches the pinned source's empty experimental/rights-rejected/release-excluded record. Closed Aether52/53 do not satisfy ADR0016 admission. Future external surfaces retain that owner boundary. The owner-supplied GitHub Repo Card Template is retained byte-for-byte under docs/references/github with source/checksum and reference-only status; no screenshot or account/browser context is committed. The additive githubSocialPreviewDownload definition names the existing native artifact without changing source/download fields or generic compatibility. All29 prior ADR bytes/dispositions/approvals remain unchanged (21accepted/8proposed), including proposed ADR0029 after merge127. Complete public-kit/release acceptance remains #105/#98; Docker, full lint/testing/CI, refactors and final reconciliation remain #70. No release/deployment or creative approval occurs.
 

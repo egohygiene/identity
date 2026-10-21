@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: MIT
 
 import fs from "node:fs";
+import http from "node:http";
 import { createRequire } from "node:module";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { expect, test } from "@playwright/test";
 import { JSDOM } from "jsdom";
@@ -13,46 +16,59 @@ import { BrandKitPage } from "../../src/app.js";
 import { deriveThemeVariables } from "../../src/model.js";
 
 const require = createRequire(import.meta.url);
-const servedPreview = new URL("../../dist/github/social-preview.png", import.meta.url);
-let priorPreview;
-let priorDirectory;
+const distRoot = path.resolve(fileURLToPath(new URL("../../dist/", import.meta.url)));
+const model = JSON.parse(fs.readFileSync(new URL("../../fixtures/mantle-presentation/brand-kit.view-model.json", import.meta.url), "utf8"));
+const png = fs.readFileSync(new URL("../../fixtures/mantle-presentation/github/social-preview.png", import.meta.url));
+let server;
+let fixtureUrl;
 
-test.beforeAll(() => {
-  // Browser downloads can bypass page routing; serve the real fixture from the
-  // generated preview tree so both image and download requests receive PNG bytes.
-  priorDirectory = fs.existsSync(new URL(".", servedPreview));
-  priorPreview = fs.existsSync(servedPreview) ? fs.readFileSync(servedPreview) : null;
-  fs.mkdirSync(new URL(".", servedPreview), { recursive: true });
-  fs.copyFileSync(new URL("../../fixtures/mantle-presentation/github/social-preview.png", import.meta.url), servedPreview);
+test.beforeAll(async () => {
+  // Serve the exact native fixture and the real built renderer over HTTP.
+  // Browser downloads can bypass page routing; no virtual route or mutation of
+  // a running Vite server's generated tree is used for the download assertion.
+  const document = new JSDOM(fs.readFileSync(path.join(distRoot, "index.html"), "utf8")).window.document;
+  document.querySelector("#identity-brand-kit-root").innerHTML = renderToStaticMarkup(
+    React.createElement(BrandKitPage, { model }),
+  );
+  document.querySelector("#identity-brand-kit-model").textContent = JSON.stringify(model).replaceAll("<", "\\u003c");
+  document.querySelector("#identity-brand-vars").textContent = deriveThemeVariables(model);
+  const html = `<!doctype html>\n${document.documentElement.outerHTML}`;
+  const types = { ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".svg": "image/svg+xml" };
+  server = http.createServer((request, response) => {
+    const pathname = decodeURIComponent(new URL(request.url, "http://127.0.0.1").pathname);
+    if (pathname === "/") {
+      response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      return response.end(html);
+    }
+    if (pathname === "/github/social-preview.png") {
+      response.writeHead(200, { "Content-Type": "image/png", "Content-Length": png.length });
+      return response.end(png);
+    }
+    const file = path.resolve(distRoot, `.${pathname}`);
+    if (!file.startsWith(`${distRoot}${path.sep}`) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
+      response.writeHead(404);
+      return response.end();
+    }
+    response.writeHead(200, { "Content-Type": types[path.extname(file)] || "application/octet-stream" });
+    response.end(fs.readFileSync(file));
+  });
+  await new Promise((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", resolve);
+  });
+  fixtureUrl = `http://127.0.0.1:${server.address().port}/`;
 });
 
-test.afterAll(() => {
-  if (priorPreview) fs.writeFileSync(servedPreview, priorPreview);
-  else fs.rmSync(servedPreview, { force: true });
-  if (!priorDirectory) fs.rmdirSync(new URL(".", servedPreview));
+test.afterAll(async () => {
+  if (!server) return;
+  server.closeAllConnections();
+  await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
 });
 
 test("selected presentation preview hydrates, downloads and copies with keyboard access", async ({ page }) => {
-  // Exact native output from unchanged Mantle source, bound by the #104 receipt.
-  const model = JSON.parse(fs.readFileSync(new URL("../../fixtures/mantle-presentation/brand-kit.view-model.json", import.meta.url), "utf8"));
-  const png = fs.readFileSync(new URL("../../fixtures/mantle-presentation/github/social-preview.png", import.meta.url));
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.route("**/*", async (route) => {
-    if (new URL(route.request().url()).pathname === "/github/social-preview.png") {
-      return route.continue();
-    }
-    if (route.request().resourceType() !== "document") return route.continue();
-    const response = await route.fetch();
-    const document = new JSDOM(await response.text()).window.document;
-    document.querySelector("#identity-brand-kit-root").innerHTML = renderToStaticMarkup(
-      React.createElement(BrandKitPage, { model }),
-    );
-    document.querySelector("#identity-brand-kit-model").textContent = JSON.stringify(model).replaceAll("<", "\\u003c");
-    document.querySelector("#identity-brand-vars").textContent = deriveThemeVariables(model);
-    await route.fulfill({ response, body: `<!doctype html>\n${document.documentElement.outerHTML}` });
-  });
-  await page.goto("/");
+  await page.goto(fixtureUrl);
   const section = page.locator("#presentation");
   const navigation = page.getByRole("link", { name: "Presentation profiles", exact: true });
   await navigation.focus();
