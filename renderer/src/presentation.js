@@ -11,7 +11,7 @@ const GITHUB_PREVIEW_GUIDE = "https://docs.github.com/en/repositories/managing-y
 // These are the two existing native output targets, not a platform fact catalog.
 const PRESENTATION_TARGETS = new Map([
   ["github-social-preview", {
-    profile: "github", title: "GitHub repository preview",
+    profile: "github", title: "GitHub repository Social preview",
     instruction: "Review the image and its usage terms, then upload it under repository Settings → Social preview → Edit.",
     guide: GITHUB_PREVIEW_GUIDE,
   }],

@@ -350,7 +350,9 @@ path under the configured base; it does not discover or guess a file.
 The same view copies project name/tagline/repository and existing generated
 Press Kit boilerplates, facts and links exactly. Labels do not activate registry
 or account behavior. Empty/absent downloads retain the prior kit and omit this
-section/navigation. No source or view-model schema extension is introduced.
+section/navigation. Source and view-model fields are unchanged; the schema adds
+an optional named `githubSocialPreviewDownload` definition for the existing
+GitHub artifact, linked to its retained layout reference.
 See the [selected-profile guide](../consumers/PRESENTATION_PROFILES.md) for
 bounded targets, actual consumer proof and manual upload requirements.
 

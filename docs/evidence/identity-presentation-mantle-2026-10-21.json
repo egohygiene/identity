@@ -142,7 +142,7 @@
       },
       {
         "path": "renderer/src/presentation.js",
-        "sha256": "6bc49c00fa46394cfd6b933b9e6c87b31ec1078a88e5213a779f2290c4334b10"
+        "sha256": "982d4a2dc007dbc301a702899454b9ac964ec05d356a42da73089bfc82b18ebd"
       },
       {
         "path": "renderer/src/styles.css",
@@ -180,6 +180,6 @@
     "sourceRightsAndRestrictionsRetained": true,
     "unselectedSocialProfileOmitted": true
   },
-  "observedAt": "2026-10-21T11:03:00-04:00",
+  "observedAt": "2026-10-21T11:18:14-04:00",
   "recordPurpose": "Identity #104 bounded development proof and generated renderer fixture; no new contract, approval, release, upload or deployment."
 }

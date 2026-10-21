@@ -13,6 +13,24 @@ import { BrandKitPage } from "../../src/app.js";
 import { deriveThemeVariables } from "../../src/model.js";
 
 const require = createRequire(import.meta.url);
+const servedPreview = new URL("../../dist/github/social-preview.png", import.meta.url);
+let priorPreview;
+let priorDirectory;
+
+test.beforeAll(() => {
+  // Browser downloads can bypass page routing; serve the real fixture from the
+  // generated preview tree so both image and download requests receive PNG bytes.
+  priorDirectory = fs.existsSync(new URL(".", servedPreview));
+  priorPreview = fs.existsSync(servedPreview) ? fs.readFileSync(servedPreview) : null;
+  fs.mkdirSync(new URL(".", servedPreview), { recursive: true });
+  fs.copyFileSync(new URL("../../fixtures/mantle-presentation/github/social-preview.png", import.meta.url), servedPreview);
+});
+
+test.afterAll(() => {
+  if (priorPreview) fs.writeFileSync(servedPreview, priorPreview);
+  else fs.rmSync(servedPreview, { force: true });
+  if (!priorDirectory) fs.rmdirSync(new URL(".", servedPreview));
+});
 
 test("selected presentation preview hydrates, downloads and copies with keyboard access", async ({ page }) => {
   // Exact native output from unchanged Mantle source, bound by the #104 receipt.
@@ -22,7 +40,7 @@ test("selected presentation preview hydrates, downloads and copies with keyboard
   page.on("pageerror", (error) => errors.push(error.message));
   await page.route("**/*", async (route) => {
     if (new URL(route.request().url()).pathname === "/github/social-preview.png") {
-      return route.fulfill({ contentType: "image/png", body: png });
+      return route.continue();
     }
     if (route.request().resourceType() !== "document") return route.continue();
     const response = await route.fetch();
@@ -48,10 +66,10 @@ test("selected presentation preview hydrates, downloads and copies with keyboard
   await copy.press("Enter");
   await expect(page.getByRole("status")).toContainText("Project tagline copied.");
   const completed = page.waitForEvent("download");
-  await section.getByRole("link", { name: "Download GitHub repository preview", exact: true }).click();
+  await section.getByRole("link", { name: "Download GitHub repository Social preview", exact: true }).click();
   const download = await completed;
   expect(download.suggestedFilename()).toBe("social-preview.png");
-  expect(fs.readFileSync(await download.path())).toEqual(png);
+  expect(fs.readFileSync(await download.path()).equals(png), "Download must equal the exact native PNG bytes").toBe(true);
   await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
   const accessibility = await page.evaluate(async () => window.axe.run(document));
   expect(accessibility.violations).toEqual([]);

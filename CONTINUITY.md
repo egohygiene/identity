@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-10-21T11:07:43-04:00'
+  updated_at: '2026-10-21T11:19:30-04:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -18,6 +18,7 @@ scope:
   - Existing selected preview images, exact project/Press Kit copy and source rights.
   - Conservative GitHub upload budget and unchanged Mantle generation/omission/integrity proof.
   - Source-bound real-consumer fixture and focused browser validation.
+  - Explicit existing GitHub Social preview artifact schema and byte-preserved owner-supplied reference template.
   excludes:
   - New canonical source fields, registry publishers, social account management and external platform matrices.
   - Deferred broad Docker/CI/refactoring campaign, creative approval, upload, release and deployment.
@@ -48,6 +49,8 @@ scope:
   - https://github.com/egohygiene/identity/issues/104
   - https://github.com/egohygiene/identity/issues/116
   - https://github.com/egohygiene/identity/issues/70
+  - contracts/v1/brand-kit-view-model.schema.json
+  - docs/references/github/README.md
 work:
   objective: Make a small existing opt-in target set usable from the kit without new authored brand facts
     or a platform catalog.
@@ -67,6 +70,7 @@ work:
     description: 'Inspect candidate checks and review the scoped #104 PR before authorized merge; #105 follows.'
     readiness: ready
     references:
+    - https://github.com/egohygiene/identity/pull/128
     - https://github.com/egohygiene/identity/issues/104
     - https://github.com/egohygiene/identity/issues/105
     - https://github.com/egohygiene/identity/issues/116
@@ -82,25 +86,29 @@ state:
     verified_at: '2026-10-21T11:05:50-04:00'
   candidate:
     branch: codex/104-presentation-profiles
-    revision: null
-    pull_request: null
+    revision: 65bc0c8137a54ae9959947cac9c3868953dcb14d
+    pull_request:
+      provider: github
+      id: egohygiene/identity#128
+      url: https://github.com/egohygiene/identity/pull/128
     handoff_state: in-progress
   live:
     status: verified
     observed_at: '2026-10-21T11:05:50-04:00'
     default_branch_revision: 12985216d34d71a2c09adfa2fe1e43481b3252ee
     issue_state: open
-    pull_request_state: not-applicable
-    notes: 'PR127 merged with owner authorization at1298521; #102 closed and #104 open. #99/#100/#101/#103
-      prerequisites are closed. The candidate is not yet published; parked123 remains draft/open/unmerged
-      at400846db7f10823d4b5bc1629213caf03960b59c.'
+    pull_request_state: draft
+    notes: PR128 is draft/open at65bc0c8137a54ae9959947cac9c3868953dcb14d through merge3732162c776da4b6b3de798feb72930fd6cebb36;
+      main1298521 is the base. First browser download test received fallback HTML. This checkpoint accompanies
+      corrected fixture delivery and the requested GitHub artifact/template addition; fresh containing-head
+      checks are required. Parked123 is unchanged.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-10-21T11:07:43-04:00'
+  reviewed_at: '2026-10-21T11:19:30-04:00'
   reviewed_by: Codex
   evidence:
   - command: 'Live PR127/parked123 and #99/#100/#101/#103/#104 inspection'
@@ -135,8 +143,23 @@ review:
     observed_at: '2026-10-21T11:05:50-04:00'
     notes: 'Local JS dependencies remain absent from the recorded registry/cache block; existing hosted suites
       must execute the added cases. Broader quality stays #70 and parked #80/123.'
+  - command: https://github.com/egohygiene/identity/actions/runs/39623214621; https://github.com/egohygiene/identity/actions/runs/39623214627
+    outcome: failed
+    observed_at: '2026-10-21T11:13:46-04:00'
+    notes: First source65bc0c8:394 tests/17files pass; seven existing Chromium checks pass. The new browser
+      case reaches hydrated preview/keyboard copy but exact download is fallback HTML. Repair serves the retained
+      PNG through the real generated preview tree and restores prior bytes afterward; equality remains exact.
+      Axe/narrow checks for this new case require fresh execution.
+  - command: Offline Draft202012Validator schema/model/GitHub specialization checks; uploaded-template byte
+      comparison
+    outcome: passed
+    observed_at: '2026-10-21T11:19:30-04:00'
+    notes: Native model and explicit existing GitHub download validate; five mismatched artifact fields reject.
+      Retained template exactly matches all51470 supplied bytes, SHA2565259d6e413242c63afe88027122eed783612ff9a9e48b9a9c51313f6bf66fb94.
+      No source/download fields are added.
   environment_limitations:
-  - Local JS dependencies remain absent; hosted exact-head runtime evidence is pending.
+  - Local JS dependencies remain absent; first hosted unit suite passed but the fixture-delivery repair needs
+    fresh exact-head Chromium execution.
   - This containing checkpoint must receive its own current-head check inspection before merge.
   - No final human visual approval, all-browser conformance, social account/registry verification, upload,
     complete-kit acceptance, release or deployment is asserted.
@@ -186,13 +209,13 @@ The real Mantle fixture retains exact generated model/PNG bytes from unchanged b
 
 All14 focused native consumer cases pass. Two independent fresh Mantle generations and read-only verifies agree on all19 output files including the compiler manifest; all14 consumed source inputs match raw Git. The1280x640 GitHub PNG is16698bytes, SHA25639a01b2242100703c238fd4719201719eddd2ae94f882c56c697b1f43dccf79f. Every manifested output matches bytes. A deliberately damaged PNG fails without repair; a disposable GitHub/social-exclusion variant validates/generates/verifies without those targets. The complete original checkout is preserved.
 
-All35 JS sources parse, docs links and whitespace pass. Added renderer cases cover selection, exact source paths/rights, approved copy reuse, absent/unselected inputs and real fixture integrity. The Chromium case uses that real model/PNG for hydration, navigation/keyboard copy, actual download bytes, axe and narrow layout. These authored JS cases still need hosted execution because local dependencies are absent; no browser pass is claimed yet.
+All35 JS sources parse, docs links and whitespace pass. Added renderer cases cover selection, exact source paths/rights, approved copy reuse, absent/unselected inputs and real fixture integrity. The Chromium case uses that real model/PNG for hydration, navigation/keyboard copy, actual download bytes, axe and narrow layout. The first hosted run passed394 unit cases/seven existing browser checks; the new exact-download assertion found fallback HTML. Corrected fixture delivery preserves exact equality and prior generated bytes. Fresh containing-head runtime checks remain required.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Hosted JS/browser execution is the remaining scoped validation gate. Unavailable package/account facts stay absent; supplied metadata and manual upload instructions do not prove registry publication, ownership, uploaded preview or human visual approval. Device/destination cropping and length limits require review.
+Fresh hosted execution of the corrected download fixture is the remaining scoped validation gate. Unavailable package/account facts stay absent; supplied metadata and manual upload instructions do not prove registry publication, ownership, uploaded preview or human visual approval. Device/destination cropping and length limits require review.
 
-The Aether catalog was rechecked through its live file and matches the pinned source's empty experimental/rights-rejected/release-excluded record. Closed Aether52/53 do not satisfy ADR0016 admission. Future external surfaces retain that owner boundary. All29 prior ADR bytes/dispositions/approvals remain unchanged (21accepted/8proposed), including proposed ADR0029 after merge127. Complete public-kit/release acceptance remains #105/#98; Docker, full lint/testing/CI, refactors and final reconciliation remain #70. No release/deployment or creative approval occurs.
+The Aether catalog was rechecked through its live file and matches the pinned source's empty experimental/rights-rejected/release-excluded record. Closed Aether52/53 do not satisfy ADR0016 admission. Future external surfaces retain that owner boundary. The owner-supplied GitHub Repo Card Template is retained byte-for-byte under docs/references/github with source/checksum and reference-only status; no screenshot or account/browser context is committed. The additive githubSocialPreviewDownload definition names the existing native artifact without changing source/download fields or generic compatibility. All29 prior ADR bytes/dispositions/approvals remain unchanged (21accepted/8proposed), including proposed ADR0029 after merge127. Complete public-kit/release acceptance remains #105/#98; Docker, full lint/testing/CI, refactors and final reconciliation remain #70. No release/deployment or creative approval occurs.
 
 ## Next dependency-ready work
 
@@ -200,7 +223,7 @@ Publish the scoped draft, inspect its exact-head checks and review #104 before a
 
 ## Parallel changes and reconciliation
 
-Parked123 supplies no merged Docker/browser acceptance. Decision impact is reference: accepted ADR0008/0010/0015/0016/0020 already govern typed profiles, immutable renderer inputs, public Press Kit facts, external catalogs and account lifecycle. This change presents existing outputs and repairs an existing provider byte limit; no public source contract, platform ownership or approval boundary changes. Recheck that classification against the final diff. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified owner checkouts; authoring guidance remains draft.
+Parked123 supplies no merged Docker/browser acceptance. Decision impact is reference: accepted ADR0005/0008/0010/0015/0016/0020 already govern typed profiles, immutable renderer inputs, public Press Kit facts, external catalogs and account lifecycle. This change presents existing outputs and repairs an existing provider byte limit; source/download fields and existing generic compatibility remain unchanged; the named artifact definition exposes an existing supported output. No platform ownership or approval boundary changes. Recheck that classification against the final diff. Exact pinned Aether authoring2.1.0/continuity1.1.0 and Hygiene policy1.2.0 were read from verified owner checkouts; authoring guidance remains draft.
 
 ## Privacy and redaction
 

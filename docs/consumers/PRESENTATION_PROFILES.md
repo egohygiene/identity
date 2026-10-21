@@ -18,7 +18,7 @@ The implementation owners are the typed native catalog in
 [`src/brandkit/profiles.rs`](../../src/brandkit/profiles.rs) and the
 [package contract](../contracts/BRAND_KIT_PACKAGES_V1.md). The older `profiles/`
 JSON files describe **v0** and are not the native v1 catalog. No new output
-profile or source schema is required for this selection.
+profile or source field is required for this selection.
 
 In `.identity/targets/profiles.json`, retain the project's current selections
 and add only the required `{ "id": "github", "version": "1.0.0" }` or
@@ -32,6 +32,24 @@ enforces GitHub's existing upload requirement without changing its output path,
 format, dimensions or image composition. Previously generated oversized previews
 must be regenerated and reviewed with the updated immutable compiler pin; old
 releases and their receipts are not rewritten.
+
+## GitHub Social preview artifact and template
+
+The artifact for the repository setting shown in the supplied screenshot is
+**`github-social-preview`**, selected by **`github@1.0.0`** and generated as
+**`github/social-preview.png`**. It has the named
+`#/$defs/githubSocialPreviewDownload` specialization in the
+[artifact/view-model schema](../../contracts/v1/brand-kit-view-model.schema.json).
+That additive definition describes the existing ID, profile, path, PNG format
+and 1280 × 640 dimensions; the native compiler enforces the byte budget. Generic
+existing download records and source fields remain compatible.
+
+The supplied [GitHub Repo Card Template](../references/github/repository-open-graph-template.png)
+is retained unchanged with its [source and checksum](../references/github/README.md).
+Use it when designing approved preview artwork, including its stated 40pt border
+recommendation. It is a reference for that setting and is not automatically
+selected as a project's logo or preview. The kit continues to generate only
+approved project artwork through its existing selection and rights boundaries.
 
 ## Reuse copy and discovery facts
 
