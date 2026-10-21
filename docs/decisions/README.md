@@ -17,8 +17,9 @@ proposes the executable minimal authoring core and nullable-guidance behavior.
 ADR-0026 proposes repository-wide native writer serialization and its persistent
 coordination file. ADR-0027 proposes an optional paragraph description in the
 existing Press Kit boilerplates. ADR-0028 proposes optional asset-usage transport
-and truthful missing rights metadata. These seven proposals have no lifecycle
-approval; the corpus contains 21 accepted records and seven proposed records.
+and truthful missing rights metadata. ADR-0029 proposes governed public asset
+selection and selected-output download metadata. These eight proposals have no
+lifecycle approval; the corpus contains 21 accepted records and eight proposed records.
 
 | ID | Title | Decision status | Date | Canonical record |
 | --- | --- | --- | --- | --- |
@@ -50,6 +51,7 @@ approval; the corpus contains 21 accepted records and seven proposed records.
 | ADR-0026 | Serialize local generation and recovery with one persistent native lock | proposed | 2026-10-19 | [ADR-0026](ADR-0026-local-writer-serialization.md) |
 | ADR-0027 | Reuse Press Kit boilerplates for optional paragraph descriptions | proposed | 2026-10-20 | [ADR-0027](ADR-0027-optional-paragraph-boilerplate.md) |
 | ADR-0028 | Project asset rights without inventing missing authority | proposed | 2026-10-20 | [ADR-0028](ADR-0028-asset-rights-projection.md) |
+| ADR-0029 | Bind public downloads to governed assets and selected outputs | proposed | 2026-10-21 | [ADR-0029](ADR-0029-selected-public-downloads.md) |
 
 ## Ongoing capture
 
@@ -62,7 +64,8 @@ The index dates identify the current 2026-10-10 disposition for migrated legacy
 records, the reconstruction date for ADR-0019–021 and the proposal date for
 ADR-0022; ADR-0023/024 use their actual 2026-10-18 proposal date and ADR-0025 its
 2026-10-19 proposal date; ADR-0026 also uses its actual 2026-10-19 proposal date.
-ADR-0027 and ADR-0028 use their actual 2026-10-20 proposal date. Original declared dates,
+ADR-0027 and ADR-0028 use their actual 2026-10-20 proposal date; ADR-0029 uses its
+actual 2026-10-21 proposal date. Original declared dates,
 status claims and substantive prose remain preserved in each record with
 immutable source provenance. Approval uses its actual current date; no historical
 approval is inferred. No ID, filename or compatibility anchor was changed.

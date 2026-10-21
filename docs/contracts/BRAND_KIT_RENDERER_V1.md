@@ -50,7 +50,7 @@ The view model contains only public, approved, renderer-relevant projections:
   and optional license/provenance/usage records;
 - canonical voice and usage guidance with explicit declaration status;
 - explicit motion, imagery, and mascot support status;
-- versioned package/download paths.
+- selected package paths and optional source-bound download metadata.
 
 When a consumer supplies the complete generated design-system projection
 directory, the renderer may additionally consume:
@@ -103,14 +103,60 @@ and [Press Kit compatibility notes](PRESS_KIT_V1.md#compatibility).
 The renderer must not read `.identity/`, infer missing brand facts, or reach into
 a sibling repository.
 
+### Public source assets and selected downloads
+
+The generic compiler selects a public asset only when its existing usage
+`assets[]` record is approved/public, `status: "active"`, and
+`availability: "public"`, with the validated asset ID/path bound to local
+provenance. Source rights approval alone does not select an asset for public
+display. Internal, candidate, rejected, superseded and unavailable assets stay
+out of the public asset model. Missing usage produces an empty public asset
+list; it does not invalidate local generation with independently nullable
+guidance or discard the complete source/review state.
+
+Asset labels, optional `kind` and optional `notes` come from that selected usage
+record. `intendedUse` preserves its supplied notes. These fields do not infer
+logo roles, light/dark variants or new artwork from filenames or IDs. Per-asset
+rights and approval continue to describe the bound provenance source.
+
+Optional `downloads[]` describes selected source-copy and raster targets:
+
+| Member | Meaning |
+| --- | --- |
+| `id`, `label` | Target identity and display label |
+| `path`, `mediaType`, `profile` | Bundle-relative output path, actual format and selected target profile |
+| `sourceAssetId`, `sourceSha256` | Public master asset and SHA-256 of that source's bytes |
+| `dimensions` | Supplied/generated dimension description |
+
+`sourceSha256` is not the checksum of a derived PNG. The compiler manifest
+records output checksums and sizes. The public asset catalog can contain an
+embedded approved master without a selected download target; it must not
+invent a file for that master.
+
+The renderer target receives the actual `CompilerRequest` targets through
+`with_reference_renderer`. Only matching selected targets become packages or
+downloads; an archive is advertised only when its underlying mark is public.
+`BrandKitViewModel::from_brand_kit` alone has no target handoff and declares no
+generated file links. Selected targets describe generation intent; successful
+generation and byte verification establish that those files exist.
+
+The v1 bridge adds distinct selected public SVG masters to the `core` request
+as source-copy targets at safe `brand/<downloadName>` paths, using the existing
+SVG adapter. An existing matching target is reused; conflicting targets fail
+before writes. Selected native profiles can expose the existing favicon/PWA/
+maskable/social PNG targets. This introduces no new universal ICO or avatar
+adapter. See the [authoring worksheet](../consumers/AUTHORING.md#select-public-masters-and-downloads)
+for source selection and proposed
+[ADR-0029](../decisions/ADR-0029-selected-public-downloads.md) for this boundary.
+
 ## Artifact paths and configured deployment bases
 
 Compatibility rationale is recorded in proposed
 [ADR-0024](../decisions/ADR-0024-renderer-artifact-paths.md).
 
 All model-provided download paths are relative to the published bundle:
-`assets[].downloadPath`, `packages[].path`, every optional Design System and
-Press Kit artifact/asset path, and the separately supplied publication
+`assets[].downloadPath`, `packages[].path`, optional `downloads[].path`, every
+optional Design System and Press Kit artifact/asset path, and the separately supplied publication
 `manifestPath`. Imported models are checked before rendering; URL construction
 applies the same shared validator. A generated-download asset requires a path;
 an embedded source may omit it or use null.
@@ -156,6 +202,36 @@ Do not patch historical published models, source digests, or artifact bytes.
 The explicit publication `releaseUrl` remains an external release-page link;
 v1 has no generic external-download path variant.
 
+### Browser metadata and local artifact verification
+
+Static rendering accepts optional `--icon-path`, `--apple-touch-icon-path` and
+`--web-manifest-path` bundle-relative paths. They use the same safe path rules
+and `--asset-base-url` as downloads. An omitted option emits no corresponding
+head link; the renderer does not assume that a favicon or manifest was built.
+
+Supplying `--artifact-root` checks advertised local downloads and configured
+browser assets before rendering: paths must resolve to nonempty regular files
+within that root, including after symlink resolution. Source asset bytes must
+match their source checksum. Add `--artifact-manifest` to verify the supported
+compiler/publication inventory, output hashes/sizes and source-digest binding.
+The manifest option requires an artifact root; its filesystem path is separate
+from the bundle-relative paths it inventories.
+
+For example, from `renderer/` after a successful consumer generation:
+
+```bash
+pnpm run render -- \
+  --model "/path/to/consumer/assets/identity/packages/renderer/brand-kit.view-model.json" \
+  --artifact-root "/path/to/consumer/assets/identity" \
+  --artifact-manifest "/path/to/compiler-manifest.json" \
+  --asset-base-url "/brand/"
+```
+
+Supply the actual compiler manifest path. These checks read local bytes only
+and never fetch a configured CDN or download URL. Rendering a model alone
+remains supported for preview, with no claim of execution or file-integrity
+proof.
+
 ## Compiler API
 
 Rust consumers compose the existing package request with the renderer target:
@@ -176,6 +252,10 @@ register_reference_renderer_adapter(&mut registry)?;
 
 The adapter is deterministic, offline, and registered as
 `identity-reference-renderer-model@1.0.0`.
+Compose the renderer after all selected targets have been added. The v1
+consumer bridge uses its source-aware request to add public master copies
+before calling `with_reference_renderer`; the generic profile-only helper
+cannot discover additional source masters.
 
 ## Static rendering guarantees
 
@@ -228,6 +308,12 @@ renderer together before consuming a model that supplies it. Existing models
 without `usage` remain accepted; old release artifacts are not edited. Proposed
 [ADR-0028](../decisions/ADR-0028-asset-rights-projection.md) records this bounded
 compatibility and absence treatment without supplying legal or ADR approval.
+
+The optional `downloads`, asset `kind` and asset `notes` members likewise keep
+the v1 identifier and require matching reviewed compiler/schema/renderer pins.
+Older strict readers may reject them; omission remains supported. Regenerate
+the complete source-bound handoff when adopting them rather than editing an
+immutable published package. No model extension supplies human approval.
 
 The separate release publisher preserves missing configured license, origin and
 approval as null. Its release-owned byte/archive selection is unchanged: a

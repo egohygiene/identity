@@ -28,6 +28,10 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
     (token) =>
       token.type === "fontFamily" || token.path.startsWith("typography."),
   );
+  const completeKit = model.packages.find((entry) =>
+    ["brand-kit-archive", "complete-brand-kit"].includes(entry.id)
+    && entry.mediaType === "application/zip",
+  );
 
   return h(
     "div",
@@ -74,18 +78,18 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
           },
           "Theme: system",
         ),
-        h(
+        completeKit ? h(
           "a",
           {
             className: "button",
             href: joinAssetUrl(
               assetBaseUrl,
-              "packages/brand-kit/brand-kit.zip",
+              completeKit.path,
             ),
             download: true,
           },
           "Download complete kit",
-        ),
+        ) : null,
       ),
     ),
     h(
@@ -96,7 +100,11 @@ export function BrandKitPage({ model, assetBaseUrl = "./", publication = null })
         "main",
         { id: "main-content", tabIndex: -1 },
         h(OverviewSection, { model }),
-        h(AssetsSection, { assets: model.assets, assetBaseUrl }),
+        h(AssetsSection, {
+          assets: model.assets,
+          downloads: model.downloads || [],
+          assetBaseUrl,
+        }),
         h(ColorSection, { tokens: colorTokens }),
         h(TypographySection, { tokens: typographyTokens }),
         h(GuidanceSection, {
@@ -660,7 +668,7 @@ function OverviewSection({ model }) {
   );
 }
 
-function AssetsSection({ assets, assetBaseUrl }) {
+function AssetsSection({ assets, downloads, assetBaseUrl }) {
   return h(
     Section,
     { id: "logos", title: "Logo and marks", preview: true },
@@ -688,6 +696,8 @@ function AssetsSection({ assets, assetBaseUrl }) {
                   : h("p", null, "Preview unavailable for this media type."),
               ),
               h("h3", null, asset.label),
+              asset.kind ? h("p", { className: "eyebrow" }, humanize(asset.kind)) : null,
+              asset.notes ? h("p", null, asset.notes) : null,
               h(DefinitionList, {
                 entries: [
                   ["Format", asset.mediaType],
@@ -709,6 +719,7 @@ function AssetsSection({ assets, assetBaseUrl }) {
                   ],
                 ],
               }),
+              asset.usage ? h(AssetRights, { asset }) : null,
               asset.downloadPath
                 ? h(
                     "a",
@@ -724,10 +735,49 @@ function AssetsSection({ assets, assetBaseUrl }) {
                     { className: "support-note" },
                     "This approved source is embedded for review but has no generated download path.",
                   ),
+              h(AssetDownloads, {
+                asset,
+                downloads: downloads.filter((download) =>
+                  download.sourceAssetId === asset.id
+                  && (!asset.downloadPath || normalizeArtifactPath(download.path)
+                    !== normalizeArtifactPath(asset.downloadPath)),
+                ),
+                assetBaseUrl,
+              }),
             ),
           ),
         ),
   );
+}
+
+function AssetDownloads({ asset, downloads, assetBaseUrl }) {
+  return downloads.length
+    ? h(
+        "section",
+        { "data-asset-downloads": asset.id },
+        h("h4", null, "Available downloads"),
+        h(
+          "ul",
+          { className: "guidance-list" },
+          ...downloads.map((download) => h(
+            "li",
+            { key: download.id },
+            h("a", {
+              className: "text-link",
+              href: joinAssetUrl(assetBaseUrl, download.path),
+              download: true,
+            }, download.label),
+            h("p", { className: "support-note" },
+              `${download.dimensions} · ${download.mediaType} · ${download.profile}`,
+            ),
+            h(DefinitionList, { entries: [
+              ["Source asset", download.sourceAssetId],
+              ["Source SHA-256", download.sourceSha256],
+            ] }),
+          )),
+        ),
+      )
+    : null;
 }
 
 function ColorSection({ tokens }) {

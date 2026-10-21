@@ -10,6 +10,8 @@ import { fileURLToPath } from "node:url";
 import { JSDOM } from "jsdom";
 import { describe, expect, test } from "vitest";
 
+import { artifactPathFromUrl } from "../src/download-integrity.js";
+
 const rendererRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const repositoryRoot = path.resolve(rendererRoot, "..");
 
@@ -49,6 +51,7 @@ describe("release-backed public asset rights", () => {
       delete unknown.approval;
       delete unknown.usage;
       config.assets = [known, unknown];
+      delete config.browserAssets;
       fs.writeFileSync(path.join(repository, "publication/identity-brand-kit.config.json"), JSON.stringify(config));
       fs.mkdirSync(path.join(repository, "assets/identity/brand"), { recursive: true });
       const contents = {
@@ -65,6 +68,7 @@ describe("release-backed public asset rights", () => {
         "--output-directory", "dist",
         "--release-tag", "v1.0.0",
         "--release-commit", "a".repeat(40),
+        "--asset-base-url", "https://cdn.example.invalid/identity/v1/",
       ], { cwd: renderer, encoding: "utf8" });
       expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
       const model = JSON.parse(fs.readFileSync(path.join(renderer, ".identity-public-build/brand-kit.view-model.json"), "utf8"));
@@ -84,7 +88,12 @@ describe("release-backed public asset rights", () => {
       const embedded = JSON.parse(document.querySelector("#identity-brand-kit-model").textContent);
       expect(embedded.assets[1]).toEqual(model.assets[1]);
       const downloads = [...document.querySelectorAll("a[download]")].map((link) => link.getAttribute("href"));
-      expect(downloads).toContain("./brand/unknown.svg");
+      expect(downloads).toContain("https://cdn.example.invalid/identity/v1/brand/unknown.svg");
+      expect(document.querySelector('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]')).toBeNull();
+      for (const href of downloads) {
+        const relative = artifactPathFromUrl(href, "https://cdn.example.invalid/identity/v1/");
+        expect(fs.statSync(path.join(renderer, "dist", relative)).size).toBeGreaterThan(0);
+      }
 
       const archive = path.join(renderer, "dist/packages/identity-brand-kit-v1.0.0.zip");
       const archived = JSON.parse(execFileSync("python3", [
@@ -101,4 +110,23 @@ describe("release-backed public asset rights", () => {
       fs.rmSync(temporary, { recursive: true, force: true });
     }
   }, 20000);
+
+  test("rejects a missing configured asset before packaging or rendering", () => {
+    const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "identity-public-missing-"));
+    try {
+      const config = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "publication/identity-brand-kit.config.json"), "utf8"));
+      config.assets = [{ ...config.assets[0], sourcePath: "brand/missing.svg" }];
+      delete config.browserAssets;
+      fs.mkdirSync(path.join(temporary, "publication"));
+      fs.mkdirSync(path.join(temporary, "assets/identity"), { recursive: true });
+      fs.writeFileSync(path.join(temporary, "publication/identity-brand-kit.config.json"), JSON.stringify(config));
+      const result = spawnSync(process.execPath, [
+        path.join(rendererRoot, "scripts/build-public-site.mjs"), "--source-root", temporary,
+      ], { encoding: "utf8" });
+      expect(result.status).not.toBe(0);
+      expect(result.stderr).toContain("Advertised artifact is missing: brand/missing.svg");
+    } finally {
+      fs.rmSync(temporary, { recursive: true, force: true });
+    }
+  });
 });

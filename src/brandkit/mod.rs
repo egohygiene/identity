@@ -29,8 +29,10 @@ use crate::compiler::{
 pub use guidance::GuidanceAudience;
 pub use model::{
     BRAND_KIT_MODEL_SCHEMA, BrandKitAssetUsage, BrandKitGuidance, BrandKitLicense, BrandKitModel,
-    BrandKitOrigin, BrandKitProject, BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken,
+    BrandKitOrigin, BrandKitProject, BrandKitPublicAsset, BrandKitSourceAsset,
+    BrandKitSourceGovernance, BrandKitToken,
 };
+pub(crate) use profiles::bind_selected_output_targets;
 pub use profiles::{
     BRAND_KIT_PROFILE_VERSION, ProfileDescriptor, ProfileSelection, all_profiles, compiler_request,
     profile_catalog, profile_ids,

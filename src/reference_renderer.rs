@@ -76,6 +76,23 @@ pub struct BrandKitViewAsset {
     pub approval: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub usage: Option<BrandKitAssetUsage>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub kind: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub notes: Option<String>,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct BrandKitViewDownload {
+    pub id: String,
+    pub label: String,
+    pub path: String,
+    pub media_type: String,
+    pub profile: String,
+    pub source_asset_id: String,
+    pub source_sha256: String,
+    pub dimensions: String,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -130,11 +147,17 @@ pub struct BrandKitViewModel {
     pub guidance: BrandKitViewGuidance,
     pub support: BrandKitViewSupport,
     pub packages: Vec<BrandKitViewPackage>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub downloads: Vec<BrandKitViewDownload>,
 }
 
 impl BrandKitViewModel {
     #[must_use]
     pub fn from_brand_kit(model: &BrandKitModel) -> Self {
+        Self::from_selected_targets(model, &[])
+    }
+
+    fn from_selected_targets(model: &BrandKitModel, targets: &[ProjectionTarget]) -> Self {
         let guidance = model
             .guidance
             .for_audience(crate::brandkit::GuidanceAudience::Public);
@@ -151,20 +174,27 @@ impl BrandKitViewModel {
             })
             .collect();
 
-        let assets = model
-            .sources
+        let public_assets = model.public_assets();
+        let assets = public_assets
             .iter()
-            .map(|(role, source)| {
+            .map(|(role, declaration)| {
+                let source = &model.sources[role];
                 let governance = model.source_governance.get(role);
-                let download_path = projected_source_path(role);
+                let download_path = targets.iter().find_map(|target| {
+                    (target.adapter_id == "identity-source-svg"
+                        && target.media_type == "image/svg+xml"
+                        && target.parameters.get("role").and_then(Value::as_str)
+                            == Some(role.as_str()))
+                    .then(|| target.relative_path.clone())
+                });
                 BrandKitViewAsset {
                     id: role.clone(),
-                    label: humanize_identifier(role),
+                    label: declaration.label.clone(),
                     media_type: source.media_type.clone(),
                     sha256: source.sha256.clone(),
                     alt_text: source.alt_text.clone(),
                     dimensions: asset_dimensions(source),
-                    intended_use: asset_intended_use(role),
+                    intended_use: declaration.notes.clone(),
                     safe_zone: source.safe_zone,
                     text: source.text.clone(),
                     availability: if download_path.is_some() {
@@ -177,6 +207,8 @@ impl BrandKitViewModel {
                     origin: governance.map(|entry| entry.origin.clone()),
                     approval: governance.map(|entry| entry.approval.clone()),
                     usage: governance.and_then(|entry| entry.usage.clone()),
+                    kind: Some(declaration.kind.clone()),
+                    notes: Some(declaration.notes.clone()),
                 }
             })
             .collect();
@@ -213,7 +245,49 @@ impl BrandKitViewModel {
                     status: "not-declared".to_owned(),
                 },
             },
-            packages: package_catalog(),
+            packages: package_catalog()
+                .into_iter()
+                .filter(|package| {
+                    targets
+                        .iter()
+                        .any(|target| package_target_matches(package, target))
+                        && (package.id != "brand-kit-archive" || public_assets.contains_key("mark"))
+                })
+                .collect(),
+            downloads: targets
+                .iter()
+                .filter_map(|target| {
+                    let role = match target.adapter_id.as_str() {
+                        "identity-source-svg" if target.media_type == "image/svg+xml" => {
+                            target.parameters.get("role")?
+                        }
+                        "identity-raster" if target.media_type == "image/png" => {
+                            target.parameters.get("sourceRole")?
+                        }
+                        _ => return None,
+                    }
+                    .as_str()?;
+                    public_assets.get(role)?;
+                    let source = model.sources.get(role)?;
+                    let dimensions = if target.adapter_id == "identity-raster" {
+                        let width = target.parameters.get("width")?.as_u64()?;
+                        let height = target.parameters.get("height")?.as_u64()?;
+                        format!("{width} × {height} pixels")
+                    } else {
+                        asset_dimensions(source)
+                    };
+                    Some(BrandKitViewDownload {
+                        id: target.id.clone(),
+                        label: humanize_identifier(&target.id),
+                        path: target.relative_path.clone(),
+                        media_type: target.media_type.clone(),
+                        profile: target.profile.clone(),
+                        source_asset_id: role.to_owned(),
+                        source_sha256: source.sha256.clone(),
+                        dimensions,
+                    })
+                })
+                .collect(),
         }
     }
 }
@@ -234,7 +308,13 @@ pub fn reference_renderer_target() -> ProjectionTarget {
 
 #[must_use]
 pub fn with_reference_renderer(mut request: CompilerRequest) -> CompilerRequest {
-    request.targets.push(reference_renderer_target());
+    crate::brandkit::bind_selected_output_targets(&mut request.targets);
+    let mut renderer = reference_renderer_target();
+    renderer.parameters.insert(
+        "selectedTargets".to_owned(),
+        serde_json::to_value(&request.targets).expect("compiler targets serialize to JSON"),
+    );
+    request.targets.push(renderer);
     request.targets.sort_by(|left, right| {
         left.profile
             .cmp(&right.profile)
@@ -270,16 +350,11 @@ impl ProjectionAdapter for ReferenceRendererAdapter {
     fn plan(
         &self,
         identity: &ResolvedIdentity,
-        _target: &ProjectionTarget,
+        target: &ProjectionTarget,
     ) -> CompilerResult<AdapterPlan> {
         let model = BrandKitModel::from_resolved(identity)?;
-        let view_model = BrandKitViewModel::from_brand_kit(&model);
-        if view_model.assets.is_empty() {
-            return Err(renderer_error(
-                REFERENCE_RENDERER_OUTPUT_PATH,
-                "reference renderer requires at least one approved source asset".to_owned(),
-            ));
-        }
+        let _view_model =
+            BrandKitViewModel::from_selected_targets(&model, &selected_targets(target)?);
         Ok(AdapterPlan {
             warnings: Vec::new(),
             required_approvals: BTreeSet::new(),
@@ -289,10 +364,11 @@ impl ProjectionAdapter for ReferenceRendererAdapter {
     fn render(
         &self,
         identity: &ResolvedIdentity,
-        _target: &ProjectionTarget,
+        target: &ProjectionTarget,
     ) -> CompilerResult<Vec<u8>> {
         let model = BrandKitModel::from_resolved(identity)?;
-        let view_model = BrandKitViewModel::from_brand_kit(&model);
+        let view_model =
+            BrandKitViewModel::from_selected_targets(&model, &selected_targets(target)?);
         let mut bytes = serde_json::to_vec_pretty(&view_model).map_err(|error| {
             renderer_error(
                 REFERENCE_RENDERER_OUTPUT_PATH,
@@ -358,11 +434,20 @@ fn guidance_section(value: Option<Value>) -> BrandKitViewGuidanceSection {
     }
 }
 
-fn projected_source_path(role: &str) -> Option<String> {
-    match role {
-        "mark" => Some("brand/mark.svg".to_owned()),
-        _ => None,
-    }
+fn selected_targets(target: &ProjectionTarget) -> CompilerResult<Vec<ProjectionTarget>> {
+    target
+        .parameters
+        .get("selectedTargets")
+        .map(|value| {
+            serde_json::from_value(value.clone()).map_err(|error| {
+                renderer_error(
+                    &target.relative_path,
+                    format!("selected output targets are invalid: {error}"),
+                )
+            })
+        })
+        .transpose()
+        .map(Option::unwrap_or_default)
 }
 
 fn asset_dimensions(source: &BrandKitSourceAsset) -> String {
@@ -383,17 +468,6 @@ fn asset_dimensions(source: &BrandKitSourceAsset) -> String {
     }
 
     format!("{} × {} SVG viewBox units", components[2], components[3])
-}
-
-fn asset_intended_use(role: &str) -> String {
-    match role {
-        "mark" => "Primary scalable brand mark for approved product surfaces.",
-        "wordmark" => "Primary brand name treatment for approved product surfaces.",
-        "lockup-horizontal" => "Horizontal mark-and-wordmark composition.",
-        "lockup-stacked" => "Stacked mark-and-wordmark composition.",
-        _ => "Approved source asset for Identity-generated brand projections.",
-    }
-    .to_owned()
 }
 
 fn attribute_value<'a>(text: &'a str, name: &str) -> Option<&'a str> {
@@ -422,6 +496,20 @@ fn humanize_identifier(value: &str) -> String {
         })
         .collect::<Vec<_>>()
         .join(" ")
+}
+
+fn package_target_matches(package: &BrandKitViewPackage, target: &ProjectionTarget) -> bool {
+    let (adapter, format) = match package.id.as_str() {
+        "brand-kit-archive" => ("identity-package", "zip"),
+        "design-tokens" => ("identity-tokens", "dtcg-json"),
+        "public-metadata" => ("identity-metadata", "metadata-json"),
+        "guidance" => ("identity-guidance", "markdown"),
+        _ => return false,
+    };
+    target.relative_path == package.path
+        && target.media_type == package.media_type
+        && target.adapter_id == adapter
+        && target.parameters.get("format").and_then(Value::as_str) == Some(format)
 }
 
 fn package_catalog() -> Vec<BrandKitViewPackage> {

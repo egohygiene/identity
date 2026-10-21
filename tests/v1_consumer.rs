@@ -33,7 +33,9 @@ fn published_v1_source_contract_drives_selected_package_profiles() {
 
     let temporary = TempDir::new().expect("create output repository");
     let request = with_reference_renderer(
-        compiler_request("assets/identity", pipeline.profiles()).expect("build selected request"),
+        pipeline
+            .compiler_request("assets/identity")
+            .expect("build selected request"),
     );
     let mut registry = AdapterRegistry::new();
     register_builtin_adapters(&mut registry).expect("register package adapters");
@@ -81,15 +83,31 @@ fn published_v1_source_contract_drives_selected_package_profiles() {
             .expect("read source provenance"),
     )
     .expect("parse source provenance");
-    for asset in provenance["assets"].as_array().expect("source assets") {
-        let projected = renderer["assets"]
+    let public_assets = renderer["assets"].as_array().expect("renderer assets");
+    assert_eq!(public_assets.len(), 1);
+    assert_eq!(public_assets[0]["id"], "mark");
+    assert_eq!(public_assets[0]["usage"], provenance["assets"][0]["usage"]);
+    assert_eq!(public_assets[0]["kind"], "mark");
+    assert_eq!(public_assets[0]["notes"], public_assets[0]["intendedUse"]);
+    assert_eq!(renderer["downloads"].as_array().unwrap().len(), 1);
+    assert!(
+        renderer["packages"]
             .as_array()
-            .expect("renderer assets")
+            .unwrap()
             .iter()
-            .find(|projected| projected["id"] == asset["id"])
-            .expect("renderer source asset");
-        assert_eq!(projected["usage"], asset["usage"]);
-    }
+            .all(|package| package["id"] != "brand-kit-archive")
+    );
+    let serialized = serde_json::to_string(&renderer).unwrap();
+    assert!(!serialized.contains("legacy-wordmark"));
+    assert!(!serialized.contains("The retired Example Product"));
+    assert!(!serialized.contains("mascot-kern"));
+    let intent = identity::compiler::IdentityReader::read(&pipeline).unwrap();
+    let local = BrandKitModel::from_resolved(&pipeline.resolve(&intent).unwrap()).unwrap();
+    assert_eq!(
+        local.sources.len(),
+        3,
+        "review/local sources remain complete"
+    );
 }
 
 fn copy_tree(source: &Path, destination: &Path) {
@@ -102,6 +120,238 @@ fn copy_tree(source: &Path, destination: &Path) {
         } else {
             fs::copy(entry.path(), output).expect("copy fixture file");
         }
+    }
+}
+
+fn generate_request(
+    root: &Path,
+    pipeline: &V1ConsumerPipeline,
+    request: identity::compiler::CompilerRequest,
+) -> Value {
+    let mut registry = AdapterRegistry::new();
+    register_builtin_adapters(&mut registry).unwrap();
+    register_reference_renderer_adapter(&mut registry).unwrap();
+    let mut store = LocalArtifactStore::new(root).unwrap();
+    let mut compiler = Compiler::new(pipeline, pipeline, pipeline, &registry, &mut store);
+    let prepared = compiler.prepare(with_reference_renderer(request)).unwrap();
+    compiler.execute(&prepared, &BTreeSet::new()).unwrap();
+    serde_json::from_slice(
+        &fs::read(root.join("assets/identity/packages/renderer/brand-kit.view-model.json"))
+            .unwrap(),
+    )
+    .unwrap()
+}
+
+#[test]
+fn selected_outputs_bind_public_downloads_and_standalone_metadata() {
+    let repository = TempDir::new().unwrap();
+    copy_tree(&fixture_root(), repository.path());
+    let pipeline = V1ConsumerPipeline::load(repository.path()).unwrap();
+    let profiles = ["core", "web", "pwa", "social", "metadata"].map(|id| ProfileSelection {
+        id: id.to_owned(),
+        version: "1.0.0".to_owned(),
+    });
+    let request = compiler_request("assets/identity", &profiles).unwrap();
+    let renderer = generate_request(repository.path(), &pipeline, request.clone());
+    let source_digest = renderer["assets"][0]["sha256"].as_str().unwrap();
+    let downloads = renderer["downloads"].as_array().unwrap();
+    assert_eq!(downloads.len(), 8);
+    for download in downloads {
+        assert_eq!(download["sourceAssetId"], "mark");
+        assert_eq!(download["sourceSha256"], source_digest);
+        assert!(
+            download.get("sha256").is_none(),
+            "source hash does not claim output integrity"
+        );
+        let bytes = fs::read(
+            repository
+                .path()
+                .join("assets/identity")
+                .join(download["path"].as_str().unwrap()),
+        )
+        .unwrap();
+        if download["mediaType"] == "image/png" {
+            let width = u32::from_be_bytes(bytes[16..20].try_into().unwrap());
+            let height = u32::from_be_bytes(bytes[20..24].try_into().unwrap());
+            assert_eq!(download["dimensions"], format!("{width} × {height} pixels"));
+        }
+    }
+    let metadata: Value = serde_json::from_slice(
+        &fs::read(
+            repository
+                .path()
+                .join("assets/identity/packages/metadata/metadata.json"),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(
+        metadata["social"]["defaultCard"],
+        "social/card-1200x630.png"
+    );
+    assert!(metadata["social"].get("githubPreview").is_none());
+    let icons: Value = serde_json::from_slice(
+        &fs::read(
+            repository
+                .path()
+                .join("assets/identity/pwa/manifest-icons.json"),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(icons["icons"].as_array().unwrap().len(), 3);
+
+    // Reusing a selected request after removing rasters must refresh its bindings.
+    let metadata_only = TempDir::new().unwrap();
+    let mut request = request;
+    request.targets.retain(|target| {
+        target.adapter_id == "identity-metadata" || target.adapter_id == "identity-guidance"
+    });
+    let renderer = generate_request(metadata_only.path(), &pipeline, request);
+    assert!(renderer.get("downloads").is_none());
+    assert_eq!(renderer["assets"][0]["availability"], "embedded-source");
+    assert!(renderer["assets"][0]["downloadPath"].is_null());
+    assert!(
+        renderer["packages"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|package| package["id"] != "brand-kit-archive")
+    );
+    let metadata: Value = serde_json::from_slice(
+        &fs::read(
+            metadata_only
+                .path()
+                .join("assets/identity/packages/metadata/metadata.json"),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(metadata["social"], serde_json::json!({}));
+    let icons: Value = serde_json::from_slice(
+        &fs::read(
+            metadata_only
+                .path()
+                .join("assets/identity/pwa/manifest-icons.json"),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(icons["icons"], serde_json::json!([]));
+    let open_graph = fs::read_to_string(
+        metadata_only
+            .path()
+            .join("assets/identity/packages/metadata/open-graph.html"),
+    )
+    .unwrap();
+    assert!(!open_graph.contains("og:image"));
+}
+
+fn approve_distinct_master(root: &Path, download_name: &str) {
+    let path = root.join(".identity/guidance/usage.json");
+    let mut usage: Value = serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+    let asset = &mut usage["assets"][1];
+    asset["status"] = serde_json::json!("active");
+    asset["availability"] = serde_json::json!("public");
+    asset["replacement"] = Value::Null;
+    asset["downloadName"] = serde_json::json!(download_name);
+    asset["label"] = serde_json::json!("Light background wordmark");
+    asset["notes"] = serde_json::json!("Approved on light backgrounds.");
+    asset["governance"]["subject"] = serde_json::json!("legacy-wordmark");
+    asset["governance"]["state"] = serde_json::json!("approved");
+    asset["governance"]["visibility"] = serde_json::json!("public");
+    asset["governance"]["approval"] = serde_json::json!("approve-legacy-wordmark-source");
+    fs::write(path, serde_json::to_vec_pretty(&usage).unwrap()).unwrap();
+}
+
+#[test]
+fn core_copies_distinct_approved_masters_and_preserves_canonical_source() {
+    use identity::compiler::IdentityReader;
+    let repository = TempDir::new().unwrap();
+    copy_tree(&fixture_root(), repository.path());
+    approve_distinct_master(repository.path(), "example-wordmark-light.svg");
+    let pipeline = V1ConsumerPipeline::load(repository.path()).unwrap();
+    let before = pipeline.read().unwrap();
+    let renderer = generate_request(
+        repository.path(),
+        &pipeline,
+        pipeline.compiler_request("assets/identity").unwrap(),
+    );
+    let master = renderer["assets"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|asset| asset["id"] == "legacy-wordmark")
+        .unwrap();
+    assert_eq!(master["label"], "Light background wordmark");
+    assert_eq!(master["kind"], "wordmark");
+    assert_eq!(master["notes"], "Approved on light backgrounds.");
+    assert_eq!(master["downloadPath"], "brand/example-wordmark-light.svg");
+    assert_eq!(
+        fs::read(
+            repository
+                .path()
+                .join("assets/identity/brand/example-wordmark-light.svg")
+        )
+        .unwrap(),
+        fs::read(
+            repository
+                .path()
+                .join(".identity/sources/legacy-wordmark.svg")
+        )
+        .unwrap()
+    );
+    assert_eq!(renderer["downloads"].as_array().unwrap().len(), 2);
+    assert_eq!(pipeline.read().unwrap(), before);
+    let direct = compiler_request(
+        "assets/identity",
+        &[ProfileSelection {
+            id: "metadata".to_owned(),
+            version: "1.0.0".to_owned(),
+        }],
+    )
+    .unwrap();
+    assert!(
+        !direct
+            .targets
+            .iter()
+            .any(|target| target.adapter_id == "identity-source-svg")
+    );
+}
+
+#[test]
+fn unsafe_or_colliding_public_master_paths_fail_before_output_writes() {
+    for download_name in [
+        "../outside.svg",
+        "logo#draft.svg",
+        "logo?draft.svg",
+        "logo%20draft.svg",
+        "logo%.svg",
+        "nested/logo.svg",
+        "mark.svg",
+    ] {
+        let repository = TempDir::new().unwrap();
+        copy_tree(&fixture_root(), repository.path());
+        approve_distinct_master(repository.path(), download_name);
+        let pipeline = V1ConsumerPipeline::load(repository.path()).unwrap();
+        let request = pipeline.compiler_request("assets/identity");
+        if download_name != "mark.svg" {
+            assert!(request.is_err());
+        } else {
+            let mut registry = AdapterRegistry::new();
+            register_builtin_adapters(&mut registry).unwrap();
+            register_reference_renderer_adapter(&mut registry).unwrap();
+            let mut store = LocalArtifactStore::new(repository.path()).unwrap();
+            let mut compiler =
+                Compiler::new(&pipeline, &pipeline, &pipeline, &registry, &mut store);
+            assert!(
+                compiler
+                    .prepare(with_reference_renderer(request.unwrap()))
+                    .is_err()
+            );
+        }
+        assert!(!repository.path().join("assets").exists());
+        assert!(!repository.path().join("outside.svg").exists());
     }
 }
 
@@ -213,6 +463,17 @@ fn nullable_guidance_drives_packages_and_renderer_without_reading_absent_documen
                     if relative.contains("view-model") {
                         assert_eq!(output["guidance"][field]["status"], expected);
                         assert_eq!(output["guidance"][field]["value"].is_null(), !declared);
+                        if !declared_usage {
+                            assert_eq!(output["assets"], serde_json::json!([]));
+                            assert!(output.get("downloads").is_none());
+                            assert!(
+                                output["packages"]
+                                    .as_array()
+                                    .unwrap()
+                                    .iter()
+                                    .all(|package| package["id"] != "brand-kit-archive")
+                            );
+                        }
                     } else {
                         assert_eq!(output["status"][field], expected);
                         assert_eq!(output[field].is_null(), !declared);
