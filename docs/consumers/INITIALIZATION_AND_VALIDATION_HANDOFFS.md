@@ -5,7 +5,10 @@ This records the bounded initialization and EgoLint handoffs for
 It distinguishes executable interfaces from future integration requirements.
 It does not implement an initializer, install a validator, adopt an EgoLint
 policy or assert that an adapter already exists. Cross-owner integration stays
-with [Identity #108](https://github.com/egohygiene/identity/issues/108).
+with [Identity #108](https://github.com/egohygiene/identity/issues/108). Its
+2026-11-02 [coordination closeout](../work/108/CLOSEOUT.md) retains this
+interface handoff; the deferred initializer now has its own
+[Identity #133](https://github.com/egohygiene/identity/issues/133).
 
 The Identity interfaces below were inspected at checkpoint 2 merge
 [`03eaeac72e2cf69c7bf205dd80f53ca25d1629e4`](https://github.com/egohygiene/identity/commit/03eaeac72e2cf69c7bf205dd80f53ca25d1629e4)
@@ -161,15 +164,19 @@ EgoLint was inspected at immutable main revision
   not replace those owner-defined states.
 
 No dedicated open initializer or Identity-delegation issue was found in the
-scoped issue searches at that observation. Reuse #108 and the verified owner
-work for intake; create no duplicate integration ticket from this checkpoint.
+scoped issue searches at that 2026-10-19 observation. #108 served as intake
+for that checkpoint. At its 2026-11-02 closeout, the initializer requirements
+were transferred to #133 after a fresh duplicate search. Delegated validation
+continues through the existing EgoLint #35/#36 and Relay #49 owner queues;
+their open state was rechecked. This is coordination coverage, not evidence
+that a specific Identity adapter or complete producer report boundary exists.
 Repository-required files, engineering conformance, contribution enforcement
 and installation remain external responsibilities, not new `.identity/` facts.
 
 ## Bounded future v1 initializer requirements
 
 Manual v1 authoring remains supported. A later initializer implementation needs
-an explicit owner-selected scope and review under #108 coordination. Its minimum
+an explicit owner-selected scope and review under #133. Its minimum
 acceptance requirements are:
 
 - Preserve the v0 `init`/`validate` interface. Use an explicit v1 selection;

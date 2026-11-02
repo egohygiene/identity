@@ -4,6 +4,11 @@ This handoff addresses [#108](https://github.com/egohygiene/identity/issues/108)
 using the existing Identity source, policy links and offline commands. It adds
 no repository scaffolder, policy-inheritance engine, DCO action or CLA service.
 
+The 2026-11-02 [closeout review](../work/108/CLOSEOUT.md) verifies the pinned
+owners, maps all eight acceptance criteria and records the concrete Mantle
+handoff below. Actual installation, adapter implementation and current-source
+runtime qualification retain their linked follow-ups.
+
 ## Owners and consumers
 
 The inspected source revisions below bind ownership statements. A source
@@ -52,10 +57,21 @@ project owner. Related contributor automation [Relay #3](https://github.com/egoh
 does not establish that implementation; no DCO action definition was located
 in the inspected Relay source above.
 
-The exact issue/action link remains unresolved. This bounded search result is
-not proof the work never existed. During review, obtain the owner's reference
-and link that existing work. Do not create another action, substitute an
-unrelated check, add a contributor's sign-off or change repository protections.
+The exact Relay issue/action link remains unresolved after the 2026-11-02
+refresh: all 95 Relay issues (open and closed), the organization DCO search and
+222 tracked Relay implementation/documentation files were inspected. This
+bounded result is not proof the reported work never existed. #108 explicitly
+permits an unresolved reference as its completion outcome.
+
+[Sanctuary #8](https://github.com/egohygiene/sanctuary/issues/8) already tracks
+the future governance catalog, including DCO checks and whether they should
+graduate to Relay. It is a related existing follow-up, not the missing Relay
+action or proof of enforcement. The policy definition in
+[organization #9](https://github.com/egohygiene/.github/issues/9) is closed;
+policy completion does not establish action availability. Reuse the existing
+catalog work and retain the unresolved Relay reference instead of creating a
+duplicate action. Do not substitute an unrelated check, add a contributor's
+sign-off or change repository protections.
 Later qualification must distinguish adoption mode, immutable action version,
 actual check outcome and provider required-check settings.
 
@@ -63,34 +79,85 @@ CLA support remains optional future work requiring a concrete use case,
 policy/legal owner, signing/data boundary and accountable delivery owner.
 This checkpoint collects no signatures and proposes no signing service.
 
-## Bounded consumer example
+## Concrete Mantle consumer handoff
 
-1. Keep canonical policy documents and existing issue/PR templates in their
-   authoritative locations. Holon may materialize an explicitly selected
-   baseline; Identity does not rewrite those files.
-2. Record approved brand facts in `.identity/`. If a Press Kit is adopted,
-   supply reviewed policy links and exact approved copy through its existing
-   source; no new policy/override schema is needed.
-3. In an already provisioned Realm environment, use the selected executable:
+Use the existing real Mantle source at
+[`b08045acc1e982dd9424c1d8c91b0badd64744e8`](https://github.com/egohygiene/mantle/tree/b08045acc1e982dd9424c1d8c91b0badd64744e8/.identity).
+Its [manifest](https://github.com/egohygiene/mantle/blob/b08045acc1e982dd9424c1d8c91b0badd64744e8/.identity/identity.json)
+already selects digest-bound organization defaults at priority 0 and Mantle's
+product override at priority 10. This is the existing explicit override model.
+Its [contribution guide](https://github.com/egohygiene/mantle/blob/b08045acc1e982dd9424c1d8c91b0badd64744e8/CONTRIBUTING.md)
+and [license](https://github.com/egohygiene/mantle/blob/b08045acc1e982dd9424c1d8c91b0badd64744e8/LICENSE)
+remain consumer-owned. This source declares no Press Kit or handbook; it
+does not adopt new policy links, folders or templates through this example.
+
+The retained [complete-kit receipt](../../renderer/fixtures/complete-kit/receipt.json)
+records this source's two independent native generations and unchanged inputs
+at its original checkpoint. The 2026-11-02 source inspection found all 14
+consumed raw Git files still identical at Mantle main
+`0f54fa6e100c5b86af64aa383e41eed8c64e363a`. This comparison is not a fresh
+runtime pass or evidence that Realm/Relay installation has been exercised.
+
+In a disposable checkout of that consumer, with one reviewed immutable
+Identity implementation and its matching renderer dependencies already
+provisioned, the handoff is:
+
+1. Aether supplies selected compatible authoring/validation guidance. The
+   existing [worksheet](AUTHORING.md) supplies the manual v1 source route;
+   the current `identity init` still creates v0 source.
+2. Realm supplies the executable and prerequisites through its selected
+   environment. Missing versions or executables remain setup failures; an
+   Identity validation command does not install tools.
+3. Run the selected executable, using the consumer's existing output root:
 
    ```bash
-   identity v1-generate --repository-root path/to/consumer
-   identity v1-verify --repository-root path/to/consumer
+   "$identity_bin" v1-generate --repository-root "$mantle_root"
+   "$identity_bin" v1-verify --repository-root "$mantle_root"
    ```
 
-   Missing executables, incompatible versions and failed validation remain
-   explicit setup/check results; they do not authorize fetching sibling code.
-4. Optionally generate the Press Kit and assemble the
-   [complete public kit](COMPLETE_BRAND_KIT.md). Native and optional source
-   digests must agree. Missing optional policy links remain absent.
-5. A consumer-owned workflow can later call these same commands through a
-   reviewed Relay adapter. Record the actual environment/result. Local checks
-   do not establish hosted CI, policy enforcement, release or deployment.
+4. From the matching Identity `renderer/`, assemble the native-only kit:
+
+   ```bash
+   corepack pnpm run build:kit -- \
+     --artifact-root "$mantle_root/assets/identity" \
+     --output-directory "$mantle_root/build/identity-kit"
+   corepack pnpm run verify:kit -- \
+     --output-directory "$mantle_root/build/identity-kit"
+   ```
+
+   `identity_bin` and `mantle_root` are caller-supplied paths. The output
+   directory must be new or empty. No optional projection flags are supplied
+   because this real source does not adopt those documents. A later reviewed
+   Press Kit adoption can expose supplied policy references through existing
+   governed links; it is not performed by this example.
+5. A later consumer-owned Relay adapter may invoke the selected check-only
+   interfaces and retain actual outcomes. Neither that adapter nor a new
+   combined Realm/Relay execution was implemented or run in this closeout.
+
+The commands above document existing interfaces for a later run. Original
+receipt evidence retains its represented-source scope; all new runtime and
+CI execution remains deferred under #70/#80.
 
 Shared brand defaults retain existing content-addressed source and explicit
 consumer overrides. This guide grants no implicit configuration inheritance.
 Later Realm/Aether consolidation remains a bounded post-stabilization handoff,
 not a mandatory fleet migration.
+
+## Deferred work and existing queues
+
+| Remaining outcome | Existing owner/queue |
+| --- | --- |
+| Explicit v1 initialization; preserve v0 and human-supplied facts | [Identity #133](https://github.com/egohygiene/identity/issues/133), newly separated from this completed coordination issue. |
+| Released-tool installation and verified fallback selection | [Realm #19](https://github.com/egohygiene/realm/issues/19); existing projection/release/host acceptance remains [Realm #60](https://github.com/egohygiene/realm/issues/60). |
+| Repository-default agent guidance and organization workspaces | [Aether #67](https://github.com/egohygiene/aether/issues/67), [Realm #26](https://github.com/egohygiene/realm/issues/26) and [Holon #41](https://github.com/egohygiene/holon/issues/41). |
+| Delegated validation applicability, report/enforcement semantics and execution | [EgoLint #35](https://github.com/egohygiene/egolint/issues/35), [#36](https://github.com/egohygiene/egolint/issues/36) and [Relay #49](https://github.com/egohygiene/relay/issues/49); retain the [detailed interface handoff](INITIALIZATION_AND_VALIDATION_HANDOFFS.md). |
+| DCO workflow curation and owner handoff | [Sanctuary #8](https://github.com/egohygiene/sanctuary/issues/8); the exact reported Relay action remains explicitly unresolved. |
+| Current native/browser/Docker/setup/CI proof and final docs | Identity #70/#80/#82/#83; no new duplicate quality tracker. Shared development-environment consolidation stays in #70's deferred Realm/Aether design. |
+
+CLA support has no selected consumer or implementation requirement. Preserve
+it as an optional future owner decision rather than creating a signing service
+or speculative issue. This closeout does not add the deferred queues as new
+hard prerequisites for the current usable kit or remaining #106/#107 choices.
 
 ADR not required: this applies existing projection and cross-owner boundaries
 without adopting policy or changing an interface.
