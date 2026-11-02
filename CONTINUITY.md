@@ -7,23 +7,23 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-02T19:25:24Z'
+  updated_at: '2026-11-02T20:03:03Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Deliver issue106 selected release-announcement reference use case and retain deferred quality/real-adoption
-    boundaries.
+  purpose: Complete issue107 existing static mascot demonstration and sync on the remaining source/quality/release
+    gates.
   includes:
-  - One optional Markdown template, explicit fictional request and actually generated draft/receipt/selected
-    asset from unchanged governed example source.
-  - Q36 scope completion, append-only ADR0032 outcome, current evidence and deferred regression coverage.
+  - Existing approved Kern source-to-kit bindings, static local portrait consumer, exact rights/alt/minimum
+    width and Q37 scope completion.
+  - Actual package-verification evidence, preserved eleven input files and the historical-release limitation.
   excludes:
-  - Regression/native/browser/Docker suites and hosted CI; real release/claim approval, posting, publication
-    and deployment.
-  - New template formats, real consumer adoption claims, canonical source/rights changes and formal ADR
-    acceptance.
+  - Regression/native/browser/AX/Docker suites and hosted CI; new art, categories, animation, source approvals
+    or formal ADR acceptance.
+  - Root v1 source/rights migration, new release, deployment, posting and deferred initializer/refactor
+    implementation.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -34,94 +34,101 @@ scope:
   - AGENTS.md
   - ROADMAP.md
   - docs/decisions/policy-reference.json
-  - docs/consumers/LAUNCH_DOCUMENTS.md
-  - examples/launch/README.md
-  - docs/work/106/CLOSEOUT.md
-  - docs/work/106/sample-generation.json
-  - https://github.com/egohygiene/identity/issues/106
+  - docs/consumers/OPTIONAL_VISUALS.md
+  - examples/visuals/kern-static/README.md
+  - docs/work/107/CLOSEOUT.md
+  - docs/work/107/static-mascot.json
+  - https://github.com/egohygiene/identity/issues/107
+  - https://github.com/egohygiene/identity/issues/98
   - https://github.com/egohygiene/identity/issues/70
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Complete the selected optional release-announcement template with a concrete fictional reference
-    package, without claiming real project adoption or general qualification.
+  objective: Complete the selected real static mascot category without changing existing asset/source/approval
+    bytes or claiming released availability.
   success_conditions:
-  - Retain explicit required/optional inputs, generated Markdown/receipt/selected unchanged mark and source
-    preservation evidence.
-  - Complete only Q36/issue106; preserve ADR0032 original rationale and proposed/null-approval lifecycle.
-  - 'Keep five authored regressions and broader quality under #70/#80; preserve real self-source/rights/release/dogfood
-    gates under #98.'
+  - Show existing approved source, three packaged variants and an offline static consumer with reviewed
+    alt text, size, attribution and motion guidance.
+  - Complete only Q37/issue107, preserve all 40 roadmap IDs/mappings/88 edges and leave Q40/quality gates
+    open.
+  - 'Keep root-v1/rights/new-release/dogfood work under #98, broader qualification under #70/#80 and future
+    initialization under #133.'
   active_issue:
     provider: github
-    id: egohygiene/identity#106
-    url: https://github.com/egohygiene/identity/issues/106
-  next:
-    kind: issue
     id: egohygiene/identity#107
-    description: Select an existing optional visual category/consumer or a scope disposition using the
-      merged imagery/motion inventory. Do not invent artwork or approvals. Keep initializer133 and the
-      broader quality/refactoring/CI sweep deferred.
+    url: https://github.com/egohygiene/identity/issues/107
+  next:
+    kind: action
+    id: sync-on-source-and-stabilization-scope
+    description: 'Sync on #98 root v1 source/rights and the deferred #70 quality/refactoring phase. All
+      eleven Brand Kit child scopes are complete after this issue closes; the parent still needs its independent
+      evidence. Do not infer release, deployment or a passing broad suite. Initializer133 stays later.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/107
-    - docs/consumers/OPTIONAL_VISUALS.md
     - https://github.com/egohygiene/identity/issues/116
+    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/70
+    - https://github.com/egohygiene/identity/issues/133
     depends_on: []
 state:
   base:
-    revision: f5fd0b03ebf5e0033725768b2e52088b3ddf88ea
+    revision: 349b3de76bfbec5483bbb7d5de3489abe93b9fa0
     ref: refs/heads/main
-    verified_at: '2026-11-02T19:25:24Z'
+    verified_at: '2026-11-02T20:03:03Z'
   candidate:
-    branch: codex/106-release-announcement-example
+    branch: codex/107-static-mascot-example
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-02T19:25:24Z'
-    default_branch_revision: f5fd0b03ebf5e0033725768b2e52088b3ddf88ea
+    observed_at: '2026-11-02T20:03:03Z'
+    default_branch_revision: 349b3de76bfbec5483bbb7d5de3489abe93b9fa0
     issue_state: open
     pull_request_state: unknown
-    notes: Issue106 is open in the observed snapshot and the maintainer authorized executing it. Issues108/109
-      and their documentation PRs are complete; initializer133 remains open. No parallel open Identity
-      PR was observed. This candidate does not predeclare its own merge or any real release.
+    notes: 'Issue107 is open in the observed snapshot and authorized for execution. All ten other #98
+      children are verified closed; #106 already merged in PR135. No parallel open Identity PR was observed.
+      This candidate does not predeclare its own merge or a new release.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-02T19:25:24Z'
+  reviewed_at: '2026-11-02T20:03:03Z'
   reviewed_by: Codex
   evidence:
-  - command: render_launch_document.py generation and --verify-directory on a disposable expanded reference
-      consumer
+  - command: python3 scripts/verify_mascot.py --repository-root .
     outcome: passed
-    observed_at: '2026-11-02T19:25:24Z'
-    notes: 'Actual optional product use: three package files, synthetic request/consumer, all 13 source
-      inputs unchanged. This is sample generation/integrity, not a regression-suite or real-adoption result.'
-  - command: Request/receipt schemas, pinned ADR metadata/original-prefix preservation and retained example/evidence
-      hashes
+    observed_at: '2026-11-02T20:03:03Z'
+    notes: 'Existing product package check: character=kern, variants=3, transparency=rgba. All eleven
+      canonical/package inputs remain byte-identical to base.'
+  - command: Static HTML parser/source inspection, exact input/example hashes, local links/anchors and
+      git diff --check
     outcome: passed
-    observed_at: '2026-11-02T19:25:24Z'
-    notes: Existing source rights/approval data stay fictional and unchanged; formal ADR0032 remains proposed.
-      Runtime code and schemas are unchanged.
-  - command: Local Markdown links/anchors, stable roadmap-block comparison and git diff --check
+    observed_at: '2026-11-02T20:03:03Z'
+    notes: Exact source portrait alt text and 160 CSS-pixel width; required attribution/trademark text;
+      no scripts/animation. 79 local Markdown and 8 local HTML references resolve. No browser/AX qualification
+      is claimed.
+  - command: GitHub annotated v1.0.0 tag dereference and exact release-tree inspection
     outcome: passed
-    observed_at: '2026-11-02T19:25:24Z'
-    notes: 69 local links/anchors; all 40 stable IDs/mappings and 88 edges retained. Only Q36 status changes.
-  - command: Five authored launch regressions, broader source/native/browser/Docker suites and hosted
-      CI
+    observed_at: '2026-11-02T20:03:03Z'
+    notes: Tag 9540ad6 points to aaad8839104704cf57bfa846539b3b875421e03d; that tree has no mascot package.
+      Current source availability is not historical released availability.
+  - command: Stable roadmap-block/source-preservation comparison
+    outcome: passed
+    observed_at: '2026-11-02T20:03:03Z'
+    notes: All 40 IDs/mappings and 88 edges retained; only Q37 status changes. All runtime, canonical asset/rights/approval,
+      schema, workflow, prior receipt and ADR sources remain unchanged.
+  - command: Broader regression/native/browser/AX/Docker suites and hosted CI
     outcome: not-run
-    observed_at: '2026-11-02T19:25:24Z'
-    notes: 'Remain deferred under #70/#80; the quality tracker retains the exact sample-proof limitation
-      and pending cases.'
+    observed_at: '2026-11-02T20:03:03Z'
+    notes: 'Remain deferred under #70/#80. No release, publication or deployment performed.'
   environment_limitations:
-  - The generated sample is fictional and supplies no real project release, claim approval or production-adoption
-    evidence.
-  - 'Five authored launch regressions and broader native/source/projection/browser/Docker/CI qualification
-    remain deferred under #70/#80.'
-  - ADR0032 remains proposed/null approval; the appended outcome preserves original rationale and distinguishes
-    the selected reference demonstration from suggested real adoption.
-  - '#107 remains the next product choice. #133, #87/#88, final #83 and #98 self-source/rights/release/dogfood
-    gates remain open.'
+  - 'The existing stable v1.0.0 release predates Kern. New release and root v1 self-source/rights/dogfood
+    remain #98.'
+  - 'Package verification and static HTML inspection do not establish browser/AX/contrast/visual-regression
+    or broad current-source qualification; #70/#80 retain those checks.'
+  - Other imagery/capture/animation categories remain unselected. Relay issue 8 applies only if a future capture
+    is actually selected.
+  - 'Initializer133, #87/#88 refactors and final #83 reconciliation remain pending; no ADR lifecycle is
+    promoted.'
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -140,48 +147,48 @@ privacy:
 
 ## Purpose and precedence
 
-Record the selected optional announcement-template delivery and remaining work. User/runtime instructions, scoped policy, live evidence and canonical sources outrank this checkpoint.
+Record issue107's selected static mascot delivery and the next scope sync. User/runtime instructions, scoped policy, live evidence and canonical sources outrank this checkpoint.
 
 ## Resume protocol
 
-Read AGENTS, the sample README, docs/work/106/CLOSEOUT.md and tracker #116. Verify issue106/PR state before repeating closure. Earlier issue108/109 work and PRs132/134 are complete.
+Read AGENTS, docs/work/107/CLOSEOUT.md, the visual example and tracker #116. Verify issue107/PR state before repeating closure. #106 is already closed and PR135 merged.
 
 ## Current objective and success conditions
 
-Deliver the optional Markdown template with a concrete fictional reference request/package. Preserve exact source/asset rights and explicit changing facts; complete Q36 without claiming a real release or broader qualification.
+Demonstrate the existing real approved Kern source-to-kit-to-static-consumer path. Preserve exact inputs, rights, approvals, source authority and the distinction between local source availability and a published release. Complete Q37 only.
 
 ## State snapshot
 
-The candidate is based on main f5fd0b03ebf5e0033725768b2e52088b3ddf88ea. Issue106 was open in the fresh observation; no parallel open PR was observed. Candidate revision/PR remain null before creation.
+The candidate is based on main 349b3de76bfbec5483bbb7d5de3489abe93b9fa0. Issue107 was open; all ten other #98 children were closed in fresh reads. No parallel open PR was observed. Candidate revision/PR are null before creation.
 
 ## Completed and material changes
 
-examples/launch owns the explicit request and generated draft/receipt/mark. All 13 existing expanded source files remain unchanged. The guide and delivery record identify required versus optional inputs and exact proof. ADR0032 appends a dated outcome while preserving its original rationale, proposed status and null approval. ROADMAP Q36 records the selected scope.
+examples/visuals/kern-static supplies the offline static portrait consumer and download/source guidance. The inventory and delivery record trace actual existing approval, rights and the three-variant package; all eleven inputs are unchanged. ROADMAP Q37 records the selected scope. No runtime, schema, artwork or ADR is changed.
 
 ## Validation and review evidence
 
-Actual draft generation and read-only package verification passed on a disposable consumer. The request/receipt and pinned ADR metadata validate; retained hashes, 69 local links/anchors and whitespace pass. All 40 roadmap IDs/mappings and 88 edges remain, with Q36 status alone changed. No regression suite or hosted CI was run.
+The existing mascot package verifier passed for all three RGBA variants. Static HTML/data checks preserve exact alt text, minimum width, rights and local links, with no script/animation. All 40 roadmap IDs/mappings and 88 edges remain. No broader suite or hosted CI ran.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The sample is fictional. Real adopters must provide real source/facts/review; no public release or claim approval is inferred. #70 retains five launch regressions and broader qualification. #80 keeps current nine-case and actual Docker proof. Existing #98 real self-source/rights/release/dogfood acceptance remains independent. Proposed ADRs retain their lifecycles.
+The real v1.0.0 source predates Kern. #98 remains open for root v1 source/rights, quality, new release, publication/dogfood and contrasting-consumer evidence. #70/#80 retain actual browser/AX/native/Docker/CI qualification; local package checks do not replace it. #133 and remaining refactors/final docs stay pending.
 
 ## Next dependency-ready work
 
-Select a concrete #107 visual category/consumer or disposition from the existing inventory. Keep #133 initialization and the quality/refactoring/testing/CI sweep deferred until selected.
+Sync on the remaining source/rights and stabilization scope. All eleven child scopes are complete once issue107 closes; the parent is not complete. The user has deferred cleanup/refactoring/testing/CI, so do not start that phase or a release merely because the product child list is closed.
 
 ## Parallel changes and reconciliation
 
-No parallel open PR was observed. Verify current main before merging and preserve canonical source, prior ADR dispositions, historical receipts, screenshot and immutable releases.
+No parallel open PR was observed before the candidate. Recheck current main before merging, preserving canonical assets/approvals, proposed ADR states, old evidence, screenshot and immutable tags/releases.
 
 ## Privacy and redaction
 
-Only scoped public project facts and fictional example material are retained. No conversation excerpts, credentials, personal information or machine-local paths appear in the committed evidence.
+Only scoped public project facts and existing public asset references are retained. Exclude conversation excerpts, credentials, personal data and machine-local paths.
 
 ## Handoff update protocol
 
-After merging, verify issue106 closure and update #116/#98 plus #70's pending launch checks. A selected reference-template delivery is separate from real adoption, formal ADR acceptance, release or deployment.
+After merging, verify issue107 closure, update #116/#98 and keep #70's pending static-example checks explicit. A completed optional category does not supply broader conformance, a new release or formal ADR acceptance.
 
 ## Compaction and supersession
 
-Keep the twelve sections, metadata and size/privacy budgets. Git, the sample, delivery record and existing owner queues retain detailed evidence and requirements.
+Keep twelve sections, metadata and size/privacy budgets. Git, the canonical sources, selected visual example and owner queues retain detailed evidence and requirements.

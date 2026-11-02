@@ -1,0 +1,110 @@
+{
+  "purpose": "Existing approved Kern source-to-kit/static-consumer example; no new release or art.",
+  "observedAtUTC": "2026-11-02T19:57:47Z",
+  "sourceRevision": "349b3de76bfbec5483bbb7d5de3489abe93b9fa0",
+  "category": "static-mascot-illustration",
+  "character": "kern",
+  "selectedVariant": "portrait",
+  "selectedDisplayWidth": 160,
+  "approval": "approve-kern-mascot",
+  "approvalEvidence": "https://github.com/egohygiene/identity/issues/50#issuecomment-5463168075",
+  "inputs": {
+    "mascot/kern.character.json": {
+      "sha256": "6ac46d39f266472f71d721c2f09e0ac3d51752115d2bbb4264f87d18473fd812",
+      "bytes": 5262
+    },
+    "mascot/provenance.json": {
+      "sha256": "f71eb84fc62c182ef4bd6a1abc11e338e2c694fc338c9f8d96d3bb6bf75e12b8",
+      "bytes": 1494
+    },
+    "mascot/approval.json": {
+      "sha256": "ee69619ceffd302f56f2490dac9efe80a57bb0a8d1689ad1b626cc27c879f951",
+      "bytes": 1113
+    },
+    "mascot/LICENSE.md": {
+      "sha256": "4e94b7c16f80ccbe20f325cbc24dffdb13b818e080c07a6938b78c1f9bb88332",
+      "bytes": 521
+    },
+    "mascot/generation-record.md": {
+      "sha256": "edfe5cede2943466a0e12b18ee181fd7cb9d07feda44ac83eb5be918b63b968b",
+      "bytes": 2755
+    },
+    "mascot/source/kern-master.png": {
+      "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+      "bytes": 692047
+    },
+    "assets/identity/mascot/manifest.json": {
+      "sha256": "65aa58f19ad8ffbac920b85835df7483eb0f1b905f5f74ab864638fb55d4063c",
+      "bytes": 1877
+    },
+    "assets/identity/mascot/README.md": {
+      "sha256": "f416c2c66be67aa6545879efb70663ecaa9a6a75e48fdba9c570fe808e033f3f",
+      "bytes": 1994
+    },
+    "assets/identity/mascot/kern-full.png": {
+      "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+      "bytes": 692047
+    },
+    "assets/identity/mascot/kern-portrait.png": {
+      "sha256": "bf3dad6ff9b75ef998f662b9cadd6bde9a5dffeaff54d01a1a1bec8681cefc99",
+      "bytes": 288668
+    },
+    "assets/identity/mascot/kern-icon.png": {
+      "sha256": "e902dc0f264f94ae1a06b9020d3b07fae8e4a2ec0c09dab4d9ec35bc0f9089e7",
+      "bytes": 92515
+    }
+  },
+  "variants": [
+    {
+      "id": "kern-full",
+      "path": "assets/identity/mascot/kern-full.png",
+      "mediaType": "image/png",
+      "width": 768,
+      "height": 1152,
+      "sizeBytes": 692047,
+      "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+      "role": "Full-figure hero and editorial art.",
+      "minimumWidth": 320
+    },
+    {
+      "id": "kern-portrait",
+      "path": "assets/identity/mascot/kern-portrait.png",
+      "mediaType": "image/png",
+      "width": 512,
+      "height": 512,
+      "sizeBytes": 288668,
+      "sha256": "bf3dad6ff9b75ef998f662b9cadd6bde9a5dffeaff54d01a1a1bec8681cefc99",
+      "role": "Square cards, documentation callouts, and profile introductions.",
+      "minimumWidth": 160
+    },
+    {
+      "id": "kern-icon",
+      "path": "assets/identity/mascot/kern-icon.png",
+      "mediaType": "image/png",
+      "width": 256,
+      "height": 256,
+      "sizeBytes": 92515,
+      "sha256": "e902dc0f264f94ae1a06b9020d3b07fae8e4a2ec0c09dab4d9ec35bc0f9089e7",
+      "role": "Compact avatars and small square identity surfaces.",
+      "minimumWidth": 96
+    }
+  ],
+  "staticExample": {
+    "path": "examples/visuals/kern-static/index.html",
+    "sha256": "30d6160c46c71218c2181b88171c387c51031888cb2c21416b6b3999b574651f"
+  },
+  "historicalRelease": {
+    "tag": "v1.0.0",
+    "annotatedTagObject": "9540ad6076ccc34b6dbbafc0e2fc72ee6ad4d02f",
+    "commit": "aaad8839104704cf57bfa846539b3b875421e03d",
+    "includesKern": false
+  },
+  "testSuitesRun": false,
+  "hostedCIRun": false,
+  "publicationPerformed": false,
+  "mascotPackageVerification": {
+    "command": "python3 scripts/verify_mascot.py --repository-root .",
+    "exitCode": 0,
+    "summary": "character=kern, variants=3, transparency=rgba"
+  }
+}
