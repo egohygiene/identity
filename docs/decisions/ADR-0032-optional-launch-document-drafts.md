@@ -13,7 +13,7 @@ related: [ADR-0001, ADR-0003, ADR-0011, ADR-0015, ADR-0028, ADR-0030]
 supersedes: []
 superseded_by: []
 affected_repositories: [egohygiene/identity]
-affected_contracts: []
+affected_contracts: [identity.launch-document-request/v1, identity.launch-document/v1]
 implementation_status: implemented
 evidence:
   - type: issue
