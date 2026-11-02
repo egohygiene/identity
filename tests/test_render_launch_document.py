@@ -1,7 +1,7 @@
 # Copyright 2026 Ego Hygiene
 # SPDX-License-Identifier: MIT
 
-"""Unexecuted starting regressions for the optional announcement-draft boundary."""
+"""Regression cases for optional announcement drafts; execution status lives in the handoff."""
 
 from __future__ import annotations
 

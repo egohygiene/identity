@@ -745,5 +745,3 @@ def sha256(path: Path) -> str:
     """Return the lowercase SHA-256 digest for one local file."""
 
     return hashlib.sha256(read_source_bytes(path)).hexdigest()
-
-

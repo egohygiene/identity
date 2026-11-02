@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-10-21
+updated: 2026-11-02
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -25,6 +25,25 @@ supersedes: []
 ---
 
 # Identity Roadmap
+
+## 2026-11-02 isolated review candidate
+
+A separate branch, `codex/identity-product-sprint-20261102`, prepares bounded
+progress on #109/#108/#106/#107 and ready maintenance #84/#85/#86. The
+[sprint handoff](docs/work/116/HANDOFF.md) owns this candidate's exact scope,
+structural evidence, unresolved choices and deferred checks. Its source base is
+unmerged [PR #129](https://github.com/egohygiene/identity/pull/129) at
+`d247487379569c3701a8cefe6d6136502657fa64`; the parent and main are unchanged.
+
+The existing 40 quest IDs, dependency edges, issue mappings, states and exit
+boxes below are preserved. Draft implementation/preparation is not full
+acceptance. No issue is closed and no ADR, merge, release, deployment or new
+creative source is approved. #109 needs owner disposition; #106's proposed
+announcement template needs an agreed consumer and runtime qualification;
+#107 remains an inventory/adoption handoff pending concrete selection. #108
+records the reported DCO action link as unresolved rather than duplicating it.
+Testing/CI/Docker qualification remains deferred; #87/#88 are unstarted in this
+candidate. The dated execution snapshot below retains its historical context.
 
 <!-- BEGIN ROADMAP EXECUTION SNAPSHOT -->
 <!-- roadmap-manifest
