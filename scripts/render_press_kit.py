@@ -733,6 +733,39 @@ def generated_output_directory(repository_root: Path, value: Path) -> Path:
     return repository_root / relative
 
 
+def verify_package_directory(directory: Path) -> None:
+    """Verify a complete native-only projection without reading canonical source."""
+
+    root = directory.resolve(strict=True)
+
+    def read(relative: str) -> bytes:
+        if not validator.valid_relative_path(relative):
+            raise ProjectionError(f"unsafe Press Kit artifact path: {relative!r}")
+        file = (root / relative).resolve(strict=True)
+        if not file.is_relative_to(root) or not file.is_file():
+            raise ProjectionError(f"Press Kit artifact escapes its package: {relative}")
+        return file.read_bytes()
+
+    model = json.loads(read(OUTPUT_FILES["json"]))
+    social = model.get("socialSurfaces")
+    if model.get("schema") != PRESS_KIT_SCHEMA or (isinstance(social, dict) and social.get("status") == "included"):
+        raise ProjectionError("verification requires a native-only Press Kit projection")
+    assets = {}
+    for asset in model["assets"]:
+        relative = asset["downloadPath"]
+        contents = read(relative)
+        if relative in assets or checksum_entry(contents)["sha256"] != asset["sha256"]:
+            raise ProjectionError(f"Press Kit source asset checksum/identity mismatch: {relative}")
+        assets[relative] = contents
+    expected = build_package(model, assets)
+    actual = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+    if actual != set(expected):
+        raise ProjectionError("Press Kit file inventory differs from its declared projection")
+    for relative, contents in expected.items():
+        if read(relative) != contents:
+            raise ProjectionError(f"Press Kit artifact differs from its projection: {relative}")
+
+
 def atomic_write(path: Path, value: bytes) -> None:
     """Replace one generated artifact without leaving a partial file behind."""
 
@@ -785,6 +818,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Repository-relative generated directory for the complete Press Kit package.",
     )
     parser.add_argument(
+        "--verify-directory",
+        type=Path,
+        help="Read-only verification of a complete generated native-only Press Kit, including archive bytes.",
+    )
+    parser.add_argument(
         "--social-surfaces-directory",
         type=Path,
         help="Repository-relative generated social package to verify and include.",
@@ -798,6 +836,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments = build_parser().parse_args(argv)
     repository_root = arguments.repository_root.resolve()
     try:
+        if arguments.verify_directory is not None:
+            if arguments.output_directory is not None or arguments.social_surfaces_directory is not None:
+                raise ProjectionError("--verify-directory cannot be combined with generation options")
+            verify_package_directory(arguments.verify_directory)
+            print("Verified generated Press Kit package")
+            return 0
         model, assets = build_projection(repository_root)
         if arguments.social_surfaces_directory is not None:
             model, assets = verified_social_package(
@@ -813,7 +857,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             payload = build_package(model, assets)
             for path in write_outputs(repository_root, arguments.output_directory, payload):
                 print(path.relative_to(repository_root).as_posix())
-    except (OSError, ProjectionError, ValueError) as error:
+    except (OSError, ProjectionError, ValueError, KeyError, TypeError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
     return 0

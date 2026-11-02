@@ -281,6 +281,7 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "channel-registry.schema.json",
                 "compiler-manifest.schema.json",
                 "compiler-plan.schema.json",
+                "consumer-brand-kit.schema.json",
                 "design-context.schema.json",
                 "design-references.schema.json",
                 "design-system-handbook.schema.json",

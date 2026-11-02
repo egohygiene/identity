@@ -1,5 +1,11 @@
 # Identity public publication surfaces
 
+For the native consumer's complete generated kit, use the separate
+[assembly and offline verification guide](../consumers/COMPLETE_BRAND_KIT.md).
+That command produces a reviewable artifact directory and `kit.json`; it does
+not select a stable release, replace this publisher's `site.json`, install an
+organization route or publish Intelligence pages.
+
 The accepted publication architecture has two public surfaces with separate
 deployment and rollback authority:
 

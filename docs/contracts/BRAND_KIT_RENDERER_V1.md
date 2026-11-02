@@ -14,6 +14,12 @@ The reference renderer presents one immutable generated Brand Kit as an
 accessible, navigable, downloadable static page. It is a presentation adapter,
 not a source-of-truth editor.
 
+The [complete consumer kit guide](../consumers/COMPLETE_BRAND_KIT.md) documents
+the explicit native assembly/verification commands. `--audience "public"` on
+the static renderer omits review controls and absent optional sections;
+default `preview` preserves the existing independent model-only workflow.
+Public server rendering and client hydration use the same explicit setting.
+
 ```text
 consumer-owned .identity/
         |

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.egohygiene.io/identity/consumer-brand-kit/v1.json",
+  "title": "Identity assembled consumer Brand Kit receipt v1",
+  "description": "Offline byte inventory of a static public kit and its selected generated artifacts. This is neither canonical brand source nor release/deployment authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "projectId", "sourceDigest", "release", "assetBaseUrl", "browserAssets", "files"],
+  "properties": {
+    "schema": { "const": "identity.consumer-brand-kit/v1" },
+    "projectId": { "type": "string", "minLength": 1 },
+    "sourceDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "release": { "$ref": "https://schemas.egohygiene.io/identity/brand-kit-view-model/v1.json#/$defs/release" },
+    "assetBaseUrl": { "type": "string", "minLength": 1 },
+    "browserAssets": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "icon": { "type": "string", "minLength": 1 },
+        "appleTouchIcon": { "type": "string", "minLength": 1 },
+        "manifest": { "type": "string", "minLength": 1 }
+      }
+    },
+    "files": {
+      "type": "object",
+      "description": "All nonempty regular output files except kit.json itself. Paths use the existing normalized bundle-relative URL contract; the verifier also checks filesystem confinement and exact inventory equality.",
+      "required": ["index.html", "brand-kit.view-model.json", ".identity-manifest.json"],
+      "propertyNames": { "pattern": "^(?!/)(?!kit\\.json$)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$" },
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["sha256", "bytes"],
+        "properties": {
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "bytes": { "type": "integer", "minimum": 1 }
+        }
+      }
+    }
+  }
+}
