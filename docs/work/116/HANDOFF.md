@@ -1,11 +1,12 @@
 # Identity roadmap sprint for maintainer review
 
-Coordinator: [#116](https://github.com/egohygiene/identity/issues/116).  
-Branch: `codex/identity-product-sprint-20261102`.  
+Coordinator: [#116](https://github.com/egohygiene/identity/issues/116).
+Draft review: [PR #130](https://github.com/egohygiene/identity/pull/130), stacked on #129.
+Branch: `codex/identity-product-sprint-20261102`.
 Base: unmerged [PR #129](https://github.com/egohygiene/identity/pull/129) at
 `d247487379569c3701a8cefe6d6136502657fa64`, exact tree
-`5d49bc6c1dcdb0d758e182ab3ffd14cb37489fe5`.  
-Main observed: `47995976ae41415226bd6fb9400fbbd02777fca6`.  
+`5d49bc6c1dcdb0d758e182ab3ffd14cb37489fe5`.
+Main observed: `47995976ae41415226bd6fb9400fbbd02777fca6`.
 Mode: bounded implementation/proposal sprint with tests and CI explicitly deferred.
 
 ## Reviewable progress

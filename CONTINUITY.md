@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-02T06:11:40Z'
+  updated_at: '2026-11-02T12:23:09Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -65,24 +65,27 @@ state:
   candidate:
     branch: codex/identity-product-sprint-20261102
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#130
+      url: https://github.com/egohygiene/identity/pull/130
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-02T06:11:40Z'
+    observed_at: '2026-11-02T12:23:09Z'
     default_branch_revision: 47995976ae41415226bd6fb9400fbbd02777fca6
     issue_state: open
-    pull_request_state: unknown
-    notes: Main and parent PR129 were verified through the GitHub connector. The local source snapshot
-      matched all 32 changed blobs and parent tree 5d49bc6c1dcdb0d758e182ab3ffd14cb37489fe5. Candidate
-      PR creation/head verification follow this checkpoint.
+    pull_request_state: draft
+    notes: PR130 is open/draft and stacked on unchanged PR129. Main remains 47995976ae41415226bd6fb9400fbbd02777fca6;
+      parent remains d247487379569c3701a8cefe6d6136502657fa64. All nine initial upload trees matched local
+      source; no hosted run was observed for that prepared head. Verify the final containing head separately.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#123
     url: https://github.com/egohygiene/identity/pull/123
 review:
   status: partial
-  reviewed_at: '2026-11-02T06:11:40Z'
+  reviewed_at: '2026-11-02T12:23:09Z'
   reviewed_by: Codex
   evidence:
   - command: Pinned PR129 blob/tree comparison
@@ -101,6 +104,12 @@ review:
     observed_at: '2026-11-02T06:11:40Z'
     notes: Structural handoff checks only. The final exact-head result and any limitations are retained
       in the PR; behavioral tests and owner gates are not claimed.
+  - command: GitHub connector branch/PR/source-tree and workflow-run inspection
+    outcome: passed
+    observed_at: '2026-11-02T12:23:09Z'
+    notes: PR130 is draft/open, parent and main unchanged. Initial nine source trees matched exactly and
+      the prepared head had zero workflow runs. Final delivery verification follows this metadata refresh;
+      no behavioral result is claimed.
   environment_limitations:
   - All behavioral tests, full native/pinned-owner validation, CI, browser and Docker qualification are
     deferred at maintainer request. Candidate source is not acceptance or merge-readiness proof.
@@ -138,7 +147,7 @@ Present bounded product and maintenance candidates on an isolated branch, with a
 
 ## State snapshot
 
-The evaluated base is PR129 head d247487379569c3701a8cefe6d6136502657fa64. Default main remains 47995976ae41415226bd6fb9400fbbd02777fca6 at observation. Candidate branch is codex/identity-product-sprint-20261102. Its containing revision/PR are intentionally null until separately verified after creation.
+The evaluated base is PR129 head d247487379569c3701a8cefe6d6136502657fa64. Default main remains 47995976ae41415226bd6fb9400fbbd02777fca6 at observation. Candidate branch is codex/identity-product-sprint-20261102. Its containing revision is intentionally null; [PR130](https://github.com/egohygiene/identity/pull/130) is verified open/draft and targets the unchanged parent branch.
 
 ## Completed and material changes
 
