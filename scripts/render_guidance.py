@@ -14,6 +14,7 @@ import sys
 from typing import Any, Sequence
 
 import validate_identity as validator
+import projection_boundary as boundary
 
 BRAND_GUIDANCE_SCHEMA = "identity.brand-guidance/v1"
 _OMITTED = object()
@@ -26,10 +27,7 @@ class GuidanceError(ValueError):
 def load_json(path: Path) -> dict[str, Any]:
     """Load one already-validated JSON document."""
 
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise GuidanceError(f"document must be an object: {path}")
-    return value
+    return boundary.load_json_object(path, error_type=GuidanceError)
 
 
 def guidance_documents(
@@ -221,7 +219,7 @@ def governance_label(value: dict[str, Any]) -> str:
 def render_json(model: dict[str, Any]) -> str:
     """Render the stable machine-readable projection."""
 
-    return f"{json.dumps(model, indent=2, sort_keys=True, ensure_ascii=False)}\n"
+    return boundary.render_json(model)
 
 
 def markdown_governance(value: dict[str, Any]) -> list[str]:
