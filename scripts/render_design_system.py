@@ -8,12 +8,12 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import sys
 from typing import Any, Sequence
 
 import validate_identity as validator
+import projection_boundary as boundary
 
 HANDBOOK_SCHEMA = "identity.design-system-handbook/v1"
 CONTEXT_SCHEMA = "identity.design-context/v1"
@@ -33,30 +33,19 @@ class ProjectionError(ValueError):
 def load_json(path: Path) -> dict[str, Any]:
     """Load one validated, object-shaped JSON source document."""
 
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ProjectionError(f"document must be an object: {path}")
-    return value
+    return boundary.load_json_object(path, error_type=ProjectionError)
 
 
 def is_public(value: dict[str, Any]) -> bool:
     """Return whether one governed source record is public and approved."""
 
-    governance = value.get("governance")
-    return (
-        isinstance(governance, dict)
-        and governance.get("state") == "approved"
-        and governance.get("visibility") == "public"
-    )
+    return boundary.approved_public(value)
 
 
 def canonical_source_digest(repository_root: Path) -> str:
     """Return egohygiene.identity.source-digest/v1, shared by every Python projection."""
 
-    try:
-        return validator.canonical_source_digest(repository_root)
-    except (OSError, ValueError) as error:
-        raise ProjectionError(str(error)) from error
+    return boundary.source_digest(repository_root, error_type=ProjectionError)
 
 
 def resolve_alias_value(
@@ -440,7 +429,7 @@ def build_projections(repository_root: Path) -> tuple[dict[str, Any], dict[str, 
 def render_json(value: dict[str, Any]) -> str:
     """Render one deterministic JSON projection."""
 
-    return f"{json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False)}\n"
+    return boundary.render_json(value)
 
 
 def markdown_value(value: Any) -> str:
@@ -646,26 +635,16 @@ def render(projections: tuple[dict[str, Any], dict[str, Any]], output_format: st
 def output_directory(repository_root: Path, value: Path) -> Path:
     """Resolve an explicit generated-output directory without allowing source writes."""
 
-    relative = value.as_posix()
-    if not validator.valid_relative_path(relative):
-        raise ProjectionError("output directory must be normalized and repository-relative")
-    if relative == ".identity" or relative.startswith(".identity/"):
-        raise ProjectionError("projection output cannot overwrite canonical .identity source")
-    current = repository_root
-    for part in PurePosixPath(relative).parts:
-        current = current / part
-        if current.is_symlink():
-            raise ProjectionError("output directory may not traverse a symbolic link")
-    return repository_root / relative
+    return boundary.generated_directory(
+            repository_root, value, error_type=ProjectionError,
+            canonical_error="projection output cannot overwrite canonical .identity source",
+        )
 
 
 def atomic_write(path: Path, content: str) -> None:
     """Replace one generated text artifact without leaving a partial file behind."""
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_text(content, encoding="utf-8")
-    os.replace(temporary, path)
+    boundary.atomic_write_text(path, content)
 
 
 def write_outputs(repository_root: Path, destination: Path, projections: tuple[dict[str, Any], dict[str, Any]]) -> list[Path]:
@@ -701,7 +680,32 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Repository-relative generated directory for all handbook and context artifacts.",
     )
+    parser.add_argument(
+        "--verify-directory",
+        type=Path,
+        help="Read-only verification that all four generated handbook/context files agree.",
+    )
     return parser
+
+
+def verify_projection_directory(directory: Path) -> None:
+    """Reject stale Markdown or extra files without reading canonical source."""
+
+    root = directory.resolve(strict=True)
+    expected_paths = set(OUTPUT_FILES.values())
+    actual = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+    if actual != expected_paths:
+        raise ProjectionError("handbook file inventory differs from its four-file projection")
+    for name in expected_paths:
+        if not (root / name).resolve(strict=True).is_relative_to(root):
+            raise ProjectionError("handbook file escapes its projection directory")
+    projections = (
+        load_json(root / "design-system-handbook.json"),
+        load_json(root / "design-context.json"),
+    )
+    for output_format, name in OUTPUT_FILES.items():
+        if (root / name).read_bytes() != render(projections, output_format).encode("utf-8"):
+            raise ProjectionError(f"handbook artifact differs from its projection: {name}")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -710,6 +714,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments = build_parser().parse_args(argv)
     repository_root = arguments.repository_root.resolve()
     try:
+        if arguments.verify_directory is not None:
+            if arguments.output_directory is not None:
+                raise ProjectionError("--verify-directory cannot be combined with --output-directory")
+            verify_projection_directory(arguments.verify_directory)
+            print("Verified generated handbook/context projection")
+            return 0
         projections = build_projections(repository_root)
         if arguments.output_directory is None:
             sys.stdout.write(render(projections, arguments.format))
@@ -717,7 +727,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             written = write_outputs(repository_root, arguments.output_directory, projections)
             for path in written:
                 print(path.relative_to(repository_root).as_posix())
-    except (OSError, UnicodeError, json.JSONDecodeError, ProjectionError) as error:
+    except (OSError, UnicodeError, json.JSONDecodeError, ProjectionError, KeyError, TypeError) as error:
         print(f"projection failed: {error}", file=sys.stderr)
         return 1
     return 0

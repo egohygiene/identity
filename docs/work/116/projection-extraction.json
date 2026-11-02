@@ -1,0 +1,45 @@
+{
+  "baseRevision": "d247487379569c3701a8cefe6d6136502657fa64",
+  "issue": "https://github.com/egohygiene/identity/issues/86",
+  "sharedModule": "scripts/projection_boundary.py",
+  "behavioralTests": "not-run; deferred at maintainer request",
+  "files": [
+    {
+      "path": "scripts/render_guidance.py",
+      "oldSha256": "ef44f2ee4fe7a66abbe9fb80980d99abcd804087699fa4d47a5a9fe34efaba6c",
+      "delegatingWrappers": [
+        "load_json",
+        "render_json"
+      ],
+      "unchangedFunctions": 18,
+      "otherFunctionAsts": "unchanged"
+    },
+    {
+      "path": "scripts/render_design_system.py",
+      "oldSha256": "c12383a7acfc4b37cc10ff7c17549e82fbe8f24fa695dfde318cae26c417bd35",
+      "delegatingWrappers": [
+        "atomic_write",
+        "canonical_source_digest",
+        "is_public",
+        "load_json",
+        "output_directory",
+        "render_json"
+      ],
+      "unchangedFunctions": 17,
+      "otherFunctionAsts": "unchanged"
+    },
+    {
+      "path": "scripts/render_press_kit.py",
+      "oldSha256": "860b34638efc56ecb8fd53a15958f98d596a5ccacda49277bf57a0fcb7bda15b",
+      "delegatingWrappers": [
+        "atomic_write",
+        "generated_output_directory",
+        "is_public",
+        "load_json",
+        "render_json"
+      ],
+      "unchangedFunctions": 18,
+      "otherFunctionAsts": "unchanged"
+    }
+  ]
+}

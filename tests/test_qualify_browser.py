@@ -52,7 +52,7 @@ def proof(directory, profile):
         "runtimes": {"playwright": profile["playwright"], "pnpm": "11.21.0"},
         "browser": {"version": profile["chromium"]["version"], "executableSha256": "e" * 64, "commandLine": ["--force-color-profile=srgb"], "settings": profile["settings"], "renderedFonts": [{"selector": "h1", "fonts": [{"familyName": "Arial"}]}]},
         "fonts": {"packages": [{"name": package["name"], "version": package["version"]} for package in reversed(profile["fontPackages"])], "files": copy.deepcopy(profile["fontFiles"]), "configuration": [{"path": "/fonts.conf", "sha256": "d" * 64}]},
-        "positive": {"exitCode": 0, "passed": 6, "failed": 0, "skipped": 0, "report": "positive/report.json"},
+        "positive": {"exitCode": 0, "passed": 9, "failed": 0, "skipped": 0, "report": "positive/report.json"},
         "negative": {"exitCode": 1, "passed": 0, "failed": 1, "skipped": 0, "report": "negative/report.json", "expectedFailure": "screenshot-comparison", "baselineUnchanged": True, "diffArtifacts": [{"path": "negative/brand-kit-page-diff.png", "sha256": QUALIFY.sha256(diff.read_bytes())}]},
         "restored": {"exitCode": 0, "passed": 1, "failed": 0, "skipped": 0, "report": "restored/report.json"},
     }

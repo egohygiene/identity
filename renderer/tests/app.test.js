@@ -40,7 +40,7 @@ describe("BrandKitPage", () => {
 
     expect(sections.map(({ id }) => id)).toEqual(
       SECTION_DEFINITIONS.filter(
-        ([id]) => id !== "design-system" && id !== "press-kit",
+        ([id]) => !["design-system", "press-kit", "presentation"].includes(id),
       ).map(
         ([id]) => id,
       ),

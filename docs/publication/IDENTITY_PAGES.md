@@ -1,5 +1,11 @@
 # Identity public publication surfaces
 
+For the native consumer's complete generated kit, use the separate
+[assembly and offline verification guide](../consumers/COMPLETE_BRAND_KIT.md).
+That command produces a reviewable artifact directory and `kit.json`; it does
+not select a stable release, replace this publisher's `site.json`, install an
+organization route or publish Intelligence pages.
+
 The accepted publication architecture has two public surfaces with separate
 deployment and rollback authority:
 
@@ -81,7 +87,7 @@ out an annotated, stable Identity release tag, stages only that tag's
 `assets/identity/` tree, and generates:
 
 - the static reference renderer;
-- individual approved asset downloads;
+- release-selected asset downloads;
 - release-owned mascot assets and their byte-bound character-package manifest;
 - a deterministic `identity-brand-kit-v<version>.zip` archive;
 - a public manifest with release tag, commit, source digest, file inventory,
@@ -100,6 +106,56 @@ The page visibly links its release and publication manifest. `site.json`
 carries the same release, digest, canonical URL, and route-alias information
 for a machine check without scraping HTML and for the `/identity/` composite's
 cross-host release proof.
+
+### Rights metadata and release selection
+
+The release publisher copies explicitly supplied asset license, origin and
+approval metadata. When a legacy configuration omits one of these fields, its
+view model now records null and the page reports that information as not
+declared. It does not invent MIT permission, attribution, a creator/capture
+date or a human approval. A repository's software license is not blanket
+permission for its trademarks or third-party assets.
+
+This corrects the metadata representation only. The publisher still packages
+the selected immutable release tree under its existing publication contract;
+its archive and copied asset bytes are not withheld by a missing-data label.
+Unknown permissions remain unresolved and require the rights owner, rather
+than the renderer, to establish the evidence. The governed v1 Press Kit has
+its separate explicit public/approval selection boundary. Complete consumer
+kit readiness and the later #105/#98 release proof must assess the actual
+distributed bytes and their rights, not infer approval from a successful build.
+Proposed [ADR-0028](../decisions/ADR-0028-asset-rights-projection.md) records this
+bounded distinction; implementation does not accept the proposal or adopt a
+new legal policy.
+
+### Selected downloads and browser assets
+
+Publication configuration selects assets that actually exist in the immutable
+release tree, with explicit labels, paths and source metadata. The page exposes
+those selected masters and existing raster/ICO/avatar files; it does not infer
+new artwork, variant roles or approval from filenames. Its emitted download
+catalog and package links describe the built release files. The separate
+generic v1 renderer additionally requires governed approved/public/active/
+publicly available usage asset selections; the legacy missing-rights boundary
+above is unchanged.
+
+Optional configuration `browserAssets` supplies `icon`, `appleTouchIcon` and
+`manifest` bundle-relative paths for actual selected release files. These map
+to the static renderer's `--icon-path`, `--apple-touch-icon-path` and
+`--web-manifest-path` options. All use the configured asset base and normalized
+safe paths. Omitted entries emit no corresponding head link, so publication
+does not imply an unselected favicon/PWA profile exists.
+
+The builder and offline verifier check advertised downloads and browser assets
+against existing nonempty files confined to the staged artifact root. The
+public manifest's inventory/checksums bind actual output bytes and sizes to the
+release source digest; they are not replaced by the master asset's source hash.
+The verifier also checks the emitted download URLs against the configured base
+and local files. These checks do not fetch a CDN or remote download URL and do
+not claim live deployment, browser review or human approval. Standalone
+model-only previews remain possible without filesystem proof. The
+[renderer contract](../contracts/BRAND_KIT_RENDERER_V1.md#browser-metadata-and-local-artifact-verification)
+documents the explicit artifact-root/manifest options for consumer bundles.
 
 ## Local preview and verification
 

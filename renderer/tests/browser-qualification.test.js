@@ -108,12 +108,12 @@ describe("qualified browser report evidence", () => {
   });
 
   test("accepts the exact nested positive suite without retries or skips", () => {
-    const result = validateReport(report({ count: 6 }), {
-      expectedPassed: 6,
+    const result = validateReport(report({ count: 9 }), {
+      expectedPassed: 9,
       expectedFailed: 0,
       artifactRoot,
     });
-    expect(result).toMatchObject({ passed: 6, failed: 0, skipped: 0 });
+    expect(result).toMatchObject({ passed: 9, failed: 0, skipped: 0 });
     expect(result.diffArtifacts).toEqual([]);
   });
 

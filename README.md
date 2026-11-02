@@ -109,6 +109,13 @@ documented below. See the
 
 ## Identity v1 source
 
+Validator maintenance uses focused canonical modules under
+[`scripts/identity_validation/`](scripts/identity_validation/README.md).
+Regenerate `scripts/validate_identity.py` with
+`python3 scripts/build_identity_validator.py` after editing those modules.
+The public script/import path and the Rust-embedded standalone payload retain
+their existing offline boundary.
+
 The v1 contract adds content-addressed organization defaults, intentional
 product overrides, DTCG-compatible semantic tokens, versioned target profiles,
 asset provenance/licensing, and human approvals beneath `.identity/`.
@@ -151,6 +158,13 @@ build; source changes require loading and planning again. The standalone
 validator remains available for diagnostic-only use.
 
 ## Governed brand guidance
+
+To assemble native downloads, an optional handbook and an optional Press Kit
+into one usable public page, follow the
+[complete Brand Kit guide](docs/consumers/COMPLETE_BRAND_KIT.md). The builder
+checks actual generated files and source agreement, preserves static content,
+omits absent sections/review controls, and emits an offline-verifiable kit.
+Building a kit remains separate from releasing or deploying it.
 
 Voice, contextual tone, vocabulary, examples, anti-examples, usage rules,
 accessibility, legal notes, localization, legacy assets, and approval state are

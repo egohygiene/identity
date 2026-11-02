@@ -43,6 +43,22 @@ def source_digests(repository_root: Path) -> dict[str, str]:
 class DesignSystemProjectionTests(unittest.TestCase):
     """Prove deterministic projections preserve their source and ownership boundaries."""
 
+    def test_standalone_verification_rejects_stale_markdown_without_source_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = Path(temporary) / "consumer"
+            shutil.copytree(VALID_FIXTURE, repository)
+            before = source_digests(repository)
+            renderer.write_outputs(repository, Path("build/handbook"), renderer.build_projections(repository))
+            directory = repository / "build/handbook"
+            result = subprocess.run([sys.executable, str(RENDERER_PATH), "--verify-directory", str(directory)],
+                                    capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            with (directory / "design-system-handbook.md").open("a", encoding="utf-8") as output:
+                output.write("Stale or unselected guidance")
+            with self.assertRaisesRegex(renderer.ProjectionError, "differs from its projection"):
+                renderer.verify_projection_directory(directory)
+            self.assertEqual(source_digests(repository), before)
+
     def test_handbook_projects_only_declared_guidance(self) -> None:
         for declared_voice in (False, True):
             for declared_usage in (False, True):

@@ -10,7 +10,6 @@ import argparse
 from io import BytesIO
 import hashlib
 import json
-import os
 from pathlib import Path, PurePosixPath
 import shutil
 import sys
@@ -20,6 +19,7 @@ import zipfile
 import render_design_system as design_system
 import channel_registry
 import validate_identity as validator
+import projection_boundary as boundary
 
 PRESS_KIT_SCHEMA = "identity.press-kit/v1"
 PACKAGE_SCHEMA = "identity.press-kit-package/v1"
@@ -53,22 +53,13 @@ class ProjectionError(ValueError):
 def load_json(path: Path) -> dict[str, Any]:
     """Load one object-shaped JSON document."""
 
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ProjectionError(f"document must be an object: {path}")
-    return value
+    return boundary.load_json_object(path, error_type=ProjectionError)
 
 
 def is_public(value: dict[str, Any]) -> bool:
     """Return whether a governed record is approved for public projection."""
 
-    governance = value.get("governance")
-    return (
-        isinstance(governance, dict)
-        and governance.get("state") == "approved"
-        and governance.get("visibility") == "public"
-        and isinstance(governance.get("approval"), str)
-    )
+    return boundary.approved_public_with_approval(value)
 
 
 def approval_record(value: dict[str, Any], approvals: dict[str, dict[str, Any]]) -> dict[str, str]:
@@ -193,7 +184,7 @@ def build_projection(repository_root: Path) -> tuple[dict[str, Any], dict[str, b
 
     boilerplates = public_records(source, "boilerplates", approvals)
     boilerplate_kinds = {value["kind"] for value in boilerplates}
-    if boilerplate_kinds != {"short", "long"}:
+    if not {"short", "long"}.issubset(boilerplate_kinds):
         raise ProjectionError(
             "Press Kit projection requires approved public short and long boilerplates"
         )
@@ -503,7 +494,7 @@ def verified_social_package(
 def render_json(value: dict[str, Any]) -> str:
     """Render one stable JSON document."""
 
-    return f"{json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False)}\n"
+    return boundary.render_json(value)
 
 
 def markdown_cell(value: str) -> str:
@@ -526,21 +517,19 @@ def render_markdown(model: dict[str, Any]) -> str:
         "",
         f"Source digest: `{model['source']['digest']}`",
         "",
-        "## Short boilerplate",
-        "",
-        boilerplates["short"]["text"],
-        "",
-        f"Approval: `{boilerplates['short']['approval']['id']}`",
-        "",
-        "## Long boilerplate",
-        "",
-        boilerplates["long"]["text"],
-        "",
-        f"Approval: `{boilerplates['long']['approval']['id']}`",
-        "",
-        "## Key facts",
-        "",
     ]
+    for kind, label in (("short", "Short"), ("paragraph", "Paragraph"), ("long", "Long")):
+        if kind in boilerplates:
+            value = boilerplates[kind]
+            lines.extend([
+                f"## {label} boilerplate",
+                "",
+                value["text"],
+                "",
+                f"Approval: `{value['approval']['id']}`",
+                "",
+            ])
+    lines.extend(["## Key facts", ""])
     if model["facts"]:
         lines.extend(["| Fact | Value |", "| --- | --- |"])
         lines.extend(
@@ -574,11 +563,35 @@ def render_markdown(model: dict[str, Any]) -> str:
         lines.append("No public team bios are declared in the current source.")
     lines.extend(["", "## Approved assets", ""])
     if model["assets"]:
-        lines.extend(["| Asset | Use | Download |", "| --- | --- | --- |"])
-        lines.extend(
-            f"| {markdown_cell(value['label'])} | {markdown_cell(value['notes'])} | [{value['downloadPath']}]({value['downloadPath']}) |"
-            for value in model["assets"]
-        )
+        for asset in model["assets"]:
+            license_value = asset["license"]
+            origin = asset["origin"]
+            usage = asset["usage"]
+            lines.extend(
+                [
+                    f"### {asset['label']}",
+                    "",
+                    asset["notes"],
+                    "",
+                    f"[Download {asset['label']}]({asset['downloadPath']})",
+                    "",
+                    f"- Asset ID: `{asset['assetId']}`",
+                    f"- License: `{license_value['spdx']}` · {license_value['status']}",
+                    f"- Attribution: {license_value['attribution'] or 'No attribution text is declared.'}",
+                    f"- Creator: {origin['creator']}",
+                    f"- Origin method: {origin['method']}",
+                    f"- Source: {origin['source']}",
+                    f"- Captured: {origin['capturedAt']}",
+                    f"- SHA-256: `{asset['sha256']}`",
+                    f"- Selection approval: `{asset['approval']['id']}`",
+                    f"- Safe zone: {usage['safeZone']}",
+                    f"- Minimum size: {usage['minimumSize']}",
+                ]
+            )
+            lines.extend(f"- Restriction: {restriction}" for restriction in usage["restrictions"])
+            if not usage["restrictions"]:
+                lines.append("- Restrictions: no restriction text is declared.")
+            lines.append("")
     else:
         lines.append("No Press Kit assets are selected in the current source.")
     lines.extend(["", "## Usage and legal guidance", ""])
@@ -598,8 +611,20 @@ def render_markdown(model: dict[str, Any]) -> str:
                 f"Copyright: {value['copyright']}",
                 "",
                 f"Attribution: {value['attribution']}",
+                "",
+                "### Third-party asset notices",
+                "",
             ]
         )
+        for notice in value["thirdPartyLicenses"]:
+            lines.extend(
+                [
+                    f"- **{notice['name']}** — `{notice['spdx']}`",
+                    f"  Attribution: {notice['attribution']}",
+                ]
+            )
+        if not value["thirdPartyLicenses"]:
+            lines.append("No third-party asset notices are declared in the current source.")
     else:
         lines.extend(["", "No public legal guidance is declared in the current source."])
     social = model.get("socialSurfaces")
@@ -686,26 +711,49 @@ def build_package(model: dict[str, Any], asset_bytes: dict[str, bytes]) -> dict[
 def generated_output_directory(repository_root: Path, value: Path) -> Path:
     """Resolve a generated directory without allowing source or symlink writes."""
 
-    relative = value.as_posix()
-    if not validator.valid_relative_path(relative):
-        raise ProjectionError("output directory must be normalized and repository-relative")
-    if relative == ".identity" or relative.startswith(".identity/"):
-        raise ProjectionError("generated Press Kit output cannot be written into canonical .identity")
-    current = repository_root
-    for part in PurePosixPath(relative).parts:
-        current = current / part
-        if current.is_symlink():
-            raise ProjectionError("output directory may not traverse a symbolic link")
-    return repository_root / relative
+    return boundary.generated_directory(
+            repository_root, value, error_type=ProjectionError,
+            canonical_error="generated Press Kit output cannot be written into canonical .identity",
+        )
+
+
+def verify_package_directory(directory: Path) -> None:
+    """Verify a complete native-only projection without reading canonical source."""
+
+    root = directory.resolve(strict=True)
+
+    def read(relative: str) -> bytes:
+        if not validator.valid_relative_path(relative):
+            raise ProjectionError(f"unsafe Press Kit artifact path: {relative!r}")
+        file = (root / relative).resolve(strict=True)
+        if not file.is_relative_to(root) or not file.is_file():
+            raise ProjectionError(f"Press Kit artifact escapes its package: {relative}")
+        return file.read_bytes()
+
+    model = json.loads(read(OUTPUT_FILES["json"]))
+    social = model.get("socialSurfaces")
+    if model.get("schema") != PRESS_KIT_SCHEMA or (isinstance(social, dict) and social.get("status") == "included"):
+        raise ProjectionError("verification requires a native-only Press Kit projection")
+    assets = {}
+    for asset in model["assets"]:
+        relative = asset["downloadPath"]
+        contents = read(relative)
+        if relative in assets or checksum_entry(contents)["sha256"] != asset["sha256"]:
+            raise ProjectionError(f"Press Kit source asset checksum/identity mismatch: {relative}")
+        assets[relative] = contents
+    expected = build_package(model, assets)
+    actual = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+    if actual != set(expected):
+        raise ProjectionError("Press Kit file inventory differs from its declared projection")
+    for relative, contents in expected.items():
+        if read(relative) != contents:
+            raise ProjectionError(f"Press Kit artifact differs from its projection: {relative}")
 
 
 def atomic_write(path: Path, value: bytes) -> None:
     """Replace one generated artifact without leaving a partial file behind."""
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_bytes(value)
-    os.replace(temporary, path)
+    boundary.atomic_write_bytes(path, value)
 
 
 def write_outputs(
@@ -751,6 +799,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Repository-relative generated directory for the complete Press Kit package.",
     )
     parser.add_argument(
+        "--verify-directory",
+        type=Path,
+        help="Read-only verification of a complete generated native-only Press Kit, including archive bytes.",
+    )
+    parser.add_argument(
         "--social-surfaces-directory",
         type=Path,
         help="Repository-relative generated social package to verify and include.",
@@ -764,6 +817,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments = build_parser().parse_args(argv)
     repository_root = arguments.repository_root.resolve()
     try:
+        if arguments.verify_directory is not None:
+            if arguments.output_directory is not None or arguments.social_surfaces_directory is not None:
+                raise ProjectionError("--verify-directory cannot be combined with generation options")
+            verify_package_directory(arguments.verify_directory)
+            print("Verified generated Press Kit package")
+            return 0
         model, assets = build_projection(repository_root)
         if arguments.social_surfaces_directory is not None:
             model, assets = verified_social_package(
@@ -779,7 +838,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             payload = build_package(model, assets)
             for path in write_outputs(repository_root, arguments.output_directory, payload):
                 print(path.relative_to(repository_root).as_posix())
-    except (OSError, ProjectionError, ValueError) as error:
+    except (OSError, ProjectionError, ValueError, KeyError, TypeError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
     return 0

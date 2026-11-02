@@ -37,7 +37,6 @@
     },
     "assets": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/$defs/asset"
       }
@@ -51,12 +50,19 @@
     "designSystem": {
       "$ref": "#/$defs/designSystem"
     },
+    "pressKit": {
+      "$ref": "#/$defs/pressKit"
+    },
     "packages": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/$defs/package"
       }
+    },
+    "downloads": {
+      "description": "Selected public generated artifacts. The native GitHub Social preview artifact is described by $defs.githubSocialPreviewDownload; other existing downloads remain valid.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/download" }
     }
   },
   "$defs": {
@@ -218,6 +224,20 @@
         }
       }
     },
+    "assetUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["safeZone", "minimumSize", "restrictions"],
+      "properties": {
+        "safeZone": { "type": "string", "minLength": 1 },
+        "minimumSize": { "type": "string", "minLength": 1 },
+        "restrictions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
     "asset": {
       "type": "object",
       "additionalProperties": false,
@@ -309,8 +329,57 @@
             "string",
             "null"
           ]
+        },
+        "usage": {
+          "oneOf": [
+            { "$ref": "#/$defs/assetUsage" },
+            { "type": "null" }
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
         }
       }
+    },
+    "download": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "path", "mediaType", "profile", "sourceAssetId", "sourceSha256", "dimensions"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)(?!.*\/$)[^\\u0000]+$"
+        },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "profile": { "type": "string", "minLength": 1 },
+        "sourceAssetId": { "type": "string", "minLength": 1 },
+        "sourceSha256": { "$ref": "#/$defs/digest" },
+        "dimensions": { "type": "string", "minLength": 1 }
+      }
+    },
+    "githubSocialPreviewDownload": {
+      "title": "Native GitHub repository Social preview artifact",
+      "description": "The existing github@1.0.0 output for repository Settings > Social preview: 1280 by 640 PNG, with a native compiler budget of 999999 bytes. The repository retains its layout reference at docs/references/github/repository-open-graph-template.png. This additive named specialization introduces no new source or download fields.",
+      "allOf": [
+        { "$ref": "#/$defs/download" },
+        {
+          "properties": {
+            "id": { "const": "github-social-preview" },
+            "profile": { "const": "github" },
+            "path": { "const": "github/social-preview.png" },
+            "mediaType": { "const": "image/png" },
+            "dimensions": { "const": "1280 × 640 pixels" }
+          }
+        }
+      ]
     },
     "guidanceSection": {
       "type": "object",

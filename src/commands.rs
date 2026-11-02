@@ -10,7 +10,7 @@ use anyhow::{Context, Result, bail};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
-use crate::brandkit::{compiler_request, register_builtin_adapters};
+use crate::brandkit::register_builtin_adapters;
 use crate::cli::{
     HandoffArguments, InitArguments, PlanArguments, PlanFormat, RepositoryArguments,
     StudioReviewArguments, V1CompilationArguments,
@@ -320,7 +320,9 @@ fn v1_request(
 ) -> Result<crate::compiler::CompilerRequest> {
     let output_root = v1_output_root(arguments)?;
     Ok(with_reference_renderer(
-        compiler_request(output_root, pipeline.profiles()).map_err(compiler_error)?,
+        pipeline
+            .compiler_request(output_root)
+            .map_err(compiler_error)?,
     ))
 }
 

@@ -362,7 +362,7 @@ async function main(arguments_) {
         throw new Error(`Required qualified font file is missing or changed: ${expected.path}`);
       }
     }
-    receipt.positive = phase("positive", runRoot, profile, { passed: 6 });
+    receipt.positive = phase("positive", runRoot, profile, { passed: 9 });
     const cssFiles = readdirSync(path.join(rendererRoot, "dist/assets")).filter((file) => file.endsWith(".css"));
     if (cssFiles.length !== 1) throw new Error("The visual mutation requires one unambiguous built CSS file");
     const cssPath = path.join(rendererRoot, "dist/assets", cssFiles[0]);

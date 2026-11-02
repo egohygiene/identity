@@ -19,12 +19,14 @@ use std::path::{Path, PathBuf};
 use serde_json::{Map, Value};
 
 use crate::brandkit::{
-    BrandKitGuidance, BrandKitLicense, BrandKitOrigin, BrandKitProject, BrandKitSourceAsset,
-    BrandKitSourceGovernance, BrandKitToken, ProfileSelection,
+    BrandKitAssetUsage, BrandKitGuidance, BrandKitLicense, BrandKitModel, BrandKitOrigin,
+    BrandKitProject, BrandKitSourceAsset, BrandKitSourceGovernance, BrandKitToken,
+    ProfileSelection,
 };
 use crate::compiler::{
-    CompilerError, CompilerResult, Diagnostic, FailureKind, IdentityIntent, IdentityReader,
-    IdentityResolver, IdentityValidator, ResolvedIdentity, ValidationReport, sha256_hex,
+    CompilerError, CompilerRequest, CompilerResult, Diagnostic, FailureKind, IdentityIntent,
+    IdentityReader, IdentityResolver, IdentityValidator, ProjectionTarget, ResolvedIdentity,
+    ValidationReport, sha256_hex,
 };
 use source_digest::canonical_source_digest;
 
@@ -169,6 +171,65 @@ impl V1ConsumerPipeline {
     #[must_use]
     pub fn profiles(&self) -> &[ProfileSelection] {
         &self.profiles
+    }
+
+    /// Build the selected local outputs, adding only explicitly public source
+    /// masters to the selected core profile. Other source/review state is kept.
+    pub fn compiler_request(
+        &self,
+        output_root: impl Into<String>,
+    ) -> CompilerResult<CompilerRequest> {
+        self.verify_source()?;
+        let mut request = crate::brandkit::compiler_request(output_root, &self.profiles)?;
+        if self.profiles.iter().any(|profile| profile.id == "core") {
+            let model = BrandKitModel::from_resolved(&self.resolved)?;
+            for (id, declaration) in model.public_assets() {
+                if model.sources[&id].media_type != "image/svg+xml"
+                    || request.targets.iter().any(|target| {
+                        target.adapter_id == "identity-source-svg"
+                            && target.parameters.get("role").and_then(Value::as_str)
+                                == Some(id.as_str())
+                    })
+                {
+                    continue;
+                }
+                if declaration.download_name.is_empty()
+                    || matches!(declaration.download_name.as_str(), "." | "..")
+                    || declaration.download_name.chars().any(|character| {
+                        character.is_control()
+                            || matches!(character, '/' | '\\' | '%' | ':' | '?' | '#')
+                    })
+                {
+                    return Err(invalid(
+                        format!("usage.assets.{id}.downloadName"),
+                        "public SVG download name must be a filename without URL-reserved characters, separators, or control characters",
+                    ));
+                }
+                let relative_path = format!("brand/{}", declaration.download_name);
+                crate::contract::validate_relative_path(
+                    Path::new(&relative_path),
+                    "public source download",
+                )
+                .map_err(|error| invalid(&relative_path, error.to_string()))?;
+                request.targets.push(ProjectionTarget {
+                    id: format!("core-source-{id}"),
+                    profile: "core".to_owned(),
+                    relative_path,
+                    adapter_id: "identity-source-svg".to_owned(),
+                    media_type: "image/svg+xml".to_owned(),
+                    parameters: BTreeMap::from([("role".to_owned(), Value::String(id))]),
+                    required_approval: None,
+                    maximum_bytes: Some(512_000),
+                });
+            }
+        }
+        request.targets.sort_by(|left, right| {
+            left.profile
+                .cmp(&right.profile)
+                .then_with(|| left.relative_path.cmp(&right.relative_path))
+                .then_with(|| left.id.cmp(&right.id))
+        });
+        Ok(request)
     }
 }
 
@@ -376,7 +437,7 @@ fn source_assets(
         let text = String::from_utf8(bytes.clone())
             .map_err(|error| invalid(&path, format!("approved source must be UTF-8: {error}")))?;
         let accessibility = object_field(entry, "accessibility", "provenance asset")?;
-        let _usage = object_field(entry, "usage", "provenance asset")?;
+        let usage = object_field(entry, "usage", "provenance asset")?;
         let license = object_field(entry, "license", "provenance asset")?;
         let origin = object_field(entry, "origin", "provenance asset")?;
         let approval = string_field(entry, "approval", "provenance asset.approval")?.to_owned();
@@ -419,6 +480,18 @@ fn source_assets(
                     captured_at: string_field(origin, "capturedAt", "asset origin")?.to_owned(),
                 },
                 approval,
+                usage: Some(BrandKitAssetUsage {
+                    safe_zone: string_field(usage, "safeZone", "asset usage")?.to_owned(),
+                    minimum_size: string_field(usage, "minimumSize", "asset usage")?.to_owned(),
+                    restrictions: array_field(usage, "restrictions", "asset usage")?
+                        .iter()
+                        .map(|restriction| {
+                            restriction.as_str().map(str::to_owned).ok_or_else(|| {
+                                invalid("asset usage.restrictions", "expected a string restriction")
+                            })
+                        })
+                        .collect::<CompilerResult<Vec<_>>>()?,
+                }),
             },
         );
     }

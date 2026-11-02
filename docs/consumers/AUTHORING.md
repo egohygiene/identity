@@ -113,9 +113,37 @@ Use the existing governed homes when a consumer needs richer material:
 | `assets[]` | Required nonempty array when usage is adopted; ID, label, kind, path, status, availability, replacement, downloadName, notes, governance | H; match existing source provenance/approval | Public guidance downloads require active/public/approved records; legacy assets require a replacement and separate labeling |
 | `accessibility.{summary,rules,governance}` | Required summary string and nonempty rules array when adopted | H; governed bundle | Approved/public accessibility guidance |
 | `legal.{trademark,copyright,attribution,thirdPartyLicenses,governance}` | Required strings, third-party-license array, governance when adopted | H; governed bundle; actual rights owners | Approved/public legal guidance; authoritative policy documents retain their owners |
-| `.identity/guidance/press-kit.json` → `boilerplates[]` | Optional document; exactly one short and one long nonempty text record required for a public kit | H; each has ID, kind, text, governance | Canonical short/long descriptions in the Press Kit projection |
+| `.identity/guidance/press-kit.json` → `boilerplates[]` | Optional document; exactly one `short` and one `long` nonempty text record required for a public kit; at most one optional `paragraph` record | H; each has ID, kind, text, governance | Canonical supplied descriptions in the Press Kit projection, page, Markdown and ZIP |
 | `facts`, `links`, `contacts`, `team`, `assets` in that Press Kit source | Required arrays in the adopted document; may be empty | H; each supplied record governed; assets reference existing `assetId` | Only affirmative reviewed facts/contacts/bios and explicitly selected public assets; absence stays explicit |
 | `.identity/guidance/channel-registry.json`, selected by `documents.channelRegistry` | Optional document; follow its closed schema and contract | H; actual account lifecycle, verification and record governance | Authoritative social URLs/handles for registry, Press Kit and social consumers; do not duplicate registry social links in Press Kit source |
+
+For the project profile, use these homes consistently:
+
+| Supplied material | Authoritative home |
+| --- | --- |
+| Official name, tagline, repository | Project `displayName`, `tagline`, `repository` |
+| Website and contact | Press Kit `links[]` with `kind: "website"` and `contacts[]` |
+| Audience, positioning, personality | Voice `foundation` fields above |
+| Short name, distinct mission statement, values, pronunciation | Optional Press Kit `facts[]`; choose an explicit human-readable label and exact approved value for each supplied fact |
+| Purpose or mission already expressed by the approved purpose | Voice `foundation.purpose`; reuse it rather than maintaining a second version |
+| Terminology and capitalization | The relevant voice context's `preferredVocabulary`, `avoidedLanguage` and `capitalization` |
+| Official naming and unofficial-extension naming rules | The relevant context's `naming`; use governed usage rules for additional constraints |
+| Practical voice examples | The relevant context's separately governed `examples[]` and `antiExamples[]` |
+
+Fact IDs and labels do not select special renderer behavior: a supplied
+"Short name" or "Pronunciation" fact appears under that exact label. The
+renderer does not derive a mission, shorten a name, infer values, pronounce a
+name, or grant unofficial extensions permission to use it. Owners must supply
+the actual rule and its approval before that guidance appears publicly.
+
+Use `short` for the supplied one-sentence description, optional `paragraph` for
+a separately approved paragraph, and `long` for the longer description. These
+are editorial labels, not sentence-count or length validators. Copy controls
+reuse the projected text exactly; no description is generated from another.
+An absent or withheld paragraph adds no placeholder. The optional paragraph
+extension requires matching updated schemas, producer and renderer; older
+pinned tools can reject it or omit it. See the
+[Press Kit compatibility notes](../contracts/PRESS_KIT_V1.md#compatibility).
 
 Every governed record includes
 `governance.{subject,state,visibility,provenance,approval}`. Provenance supplies
@@ -131,6 +159,93 @@ and a Press Kit with short/long descriptions, a website, a media contact, and
 the approved mark. Empty facts/team arrays demonstrate genuine optionality.
 Its synthetic review and rights evidence is for exercising this example only;
 it cannot approve real consumer copy, artwork, licenses, or people.
+
+### Select public masters and downloads
+
+Put each actual reviewed logo, wordmark or variant master in the existing
+sources/provenance/approval records, then select it through usage `assets[]`.
+The generic public renderer requires the matching record's
+`governance.state: "approved"`, `governance.visibility: "public"`,
+`status: "active"` and `availability: "public"`. Source validation binds the
+same asset ID/path to provenance and its byte digest. An approved local source
+alone is not a public selection. Missing usage leaves the public asset and
+download lists empty while preserving local generation and review material.
+
+Use the record's exact `label`, `kind`, `notes` and safe `downloadName` for
+existing variants. Place background, spacing, minimum-size and misuse guidance
+in the existing governed usage rules and provenance usage fields. The compiler
+does not derive dark/light artwork, wordmarks, avatars or permission from a
+filename, ID, label or build. Add a distinct master only when the reviewed
+artwork and approval actually exist.
+
+Selecting `core` copies the selected public SVG masters to
+`brand/<downloadName>` through the existing source adapter; an existing matching
+target is reused and output collisions fail before writes. Other selected
+native profiles provide their existing mechanical exports: `web` favicon
+PNGs at 32/64 pixels, `pwa` icons at 192/512 pixels and a 512-pixel maskable
+icon, and the supported GitHub/social preview PNGs. Select only the required
+profiles and inspect their actual output inventory. This work adds no new
+universal ICO or avatar adapter; the legacy release publisher can expose its
+already-existing avatar SVG through explicit release configuration.
+
+For an actual GitHub preview or generic card, follow the
+[selected presentation profiles](PRESENTATION_PROFILES.md) walkthrough. It
+reuses existing output selections and Press Kit copy/facts/links, including
+explicitly supplied official package identifiers and discovery keywords.
+It adds no registry publisher, account manager, inferred tags or new source
+catalog. Keep absent/withheld metadata absent and inspect the destination's
+current requirements before using the generated handoff.
+
+The renderer receives the actual selected compiler targets. It advertises
+their package/source/raster paths, dimensions and source binding, and omits an
+archive when its underlying mark is not selected for public use. A bare model
+without targets supplies no generated-download inventory. After generation,
+verify advertised local files against the artifact root and compiler manifest;
+the source SHA-256 is not a derived PNG's checksum. See the
+[renderer verification options](../contracts/BRAND_KIT_RENDERER_V1.md#browser-metadata-and-local-artifact-verification).
+
+These post-`v1.0.0` changes require the matching reviewed compiler, schema and
+renderer pin. Optional `downloads`, asset `kind` and asset `notes` remain in
+the v1 model family, but older strict readers may reject them. Regenerate the
+complete handoff when upgrading; preserve immutable old releases. Proposed
+[ADR-0029](../decisions/ADR-0029-selected-public-downloads.md) records the
+selection/output boundary without accepting a new decision or creative asset.
+
+### Rights, policy references and font acquisition
+
+Keep software licensing, trademark rules and third-party asset rights distinct.
+The repository's software license is not blanket permission to reuse its name,
+marks or fonts. Use the existing governed homes rather than copying policies
+into a second catalog:
+
+| Supplied material | Authoritative home and consumer behavior |
+| --- | --- |
+| Distributed asset rights, attribution, creator/source and restrictions | The asset's provenance `license`, `origin`, `usage` and `approval`; Press Kit reuses the rights and digest with its own asset-selection approval, while the core renderer carries the source approval |
+| Trademark, copyright and third-party notices | Approved/public usage `legal.{trademark,copyright,attribution,thirdPartyLicenses}`; preserve supplied wording and the rights owner's authority |
+| Software license, governance, Code of Conduct, security-reporting and contribution documents | Approved/public Press Kit `links[]` with `kind: "documentation"` or `"other"`, an explicit label and the authoritative HTTPS URL |
+| Support/community destinations and official contacts | Approved/public Press Kit `links[]` and `contacts[]`; use `kind: "support"` where applicable and the channel registry for adopted social-account links |
+| A font that consumers must acquire separately | An approved/public external Press Kit link, with a clear supplied label and explanatory usage/legal guidance where needed; the link is not a redistribution approval |
+| Permissions that have not been established | An approved explanatory fact or guidance statement describing that uncertainty; do not invent an approved license or place unresolved bytes among selected public assets |
+
+Link IDs and labels do not select policy semantics. The renderer preserves the
+configured label and destination; it does not fetch, copy, verify or rewrite
+the linked policy. Omit absent optional references. Changes to a policy or its
+owner remain with that policy's existing repository or organization owner.
+
+Canonical provenance requires `license.status: "approved"` and an actual
+subject-matched asset decision. There is no invented `unresolved` license
+status that makes unknown rights distributable. Keep acquisition-only fonts
+outside local selected assets until the owner has approved the actual bytes,
+license evidence and checksums. A font family name or provider URL supplies no
+such approval; builds do not download fonts. The optional inspection/subsetting
+adapters in [ADR-0007](../decisions/ADR-0007-font-tooling-boundaries.md) are not
+implemented by this presentation work.
+
+The separate legacy release publisher can have missing rights metadata. Its
+page now exposes that absence rather than manufacturing a license or approval;
+its existing archive selection is unchanged. This does not establish those
+permissions or withhold the already-selected bytes. See the
+[publication rights boundary](../publication/IDENTITY_PAGES.md#rights-metadata-and-release-selection).
 
 ## 4. Rehearse on a disposable copy
 
@@ -189,6 +304,27 @@ Optional packages have their own projection and integrity checks; core
 
 ## 5. Record what the result proves
 
+For readable color/type foundations, generate the optional handbook/context
+pair from the same consumer snapshot using
+[`render_design_system.py`](../../scripts/render_design_system.py), then supply
+that directory through the renderer's existing `--design-system-directory`
+option. Its token entries already carry the approved source's contrast intent,
+pairings/minimums and typography license/language/legibility constraints. Keep
+the generated pair and displayed core model together: their token inventories,
+resolved values, layers and override metadata must agree as well as their
+project/source digest. Use the existing artifact-root/manifest checks when
+rendering an actual generated bundle.
+
+Only supplied foreground/background pairings are measured; undeclared themes,
+translucent or unsupported colors, font acquisition URLs and type relationships
+are not guessed. A font family is not proof of installed or distributable font
+bytes. Preserve fallback order, review the supplied license and obtain approved
+font files before bundling; otherwise use the declared fallbacks. Add intended
+sizes/weights/line-height relationships in reviewed canonical source rather
+than editing the page or expecting it to infer a hierarchy. The
+[foundation contract](../contracts/DESIGN_SYSTEM_V1.md#readable-color-and-typography-foundations)
+describes supported previews and remaining review limits.
+
 | Check | Evidence and limit |
 | --- | --- |
 | Valid source | Same-commit validator checks closed structure, local bytes/pins, references, rights and decision consistency. It cannot grant creative/legal approval or promise support by every producer. |
@@ -196,9 +332,10 @@ Optional packages have their own projection and integrity checks; core
 | Verified selected outputs | `v1-generate` plus `v1-verify` checks the core selected package state. Inspect its manifest and actual files; verify optional packages through their separate paths. |
 | Public-kit readiness | Requires the real public selection, downloads, rights presentation, visual/accessibility review, and publication integration proof for that consumer. Passing the prior checks does not establish this. |
 
-The audit's internal-asset exposure finding G03 and advertised-but-unselected
-archive finding G04 remain implementation/regression work in #101/#105. Do not
-infer safe generic public selection or a complete kit from these examples.
+Merged [PR #126](https://github.com/egohygiene/identity/pull/126) addresses the
+audit's G03/G04 generic public-asset selection and selected-download findings.
+Keep those boundaries exercised for the actual consumer; a complete public kit
+still requires #105's assembly and acceptance evidence.
 The [Mantle walkthrough](MANTLE_AUTHORING_PROOF.md) exercises this worksheet
 against pinned real source. Its evidence and the [initialization/validation
 handoffs](INITIALIZATION_AND_VALIDATION_HANDOFFS.md) supply checkpoint 3

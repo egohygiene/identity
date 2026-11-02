@@ -13,9 +13,11 @@ import { BrandKitPage } from "../src/app.js";
 import {
   assertBrandKitViewModel,
   deriveThemeVariables,
+  joinAssetUrl,
 } from "../src/model.js";
 import { createDesignSystemView } from "../src/design-system.js";
 import { createPressKitView } from "../src/press-kit.js";
+import { verifyArtifactDownloads } from "../src/download-integrity.js";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
@@ -35,6 +37,9 @@ const openGraphImage = argumentsMap["open-graph-image"] || null;
 const publicationPath = argumentsMap.publication
   ? path.resolve(argumentsMap.publication)
   : null;
+const audience = argumentsMap.audience || "preview";
+if (!["preview", "public"].includes(audience)) throw new Error("--audience must be preview or public.");
+const publicOnly = audience === "public";
 const designSystemDirectory = argumentsMap["design-system-directory"]
   ? path.resolve(argumentsMap["design-system-directory"])
   : null;
@@ -45,6 +50,20 @@ const pressKitDirectory = argumentsMap["press-kit-directory"]
   : null;
 const pressKitArtifactDirectory =
   argumentsMap["press-kit-artifact-directory"] || "press-kit";
+const artifactRoot = argumentsMap["artifact-root"]
+  ? path.resolve(argumentsMap["artifact-root"])
+  : null;
+const manifestPath = argumentsMap["artifact-manifest"]
+  ? path.resolve(argumentsMap["artifact-manifest"])
+  : null;
+const browserAssets = Object.fromEntries([
+  ["icon", argumentsMap["icon-path"]],
+  ["appleTouchIcon", argumentsMap["apple-touch-icon-path"]],
+  ["manifest", argumentsMap["web-manifest-path"]],
+].filter(([, value]) => value !== undefined));
+if (manifestPath && !artifactRoot) {
+  throw new Error("--artifact-manifest requires --artifact-root.");
+}
 
 const baseModel = assertBrandKitViewModel(
   JSON.parse(await fs.readFile(modelPath, "utf8")),
@@ -68,8 +87,12 @@ if (pressKitDirectory) {
 const publication = publicationPath
   ? JSON.parse(await fs.readFile(publicationPath, "utf8"))
   : null;
+const browserMetadata = browserAssetMetadata(browserAssets, assetBaseUrl);
+if (artifactRoot) {
+  await verifyArtifactDownloads(model, { artifactRoot, manifestPath, browserAssets });
+}
 const markup = renderToStaticMarkup(
-  React.createElement(BrandKitPage, { model, assetBaseUrl, publication }),
+  React.createElement(BrandKitPage, { model, assetBaseUrl, publication, publicOnly }),
 );
 const template = await fs.readFile(templatePath, "utf8");
 const rendered = template
@@ -79,6 +102,8 @@ const rendered = template
   .replaceAll("{{THEME_VARIABLES}}", deriveThemeVariables(model))
   .replaceAll("{{ASSET_BASE_URL}}", escapeHtmlAttribute(assetBaseUrl))
   .replaceAll("{{PUBLICATION_JSON}}", escapeHtmlAttribute(JSON.stringify(publication || {})))
+  .replaceAll("{{PUBLIC_ONLY}}", String(publicOnly))
+  .replaceAll("{{BROWSER_ASSET_METADATA}}", browserMetadata)
   .replaceAll(
     "{{CANONICAL_METADATA}}",
     canonicalMetadata({ model, canonicalUrl, openGraphImage }),
@@ -149,6 +174,17 @@ function escapeScriptJson(value) {
     .replaceAll("&", "\\u0026")
     .replaceAll("\u2028", "\\u2028")
     .replaceAll("\u2029", "\\u2029");
+}
+
+function browserAssetMetadata(assets, base) {
+  const relations = new Map([
+    ["icon", "icon"],
+    ["appleTouchIcon", "apple-touch-icon"],
+    ["manifest", "manifest"],
+  ]);
+  return Object.entries(assets).map(([key, assetPath]) =>
+    `<link rel="${relations.get(key)}" href="${escapeHtmlAttribute(joinAssetUrl(base, assetPath))}" />`,
+  ).join("\n    ");
 }
 
 function canonicalMetadata({ model, canonicalUrl: url, openGraphImage: image }) {

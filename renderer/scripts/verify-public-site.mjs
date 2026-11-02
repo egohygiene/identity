@@ -7,6 +7,11 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
+import { JSDOM } from "jsdom";
+
+import { artifactPathFromUrl, verifyArtifactDownloads, verifyArtifactPaths } from "../src/download-integrity.js";
+import { assertBrandKitViewModel } from "../src/model.js";
+
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
 const argumentsMap = parseArguments(process.argv.slice(2));
@@ -107,6 +112,37 @@ if (sha256(await fs.readFile(resolve(`${packageDirectory}/${archiveName}`))) !==
   throw new Error("The public archive does not match the publication manifest checksum.");
 }
 
+const document = new JSDOM(index).window.document;
+const modelElement = document.querySelector("#identity-brand-kit-model");
+if (!modelElement) throw new Error("The published page must embed its selected renderer model.");
+const model = assertBrandKitViewModel(JSON.parse(modelElement.textContent));
+const assetBaseUrl = site.assetBaseUrl || "./";
+const browserAssets = {};
+for (const [key, relation] of [
+  ["icon", "icon"], ["appleTouchIcon", "apple-touch-icon"], ["manifest", "manifest"],
+]) {
+  const links = [...document.querySelectorAll(`link[rel="${relation}"]`)];
+  if (links.length > 1) throw new Error(`The published page repeats browser asset role: ${key}`);
+  if (links.length) browserAssets[key] = artifactPathFromUrl(links[0].getAttribute("href"), assetBaseUrl);
+  if (site.browserAssets?.[key] !== browserAssets[key]) {
+    throw new Error(`The published browser asset disagrees with site configuration: ${key}`);
+  }
+}
+const verified = await verifyArtifactDownloads(model, {
+  artifactRoot: outputDirectory,
+  manifestPath: resolve(`${packageDirectory}/${manifestName}`),
+  browserAssets,
+});
+const emittedDownloads = [...document.querySelectorAll("a[download]")].map(
+  (link) => artifactPathFromUrl(link.getAttribute("href"), assetBaseUrl),
+);
+for (const relativePath of emittedDownloads) {
+  if (!verified.verifiedPaths.includes(relativePath)) {
+    throw new Error(`The published page advertises a download absent from its selected model: ${relativePath}`);
+  }
+}
+await verifyArtifactPaths(emittedDownloads, { artifactRoot: outputDirectory });
+
 process.stdout.write(`Verified public Brand Kit site: ${outputDirectory}\n`);
 
 function assertStableRelease(tag) {
@@ -118,10 +154,7 @@ function assertStableRelease(tag) {
 }
 
 async function assertFile(relativePath) {
-  const status = await fs.stat(resolve(relativePath));
-  if (!status.isFile() || status.size === 0) {
-    throw new Error(`Expected a non-empty public file: ${relativePath}`);
-  }
+  await verifyArtifactPaths([relativePath], { artifactRoot: outputDirectory });
 }
 
 async function readJson(relativePath) {

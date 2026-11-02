@@ -68,7 +68,7 @@ silently generate unrelated profiles.
 | `core` | Canonical scalable brand projection | `brand/mark.svg` |
 | `web` | Browser identity | `web/favicon.svg`, 32px and 64px PNG favicons |
 | `pwa` | Web App Manifest identity | 192px/512px icons, 512px maskable icon, icon metadata |
-| `github` | Repository preview | 1280×640 PNG social preview |
+| `github` | Repository preview | 1280×640 PNG social preview, at most 999,999 bytes |
 | `docs` | Document/presentation styling | generated document CSS |
 | `social` | Portable social-card surface | 1200×630 PNG card |
 | `tokens` | Programmatic design system | DTCG JSON, CSS, JS, TypeScript declaration, Tailwind-compatible theme, package metadata |
@@ -125,6 +125,13 @@ The maskable profile constrains the approved mark's bounding square to 54% of
 the icon bounds so the full square remains inside the Web App Manifest central
 safe circle. The compiler records verification evidence for that constraint.
 Broader visual and accessibility gates belong to #12.
+
+The optional GitHub and generic social-card outputs are presented with their
+existing source rights, dimensions and copyable approved project/Press Kit text.
+The [selected presentation guide](../consumers/PRESENTATION_PROFILES.md) records
+the bounded target inventory, the GitHub upload-budget repair, real-consumer
+proof, omission behavior and how to review another concrete target. The generic
+card dimensions are an Identity choice, not a universal social-platform rule.
 
 ## Metadata and guidance
 

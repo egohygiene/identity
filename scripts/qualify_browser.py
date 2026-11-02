@@ -192,7 +192,7 @@ def container_receipt(output: str, profile: dict[str, object], directory: Path) 
     hashes = {font["path"]: font["sha256"] for font in files}
     if len(hashes) != len(files) or any(hashes.get(font["path"]) != font["sha256"] for font in profile["fontFiles"]):
         raise RuntimeError("The installed font file checksums differ from the profile")
-    phases = (("positive", 0, 6, 0), ("negative", 1, 0, 1), ("restored", 0, 1, 0))
+    phases = (("positive", 0, 9, 0), ("negative", 1, 0, 1), ("restored", 0, 1, 0))
     for name, exit_code, passed, failed in phases:
         phase = receipt.get(name, {})
         if not isinstance(phase, dict) or any(type(phase.get(key)) is not int or phase.get(key) != value for key, value in (

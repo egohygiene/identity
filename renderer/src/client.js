@@ -20,10 +20,11 @@ if (!(modelElement instanceof HTMLScriptElement) || !rootElement) {
 const model = assertBrandKitViewModel(JSON.parse(modelElement.textContent || "{}"));
 const assetBaseUrl = rootElement.dataset.assetBaseUrl || "./";
 const publication = readPublication(rootElement.dataset.publication);
+const publicOnly = rootElement.dataset.publicOnly === "true";
 
 hydrateRoot(
   rootElement,
-  React.createElement(BrandKitPage, { model, assetBaseUrl, publication }),
+  React.createElement(BrandKitPage, { model, assetBaseUrl, publication, publicOnly }),
 );
 
 let studioPlan = null;

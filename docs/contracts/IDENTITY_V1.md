@@ -70,7 +70,8 @@ under the same human approval model as voice and usage. See the
 
 `documents.pressKit` is an optional additive v1 path. It names one local,
 reviewed Press and Media Kit source document. The source can contain approved
-short and long boilerplate, facts, links, contacts, optional team bios, and
+short and long boilerplate, an optional paragraph description, facts, links,
+contacts, optional team bios, and
 explicit selections from already-approved public assets. It never makes a
 candidate record, unapproved fact, or unspecified asset public. See the
 [Press Kit contract](PRESS_KIT_V1.md).
@@ -187,9 +188,16 @@ reclassifying approved source merely to make generation pass. Add an approved
 SVG master only when it actually exists.
 
 Present source, supported producer, verified selected outputs and complete public
-kit are separate results. Generic public asset selection and advertised archive
-availability remain tracked in #101/#105; a valid minimum source does not resolve
-those output gaps. Nulling a document path does not exclude leftover files from
+kit are separate results. The generic public renderer selects only matching
+usage `assets[]` records that are approved/public, active and publicly available,
+bound to validated local provenance. Absent usage leaves public assets/downloads
+empty; local nullable-core generation remains valid. With `core` selected,
+distinct selected public SVG masters can be copied under their supplied safe
+download names. Actual selected compiler targets determine advertised generated
+files; artifact verification establishes their bytes. See the
+[renderer contract](BRAND_KIT_RENDERER_V1.md#public-source-assets-and-selected-downloads)
+for optional output metadata and compatible tool pins. Complete-kit acceptance
+remains with #105. Nulling a document path does not exclude leftover files from
 the physical canonical-source digest or authorize their deletion.
 
 ## Diagnostics

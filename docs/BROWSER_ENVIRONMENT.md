@@ -103,3 +103,15 @@ It is separate from the portable development add-on; custom development bases
 and their ownership/trust responsibilities remain in
 [DEVELOPMENT.md](DEVELOPMENT.md). Broader standalone/Make/Task/Docker setup
 coverage stays #82; final documentation reconciliation stays #83.
+# Current-suite integration checkpoint
+
+PRs #129 and #130 are merged. Integrating the parked #123 source now requires
+**nine** positive Chromium cases: the six original renderer cases plus
+foundations, presentation and complete-kit cases. Both producer and receipt
+verification retain the exact required positive count, deliberate screenshot
+failure, restored pass, zero skips and zero retries. The approved screenshot,
+image/font pins and dated six-case receipts below are unchanged.
+
+This is source integration only. The historical receipts do not qualify this
+combined source; the nine-case replay and actual local Docker proof remain
+deferred under #80/#70. No new browser/Docker test execution is claimed.

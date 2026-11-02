@@ -8,6 +8,13 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- An optional release-announcement draft projector that reuses approved public
+  Press Kit copy/assets and explicit owner-supplied release facts, with draft
+  receipts and offline inventory verification. The candidate remains subject
+  to consumer selection and the deferred quality sweep before adoption.
+- Focused canonical validator source modules and a deterministic self-contained
+  bundle generator; existing standalone/import and Rust embedding paths remain
+  the supported interfaces.
 - A shared digest-pinned browser/font/render profile and local/CI qualification
   command, retaining the approved screenshot and proving deliberate visual drift
   fails without baseline regeneration or tolerance relaxation (#80).

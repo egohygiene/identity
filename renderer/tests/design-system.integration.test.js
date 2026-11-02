@@ -41,6 +41,7 @@ function withConsumer(legacy, check) {
     // Construct a test model for this snapshot; retain the committed v0 fixture
     // and all real release bindings unchanged.
     const model = JSON.parse(fs.readFileSync(rendererFixture, "utf8"));
+    model.tokens = structuredClone(context.tokens);
     model.release.sourceDigest = handbook.source.digest;
     model.release.immutableId = `sha256:${handbook.source.digest}`;
     const modelPath = path.join(temporary, "model.json");
@@ -97,6 +98,16 @@ describe("generated design-system renderer handoff", () => {
     ["historical v0 release plus new v1 guidance", ({ model }) => {
       model.release = JSON.parse(fs.readFileSync(rendererFixture, "utf8")).release;
     }, "must match the Brand Kit immutable release"],
+    ["displayed value with a matching digest", ({ model }) => {
+      model.tokens[0].value = { colorSpace: "srgb", components: [0, 0, 0], alpha: 1 };
+    }, "token values must match"],
+    ["context value with a matching digest", ({ context }) => {
+      context.tokens[0].value = { colorSpace: "srgb", components: [0, 0, 0], alpha: 1 };
+    }, "token values must match"],
+    ["handbook value with a matching digest", ({ handbook }) => {
+      const token = handbook.sections.flatMap((section) => section.entries).find((entry) => entry.kind === "token");
+      token.content.value = { colorSpace: "srgb", components: [0, 0, 0], alpha: 1 };
+    }, "token values must match"],
   ])("rejects %s before replacing an existing page", (_name, mutate, message) => {
     withConsumer(false, (inputs) => {
       mutate(inputs);

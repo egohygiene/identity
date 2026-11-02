@@ -12,9 +12,9 @@
     {
       "destination": "src/commands.rs",
       "baseline_sha256": "01f0fe85a4fa1fa3c09db4db237b087912f8e73fe4d536cc24a87a56dbb87c32",
-      "current_sha256": "a5370fe0bf64668b015470811fc1ce67710e0ef002a8b24fa647b2a27f9025b1",
-      "issue": "https://github.com/egohygiene/identity/issues/77",
-      "reason": "Preserve #17 consumer/renderer integration and #73 independent output-root authority while exposing read-only inspection and explicit validated rollback in #77. Reject lossy or nonportable CLI output-root spellings before recovery authority is granted."
+      "current_sha256": "bbe87cfe997e3e6a14217ec0733afd9798c77b1fd9362521167eb28aca27c5e4",
+      "issue": "https://github.com/egohygiene/identity/issues/101",
+      "reason": "Preserve #17 consumer/renderer integration and #73 independent output-root authority while exposing read-only inspection and explicit validated rollback in #77. Reject lossy or nonportable CLI output-root spellings before recovery authority is granted. In #101, build the v1 request through the consumer pipeline so explicitly public source SVG masters join the actual selected renderer targets."
     },
     {
       "destination": "src/lib.rs",

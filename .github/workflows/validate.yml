@@ -50,6 +50,9 @@ jobs:
       - name: Verify release metadata and documentation contract
         run: python3 scripts/verify_release.py --repository-root "."
 
+      - name: Verify generated standalone validator source
+        run: python3 scripts/build_identity_validator.py --check
+
       - name: Verify repository documentation links
         run: python3 scripts/verify_docs.py --repository-root "."
 

@@ -92,11 +92,28 @@ pub fn compiler_request(
             .then_with(|| left.relative_path.cmp(&right.relative_path))
             .then_with(|| left.id.cmp(&right.id))
     });
+    bind_selected_output_targets(&mut targets);
 
     Ok(CompilerRequest {
         output_root: output_root.into(),
         targets,
     })
+}
+
+/// Bind standalone metadata references to raster outputs in this request.
+pub(crate) fn bind_selected_output_targets(targets: &mut [ProjectionTarget]) {
+    let rasters = targets
+        .iter()
+        .filter(|target| target.adapter_id == "identity-raster")
+        .collect::<Vec<_>>();
+    let selected = serde_json::to_value(rasters).expect("compiler targets serialize to JSON");
+    for target in targets {
+        if target.adapter_id == "identity-metadata" {
+            target
+                .parameters
+                .insert("selectedRasterTargets".to_owned(), selected.clone());
+        }
+    }
 }
 
 #[must_use]
@@ -208,18 +225,22 @@ fn pwa_profile() -> ProfileDescriptor {
 }
 
 fn github_profile() -> ProfileDescriptor {
+    let mut preview = raster_target(
+        "github-social-preview",
+        "github",
+        "github/social-preview.png",
+        1280,
+        640,
+        "social-card",
+        false,
+    );
+    // GitHub requires an upload under 1 MB. This conservative bound is below
+    // both decimal and binary interpretations; other raster targets retain theirs.
+    preview.maximum_bytes = Some(999_999);
     profile(
         "github",
         "GitHub repository social preview projection.",
-        vec![raster_target(
-            "github-social-preview",
-            "github",
-            "github/social-preview.png",
-            1280,
-            640,
-            "social-card",
-            false,
-        )],
+        vec![preview],
     )
 }
 

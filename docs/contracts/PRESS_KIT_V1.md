@@ -28,7 +28,11 @@ the path is configured, the source must validate as
 `identity.press-kit-source/v1` under the same local human approval model as
 voice, usage, and handbook material.
 
-The source requires exactly one `short` and one `long` boilerplate. It may
+The source requires exactly one `short` and one `long` boilerplate. It permits
+at most one additional `paragraph` boilerplate for a separately supplied
+paragraph description. Kinds are unique; the optional paragraph does not
+replace either required record. These labels describe intended reuse, without
+enforcing sentence counts or generating one length from another. It may
 also contain facts, HTTPS links, contacts, optional team biographies, and
 explicit asset selections. Every record has a lifecycle, visibility,
 provenance, and approval envelope. Only `approved` + `public` records with a
@@ -127,18 +131,79 @@ local/CDN bases remain separate from these paths.
 The renderer never reads `.identity/` or fills in a missing press
 contact, biography, asset, legal claim, or social account.
 
+The page provides copy controls for supplied boilerplates and facts using
+their exact projected text. Short, optional paragraph and long descriptions
+reuse the same approved records as JSON, Markdown and the offline ZIP. Profile
+facts such as a short name, distinct mission statement, values or pronunciation
+remain ordinary labeled facts; labels and IDs do not activate inferred fields
+or generated copy. Contextual naming and voice guidance retain their existing
+[voice/usage authority](GUIDANCE_V1.md#context-retrieval).
+
+## Rights and authoritative references
+
+Each selected asset retains its existing provenance license identifier/status
+and attribution, creator/method/source/capture time, safe-zone/minimum-size
+guidance, restriction entries and SHA-256 digest. Its projected `approval` is
+the Press Kit asset-selection approval, not a separately exported provenance
+approval; `assetId` and digest bind the rights to the validated source asset. The page
+and Markdown expose these supplied fields alongside the download; JSON and the
+offline ZIP carry the same records. Usage strings remain reviewed prose, not
+inferred numeric constraints or proof of legal permission.
+
+Approved legal guidance presents trademark rules, copyright, attribution and
+every supplied third-party notice separately. An asset's SPDX identifier and
+the project's software license do not imply trademark permission or rights to
+other assets. An empty list or absent optional guidance does not waive rights;
+consumers must use the actual supplied terms and authoritative owner references.
+
+Existing governed `links[]` and `contacts[]` supply official support/community
+destinations, contacts, and references to software-license, governance, Code of
+Conduct, security-reporting and contribution documents. Use an explicit label
+and authoritative HTTPS URL with the existing `documentation`, `support` or
+`other` kind as appropriate. IDs and labels are not machine policy selectors.
+Adopted social links continue to derive from the channel registry. The renderer
+does not fetch a policy, copy its text into source, or change its owner.
+
+A separately acquired font can be an external link with supplied explanatory
+guidance. This creates no local font download, license inference or permission
+to redistribute it. Only explicitly selected, approved local assets enter the
+package. Unresolved permissions belong in truthful governed explanatory
+guidance; they do not satisfy the provenance contract's approved-license and
+asset-approval requirements. See the
+[authoring map](../consumers/AUTHORING.md#rights-policy-references-and-font-acquisition).
+
 ## Missing data and lifecycle behavior
 
 Facts, links, contacts, team bios, and selected assets can be absent. Their
 generated JSON and Markdown explain the absence instead of inventing content.
 The two public boilerplates are the minimum affirmative content required to
-generate a Press Kit.
+generate a Press Kit. An absent or nonpublic paragraph is omitted from the
+public JSON, Markdown and page without a replacement or placeholder. An
+approved public paragraph uses the same governance and exact-text projection
+as the required descriptions.
 
 Candidate, internal, rejected, and superseded records stay in canonical source
 for review history but are not promoted into the public package. Rebuilding
 after an approval or source decision changes is the only way to change an
 existing package; publishing or routing the rebuilt package is a separate
 consumer deployment decision.
+
+## Compatibility
+
+The optional `paragraph` kind extends the existing source and projection
+schemas without adding a second copy document or changing project metadata.
+Sources containing only the original short/long pair remain valid. Existing
+public-kit prerequisites and filtering still apply.
+
+Older pinned schemas and producers can reject the new enum value, and older
+renderers may reject or omit it. Pin a compatible schema, validator, producer
+and renderer together when adopting paragraph copy; a v1 schema identifier
+alone does not establish support in a previously released tool. Regenerate
+digest-bound handoffs from that reviewed source and tool selection, and retain
+the previous immutable package for rollback. See proposed
+[ADR-0027](../decisions/ADR-0027-optional-paragraph-boilerplate.md) for the bounded
+extension and its tradeoffs. This implementation does not accept that proposal
+or grant publication authority.
 
 ## Deliberately deferred
 

@@ -354,6 +354,7 @@ fn source_governance() -> BrandKitSourceGovernance {
             captured_at: "2026-08-22T12:00:00Z".to_owned(),
         },
         approval: "approve-mark".to_owned(),
+        usage: None,
     }
 }
 
