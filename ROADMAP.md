@@ -26,17 +26,18 @@ supersedes: []
 
 # Identity Roadmap
 
-## Authorized source merge integration — 2026-11-02
+## Authorized source merges — 2026-11-02
 
-[PR #129](https://github.com/egohygiene/identity/pull/129) merged at
-`ec865c336a892943e55e8e1d3be0ae5c3c299c61`; [PR #130](https://github.com/egohygiene/identity/pull/130)
-merged at `f9b20b707d72472134ae209ec496cb8e6e4df053`, with their exact source trees
-preserved. Parked #123 is being reconciled as source preparation. Its strict
-positive proof now expects the current nine-case suite; historical six-case
-receipts and the screenshot baseline remain unchanged. #80, #82 and #88 keep
-their actual qualification gates. Test/CI execution and remaining acceptance
-are deferred; merge is not creative approval or a release. Earlier dated
-snapshots below retain their original observation context.
+PRs [#129](https://github.com/egohygiene/identity/pull/129),
+[#130](https://github.com/egohygiene/identity/pull/130) and
+[#123](https://github.com/egohygiene/identity/pull/123) are merged. The
+[merge closeout](docs/work/116/MERGES.md) records exact commits, matching source
+trees, the nine-case browser integration and all remaining acceptance.
+#105 is closed and Q35 records its qualified source plus authorized merge.
+#80 is reopened for current nine-case and actual local Docker proof; #70 owns
+the full deferred quality pass. Other step states/exit boxes, owner choices,
+proposed ADRs and release/creative gates are not promoted by source delivery.
+The dated candidate snapshots below retain their original observation context.
 
 ## 2026-11-02 isolated review candidate
 
@@ -744,7 +745,7 @@ issues: [104]
 
 <!-- roadmap-step
 id: IDN-Q35
-status: active
+status: complete
 depends_on: [IDN-Q30, IDN-Q31, IDN-Q32, IDN-Q33, IDN-Q34, IDN-Q14, IDN-Q15]
 issues: [105]
 -->
@@ -754,9 +755,9 @@ issues: [105]
 
 **Exit criteria:**
 
-- [ ] Minimal/expanded consumers, release binding, downloads, accessibility, public filtering, and publication ownership evidence pass.
+- [x] Minimal/expanded consumers, release binding, downloads, accessibility, public filtering, and publication ownership evidence pass.
 
-**Evidence and scope:** [#105](https://github.com/egohygiene/identity/issues/105) is implemented in draft [PR #129](https://github.com/egohygiene/identity/pull/129), pending review/merge. Source `08cab7b3b8264219128966ff9ea445e95bb88c10` passes all five workflows, including 401 renderer cases/nine Chromium checks in both runs and Linux/macOS/Windows gates; the containing checkpoint needs fresh checks. The [complete-kit guide](docs/consumers/COMPLETE_BRAND_KIT.md) describes explicit native assembly, optional governed projections, public-only presentation and complete offline inventory verification. The [fixture receipt](renderer/fixtures/complete-kit/receipt.json) records independent native generations for minimal/expanded synthetic cases and unchanged Mantle source; actual renderer/browser outcomes remain separate exact-head evidence. New ADR-0030 remains proposed. Existing stable publication routes and all prior ADR dispositions are preserved. G09 canonical self-source/rights and final release acceptance remain #98; broader Docker/CI/refactoring remains #70/#80. This first usable kit does not wait for IDN-Q24–IDN-Q27 or later optional scope.
+**Evidence and scope:** [#105](https://github.com/egohygiene/identity/issues/105) is closed after [PR #129](https://github.com/egohygiene/identity/pull/129) merged at `ec865c336a892943e55e8e1d3be0ae5c3c299c61`. Its exact final source `d247487379569c3701a8cefe6d6136502657fa64` had the recorded five passing workflows, 401 renderer cases/nine Chromium checks in both runs, native three-case proof and Linux/macOS/Windows evidence; the merge tree equals that candidate. The [complete-kit guide](docs/consumers/COMPLETE_BRAND_KIT.md) and [fixture receipt](renderer/fixtures/complete-kit/receipt.json) retain scope and represented-source proof. Q35 completion records that source checkpoint and authorized merge, not a new passing result for later combined source. Current tests, browser/Docker and broader qualification remain deferred under #70/#80. ADR-0030 remains proposed; root self-source/rights, release and dogfood stay #98.
 
 <!-- roadmap-step
 id: IDN-Q36
