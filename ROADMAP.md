@@ -26,6 +26,18 @@ supersedes: []
 
 # Identity Roadmap
 
+## Product scope disposition — 2026-11-02
+
+The maintainer resolved [#109](https://github.com/egohygiene/identity/issues/109):
+Identity specifies and validates a project's comprehensive identity. Existing
+foundations suffice for this checkpoint; components remain possible future
+work requiring a concrete need and separately reviewed scope. The
+[scope record](docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) and dated
+ADR-0031 clarification record this disposition. IDN-Q39 is complete; no
+component library or new follow-up is required. ADR-0031 remains proposed.
+Next product closeout is #108, followed by the concrete selections for #106
+and #107. Quality/refactoring/testing stays deferred under #70.
+
 ## Authorized source merges — 2026-11-02
 
 PRs [#129](https://github.com/egohygiene/identity/pull/129),
@@ -809,7 +821,7 @@ issues: [108]
 
 <!-- roadmap-step
 id: IDN-Q39
-status: planned
+status: complete
 depends_on: [IDN-Q29, IDN-Q32]
 issues: [109]
 -->
@@ -819,9 +831,9 @@ issues: [109]
 
 **Exit criteria:**
 
-- [ ] A short reviewed decision selects sufficient foundations, external component ownership, bounded follow-up, or deferral.
+- [x] A short reviewed decision selects sufficient foundations, external component ownership, bounded follow-up, or deferral.
 
-**Evidence and scope:** [#109](https://github.com/egohygiene/identity/issues/109). Keep reusable components/templates with their established Holon owner unless a separately reviewed decision changes that boundary.
+**Evidence and scope:** [#109](https://github.com/egohygiene/identity/issues/109) is resolved by the maintainer's 2026-11-02 scope disposition, recorded in the [scope guide](docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) and dated ADR-0031 outcome. Identity specifies and validates comprehensive project identity; existing foundations suffice now. Future components remain possible after a concrete need, owner and compatibility scope are reviewed. Existing Holon scaffolding ownership is preserved. No new component library or runtime result is claimed; ADR-0031 remains proposed.
 
 <!-- roadmap-step
 id: IDN-Q40

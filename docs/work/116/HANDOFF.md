@@ -2,6 +2,12 @@
 
 Current merged status: see [MERGES.md](MERGES.md). The source PRs are merged; the detailed candidate and deferred-check notes below remain relevant.
 
+Latest scope disposition, 2026-11-02: the maintainer resolved #109 around
+comprehensive identity specification and validation. Components remain a future
+possibility; existing foundations suffice now. See the
+[scope record](../../consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md). Next product
+closeout is #108, then the concrete choices for #106/#107. Tests/CI stay deferred.
+
 Coordinator: [#116](https://github.com/egohygiene/identity/issues/116).
 Merged sprint: [PR #130](https://github.com/egohygiene/identity/pull/130), originally stacked on #129.
 Original sprint branch: `codex/identity-product-sprint-20261102`.
@@ -15,7 +21,7 @@ Mode: bounded implementation/proposal sprint with tests and CI explicitly deferr
 
 | Issue / roadmap step | Source result | Remaining acceptance |
 | --- | --- | --- |
-| #109 / IDN-Q39 | [Component-ownership inventory](../../consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) and proposed ADR-0031; no speculative component library. | Human decision on the bounded scope or a concrete component pilot. The proposal remains unaccepted. |
+| #109 / IDN-Q39 | Maintainer-selected specification/validation scope; foundations suffice now and components remain possible later. The [scope record](../../consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) and dated ADR-0031 clarification retain the disposition. | Scope decision complete; no component implementation or follow-up selected. Formal ADR-0031 lifecycle remains proposed. |
 | #108 / IDN-Q38 | [Authoritative ecosystem handoff](../../consumers/ECOSYSTEM_INTEGRATION.md), pinned owner references and an existing-field contribution-policy example. | Review references and supply the reported DCO action's exact existing link; the bounded lookup remains unresolved and no duplicate action is created. |
 | #106 / IDN-Q36 | Optional standard-library announcement-draft tool, request/receipt schemas, [consumer guide](../../consumers/LAUNCH_DOCUMENTS.md), proposed ADR-0032 and five unexecuted regression cases. | Agree on the proposed real consumer/template, run focused/source suites, review voice/claims/rights and record real adoption. No posting or approval is performed. |
 | #107 / IDN-Q37 | [Existing imagery/motion inventory](../../consumers/OPTIONAL_VISUALS.md) and a bounded approved-illustration source-to-kit route. | Select an actual consumer/category or approve a scope disposition. No new artwork, asset category or animation engine is invented. |
@@ -23,7 +29,7 @@ Mode: bounded implementation/proposal sprint with tests and CI explicitly deferr
 | #85 / IDN-Q24 | Canonical validator source split into common plus fourteen focused modules, with a deterministic self-contained public bundle and read-only drift guards. | Execute existing CLI/import/source/digest/embedded-consumer suites. [Structural receipt](validator-extraction.json) proves AST preservation, not runtime outcomes. |
 | #86 / IDN-Q25 | Explicit shared projection source/audience/path/serialization mechanics behind unchanged wrappers and formats. | Run public/review isolation, digest, failure-path and generated-byte comparisons. [Extraction record](projection-extraction.json) identifies the wrappers and preserved function bodies. |
 
-These merged implementations and proposals do not complete seven acceptance gates or close seven issues. PR129/PR130/PR123 are now merged, and #105 is closed. Historical exact-head evidence does not qualify later combined code. Prior ADR bodies, approvals, existing asset bytes and immutable releases are preserved.
+The merged sprint did not complete seven acceptance gates. #109 now has its separate maintainer scope disposition; the six other sprint issues retain their remaining acceptance. PR129/PR130/PR123 are merged and #105 is closed. Historical exact-head evidence does not qualify later combined code. Prior ADR rationale, approvals, existing asset bytes and immutable releases are preserved.
 
 ## Structural evidence actually collected
 
@@ -80,7 +86,7 @@ the selected owner and retain review of changing claims.
 ## Scope and next action
 
 The three source PRs are merged; review the current merged source and keep new
-ADRs 0031/0032 proposed with null approval. Only the explicitly authorized source merges and #105 closure occurred. Issue #80 is reopened for missing proof. No release, publication, deployment, social posting, DCO attestation or creative approval was performed. Commits contain `[skip ci]`; provider runs are checked
+ADRs 0031/0032 proposed with null approval. The source merges, #105 closure and subsequent maintainer scope disposition for #109 are recorded separately. Issue #80 is reopened for missing proof. No release, publication, deployment, social posting, DCO attestation or creative approval was performed. Commits contain `[skip ci]`; provider runs are checked
 separately after merging; zero runs were observed for all three source merge commits.
 
 #80 remains open after PR123 source merged and still needs its actual local Docker acceptance and fresh nine-case proof. #82/#88 retain
@@ -90,5 +96,5 @@ and #98/G09 self-source/rights, release, dogfood and contrasting-consumer
 acceptance remain in tracker #116. No new real consumer/approval is fabricated
 to bypass those gates.
 
-The forty stable roadmap IDs, issue mappings and dependencies remain. Q35 now records its exact qualified source and merge; other acceptance states and exit boxes are retained. Any newer main/parent/candidate edits
+The forty stable roadmap IDs, issue mappings and dependencies remain. Q35 records its exact qualified source and merge; Q39 records the maintainer scope disposition. Other acceptance states and exit boxes are retained. Any newer main/parent/candidate edits
 need a fresh source comparison before combining branches.
