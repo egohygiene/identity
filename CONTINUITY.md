@@ -7,17 +7,18 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-02T15:10:19Z'
+  updated_at: '2026-11-02T16:09:26Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Resume Identity after authorized source merges, with remaining acceptance and owner decisions
-    explicit.
+  purpose: Record the authorized issue109 scope disposition and continue with the remaining product closeouts.
   includes:
-  - Merged PR129/130/123 source, exact merge-tree evidence and current review/quality handoff.
-  - 'Open #80 actual-Docker/nine-case proof, #70 quality sweep and unresolved optional product decisions.'
+  - Comprehensive identity specification/validation focus; components remain a possible separately scoped
+    future capability.
+  - Issue109/Q39 scope completion, original ADR0031 rationale and proposed lifecycle, and the next issue108
+    handoff.
   excludes:
   - Test/CI execution, publishing, deployment, new implementation, ADR/creative acceptance and fabricated
     rights.
@@ -31,79 +32,79 @@ scope:
   - AGENTS.md
   - ROADMAP.md
   - docs/decisions/policy-reference.json
-  - docs/work/116/HANDOFF.md
+  - docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md
+  - docs/decisions/ADR-0031-product-component-ownership.md
+  - https://github.com/egohygiene/identity/issues/109
   - https://github.com/egohygiene/identity/issues/116
-  - https://github.com/egohygiene/identity/pull/129
 work:
-  objective: Continue from merged source without repeating completed merges or losing deferred acceptance.
+  objective: Complete the maintainer-selected issue109 scope decision without committing to or permanently
+    excluding future components.
   success_conditions:
-  - Record actual source merge states and preserve all remaining checks/decisions.
-  - 'Keep #80 open, proposed ADRs unchanged and release/publication distinct from source delivery.'
+  - Record the selected current scope and explicitly retain future component possibilities.
+  - Complete only Q39/issue109; preserve proposed ADR lifecycle and all deferred quality/product gates.
   active_issue:
     provider: github
-    id: egohygiene/identity#116
-    url: https://github.com/egohygiene/identity/issues/116
+    id: egohygiene/identity#109
+    url: https://github.com/egohygiene/identity/issues/109
   next:
-    kind: action
-    id: review-deferred-quality-and-owner-decisions
-    description: 'Review the merged-state handoff, resolve the existing product decisions and schedule/run
-      the deferred #70/#80 qualification when selected by the maintainer. Do not repeat the three completed
-      source merges.'
+    kind: issue
+    id: egohygiene/identity#108
+    description: Review the merged Aether/Realm/Relay integration closeout. Keep the reported DCO-action
+      link explicitly unresolved unless verified; follow with concrete issue106/107 selections. Testing/CI
+      remains deferred.
     readiness: ready
     references:
-    - docs/work/116/MERGES.md
-    - docs/work/116/HANDOFF.md
+    - https://github.com/egohygiene/identity/issues/108
+    - docs/consumers/ECOSYSTEM_INTEGRATION.md
     - https://github.com/egohygiene/identity/issues/116
-    - https://github.com/egohygiene/identity/issues/80
     depends_on: []
 state:
   base:
-    revision: 037fcc042f8e94743d3756a121f0df1d0a5f74d7
+    revision: 449a24b82fb88d9a1f48cf0d06367966987e1675
     ref: refs/heads/main
-    verified_at: '2026-11-02T15:10:19Z'
+    verified_at: '2026-11-02T16:09:26Z'
   candidate:
-    branch: codex/identity-merge-closeout-20261102
+    branch: codex/109-identity-specification-scope
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-02T15:10:19Z'
-    default_branch_revision: 037fcc042f8e94743d3756a121f0df1d0a5f74d7
+    observed_at: '2026-11-02T16:09:26Z'
+    default_branch_revision: 449a24b82fb88d9a1f48cf0d06367966987e1675
     issue_state: open
     pull_request_state: unknown
-    notes: 'PR129, PR130 and PR123 are merged. Their resulting source trees match the exact candidates.
-      GitHub closed #80 during merge; it was reopened because actual local Docker and current nine-case
-      proof remain outstanding. This containing metadata-only checkpoint is separately reviewable.'
+    notes: Issue109 is open in the observed GitHub snapshot; the maintainer selected its bounded scope
+      and authorized closure. This candidate records that disposition before issue completion. PR123/129/130/131
+      are already merged; no source merge needs repeating.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-02T15:10:19Z'
+  reviewed_at: '2026-11-02T16:09:26Z'
   reviewed_by: Codex
   evidence:
-  - command: GitHub expected-head merges and resulting-tree comparisons for PR129/130/123
+  - command: Pinned Hygiene ADR metadata schema, original ADR0031 prefix preservation, local Markdown
+      links, roadmap-block comparison and git diff --check
     outcome: passed
-    observed_at: '2026-11-02T15:10:19Z'
-    notes: Merge source trees equal the qualified/prepared candidate trees. PR123 reconciliation retains
-      all old evidence and strictly expects the current nine E2E cases. This is source delivery, not behavioral
-      qualification.
-  - command: Python/JavaScript syntax, unchanged screenshot/historical browser hashes and conflict/whitespace
-      checks
+    observed_at: '2026-11-02T16:09:26Z'
+    notes: Documentation checks only. Original ADR rationale/metadata remain; all 40 roadmap IDs/mappings
+      and 88 edges remain, with Q39 status alone changed.
+  - command: Live GitHub main/issue109/parent98/tracker116 inspection
     outcome: passed
-    observed_at: '2026-11-02T15:10:19Z'
-    notes: Structural integration checks only. No new unit, browser, Docker or hosted CI execution.
-  - command: GitHub workflow-run lookup for each source merge commit
-    outcome: passed
-    observed_at: '2026-11-02T15:10:19Z'
-    notes: Zero runs observed for each of the three merge commits; all use CI skip markers.
+    observed_at: '2026-11-02T16:09:26Z'
+    notes: Main449a24b and open issue109 were verified before the bounded documentation change. Closure
+      and its commit evidence must be read back after merging.
+  - command: Behavioral tests, Docker execution and hosted CI
+    outcome: not-run
+    observed_at: '2026-11-02T16:09:26Z'
+    notes: Still deferred by maintainer direction; no runtime change is included.
   environment_limitations:
-  - 'All combined-source tests, nine-case browser replay, actual local Docker and full native/pinned-owner
-    qualification remain deferred under #70/#80. Historical checks retain only their represented-source
-    scope.'
-  - '#109 and proposed ADRs need explicit owner disposition; #106 needs an agreed consumer/template; #107
-    needs a concrete selection or disposition; the reported DCO link in #108 remains unresolved.'
-  - '#87/#88, final #83 reconciliation and #98 release/self-source/dogfood/contrasting-consumer gates
-    remain outstanding.'
+  - 'All runtime/native/browser/Docker/CI qualification remains deferred under #70/#80.'
+  - '#106 needs an agreed consumer/template; #107 needs a concrete category or disposition; #108 retains
+    the explicitly unresolved DCO-action link.'
+  - ADR0031 remains proposed with null approval; the dated issue disposition does not alter formal ADR
+    lifecycle.
+  - '#87/#88, final #83 and #98 self-source/rights/release/dogfood/contrasting-consumer gates remain outstanding.'
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -122,48 +123,48 @@ privacy:
 
 ## Purpose and precedence
 
-This records completed source merges and remaining work. User/runtime instructions, scoped policy, live evidence and canonical source outrank it. It supplies no approval or publication authority.
+Record the current scope disposition and remaining work. User/runtime instructions, scoped policy, live evidence and canonical source outrank this handoff.
 
 ## Resume protocol
 
-Read AGENTS, tracker #116 and docs/work/116/MERGES.md. Verify live main/issue state before selecting work. The three implementation PRs are already merged; do not recreate or repeat them.
+Read AGENTS, the scope guide and tracker #116. Verify live issue109/PR state before repeating closure. Previous implementation PRs #123/129/130 and closeout131 are merged.
 
 ## Current objective and success conditions
 
-Resume from merged source and retain all deferred checks, product decisions and publication gates. Source delivery and acceptance remain separate.
+Record comprehensive identity specification and validation as the present focus. Existing foundations suffice; future components remain possible after a concrete need and reviewed scope. Complete Q39 without creating a library or changing ADR lifecycle.
 
 ## State snapshot
 
-PR129 merged at ec865c336a892943e55e8e1d3be0ae5c3c299c61, PR130 at f9b20b707d72472134ae209ec496cb8e6e4df053 and PR123 at 037fcc042f8e94743d3756a121f0df1d0a5f74d7. This handoff-only checkpoint is based on that final source merge; its containing revision is intentionally null.
+The candidate is based on main 449a24b82fb88d9a1f48cf0d06367966987e1675. Issue109 was open in the observed snapshot; its scope disposition and closure are explicitly authorized. Candidate revision/PR are null before they exist.
 
 ## Completed and material changes
 
-Complete public kit source and the roadmap sprint are on main. Browser preparation is reconciled with the current nine-case suite; producer/verifier retain strict positive/negative/restored, zero-skip/retry and unchanged-baseline rules. Prior ADR bodies/approvals, source assets and historical browser evidence are preserved.
+docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md records the selected scope. ADR-0031 retains its original rationale and adds a dated clarification permitting future component work. ROADMAP Q39 records completion; the sprint handoff carries the revised owner decision.
 
 ## Validation and review evidence
 
-All three merge trees match their exact prepared source. Structural integration checks passed; no new behavioral tests or CI were run. Earlier qualification applies only to its named source and does not qualify the combined current code.
+Pinned ADR metadata, original rationale, all 40 roadmap IDs/mappings/88 edges, local documentation links and whitespace were checked. This is documentation evidence; no behavioral or CI result is claimed.
 
 ## Blockers, risks, unknowns, and deferred work
 
-#80 was reopened after GitHub's merge closure: fresh nine-case proof and actual local Docker acceptance remain outstanding. #70 owns the full deferred quality sweep. Product decisions/proposals and DCO lookup remain as documented in the sprint handoff. No new release, creative approval or accepted ADR is inferred.
+#80 stays open for actual local Docker and current nine-case browser proof; #70 owns the full sweep. #106/#107 still require concrete choices; #108 explicitly records the missing DCO link. ADR-0031 remains proposed. Release/rights/self-source/dogfood gates stay #98.
 
 ## Next dependency-ready work
 
-Review the finite pending owner decisions and plan/run the selected deferred quality pass. #105 is closed through the reviewed-source merge; the rest of the listed acceptance gates remain open. #87/#88 and final #83/#98 work are not silently completed.
+Review #108's bounded integration handoff, then select the real #106/#107 use cases or dispositions. Keep cleanup/refactoring/testing deferred until selected by the maintainer.
 
 ## Parallel changes and reconciliation
 
-The three source PRs are merged. Verify newer work before combining it; preserve source, historical receipts, proposed ADR states and immutable releases. Any remaining root-source/rights and actual-host proof stay with their recorded owners.
+All prior source PRs are merged. Check live main before this candidate is merged; preserve other ADR dispositions, assets, historical browser receipts and immutable releases.
 
 ## Privacy and redaction
 
-Only public repository facts and bounded evidence are retained. Exclude private conversation text, credentials, machine paths and invented approvals.
+Only scoped project facts are retained. No conversation excerpts, credentials, personal information or private local paths are copied.
 
 ## Handoff update protocol
 
-Refresh current evidence and exact check outcomes before acceptance. A source merge is not a passing test, release, deployment or human decision disposition.
+Verify the documentation merge and issue closure, refresh #116/#98, and preserve the next product task. Scope completion supplies no new test, release or formal ADR-acceptance evidence.
 
 ## Compaction and supersession
 
-Git, tracker #116 and docs/work/116 preserve the trail. Keep twelve sections and the declared metadata/size/privacy budgets; do not duplicate the full roadmap here.
+Git and the canonical scope/decision documents retain history. Preserve the twelve sections, metadata and size/privacy budgets; keep detailed roadmap and evidence in their owners.

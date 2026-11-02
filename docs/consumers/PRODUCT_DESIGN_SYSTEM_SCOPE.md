@@ -1,9 +1,17 @@
-# Product design-system scope
+# Identity specification and future component scope
 
-Proposal for [#109](https://github.com/egohygiene/identity/issues/109), awaiting
-maintainer review. [ADR-0031](../decisions/ADR-0031-product-component-ownership.md)
-records the recommendation. This document does not approve that proposal or
-make component work a prerequisite for the usable Brand Kit.
+Maintainer-selected scope for [#109](https://github.com/egohygiene/identity/issues/109),
+2026-11-02: Identity specifies and validates a project's comprehensive identity,
+including its naming, copy, visual foundations, assets, rights, provenance and
+usage guidance under the adopted contracts. Validation and generation tooling
+support that specification; the Brand Kit is a consumer-facing presentation.
+
+Existing foundations and reference behavior suffice for this checkpoint.
+Components remain a possible future capability, including a future Identity
+component scope if justified. This decision introduces no component library,
+new requirement or permanent prohibition. [ADR-0031](../decisions/ADR-0031-product-component-ownership.md)
+retains the original proposal and a dated scope clarification; its formal
+lifecycle remains proposed.
 
 ## Concrete needs and current support
 
@@ -15,7 +23,7 @@ make component work a prerequisite for the usable Brand Kit.
 | Real product buttons, validation, data-entry forms and application navigation | No concrete shared consumer requirement is identified by #109 | The product owner selects accessible components and behavior; Identity can supply brand tokens. |
 | Reusable repository/site starting points | Existing Holon profiles consumed through an explicit immutable selection | Holon owns scaffolding. A template is not an Identity component package or a silent fleet rollout. |
 
-## Proposed scope
+## Selected current scope
 
 Keep Identity's shipped foundations and reference experience. Do not create a
 new universal component library for this checkpoint. Existing button or studio
@@ -40,7 +48,9 @@ imports to `.identity/` to make this work.
 - A separate bounded issue. Do not broaden renderer cleanup #88 into a
   component-system project or create speculative implementation issues now.
 
-The maintainer can accept this bounded scope, request a concrete component
-pilot, or choose an external owner during review. Until that disposition is
-recorded, #109 remains open; no owner acceptance, release or deployment is
-claimed.
+The maintainer selected the current specification/validation focus and
+authorized closing #109 with future components left open. No concrete shared
+interaction gap or component implementation is selected, so no speculative
+implementation follow-up is created. Revisit ownership and compatibility when
+an actual component need is scoped. This disposition supplies no new runtime,
+release or deployment evidence.

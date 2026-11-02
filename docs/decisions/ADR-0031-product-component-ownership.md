@@ -87,3 +87,21 @@ than silently converting the reference renderer into a public dependency.
 Review #109 and choose the bounded scope or a concrete pilot. Record human
 approval before closing the decision issue. No speculative component follow-up
 is created by this proposal.
+
+## Maintainer scope outcome — 2026-11-02
+
+The maintainer selected the specification/validation focus and authorized
+closing [#109](https://github.com/egohygiene/identity/issues/109). Identity's
+current purpose is to specify and validate a project's comprehensive identity;
+its foundations and reference experience suffice for this checkpoint.
+
+Components remain a possible future capability. The original proposal's
+current foundation boundary is not a permanent exclusion of components from
+Identity or an assignment of all future component ownership elsewhere. A real
+consumer need must establish any later scope, owner, API and compatibility.
+No component implementation or speculative follow-up is selected now.
+
+This dated outcome clarifies the original proposal without rewriting its
+rationale. Issue completion records the maintainer's bounded scope disposition;
+it does not promote this ADR's formal lifecycle or claim behavioral validation.
+Status remains proposed and approval remains null.
