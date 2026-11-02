@@ -84,3 +84,24 @@ Review the proposed template selection and run the deferred focused/source
 suites. Demonstrate a real agreed consumer before closing #106. Final claim,
 voice and destination review plus any posting remain with the owner. This
 proposal stays unaccepted with null approval.
+
+## Selected template and demonstration outcome — 2026-11-02
+
+Under the maintainer's direction to execute #106, the selected first scope is
+the existing optional Markdown release-announcement template. The
+[reference-consumer example](../../examples/launch/README.md) reuses unchanged
+`examples/v1/expanded` source, its existing public `long` boilerplate and
+selected `mark`. A separate request explicitly supplies fictional release
+facts. Actual command generation and read-only package verification passed;
+all 13 input files were preserved.
+
+This completes the selected template/use-case demonstration using an explicit
+fictional reference consumer. It is not the original proposal's suggested
+real-project adoption: no real release facts, creative approval, destination
+acceptance or posting are claimed. Actual adopters must supply their own facts
+and review. Other presentation formats remain unselected future possibilities.
+
+The [delivery record](../work/106/CLOSEOUT.md) retains exact inputs and command
+scope. Five authored regressions and broader qualification remain deferred
+under #70/#80. The original rationale and proposed/null-approval lifecycle are
+preserved; this dated outcome supplies no formal ADR acceptance.

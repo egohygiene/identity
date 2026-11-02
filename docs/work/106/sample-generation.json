@@ -1,0 +1,88 @@
+{
+  "purpose": "Selected fictional release-announcement example; generation/integrity evidence only.",
+  "observedAtUTC": "2026-11-02T19:24:05Z",
+  "generatorRevision": "f5fd0b03ebf5e0033725768b2e52088b3ddf88ea",
+  "generatorGitBlob": "9b15bff9b81f6ac234a0d2fbc13ebd081536e4ec",
+  "pythonVersion": "3.12.14",
+  "consumer": "examples/v1/expanded",
+  "synthetic": true,
+  "sourceDigest": "aec3ea886ad78897341863ba9f567cb2582e21d99abf9ae795d3d4dc7a8afa98",
+  "sourceInputsPreserved": true,
+  "sourceFiles": {
+    ".identity/brief.md": {
+      "sha256": "27cbe4a38e9069b117afaac0449993450ba95af1a0fd0e68eeecb070c284ff55",
+      "bytes": 649
+    },
+    ".identity/candidates/README.md": {
+      "sha256": "5231b661069d40c2ccc84c5b04edb413e8d42f91cca31b36a867491a9ef93313",
+      "bytes": 68
+    },
+    ".identity/defaults/organization.tokens.json": {
+      "sha256": "f0d51e176b5e1be72657a29b7b6d6edec4ed5ab858a81267ab57f9cc9f49ec82",
+      "bytes": 904
+    },
+    ".identity/governance/approvals.json": {
+      "sha256": "76680ec6a1cd4b5e0f0df89b3046cdfd577b57333043b9766acd2b29927ad4f9",
+      "bytes": 4355
+    },
+    ".identity/governance/provenance.json": {
+      "sha256": "1cfc7f7d55db497f2d76b21cc906038266220cbc14922fcf2074ca5646ed2bbc",
+      "bytes": 1089
+    },
+    ".identity/guidance/press-kit.json": {
+      "sha256": "8ebab8b603f4e344c949a01705791fd04bcf7c4b2158480ff21ec6bc9862d397",
+      "bytes": 2915
+    },
+    ".identity/guidance/usage.json": {
+      "sha256": "e46c9354008c51ff70154203ca8fc589466ef7a70646d8f2a2acadc9f21fed31",
+      "bytes": 2829
+    },
+    ".identity/guidance/voice.json": {
+      "sha256": "11b3432d07931385613195a69736dc0f497204a8f481a6ec9972cfb2360000c1",
+      "bytes": 4018
+    },
+    ".identity/identity.json": {
+      "sha256": "43cfac4dd7a598603122f5b31f6e277383744113f3171ae6fcf88a1098bbbf59",
+      "bytes": 1477
+    },
+    ".identity/overrides/product.tokens.json": {
+      "sha256": "ff5043c2512ef8f73c9f9df1c37aafd15bd47f0c7205b1010dd9ebb2a78f46ca",
+      "bytes": 920
+    },
+    ".identity/references/README.md": {
+      "sha256": "8bbc52a52ad16a623740c2d3086e776cdebbcb6b9fe59e9c49a7378255ad5064",
+      "bytes": 68
+    },
+    ".identity/sources/mark.svg": {
+      "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+      "bytes": 263
+    },
+    ".identity/targets/profiles.json": {
+      "sha256": "f2967871f97cdcf8f698aea68c6d9c0bf8932f682b463a6d46e3c4d3190fb8c9",
+      "bytes": 402
+    }
+  },
+  "request": {
+    "sha256": "d59d7c847dc84ff9df02eeaef6faf04a48a4c31a9d0d5e0d25d38fe1ecd9088f",
+    "bytes": 552
+  },
+  "outputs": {
+    "assets/mark/example-expanded-mark.svg": {
+      "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+      "bytes": 263
+    },
+    "launch-document.json": {
+      "sha256": "be3d85a067ebd9545185da697f9cb1bf4701476f3bbc34726197a1250758599b",
+      "bytes": 2847
+    },
+    "release-announcement.md": {
+      "sha256": "0157645e5b2d95ad4f33af6e05932e04c96a082e3ec51b02170b5aa66150bd6f",
+      "bytes": 1671
+    }
+  },
+  "generation": "passed",
+  "packageIntegrityVerification": "passed",
+  "regressionSuitesRun": false,
+  "hostedCIRun": false,
+  "realProjectAdoptionClaimed": false
+}

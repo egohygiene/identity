@@ -26,6 +26,19 @@ supersedes: []
 
 # Identity Roadmap
 
+## Optional announcement-template delivery — 2026-11-02
+
+[#106](https://github.com/egohygiene/identity/issues/106) selects the existing
+Markdown release-announcement template with a complete
+[reference-consumer example](examples/launch/README.md). Its explicit fictional
+request, generated draft, selected asset and receipt demonstrate the existing
+approved-source/rights boundary. Actual generation and package verification
+passed; all 13 input files remain unchanged. The
+[delivery record](docs/work/106/CLOSEOUT.md) separates this example from real
+project adoption and deferred regressions/CI under #70/#80. IDN-Q36 is complete
+for the selected template scope; ADR-0032 remains proposed. Next product
+selection is #107; no additional format or publication is selected.
+
 ## Ecosystem handoff closeout — 2026-11-02
 
 [#108](https://github.com/egohygiene/identity/issues/108) completes its bounded
@@ -785,7 +798,7 @@ issues: [105]
 
 <!-- roadmap-step
 id: IDN-Q36
-status: planned
+status: complete
 depends_on: [IDN-Q35]
 issues: [106]
 -->
@@ -795,9 +808,9 @@ issues: [106]
 
 **Exit criteria:**
 
-- [ ] A concrete selected use case is demonstrated with explicit inputs, or the owner records an approved scope disposition.
+- [x] A concrete selected use case is demonstrated with explicit inputs, or the owner records an approved scope disposition.
 
-**Evidence and scope:** [#106](https://github.com/egohygiene/identity/issues/106). Later scope selection is required; reuse Aether campaign-handoff capabilities where suitable.
+**Evidence and scope:** [#106](https://github.com/egohygiene/identity/issues/106) selects an optional Markdown release-announcement draft with a complete [fictional reference-consumer example](examples/launch/README.md), explicit required/optional inputs and actual generation/package-verification evidence. Existing source, approved-copy selection, asset bytes/rights and ordinary kit behavior are preserved. The [delivery record](docs/work/106/CLOSEOUT.md) limits this proof to the sample; real project adoption/fact review is not claimed and five authored regressions plus broader qualification remain #70/#80. ADR-0032 remains proposed. No additional format, publishing system or real release is inferred.
 
 <!-- roadmap-step
 id: IDN-Q37
