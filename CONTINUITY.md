@@ -7,22 +7,22 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-02T12:23:09Z'
+  updated_at: '2026-11-02T14:54:49Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Prepare an isolated review candidate for bounded Identity product and source-maintenance checkpoints.
+  purpose: Integrate parked browser preparation with the authorized merged Brand Kit source; retain deferred
+    acceptance.
   includes:
-  - 'Proposed #109 component ownership, #108 authoritative references, optional #106 announcement draft
-    and #107 existing-visual inventory.'
-  - 'Candidate #84 retired workflow removal, #85 canonical validator modules/standalone bundler and #86
-    shared projection mechanics.'
-  - Explicit deferred-check and review handoff under docs/work/116.
+  - Reconciled browser implementation, current nine-case strict qualification expectation, unchanged historical
+    evidence and current merged product source.
+  - 'Operational conflict resolution and transfer of all remaining browser/local-Docker acceptance to
+    #80/#70.'
   excludes:
-  - Merging PR129 or this candidate, accepting ADRs, closing issues, publishing, deploying or posting.
-  - 'Test/CI execution, Docker qualification, Rust #87 and browser-dependent renderer #88 refactors.'
+  - Test/CI/Docker execution, publication, deployment, issue closure and ADR/creative approval.
+  - Unrelated product/refactor work and changes to immutable historical receipts or the screenshot baseline.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -37,86 +37,67 @@ scope:
   - https://github.com/egohygiene/identity/issues/116
   - https://github.com/egohygiene/identity/pull/129
 work:
-  objective: Present one isolated, explicitly unvalidated roadmap sprint for maintainer review.
+  objective: Reconcile PR123 with merged PR129/130 while preserving current source, strict browser proof
+    and all deferred gates.
   success_conditions:
-  - Preserve the exact PR129 source baseline and leave main/other PRs unchanged.
-  - Save bounded implementation/proposal checkpoints without promoting approval or completion state.
-  - Deliver a draft PR with exact source/structural evidence, pending choices and finite deferred checks.
+  - Preserve merged PR129/130 source and all historical browser/screenshot evidence.
+  - Reconcile source with nine current E2E declarations while retaining zero-skip/retry and deliberate-failure/restoration
+    requirements.
+  - 'Merge source only under explicit maintainer authorization; leave #80 acceptance open for the deferred
+    sweep.'
   active_issue:
     provider: github
-    id: egohygiene/identity#116
-    url: https://github.com/egohygiene/identity/issues/116
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: review-isolated-roadmap-sprint
-    description: Review this candidate and parent PR129, choose the pending product scopes and run the
-      deferred checks before acceptance. Do not merge, release or close work automatically.
+    id: finish-authorized-browser-source-merge
+    description: 'Verify and merge the reconciled PR123 source, then refresh merged-state continuity.
+      #80 stays open for nine-case and actual local Docker proof; all tests/CI remain deferred.'
     readiness: ready
     references:
-    - docs/work/116/HANDOFF.md
+    - https://github.com/egohygiene/identity/pull/123
+    - https://github.com/egohygiene/identity/issues/80
     - https://github.com/egohygiene/identity/issues/116
-    - https://github.com/egohygiene/identity/pull/129
     depends_on: []
 state:
   base:
-    revision: d247487379569c3701a8cefe6d6136502657fa64
-    ref: refs/heads/codex/105-complete-public-kit
-    verified_at: '2026-11-02T06:11:40Z'
+    revision: f9b20b707d72472134ae209ec496cb8e6e4df053
+    ref: refs/heads/main
+    verified_at: '2026-11-02T14:54:49Z'
   candidate:
-    branch: codex/identity-product-sprint-20261102
+    branch: codex/80-browser-environment
     revision: null
     pull_request:
       provider: github
-      id: egohygiene/identity#130
-      url: https://github.com/egohygiene/identity/pull/130
+      id: egohygiene/identity#123
+      url: https://github.com/egohygiene/identity/pull/123
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-02T12:23:09Z'
-    default_branch_revision: 47995976ae41415226bd6fb9400fbbd02777fca6
+    observed_at: '2026-11-02T14:54:49Z'
+    default_branch_revision: f9b20b707d72472134ae209ec496cb8e6e4df053
     issue_state: open
     pull_request_state: draft
-    notes: PR130 is open/draft and stacked on unchanged PR129. Main remains 47995976ae41415226bd6fb9400fbbd02777fca6;
-      parent remains d247487379569c3701a8cefe6d6136502657fa64. All nine initial upload trees matched local
-      source; no hosted run was observed for that prepared head. Verify the final containing head separately.
-  parallel_changes:
-  - provider: github
-    id: egohygiene/identity#123
-    url: https://github.com/egohygiene/identity/pull/123
+    notes: PR129 merged at ec865c336a892943e55e8e1d3be0ae5c3c299c61 and PR130 at f9b20b707d72472134ae209ec496cb8e6e4df053.
+      Their trees equal their exact source candidates. PR123 is the pending reconciliation; current source
+      has not been browser/Docker-qualified.
+  parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-02T12:23:09Z'
+  reviewed_at: '2026-11-02T14:57:15Z'
   reviewed_by: Codex
   evidence:
-  - command: Pinned PR129 blob/tree comparison
+  - command: Exact-head GitHub merges for PR129/130 and returned merge-tree comparisons
     outcome: passed
-    observed_at: '2026-11-02T06:11:40Z'
-    notes: Exact immutable parent source was copied into an isolated worktree. Main, parent PR129 and
-      parked PR123 were not modified.
-  - command: Standalone validator generation and AST comparison; projection wrapper source comparison
-    outcome: passed
-    observed_at: '2026-11-02T06:11:40Z'
-    notes: Standalone AST equals the original; projection functions outside named delegating wrappers
-      are unchanged. These are structural checks, not runtime tests.
-  - command: Python/JSON parsing, relative documentation links, pinned ADR metadata, prior-ADR preservation
-      and git diff --check
-    outcome: passed
-    observed_at: '2026-11-02T06:11:40Z'
-    notes: Structural handoff checks only. The final exact-head result and any limitations are retained
-      in the PR; behavioral tests and owner gates are not claimed.
-  - command: GitHub connector branch/PR/source-tree and workflow-run inspection
-    outcome: passed
-    observed_at: '2026-11-02T12:23:09Z'
-    notes: PR130 is draft/open, parent and main unchanged. Initial nine source trees matched exactly and
-      the prepared head had zero workflow runs. Final delivery verification follows this metadata refresh;
-      no behavioral result is claimed.
+    observed_at: '2026-11-02T14:57:15Z'
+    notes: Both merges were explicitly authorized and preserve exact candidate trees. Merge messages contain
+      CI skip markers; these are source delivery facts, not new test results.
   environment_limitations:
-  - All behavioral tests, full native/pinned-owner validation, CI, browser and Docker qualification are
-    deferred at maintainer request. Candidate source is not acceptance or merge-readiness proof.
-  - 'Rust tooling is unavailable in this environment; #87 remains unstarted. #80/#82/#88 retain their
-    qualification/dependency boundaries.'
-  - The reported Relay DCO action reference remains unresolved after bounded source and issue searches;
-    no replacement action or policy enforcement is invented.
+  - All tests, browser/Docker execution and hosted CI remain deferred. Historical six-case browser receipts
+    apply only to their recorded source; the reconciled nine-case source needs fresh qualification.
+  - 'Actual local Docker acceptance, current source replay and #82/#88 prerequisites remain open under
+    #80/#70. Proposed ADRs retain their prior states and null approval.'
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -135,48 +116,48 @@ privacy:
 
 ## Purpose and precedence
 
-This is an operational handoff for a proposed roadmap sprint, not approval or a second roadmap. User/runtime instructions, scoped repository policy, live tracker state and canonical sources outrank this checkpoint.
+This is a source-merge handoff. User/runtime authorization, repository instructions, live evidence and canonical source outrank it. It grants no approval or publication authority.
 
 ## Resume protocol
 
-Read AGENTS, ROADMAP, tracker #116, parent PR129 and docs/work/116/HANDOFF.md. Verify both branch heads and candidate PR state before resuming. The local snapshot was checked against the exact parent tree; inherited validation belongs to PR129 and does not qualify new work.
+Read AGENTS, tracker #116, issue #80 and PR123. Verify live merge state before repeating an operation. The earlier sprint handoff retains implementation and deferred-check details.
 
 ## Current objective and success conditions
 
-Present bounded product and maintenance candidates on an isolated branch, with approval, dependency and deferred-check boundaries explicit. Main and existing PR branches remain unchanged.
+Integrate parked browser preparation with merged PR129/130 while preserving current source, strict evidence rules and all deferred acceptance.
 
 ## State snapshot
 
-The evaluated base is PR129 head d247487379569c3701a8cefe6d6136502657fa64. Default main remains 47995976ae41415226bd6fb9400fbbd02777fca6 at observation. Candidate branch is codex/identity-product-sprint-20261102. Its containing revision is intentionally null; [PR130](https://github.com/egohygiene/identity/pull/130) is verified open/draft and targets the unchanged parent branch.
+PR129 merged at ec865c336a892943e55e8e1d3be0ae5c3c299c61; PR130 merged at f9b20b707d72472134ae209ec496cb8e6e4df053. Their source trees match their exact candidate trees. PR123 is being reconciled with that main; the containing candidate revision is intentionally null.
 
 ## Completed and material changes
 
-Prepared the #109 scope proposal and #108 reference handoff, an optional #106 announcement-draft implementation and #107 capability inventory. Prepared #84 workflow retirement, #85 canonical validator module extraction with the original standalone payload preserved, and #86 explicit shared projection mechanics. See the sprint handoff for per-issue status. None is declared accepted, merged or closed.
+Keep the newer roadmap, product source, validator/projection refactors and both changelog entries. Browser proof now expects nine current E2E cases in producer and verifier; screenshot, image/font pins and historical receipts are unchanged. No proof threshold, retry/skip gate or reduced source boundary is weakened.
 
 ## Validation and review evidence
 
-Source snapshot/hash, syntax/JSON/link, metadata and structural-preservation checks are recorded separately from behavior. The generated standalone validator has the same AST as its original source. Existing renderer, projection, Rust, source/digest and new announcement regressions have not run for this candidate.
+Merge-tree identity is verified. Python/JavaScript syntax where available, data/metadata, conflict resolution and source-preservation checks precede the candidate update. No runtime, browser, Docker, unit or hosted CI result is claimed for the reconciled source.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Testing/CI and broader qualification are deferred. Rust tooling is unavailable. #105/PR129 remains under its own review gate. #109 needs a human scope decision; #106 needs an agreed consumer/template and runtime proof; #107 needs a concrete selection or owner disposition. The Relay DCO link remains unresolved. Final root self-source/rights, dogfood and release acceptance stay #98/#116.
+Issue #80 remains open for fresh nine-case and actual local Docker evidence. #70 owns the full deferred quality pass. #82/#88 retain their prerequisites; product scope/creative decisions and release/self-dogfood remain separate. Historical six-case evidence cannot qualify the combined source.
 
 ## Next dependency-ready work
 
-Review the parent and candidate, resolve the finite product choices and execute the deferred checklist before accepting or stacking further qualified behavior. No merge, release, deployment, posting, issue closure or ADR acceptance is authorized by this handoff.
+Finish the separately authorized PR123 source merge and refresh merged-state continuity. Then run the deferred checks and resolve the existing owner decisions. This checkpoint does not close #80, accept ADRs or authorize publication.
 
 ## Parallel changes and reconciliation
 
-Parent PR129 and parked PR123 remain independent and unmerged at observation. Preserve prior ADR bodies, source approvals and historical audit bytes. Reconcile operational handoffs by live evidence when branches are later combined.
+PR129 and PR130 are verified merged. Resolve only the pending browser source plus operational documentation; preserve all prior ADR bodies, human dispositions, original screenshot and historical receipt bytes.
 
 ## Privacy and redaction
 
-Only public repository facts and bounded status are retained. No credentials, private context, source transcripts, machine paths, new real-person approvals or unapproved artwork are included.
+Store public repository facts and bounded evidence only. No credentials, private transcripts or machine-specific paths are retained.
 
 ## Handoff update protocol
 
-Before acceptance, record actual commands, exact head/results, remaining gaps and the next checked action. Preserve the twelve sections and declared size/privacy budgets. No unrun check is passed.
+Verify live source state, record actual results and preserve all deferred obligations. A merged implementation is not a passing check or an accepted decision.
 
 ## Compaction and supersession
 
-This replaces stale current-state prose. Git, issue #116 and docs/work/116 retain context without copying the full tracker or dated audit. Preserve distinct source, runtime, release and human disposition evidence.
+This replaces stale current-state prose. Git, PR history and docs/work/116 keep the implementation trail. Retain the twelve sections and declared budgets.

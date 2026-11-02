@@ -31,11 +31,13 @@ Browser tests are a separate validation step, not implied by `setup` or
 installation. `preview` runs in the foreground. Its default host/port are
 127.0.0.1:4173; override `IDENTITY_DEV_HOST` and `IDENTITY_DEV_PORT` as needed.
 Live preview processes must be restarted in a new cloud task.
-The reviewed screenshot also depends on the Linux font environment. A custom
-image with different system fonts can pass functional browser checks but fail
-the exact screenshot comparison. Preserve the reviewed baseline; align the
-image's fonts with CI instead of automatically updating snapshots. An existing
-`FONTCONFIG_FILE` override is passed through to browser commands.
+Approved-baseline evidence uses the
+[qualified browser command](BROWSER_ENVIRONMENT.md), shared with CI. It pins
+the browser image, font/runtime evidence and render settings, then proves
+positive comparison and deliberate visual-drift rejection. The commands above
+remain useful for development/host diagnostics; arbitrary host fonts or custom
+browser images are not qualified by those commands. Preserve the approved PNG
+when diagnosing an environment mismatch.
 
 By default, local tools and caches live in the ignored
 `.cache/identity/dev-env` directory. Set `IDENTITY_DEV_PREFIX` to a persistent,

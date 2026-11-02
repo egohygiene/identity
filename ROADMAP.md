@@ -26,6 +26,18 @@ supersedes: []
 
 # Identity Roadmap
 
+## Authorized source merge integration — 2026-11-02
+
+[PR #129](https://github.com/egohygiene/identity/pull/129) merged at
+`ec865c336a892943e55e8e1d3be0ae5c3c299c61`; [PR #130](https://github.com/egohygiene/identity/pull/130)
+merged at `f9b20b707d72472134ae209ec496cb8e6e4df053`, with their exact source trees
+preserved. Parked #123 is being reconciled as source preparation. Its strict
+positive proof now expects the current nine-case suite; historical six-case
+receipts and the screenshot baseline remain unchanged. #80, #82 and #88 keep
+their actual qualification gates. Test/CI execution and remaining acceptance
+are deferred; merge is not creative approval or a release. Earlier dated
+snapshots below retain their original observation context.
+
 ## 2026-11-02 isolated review candidate
 
 A separate branch, `codex/identity-product-sprint-20261102`, prepares bounded

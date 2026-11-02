@@ -1,0 +1,174 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/opt/identity/renderer/node_modules/@playwright/test/cli.js",
+      "test",
+      "--project=chromium",
+      "--retries=0",
+      "--reporter=json",
+      "--update-snapshots=none",
+      "--output=/evidence/browser-1FbY0f/negative/artifacts",
+      "--grep",
+      "matches the reviewed desktop viewport baseline$"
+    ],
+    "configFile": "/opt/identity/renderer/playwright.config.js",
+    "rootDir": "/opt/identity/renderer/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/evidence/browser-1FbY0f/negative/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/opt/identity/renderer/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "none",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "corepack pnpm run preview -- --host 127.0.0.1 --port 4173",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": false,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "renderer.spec.js",
+      "file": "renderer.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "matches the reviewed desktop viewport baseline",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1300,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  1408013 pixels (ratio 0.98 of all image pixels) are different.\n\n  Snapshot: brand-kit-page.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(brand-kit-page.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 1408013 pixels (ratio 0.98 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 1408013 pixels (ratio 0.98 of all image pixels) are different.\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  1408013 pixels (ratio 0.98 of all image pixels) are different.\n\n  Snapshot: brand-kit-page.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(brand-kit-page.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 1408013 pixels (ratio 0.98 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 1408013 pixels (ratio 0.98 of all image pixels) are different.\u001b[22m\n\n    at /opt/identity/renderer/tests/e2e/renderer.spec.js:140:22",
+                    "location": {
+                      "file": "/opt/identity/renderer/tests/e2e/renderer.spec.js",
+                      "column": 22,
+                      "line": 140
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 138 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mreload()\u001b[33m;\u001b[39m\n \u001b[90m 139 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mevaluate(() \u001b[33m=>\u001b[39m document\u001b[33m.\u001b[39mfonts\u001b[33m.\u001b[39mready)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 140 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page)\u001b[33m.\u001b[39mtoHaveScreenshot(\u001b[32m\"brand-kit-page.png\"\u001b[39m\u001b[33m,\u001b[39m {\n \u001b[90m     |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 141 |\u001b[39m     animations\u001b[33m:\u001b[39m \u001b[32m\"disabled\"\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 142 |\u001b[39m     fullPage\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 143 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/opt/identity/renderer/tests/e2e/renderer.spec.js",
+                        "column": 22,
+                        "line": 140
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveScreenshot\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\n  1408013 pixels (ratio 0.98 of all image pixels) are different.\n\n  Snapshot: brand-kit-page.png\n\nCall log:\n\u001b[2m  - Expect \"toHaveScreenshot(brand-kit-page.png)\" with timeout 5000ms\u001b[22m\n\u001b[2m    - verifying given screenshot expectation\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - 1408013 pixels (ratio 0.98 of all image pixels) are different.\u001b[22m\n\u001b[2m  - waiting 100ms before taking screenshot\u001b[22m\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m    - disabled all CSS animations\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\u001b[2m  - captured a stable screenshot\u001b[22m\n\u001b[2m  - 1408013 pixels (ratio 0.98 of all image pixels) are different.\u001b[22m\n\n\n  138 |   await page.reload();\n  139 |   await page.evaluate(() => document.fonts.ready);\n> 140 |   await expect(page).toHaveScreenshot(\"brand-kit-page.png\", {\n      |                      ^\n  141 |     animations: \"disabled\",\n  142 |     fullPage: false,\n  143 |   });\n    at /opt/identity/renderer/tests/e2e/renderer.spec.js:140:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T13:36:53.896Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "brand-kit-page-expected.png",
+                      "contentType": "image/png",
+                      "path": "/opt/identity/renderer/tests/e2e/__snapshots__/brand-kit-page.png"
+                    },
+                    {
+                      "name": "brand-kit-page-actual.png",
+                      "contentType": "image/png",
+                      "path": "/evidence/browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png"
+                    },
+                    {
+                      "name": "brand-kit-page-diff.png",
+                      "contentType": "image/png",
+                      "path": "/evidence/browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/evidence/browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/evidence/browser-1FbY0f/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/opt/identity/renderer/tests/e2e/renderer.spec.js",
+                    "column": 22,
+                    "line": 140
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1f10420b3b7aa48b04c9-f8e704f4d7849d7a74b5",
+          "file": "renderer.spec.js",
+          "line": 136,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-20T13:36:52.673Z",
+    "duration": 2709.66,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
