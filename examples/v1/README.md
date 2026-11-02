@@ -17,6 +17,11 @@ than requiring every available feature. Reusable descriptions and contact detail
 live in the Press Kit source; tone and contextual naming live in voice guidance.
 The project manifest owns only its existing project metadata.
 
+The expanded source also supplies the unchanged input for the optional
+[release-announcement example](../launch/README.md), which includes an explicit
+request, generated Markdown draft, selected mark and draft-only receipt. Its
+fictional release facts are separate from canonical `.identity/` source.
+
 The older `tests/fixtures/v1/valid/minimal` directory is an expanded historical
 regression corpus. Its name, source bytes and expected projections remain stable;
 these new examples are the authoring entry point.

@@ -1,0 +1,82 @@
+{
+  "files": {
+    "assets/mark/example-expanded-mark.svg": {
+      "bytes": 263,
+      "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad"
+    },
+    "release-announcement.md": {
+      "bytes": 1671,
+      "sha256": "0157645e5b2d95ad4f33af6e05932e04c96a082e3ec51b02170b5aa66150bd6f"
+    }
+  },
+  "projection": {
+    "assets": [
+      {
+        "altText": "A violet diamond nested inside a rounded square.",
+        "approval": {
+          "id": "example-press-mark-approval",
+          "subject": "press-kit:asset:mark"
+        },
+        "assetId": "mark",
+        "downloadPath": "assets/example-expanded-mark.svg",
+        "id": "mark",
+        "label": "Example mark",
+        "license": {
+          "attribution": "Copyright 2026 Example",
+          "spdx": "MIT",
+          "status": "approved"
+        },
+        "mediaType": "image/svg+xml",
+        "notes": "Use with the reviewed usage guidance.",
+        "origin": {
+          "capturedAt": "2026-10-19T10:30:00Z",
+          "creator": "Fictional Example Organization",
+          "method": "first-party",
+          "source": "https://example.invalid/synthetic-artwork/mark"
+        },
+        "sha256": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+        "usage": {
+          "minimumSize": "16 CSS pixels for the standalone mark.",
+          "restrictions": [
+            "Synthetic example artwork only; replace for a real identity."
+          ],
+          "safeZone": "Keep one quarter of the mark width clear on every side."
+        }
+      }
+    ],
+    "boilerplate": {
+      "approval": {
+        "id": "example-press-long-approval",
+        "subject": "press-kit:boilerplate:long"
+      },
+      "id": "long",
+      "kind": "long",
+      "text": "Example Expanded is a fictional repository for learning Identity v1. Its local token layers, governed artwork and guidance show how maintainers can keep source facts reviewable while generating reusable packages."
+    },
+    "project": {
+      "displayName": "Example Expanded",
+      "id": "example-expanded"
+    },
+    "sourceDigest": "aec3ea886ad78897341863ba9f567cb2582e21d99abf9ae795d3d4dc7a8afa98"
+  },
+  "request": {
+    "assetIds": [
+      "mark"
+    ],
+    "boilerplateId": "long",
+    "projectId": "example-expanded",
+    "release": {
+      "date": "2026-11-02",
+      "highlights": [
+        "Synthetic example: release facts are supplied through a separate request.",
+        "The selected example mark retains its existing source bytes, alternative text and usage information."
+      ],
+      "url": "https://example.invalid/example-expanded/releases/0.1.0-example",
+      "version": "0.1.0-example"
+    },
+    "schema": "identity.launch-document-request/v1",
+    "template": "release-announcement"
+  },
+  "schema": "identity.launch-document/v1",
+  "status": "draft"
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "identity.launch-document-request/v1",
+  "template": "release-announcement",
+  "projectId": "example-expanded",
+  "boilerplateId": "long",
+  "assetIds": ["mark"],
+  "release": {
+    "version": "0.1.0-example",
+    "date": "2026-11-02",
+    "url": "https://example.invalid/example-expanded/releases/0.1.0-example",
+    "highlights": [
+      "Synthetic example: release facts are supplied through a separate request.",
+      "The selected example mark retains its existing source bytes, alternative text and usage information."
+    ]
+  }
+}
