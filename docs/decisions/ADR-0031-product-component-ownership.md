@@ -19,7 +19,7 @@ evidence:
   - type: issue
     url: https://github.com/egohygiene/identity/issues/109
     description: Requests a bounded ownership decision rather than a mandatory component library.
-  - type: source
+  - type: implementation
     url: https://github.com/egohygiene/identity/blob/d247487379569c3701a8cefe6d6136502657fa64/renderer/package.json
     description: The existing renderer is a private reference package, not a downstream component distribution.
 approval: null

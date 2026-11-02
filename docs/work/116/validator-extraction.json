@@ -1,0 +1,110 @@
+{
+  "baseRevision": "d247487379569c3701a8cefe6d6136502657fa64",
+  "originalPath": "scripts/validate_identity.py",
+  "originalSha256": "87a1b12d925466f75ba6e013328af9a258d0890ad0b2ca751573fb5285a3e0f3",
+  "originalAstSha256": "502d85ffa89fe71c8c6d97684c997e36c8f1d9e5f4f03db4f26deaddfe440b6d",
+  "modules": [
+    {
+      "module": "project",
+      "functions": [
+        "validate_project"
+      ]
+    },
+    {
+      "module": "tokens",
+      "functions": [
+        "validate_layer_declaration",
+        "validate_extensions",
+        "flatten_tokens",
+        "load_layers",
+        "validate_aliases"
+      ]
+    },
+    {
+      "module": "governance",
+      "functions": [
+        "validate_approvals",
+        "validate_provenance"
+      ]
+    },
+    {
+      "module": "targets",
+      "functions": [
+        "validate_targets"
+      ]
+    },
+    {
+      "module": "guidance",
+      "functions": [
+        "validate_guidance_strings",
+        "validate_guidance_text_fields",
+        "validate_guidance_governance"
+      ]
+    },
+    {
+      "module": "voice",
+      "functions": [
+        "validate_voice_message",
+        "validate_voice"
+      ]
+    },
+    {
+      "module": "usage",
+      "functions": [
+        "validate_usage_rule",
+        "validate_usage"
+      ]
+    },
+    {
+      "module": "handbook",
+      "functions": [
+        "validate_design_system",
+        "validate_design_references"
+      ]
+    },
+    {
+      "module": "channels",
+      "functions": [
+        "validate_channel_registry"
+      ]
+    },
+    {
+      "module": "press_kit",
+      "functions": [
+        "validate_press_kit"
+      ]
+    },
+    {
+      "module": "social_surfaces",
+      "functions": [
+        "validate_social_surfaces"
+      ]
+    },
+    {
+      "module": "repository_presentation",
+      "functions": [
+        "validate_repository_presentation"
+      ]
+    },
+    {
+      "module": "mascot",
+      "functions": [
+        "validate_mascot"
+      ]
+    },
+    {
+      "module": "entrypoint",
+      "functions": [
+        "validate_identity",
+        "build_parser",
+        "validate_snapshot",
+        "main"
+      ]
+    }
+  ],
+  "behavioralTests": "not-run; deferred at maintainer request",
+  "publicEntryPoint": "scripts/validate_identity.py",
+  "rustEmbedding": "src/v1_consumer/preflight.rs remains unchanged",
+  "generatedAstSha256": "502d85ffa89fe71c8c6d97684c997e36c8f1d9e5f4f03db4f26deaddfe440b6d",
+  "structuralResult": "Original and generated standalone ASTs are identical; no behavioral tests executed."
+}
