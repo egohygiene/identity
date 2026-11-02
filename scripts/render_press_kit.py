@@ -10,7 +10,6 @@ import argparse
 from io import BytesIO
 import hashlib
 import json
-import os
 from pathlib import Path, PurePosixPath
 import shutil
 import sys
@@ -20,6 +19,7 @@ import zipfile
 import render_design_system as design_system
 import channel_registry
 import validate_identity as validator
+import projection_boundary as boundary
 
 PRESS_KIT_SCHEMA = "identity.press-kit/v1"
 PACKAGE_SCHEMA = "identity.press-kit-package/v1"
@@ -53,22 +53,13 @@ class ProjectionError(ValueError):
 def load_json(path: Path) -> dict[str, Any]:
     """Load one object-shaped JSON document."""
 
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ProjectionError(f"document must be an object: {path}")
-    return value
+    return boundary.load_json_object(path, error_type=ProjectionError)
 
 
 def is_public(value: dict[str, Any]) -> bool:
     """Return whether a governed record is approved for public projection."""
 
-    governance = value.get("governance")
-    return (
-        isinstance(governance, dict)
-        and governance.get("state") == "approved"
-        and governance.get("visibility") == "public"
-        and isinstance(governance.get("approval"), str)
-    )
+    return boundary.approved_public_with_approval(value)
 
 
 def approval_record(value: dict[str, Any], approvals: dict[str, dict[str, Any]]) -> dict[str, str]:
@@ -503,7 +494,7 @@ def verified_social_package(
 def render_json(value: dict[str, Any]) -> str:
     """Render one stable JSON document."""
 
-    return f"{json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False)}\n"
+    return boundary.render_json(value)
 
 
 def markdown_cell(value: str) -> str:
@@ -720,17 +711,10 @@ def build_package(model: dict[str, Any], asset_bytes: dict[str, bytes]) -> dict[
 def generated_output_directory(repository_root: Path, value: Path) -> Path:
     """Resolve a generated directory without allowing source or symlink writes."""
 
-    relative = value.as_posix()
-    if not validator.valid_relative_path(relative):
-        raise ProjectionError("output directory must be normalized and repository-relative")
-    if relative == ".identity" or relative.startswith(".identity/"):
-        raise ProjectionError("generated Press Kit output cannot be written into canonical .identity")
-    current = repository_root
-    for part in PurePosixPath(relative).parts:
-        current = current / part
-        if current.is_symlink():
-            raise ProjectionError("output directory may not traverse a symbolic link")
-    return repository_root / relative
+    return boundary.generated_directory(
+            repository_root, value, error_type=ProjectionError,
+            canonical_error="generated Press Kit output cannot be written into canonical .identity",
+        )
 
 
 def verify_package_directory(directory: Path) -> None:
@@ -769,10 +753,7 @@ def verify_package_directory(directory: Path) -> None:
 def atomic_write(path: Path, value: bytes) -> None:
     """Replace one generated artifact without leaving a partial file behind."""
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_bytes(value)
-    os.replace(temporary, path)
+    boundary.atomic_write_bytes(path, value)
 
 
 def write_outputs(

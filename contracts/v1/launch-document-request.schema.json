@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/launch-document-request.schema.json",
+  "title": "Identity optional launch-document request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "template", "projectId", "boilerplateId", "release"],
+  "properties": {
+    "schema": { "const": "identity.launch-document-request/v1" },
+    "template": { "const": "release-announcement" },
+    "projectId": { "$ref": "#/$defs/identifier" },
+    "boilerplateId": { "$ref": "#/$defs/identifier" },
+    "assetIds": {
+      "type": "array", "maxItems": 20, "uniqueItems": true,
+      "items": { "$ref": "#/$defs/identifier" }
+    },
+    "release": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "date", "url", "highlights"],
+      "properties": {
+        "version": { "type": "string", "pattern": "^v?(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?(?:\\+[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$" },
+        "date": { "type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://[^\\s<>\"\\\\]+$", "maxLength": 2000 },
+        "highlights": { "type": "array", "minItems": 1, "maxItems": 20, "items": { "type": "string", "minLength": 1, "maxLength": 2000 } }
+      }
+    }
+  },
+  "$defs": { "identifier": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" } }
+}

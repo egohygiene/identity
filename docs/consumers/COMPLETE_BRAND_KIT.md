@@ -1,5 +1,13 @@
 # Assemble a complete public Brand Kit
 
+For repository setup and contribution-policy links, use the bounded
+[ecosystem integration handoff](ECOSYSTEM_INTEGRATION.md). Those references do
+not imply policy enforcement or change the kit's publication owner.
+
+Optional [announcement drafts](LAUNCH_DOCUMENTS.md) and the
+[imagery/motion inventory](OPTIONAL_VISUALS.md) reuse the existing source and
+rights boundaries. Neither adds a required section to a minimal kit.
+
 The consumer kit builder presents generated public material in one static
 experience. It reads the selected native compiler manifest and renderer model,
 plus explicitly supplied generated handbook and Press Kit directories. It does

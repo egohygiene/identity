@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/launch-document.schema.json",
+  "title": "Identity optional announcement draft receipt",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema", "status", "request", "projection", "files"],
+  "properties": {
+    "schema": { "const": "identity.launch-document/v1" },
+    "status": { "const": "draft" },
+    "request": { "$ref": "launch-document-request.schema.json" },
+    "projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["project", "sourceDigest", "boilerplate", "assets"],
+      "properties": {
+        "project": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "displayName"],
+          "properties": {
+            "id": { "$ref": "launch-document-request.schema.json#/$defs/identifier" },
+            "displayName": { "type": "string", "minLength": 1, "maxLength": 2000 }
+          }
+        },
+        "sourceDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "boilerplate": { "$ref": "press-kit-projection.schema.json#/$defs/boilerplate" },
+        "assets": { "type": "array", "maxItems": 20, "items": { "$ref": "press-kit-projection.schema.json#/$defs/asset" } }
+      }
+    },
+    "files": {
+      "type": "object", "minProperties": 1,
+      "propertyNames": { "pattern": "^(?:release-announcement\\.md|assets/[a-z][a-z0-9-]*/[^/\\\\]+)$" },
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["sha256", "bytes"],
+        "properties": {
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "bytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

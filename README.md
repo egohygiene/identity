@@ -109,6 +109,13 @@ documented below. See the
 
 ## Identity v1 source
 
+Validator maintenance uses focused canonical modules under
+[`scripts/identity_validation/`](scripts/identity_validation/README.md).
+Regenerate `scripts/validate_identity.py` with
+`python3 scripts/build_identity_validator.py` after editing those modules.
+The public script/import path and the Rust-embedded standalone payload retain
+their existing offline boundary.
+
 The v1 contract adds content-addressed organization defaults, intentional
 product overrides, DTCG-compatible semantic tokens, versioned target profiles,
 asset provenance/licensing, and human approvals beneath `.identity/`.

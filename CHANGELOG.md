@@ -8,6 +8,14 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- An optional release-announcement draft projector that reuses approved public
+  Press Kit copy/assets and explicit owner-supplied release facts, with draft
+  receipts and offline inventory verification. The candidate remains subject
+  to consumer selection and the deferred quality sweep before adoption.
+- Focused canonical validator source modules and a deterministic self-contained
+  bundle generator; existing standalone/import and Rust embedding paths remain
+  the supported interfaces.
+
 - Human-oriented `v1-inspect` and explicit `v1-recover` commands for retained
   compiler transactions, with shared read-only inspection, source/Python-independent
   rollback, actionable diagnostics and consistent repository/output-root authority.

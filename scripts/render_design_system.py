@@ -8,12 +8,12 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import sys
 from typing import Any, Sequence
 
 import validate_identity as validator
+import projection_boundary as boundary
 
 HANDBOOK_SCHEMA = "identity.design-system-handbook/v1"
 CONTEXT_SCHEMA = "identity.design-context/v1"
@@ -33,30 +33,19 @@ class ProjectionError(ValueError):
 def load_json(path: Path) -> dict[str, Any]:
     """Load one validated, object-shaped JSON source document."""
 
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ProjectionError(f"document must be an object: {path}")
-    return value
+    return boundary.load_json_object(path, error_type=ProjectionError)
 
 
 def is_public(value: dict[str, Any]) -> bool:
     """Return whether one governed source record is public and approved."""
 
-    governance = value.get("governance")
-    return (
-        isinstance(governance, dict)
-        and governance.get("state") == "approved"
-        and governance.get("visibility") == "public"
-    )
+    return boundary.approved_public(value)
 
 
 def canonical_source_digest(repository_root: Path) -> str:
     """Return egohygiene.identity.source-digest/v1, shared by every Python projection."""
 
-    try:
-        return validator.canonical_source_digest(repository_root)
-    except (OSError, ValueError) as error:
-        raise ProjectionError(str(error)) from error
+    return boundary.source_digest(repository_root, error_type=ProjectionError)
 
 
 def resolve_alias_value(
@@ -440,7 +429,7 @@ def build_projections(repository_root: Path) -> tuple[dict[str, Any], dict[str, 
 def render_json(value: dict[str, Any]) -> str:
     """Render one deterministic JSON projection."""
 
-    return f"{json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False)}\n"
+    return boundary.render_json(value)
 
 
 def markdown_value(value: Any) -> str:
@@ -646,26 +635,16 @@ def render(projections: tuple[dict[str, Any], dict[str, Any]], output_format: st
 def output_directory(repository_root: Path, value: Path) -> Path:
     """Resolve an explicit generated-output directory without allowing source writes."""
 
-    relative = value.as_posix()
-    if not validator.valid_relative_path(relative):
-        raise ProjectionError("output directory must be normalized and repository-relative")
-    if relative == ".identity" or relative.startswith(".identity/"):
-        raise ProjectionError("projection output cannot overwrite canonical .identity source")
-    current = repository_root
-    for part in PurePosixPath(relative).parts:
-        current = current / part
-        if current.is_symlink():
-            raise ProjectionError("output directory may not traverse a symbolic link")
-    return repository_root / relative
+    return boundary.generated_directory(
+            repository_root, value, error_type=ProjectionError,
+            canonical_error="projection output cannot overwrite canonical .identity source",
+        )
 
 
 def atomic_write(path: Path, content: str) -> None:
     """Replace one generated text artifact without leaving a partial file behind."""
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_text(content, encoding="utf-8")
-    os.replace(temporary, path)
+    boundary.atomic_write_text(path, content)
 
 
 def write_outputs(repository_root: Path, destination: Path, projections: tuple[dict[str, Any], dict[str, Any]]) -> list[Path]:

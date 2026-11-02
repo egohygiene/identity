@@ -59,6 +59,7 @@ deps() {
 
 build() {
   cd "$repo_root"
+  python3 scripts/build_identity_validator.py --check
   cargo build --locked
   cd renderer
   corepack pnpm build
@@ -66,6 +67,7 @@ build() {
 
 check() {
   cd "$repo_root"
+  python3 scripts/build_identity_validator.py --check
   cargo fmt --all --check
   cargo clippy --locked --all-targets --all-features -- -D warnings
   cargo test --locked --all-features

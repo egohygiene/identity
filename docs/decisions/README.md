@@ -54,6 +54,8 @@ records and nine proposed records.
 | ADR-0028 | Project asset rights without inventing missing authority | proposed | 2026-10-20 | [ADR-0028](ADR-0028-asset-rights-projection.md) |
 | ADR-0029 | Bind public downloads to governed assets and selected outputs | proposed | 2026-10-21 | [ADR-0029](ADR-0029-selected-public-downloads.md) |
 | ADR-0030 | Assemble native consumer kits with a complete offline inventory | proposed | 2026-10-21 | [ADR-0030](ADR-0030-consumer-kit-assembly.md) |
+| ADR-0031 | Keep product components outside the Identity foundations contract | proposed | 2026-11-02 | [ADR-0031](ADR-0031-product-component-ownership.md) |
+| ADR-0032 | Generate optional announcement drafts from approved copy and explicit facts | proposed | 2026-11-02 | [ADR-0032](ADR-0032-optional-launch-document-drafts.md) |
 
 ## Ongoing capture
 
