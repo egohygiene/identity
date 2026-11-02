@@ -7,18 +7,18 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-02T16:09:26Z'
+  updated_at: '2026-11-02T16:45:38Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Record the authorized issue109 scope disposition and continue with the remaining product closeouts.
+  purpose: Complete issue108 ownership/reference/example closeout and retain each deferred requirement
+    with a real queue.
   includes:
-  - Comprehensive identity specification/validation focus; components remain a possible separately scoped
-    future capability.
-  - Issue109/Q39 scope completion, original ADR0031 rationale and proposed lifecycle, and the next issue108
-    handoff.
+  - Verified immutable owner references, concrete unchanged Mantle source/override/kit handoff and Q38
+    scope completion.
+  - Explicitly unresolved Relay DCO reference, new initializer issue133 and reused upstream owner queues.
   excludes:
   - Test/CI execution, publishing, deployment, new implementation, ADR/creative acceptance and fabricated
     rights.
@@ -32,79 +32,93 @@ scope:
   - AGENTS.md
   - ROADMAP.md
   - docs/decisions/policy-reference.json
-  - docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md
-  - docs/decisions/ADR-0031-product-component-ownership.md
-  - https://github.com/egohygiene/identity/issues/109
+  - docs/consumers/ECOSYSTEM_INTEGRATION.md
+  - docs/consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md
+  - docs/work/108/CLOSEOUT.md
+  - https://github.com/egohygiene/identity/issues/108
+  - https://github.com/egohygiene/identity/issues/133
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Complete the maintainer-selected issue109 scope decision without committing to or permanently
-    excluding future components.
+  objective: Close issue108 for its documented bounded handoff without claiming deferred installation,
+    enforcement or runtime proof.
   success_conditions:
-  - Record the selected current scope and explicitly retain future component possibilities.
-  - Complete only Q39/issue109; preserve proposed ADR lifecycle and all deferred quality/product gates.
+  - Map all eight issue criteria to verified references, an existing consumer example and allowed unresolved
+    DCO status.
+  - Transfer the orphaned v1 initializer requirement to issue133; reuse the existing install/guidance/validation/governance
+    queues.
+  - Complete only Q38/issue108 and retain all deferred tests/CI, source rights, formal ADR and release
+    gates.
   active_issue:
     provider: github
-    id: egohygiene/identity#109
-    url: https://github.com/egohygiene/identity/issues/109
+    id: egohygiene/identity#108
+    url: https://github.com/egohygiene/identity/issues/108
   next:
     kind: issue
-    id: egohygiene/identity#108
-    description: Review the merged Aether/Realm/Relay integration closeout. Keep the reported DCO-action
-      link explicitly unresolved unless verified; follow with concrete issue106/107 selections. Testing/CI
-      remains deferred.
+    id: egohygiene/identity#106
+    description: Select a concrete launch/document consumer/template for the already merged optional draft
+      tool, or an explicit scope disposition. Follow with issue107. Keep issue133 and the quality/refactoring/CI
+      sweep deferred.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/108
-    - docs/consumers/ECOSYSTEM_INTEGRATION.md
+    - https://github.com/egohygiene/identity/issues/106
+    - docs/consumers/LAUNCH_DOCUMENTS.md
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 449a24b82fb88d9a1f48cf0d06367966987e1675
+    revision: d6864918c7303e9c277130528a3ecdf19cf70ea7
     ref: refs/heads/main
-    verified_at: '2026-11-02T16:09:26Z'
+    verified_at: '2026-11-02T16:45:38Z'
   candidate:
-    branch: codex/109-identity-specification-scope
+    branch: codex/108-ecosystem-handoff-closeout
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-02T16:09:26Z'
-    default_branch_revision: 449a24b82fb88d9a1f48cf0d06367966987e1675
+    observed_at: '2026-11-02T16:45:38Z'
+    default_branch_revision: d6864918c7303e9c277130528a3ecdf19cf70ea7
     issue_state: open
     pull_request_state: unknown
-    notes: Issue109 is open in the observed GitHub snapshot; the maintainer selected its bounded scope
-      and authorized closure. This candidate records that disposition before issue completion. PR123/129/130/131
-      are already merged; no source merge needs repeating.
+    notes: Issue108 is open in the observed snapshot and its bounded closeout is authorized. Issue109
+      is closed through merged PR132; issue133 is open for deferred v1 initialization. No parallel Identity
+      PRs were observed before this candidate. The exact Relay DCO action remains unresolved, as the criterion
+      permits.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-02T16:09:26Z'
+  reviewed_at: '2026-11-02T16:45:38Z'
   reviewed_by: Codex
   evidence:
-  - command: Pinned Hygiene ADR metadata schema, original ADR0031 prefix preservation, local Markdown
-      links, roadmap-block comparison and git diff --check
+  - command: GitHub owner main/issue reads, complete two-page Relay issue inventory and tracked-source
+      inspection
     outcome: passed
-    observed_at: '2026-11-02T16:09:26Z'
-    notes: Documentation checks only. Original ADR rationale/metadata remain; all 40 roadmap IDs/mappings
-      and 88 edges remain, with Q39 status alone changed.
-  - command: Live GitHub main/issue109/parent98/tracker116 inspection
+    observed_at: '2026-11-02T16:45:38Z'
+    notes: Pinned owner sources still match live main. All 95 Relay issues and 222 source files have no
+      DCO/sign-off match; related existing Sanctuary8 is not mislabeled as a Relay implementation.
+  - command: Raw Git comparison of 14 real Mantle receipt inputs at recorded and current revisions
     outcome: passed
-    observed_at: '2026-11-02T16:09:26Z'
-    notes: Main449a24b and open issue109 were verified before the bounded documentation change. Closure
-      and its commit evidence must be read back after merging.
-  - command: Behavioral tests, Docker execution and hosted CI
+    observed_at: '2026-11-02T16:45:38Z'
+    notes: All 14 input hashes match the immutable receipt and current Mantle source. This is source preservation,
+      not a fresh generation or integration run.
+  - command: Local Markdown links/anchors, stable roadmap-block comparison and git diff --check
+    outcome: passed
+    observed_at: '2026-11-02T16:45:38Z'
+    notes: 58 local links/anchors and all 40 steps/mappings/88 edges retained. Only Q38 status changes.
+      Runtime code, all ADR sources and historic receipts remain unchanged.
+  - command: Behavioral/native/browser/Docker tests, installation and hosted CI
     outcome: not-run
-    observed_at: '2026-11-02T16:09:26Z'
-    notes: Still deferred by maintainer direction; no runtime change is included.
+    observed_at: '2026-11-02T16:45:38Z'
+    notes: Remain deferred by maintainer; this candidate changes documentation only.
   environment_limitations:
-  - 'All runtime/native/browser/Docker/CI qualification remains deferred under #70/#80.'
-  - '#106 needs an agreed consumer/template; #107 needs a concrete category or disposition; #108 retains
-    the explicitly unresolved DCO-action link.'
-  - ADR0031 remains proposed with null approval; the dated issue disposition does not alter formal ADR
-    lifecycle.
-  - '#87/#88, final #83 and #98 self-source/rights/release/dogfood/contrasting-consumer gates remain outstanding.'
+  - 'Current runtime/browser/Docker/CI proof remains deferred under #70/#80/#82; no enforcement, release
+    or deployment is claimed.'
+  - The specific reported Relay DCO issue/action remains unresolved; existing Sanctuary8 tracks related
+    catalog curation.
+  - Issue133 retains the future initializer; installation/guidance/delegated-validation work retains existing
+    upstream queues.
+  - '#106/#107 still need concrete selections or dispositions; #87/#88, final #83 and #98 self-source/rights/release/dogfood
+    gates remain open.'
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -123,48 +137,48 @@ privacy:
 
 ## Purpose and precedence
 
-Record the current scope disposition and remaining work. User/runtime instructions, scoped policy, live evidence and canonical source outrank this handoff.
+Record the bounded issue108 handoff closeout and remaining work. User/runtime instructions, scoped policy, live evidence and canonical sources outrank this checkpoint.
 
 ## Resume protocol
 
-Read AGENTS, the scope guide and tracker #116. Verify live issue109/PR state before repeating closure. Previous implementation PRs #123/129/130 and closeout131 are merged.
+Read AGENTS, docs/work/108/CLOSEOUT.md and tracker #116. Verify issue108/PR merge state before repeating closure. Issue109 is already closed and PR132 merged.
 
 ## Current objective and success conditions
 
-Record comprehensive identity specification and validation as the present focus. Existing foundations suffice; future components remain possible after a concrete need and reviewed scope. Complete Q39 without creating a library or changing ADR lifecycle.
+Complete the ownership/reference/example scope, retain the allowed unresolved Relay DCO reference and give deferred implementation real queues. No new install, enforcement, rights or runtime outcome is inferred.
 
 ## State snapshot
 
-The candidate is based on main 449a24b82fb88d9a1f48cf0d06367966987e1675. Issue109 was open in the observed snapshot; its scope disposition and closure are explicitly authorized. Candidate revision/PR are null before they exist.
+The candidate is based on main d6864918c7303e9c277130528a3ecdf19cf70ea7. Issue108 was open and issue133 open in the fresh observation. Candidate revision/PR remain null before creation; the live snapshot does not predeclare this candidate merged.
 
 ## Completed and material changes
 
-docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md records the selected scope. ADR-0031 retains its original rationale and adds a dated clarification permitting future component work. ROADMAP Q39 records completion; the sprint handoff carries the revised owner decision.
+ECOSYSTEM_INTEGRATION.md now gives the concrete existing Mantle handoff and owner queues. The closeout maps all eight criteria. The initializer requirements formerly routed through issue108 now live in issue133; INITIALIZATION_AND_VALIDATION_HANDOFFS.md records that transfer. ROADMAP Q38 and the sprint handoff record bounded completion.
 
 ## Validation and review evidence
 
-Pinned ADR metadata, original rationale, all 40 roadmap IDs/mappings/88 edges, local documentation links and whitespace were checked. This is documentation evidence; no behavioral or CI result is claimed.
+Owner pins and open queues were read back. All 14 Mantle raw inputs match their historical receipt and current source; all 40 roadmap IDs/mappings and 88 edges remain. Documentation links/anchors and whitespace passed. Original evidence keeps its represented-source scope; no new test/CI pass is claimed.
 
 ## Blockers, risks, unknowns, and deferred work
 
-#80 stays open for actual local Docker and current nine-case browser proof; #70 owns the full sweep. #106/#107 still require concrete choices; #108 explicitly records the missing DCO link. ADR-0031 remains proposed. Release/rights/self-source/dogfood gates stay #98.
+The exact Relay DCO action is unresolved, an allowed issue108 outcome; Sanctuary8 is a related curation queue. Installation and adapters stay with linked existing owners. Issue133 retains explicit v1 initialization. #70/#80/#82 keep actual quality/browser/Docker/CI proof. Proposed ADRs, self-source/rights, release and dogfood remain unchanged.
 
 ## Next dependency-ready work
 
-Review #108's bounded integration handoff, then select the real #106/#107 use cases or dispositions. Keep cleanup/refactoring/testing deferred until selected by the maintainer.
+Select the concrete #106 consumer/template or disposition, then #107. The new initializer follow-up and existing upstream queues are later work, not extra hard prerequisites for those choices. Cleanup/refactoring/testing remains deferred.
 
 ## Parallel changes and reconciliation
 
-All prior source PRs are merged. Check live main before this candidate is merged; preserve other ADR dispositions, assets, historical browser receipts and immutable releases.
+No parallel open Identity PR was observed before this candidate. Verify live main before merging and preserve other source, ADR dispositions, asset bytes, screenshot and historical receipts.
 
 ## Privacy and redaction
 
-Only scoped project facts are retained. No conversation excerpts, credentials, personal information or private local paths are copied.
+Only scoped public project facts are retained. Exclude conversation excerpts, credentials, personal information and machine-local paths.
 
 ## Handoff update protocol
 
-Verify the documentation merge and issue closure, refresh #116/#98, and preserve the next product task. Scope completion supplies no new test, release or formal ADR-acceptance evidence.
+After the documentation merge, verify issue108 closure and update #116/#98 with its exact evidence and issue133. A completed reference handoff supplies no runtime, release, deployment or formal ADR acceptance.
 
 ## Compaction and supersession
 
-Git and the canonical scope/decision documents retain history. Preserve the twelve sections, metadata and size/privacy budgets; keep detailed roadmap and evidence in their owners.
+Keep the twelve sections, metadata and size/privacy budgets. Git, the canonical integration guide, closeout and existing owner queues retain detailed history and requirements.

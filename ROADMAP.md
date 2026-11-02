@@ -26,6 +26,18 @@ supersedes: []
 
 # Identity Roadmap
 
+## Ecosystem handoff closeout — 2026-11-02
+
+[#108](https://github.com/egohygiene/identity/issues/108) completes its bounded
+ownership/reference/example scope. The [closeout review](docs/work/108/CLOSEOUT.md)
+maps all eight criteria, verifies the source pins and documents the existing
+Mantle source-to-kit handoff. The specific Relay DCO action remains explicitly
+unresolved, as the criterion permits; existing Sanctuary #8 tracks related
+workflow curation. IDN-Q38 is complete without claiming runtime installation,
+enforcement or CI proof. The deferred v1 initializer moves to
+[#133](https://github.com/egohygiene/identity/issues/133); other future work
+retains its existing owner queues. Next product choice is #106, then #107.
+
 ## Product scope disposition — 2026-11-02
 
 The maintainer resolved [#109](https://github.com/egohygiene/identity/issues/109):
@@ -35,8 +47,8 @@ work requiring a concrete need and separately reviewed scope. The
 [scope record](docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) and dated
 ADR-0031 clarification record this disposition. IDN-Q39 is complete; no
 component library or new follow-up is required. ADR-0031 remains proposed.
-Next product closeout is #108, followed by the concrete selections for #106
-and #107. Quality/refactoring/testing stays deferred under #70.
+The subsequent #108 closeout is recorded above; concrete selections for #106
+and #107 remain next. Quality/refactoring/testing stays deferred under #70.
 
 ## Authorized source merges — 2026-11-02
 
@@ -805,7 +817,7 @@ issues: [107]
 
 <!-- roadmap-step
 id: IDN-Q38
-status: planned
+status: complete
 depends_on: [IDN-Q29, IDN-Q33, IDN-Q35]
 issues: [108]
 -->
@@ -815,9 +827,9 @@ issues: [108]
 
 **Exit criteria:**
 
-- [ ] Owner/source/consumer references and a bounded example are documented; the existing DCO queue is linked or explicitly unresolved.
+- [x] Owner/source/consumer references and a bounded example are documented; the existing DCO queue is linked or explicitly unresolved.
 
-**Evidence and scope:** [#108](https://github.com/egohygiene/identity/issues/108). Shared-default consolidation follows stabilization; not every reference integration needs every audit refactor. No duplicate DCO action or CLA service.
+**Evidence and scope:** [#108](https://github.com/egohygiene/identity/issues/108) is complete for its bounded ownership/reference/example scope; see the [criterion-by-criterion closeout](docs/work/108/CLOSEOUT.md) and [concrete Mantle handoff](docs/consumers/ECOSYSTEM_INTEGRATION.md). The exact Relay DCO action remains explicitly unresolved under the permitted criterion. V1 initialization is deferred to #133; install/guidance/validation/governance work reuses the linked owner issues. No new runtime/CI qualification, policy enforcement, DCO action or CLA service is claimed. Shared-default consolidation follows stabilization.
 
 <!-- roadmap-step
 id: IDN-Q39
