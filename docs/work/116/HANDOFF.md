@@ -2,6 +2,16 @@
 
 Current merged status: see [MERGES.md](MERGES.md). The source PRs are merged; the detailed candidate and deferred-check notes below remain relevant.
 
+Latest product delivery, 2026-11-02: #107 selects the existing real approved
+static Kern mascot. The [example](../../../examples/visuals/kern-static/README.md)
+and [delivery record](../107/CLOSEOUT.md) trace source, prior approval, rights,
+three packaged variants and a static consumer. The package verifier passed;
+all eleven inputs are unchanged. Browser/CI qualification stays #70/#80;
+new release and root-v1 self-adoption remain #98. The four optional product
+items #106–#109 are complete for their selected scopes; larger quality,
+refactoring and release acceptance remain outstanding. Initializer #133 stays
+deferred.
+
 Latest product delivery, 2026-11-02: #106 selects the optional Markdown
 release-announcement template with a complete fictional reference-consumer
 [example](../../../examples/launch/README.md) and
@@ -38,12 +48,12 @@ Mode: bounded implementation/proposal sprint with tests and CI explicitly deferr
 | #109 / IDN-Q39 | Maintainer-selected specification/validation scope; foundations suffice now and components remain possible later. The [scope record](../../consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) and dated ADR-0031 clarification retain the disposition. | Scope decision complete; no component implementation or follow-up selected. Formal ADR-0031 lifecycle remains proposed. |
 | #108 / IDN-Q38 | Verified owner references, concrete existing Mantle source/override/kit handoff, eight-criterion closeout and deferred-work mapping. | Bounded scope complete with the allowed unresolved Relay DCO reference. V1 initializer is #133; existing owner issues retain installation, guidance, validation and governance work. Runtime/CI proof is deferred. |
 | #106 / IDN-Q36 | Selected optional Markdown template plus explicit fictional request, generated announcement/receipt and unchanged selected mark. Actual generation/integrity verification and all 13 unchanged inputs are recorded. | Selected reference-use-case scope complete. Five regressions/broader qualification stay #70/#80; real adopters supply their own facts/source/review. ADR-0032 remains proposed; no posting is performed. |
-| #107 / IDN-Q37 | [Existing imagery/motion inventory](../../consumers/OPTIONAL_VISUALS.md) and a bounded approved-illustration source-to-kit route. | Select an actual consumer/category or approve a scope disposition. No new artwork, asset category or animation engine is invented. |
+| #107 / IDN-Q37 | Existing approved static Kern category, source-to-kit bindings and offline consumer with exact alternative text, attribution, minimum-width and reduced-motion guidance. Existing package verification passed for all three RGBA variants. | Selected category complete; broader browser/AX/CI proof stays #70/#80 and actual new release/root-v1 adoption stays #98. Existing artwork/rights/approval bytes are unchanged. |
 | #84 / IDN-Q23 | Remove the two retired hardcoded guidance rewrite definitions after verifying merged PR37, closed issue13 and absence of its old branch ref. | Review [ownership/retained-workflow inventory](workflow-retirement.md) and execute deferred source/workflow checks. The definitions are now retired through merged PR130; runtime checks remain deferred. |
 | #85 / IDN-Q24 | Canonical validator source split into common plus fourteen focused modules, with a deterministic self-contained public bundle and read-only drift guards. | Execute existing CLI/import/source/digest/embedded-consumer suites. [Structural receipt](validator-extraction.json) proves AST preservation, not runtime outcomes. |
 | #86 / IDN-Q25 | Explicit shared projection source/audience/path/serialization mechanics behind unchanged wrappers and formats. | Run public/review isolation, digest, failure-path and generated-byte comparisons. [Extraction record](projection-extraction.json) identifies the wrappers and preserved function bodies. |
 
-The merged sprint did not complete seven acceptance gates. #109 has its separate maintainer scope disposition, #108 its bounded handoff and #106 its selected reference-use-case delivery; the four other sprint issues retain their remaining acceptance. PR129/PR130/PR123 are merged and #105 is closed. Historical exact-head evidence does not qualify later combined code. Prior ADR rationale, approvals, existing source assets and immutable releases are preserved.
+The merged sprint did not complete seven acceptance gates. #109 has its separate maintainer scope disposition, #108 its bounded handoff, #106 its selected reference template and #107 its existing static mascot demonstration. #84/#85/#86 retain deferred qualification. PR129/PR130/PR123 are merged and #105 is closed. Historical exact-head evidence does not qualify later combined code. Prior ADR rationale, approvals, existing source assets and immutable releases are preserved.
 
 ## Structural evidence actually collected
 
@@ -110,5 +120,5 @@ and #98/G09 self-source/rights, release, dogfood and contrasting-consumer
 acceptance remain in tracker #116. No new real consumer/approval is fabricated
 to bypass those gates.
 
-The forty stable roadmap IDs, issue mappings and dependencies remain. Q35 records its exact qualified source and merge; Q39 records the maintainer scope disposition; Q38 records its bounded handoff; Q36 records its selected reference template. Other acceptance states and exit boxes are retained. Any newer main/parent/candidate edits
+The forty stable roadmap IDs, issue mappings and dependencies remain. Q35 records its exact qualified source and merge; Q39 records the maintainer scope disposition; Q38 records its bounded handoff; Q36 records its selected reference template; Q37 records the selected static mascot. Q40 and the quality/refactoring gates retain their actual remaining acceptance. Any newer main/parent/candidate edits
 need a fresh source comparison before combining branches.

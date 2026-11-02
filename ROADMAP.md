@@ -26,6 +26,21 @@ supersedes: []
 
 # Identity Roadmap
 
+## Optional static mascot delivery — 2026-11-02
+
+[#107](https://github.com/egohygiene/identity/issues/107) selects the existing
+approved static Kern mascot category. The [local example](examples/visuals/kern-static/README.md)
+demonstrates the actual character/approval/rights source, three-variant Brand
+Kit asset package and static consumer with exact alt text, attribution and
+reduced-motion guidance. The existing mascot package verifier passed; all
+eleven inputs remain unchanged. The [delivery record](docs/work/107/CLOSEOUT.md)
+keeps broader browser/CI work under #70/#80 and actual new-release/root-v1
+self-adoption under #98. IDN-Q37 is complete for this selected scope.
+All eleven #98 child scopes are now complete or dispositioned; #98/Q40 remains
+open for its independent source/rights, quality, release and dogfood evidence.
+The deferred initializer remains #133; no new artwork or category engine is
+required for this checkpoint.
+
 ## Optional announcement-template delivery — 2026-11-02
 
 [#106](https://github.com/egohygiene/identity/issues/106) selects the existing
@@ -814,7 +829,7 @@ issues: [106]
 
 <!-- roadmap-step
 id: IDN-Q37
-status: planned
+status: complete
 depends_on: [IDN-Q29, IDN-Q33, IDN-Q35]
 issues: [107]
 -->
@@ -824,9 +839,9 @@ issues: [107]
 
 **Exit criteria:**
 
-- [ ] A selected category is demonstrated with accessibility/reduced-motion guidance, or the owner records an approved scope disposition.
+- [x] A selected category is demonstrated with accessibility/reduced-motion guidance, or the owner records an approved scope disposition.
 
-**Evidence and scope:** [#107](https://github.com/egohygiene/identity/issues/107). Inventory existing Kern/motion support first. Relay #8 is conditional only for new automated capture.
+**Evidence and scope:** [#107](https://github.com/egohygiene/identity/issues/107) selects the existing approved static Kern mascot category. The [example](examples/visuals/kern-static/README.md) and [delivery record](docs/work/107/CLOSEOUT.md) demonstrate source/approval/rights-to-package bindings and a static consumer with exact alt text, minimum width, attribution and reduced-motion guidance. The existing three-variant package verifier passed; all eleven inputs are unchanged. No category/schema/asset extension is needed. Browser/CI qualification remains #70/#80; the stable v1.0.0 source predates Kern, so new release and root-v1 adoption stay #98. Relay #8 remains conditional only for future new capture work.
 
 <!-- roadmap-step
 id: IDN-Q38
