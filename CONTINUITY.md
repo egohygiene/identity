@@ -7,23 +7,23 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-02T20:03:03Z'
+  updated_at: '2026-11-03T04:27:35Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Complete issue107 existing static mascot demonstration and sync on the remaining source/quality/release
-    gates.
-  includes:
-  - Existing approved Kern source-to-kit bindings, static local portrait consumer, exact rights/alt/minimum
-    width and Q37 scope completion.
-  - Actual package-verification evidence, preserved eleven input files and the historical-release limitation.
+  purpose: Simplify the README and route detailed guidance into docs while preserving executable Task
+    and consumer interfaces.
+  includes: &id001
+  - Keep the front page concise, show a representative preview and route authoring, consuming, development
+    and reference work.
+  - Preserve all former README sections and fragment entry points; keep existing Task commands and argument
+    forwarding unchanged.
+  - Leave final issue83 reconciliation, quality gates, root v1 self-source and release acceptance open.
   excludes:
-  - Regression/native/browser/AX/Docker suites and hosted CI; new art, categories, animation, source approvals
-    or formal ADR acceptance.
-  - Root v1 source/rights migration, new release, deployment, posting and deferred initializer/refactor
-    implementation.
+  - Runtime/schema/asset/approval changes, roadmap completion and new releases or deployments.
+  - Test suites, Task execution and hosted CI; no merge or issue closure.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -32,103 +32,83 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
+  - README.md
+  - Taskfile.yml
+  - docs/README.md
+  - docs/USAGE.md
+  - docs/IMPLEMENTATION.md
+  - docs/OVERVIEW.md
+  - docs/DEVELOPMENT.md
   - ROADMAP.md
-  - docs/decisions/policy-reference.json
-  - docs/consumers/OPTIONAL_VISUALS.md
-  - examples/visuals/kern-static/README.md
-  - docs/work/107/CLOSEOUT.md
-  - docs/work/107/static-mascot.json
-  - https://github.com/egohygiene/identity/issues/107
-  - https://github.com/egohygiene/identity/issues/98
-  - https://github.com/egohygiene/identity/issues/70
-  - https://github.com/egohygiene/identity/issues/116
+  - docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md
+  - https://github.com/egohygiene/identity/issues/83
 work:
-  objective: Complete the selected real static mascot category without changing existing asset/source/approval
-    bytes or claiming released availability.
-  success_conditions:
-  - Show existing approved source, three packaged variants and an offline static consumer with reviewed
-    alt text, size, attribution and motion guidance.
-  - Complete only Q37/issue107, preserve all 40 roadmap IDs/mappings/88 edges and leave Q40/quality gates
-    open.
-  - 'Keep root-v1/rights/new-release/dogfood work under #98, broader qualification under #70/#80 and future
-    initialization under #133.'
+  objective: Simplify the README and route detailed guidance into docs while preserving executable Task
+    and consumer interfaces.
+  success_conditions: *id001
   active_issue:
     provider: github
-    id: egohygiene/identity#107
-    url: https://github.com/egohygiene/identity/issues/107
+    id: egohygiene/identity#83
+    url: https://github.com/egohygiene/identity/issues/83
   next:
     kind: action
-    id: sync-on-source-and-stabilization-scope
-    description: 'Sync on #98 root v1 source/rights and the deferred #70 quality/refactoring phase. All
-      eleven Brand Kit child scopes are complete after this issue closes; the parent still needs its independent
-      evidence. Do not infer release, deployment or a passing broad suite. Initializer133 stays later.'
+    id: review-draft-and-qualify
+    description: 'Review this bounded README/Task draft; reconcile #83 final capability/publication/recovery
+      wording after remaining implementation/refactors and qualify dispatch under #82.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/116
-    - https://github.com/egohygiene/identity/issues/98
-    - https://github.com/egohygiene/identity/issues/70
-    - https://github.com/egohygiene/identity/issues/133
+    - https://github.com/egohygiene/identity/issues/83
     depends_on: []
 state:
   base:
-    revision: 349b3de76bfbec5483bbb7d5de3489abe93b9fa0
+    revision: b5cf5137884ba9d16a35c8e6280ea81b4ee930be
     ref: refs/heads/main
-    verified_at: '2026-11-02T20:03:03Z'
+    verified_at: '2026-11-03T04:27:35Z'
   candidate:
-    branch: codex/107-static-mascot-example
+    branch: codex/83-readme-task-entrypoint
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-02T20:03:03Z'
-    default_branch_revision: 349b3de76bfbec5483bbb7d5de3489abe93b9fa0
+    observed_at: '2026-11-03T04:27:35Z'
+    default_branch_revision: b5cf5137884ba9d16a35c8e6280ea81b4ee930be
     issue_state: open
-    pull_request_state: unknown
-    notes: 'Issue107 is open in the observed snapshot and authorized for execution. All ten other #98
-      children are verified closed; #106 already merged in PR135. No parallel open Identity PR was observed.
-      This candidate does not predeclare its own merge or a new release.'
+    pull_request_state: not-applicable
+    notes: 'Main and issue83 are verified open/current before this draft. PR136 is already merged and
+      issue107 closed; all eleven issue98 children are closed, while #98/#70/#80/#83/#133 remain open.
+      No other open Identity PR was observed. This candidate is not merged or released.'
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-02T20:03:03Z'
+  reviewed_at: '2026-11-03T04:27:35Z'
   reviewed_by: Codex
   evidence:
-  - command: python3 scripts/verify_mascot.py --repository-root .
+  - command: Static local Markdown/HTML references, legacy heading/fragment mapping and parsed Taskfile
+      comparison
     outcome: passed
-    observed_at: '2026-11-02T20:03:03Z'
-    notes: 'Existing product package check: character=kern, variants=3, transparency=rgba. All eleven
-      canonical/package inputs remain byte-identical to base.'
-  - command: Static HTML parser/source inspection, exact input/example hashes, local links/anchors and
-      git diff --check
+    observed_at: '2026-11-03T04:27:35Z'
+    notes: 153 references resolve; all 19 former sections and their README fragment entry points remain
+      reachable. All nine Task command arrays and CLI_ARGS strings are unchanged.
+  - command: git diff --check
     outcome: passed
-    observed_at: '2026-11-02T20:03:03Z'
-    notes: Exact source portrait alt text and 160 CSS-pixel width; required attribution/trademark text;
-      no scripts/animation. 79 local Markdown and 8 local HTML references resolve. No browser/AX qualification
-      is claimed.
-  - command: GitHub annotated v1.0.0 tag dereference and exact release-tree inspection
+    observed_at: '2026-11-03T04:27:35Z'
+    notes: No whitespace errors. Runtime, schemas, assets, ADRs, roadmap IDs/statuses and prior evidence
+      are unchanged.
+  - command: Aether continuity Draft 2020-12 metadata/heading/size/privacy inspection
     outcome: passed
-    observed_at: '2026-11-02T20:03:03Z'
-    notes: Tag 9540ad6 points to aaad8839104704cf57bfa846539b3b875421e03d; that tree has no mascot package.
-      Current source availability is not historical released availability.
-  - command: Stable roadmap-block/source-preservation comparison
-    outcome: passed
-    observed_at: '2026-11-02T20:03:03Z'
-    notes: All 40 IDs/mappings and 88 edges retained; only Q37 status changes. All runtime, canonical asset/rights/approval,
-      schema, workflow, prior receipt and ADR sources remain unchanged.
-  - command: Broader regression/native/browser/AX/Docker suites and hosted CI
+    observed_at: '2026-11-03T04:27:35Z'
+    notes: Pinned metadata schema and twelve-section structure; within byte/line limits.
+  - command: Task dispatch, regression/browser/AX suites, published EgoLint conformance and hosted CI
     outcome: not-run
-    observed_at: '2026-11-02T20:03:03Z'
-    notes: 'Remain deferred under #70/#80. No release, publication or deployment performed.'
+    observed_at: '2026-11-03T04:27:35Z'
+    notes: 'This draft supplies documentation/static evidence only; #82/#70/#80 retain qualification.'
   environment_limitations:
-  - 'The existing stable v1.0.0 release predates Kern. New release and root v1 self-source/rights/dogfood
-    remain #98.'
-  - 'Package verification and static HTML inspection do not establish browser/AX/contrast/visual-regression
-    or broad current-source qualification; #70/#80 retain those checks.'
-  - Other imagery/capture/animation categories remain unselected. Relay issue 8 applies only if a future capture
-    is actually selected.
-  - 'Initializer133, #87/#88 refactors and final #83 reconciliation remain pending; no ADR lifecycle is
-    promoted.'
+  - Task is unavailable on PATH; no setup, preview, dispatch or test suite was executed.
+  - Official released EgoLint continuity conformance was not run; JSON Schema and structural checks are
+    narrower evidence.
+  - 'Final #83 reconciliation, #98 self-source/rights/new-release/dogfood and #70/#80 qualification remain
+    incomplete.'
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -147,48 +127,48 @@ privacy:
 
 ## Purpose and precedence
 
-Record issue107's selected static mascot delivery and the next scope sync. User/runtime instructions, scoped policy, live evidence and canonical sources outrank this checkpoint.
+Keep this operational handoff below user/runtime instructions, scoped policy, live state and canonical source. It records the bounded issue83 navigation pass.
 
 ## Resume protocol
 
-Read AGENTS, docs/work/107/CLOSEOUT.md, the visual example and tracker #116. Verify issue107/PR state before repeating closure. #106 is already closed and PR135 merged.
+Read AGENTS, README, docs/README, Taskfile and the current issue83 scope. Verify main/PR state before repeating work. Earlier issue107 delivery merged in PR136.
 
 ## Current objective and success conditions
 
-Demonstrate the existing real approved Kern source-to-kit-to-static-consumer path. Preserve exact inputs, rights, approvals, source authority and the distinction between local source availability and a published release. Complete Q37 only.
+Shorten the front page, preserve detailed content and old fragment routes, and make existing Task entry points discoverable without changing the consumer CLI.
 
 ## State snapshot
 
-The candidate is based on main 349b3de76bfbec5483bbb7d5de3489abe93b9fa0. Issue107 was open; all ten other #98 children were closed in fresh reads. No parallel open PR was observed. Candidate revision/PR are null before creation.
+Base main is b5cf5137884ba9d16a35c8e6280ea81b4ee930be. Issue83 is open. Candidate branch is codex/83-readme-task-entrypoint; revision and PR are null before creation.
 
 ## Completed and material changes
 
-examples/visuals/kern-static supplies the offline static portrait consumer and download/source guidance. The inventory and delivery record trace actual existing approval, rights and the three-variant package; all eleven inputs are unchanged. ROADMAP Q37 records the selected scope. No runtime, schema, artwork or ADR is changed.
+README routes to new documentation overview, usage, implementation and index pages. DEVELOPMENT prefers Task examples with standalone fallbacks. Taskfile adds descriptions only. Overview reflects the scoped future-component possibility and v1.0.0 historical feature boundary.
 
 ## Validation and review evidence
 
-The existing mascot package verifier passed for all three RGBA variants. Static HTML/data checks preserve exact alt text, minimum width, rights and local links, with no script/animation. All 40 roadmap IDs/mappings and 88 edges remain. No broader suite or hosted CI ran.
+Static reference/mapping inspection passed for 153 local targets and all nineteen former sections/anchors. All nine Task command arrays are identical. git diff --check passed. Metadata/schema and twelve-section budget checks passed; no broad suite ran.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The real v1.0.0 source predates Kern. #98 remains open for root v1 source/rights, quality, new release, publication/dogfood and contrasting-consumer evidence. #70/#80 retain actual browser/AX/native/Docker/CI qualification; local package checks do not replace it. #133 and remaining refactors/final docs stay pending.
+This is an early pass under #83, not its final closure. #70/#80/#82 retain execution/qualification; #98 retains root v1 source/rights/release/dogfood. Task and released EgoLint conformance are unavailable/unexecuted. Proposed ADRs remain proposed.
 
 ## Next dependency-ready work
 
-Sync on the remaining source/rights and stabilization scope. All eleven child scopes are complete once issue107 closes; the parent is not complete. The user has deferred cleanup/refactoring/testing/CI, so do not start that phase or a release merely because the product child list is closed.
+Review the navigation/command draft, then reconcile final #83 wording against remaining implementations/refactors. Run dispatch and quality checks in the separately tracked qualification phase.
 
 ## Parallel changes and reconciliation
 
-No parallel open PR was observed before the candidate. Recheck current main before merging, preserving canonical assets/approvals, proposed ADR states, old evidence, screenshot and immutable tags/releases.
+No peer open Identity PR was observed before creation. Recheck main and semantically reconcile this root checkpoint with any later drafts before merge; preserve roadmap dependencies and prior immutable evidence.
 
 ## Privacy and redaction
 
-Only scoped public project facts and existing public asset references are retained. Exclude conversation excerpts, credentials, personal data and machine-local paths.
+Only scoped public repository facts and links are retained; exclude private context, local paths, credentials and personal information.
 
 ## Handoff update protocol
 
-After merging, verify issue107 closure, update #116/#98 and keep #70's pending static-example checks explicit. A completed optional category does not supply broader conformance, a new release or formal ADR acceptance.
+Refresh after review and actual checks. Do not infer a passing suite, issue closure, merge, release or deployment from this draft. ADR not required: routine documentation/discoverability under existing contracts; no new public interface or ownership decision.
 
 ## Compaction and supersession
 
-Keep twelve sections, metadata and size/privacy budgets. Git, the canonical sources, selected visual example and owner queues retain detailed evidence and requirements.
+Keep this twelve-section current-state snapshot compact. Canonical contracts, owner queues, Git and the work tracker retain detailed history.

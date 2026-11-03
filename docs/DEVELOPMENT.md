@@ -12,16 +12,17 @@ using npm. Make and Task are optional frontends; neither is needed by the
 standalone installer. Tools already available in the base image are reused.
 
 ```bash
-bash scripts/dev-env.sh setup
-# Equivalent frontends:
-make setup
-task setup
-
-make check                 # Rust, Python, renderer tests and public build
+task --list                 # Discover the existing repository tasks
+task setup                  # Install tools, dependencies and build
+task check                  # Rust, Python, renderer tests and public build
 task browsers -- --with-deps # Chromium and Linux libraries; needs OS privileges
-make browsers DEV_ARGS=--with-deps # Equivalent Make invocation
-make e2e                   # Builds the fixture renderer, then browser tests
-make preview               # Builds and serves the reference renderer
+task e2e                    # Builds the fixture renderer, then browser tests
+task preview                # Builds and serves the reference renderer
+
+# Without Task, use the same installer directly:
+bash scripts/dev-env.sh setup
+bash scripts/dev-env.sh preview
+# Make is also supported, e.g. make setup or make browsers DEV_ARGS=--with-deps
 bash scripts/dev-env.sh exec cargo run --locked -- --help
 ```
 
@@ -57,7 +58,9 @@ Bookworm image pinned by its OCI index digest. The
 [dated registry receipt](evidence/identity-development-base-registry-2026-10-20.json)
 records the verified index, selected Linux/amd64 manifest and image-config
 identities. The [qualification review](reviews/development-base-2026-10-20.md)
-records executed build/runtime evidence and the\n[runtime receipt](evidence/identity-development-image-2026-10-20.json) retains\nactual versions, user/cache checks and source hashes. An index containing other architectures
+records executed build/runtime evidence and the
+[runtime receipt](evidence/identity-development-image-2026-10-20.json) retains
+actual versions, user/cache checks and source hashes. An index containing other architectures
 does not qualify those architectures; this checkpoint targets `linux/amd64`.
 
 The add-on owns this repository's pinned Rust toolchain, pnpm dependencies and
