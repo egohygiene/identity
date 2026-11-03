@@ -1,476 +1,107 @@
 <p align="center">
-  <img src="assets/identity/brand/banner-readme.svg" alt="identity — brand kit generator" width="100%" />
+  <img src="assets/identity/brand/banner-readme.svg" alt="Identity — project identity specification and Brand Kit tools" width="100%" />
 </p>
 
 # Identity
 
-🪪 Identity is an open-source Brand Kit generator that turns reviewed brand intent into reproducible design tokens, creative guidance, platform assets, distributable packages, and a public Brand Kit.
+Identity specifies and validates a project's identity, then turns reviewed
+source into reproducible design tokens, creative guidance, assets and a Brand
+Kit. Each project owns its `.identity/` source and creative approvals.
 
-## Product contract
+<a id="product-contract"></a>
+<a id="the-three-product-layers"></a>
+<a id="state-and-authority"></a>
+<a id="what-identity-owns"></a>
+<a id="what-identity-does-not-own"></a>
 
-A consumer owns its identity source. Identity validates that source, plans deterministic projections, generates derived artifacts, verifies the result, and records evidence without replacing human creative authority.
-
-```text
-project-owned .identity/ intent
-        ↓
-Identity validate → resolve → plan → render → verify
-        ↓
-assets/identity/ + versioned packages + Brand Kit view model
-        ↓
-product consumers + public Brand Kit
-```
-
-The canonical Identity Brand Kit is published at
-[`https://identity.egohygiene.io/`](https://identity.egohygiene.io/). The
-identity repository owns that standalone tool surface; the main
-`egohygiene.io` website and Flutter application retain host and homepage
-ownership. Identity now defines a content-addressed LaunchKit and Zensical
-dogfood artifact for `https://egohygiene.io/identity/` without transferring
-brand authority into either framework. See the
-[public Brand Kit publication guide](docs/publication/IDENTITY_PAGES.md).
-
-## Brand Kit preview
-
-The first human-approved self-hosting visual direction lives under [`assets/identity/`](assets/identity/README.md). These are generated projections. The v1 `.identity/` source contract is implemented; [#99](https://github.com/egohygiene/identity/issues/99) and [#105](https://github.com/egohygiene/identity/issues/105) track the real self-consumer source inventory and complete kit proof.
-
-Kern, the approved Identity guide, now dogfoods the v1
-[mascot and character-system contract](docs/contracts/MASCOT_SYSTEM_V1.md).
-His three glowing eyes represent context, intent, and verified projection; the
-identity kernel is integrated into his outfit rather than floating as a prop.
-
-<p align="center">
-  <img src="assets/identity/mascot/kern-portrait.png" alt="Portrait of Kern with three glowing eyes, open hands, and the identity kernel integrated into his robe." width="360" />
-</p>
-
-<p align="center">
-  <img src="assets/identity/guidelines/color-palette.svg" alt="identity color palette" width="92%" />
-</p>
-
-<p align="center">
-  <a href="assets/identity/guidelines/design-system.svg">design system board</a> ·
-  <a href="assets/identity/guidelines/usage-guidelines.svg">usage guidelines</a> ·
-  <a href="assets/identity/mascot/manifest.json">mascot package</a> ·
-  <a href="assets/identity/manifest.json">asset manifest</a>
-</p>
-
-## The three product layers
-
-| Layer | Responsibility | Primary outputs |
-| --- | --- | --- |
-| Compiler and contracts | Model, validate, resolve, plan, render, and verify reviewed identity intent | Diagnostics, plans, manifests, and evidence |
-| Generated Brand Kit | Project the resolved identity into portable assets and packages | Tokens, marks, metadata, guidance, archives, and typed packages |
-| Reference experience | Present and safely preview the generated Brand Kit | Public renderer, downloads, and approval-aware asset studio |
-
-Frameworks, renderers, and providers remain replaceable adapters around these stable layers.
-
-## CLI foundation
-
-The independently buildable Rust CLI currently preserves four local-first
-commands from the Empathy incubation:
-
-```bash
-cargo run -- init \
-  --repository-root "path/to/consumer" \
-  --project-id "consumer" \
-  --display-name "Consumer"
-
-cargo run -- validate --repository-root "path/to/consumer"
-
-cargo run -- plan \
-  --repository-root "path/to/consumer" \
-  --format "markdown"
-
-cargo run -- handoff \
-  --repository-root "path/to/consumer" \
-  --output-directory ".cache/identity/handoff"
-
-cargo run -- studio-review \
-  --repository-root "path/to/consumer" \
-  --handoff "review/identity-approved-handoff.json" \
-  --release-view-model "assets/identity/brand-kit-view-model.json" \
-  --output ".cache/identity/studio-review.json" \
-  --format "markdown"
-```
-
-`init` creates consumer-owned `.identity/` intent. `validate` checks the v0
-project and profile contracts. `plan` resolves eight profiles and 45 targets
-without generating them. `handoff` creates a deterministic, provenance-aware
-creative source-pack request whose candidates remain unapproved by default.
-`studio-review` accepts only a named, explicitly approved local-studio handoff
-that matches an immutable Brand Kit release; it resolves the selected existing
-CLI profiles into a deterministic review plan. It does not write canonical
-`.identity/` source or generated assets; an optional saved review record must
-remain outside both locations.
-
-Raster/vector rendering, asset application, packaging, and publication remain
-outside the extracted v0 vertical slice. The separate v1 package commands are
-documented below. See the
-[Empathy extraction evidence](docs/migration/EMPATHY_EXTRACTION.md).
-
-## Identity v1 source
-
-Validator maintenance uses focused canonical modules under
-[`scripts/identity_validation/`](scripts/identity_validation/README.md).
-Regenerate `scripts/validate_identity.py` with
-`python3 scripts/build_identity_validator.py` after editing those modules.
-The public script/import path and the Rust-embedded standalone payload retain
-their existing offline boundary.
-
-The v1 contract adds content-addressed organization defaults, intentional
-product overrides, DTCG-compatible semantic tokens, versioned target profiles,
-asset provenance/licensing, and human approvals beneath `.identity/`.
-
-```bash
-python3 scripts/validate_identity.py \
-  --repository-root "tests/fixtures/v1/valid/minimal" \
-  --format "human"
-
-python3 scripts/plan_v0_migration.py \
-  --repository-root "tests/fixtures/migration/empathy-v0" \
-  --format "human"
-```
-
-Both tools are standard-library-only, offline, and non-mutating. The complete
-[v1 contract](docs/contracts/IDENTITY_V1.md) documents topology, merge order,
-aliases, compatibility, diagnostics, migration, and rollback.
-
-Validated v1 consumers can use the explicit package boundary without importing
-compiler internals:
-
-```bash
-cargo run -- v1-generate --repository-root "path/to/consumer"
-cargo run -- v1-verify --repository-root "path/to/consumer"
-```
-
-`v1-generate` resolves the selected versioned profiles, writes a transactional
-package and compiler manifest beneath `assets/identity/`, and never writes
-canonical `.identity/` source. `v1-verify` is read-only; it fails when the
-selected package is missing, stale, or drifted. Both commands and the public
-`V1ConsumerPipeline::load` library API run the complete authoritative source
-validator automatically, including schema, approval, digest, and path checks.
-
-V1 execution requires Python 3.11+ (`python3` on Unix, `python` on Windows;
-`IDENTITY_PYTHON` can select an explicit executable). The binary embeds the
-standard-library validator and runs it in isolated mode: no Identity checkout,
-Python packages, or network access is needed. Missing Python fails before writes.
-Validated input files are checked again after planning and before applying a
-build; source changes require loading and planning again. The standalone
-validator remains available for diagnostic-only use.
-
-## Governed brand guidance
-
-To assemble native downloads, an optional handbook and an optional Press Kit
-into one usable public page, follow the
-[complete Brand Kit guide](docs/consumers/COMPLETE_BRAND_KIT.md). The builder
-checks actual generated files and source agreement, preserves static content,
-omits absent sections/review controls, and emits an offline-verifiable kit.
-Building a kit remains separate from releasing or deploying it.
-
-Voice, contextual tone, vocabulary, examples, anti-examples, usage rules,
-accessibility, legal notes, localization, legacy assets, and approval state are
-first-class Identity v1 source. Public output includes only approved public
-records; the review projection preserves candidate, approved, rejected, and
-superseded decisions with their human-review evidence.
-
-```bash
-python3 scripts/render_guidance.py \
-  --repository-root "tests/fixtures/v1/valid/minimal" \
-  --audience "public" \
-  --format "html" \
-  --output "build/brand-guidance.html"
-
-python3 scripts/render_guidance.py \
-  --repository-root "tests/fixtures/v1/valid/minimal" \
-  --audience "review" \
-  --context "support" \
-  --format "json"
-```
-
-The renderer validates source before projection, never invents brand prose,
-and refuses to write beneath canonical `.identity/`. The
-[guidance v1 contract](docs/contracts/GUIDANCE_V1.md) defines authority,
-lifecycle, context retrieval, deterministic JSON/Markdown/HTML outputs, and
-legacy-asset publication policy.
-
-## Press and Media Kits
-
-Consumers can opt into a governed Press Kit source without making publication
-or deployment part of their canonical identity contract. Identity projects only
-approved public boilerplate, facts, links, contacts, supplied team biographies,
-and explicitly selected approved assets into a deterministic package:
-
-```bash
-python3 scripts/render_press_kit.py \
-  --repository-root "path/to/consumer" \
-  --output-directory "assets/identity/press-kit"
-```
-
-The output includes JSON, Markdown, an integrity manifest, checksums, selected
-assets, and a deterministic ZIP. It is ready for a consumer-owned release or
-site deployment step, but does not publish anything itself. See the
-[Press Kit and Media Kit contract](docs/contracts/PRESS_KIT_V1.md).
-
-## Social-surface packages
-
-Consumers can explicitly map approved Identity assets and project metadata to
-stable records in a repository-local, digest-pinned Aether catalog:
-
-```bash
-python3 scripts/render_social_surfaces.py \
-  --repository-root "path/to/consumer" \
-  --output-directory "assets/identity/social-surfaces"
-```
-
-Identity never fetches platform facts or generates an implicit platform
-matrix. The package retains exact dimensions, media constraints, safe-zone
-state, source verification, approvals, provenance, a manifest, checksums, and
-a deterministic archive. It is renderer-ready input with publication authority
-explicitly denied. See the
-[social-surface projection contract](docs/contracts/SOCIAL_SURFACES_V1.md).
-
-## Organization channels
-
-Identity owns one versioned registry for official Ego Hygiene social accounts
-and community channels. Consumers can render the complete reviewed lifecycle
-view plus public adapters that include only badge-approved active channels:
-
-```bash
-python3 scripts/render_channel_registry.py \
-  --repository-root "path/to/consumer" \
-  --output-directory "assets/identity/channels"
-```
-
-Planned and reserved candidates remain explicit without invented handles.
-Press Kit social links and social-surface targets consume this same registry,
-while credentials and recovery material remain outside the public contract.
-See the [organization channel registry contract](docs/contracts/CHANNEL_REGISTRY_V1.md).
-
-## Repository presentation packages
-
-Consumers can project canonical README banners and local evidence badges from
-reviewed `.identity/` visuals plus one explicit Hygiene evidence document:
-
-```bash
-python3 scripts/render_repository_presentation.py \
-  --repository-root "path/to/consumer" \
-  --evidence "evidence/repository-presentation.json" \
-  --output "assets/identity/repository-presentation"
-```
-
-The output includes light, dark, high-contrast, and narrow banner variants;
-static SVG and PNG `Hygienic` badges; accessible textual fallbacks; a
-framework-neutral descriptor; integrity manifest; and checksums. Identity pins
-the proposed Hygiene profile by full commit and digest, but never evaluates
-evidence, activates policy, fetches the web, or edits a consumer README. See
-the [repository-presentation contract](docs/contracts/REPOSITORY_PRESENTATION_V1.md).
-
-## Compiler core
-
-The Rust library exposes the deterministic framework-neutral compiler boundary
-behind the Brand Kit generator:
+## What it does
 
 ```text
-read → validate → resolve → plan → render → verify → manifest
-                                      │
-                                      └─ transactional apply after approval
+Project-owned .identity/ → validate → generate → verify → Brand Kit
 ```
 
-The compiler provides mutation-free plans, adapter capability/compatibility
-records, stable diagnostics, SHA-256 fingerprints and manifests, incremental
-unchanged detection, pre-apply verification, and explicit recovery for
-interrupted generated-state transactions. Network-dependent or nondeterministic
-projection adapters are rejected from the compiler-owned path.
+Define colors, typography, voice, usage, rights and approved assets in one
+versioned source. Generate portable packages and a public kit from that source;
+publishing remains an explicit step owned by the consuming project. See the
+[product overview](docs/OVERVIEW.md) for layers, boundaries and capabilities.
 
-The [compiler v1 contract](docs/contracts/COMPILER_V1.md) documents the public
-Rust ports plus `identity.compiler-plan/v1` and
-`identity.compiler-manifest/v1`. The `v1-generate` and `v1-verify` commands
-build and check the selected package flow. `v1-inspect` performs read-only
-interruption inspection; `v1-recover` explicitly rolls back validated interrupted
-transactions. Both use the same repository/output-root authority and operate
-without requiring valid brand source or Python. See the
-[consumer recovery guide](docs/consumers/RECOVERY.md). The existing v0 CLI
-commands retain their extraction-parity contract.
+The [public Identity Brand Kit](https://identity.egohygiene.io/) is the
+standalone release-backed site. Its latest stable release, `v1.0.0`, predates
+later source additions such as Kern; a merged source feature is not evidence
+that the published release contains it. [Publication details](docs/publication/IDENTITY_PAGES.md)
+explain the separate product-experience route at `egohygiene.io/identity/`.
 
-## Brand Kit packages
+<a id="cli-foundation"></a>
+<a id="identity-v1-source"></a>
+<a id="governed-brand-guidance"></a>
+<a id="press-and-media-kits"></a>
+<a id="social-surface-packages"></a>
+<a id="organization-channels"></a>
+<a id="repository-presentation-packages"></a>
 
-The built-in package layer implements nine versioned output profiles over the
-compiler ports: `core`, `web`, `pwa`, `github`, `docs`, `social`, `tokens`,
-`metadata`, and `archive`.
+## Use Identity in a project
 
-Those profiles can deterministically project a resolved identity into:
+Start with the [authoring worksheet](docs/consumers/AUTHORING.md) and
+[minimal and expanded examples](examples/v1/README.md). The
+[adoption guide](docs/consumers/ADOPTION.md) covers tool pins, generation,
+verification and rollback. Then [assemble a complete Brand Kit](docs/consumers/COMPLETE_BRAND_KIT.md).
 
-- DTCG JSON, CSS custom properties, JavaScript, TypeScript declarations, and a
-  Tailwind-compatible theme;
-- document CSS, public metadata, Open Graph markup, PWA icon metadata, and
-  explicit voice/usage guidance state;
-- approved SVG marks plus PNG favicon, PWA, maskable, social-card, and GitHub
-  preview assets through the offline `resvg` adapter boundary;
-- package metadata, SHA-256 indexes/checksums, and a deterministic downloadable
-  ZIP with fixed ordering and timestamps.
+The [command guide](docs/USAGE.md) documents the existing CLI and optional
+projections, with explicit consumer paths. `init` currently creates the legacy
+v0 source; use the v1 authoring examples for v1 source. A future v1 initializer
+is tracked separately in [#133](https://github.com/egohygiene/identity/issues/133).
 
-Consumers select profile IDs and compatible versions; selecting a subset does
-not generate unrelated profiles. The compiler manifest remains the transaction
-and evidence record for the exact selected build. The
-[Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
-defines the stable generated interface, compatibility rules, archive semantics,
-and consumer boundary.
+## Work on this repository
 
-## Quality and release evidence
+From the checkout root, with [Task v3](https://taskfile.dev/) installed:
 
-The shared quality layer evaluates a resolved Brand Kit and its compiler manifest
-without mutating canonical or generated state. It emits the versioned
-`identity.quality-report/v1` contract with one deterministic release decision,
-coverage counts, stable check identifiers, source/generated context, and
-recovery guidance.
+```bash
+task --list
+task setup
+task preview
+```
 
-`package` scope validates distributable output while explicitly recording
-renderer-only interaction checks as skipped. `publication` scope turns those
-same checks into blocking review requirements until the reference renderer owns
-real browser evidence. Automated checks cover semantic contrast, reduced-motion
-budgets, source integrity, licenses and provenance, SVG structure, target file
-budgets, raster dimensions, manifest drift, maskable safe-zone evidence, and
-visual baselines. Creative baseline changes and small-size legibility remain
-explicit human decisions rather than automated approval.
+`setup` installs pinned tools and frozen dependencies, then builds the CLI and
+renderer. `preview` serves the reference renderer in the foreground. Task wraps
+the existing installer; [development setup](docs/DEVELOPMENT.md) lists host
+prerequisites, equivalent standalone commands, browser qualification and the
+optional Docker layer. The consumer CLI remains usable without Task.
 
-The [quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md) defines the
-status vocabulary, default budgets, review evidence, failure/recovery semantics,
-and the extension boundary used by visual-motion governance.
+<a id="brand-kit-preview"></a>
 
-## Visual-motion governance
+## Explore the kit
 
-The visual-motion layer extends that same `identity.quality-report/v1` release
-decision with versioned `identity.motion-policy/v1` and
-`identity.visual-motion-manifest/v1` contracts. It validates animation,
-generated imagery, landing sequences, continuous-status motion, and
-deterministic demo captures without creating a second release authority.
+<p align="center">
+  <img src="assets/identity/mascot/kern-portrait.png" alt="Portrait of Kern with three glowing eyes, open hands, and the identity kernel integrated into his robe." width="180" />
+</p>
 
-The default policy is meaning-first and conservative: UI movement uses
-`transform`/`opacity`, standard decelerating easing, bounded purpose-specific
-durations and file sizes, non-blocking interaction, deterministic synthetic
-capture state, and real reduced-motion fallbacks where pre-rendered motion is
-used. Motion meaning, direction/origin, and intentional baseline changes remain
-explicit human-review boundaries.
+[Approved visual assets](assets/identity/README.md), the
+[static Kern example](examples/visuals/kern-static/README.md) and the
+[optional launch-document example](examples/launch/README.md) show selected
+source capabilities. The [overview](docs/OVERVIEW.md#brand-kit-preview) includes
+the visual boards and mascot preview.
 
-The [visual-motion v1 contract](docs/contracts/VISUAL_MOTION_V1.md) defines the
-stable runtime/evidence boundary. The
-[Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) records the
-pinned upstream research, MIT license decision, and adopt/adapt/reject matrix.
-Relay #8 owns deterministic browser/demo capture and should emit this
-Identity-owned provenance contract; Relay does not become motion-policy owner.
+<a id="compiler-core"></a>
+<a id="brand-kit-packages"></a>
+<a id="quality-and-release-evidence"></a>
+<a id="visual-motion-governance"></a>
+<a id="current-capability-state"></a>
+<a id="architecture"></a>
 
-## State and authority
+## Documentation and next work
 
-| State | Owner | Meaning |
-| --- | --- | --- |
-| Canonical | Consumer | Human-reviewed intent under `.identity/` |
-| Generated | Identity | Reproducible outputs under `assets/identity/` and released packages |
-| Transient | Active interface | Preview, cache, candidate, and work state that cannot silently become canonical |
-| Published | Owning surface | An immutable approved release integrated and deployed by the website or consumer repository |
+| Looking for | Start here |
+| --- | --- |
+| All guides and contracts | [Documentation index](docs/README.md) |
+| Architecture and ownership | [Architecture](ARCHITECTURE.md), [product scope](docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) |
+| Compiler, packages and quality | [Implementation guide](docs/IMPLEMENTATION.md) |
+| Release and recovery | [Release process](docs/releases/RELEASE_PROCESS.md), [consumer recovery](docs/consumers/RECOVERY.md) |
+| Decisions and execution order | [Decision index](docs/decisions/README.md), [roadmap](ROADMAP.md) |
+| Security and support | [Security policy](SECURITY.md), [support policy](SUPPORT.md) |
 
-## What Identity owns
-
-- brand contracts, schemas, inheritance, overrides, and compatibility;
-- semantic design tokens, voice guidance, metadata, usage rules, and target profiles;
-- deterministic asset planning, projection, validation, manifests, and provenance;
-- distributable Brand Kit packages and a framework-neutral view model;
-- the reference Brand Kit renderer and approval-aware asset studio contract.
-
-## What Identity does not own
-
-- product UI components and templates, which belong to Holon;
-- organization policy, which belongs to Hygiene;
-- shared agent instructions and architecture schemas, which belong to Aether;
-- reusable CI/CD implementation, which belongs to Relay;
-- consumer source intent or the website deployment shell;
-- raw asset archives, generic logo generation, or silent publication of generated creative work.
-
-## Current capability state
-
-The Brand Kit product contract and toolchain decisions are accepted. The
-extracted CLI, v1 source contract, deterministic compiler core, built-in
-projection/package layer, shared quality/evidence harness, governed
-visual-motion validation, voice/usage/approval guidance, reference renderer,
-asset studio, and Empathy/OptiFlow pilot integrations are implemented.
-`v1.0.0` is published as the first stable release, and the release-backed public
-Brand Kit is live at [`identity.egohygiene.io`](https://identity.egohygiene.io/).
-The separately composed `egohygiene.io/identity/` product experience remains an
-independent consumer and deployment transaction.
-
-Current source includes the public/review, source-preflight, and recovery
-authority repairs merged through [PR #89](https://github.com/egohygiene/identity/pull/89).
-The latest published stable release remains `v1.0.0`; merged implementation,
-released artifacts, deployed pages, and accepted ADRs are separate evidence.
-The stabilization and complete-kit sequence is maintained in
-[ROADMAP.md](ROADMAP.md). Current source adds `v1-inspect` and `v1-recover` for
-supported interruption handling; select an exact reviewed commit or a later
-release containing them. #83 retains broader final documentation reconciliation.
-
-| Capability | State | Tracking |
-| --- | --- | --- |
-| Brand Kit product contract | Accepted | [#6](https://github.com/egohygiene/identity/issues/6) |
-| Toolchain decisions | Accepted | [#7](https://github.com/egohygiene/identity/issues/7), [evaluation](docs/evaluations/brand-kit-foundations.md), [ADRs](DECISIONS.md) |
-| Independent CLI | Implemented | [#8](https://github.com/egohygiene/identity/issues/8) |
-| v1 identity schema | Implemented | [#9](https://github.com/egohygiene/identity/issues/9), [contract](docs/contracts/IDENTITY_V1.md) |
-| Compiler core | Implemented | [#10](https://github.com/egohygiene/identity/issues/10), [contract](docs/contracts/COMPILER_V1.md) |
-| Projection adapters and packages | Implemented | [#11](https://github.com/egohygiene/identity/issues/11), [contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md) |
-| Quality and release evidence | Implemented | [#12](https://github.com/egohygiene/identity/issues/12), [contract](docs/contracts/QUALITY_GATES_V1.md) |
-| Visual-motion validation | Implemented | [#3](https://github.com/egohygiene/identity/issues/3), [contract](docs/contracts/VISUAL_MOTION_V1.md), [Astryx evaluation](docs/evaluations/astryx-motion-patterns.md) |
-| Voice, usage, and approval guidance | Implemented | [#13](https://github.com/egohygiene/identity/issues/13), [contract](docs/contracts/GUIDANCE_V1.md) |
-| Renderer and asset studio | Implemented | [#14](https://github.com/egohygiene/identity/issues/14), [#15](https://github.com/egohygiene/identity/issues/15) |
-| Public Brand Kit site | Release-backed GitHub Pages deployment at `identity.egohygiene.io` | [#16](https://github.com/egohygiene/identity/issues/16), [publication guide](docs/publication/IDENTITY_PAGES.md) |
-| Dogfooded Identity experience | Deterministic LaunchKit + Zensical composite and review-gated `/identity/` handoff | [#57](https://github.com/egohygiene/identity/issues/57), [experience guide](experience/README.md) |
-| Consumer pilots | Implemented | [#17](https://github.com/egohygiene/identity/issues/17), [Empathy #77](https://github.com/egohygiene/empathy/pull/77), [OptiFlow #46](https://github.com/egohygiene/optiflow/pull/46) |
-| v1.0.0 release | Published with cross-platform, provenance, SBOM, checksum, and package evidence | [release](https://github.com/egohygiene/identity/releases/tag/v1.0.0), [#18](https://github.com/egohygiene/identity/issues/18), [release guide](docs/releases/V1.md) |
-| Design-system handbook and AI context | Implemented with post-v1 consumer adoption path | [#35](https://github.com/egohygiene/identity/issues/35), [contract](docs/contracts/DESIGN_SYSTEM_V1.md), [adoption guide](docs/consumers/ADOPTION.md) |
-| Press Kit and Media Kit | Implemented | [#34](https://github.com/egohygiene/identity/issues/34), [contract](docs/contracts/PRESS_KIT_V1.md) |
-| Pinned social-surface packages | Implemented | [#52](https://github.com/egohygiene/identity/issues/52), [contract](docs/contracts/SOCIAL_SURFACES_V1.md) |
-| Repository banners and evidence-badge presentation | Implemented | [#54](https://github.com/egohygiene/identity/issues/54), [contract](docs/contracts/REPOSITORY_PRESENTATION_V1.md) |
-
-New repositories should follow the [consumer adoption golden
-path](docs/consumers/ADOPTION.md). It preserves human authority, immutable tool
-pins, generated-output ownership, drift verification, and rollback as one
-repeatable integration boundary. Mantle issue
-[#27](https://github.com/egohygiene/mantle/issues/27) is the first post-v1 fleet
-adoption of that pattern.
-
-The umbrella [#2](https://github.com/egohygiene/identity/issues/2) records the
-compiler/package outcome. The Empathy and OptiFlow proof has landed through
-#17; #18 now provides the installable release and evidence boundary.
-
-## Architecture
-
-- [Purpose](PURPOSE.md)
-- [Vision](VISION.md)
-- [Principles](PRINCIPLES.md)
-- [Pillars](PILLARS.md)
-- [System responsibilities](SYSTEM.md)
-- [Architecture and boundaries](ARCHITECTURE.md)
-- [Design system contract](DESIGN_SYSTEM.md)
-- [Architecture decisions](DECISIONS.md)
-- [Brand Kit foundations evaluation](docs/evaluations/brand-kit-foundations.md)
-- [Dependency policy](docs/DEPENDENCY_POLICY.md)
-- [v1 release guide](docs/releases/V1.md)
-- [consumer adoption golden path](docs/consumers/ADOPTION.md)
-- [release process](docs/releases/RELEASE_PROCESS.md)
-- [public Brand Kit publication](docs/publication/IDENTITY_PAGES.md)
-- [security policy](SECURITY.md)
-- [support policy](SUPPORT.md)
-- [Identity v1 source contract](docs/contracts/IDENTITY_V1.md)
-- [Identity authoring worksheet](docs/consumers/AUTHORING.md)
-- [Mantle authoring proof](docs/consumers/MANTLE_AUTHORING_PROOF.md)
-- [Initialization and validation handoffs](docs/consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md)
-- [Minimal and expanded v1 authoring examples](examples/v1/README.md)
-- [Identity field catalog and checkpoint 1 review](docs/reviews/identity-fields-2026-10-18.md)
-- [Guidance v1 contract](docs/contracts/GUIDANCE_V1.md)
-- [Compiler v1 contract](docs/contracts/COMPILER_V1.md)
-- [Brand Kit packages v1 contract](docs/contracts/BRAND_KIT_PACKAGES_V1.md)
-- [Quality gates v1 contract](docs/contracts/QUALITY_GATES_V1.md)
-- [Visual-motion v1 contract](docs/contracts/VISUAL_MOTION_V1.md)
-- [Design-system handbook and context contract](docs/contracts/DESIGN_SYSTEM_V1.md)
-- [Press Kit and Media Kit contract](docs/contracts/PRESS_KIT_V1.md)
-- [Social-surface projection contract](docs/contracts/SOCIAL_SURFACES_V1.md)
-- [Repository-presentation projection contract](docs/contracts/REPOSITORY_PRESENTATION_V1.md)
-- [Astryx motion-pattern evaluation](docs/evaluations/astryx-motion-patterns.md)
-- [Roadmap](ROADMAP.md)
-
-[ROADMAP.md](ROADMAP.md) owns execution order. [#70](https://github.com/egohygiene/identity/issues/70) tracks stabilization and [#98](https://github.com/egohygiene/identity/issues/98) tracks complete-kit delivery and optional scope decisions; the original [#5](https://github.com/egohygiene/identity/issues/5) remains historical context. Architecture documents define durable boundaries; individual issues own implementation detail and evidence.
+[#98](https://github.com/egohygiene/identity/issues/98) retains root v1
+self-source, rights, release and dogfood acceptance after the bounded Brand Kit
+child scopes. [#70](https://github.com/egohygiene/identity/issues/70) retains
+stabilization and quality work; [#83](https://github.com/egohygiene/identity/issues/83)
+retains final documentation reconciliation. Current source, qualified evidence,
+released artifacts, deployed pages and accepted decisions have separate status.

@@ -4,21 +4,29 @@ version: '3'
 
 tasks:
   default:
+    desc: Show installer commands and environment options
     cmds: ['bash scripts/dev-env.sh help']
   setup:
     desc: Install pinned tools, frozen dependencies, and build
     cmds: ['bash scripts/dev-env.sh setup']
   tools:
+    desc: Install or reuse the pinned development tools
     cmds: ['bash scripts/dev-env.sh tools']
   deps:
+    desc: Install frozen renderer dependencies
     cmds: ['bash scripts/dev-env.sh deps']
   build:
+    desc: Build the Rust CLI and public renderer
     cmds: ['bash scripts/dev-env.sh build']
   check:
+    desc: Run Rust, Python and renderer checks and build
     cmds: ['bash scripts/dev-env.sh check']
   browsers:
+    desc: Install Chromium; forward arguments after --
     cmds: ['bash scripts/dev-env.sh browsers {{.CLI_ARGS}}']
   e2e:
+    desc: Build the fixture renderer and run browser checks
     cmds: ['bash scripts/dev-env.sh e2e {{.CLI_ARGS}}']
   preview:
+    desc: Build and serve the reference renderer; forward arguments after --
     cmds: ['bash scripts/dev-env.sh preview {{.CLI_ARGS}}']
