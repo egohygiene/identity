@@ -1,0 +1,48 @@
+{
+  "schema": "identity.self-source-proposals/v1",
+  "status": "incomplete-manual-candidate",
+  "sourceRevision": "19d3d16bd149ddb61a03924a2b688e8e689af68b",
+  "initializerExecuted": false,
+  "sourceValidation": "unrun",
+  "projectSource": "publication/identity-brand-kit.config.json",
+  "proposedProjectKind": "product",
+  "proposedProfiles": [
+    "core@1.0.0",
+    "tokens@1.0.0",
+    "metadata@1.0.0"
+  ],
+  "masters": [
+    {
+      "source": "assets/identity/brand/emblem.svg",
+      "candidate": ".identity/candidates/masters/emblem.svg",
+      "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c",
+      "proposedV1Subject": "mark",
+      "rights": "not supplied",
+      "approval": "not supplied"
+    },
+    {
+      "source": "assets/identity/brand/lockup-horizontal.svg",
+      "candidate": ".identity/candidates/masters/lockup-horizontal.svg",
+      "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed",
+      "proposedV1Subject": "horizontal-lockup",
+      "rights": "not supplied",
+      "approval": "not supplied"
+    }
+  ],
+  "publicCopyProposal": {
+    "source": "https://github.com/egohygiene/identity/blob/19d3d16bd149ddb61a03924a2b688e8e689af68b/README.md",
+    "excerpt": "Identity specifies and validates a project's identity, then turns reviewed source into reproducible design tokens, creative guidance, assets and a Brand Kit. Each project owns its `.identity/` source and creative approvals.",
+    "selectionAndApproval": "pending; no long boilerplate synthesized"
+  },
+  "tokenSources": [
+    "assets/identity/manifest.json",
+    "publication/identity-brand-kit.config.json"
+  ],
+  "unresolved": [
+    "Actual organization-default snapshot and reviewed final product layer.",
+    "Canonical master selection, original lineage and artwork permissions.",
+    "Same-subject decisions for every adopted asset, override and public record.",
+    "Exact approved short/long copy, usage/legal and typography facts.",
+    "Native producer support/approved integration of the existing independent Kern package."
+  ]
+}

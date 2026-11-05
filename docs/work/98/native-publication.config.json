@@ -1,0 +1,10 @@
+{
+  "schema": "identity.public-brand-kit-config/v1",
+  "sourceMode": "native-v1",
+  "canonicalUrl": "https://identity.egohygiene.io/",
+  "release": {
+    "defaultTag": "v1.1.0",
+    "binding": "selected-annotated-tag"
+  },
+  "nativeInputs": {}
+}

@@ -1,0 +1,332 @@
+{
+  "schema": "identity.owner-source-inventory/v1",
+  "sourceRevision": "19d3d16bd149ddb61a03924a2b688e8e689af68b",
+  "observedAt": "2026-11-05T05:39:25+00:00",
+  "files": [
+    {
+      "path": "assets/identity/README.md",
+      "sha256": "3b93f7b207b4d9dce90018aa1448f775418e3aaf4a837e3814e65b796a8f5959",
+      "bytes": 2509,
+      "gitBlob": "5c0f709e7ae7deb5d805d2a4e26c0aca0e2f5b16",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/avatar-square.svg",
+      "sha256": "093aa646fc0a720d118c8b932068bc11b90db1fcc159abf63a97a3580f69c10d",
+      "bytes": 2364,
+      "gitBlob": "49850fa8468b16cbe16b61400ce592f4c85018c6",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/banner-hires.webp",
+      "sha256": "48b5c8f91538362856f21dfca16b274bbf2dddad23a228905a8d95074f32c60f",
+      "bytes": 12898,
+      "gitBlob": "8256dbbc83a6e632f5e391635e580904b37af8b7",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/banner-readme.svg",
+      "sha256": "0507b9f8ff011642097032c35baf3fab996654db3ff074f10c16077f957b062e",
+      "bytes": 3406,
+      "gitBlob": "8ab46c4a63d0499163d66945630a320862923cd4",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/banner-readme.webp",
+      "sha256": "a6171b1b38c1ac1023d2b102fda89060d82081b4be81041ad5360df347b560d2",
+      "bytes": 11962,
+      "gitBlob": "ddf31f1b0489d242fcba7b8d5fd8c5864cf2661b",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/emblem.svg",
+      "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c",
+      "bytes": 2387,
+      "gitBlob": "e5f8f6f976884930093eddb18f4b6c879f5a9f99",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/lockup-horizontal.svg",
+      "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed",
+      "bytes": 2531,
+      "gitBlob": "966fe34cab466e7bf85a97e34a12298f5c545ae7",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/open-graph.svg",
+      "sha256": "50fab81e6ba7d90e27d99a7ef9798927d0f9a9fc2b2e07de8252290293176ab5",
+      "bytes": 2707,
+      "gitBlob": "7521501877d634d38a119b3a900abe6e02d68e49",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/brand/social-preview.svg",
+      "sha256": "619714e55ee1c8b39236838e429e80cacaf9480612052850d730ebe62e3f15db",
+      "bytes": 3338,
+      "gitBlob": "49c1c52032327771c93578581ba9f761890dec20",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/guidelines/color-palette.svg",
+      "sha256": "6a6683766f9ed077624cb85ae3af605619e3b3497c282bd96e77f379922f1a0e",
+      "bytes": 4876,
+      "gitBlob": "4fb6a199f8266a90fe8f5b5c8e62d18ff95b8f0b",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/guidelines/design-system.svg",
+      "sha256": "7250bf2e61728c6bef5a9ef02b71cebbc63aab982486d2ae69dd0cd1d5c09f1a",
+      "bytes": 3764,
+      "gitBlob": "a65888b15e8368f4c7a0837c519a2f1f5a092ad6",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/guidelines/usage-guidelines.svg",
+      "sha256": "95dec8fc5cc80758082e2f5aad8b409928d4436f3382ba99ad6bef957dca76c5",
+      "bytes": 3683,
+      "gitBlob": "bedfa4274ee5a1e7aeac492759ef9d5aab9c8c08",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/manifest.json",
+      "sha256": "387192305d0692abe7db3c610f29b2742561976e4f9b4ec061bb466d1e474559",
+      "bytes": 3644,
+      "gitBlob": "18a567e43561e6faf408432b7c4a365cc710f4e2",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/mascot/README.md",
+      "sha256": "f416c2c66be67aa6545879efb70663ecaa9a6a75e48fdba9c570fe808e033f3f",
+      "bytes": 1994,
+      "gitBlob": "e7857782211ba25f91c5a057222dfbcabc4c453c",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/mascot/kern-full.png",
+      "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+      "bytes": 692047,
+      "gitBlob": "1870aedd4518afee6adb1adff4939278b3411991",
+      "rightsState": "existing-governed-mascot-package",
+      "rightsSource": "mascot/LICENSE.md",
+      "approvalSource": "mascot/approval.json",
+      "packageSource": "assets/identity/mascot/manifest.json"
+    },
+    {
+      "path": "assets/identity/mascot/kern-icon.png",
+      "sha256": "e902dc0f264f94ae1a06b9020d3b07fae8e4a2ec0c09dab4d9ec35bc0f9089e7",
+      "bytes": 92515,
+      "gitBlob": "3ffbabb763512ad6f052660edd77aa78cd38b5ac",
+      "rightsState": "existing-governed-mascot-package",
+      "rightsSource": "mascot/LICENSE.md",
+      "approvalSource": "mascot/approval.json",
+      "packageSource": "assets/identity/mascot/manifest.json"
+    },
+    {
+      "path": "assets/identity/mascot/kern-portrait.png",
+      "sha256": "bf3dad6ff9b75ef998f662b9cadd6bde9a5dffeaff54d01a1a1bec8681cefc99",
+      "bytes": 288668,
+      "gitBlob": "3ed763b2f1f933a43cbd62b6d000e1f0643ca1b1",
+      "rightsState": "existing-governed-mascot-package",
+      "rightsSource": "mascot/LICENSE.md",
+      "approvalSource": "mascot/approval.json",
+      "packageSource": "assets/identity/mascot/manifest.json"
+    },
+    {
+      "path": "assets/identity/mascot/manifest.json",
+      "sha256": "65aa58f19ad8ffbac920b85835df7483eb0f1b905f5f74ab864638fb55d4063c",
+      "bytes": 1877,
+      "gitBlob": "daf4d6fbe82bf2683444432887ebe4749880d654",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/reference/avatar-square.webp",
+      "sha256": "047b2c8810815d46e7391a033e2b601c8129e4a8a5459c860138ada8ce67f3b3",
+      "bytes": 6984,
+      "gitBlob": "31fa6e91f387e1e59b17593f92f9b242350dc919",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/reference/color-palette.webp",
+      "sha256": "2a073d229a67bb7a97edf5bb83c4fd4547d6f3eaaeb53659fa7aafb148a1ee8c",
+      "bytes": 2486,
+      "gitBlob": "43921d4427ba9650e0aba373a1e7c91fcfae888a",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/reference/design-system.webp",
+      "sha256": "a2b160ad9221bb0566c4c07ef9d575c1739f963ecfbb79a0ace0a50910c735e5",
+      "bytes": 2398,
+      "gitBlob": "7eb5e45da76d29ee6f96be7177e5c3c34f91b335",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/reference/lockup.webp",
+      "sha256": "5238fa31ff0f973ec773ca6561ca1ffb9f4bf226e0c3e0da56c521033106c001",
+      "bytes": 1582,
+      "gitBlob": "7e58ee872d8442bfa4cad7231c5d15578376f9b7",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/reference/master-emblem.webp",
+      "sha256": "e0f1e74df580991aaeb8d97f780d6358e7200cd7466c3bd6b79ea952b599a8f3",
+      "bytes": 2178,
+      "gitBlob": "51d893116ba14f582a43a348fa373490127a2fa6",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/reference/social-preview.webp",
+      "sha256": "f3a57194b262e355bcbea3b3b5f06db6e241428463c4d7308c4bd5528a1c0185",
+      "bytes": 6954,
+      "gitBlob": "b52d7993ce18718ecf2516b4dc731c8965bd919b",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/reference/usage-guidelines.webp",
+      "sha256": "1794238b039440b94ebd5bea5aa77412d7b5d1e18b6dfc980c59b0801ea8fe04",
+      "bytes": 2902,
+      "gitBlob": "7ae7e3399065eba80c06a67cf91c6da2203e55b4",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/apple-touch-icon.png",
+      "sha256": "89ead769af2f301b6646cf01a7de05bca8ce1cfefa5b4bc3d0b4da37c17319dd",
+      "bytes": 2176,
+      "gitBlob": "4cbe1e846a3829fb28c8503fee91cbe72e2fa40b",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/favicon-16x16.png",
+      "sha256": "dc7e2b8228b102dacace90989b1df312c5d517d42104be723d06346bec2f85e7",
+      "bytes": 666,
+      "gitBlob": "1878e9eb2ccbe04f1f4cd704ab0098c1e707be95",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/favicon-32x32.png",
+      "sha256": "972b4c9f212cd4f3b3ecc50fbf21598f88b64447c862717e11bec7f69e24974a",
+      "bytes": 819,
+      "gitBlob": "92436cafa0d8ee50dff0f767f603efb03d9053bf",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/favicon-48x48.png",
+      "sha256": "3311f76384910764fb54ca5df0e13877eff211fb340d077aa05a317c9d1397a8",
+      "bytes": 1039,
+      "gitBlob": "6953548688435ae0659e823d6c45c823a4e80b47",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/favicon-64x64.png",
+      "sha256": "fc84ad701d137901894528747a2350ba6fab0bba176167a7065daaad40b6df8b",
+      "bytes": 1274,
+      "gitBlob": "9dc85ded996f5d817a93fa0f8d9a1f9413e27d76",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/favicon.png",
+      "sha256": "fc84ad701d137901894528747a2350ba6fab0bba176167a7065daaad40b6df8b",
+      "bytes": 1274,
+      "gitBlob": "9dc85ded996f5d817a93fa0f8d9a1f9413e27d76",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/icon-192x192.png",
+      "sha256": "fb88187bc42fb0a8b8264d1af55359a8e3efcafa84daba26c5273574206f0c59",
+      "bytes": 2676,
+      "gitBlob": "f1df8d6db5b7085ac83e7a1177285e9e1c5184da",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/icon.svg",
+      "sha256": "093aa646fc0a720d118c8b932068bc11b90db1fcc159abf63a97a3580f69c10d",
+      "bytes": 2364,
+      "gitBlob": "49850fa8468b16cbe16b61400ce592f4c85018c6",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/identity-palette.css",
+      "sha256": "8577b7dea2260441827412bd206d86c7213ed75f8973a8b71aae6b0401ade1e8",
+      "bytes": 419,
+      "gitBlob": "0c09558960539be586de0e306aa0b6997be997a0",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/maskable-icon.svg",
+      "sha256": "7f32b9d17085f8340feca98d809c27bafecbe84c811ea62fe62abb4420b83d1c",
+      "bytes": 2505,
+      "gitBlob": "a3cfd592052d2b09a6fd49c0ee7988a61ae9df97",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "assets/identity/web/site.webmanifest",
+      "sha256": "845a186ea096903dafe3def746d47c3673360762c44e799811556e4ac6a3a58a",
+      "bytes": 454,
+      "gitBlob": "ea2adb73d1c37a48f2cffe8094ee2a9fece47c26",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "mascot/LICENSE.md",
+      "sha256": "4e94b7c16f80ccbe20f325cbc24dffdb13b818e080c07a6938b78c1f9bb88332",
+      "bytes": 521,
+      "gitBlob": "3b017dd56c4b1b328b1e045441f0b2ced653d837",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "mascot/README.md",
+      "sha256": "e670e304e7de6e6499451b038b1aaf998eb50ab51a8a06513564b4ce0bd361c3",
+      "bytes": 1618,
+      "gitBlob": "d1041c4b07c88ae6f03207a418e8a6e4af74420e",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "mascot/approval.json",
+      "sha256": "ee69619ceffd302f56f2490dac9efe80a57bb0a8d1689ad1b626cc27c879f951",
+      "bytes": 1113,
+      "gitBlob": "a313283805fbaa61a456ad5df7ebde5a5b2d9d28",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "mascot/generation-record.md",
+      "sha256": "edfe5cede2943466a0e12b18ee181fd7cb9d07feda44ac83eb5be918b63b968b",
+      "bytes": 2755,
+      "gitBlob": "842a5a4e44a5e4f439db5ffd82eeac7c4e24080f",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "mascot/kern.character.json",
+      "sha256": "6ac46d39f266472f71d721c2f09e0ac3d51752115d2bbb4264f87d18473fd812",
+      "bytes": 5262,
+      "gitBlob": "ac9b84a403f5006a747fc5776b3c478834efdb67",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "mascot/provenance.json",
+      "sha256": "f71eb84fc62c182ef4bd6a1abc11e338e2c694fc338c9f8d96d3bb6bf75e12b8",
+      "bytes": 1494,
+      "gitBlob": "c4674c218ee1f15b9ba5281b3a040964e3f36fef",
+      "rightsState": "owner-review-required; no blanket artwork rights inferred"
+    },
+    {
+      "path": "mascot/source/kern-master.png",
+      "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c",
+      "bytes": 692047,
+      "gitBlob": "1870aedd4518afee6adb1adff4939278b3411991",
+      "rightsState": "existing-governed-mascot-package",
+      "rightsSource": "mascot/LICENSE.md",
+      "approvalSource": "mascot/approval.json",
+      "packageSource": "assets/identity/mascot/manifest.json"
+    }
+  ],
+  "existingRightsEvidence": [
+    "mascot/LICENSE.md",
+    "mascot/provenance.json",
+    "mascot/approval.json",
+    "mascot/generation-record.md",
+    "assets/identity/mascot/manifest.json"
+  ],
+  "limitations": [
+    "Read-only byte/source inventory, not rights ratification or runtime validation.",
+    "Broad visual-direction approval does not supply missing asset rights or new v1 approval subjects.",
+    "Actual native source, release artifacts, qualification and adoption remain incomplete."
+  ]
+}

@@ -7,16 +7,16 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-05T05:32:42Z'
+  updated_at: '2026-11-05T05:39:25Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Prepare the explicit v1 initializer as an unqualified draft under issue133.
+  purpose: Prepare the actual Identity self-source/rights and native publisher draft under issue98.
   includes:
-  - Explicit v1 candidate/request interface and source implementation.
-  - Current source-campaign scheduling, bootstrap evidence and durable draft checkpoints.
+  - Existing source/rights inventory and incomplete real Identity candidate.
+  - Native publication handoff proposal and consolidated owner packet.
   excludes:
   - Refactors, runtime tests, hosted CI, merges and issue closure.
   - Creative/rights approval, release, deployment and other-repository changes.
@@ -29,29 +29,27 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
-  - docs/decisions/policy-reference.json
-  - docs/consumers/V1_INITIALIZATION.md
-  - docs/work/116/SOURCE_PREPARATION.md
-  - https://github.com/egohygiene/identity/issues/133
-  - https://github.com/egohygiene/identity/issues/116
+  - docs/work/98/OWNER_PACKET.md
+  - docs/work/98/source-inventory.json
+  - docs/decisions/ADR-0034-native-release-publication-input.md
+  - https://github.com/egohygiene/identity/issues/98
 work:
-  objective: Prepare a reviewable explicit v1 initializer without changing v0 behavior.
+  objective: Prepare source, owner facts and native publisher handoff without qualification or publication.
   success_conditions:
   - Retain local request, standalone candidate and missing-fact boundaries.
   - Push bounded draft checkpoints with actual source and deferred acceptance recorded.
   active_issue:
     provider: github
-    id: egohygiene/identity#133
-    url: https://github.com/egohygiene/identity/issues/133
+    id: egohygiene/identity#98
+    url: https://github.com/egohygiene/identity/issues/98
   next:
     kind: action
-    id: identity-98-source-preparation
-    description: Prepare the issue98 source/rights candidate, native publisher draft and owner packet; keep
-      this initializer unmerged and unqualified.
+    id: identity-98-native-publisher-draft
+    description: Implement the bounded native publication adapter, update the packet and retain missing source/rights
+      gates.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/98
-    - https://github.com/egohygiene/identity/pull/138
     depends_on: []
 state:
   base:
@@ -59,13 +57,10 @@ state:
     ref: refs/heads/main
     verified_at: '2026-11-05T05:23:14Z'
   candidate:
-    branch: codex/133-v1-initializer
+    branch: codex/98-native-publication-source
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#138
-      url: https://github.com/egohygiene/identity/pull/138
-    handoff_state: ready-for-review
+    pull_request: null
+    handoff_state: in-progress
   live:
     status: verified
     observed_at: '2026-11-05T05:23:14Z'
@@ -74,7 +69,10 @@ state:
     pull_request_state: draft
     notes: Main remains19d3d16; draft138 was opened at checkpointd513678. The containing source checkpoint
       needs fresh provider inspection. Twelve issues remain open; no issue acceptance is inferred.
-  parallel_changes: []
+  parallel_changes:
+  - provider: github
+    id: egohygiene/identity#138
+    url: https://github.com/egohygiene/identity/pull/138
 review:
   status: partial
   reviewed_at: '2026-11-05T05:32:42Z'
@@ -122,7 +120,7 @@ privacy:
 
 ## Purpose and precedence
 
-This is the unqualified issue133 source draft. User/runtime instructions, scoped instructions, live state and canonical sources outrank this snapshot.
+This is the unqualified issue98 self-source/publisher draft, stacked on PR138. User/runtime instructions, scoped instructions, live state and canonical sources outrank this snapshot.
 
 ## Resume protocol
 
@@ -150,7 +148,7 @@ Refactors, audits, tests, hosted CI, merges and affected issue closures are defe
 
 ## Next dependency-ready work
 
-Complete the issue133 source draft, push meaningful checkpoints, then prepare issue98 source/rights/publisher work and issue83 documentation. Keep original dependencies and acceptance criteria intact.
+Complete the native publisher source draft and consolidated packet, then prepare issue83 documentation. Keep original dependencies, missing owner facts and deferred acceptance intact.
 
 ## Parallel changes and reconciliation
 
