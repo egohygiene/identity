@@ -7,16 +7,16 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-05T05:32:42Z'
+  updated_at: '2026-11-05T05:56:17Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Prepare the explicit v1 initializer as an unqualified draft under issue133.
+  purpose: Prepare the actual Identity self-source/rights and native publisher draft under issue98.
   includes:
-  - Explicit v1 candidate/request interface and source implementation.
-  - Current source-campaign scheduling, bootstrap evidence and durable draft checkpoints.
+  - Existing source/rights inventory and incomplete real Identity candidate.
+  - Native publication handoff proposal and consolidated owner packet.
   excludes:
   - Refactors, runtime tests, hosted CI, merges and issue closure.
   - Creative/rights approval, release, deployment and other-repository changes.
@@ -29,42 +29,41 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
-  - docs/decisions/policy-reference.json
-  - docs/consumers/V1_INITIALIZATION.md
-  - docs/work/116/SOURCE_PREPARATION.md
-  - https://github.com/egohygiene/identity/issues/133
-  - https://github.com/egohygiene/identity/issues/116
+  - docs/work/98/OWNER_PACKET.md
+  - docs/work/98/source-inventory.json
+  - docs/decisions/ADR-0034-native-release-publication-input.md
+  - https://github.com/egohygiene/identity/issues/98
 work:
-  objective: Prepare a reviewable explicit v1 initializer without changing v0 behavior.
+  objective: Prepare source, owner facts and native publisher handoff without qualification or publication.
   success_conditions:
   - Retain local request, standalone candidate and missing-fact boundaries.
   - Push bounded draft checkpoints with actual source and deferred acceptance recorded.
   active_issue:
     provider: github
-    id: egohygiene/identity#133
-    url: https://github.com/egohygiene/identity/issues/133
+    id: egohygiene/identity#98
+    url: https://github.com/egohygiene/identity/issues/98
   next:
     kind: action
-    id: identity-98-source-preparation
-    description: Prepare the issue98 source/rights candidate, native publisher draft and owner packet; keep
-      this initializer unmerged and unqualified.
+    id: identity-83-source-documentation
+    description: Prepare the bounded issue83 documentation handoff and final source-only matrix; preserve unrun
+      qualification and all owner gates.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/98
-    - https://github.com/egohygiene/identity/pull/138
+    - https://github.com/egohygiene/identity/issues/83
+    - https://github.com/egohygiene/identity/pull/139
     depends_on: []
 state:
   base:
-    revision: 19d3d16bd149ddb61a03924a2b688e8e689af68b
-    ref: refs/heads/main
-    verified_at: '2026-11-05T05:23:14Z'
+    revision: ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2
+    ref: refs/heads/codex/133-v1-initializer
+    verified_at: '2026-11-05T05:56:17Z'
   candidate:
-    branch: codex/133-v1-initializer
+    branch: codex/98-native-publication-source
     revision: null
     pull_request:
       provider: github
-      id: egohygiene/identity#138
-      url: https://github.com/egohygiene/identity/pull/138
+      id: egohygiene/identity#139
+      url: https://github.com/egohygiene/identity/pull/139
     handoff_state: ready-for-review
   live:
     status: verified
@@ -72,12 +71,15 @@ state:
     default_branch_revision: 19d3d16bd149ddb61a03924a2b688e8e689af68b
     issue_state: open
     pull_request_state: draft
-    notes: Main remains19d3d16; draft138 was opened at checkpointd513678. The containing source checkpoint
-      needs fresh provider inspection. Twelve issues remain open; no issue acceptance is inferred.
-  parallel_changes: []
+    notes: Main remains19d3d16; draft138 and stacked draft139 are open. This source preparation supplies no
+      current-source runtime qualification or issue closure.
+  parallel_changes:
+  - provider: github
+    id: egohygiene/identity#138
+    url: https://github.com/egohygiene/identity/pull/138
 review:
   status: partial
-  reviewed_at: '2026-11-05T05:32:42Z'
+  reviewed_at: '2026-11-05T05:56:17Z'
   reviewed_by: Codex
   evidence:
   - command: bash scripts/dev-env.sh setup; bash scripts/dev-env.sh browsers
@@ -100,6 +102,18 @@ review:
     observed_at: '2026-11-05T05:32:42Z'
     notes: Structural/build evidence for the draft only. Forty roadmap blocks and approved PNG are preserved;
       no initializer behavior or regression suite executed.
+  - command: Publication Python AST, candidate JSON/workflow YAML parsing; node --check on changed publisher/verifier/download/UI
+      modules; git diff --check
+    outcome: passed
+    observed_at: '2026-11-05T05:48:49Z'
+    notes: Syntax/static source preparation only; native/legacy publication paths, file integrity failures,
+      release workflows and UI behavior are unrun.
+  - command: Source/byte inventory preservation; Python AST and node --check; pinned continuity JSON Schema/size
+      inspection
+    outcome: passed
+    observed_at: '2026-11-05T05:56:17Z'
+    notes: 43 original source files, two exact candidate masters, legacy release configuration/index,40 roadmap
+      blocks and approved PNG preserved. No runtime or official owner-domain qualification.
   environment_limitations:
   - Downloaded browsers and Docker health do not qualify fonts or the approved screenshot.
   - Onboarding skill unavailable; available cloud runtime and pinned repository guidance were read.
@@ -122,7 +136,7 @@ privacy:
 
 ## Purpose and precedence
 
-This is the unqualified issue133 source draft. User/runtime instructions, scoped instructions, live state and canonical sources outrank this snapshot.
+This is the unqualified issue98 self-source/publisher draft, stacked on PR138. User/runtime instructions, scoped instructions, live state and canonical sources outrank this snapshot.
 
 ## Resume protocol
 
@@ -130,19 +144,19 @@ Read AGENTS, the initializer guide, source-campaign checkpoint and live issue133
 
 ## Current objective and success conditions
 
-Implement explicit v1-init from local request files into a separate review candidate. Preserve v0, offline operation, same-subject approvals and source ownership. Retain missing facts honestly.
+Prepare the real Identity source/rights candidate and an opt-in native publisher handoff. Reuse verified generated material, preserve legacy release bindings and keep missing rights/creative decisions explicit.
 
 ## State snapshot
 
-Base/main is 19d3d16bd149ddb61a03924a2b688e8e689af68b. This branch proposes the initializer interface and implementation. Its containing commit/PR need fresh inspection; no self-referential commit hash is fabricated.
+Main remains 19d3d16bd149ddb61a03924a2b688e8e689af68b; this PR is stacked on initializer checkpoint ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2. Its containing source commit/PR need fresh inspection; no release or self-referential hash is fabricated.
 
 ## Completed and material changes
 
-Draft PR138 adds the closed request/report schemas, trusted stdlib initializer, embedded Rust bridge, examples and manual handoff. The source-campaign checkpoint reconciles scheduling and actual bootstrap. Proposed ADR-0033 defines the new interface; implementation is unqualified. The seven-criterion disposition is in docs/work/133/DRAFT.md.
+PR139 inventories 43 existing source/package files and retains an incomplete manually prepared self-source candidate. Its native publisher adapter consumes verified native/optional artifacts, preserves native bytes, separates canonical/inventory digests and binds release-owned files to selected Git blobs. ADR-0034 remains proposed; the owner packet records missing rights and deferred qualification. PR138 remains a separate unqualified initializer draft.
 
 ## Validation and review evidence
 
-The supported installer and browser download passed on the named base. Git/API authentication and managed Docker execution work. Those results are bootstrap evidence only. Candidate AST/JSON parsing, bounded formatting, offline Rust compilation and whitespace/source-preservation inspection passed. No candidate runtime or regression suite ran.
+Bootstrap passed on original main; initializer Rust compilation passed on PR138. Publication Python/JS syntax, JSON/YAML, pinned continuity schema/size and source-byte preservation passed for this draft. Detailed disposition is in docs/work/98/DRAFT.md. No native publisher path, runtime/regression suite, audit or CI ran.
 
 ## Blockers, risks, unknowns, and deferred work
 
@@ -150,7 +164,7 @@ Refactors, audits, tests, hosted CI, merges and affected issue closures are defe
 
 ## Next dependency-ready work
 
-Complete the issue133 source draft, push meaningful checkpoints, then prepare issue98 source/rights/publisher work and issue83 documentation. Keep original dependencies and acceptance criteria intact.
+Complete the native publisher source draft and consolidated packet, then prepare issue83 documentation. Keep original dependencies, missing owner facts and deferred acceptance intact.
 
 ## Parallel changes and reconciliation
 

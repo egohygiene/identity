@@ -57,6 +57,7 @@ records and nine proposed records.
 | ADR-0031 | Keep product components outside the Identity foundations contract | proposed | 2026-11-02 | [ADR-0031](ADR-0031-product-component-ownership.md) |
 | ADR-0032 | Generate optional announcement drafts from approved copy and explicit facts | proposed | 2026-11-02 | [ADR-0032](ADR-0032-optional-launch-document-drafts.md) |
 | ADR-0033 | Prepare explicit v1 initialization candidates from local requests | proposed | 2026-11-05 | [ADR-0033](ADR-0033-explicit-v1-initialization-candidates.md) |
+| ADR-0034 | Publish verified native v1 artifacts through the existing release publisher | proposed | 2026-11-05 | [ADR-0034](ADR-0034-native-release-publication-input.md) |
 
 ## Ongoing capture
 
