@@ -12,8 +12,8 @@ guides run from the checkout root; consumer paths remain explicit.
 | Integrate other tools | [Initialization and validation handoffs](consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md), [product component scope](consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) |
 | Develop and inspect | [Development setup and Task commands](DEVELOPMENT.md), [compiler/packages/evidence](IMPLEMENTATION.md), [renderer](../renderer/README.md), [validator modules](../scripts/identity_validation/README.md) |
 | Qualify and recover | [Browser environment](BROWSER_ENVIRONMENT.md), [quality contract](contracts/QUALITY_GATES_V1.md), [consumer recovery](consumers/RECOVERY.md) |
-| Release and publish | [Release process](releases/RELEASE_PROCESS.md), [v1 release guide](releases/V1.md), [Brand Kit publication](publication/IDENTITY_PAGES.md), [product experience](../experience/README.md) |
-| Follow decisions and work | [Decision index](decisions/README.md), [roadmap](../ROADMAP.md), [continuity checkpoint](../CONTINUITY.md) |
+| Release and publish | [Release process](releases/RELEASE_PROCESS.md), [v1 release guide](releases/V1.md), [Brand Kit publication](publication/IDENTITY_PAGES.md), [native publisher draft](publication/NATIVE_V1_DRAFT.md), [product experience](../experience/README.md) |
+| Follow decisions and work | [Decision index](decisions/README.md), [roadmap](../ROADMAP.md), [owner packet](work/98/OWNER_PACKET.md), [deferred qualification](work/83/QUALIFICATION_HANDOFF.md), [continuity checkpoint](../CONTINUITY.md) |
 
 ## Versioned contracts
 

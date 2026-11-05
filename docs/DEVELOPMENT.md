@@ -47,6 +47,11 @@ writable location to share them across checkouts. Existing `CARGO_HOME`,
 preserved. A conventional Rust installation on PATH uses its existing homes.
 Use `bash scripts/dev-env.sh exec COMMAND...` to activate these bindings for
 arbitrary commands without changing a login shell or the base image PATH.
+Run package-manager probes inside the package that declares the pin, for
+example `bash scripts/dev-env.sh exec sh -c 'cd renderer && corepack pnpm --version'`.
+Running Corepack at the checkout root has no package-manager declaration and
+can query an unpinned default; do not change global presets to repair that
+invocation. Setup/build/browser downloads are separate from qualification.
 The prefix must be writable by the development user; installations made as
 root need appropriate ownership before switching to an unprivileged user.
 
