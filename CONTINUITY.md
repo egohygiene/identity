@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-05T05:23:14Z'
+  updated_at: '2026-11-05T05:32:42Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -45,12 +45,13 @@ work:
     url: https://github.com/egohygiene/identity/issues/133
   next:
     kind: action
-    id: identity-133-source-draft
-    description: Implement the proposed local request/candidate interface, then update the draft; runtime acceptance
-      is deferred.
+    id: identity-98-source-preparation
+    description: Prepare the issue98 source/rights candidate, native publisher draft and owner packet; keep
+      this initializer unmerged and unqualified.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/133
+    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/pull/138
     depends_on: []
 state:
   base:
@@ -60,20 +61,23 @@ state:
   candidate:
     branch: codex/133-v1-initializer
     revision: null
-    pull_request: null
-    handoff_state: in-progress
+    pull_request:
+      provider: github
+      id: egohygiene/identity#138
+      url: https://github.com/egohygiene/identity/pull/138
+    handoff_state: ready-for-review
   live:
     status: verified
     observed_at: '2026-11-05T05:23:14Z'
     default_branch_revision: 19d3d16bd149ddb61a03924a2b688e8e689af68b
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Main is unchanged, PR137 merged; 12 issues open, zero peer PRs before this checkpoint. All eleven
-      issue98 children are closed. Stable/live Brand Kit remains v1.0.0.
+    pull_request_state: draft
+    notes: Main remains19d3d16; draft138 was opened at checkpointd513678. The containing source checkpoint
+      needs fresh provider inspection. Twelve issues remain open; no issue acceptance is inferred.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-05T05:23:14Z'
+  reviewed_at: '2026-11-05T05:32:42Z'
   reviewed_by: Codex
   evidence:
   - command: bash scripts/dev-env.sh setup; bash scripts/dev-env.sh browsers
@@ -90,6 +94,12 @@ review:
     outcome: not-run
     observed_at: '2026-11-05T05:23:14Z'
     notes: Deferred to a separate campaign; no merge, release, deployment or consumer adoption.
+  - command: Python AST/new-schema JSON parsing; bounded rustfmt; cargo build --locked --offline; git diff
+      --check; roadmap-block/PNG comparison
+    outcome: passed
+    observed_at: '2026-11-05T05:32:42Z'
+    notes: Structural/build evidence for the draft only. Forty roadmap blocks and approved PNG are preserved;
+      no initializer behavior or regression suite executed.
   environment_limitations:
   - Downloaded browsers and Docker health do not qualify fonts or the approved screenshot.
   - Onboarding skill unavailable; available cloud runtime and pinned repository guidance were read.
@@ -128,11 +138,11 @@ Base/main is 19d3d16bd149ddb61a03924a2b688e8e689af68b. This branch proposes the 
 
 ## Completed and material changes
 
-The source-campaign checkpoint reconciles current scheduling and actual bootstrap. The initializer guide and proposed ADR-0033 define the new interface. Implementation is in progress, not accepted or qualified.
+Draft PR138 adds the closed request/report schemas, trusted stdlib initializer, embedded Rust bridge, examples and manual handoff. The source-campaign checkpoint reconciles scheduling and actual bootstrap. Proposed ADR-0033 defines the new interface; implementation is unqualified. The seven-criterion disposition is in docs/work/133/DRAFT.md.
 
 ## Validation and review evidence
 
-The supported installer and browser download passed on the named base. Git/API authentication and managed Docker execution work. Those results are bootstrap evidence only. No candidate runtime or regression suite ran.
+The supported installer and browser download passed on the named base. Git/API authentication and managed Docker execution work. Those results are bootstrap evidence only. Candidate AST/JSON parsing, bounded formatting, offline Rust compilation and whitespace/source-preservation inspection passed. No candidate runtime or regression suite ran.
 
 ## Blockers, risks, unknowns, and deferred work
 

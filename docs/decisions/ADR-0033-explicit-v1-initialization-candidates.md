@@ -8,7 +8,7 @@ decision_scope: repository
 visibility: public
 owners: [egohygiene/identity]
 issue: https://github.com/egohygiene/identity/issues/133
-pull_request: null
+pull_request: https://github.com/egohygiene/identity/pull/138
 related: [ADR-0001, ADR-0002, ADR-0003, ADR-0005, ADR-0012, ADR-0025]
 supersedes: []
 superseded_by: []
@@ -65,8 +65,10 @@ requires the already documented Python 3.11+ v1 runtime and remains offline.
 
 ## Implementation and evidence links
 
-The [interface guide](../consumers/V1_INITIALIZATION.md) records the proposed
-request, candidate and manual handoff. This source-preparation campaign defers
+The [interface guide](../consumers/V1_INITIALIZATION.md), closed request/report
+schemas, trusted standalone initializer and embedded CLI bridge implement the
+candidate boundary in draft PR138. Syntax parsing and Rust compilation are
+limited structural/build evidence. This source-preparation campaign defers
 runtime tests, qualification and hosted CI; implementation is unqualified and
 this ADR remains proposed with null approval. Package versions alone do not
 identify a reviewed implementation revision.

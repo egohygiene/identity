@@ -35,6 +35,12 @@ source. Saving those files is not applying a managed-environment configuration,
 publishing an environment snapshot, publishing Identity or deploying a site.
 Browser download and Docker health are not #80 qualification or host-font proof.
 
+A later root-directory `corepack pnpm --version` probe attempted an unpinned
+default lookup and failed under sandbox network isolation. Running the version
+probe inside `renderer/` correctly selected the existing package pin and
+returned 11.21.0. No package-manager configuration or network permission was
+changed to resolve that invocation error.
+
 ## Work disposition
 
 | Work | Current campaign | Retained gate |

@@ -12,6 +12,7 @@ mod cli;
 mod commands;
 mod contract;
 mod output;
+mod v1_initializer;
 
 use anyhow::Result;
 use clap::Parser;
@@ -22,6 +23,7 @@ pub fn run() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
         Command::Init(arguments) => commands::init(&arguments),
+        Command::V1Init(arguments) => v1_initializer::run(&arguments),
         Command::Validate(arguments) => commands::validate(&arguments),
         Command::Plan(arguments) => commands::plan(&arguments),
         Command::Handoff(arguments) => commands::handoff(&arguments),
