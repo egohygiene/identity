@@ -1,0 +1,51 @@
+{
+  "schema": "identity.source-campaign-state/v1",
+  "observedAt": "2026-11-05T06:02:00Z",
+  "mainRevision": "19d3d16bd149ddb61a03924a2b688e8e689af68b",
+  "latestStableRelease": "v1.0.0",
+  "openIssues": [
+    70,
+    80,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    98,
+    116,
+    133
+  ],
+  "sourceDrafts": [
+    {
+      "pullRequest": 138,
+      "revision": "ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2",
+      "state": "draft",
+      "workflowRuns": 0,
+      "qualification": "unrun"
+    },
+    {
+      "pullRequest": 139,
+      "revision": "413aae01f53205312cdba4fdae60222f9f16d605",
+      "state": "draft",
+      "workflowRuns": 0,
+      "qualification": "unrun"
+    }
+  ],
+  "qualifiedRevision": null,
+  "sourceCandidateReadiness": "incomplete; owner facts missing",
+  "releaseTargetRevision": null,
+  "newReleaseArtifacts": "unbuilt",
+  "deployed": false,
+  "environmentSnapshotPublished": false,
+  "otherRepositoryChanged": false,
+  "mainProtectedMetadata": false,
+  "rulesets": [],
+  "detailedProtectionAccess": "unavailable403",
+  "IDN-Q06": {
+    "state": "planned",
+    "issues": [],
+    "disposition": "future scope; no selected quest-line consumer/profile; unchecked exits preserved"
+  }
+}

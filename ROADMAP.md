@@ -321,6 +321,13 @@ issues: []
 **Current evidence:**
 
 - The dedicated roadmap visual token profile is not yet published and has no linked issue. Preserve this planned step; #99 inventories overlap with existing foundations and #104's concrete target selection without silently claiming completion or making it a first-kit prerequisite.
+- **2026-11-05 disposition under #83:** existing typed color/typography/motion
+  foundations and renderer focus/styles overlap ingredients, but the source
+  inventory found no dedicated roadmap profile or selected quest-line consumer.
+  Retain Q06 as planned, unissued future scope; its semantic state mapping,
+  non-color distinctions and qualified profile/consumer proof remain unrun.
+  This is not a component-library or additional renderer selection. See the
+  [qualification handoff](docs/work/83/QUALIFICATION_HANDOFF.md#idn-q06).
 
 <!-- roadmap-step
 id: IDN-Q07

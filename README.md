@@ -48,8 +48,10 @@ verification and rollback. Then [assemble a complete Brand Kit](docs/consumers/C
 
 The [command guide](docs/USAGE.md) documents the existing CLI and optional
 projections, with explicit consumer paths. `init` currently creates the legacy
-v0 source; use the v1 authoring examples for v1 source. A future v1 initializer
-is tracked separately in [#133](https://github.com/egohygiene/identity/issues/133).
+v0 source; manual v1 authoring remains supported. The
+[explicit v1 initializer draft](docs/consumers/V1_INITIALIZATION.md) is under
+[#133](https://github.com/egohygiene/identity/issues/133); it is unmerged,
+unqualified and absent from published `v1.0.0`.
 
 ## Work on this repository
 
