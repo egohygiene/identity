@@ -8,9 +8,11 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 import { JSDOM } from "jsdom";
+import { isDeepStrictEqual } from "node:util";
 
 import { artifactPathFromUrl, verifyArtifactDownloads, verifyArtifactPaths } from "../src/download-integrity.js";
 import { assertBrandKitViewModel } from "../src/model.js";
+import { prepareKit, digest } from "../lib/kit-bundle.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
@@ -26,6 +28,8 @@ await assertFile("brand-kit/index.html");
 await assertFile("site.json");
 
 const site = await readJson("site.json");
+if (![undefined, "native-v1"].includes(site.sourceMode)) throw new Error("Unknown publication source mode.");
+const nativeMode = site.sourceMode === "native-v1";
 const version = assertStableRelease(site.release.tag);
 const packageDirectory = "packages";
 const archiveName = `identity-brand-kit-v${version}.zip`;
@@ -35,11 +39,8 @@ await Promise.all([
   assertFile(`${packageDirectory}/${archiveName}`),
   assertFile(`${packageDirectory}/${manifestName}`),
   assertFile(`${packageDirectory}/${checksumsName}`),
-  assertFile("brand/emblem.svg"),
-  assertFile("brand/lockup-horizontal.svg"),
-  assertFile("brand/social-preview.svg"),
-  assertFile("brand/open-graph.svg"),
-  assertFile("web/site.webmanifest"),
+  ...(!nativeMode ? ["brand/emblem.svg", "brand/lockup-horizontal.svg", "brand/social-preview.svg",
+    "brand/open-graph.svg", "web/site.webmanifest"].map(assertFile) : []),
 ]);
 
 const canonicalUrl = "https://identity.egohygiene.io/";
@@ -86,6 +87,11 @@ if (manifest.release.tag !== site.release.tag || manifest.release.commit !== sit
 if (manifest.sourceDigest !== site.sourceDigest) {
   throw new Error("The publication manifest and public site disagree about source integrity.");
 }
+if (nativeMode !== (manifest.sourceMode === "native-v1")
+  || (nativeMode && (!/^[0-9a-f]{64}$/u.test(site.canonicalSourceDigest || "")
+    || manifest.canonicalSourceDigest !== site.canonicalSourceDigest))) {
+  throw new Error("Public site and manifest disagree about native source binding.");
+}
 if (sha256(await fs.readFile(resolve(site.publicationManifest))) !== site.publicationManifestSha256) {
   throw new Error("The published manifest checksum does not match its manifest file.");
 }
@@ -116,6 +122,9 @@ const document = new JSDOM(index).window.document;
 const modelElement = document.querySelector("#identity-brand-kit-model");
 if (!modelElement) throw new Error("The published page must embed its selected renderer model.");
 const model = assertBrandKitViewModel(JSON.parse(modelElement.textContent));
+if (nativeMode && (model.projectId !== "identity" || model.release.sourceDigest !== site.canonicalSourceDigest)) {
+  throw new Error("Published native model disagrees with canonical source binding.");
+}
 const assetBaseUrl = site.assetBaseUrl || "./";
 const browserAssets = {};
 for (const [key, relation] of [
@@ -133,6 +142,24 @@ const verified = await verifyArtifactDownloads(model, {
   manifestPath: resolve(`${packageDirectory}/${manifestName}`),
   browserAssets,
 });
+if (nativeMode) {
+  const expected = await prepareKit({ artifactRoot: outputDirectory, browserAssets,
+    designSystemDirectory: model.designSystem ? resolve("design-system") : null,
+    pressKitDirectory: model.pressKit ? resolve("press-kit") : null });
+  if (!isDeepStrictEqual(expected.model, model)
+    || !isDeepStrictEqual(JSON.parse(await readText("brand-kit.view-model.json")), model)) {
+    throw new Error("Published native model differs from its source-bound downloads.");
+  }
+  const declared = new Map(manifest.files.map((entry) => [entry.path, entry]));
+  if (declared.size !== expected.files.size) throw new Error("Public native inventory contains missing/extra files.");
+  for (const [relative, bytes] of expected.files) {
+    const entry = declared.get(relative);
+    if (!entry || entry.sha256 !== digest(bytes) || entry.sizeBytes !== bytes.length) {
+      throw new Error(`Public native inventory differs from selected source: ${relative}`);
+    }
+  }
+  verified.verifiedPaths.push(`${packageDirectory}/${manifestName}`, `${packageDirectory}/${archiveName}`);
+}
 const emittedDownloads = [...document.querySelectorAll("a[download]")].map(
   (link) => artifactPathFromUrl(link.getAttribute("href"), assetBaseUrl),
 );

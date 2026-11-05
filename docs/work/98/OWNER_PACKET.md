@@ -36,7 +36,7 @@ No tag or package-version bump is made here. The exact release commit is
 | Artifact/evidence | Current disposition |
 | --- | --- |
 | Source/rights inventory and manually prepared v1 candidate | Reviewable files in this draft; candidate is incomplete and not canonical root source |
-| Native-v1 publisher adapter | Source preparation in progress; no runtime pass |
+| Native-v1 publisher adapter | Draft source in [PR139](https://github.com/egohygiene/identity/pull/139); syntax/static checks only, no runtime pass |
 | Generated self Brand Kit, publication ZIP/manifest/checksums | Unrun; no candidate output or hashes fabricated |
 | Release binary/archive, SPDX SBOM, dependency license inventory, attestation | Unbuilt/unrun for the proposed release |
 | Complete qualification matrix and exact qualified revision | Unrun; no qualified revision |
@@ -47,6 +47,13 @@ The [source-campaign checkpoint](../116/SOURCE_PREPARATION.md) records actual
 base installer/build/browser-download evidence and its limits. Those results
 do not qualify this source. Keep passed, failed, skipped, unavailable and unrun
 distinct in the later release ledger.
+
+The [native handoff guide](../../publication/NATIVE_V1_DRAFT.md) specifies its
+release-owned configuration, immutable native inputs and separate digest
+meanings. Before release, update the real package versions compatibly, choose
+actual owner-approved profiles and optional projections, generate/verify them
+and install the selected config into that exact release tree. The config binds
+to a verified annotated-tag selection instead of fabricating its own commit.
 
 ## Publication destinations and owners
 

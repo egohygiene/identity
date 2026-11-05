@@ -214,7 +214,14 @@ jobs:
             fi
           fi
 
-          if [[ "$(jq --raw-output '.release.defaultTag' "${release_config}")" != "${requested_tag}" || "$(jq --raw-output '.release.defaultCommit' "${release_config}")" != "${release_commit}" ]]; then
+          if [[ "$(jq --raw-output '.sourceMode' "${release_config}")" == "native-v1" ]]; then
+            # The annotated tag supplies its own commit; it cannot be embedded
+            # self-referentially in that commit's release-owned config bytes.
+            if [[ "${release_config}" != "${release_source}/publication/identity-brand-kit.config.json" || "$(jq --raw-output '.release.defaultTag' "${release_config}")" != "${requested_tag}" || "$(jq --raw-output '.release.binding' "${release_config}")" != "selected-annotated-tag" ]]; then
+              echo "::error::Native publication config must be owned by the selected stable release."
+              exit 1
+            fi
+          elif [[ "$(jq --raw-output '.release.defaultTag' "${release_config}")" != "${requested_tag}" || "$(jq --raw-output '.release.defaultCommit' "${release_config}")" != "${release_commit}" ]]; then
             echo "::error::Publication config is not bound to the selected release tag and commit."
             exit 1
           fi

@@ -119,10 +119,14 @@ async function artifactReader(artifactRoot) {
   };
 }
 
-async function manifestInventory(model, manifestPath, read) {
-  const manifestBytes = await fs.readFile(path.resolve(manifestPath));
+async function manifestInventory(model, manifestPath, read, suppliedBytes = null) {
+  const manifestBytes = suppliedBytes ?? await fs.readFile(path.resolve(manifestPath));
   const manifest = JSON.parse(manifestBytes.toString("utf8"));
-  if (!/^[0-9a-f]{64}$/u.test(manifest.sourceDigest || "") || manifest.sourceDigest !== model.release?.sourceDigest) {
+  const nativePublication = manifest.sourceMode === "native-v1";
+  if (manifest.sourceMode !== undefined && !nativePublication) throw new Error("Unknown manifest source mode.");
+  const canonicalDigest = nativePublication ? manifest.canonicalSourceDigest : manifest.sourceDigest;
+  if (!/^[0-9a-f]{64}$/u.test(manifest.sourceDigest || "")
+    || !/^[0-9a-f]{64}$/u.test(canonicalDigest || "") || canonicalDigest !== model.release?.sourceDigest) {
     throw new Error("Artifact manifest source digest does not match the renderer release.");
   }
   const inventory = new Map();
@@ -169,6 +173,28 @@ async function manifestInventory(model, manifestPath, read) {
       throw new Error("Public manifest release does not match the renderer release.");
     }
     if (!Array.isArray(manifest.files)) throw new Error("Public manifest must declare its file inventory.");
+    if (nativePublication) {
+      const nativeManifest = await read(".identity-manifest.json");
+      const native = JSON.parse(nativeManifest.bytes.toString("utf8"));
+      if (native.schema !== "identity.compiler-manifest/v1") throw new Error("Native publication requires a compiler manifest.");
+      // Reuse the unchanged compiler/model/byte verifier. Canonical and archive
+      // inventory digests are separate contracts, never interchangeable hashes.
+      const nativeInventory = await manifestInventory(model, null, read, nativeManifest.bytes);
+      const publicPaths = new Set(manifest.files.map((entry) => entry.path));
+      for (const relative of [".identity-manifest.json", ...nativeInventory.keys()]) {
+        if (!publicPaths.has(relative)) throw new Error(`Public archive omits native compiler inventory: ${relative}`);
+      }
+      const framed = createHash("sha256");
+      let previous = null;
+      for (const entry of manifest.files) {
+        if (normalizeArtifactPath(entry.path) !== entry.path) throw new Error("Native publication paths must be normalized URLs.");
+        if (previous !== null && entry.path <= previous) throw new Error("Native publication inventory must be sorted and unique.");
+        previous = entry.path;
+        framed.update(entry.path, "utf8"); framed.update("\0");
+        framed.update(entry.sha256, "ascii"); framed.update("\0");
+      }
+      if (framed.digest("hex") !== manifest.sourceDigest) throw new Error("Native publication inventory digest mismatch.");
+    }
     for (const entry of manifest.files) await add(entry.path, entry);
     const manifestName = path.basename(manifestPath);
     await add(`packages/${manifestName}`, { sha256: sha256(manifestBytes), bytes: manifestBytes.length });

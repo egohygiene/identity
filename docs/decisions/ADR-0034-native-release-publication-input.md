@@ -8,7 +8,7 @@ decision_scope: repository
 visibility: public
 owners: [egohygiene/identity]
 issue: https://github.com/egohygiene/identity/issues/98
-pull_request: null
+pull_request: https://github.com/egohygiene/identity/pull/139
 related: [ADR-0001, ADR-0003, ADR-0010, ADR-0017, ADR-0019, ADR-0022, ADR-0023, ADR-0028, ADR-0030]
 supersedes: []
 superseded_by: []
