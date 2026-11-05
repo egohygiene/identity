@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import types
 from typing import Any
 from urllib.parse import unquote
 
@@ -154,7 +155,8 @@ def native_input_path(root: Path, value: Any) -> Path | None:
 def verify_native_release_bytes(config: dict[str, Any], source_root: Path, release_commit: str) -> list[str]:
     """Bind generated inputs and config to selected Git blobs, not just checkout HEAD."""
     source_root = source_root.resolve()
-    roots = [source_root / "assets/identity", source_root / "publication/identity-brand-kit.config.json"]
+    roots = [source_root / ".identity", source_root / "assets/identity",
+             source_root / "publication/identity-brand-kit.config.json"]
     for value in config.get("nativeInputs", {}).values():
         path = native_input_path(source_root, value)
         if path is not None:
@@ -172,7 +174,10 @@ def verify_native_release_bytes(config: dict[str, Any], source_root: Path, relea
             blobs[name.decode("utf-8")] = (mode, oid)
     files: set[Path] = set()
     for root in roots:
-        files.update(path for path in root.rglob("*") if path.is_file() or path.is_symlink()) if root.is_dir() else files.add(root)
+        if root.is_dir():
+            files.update(path for path in root.rglob("*") if path.is_file() or path.is_symlink())
+        else:
+            files.add(root)
     errors = []
     for path in sorted(files):
         relative = path.relative_to(source_root).as_posix()
@@ -187,6 +192,24 @@ def verify_native_release_bytes(config: dict[str, Any], source_root: Path, relea
     for relative in set(blobs) - {path.relative_to(source_root).as_posix() for path in files}:
         errors.append(f"committed native release input is absent: {relative}")
     return errors
+
+
+def verify_native_source_binding(source_root: Path) -> list[str]:
+    """The release-source gate validates canonical source; renderers still read artifacts only."""
+    validator_path = Path(__file__).with_name("validate_identity.py")
+    validator = types.ModuleType("_identity_publication_validator")
+    sys.modules[validator.__name__] = validator
+    exec(compile(validator_path.read_text(encoding="utf-8"), str(validator_path), "exec"), validator.__dict__)
+    diagnostics = validator.validate_identity(source_root)
+    if diagnostics:
+        return [f"native canonical source is invalid: {item.code} {item.path}: {item.message}" for item in diagnostics]
+    expected = validator.canonical_source_digest(source_root)
+    manifest = load_json(source_root / "assets/identity/.identity-manifest.json")
+    if not isinstance(manifest, dict) or manifest.get("schema") != "identity.compiler-manifest/v1":
+        return ["native compiler manifest has an unsupported shape/schema"]
+    if manifest.get("sourceDigest") != expected:
+        return ["native compiler manifest does not match the selected release's canonical source"]
+    return []
 
 
 def verify_index(repository_root: Path) -> list[str]:
@@ -272,6 +295,8 @@ def verify_selected_config(
                 errors.append("native source checkout does not match the selected release commit")
             if not errors:
                 errors.extend(verify_native_release_bytes(config, source_root, release_commit))
+            if not errors:
+                errors.extend(verify_native_source_binding(source_root.resolve()))
         except (OSError, ValueError, subprocess.CalledProcessError):
             errors.append("native publication requires the verified release Git checkout")
     return errors

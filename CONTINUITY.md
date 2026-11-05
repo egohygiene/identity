@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-05T05:48:49Z'
+  updated_at: '2026-11-05T05:56:17Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -44,18 +44,19 @@ work:
     url: https://github.com/egohygiene/identity/issues/98
   next:
     kind: action
-    id: identity-98-native-publisher-draft
-    description: Implement the bounded native publication adapter, update the packet and retain missing source/rights
-      gates.
+    id: identity-83-source-documentation
+    description: Prepare the bounded issue83 documentation handoff and final source-only matrix; preserve unrun
+      qualification and all owner gates.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/83
+    - https://github.com/egohygiene/identity/pull/139
     depends_on: []
 state:
   base:
-    revision: 19d3d16bd149ddb61a03924a2b688e8e689af68b
-    ref: refs/heads/main
-    verified_at: '2026-11-05T05:23:14Z'
+    revision: ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2
+    ref: refs/heads/codex/133-v1-initializer
+    verified_at: '2026-11-05T05:56:17Z'
   candidate:
     branch: codex/98-native-publication-source
     revision: null
@@ -63,7 +64,7 @@ state:
       provider: github
       id: egohygiene/identity#139
       url: https://github.com/egohygiene/identity/pull/139
-    handoff_state: in-progress
+    handoff_state: ready-for-review
   live:
     status: verified
     observed_at: '2026-11-05T05:23:14Z'
@@ -78,7 +79,7 @@ state:
     url: https://github.com/egohygiene/identity/pull/138
 review:
   status: partial
-  reviewed_at: '2026-11-05T05:48:49Z'
+  reviewed_at: '2026-11-05T05:56:17Z'
   reviewed_by: Codex
   evidence:
   - command: bash scripts/dev-env.sh setup; bash scripts/dev-env.sh browsers
@@ -107,6 +108,12 @@ review:
     observed_at: '2026-11-05T05:48:49Z'
     notes: Syntax/static source preparation only; native/legacy publication paths, file integrity failures,
       release workflows and UI behavior are unrun.
+  - command: Source/byte inventory preservation; Python AST and node --check; pinned continuity JSON Schema/size
+      inspection
+    outcome: passed
+    observed_at: '2026-11-05T05:56:17Z'
+    notes: 43 original source files, two exact candidate masters, legacy release configuration/index,40 roadmap
+      blocks and approved PNG preserved. No runtime or official owner-domain qualification.
   environment_limitations:
   - Downloaded browsers and Docker health do not qualify fonts or the approved screenshot.
   - Onboarding skill unavailable; available cloud runtime and pinned repository guidance were read.
@@ -141,7 +148,7 @@ Prepare the real Identity source/rights candidate and an opt-in native publisher
 
 ## State snapshot
 
-Base/main is 19d3d16bd149ddb61a03924a2b688e8e689af68b. This branch proposes the initializer interface and implementation. Its containing commit/PR need fresh inspection; no self-referential commit hash is fabricated.
+Main remains 19d3d16bd149ddb61a03924a2b688e8e689af68b; this PR is stacked on initializer checkpoint ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2. Its containing source commit/PR need fresh inspection; no release or self-referential hash is fabricated.
 
 ## Completed and material changes
 
@@ -149,7 +156,7 @@ PR139 inventories 43 existing source/package files and retains an incomplete man
 
 ## Validation and review evidence
 
-The supported installer and browser download passed on the named base. Git/API authentication and managed Docker execution work. Those results are bootstrap evidence only. Candidate AST/JSON parsing, bounded formatting, offline Rust compilation and whitespace/source-preservation inspection passed. No candidate runtime or regression suite ran.
+Bootstrap passed on original main; initializer Rust compilation passed on PR138. Publication Python/JS syntax, JSON/YAML, pinned continuity schema/size and source-byte preservation passed for this draft. Detailed disposition is in docs/work/98/DRAFT.md. No native publisher path, runtime/regression suite, audit or CI ran.
 
 ## Blockers, risks, unknowns, and deferred work
 

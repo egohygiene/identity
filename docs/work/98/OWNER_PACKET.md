@@ -76,6 +76,17 @@ closed adoption scope [Mantle #27](https://github.com/egohygiene/mantle/issues/2
 It selects core/GitHub/docs/tokens/metadata/archive and has no adopted Press Kit,
 handbook or mascot. Do not add those facts merely to make the contrast larger.
 
+Fresh immutable reads of `.github/workflows/identity.yml` and `docs/identity.md`
+confirm its current compiler pin is `v1.0.0`, Linux archive SHA-256
+`f8a961790b959fc683b215729c20c743399c7b1d4d8aadf8b1a30e8c3663532a`.
+Its standalone validator and repository-presentation script are separately
+pinned to `3c2fd3141371b355628e81f66f63159f19d63338`, with respective hashes
+`eb0c7f9df31b2bd3eb618d830c5d11d76c750d0ef51b9b79092aa72ccfdcbb4f`
+and `5d73593ab3e04baf60d577119defd4049cf2da571f00a9d033d7a7d9430b7396`.
+The owner's future patch must update those exact acquisition URLs and hashes,
+install the full matching runtime/script dependency set, and update the
+consumer documentation together. New release hashes are not invented here.
+
 After source/quality/release gates, the Mantle owner must approve changing its
 immutable tool/script/profile pins, review isolated regeneration, prove CI
 detects deliberate drift without repair, and restore the preceding source/pins/

@@ -20,8 +20,12 @@ published stable release and annotated tag, resolves the exact commit and
 creates the detached release source. Native config must be that release's
 `publication/identity-brand-kit.config.json`. The verifier compares the checkout
 HEAD with the selected commit and compares actual generated/config bytes to
-that commit's Git blobs. A matching HEAD alone cannot bless dirty or untracked
-release inputs. Legacy configs retain exact defaultTag/
+that commit's Git blobs, including the actual root v1 source. The separate
+release-source gate runs the trusted authoritative validator and compares its
+canonical source digest with the native compiler manifest. The renderer and
+consumer-kit assembler still read generated artifacts only. A matching HEAD
+alone cannot bless dirty/untracked inputs or stale source-to-output bindings.
+Legacy configs retain exact defaultTag/
 defaultCommit matching; native compatibility fallbacks are rejected.
 
 The builder requires explicit `--source-root`, `--release-tag` and
