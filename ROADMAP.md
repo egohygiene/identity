@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-11-02
+updated: 2026-11-05
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -25,6 +25,17 @@ supersedes: []
 ---
 
 # Identity Roadmap
+
+## Source preparation checkpoint — 2026-11-05
+
+The current [source campaign](docs/work/116/SOURCE_PREPARATION.md) starts from
+merged PR137 at `19d3d16bd149ddb61a03924a2b688e8e689af68b`. It prepares
+unqualified #133/#98/#83 drafts; refactoring, audits, runtime tests, hosted CI,
+merges and affected closures are selected for a separate later campaign.
+This supersedes scheduling only. Existing acceptance, 40 stable step IDs,
+issue mappings and dependency edges remain intact. IDN-Q06 remains planned,
+unissued and outside this bounded source work. Source merge, stable release,
+deployment and human acceptance remain separate facts.
 
 ## Optional static mascot delivery — 2026-11-02
 

@@ -7,23 +7,19 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-03T04:27:35Z'
+  updated_at: '2026-11-05T05:23:14Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Simplify the README and route detailed guidance into docs while preserving executable Task
-    and consumer interfaces.
-  includes: &id001
-  - Keep the front page concise, show a representative preview and route authoring, consuming, development
-    and reference work.
-  - Preserve all former README sections and fragment entry points; keep existing Task commands and argument
-    forwarding unchanged.
-  - Leave final issue83 reconciliation, quality gates, root v1 self-source and release acceptance open.
+  purpose: Prepare the explicit v1 initializer as an unqualified draft under issue133.
+  includes:
+  - Explicit v1 candidate/request interface and source implementation.
+  - Current source-campaign scheduling, bootstrap evidence and durable draft checkpoints.
   excludes:
-  - Runtime/schema/asset/approval changes, roadmap completion and new releases or deployments.
-  - Test suites, Task execution and hosted CI; no merge or issue closure.
+  - Refactors, runtime tests, hosted CI, merges and issue closure.
+  - Creative/rights approval, release, deployment and other-repository changes.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -32,83 +28,72 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - README.md
-  - Taskfile.yml
-  - docs/README.md
-  - docs/USAGE.md
-  - docs/IMPLEMENTATION.md
-  - docs/OVERVIEW.md
-  - docs/DEVELOPMENT.md
   - ROADMAP.md
-  - docs/consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md
-  - https://github.com/egohygiene/identity/issues/83
+  - docs/decisions/policy-reference.json
+  - docs/consumers/V1_INITIALIZATION.md
+  - docs/work/116/SOURCE_PREPARATION.md
+  - https://github.com/egohygiene/identity/issues/133
+  - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Simplify the README and route detailed guidance into docs while preserving executable Task
-    and consumer interfaces.
-  success_conditions: *id001
+  objective: Prepare a reviewable explicit v1 initializer without changing v0 behavior.
+  success_conditions:
+  - Retain local request, standalone candidate and missing-fact boundaries.
+  - Push bounded draft checkpoints with actual source and deferred acceptance recorded.
   active_issue:
     provider: github
-    id: egohygiene/identity#83
-    url: https://github.com/egohygiene/identity/issues/83
+    id: egohygiene/identity#133
+    url: https://github.com/egohygiene/identity/issues/133
   next:
     kind: action
-    id: review-draft-and-qualify
-    description: 'Review this bounded README/Task draft; reconcile #83 final capability/publication/recovery
-      wording after remaining implementation/refactors and qualify dispatch under #82.'
+    id: identity-133-source-draft
+    description: Implement the proposed local request/candidate interface, then update the draft; runtime acceptance
+      is deferred.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/83
+    - https://github.com/egohygiene/identity/issues/133
     depends_on: []
 state:
   base:
-    revision: b5cf5137884ba9d16a35c8e6280ea81b4ee930be
+    revision: 19d3d16bd149ddb61a03924a2b688e8e689af68b
     ref: refs/heads/main
-    verified_at: '2026-11-03T04:27:35Z'
+    verified_at: '2026-11-05T05:23:14Z'
   candidate:
-    branch: codex/83-readme-task-entrypoint
+    branch: codex/133-v1-initializer
     revision: null
     pull_request: null
-    handoff_state: ready-for-review
+    handoff_state: in-progress
   live:
     status: verified
-    observed_at: '2026-11-03T04:27:35Z'
-    default_branch_revision: b5cf5137884ba9d16a35c8e6280ea81b4ee930be
+    observed_at: '2026-11-05T05:23:14Z'
+    default_branch_revision: 19d3d16bd149ddb61a03924a2b688e8e689af68b
     issue_state: open
     pull_request_state: not-applicable
-    notes: 'Main and issue83 are verified open/current before this draft. PR136 is already merged and
-      issue107 closed; all eleven issue98 children are closed, while #98/#70/#80/#83/#133 remain open.
-      No other open Identity PR was observed. This candidate is not merged or released.'
+    notes: Main is unchanged, PR137 merged; 12 issues open, zero peer PRs before this checkpoint. All eleven
+      issue98 children are closed. Stable/live Brand Kit remains v1.0.0.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-03T04:27:35Z'
+  reviewed_at: '2026-11-05T05:23:14Z'
   reviewed_by: Codex
   evidence:
-  - command: Static local Markdown/HTML references, legacy heading/fragment mapping and parsed Taskfile
-      comparison
+  - command: bash scripts/dev-env.sh setup; bash scripts/dev-env.sh browsers
     outcome: passed
-    observed_at: '2026-11-03T04:27:35Z'
-    notes: 153 references resolve; all 19 former sections and their README fragment entry points remain
-      reachable. All nine Task command arrays and CLI_ARGS strings are unchanged.
-  - command: git diff --check
+    observed_at: '2026-11-05T05:23:14Z'
+    notes: Base 19d3d16 built with Rust1.97.1/pnpm11.21.0; Chromium151.0.7922.34 revision1234 installed. Tracked
+      source remained unchanged; this does not qualify later candidate source.
+  - command: Live main/issues/PRs/release/site.json reads and managed Docker health probe
     outcome: passed
-    observed_at: '2026-11-03T04:27:35Z'
-    notes: No whitespace errors. Runtime, schemas, assets, ADRs, roadmap IDs/statuses and prior evidence
-      are unchanged.
-  - command: Aether continuity Draft 2020-12 metadata/heading/size/privacy inspection
-    outcome: passed
-    observed_at: '2026-11-03T04:27:35Z'
-    notes: Pinned metadata schema and twelve-section structure; within byte/line limits.
-  - command: Task dispatch, regression/browser/AX suites, published EgoLint conformance and hosted CI
+    observed_at: '2026-11-05T05:23:14Z'
+    notes: Injected authentication and command execution work; Docker health requires local-socket execution
+      permission. Detailed protection endpoint is403; metadata reports unprotected and rulesets are empty.
+  - command: Runtime/regression/native/browser/AX suites, audit and hosted CI
     outcome: not-run
-    observed_at: '2026-11-03T04:27:35Z'
-    notes: 'This draft supplies documentation/static evidence only; #82/#70/#80 retain qualification.'
+    observed_at: '2026-11-05T05:23:14Z'
+    notes: Deferred to a separate campaign; no merge, release, deployment or consumer adoption.
   environment_limitations:
-  - Task is unavailable on PATH; no setup, preview, dispatch or test suite was executed.
-  - Official released EgoLint continuity conformance was not run; JSON Schema and structural checks are
-    narrower evidence.
-  - 'Final #83 reconciliation, #98 self-source/rights/new-release/dogfood and #70/#80 qualification remain
-    incomplete.'
+  - Downloaded browsers and Docker health do not qualify fonts or the approved screenshot.
+  - Onboarding skill unavailable; available cloud runtime and pinned repository guidance were read.
+  - Current source, rights, platform/review/CI and final tracker acceptance remain open.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -127,48 +112,48 @@ privacy:
 
 ## Purpose and precedence
 
-Keep this operational handoff below user/runtime instructions, scoped policy, live state and canonical source. It records the bounded issue83 navigation pass.
+This is the unqualified issue133 source draft. User/runtime instructions, scoped instructions, live state and canonical sources outrank this snapshot.
 
 ## Resume protocol
 
-Read AGENTS, README, docs/README, Taskfile and the current issue83 scope. Verify main/PR state before repeating work. Earlier issue107 delivery merged in PR136.
+Read AGENTS, the initializer guide, source-campaign checkpoint and live issue133/116. Recheck main, candidate head and peer PRs before acting. PR137 is merged; do not repeat the README split or earlier source merges.
 
 ## Current objective and success conditions
 
-Shorten the front page, preserve detailed content and old fragment routes, and make existing Task entry points discoverable without changing the consumer CLI.
+Implement explicit v1-init from local request files into a separate review candidate. Preserve v0, offline operation, same-subject approvals and source ownership. Retain missing facts honestly.
 
 ## State snapshot
 
-Base main is b5cf5137884ba9d16a35c8e6280ea81b4ee930be. Issue83 is open. Candidate branch is codex/83-readme-task-entrypoint; revision and PR are null before creation.
+Base/main is 19d3d16bd149ddb61a03924a2b688e8e689af68b. This branch proposes the initializer interface and implementation. Its containing commit/PR need fresh inspection; no self-referential commit hash is fabricated.
 
 ## Completed and material changes
 
-README routes to new documentation overview, usage, implementation and index pages. DEVELOPMENT prefers Task examples with standalone fallbacks. Taskfile adds descriptions only. Overview reflects the scoped future-component possibility and v1.0.0 historical feature boundary.
+The source-campaign checkpoint reconciles current scheduling and actual bootstrap. The initializer guide and proposed ADR-0033 define the new interface. Implementation is in progress, not accepted or qualified.
 
 ## Validation and review evidence
 
-Static reference/mapping inspection passed for 153 local targets and all nineteen former sections/anchors. All nine Task command arrays are identical. git diff --check passed. Metadata/schema and twelve-section budget checks passed; no broad suite ran.
+The supported installer and browser download passed on the named base. Git/API authentication and managed Docker execution work. Those results are bootstrap evidence only. No candidate runtime or regression suite ran.
 
 ## Blockers, risks, unknowns, and deferred work
 
-This is an early pass under #83, not its final closure. #70/#80/#82 retain execution/qualification; #98 retains root v1 source/rights/release/dogfood. Task and released EgoLint conformance are unavailable/unexecuted. Proposed ADRs remain proposed.
+Refactors, audits, tests, hosted CI, merges and affected issue closures are deferred to a separate campaign. Unknown root asset rights and actual self-source/release/adoption stay issue98. Detailed protection API access is403. Publisher-affecting merges can automatically deploy and therefore remain draft.
 
 ## Next dependency-ready work
 
-Review the navigation/command draft, then reconcile final #83 wording against remaining implementations/refactors. Run dispatch and quality checks in the separately tracked qualification phase.
+Complete the issue133 source draft, push meaningful checkpoints, then prepare issue98 source/rights/publisher work and issue83 documentation. Keep original dependencies and acceptance criteria intact.
 
 ## Parallel changes and reconciliation
 
-No peer open Identity PR was observed before creation. Recheck main and semantically reconcile this root checkpoint with any later drafts before merge; preserve roadmap dependencies and prior immutable evidence.
+No peer open PR was observed before this initial draft. Recheck before handoff. The new public initializer needs proposed ADR-0033 under the exact pinned Aether skill; routine scheduling needs no new ADR. Existing dispositions and historical receipts remain unchanged.
 
 ## Privacy and redaction
 
-Only scoped public repository facts and links are retained; exclude private context, local paths, credentials and personal information.
+Retain only public-safe repository facts, exact revisions, commands and bounded outcomes. Exclude credentials, private conversation, private paths and unrelated context.
 
 ## Handoff update protocol
 
-Refresh after review and actual checks. Do not infer a passing suite, issue closure, merge, release or deployment from this draft. ADR not required: routine documentation/discoverability under existing contracts; no new public interface or ownership decision.
+Refresh after actual source/static checks and immediately before updating the draft. Keep all twelve headings and the 240-line/16384-byte budget. Never substitute source delivery or old test receipts for current qualification.
 
 ## Compaction and supersession
 
-Keep this twelve-section current-state snapshot compact. Canonical contracts, owner queues, Git and the work tracker retain detailed history.
+Git and the owning issues retain history. This file keeps only the current objective, evidence limits and next action. IDN-Q06 remains planned and unissued; no ecosystem-policy or component expansion is selected.
