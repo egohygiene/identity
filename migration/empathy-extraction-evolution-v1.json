@@ -5,9 +5,9 @@
     {
       "destination": "src/cli.rs",
       "baseline_sha256": "af7594d834fae7c9f618bff2b06c08744ae12f598cade665e716b3c5191dd8dd",
-      "current_sha256": "4755b09fcd8e2fe316ba6d6c47dde7f9c5f96cbfc6b32094b645f359aaa3d752",
-      "issue": "https://github.com/egohygiene/identity/issues/77",
-      "reason": "Preserve the v0 and v1 commands introduced in #17 while adding explicit v1 interruption inspection and recovery in #77 with the same independently supplied repository/output scope."
+      "current_sha256": "4ffa8c27cdfb6fd8e5a4062feac4ca614dceedd020ffc069591e945b4bedd1d7",
+      "issue": "https://github.com/egohygiene/identity/issues/133",
+      "reason": "Preserve the v0 and v1 commands introduced in #17 while adding explicit v1 interruption inspection and recovery in #77 with the same independently supplied repository/output scope. In #133, add and dispatch explicit v1-init candidate preparation through trusted embedded scripts; preserve all existing v0/v1 command implementations and original extraction provenance."
     },
     {
       "destination": "src/commands.rs",
@@ -19,9 +19,9 @@
     {
       "destination": "src/lib.rs",
       "baseline_sha256": "696dfac6faa771c3068c38d45893f19b0ea6e6f9301be0e627a1aff4c9f3eb11",
-      "current_sha256": "dd8c8fd26e7b34280fe009b159d37d8275d65cbb020b013338446a9a6c1ed70e",
-      "issue": "https://github.com/egohygiene/identity/issues/77",
-      "reason": "Preserve the original Empathy extraction digest, v0 command dispatch and #17 consumer exports while dispatching the explicit v1 inspection/recovery commands from #77."
+      "current_sha256": "86015d23e9a0abb63e7ce9aa251783a29bcf91a134828af7df9ef343a8e4f3e9",
+      "issue": "https://github.com/egohygiene/identity/issues/133",
+      "reason": "Preserve the original Empathy extraction digest, v0 command dispatch and #17 consumer exports while dispatching the explicit v1 inspection/recovery commands from #77. In #133, add and dispatch explicit v1-init candidate preparation through trusted embedded scripts; preserve all existing v0/v1 command implementations and original extraction provenance."
     }
   ]
 }

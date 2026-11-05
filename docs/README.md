@@ -6,7 +6,7 @@ guides run from the checkout root; consumer paths remain explicit.
 | Work | Guides |
 | --- | --- |
 | Understand the product | [Overview, preview and capabilities](OVERVIEW.md), [architecture](../ARCHITECTURE.md), [system responsibilities](../SYSTEM.md) |
-| Author a project's identity | [Authoring worksheet](consumers/AUTHORING.md), [v1 examples](../examples/v1/README.md), [field review](reviews/identity-fields-2026-10-18.md) |
+| Author a project's identity | [Authoring worksheet](consumers/AUTHORING.md), [v1 examples](../examples/v1/README.md), [draft explicit v1 initializer](consumers/V1_INITIALIZATION.md), [field review](reviews/identity-fields-2026-10-18.md) |
 | Adopt and generate | [Adoption](consumers/ADOPTION.md), [CLI and optional projections](USAGE.md), [complete Brand Kit](consumers/COMPLETE_BRAND_KIT.md) |
 | Select optional outputs | [Presentation profiles](consumers/PRESENTATION_PROFILES.md), [launch documents](consumers/LAUNCH_DOCUMENTS.md), [visuals](consumers/OPTIONAL_VISUALS.md) |
 | Integrate other tools | [Initialization and validation handoffs](consumers/INITIALIZATION_AND_VALIDATION_HANDOFFS.md), [product component scope](consumers/PRODUCT_DESIGN_SYSTEM_SCOPE.md) |
