@@ -17,15 +17,24 @@ review continuity and does not alter issue prerequisites. No PR is merged.
 
 | Command/inspection | Revision/platform | Outcome and limits |
 | --- | --- | --- |
-| `bash scripts/dev-env.sh setup` | main19d3d16, Linux x86_64; Node24.19.0/Python3.12.14 | Passed; Rust1.97.1, pnpm11.21.0, embedded-validator drift guard and CLI/reference build. Source/locks unchanged. |
-| `bash scripts/dev-env.sh browsers` | Same base/host | Passed downloads of Chromium/Headless Shell151.0.7922.34 revision1234 and FFmpeg1011; host fonts/browser behavior unqualified. |
+| `bash scripts/dev-env.sh setup` | main 19d3d16, Linux x86_64; Node 24.19.0 / Python 3.12.14 | Passed; Rust 1.97.1, pnpm 11.21.0, embedded-validator drift guard and CLI/reference build. Source/locks unchanged. |
+| `bash scripts/dev-env.sh browsers` | Same base/host | Passed downloads of Chromium/Headless Shell 151.0.7922.34 revision1234 and FFmpeg 1011; host fonts/browser behavior unqualified. |
 | Git fetch/main lookup, authenticated GitHub user/repo reads | Same managed session | Passed using injected authentication. No credential values inspected. |
 | Managed Docker socket info | Same host | Passed with execution permission; first sandbox-only attempt denied. No image/container/browser qualification run. |
-| Root `corepack pnpm --version` probe | Same host | Failed unpinned default lookup under sandbox networking; corrected renderer-directory probe passed11.21.0. No preset/policy change. |
+| Root `corepack pnpm --version` probe | Same host | Failed unpinned default lookup under sandbox networking; corrected renderer-directory probe passed 11.21.0. No preset/policy change. |
 | Initializer AST/new-schema JSON parsing, bounded rustfmt and `cargo build --locked --offline` | PR138 source above, Linux x86_64 | Passed syntax/build evidence only; initializer never executed. |
 | Publication Python AST, changed JS `node --check`, JSON/YAML and whitespace | PR139 source above | Passed syntax/static evidence only; publisher/source-validator paths never executed. |
+| `bash scripts/dev-env.sh build` | Documentation checkpoint `d7a2be8d264c51d550722a2c20f1cd8d6700a469`, Linux x86_64 | Passed standalone-bundle drift guard, CLI build and reference-fixture render/Vite build of the combined source stack; no initializer/native publisher path or test suite executed. |
 | Pinned continuity metadata JSON Schema, twelve headings and size | Draft source stack | Structural evidence only; official native owner-domain conformance remains unrun. |
-| Byte/source preservation | Draft stack versus main19d3d16 | All original roadmap machine blocks, original ADR files/dispositions,43 inventoried source/package files, legacy release config/index and approved PNG preserved; candidate master copies match. |
+| Byte/source preservation | Draft stack versus main 19d3d16 | All original roadmap machine blocks, original ADR files/dispositions, 43 inventoried source/package files, legacy release config/index and approved PNG preserved; candidate master copies match. |
+
+At `2026-11-05T06:07:32Z`, a fresh HTTPS `site.json` observation still selected
+`v1.0.0` at `aaad8839104704cf57bfa846539b3b875421e03d`, inventory digest
+`b757ea1a341638098b9b0ef28bb3be035838f33cc996820e133f9551a18f4d79`.
+This is a manifest-binding observation, not full live-byte verification,
+deployment or rollback proof. The documentation checkpoint also had zero
+Actions runs when queried. [PR140](https://github.com/egohygiene/identity/pull/140)
+retains the final documentation handoff.
 
 No regression, unit/integration, Clippy, browser/AX/visual, native platform,
 consumer upgrade, release/deployment or hosted CI qualification ran. No check
@@ -61,8 +70,8 @@ Run the existing owner-pinned advisory checks without converting incomplete
 domain coverage into conformance or accepting ADRs automatically.
 
 Investigate the retained Linux `ExecutableFileBusy`/OS-error26 first attempt
-from [CLI run39472257919](https://github.com/egohygiene/identity/actions/runs/39472257919),
-job118799319728, source5502106f301ed69c62396ccf4033342078412a46.
+from [CLI run 39472257919](https://github.com/egohygiene/identity/actions/runs/39472257919),
+job 118799319728, source 5502106f301ed69c62396ccf4033342078412a46.
 The historical retry supplied no diagnosis. Preserve failed evidence and
 qualify the actual repair if one is required.
 

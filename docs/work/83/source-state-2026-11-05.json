@@ -47,5 +47,25 @@
     "state": "planned",
     "issues": [],
     "disposition": "future scope; no selected quest-line consumer/profile; unchecked exits preserved"
+  },
+  "documentationCheckpoint": {
+    "pullRequest": 140,
+    "revision": "d7a2be8d264c51d550722a2c20f1cd8d6700a469",
+    "observedAt": "2026-11-05T06:07:32Z",
+    "workflowRuns": 0,
+    "build": "passed CLI/reference fixture only",
+    "qualification": "unrun"
+  },
+  "liveBindingObservation": {
+    "observedAt": "2026-11-05T06:07:32+00:00",
+    "release": {
+      "commit": "aaad8839104704cf57bfa846539b3b875421e03d",
+      "repository": "https://github.com/egohygiene/identity",
+      "tag": "v1.0.0",
+      "url": "https://github.com/egohygiene/identity/releases/tag/v1.0.0"
+    },
+    "sourceDigest": "b757ea1a341638098b9b0ef28bb3be035838f33cc996820e133f9551a18f4d79",
+    "publicationManifest": "packages/identity-brand-kit-v1.0.0.manifest.json",
+    "limitation": "Manifest binding observation only; no full live-byte or deployment/rollback qualification."
   }
 }
