@@ -1,144 +1,158 @@
-# Repository Intelligence source adoption
+# Repository Intelligence source feeds and native Compare adoption
 
-Refs [Pace #13](https://github.com/egohygiene/pace/issues/13),
-[Relay #101](https://github.com/egohygiene/relay/issues/101), and the
-[organization acceptance gate](https://github.com/egohygiene/.github/issues/41).
-The portable presentation was adopted in [Identity #141](https://github.com/egohygiene/identity/pull/141).
-The shared source implementation is [Relay #171](https://github.com/egohygiene/relay/pull/171).
-The next source slice follows [Relay #151](https://github.com/egohygiene/relay/issues/151)
-and [Search #102](https://github.com/egohygiene/relay/issues/102), with owner
-field attribution from [Observatory #29](https://github.com/egohygiene/observatory/pull/29).
+Refs [Relay #152](https://github.com/egohygiene/relay/issues/152),
+[Pace #13](https://github.com/egohygiene/pace/issues/13),
+[Identity #98](https://github.com/egohygiene/identity/issues/98) and
+[organization #41](https://github.com/egohygiene/.github/issues/41).
 
-This candidate extends Identity's existing repository Intelligence subtree with
-bounded public Git Journey evidence and owner-supplied Search field attribution.
-The existing canonical ADR source remains enabled. It adds no organization-site
-copy, new deployer or provider capture.
+The existing `Publish Identity Brand Kit` workflow remains the sole Pages
+publisher. Its canonical ADR, bounded Git Journey and attributed Search sources
+stay enabled. Current default-branch push/manual builds add actual bounded
+Work, Health and Releases captures plus admitted declared dependencies. Optional
+manual Compare follows that same native build, before consumer composition
+verification and upload. The organization site remains a fleet overview linking
+into each repository's site. Source delivery also references Relay
+[#146](https://github.com/egohygiene/relay/issues/146),
+[#149](https://github.com/egohygiene/relay/issues/149) and
+[#150](https://github.com/egohygiene/relay/issues/150); declared dependency
+admission references [#148](https://github.com/egohygiene/relay/issues/148).
 
-## Exact review boundary
+## Exact source selection
 
 | Selection | Source |
 | --- | --- |
-| Consumer base | `6e3010687034f7ee7825cda2dc9ebe5b1a7830df`, verified Identity `main` |
-| Candidate branch | `codex/intelligence-source-identity` |
-| Current builder and provenance selection | `9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff` in every current action and `relay-revision`/`relay_revision` binding in [`publish-brand-kit.yml`](../../.github/workflows/publish-brand-kit.yml) |
-| Previous current Relay selection | `49046d88ef6fe2e31e9a9f443a61157b598efb78` |
-| Intelligence source | Existing full publisher revision, or explicitly selected verified ancestor through `intelligence_revision` |
-| Stable Brand Kit source | Existing annotated stable tag/revision and release-owned configuration, unchanged |
+| Consumer base | Identity `e2457ef14b44f52faa03dc402bc3099434d7b028` |
+| Candidate branch | `codex/intelligence-native-compare` |
+| Current Relay producer, builder, Compare and provenance | `981ddf4367c67fcd625e54321d95bab027f6c0f2` throughout [`publish-brand-kit.yml`](../../.github/workflows/publish-brand-kit.yml) |
+| Previous current Relay selection | `9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff` |
+| Intelligence source | Exact publisher revision, or the existing explicitly selected ancestor when Compare is off |
+| Stable Brand Kit source | Existing annotated stable tag/revision and release-owned configuration |
 
-The current builder, composition verifier and deployment receipt must agree on
-the same Relay revision. This is one consumer adoption, not a fleet pin sweep.
-The newer shared generator is a candidate until its source and this consumer's
-output are reviewed. A committed pin does not prove a release or deployment.
-The separate advisory decision-validation workflow and its local adapter remain
-at `ac2600f4619f64c75a0e499e0540d8f48d516f9c`; this publisher upgrade does not
-repin that lane or the owner policy/validator sources.
+The shared source is the reviewed [Relay #176](https://github.com/egohygiene/relay/pull/176)
+revision pinned above. The producer, builder, post-build composer, composition
+checks and deployment receipt agree on that immutable selection. A source pin
+or merge supplies no runtime, artifact or deployment proof.
+The advisory decision-validation workflow retains its separate
+`ac2600f4619f64c75a0e499e0540d8f48d516f9c` selection.
 
-## Repository pages and source authority
+## Manual modes
 
-The shared Relay action generates `renderer/dist/intelligence/` within the
-existing final site tree. Identity's single `Publish Identity Brand Kit`
-workflow still builds the release-backed Brand Kit first, captures its baseline,
-composes the Intelligence subtree, creates the consumer-owned `/decisions/`
-alias and verifies the complete site before its existing deployment boundary.
+The existing workflow dispatch adds `intelligence_compare`, default `off`, and
+`intelligence_compare_baseline`, default empty. Push and release paths keep
+Compare off. The single existing build job receives `actions: read` for exact
+same-run capture intake and retained-baseline selection plus `issues: read`,
+`pull-requests: read` and `checks: read` for bounded provider reads. Its other
+permissions and downstream job conditions remain as before.
 
-Review the resulting repository overview, graph and `/intelligence/decisions/`
-at `identity.egohygiene.io`. Follow graph links to source-bound ADR evidence;
-module membership and position must not become a dependency or approval claim.
-The generated HTML and native graph assets belong to Relay, so Identity does
-not duplicate their route definitions or client implementation. The central
-organization site remains a fleet overview and drill-down entry point.
+- **off:** no snapshot retention or post-build Compare step runs. Current
+  source feeds still run on matching default-branch push/manual contexts.
+- **seed:** require an empty baseline record and capture one real current pair.
+  Supply `expected-baseline: none`; Compare remains unavailable. Successful
+  ordinary upload is a candidate handoff for a later run, not a fabricated
+  historical comparison.
+- **compare:** require one complete JSON selection from a real earlier
+  successful ordinary upload and successful producer attempt. No name/latest
+  lookup or partial selection is accepted.
 
-`collect-adrs: "true"` remains enabled, alongside the new explicit
-`collect-journey: "true"` and `search-attribution: "true"` selections. The source
-and activity ref remain the same exact publisher/selected ancestor revision.
-The existing full-history checkout supplies Git objects to Relay's bounded
-read-only collector; it runs no consumer code and needs no new provider scope.
-Generic commit evidence does not publish raw commit subjects, authors or emails.
-Native coverage, bounds, exclusions and freshness remain as actually reported;
-a bounded history is not promoted to complete history or delivery progress.
+Enabled modes require dispatch from the configured default branch with the
+publisher, Intelligence source and event SHA all equal. A branch/head race or
+historical ancestor replay is denied for Compare. Native collection and Compare
+both use the provider producer's actual UTC evaluation boundary after its
+captures. Existing source ancestry checks remain intact.
 
-Search uses Observatory's versioned approved title/key/kind/state/repository
-fields and its pinned matching algorithm. Opaque older records retain explicit
-unavailable attribution. A match, field label or Git event supplies no new ADR
-approval, implementation completion, health score or release/deployment proof.
+The JSON selection has exactly six string fields: `lease`, `artifact_id`,
+`artifact_digest`, `source_commit`, `run_id`, `run_attempt`. The lease is the
+action's actual `next-baseline-lease`; its ZIP digest is the actual
+`artifact-digest`, with its optional `sha256:` prefix. The artifact ID, source SHA,
+run and attempt must identify that exact public Identity upload. Duplicate or
+extra fields are rejected. No example identifiers or baseline are supplied.
+The shared action independently rechecks provider identity, successful attempt,
+age, access, original pair, digest lease and normalization compatibility.
 
-No Roadmap, provider Work, Health, Releases or comparison baseline is selected.
-Their missing evidence remains explicit. Compare retention stays an opt-in
-handoff until two real source-bound captures and an explicit baseline lease
-exist; this patch manufactures neither. Identity's canonical roadmap publication
-intent, all ADR text/metadata/approvals/lineage and policy pins remain unchanged.
+## Current provider source handoff
 
-## Preservation and recovery
+Capture is enabled only for push/manual dispatch on the configured default
+branch when the checked-out publisher, Intelligence source and event SHA match.
+Release events and existing historical ancestor replay retain their earlier
+native source path, original clock and disabled dependency/provider options.
+No PR or workflow-run artifact is substituted for a current capture.
 
-The workflow's jobs, triggers, conditions, permissions, concurrency, stable
-release selection, source ancestry checks, artifact handoff, canonical origin,
-route requirements and alias declaration remain byte-preserved apart from the
-explicit current Relay revision bindings and the two source/normalization
-opt-ins. There is no additional workflow or new execution gate.
+The pinned producer confirms public repository/head admission, captures bounded
+issue/PR, commit-matched check-run and published release evidence, and packs a
+closed source bundle. Raw bodies, comments, actors, emails, logs and optional
+titles are excluded. Provider failures and bounded pagination remain explicit;
+an empty or partial inventory never becomes complete conformance. Release
+metadata does not establish deployment or installation success.
 
-[`publication/decisions-rollback.json`](../../publication/decisions-rollback.json),
-its complete forty-file inventory, historical helper pin, archive digest,
-consumer revision, recorded site digest and ordering remain unchanged. Historical
-evidence is not repinned to the candidate. The existing capture must continue
-to retrieve and verify the recorded bytes before promotion. A later Brand Kit
-release or recovery-point refresh needs separate source and review evidence;
-this patch supplies neither a new rollback point nor an exercised recovery.
+An ordinary same-run upload retains that exact closed capture bundle. Its real
+artifact ID, ZIP digest and producer evaluation clock feed the native builder's
+existing authenticated intake; the builder freshly evaluates the captured
+sources and combines them with canonical ADRs and Journey before attributed
+Search normalization. `collect-dependencies` is enabled only on these current
+capture paths. It consumes Hygiene's exact reviewed public catalog and declared
+direct consumption, with runtime/package adoption still uncollected and no
+additional coverage domain invented.
 
-The consumer live verifier reads every file in the shared build manifest,
-checks source-binding equality and checks all captured Brand Kit files. New
-portable graph assets are therefore covered by the existing complete inventory
-mechanism when that verifier is eventually run. This is static inspection of
-the mechanism, not an executed byte-preservation or live check.
+The bounded producer receipt is retained independently as an ordinary artifact,
+including after a later build failure, and copied into the private publication
+handoff on success. Private `source-binding.json` records actual capture
+artifact ID/digest, run/attempt and evaluation clock. Neither raw captures nor
+these operational records enter the public Intelligence tree.
 
-## Parallel Identity work
+## Source-preserving composition
 
-At inspection, [draft #139](https://github.com/egohygiene/identity/pull/139)
-was open at `413aae01f53205312cdba4fdae60222f9f16d605`, based on draft #138.
-It modifies the same publisher and publication guide while preparing a native
-Brand Kit source lane. [Draft #140](https://github.com/egohygiene/identity/pull/140)
-was open at `78bb6815d226b79acf7a1c927afafd5f8e39d131` and also changes root
-continuity and architecture/docs. Neither draft is incorporated or superseded.
+The native action first builds `renderer/dist/intelligence` and retains its
+actual original pair plus receipt under `.cache/repository-intelligence/sources`.
+Compare consumes those exact files under `search-attribution-v1`. It verifies
+the native receipt, represented source, immutable generator and existing
+bundle, then recomposes only `compare/index.html` and its build manifest from
+the admitted in-memory owner evidence. All other payload files, including
+Journey, Search, Decisions and `provenance.source_collection`, keep exact bytes.
+The complete bundle is validated again. Missing/incompatible/expired baseline
+evidence withholds comparison honestly and preserves the old retained artifact.
 
-Reconcile the current Relay selection semantically with #139's publisher when
-choosing merge order. Keep its native source/release choice separate from this
-bounded Intelligence upgrade. Reconcile `CONTINUITY.md` with #140; do not choose
-one handoff wholesale and lose the other branch's deferred obligations.
+The existing consumer alias and `verify-composition` steps follow Compare.
+They read the **final tree and final manifest**, rather than using the earlier
+native builder's manifest/digest outputs. Deployment revalidates the downloaded
+final tree, and the existing live verifier derives its inventory from that final
+manifest. No stale pre-composition digest becomes publication authority.
 
-## Other consumer disposition
+The ordinary artifact action retains its operational receipt separately.
+Identity also records an optional private `compare.selection_candidate` in
+the existing retained `source-binding.json` when an upload actually returned
+an ID. Copy that complete record for a later selection only after the entire
+producer attempt succeeds. It is null without an upload. This is no mutable
+cloud pointer and no claim of global compare-and-swap. These operational fields
+and the original pair never enter the public site bundle.
 
-Akashic remains a useful later populated-roadmap canary, but
-[#197](https://github.com/egohygiene/akashic/issues/197) records an unresolved
-native `EGO-INTEL-ROADMAP-STATE-001` finding: `AKA-Q03` is ready while prerequisite
-`AKA-Q02` remains active. The current canonical file still contains that
-conflict. Do not enable native roadmap adoption, infer a new human state or
-relabel that source valid merely to populate a page. Its closed publication
-canary #185 and frozen historical rollback remain separate evidence.
+## Preservation and remaining evidence
 
-Hygiene's original ADR-0001 source/approval boundary and Empathy's producer
-revision mismatch retain their existing owners. They do not block this
-already adopted Identity ADR presentation, and they are not resolved here.
+The release-backed Brand Kit, product assets, canonical URL, existing source
+admission, deployment/recovery jobs, concurrency, route requirements and
+consumer-owned `/decisions/` alias retain their contracts. There is no new
+workflow or deployer. Canonical ADR text, approvals, lineage, roadmap and
+policy/validator pins remain unchanged. Other producer inputs retain their
+source owners; generic GitHub check runs do not resolve an unrelated normalized
+report's producer-revision mismatch or imply an organization-wide sanity pass.
 
-## Review and deferred qualification
+[`publication/decisions-rollback.json`](../../publication/decisions-rollback.json)
+and all historical evidence retain their exact bytes, digests, pins, ordering
+and source identities. This slice supplies no new recovery point or exercised
+rollback. Optional comparison does not turn semantic difference into causality,
+human approval, delivery completion or health conformance.
 
-Only static source and diff inspection is included. No native ADR collection,
-site build, typecheck, tests, CI, workflow dispatch, artifact upload, browser,
-mobile/keyboard/screen-reader review, byte comparison, Pages publication or
-live verification was run; the user deferred those checks. No issue is closed.
+No native collection, tests, builds, CI, workflow dispatch, artifact upload,
+browser, publication, live verification or rollback exercise was run; the user
+deferred those checks. Source/syntax review is implementation evidence only.
+Real first/second compatible captures and exact provider upload identities
+remain required for live Compare acceptance under Relay #152/#101 and Pace #13.
+No issue closes from this source adoption.
 
-The later qualification pass must inspect the exact candidate Relay source,
-run fresh same-revision ADR and Git Journey admission, review generated
-overview/Decisions/Journey/graph and owner Search attribution (including Unicode,
-cross-field and unavailable cases), then qualify all explicit unavailable states
-and the existing composed-site
-and recovery paths. After separately authorized publication, compare the exact
-manifest, source bindings, canonical URLs, logos/favicon and all preserved
-Brand Kit files with retained review artifacts. Source review, artifact proof,
-deployment result and live proof remain distinct.
-
-ADR disposition: reference accepted ADR-0017/ADR-0019 and the existing proposed
-ADR-0022 composition record, plus Hygiene ADR-0002's delivery-history boundary.
-This bounded source adoption under the existing design changes
-no durable ownership or publication boundary and needs no duplicate ADR;
-ADR-0022 remains proposed. The pinned Aether decision-impact 2.1.0 and continuity
-1.1.0 guidance at `dc8a16851f452763ef4f7fbe4bf057d4500b1921` was read for this
-handoff; no authoring/validator execution or lifecycle acceptance is claimed.
+ADR disposition: reference accepted ADR-0017/ADR-0019, the existing proposed
+ADR-0022 composition record and Hygiene ADR-0002's delivery-history boundary.
+This is bounded implementation of the existing composition design with an
+explicit opt-in and no new durable ownership or publication authority; no
+duplicate ADR is required. ADR-0022 remains proposed. The pinned Aether
+decision-impact 2.1.0 and continuity 1.1.0 guidance at
+`dc8a16851f452763ef4f7fbe4bf057d4500b1921` was read from Git source; no native
+validator execution or human lifecycle acceptance is inferred.

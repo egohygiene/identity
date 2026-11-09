@@ -32,6 +32,20 @@ on:
         required: false
         default: ""
         type: string
+      intelligence_compare:
+        description: "Optional Compare capture: off, seed a real first pair, or compare with an exact retained baseline"
+        required: false
+        default: "off"
+        type: choice
+        options:
+          - "off"
+          - "seed"
+          - "compare"
+      intelligence_compare_baseline:
+        description: "Complete reviewed baseline JSON record; required only for compare, empty for off/seed"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -53,6 +67,10 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
+      actions: read
+      issues: read
+      pull-requests: read
+      checks: read
       pages: write
 
     outputs:
@@ -287,25 +305,150 @@ jobs:
           --evidence-directory .relay/repository-intelligence-deployment
 
       - name: Capture the unchanged Brand Kit before composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
         with:
           operation: capture-baseline
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ steps.publisher.outputs.intelligence-commit }}
 
+      - name: Admit current provider capture and optional exact Compare selection
+        id: compare_selection
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          EVENT_SOURCE_COMMIT: ${{ github.sha }}
+          PUBLISHER_COMMIT: ${{ steps.publisher.outputs.commit }}
+          INTELLIGENCE_COMMIT: ${{ steps.publisher.outputs.intelligence-commit }}
+          COMPARE_MODE: ${{ inputs.intelligence_compare }}
+          COMPARE_BASELINE: ${{ inputs.intelligence_compare_baseline }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I - <<'PYTHON'
+          import json
+          import os
+          import re
+
+          event = os.environ["EVENT_NAME"]
+          mode = os.environ["COMPARE_MODE"] or "off"
+          raw = os.environ["COMPARE_BASELINE"]
+          keys = ("lease", "artifact_id", "artifact_digest", "source_commit", "run_id", "run_attempt")
+          values = dict.fromkeys(keys, "")
+          enabled = mode != "off"
+          current_source = (event in {"push", "workflow_dispatch"}
+              and os.environ["REF_NAME"] == os.environ["DEFAULT_BRANCH"]
+              and os.environ["PUBLISHER_COMMIT"] == os.environ["EVENT_SOURCE_COMMIT"]
+              and os.environ["INTELLIGENCE_COMMIT"] == os.environ["EVENT_SOURCE_COMMIT"])
+          if event != "workflow_dispatch" or not enabled:
+              if raw or (event != "workflow_dispatch" and enabled):
+                  raise SystemExit("Compare requires an explicit manual selection")
+          else:
+              if not current_source:
+                  raise SystemExit("Compare requires the current default-branch publisher/source revision")
+              if mode == "seed" and not raw:
+                  values["lease"] = "none"
+              elif mode == "compare" and 0 < len(raw) <= 2048:
+                  def unique(pairs):
+                      result = {}
+                      for key, value in pairs:
+                          if key in result:
+                              raise ValueError("Duplicate baseline field")
+                          result[key] = value
+                      return result
+                  values = json.loads(raw, object_pairs_hook=unique)
+                  patterns = {
+                      "lease": r"[0-9a-f]{64}:[0-9a-f]{64}",
+                      "artifact_id": r"[1-9][0-9]{0,19}",
+                      "artifact_digest": r"(?:sha256:)?[0-9a-f]{64}",
+                      "source_commit": r"[0-9a-f]{40}",
+                      "run_id": r"[1-9][0-9]{0,19}",
+                      "run_attempt": r"[1-9][0-9]{0,5}",
+                  }
+                  if (not isinstance(values, dict) or set(values) != set(keys)
+                          or any(not isinstance(values[key], str)
+                              or not re.fullmatch(patterns[key], values[key]) for key in keys)):
+                      raise SystemExit("Select all exact Compare baseline fields together")
+              else:
+                  raise SystemExit("Use seed with no baseline, or compare with a complete baseline record")
+          values["enabled"] = str(enabled).lower()
+          values["mode"] = mode
+          values["capture_enabled"] = str(current_source).lower()
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as target:
+              for key, value in values.items():
+                  target.write(key + "=" + value + "\n")
+          PYTHON
+
+      - name: Capture bounded public Work, Health and Releases sources
+        id: public_sources
+        if: steps.compare_selection.outputs.capture_enabled == 'true'
+        uses: egohygiene/relay/actions/repository-intelligence-github-sources@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        with:
+          github-token: ${{ github.token }}
+          sources: work,health,releases
+
+      - name: Retain exact same-run source captures
+        id: source_capture_upload
+        if: steps.compare_selection.outputs.capture_enabled == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ${{ steps.public_sources.outputs.artifact-name }}
+          path: ${{ steps.public_sources.outputs.artifact-directory }}
+          overwrite: false
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Retain bounded source producer evidence independently
+        if: always() && steps.public_sources.outputs.producer-receipt != ''
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: identity-source-producer-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ steps.public_sources.outputs.producer-receipt }}
+          overwrite: false
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Keep the bounded source receipt with private publication evidence
+        if: steps.compare_selection.outputs.capture_enabled == 'true'
+        env:
+          SOURCE_PRODUCER_RECEIPT: ${{ steps.public_sources.outputs.producer-receipt }}
+        shell: bash
+        run: cp -- "${SOURCE_PRODUCER_RECEIPT}" .relay/repository-intelligence-deployment/source-producer.json
+
       - name: Build validated Repository Intelligence from canonical ADRs
         id: intelligence
-        uses: egohygiene/relay/actions/repository-intelligence@9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+        uses: egohygiene/relay/actions/repository-intelligence@981ddf4367c67fcd625e54321d95bab027f6c0f2
         with:
           collect-adrs: "true"
           collect-journey: "true"
           search-attribution: "true"
+          collect-dependencies: ${{ steps.compare_selection.outputs.capture_enabled }}
+          source-capture-artifact-id: ${{ steps.source_capture_upload.outputs.artifact-id }}
+          source-capture-artifact-digest: ${{ steps.source_capture_upload.outputs.artifact-digest }}
+          as-of: ${{ steps.public_sources.outputs.as-of }}
           output-directory: renderer/dist/intelligence
           work-directory: .cache/repository-intelligence
           source-commit: ${{ steps.publisher.outputs.intelligence-commit }}
           activity-ref: ${{ steps.publisher.outputs.intelligence-commit }}
           require-full-history: "true"
+
+      - name: Retain the selected native pair and compose Compare in place
+        id: compare
+        if: steps.compare_selection.outputs.enabled == 'true'
+        uses: egohygiene/relay/actions/repository-intelligence-compare-artifact@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        with:
+          source-directory: ${{ github.workspace }}/.cache/repository-intelligence/sources
+          intelligence-directory: renderer/dist/intelligence
+          as-of: ${{ steps.public_sources.outputs.as-of }}
+          normalization-profile: search-attribution-v1
+          expected-baseline: ${{ steps.compare_selection.outputs.lease }}
+          baseline-artifact-id: ${{ steps.compare_selection.outputs.artifact_id }}
+          baseline-artifact-digest: ${{ steps.compare_selection.outputs.artifact_digest }}
+          baseline-source-commit: ${{ steps.compare_selection.outputs.source_commit }}
+          baseline-run-id: ${{ steps.compare_selection.outputs.run_id }}
+          baseline-run-attempt: ${{ steps.compare_selection.outputs.run_attempt }}
+          retention-days: "30"
 
       - name: Compose the consumer-owned Decisions alias
         run: >-
@@ -316,13 +459,13 @@ jobs:
 
       - name: Verify composed routes and byte-preserved Brand Kit
         id: composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
         with:
           operation: verify-composition
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ steps.publisher.outputs.intelligence-commit }}
-          relay-revision: 9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+          relay-revision: 981ddf4367c67fcd625e54321d95bab027f6c0f2
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
 
@@ -332,6 +475,14 @@ jobs:
           INTELLIGENCE_COMMIT: ${{ steps.publisher.outputs.intelligence-commit }}
           RELEASE_TAG: ${{ steps.release.outputs.tag }}
           RELEASE_COMMIT: ${{ steps.release.outputs.commit }}
+          COMPARE_MODE: ${{ steps.compare_selection.outputs.mode }}
+          COMPARE_STATUS: ${{ steps.compare.outputs.status }}
+          COMPARE_ARTIFACT_ID: ${{ steps.compare.outputs.artifact-id }}
+          COMPARE_ARTIFACT_DIGEST: ${{ steps.compare.outputs.artifact-digest }}
+          COMPARE_NEXT_LEASE: ${{ steps.compare.outputs.next-baseline-lease }}
+          SOURCE_CAPTURE_ID: ${{ steps.source_capture_upload.outputs.artifact-id }}
+          SOURCE_CAPTURE_DIGEST: ${{ steps.source_capture_upload.outputs.artifact-digest }}
+          SOURCE_CAPTURE_AS_OF: ${{ steps.public_sources.outputs.as-of }}
         shell: bash
         run: |
           set -euo pipefail
@@ -348,8 +499,30 @@ jobs:
                   "tag": os.environ["RELEASE_TAG"],
                   "revision": os.environ["RELEASE_COMMIT"],
               },
-              "relay_revision": "9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff",
+              "relay_revision": "981ddf4367c67fcd625e54321d95bab027f6c0f2",
           }
+          if os.environ["SOURCE_CAPTURE_ID"]:
+              binding["source_capture"] = {
+                  "artifact_id": os.environ["SOURCE_CAPTURE_ID"],
+                  "artifact_digest": os.environ["SOURCE_CAPTURE_DIGEST"],
+                  "as_of": os.environ["SOURCE_CAPTURE_AS_OF"],
+                  "run_id": os.environ["GITHUB_RUN_ID"],
+                  "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+              }
+          if os.environ["COMPARE_MODE"] != "off":
+              artifact_id = os.environ["COMPARE_ARTIFACT_ID"]
+              binding["compare"] = {
+                  "mode": os.environ["COMPARE_MODE"],
+                  "status": os.environ["COMPARE_STATUS"],
+                  "selection_candidate": {
+                      "lease": os.environ["COMPARE_NEXT_LEASE"],
+                      "artifact_id": artifact_id,
+                      "artifact_digest": os.environ["COMPARE_ARTIFACT_DIGEST"],
+                      "source_commit": os.environ["INTELLIGENCE_COMMIT"],
+                      "run_id": os.environ["GITHUB_RUN_ID"],
+                      "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+                  } if artifact_id else None,
+              }
           Path(".relay/repository-intelligence-deployment/source-binding.json").write_text(
               json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8"
           )
@@ -365,6 +538,7 @@ jobs:
             .relay/repository-intelligence-deployment/consumer-route-baseline.json
             .relay/repository-intelligence-deployment/composition-verification.json
             .relay/repository-intelligence-deployment/source-binding.json
+            .relay/repository-intelligence-deployment/source-producer.json
             .relay/repository-intelligence-deployment/rollback-site.tar
             .relay/repository-intelligence-deployment/rollback-record.json
             .relay/repository-intelligence-deployment/rollback-capture.json
@@ -417,13 +591,13 @@ jobs:
 
       - name: Revalidate downloaded composition before deployment
         id: composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
         with:
           operation: verify-composition
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
-          relay-revision: 9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+          relay-revision: 981ddf4367c67fcd625e54321d95bab027f6c0f2
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
 
@@ -505,13 +679,13 @@ jobs:
         if: >-
           always() && steps.download.outcome == 'success' &&
           contains(fromJSON('["success","failure","cancelled"]'), steps.deployment.outcome)
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
         with:
           operation: record-receipt
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
-          relay-revision: 9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff
+          relay-revision: 981ddf4367c67fcd625e54321d95bab027f6c0f2
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
           workflow-run-id: ${{ github.run_id }}
