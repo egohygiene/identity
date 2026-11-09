@@ -15,6 +15,13 @@ calls Relay without copying its validator or acquiring publication authority.
 | EgoLint architecture validator | `d917ea524962639494e5bb4b3196192238ba57d9` |
 | Holon materialization contract | `a7734dba83305276b12932fcd4ce348044d9a2e9` |
 
+These are the advisory architecture-validation selections. The existing Pages
+publisher separately selects Relay `49046d88ef6fe2e31e9a9f443a61157b598efb78`
+for its builder and composition/deployment provenance; see the
+[portable Intelligence candidate](publication/INTELLIGENCE_CANDIDATE.md).
+That unqualified publication upgrade preserves this advisory workflow and all
+historical source receipts.
+
 Relay's `1.0.0-alpha.4` architecture profile verifies source artifact digests.
 This is reviewed source adoption, not a claim that every input is released.
 The separately pinned roadmap/projection contract entries in the TOML retain
@@ -221,6 +228,6 @@ without modifying Brand Kit publication, ADR history or deployment rollback.
 
 ## Four-digit adoption — 2026-10-18
 
-Current policy: Hygiene v1.2.0 at `a05b14f8b9e2772124f879f818e09a911e996ad8`; native validator: EgoLint `d917ea524962639494e5bb4b3196192238ba57d9`; both shared runtime entrypoints: Relay `ac2600f4619f64c75a0e499e0540d8f48d516f9c` (architecture profile alpha.4). Authoring: Aether `dc8a16851f452763ef4f7fbe4bf057d4500b1921`, spec 3.1.0, skill 2.1.0 and managed module 0.3.0. The shared projection merge boundary preserves consumer instructions and copies the module exactly.
+At this dated checkpoint: Hygiene v1.2.0 at `a05b14f8b9e2772124f879f818e09a911e996ad8`; native validator: EgoLint `d917ea524962639494e5bb4b3196192238ba57d9`; both shared runtime entrypoints: Relay `ac2600f4619f64c75a0e499e0540d8f48d516f9c` (architecture profile alpha.4). Authoring: Aether `dc8a16851f452763ef4f7fbe4bf057d4500b1921`, spec 3.1.0, skill 2.1.0 and managed module 0.3.0. The shared projection merge boundary preserves consumer instructions and copies the module exactly. The current publication selection is recorded above separately from the advisory lane.
 
 The [per-record map](adr-workflow/2026-10-18-four-digit-ids.md) covers all 24 canonical filename/ID changes; the separate inline map is in root DECISIONS.md. Status and approval remain independent: 21 accepted, three proposed. Dated human ratification, immutable source receipts and publication rollback archives retain their original IDs and bytes. Earlier selections in this guide record prior checkpoints rather than the current runtime. Validate the complete corpus with the selected native tools before publication. Identity #114 remains a separate audit draft.
