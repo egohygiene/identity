@@ -1,23 +1,27 @@
-# Repository Intelligence candidate adoption
+# Repository Intelligence source adoption
 
 Refs [Pace #13](https://github.com/egohygiene/pace/issues/13),
 [Relay #101](https://github.com/egohygiene/relay/issues/101), and the
 [organization acceptance gate](https://github.com/egohygiene/.github/issues/41).
-Shared implementation review: [Relay draft #167](https://github.com/egohygiene/relay/pull/167).
+The portable presentation was adopted in [Identity #141](https://github.com/egohygiene/identity/pull/141).
+The shared source implementation is [Relay #171](https://github.com/egohygiene/relay/pull/171).
+The next source slice follows [Relay #151](https://github.com/egohygiene/relay/issues/151)
+and [Search #102](https://github.com/egohygiene/relay/issues/102), with owner
+field attribution from [Observatory #29](https://github.com/egohygiene/observatory/pull/29).
 
-This candidate upgrades the existing Identity-owned Repository Intelligence
-subtree to the shared portable Relay presentation. It uses the already adopted
-canonical ADR source so the repository graph and Decisions view have real local
-evidence. It adds no organization-site copy, new deployer or source domain.
+This candidate extends Identity's existing repository Intelligence subtree with
+bounded public Git Journey evidence and owner-supplied Search field attribution.
+The existing canonical ADR source remains enabled. It adds no organization-site
+copy, new deployer or provider capture.
 
 ## Exact review boundary
 
 | Selection | Source |
 | --- | --- |
-| Consumer base | `19d3d16bd149ddb61a03924a2b688e8e689af68b`, verified Identity `main` |
-| Candidate branch | `codex/intelligence-portable-identity` |
-| Current builder and provenance selection | `49046d88ef6fe2e31e9a9f443a61157b598efb78` in every current action and `relay-revision`/`relay_revision` binding in [`publish-brand-kit.yml`](../../.github/workflows/publish-brand-kit.yml) |
-| Previous current Relay selection | `ac2600f4619f64c75a0e499e0540d8f48d516f9c` |
+| Consumer base | `6e3010687034f7ee7825cda2dc9ebe5b1a7830df`, verified Identity `main` |
+| Candidate branch | `codex/intelligence-source-identity` |
+| Current builder and provenance selection | `9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff` in every current action and `relay-revision`/`relay_revision` binding in [`publish-brand-kit.yml`](../../.github/workflows/publish-brand-kit.yml) |
+| Previous current Relay selection | `49046d88ef6fe2e31e9a9f443a61157b598efb78` |
 | Intelligence source | Existing full publisher revision, or explicitly selected verified ancestor through `intelligence_revision` |
 | Stable Brand Kit source | Existing annotated stable tag/revision and release-owned configuration, unchanged |
 
@@ -44,20 +48,33 @@ The generated HTML and native graph assets belong to Relay, so Identity does
 not duplicate their route definitions or client implementation. The central
 organization site remains a fleet overview and drill-down entry point.
 
-`collect-adrs: "true"` remains the only adopted source selection. No Roadmap,
-Git history, Work, Health, Releases, comparison baseline or other producer is
-enabled by this patch. Their pages must retain honest uncollected/unavailable
-states. Identity's canonical roadmap still declares central publication; this
-presentation upgrade does not silently change that intent or its lifecycle.
-All ADR text, metadata, approvals, lineage and policy pins remain unchanged.
+`collect-adrs: "true"` remains enabled, alongside the new explicit
+`collect-journey: "true"` and `search-attribution: "true"` selections. The source
+and activity ref remain the same exact publisher/selected ancestor revision.
+The existing full-history checkout supplies Git objects to Relay's bounded
+read-only collector; it runs no consumer code and needs no new provider scope.
+Generic commit evidence does not publish raw commit subjects, authors or emails.
+Native coverage, bounds, exclusions and freshness remain as actually reported;
+a bounded history is not promoted to complete history or delivery progress.
+
+Search uses Observatory's versioned approved title/key/kind/state/repository
+fields and its pinned matching algorithm. Opaque older records retain explicit
+unavailable attribution. A match, field label or Git event supplies no new ADR
+approval, implementation completion, health score or release/deployment proof.
+
+No Roadmap, provider Work, Health, Releases or comparison baseline is selected.
+Their missing evidence remains explicit. Compare retention stays an opt-in
+handoff until two real source-bound captures and an explicit baseline lease
+exist; this patch manufactures neither. Identity's canonical roadmap publication
+intent, all ADR text/metadata/approvals/lineage and policy pins remain unchanged.
 
 ## Preservation and recovery
 
 The workflow's jobs, triggers, conditions, permissions, concurrency, stable
 release selection, source ancestry checks, artifact handoff, canonical origin,
 route requirements and alias declaration remain byte-preserved apart from the
-explicit current Relay revision bindings. There is no additional workflow or
-new execution gate.
+explicit current Relay revision bindings and the two source/normalization
+opt-ins. There is no additional workflow or new execution gate.
 
 [`publication/decisions-rollback.json`](../../publication/decisions-rollback.json),
 its complete forty-file inventory, historical helper pin, archive digest,
@@ -109,15 +126,18 @@ mobile/keyboard/screen-reader review, byte comparison, Pages publication or
 live verification was run; the user deferred those checks. No issue is closed.
 
 The later qualification pass must inspect the exact candidate Relay source,
-run fresh same-revision ADR admission, review generated overview/Decisions/graph
-and all explicit unavailable states, then qualify the existing composed-site
+run fresh same-revision ADR and Git Journey admission, review generated
+overview/Decisions/Journey/graph and owner Search attribution (including Unicode,
+cross-field and unavailable cases), then qualify all explicit unavailable states
+and the existing composed-site
 and recovery paths. After separately authorized publication, compare the exact
 manifest, source bindings, canonical URLs, logos/favicon and all preserved
 Brand Kit files with retained review artifacts. Source review, artifact proof,
 deployment result and live proof remain distinct.
 
 ADR disposition: reference accepted ADR-0017/ADR-0019 and the existing proposed
-ADR-0022 composition record. This routine shared implementation upgrade changes
+ADR-0022 composition record, plus Hygiene ADR-0002's delivery-history boundary.
+This bounded source adoption under the existing design changes
 no durable ownership or publication boundary and needs no duplicate ADR;
 ADR-0022 remains proposed. The pinned Aether decision-impact 2.1.0 and continuity
 1.1.0 guidance at `dc8a16851f452763ef4f7fbe4bf057d4500b1921` was read for this

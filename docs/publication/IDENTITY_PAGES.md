@@ -218,8 +218,8 @@ an automatic run.
 
 ## Decisions composition checkpoint — 2026-10-10
 
-The [portable Intelligence candidate packet](INTELLIGENCE_CANDIDATE.md) records
-the separately reviewed next consumer upgrade and its deferred qualification.
+The [Intelligence source-adoption packet](INTELLIGENCE_CANDIDATE.md) records
+the next public Git Journey/Search extension and its deferred qualification.
 The source revisions, file counts and deployment claims in this dated section
 remain historical evidence; they do not establish the candidate's publication.
 
