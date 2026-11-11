@@ -1,4 +1,4 @@
-# Repository Intelligence source feeds and native Compare adoption
+# Repository Intelligence source feeds, typed reviews and native Compare
 
 Refs [Relay #152](https://github.com/egohygiene/relay/issues/152),
 [Pace #13](https://github.com/egohygiene/pace/issues/13),
@@ -16,22 +16,29 @@ into each repository's site. Source delivery also references Relay
 [#149](https://github.com/egohygiene/relay/issues/149) and
 [#150](https://github.com/egohygiene/relay/issues/150); declared dependency
 admission references [#148](https://github.com/egohygiene/relay/issues/148).
+The optional manual [typed review-feed plan](REVIEW_FEEDS.md) adds supplied
+public Audits/Sanity evidence through the same source and evaluation boundary.
+An empty selection retains unavailable/unsupported review evidence; no audit,
+architecture review or authenticated human decision is fabricated.
 
 ## Exact source selection
 
 | Selection | Source |
 | --- | --- |
-| Consumer base | Identity `e2457ef14b44f52faa03dc402bc3099434d7b028` |
-| Candidate branch | `codex/intelligence-native-compare` |
-| Current Relay producer, builder, Compare and provenance | `981ddf4367c67fcd625e54321d95bab027f6c0f2` throughout [`publish-brand-kit.yml`](../../.github/workflows/publish-brand-kit.yml) |
-| Previous current Relay selection | `9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff` |
+| Consumer base | Identity `401b2f1de298a171fbb5bf4ee6b510e0cf12c301` |
+| Candidate branch | `codex/identity-review-feed-consumer` |
+| Current Relay producer, review feed, builder, Compare and provenance | `5d27be5ce1599df883e31f14cd894eb18622c18c` throughout [`publish-brand-kit.yml`](../../.github/workflows/publish-brand-kit.yml) |
+| Previous current Relay selection | `981ddf4367c67fcd625e54321d95bab027f6c0f2` |
 | Intelligence source | Exact publisher revision, or the existing explicitly selected ancestor when Compare is off |
 | Stable Brand Kit source | Existing annotated stable tag/revision and release-owned configuration |
 
-The shared source is the reviewed [Relay #176](https://github.com/egohygiene/relay/pull/176)
-revision pinned above. The producer, builder, post-build composer, composition
-checks and deployment receipt agree on that immutable selection. A source pin
-or merge supplies no runtime, artifact or deployment proof.
+The producer, shared typed review normalizer, builder, post-build composer,
+composition checks and deployment receipt agree on the immutable selection
+above. The earlier Work/Compare checkpoint selected
+[Relay #176](https://github.com/egohygiene/relay/pull/176); its historical source
+receipts are unchanged. A source pin or merge supplies no runtime, artifact or
+deployment proof. The typed feed uses the existing separate owner-model inputs,
+without extending the core graph schema or inventing a human-review result.
 The advisory decision-validation workflow retains its separate
 `ac2600f4619f64c75a0e499e0540d8f48d516f9c` selection.
 
@@ -39,7 +46,10 @@ The advisory decision-validation workflow retains its separate
 
 The existing workflow dispatch adds `intelligence_compare`, default `off`, and
 `intelligence_compare_baseline`, default empty. Push and release paths keep
-Compare off. The single existing build job receives `actions: read` for exact
+Compare off. `intelligence_review_plan` independently defaults empty; its
+current-source admission, actual owner outputs and ordinary receipt retention
+are documented in [the review-feed guide](REVIEW_FEEDS.md). The single existing
+build job retains `actions: read` for exact
 same-run capture intake and retained-baseline selection plus `issues: read`,
 `pull-requests: read` and `checks: read` for bounded provider reads. Its other
 permissions and downstream job conditions remain as before.

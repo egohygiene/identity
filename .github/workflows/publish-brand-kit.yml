@@ -46,6 +46,11 @@ on:
         required: false
         default: ""
         type: string
+      intelligence_review_plan:
+        description: "Optional checked-in public typed review plan at the current source revision; empty leaves review feeds unavailable"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -305,7 +310,7 @@ jobs:
           --evidence-directory .relay/repository-intelligence-deployment
 
       - name: Capture the unchanged Brand Kit before composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@5d27be5ce1599df883e31f14cd894eb18622c18c
         with:
           operation: capture-baseline
           site-directory: renderer/dist
@@ -323,6 +328,7 @@ jobs:
           INTELLIGENCE_COMMIT: ${{ steps.publisher.outputs.intelligence-commit }}
           COMPARE_MODE: ${{ inputs.intelligence_compare }}
           COMPARE_BASELINE: ${{ inputs.intelligence_compare_baseline }}
+          REVIEW_PLAN: ${{ inputs.intelligence_review_plan }}
         shell: bash
         run: |
           set -euo pipefail
@@ -341,6 +347,13 @@ jobs:
               and os.environ["REF_NAME"] == os.environ["DEFAULT_BRANCH"]
               and os.environ["PUBLISHER_COMMIT"] == os.environ["EVENT_SOURCE_COMMIT"]
               and os.environ["INTELLIGENCE_COMMIT"] == os.environ["EVENT_SOURCE_COMMIT"])
+          review_plan = os.environ["REVIEW_PLAN"]
+          if review_plan:
+              if event != "workflow_dispatch" or not current_source:
+                  raise SystemExit("Review feeds require the current default-branch publisher/source revision")
+              if (len(review_plan) > 240 or not re.fullmatch(r"[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*", review_plan)
+                      or any(part in {".", "..", ".git"} for part in review_plan.split("/"))):
+                  raise SystemExit("Select a canonical repository-relative typed review plan path")
           if event != "workflow_dispatch" or not enabled:
               if raw or (event != "workflow_dispatch" and enabled):
                   raise SystemExit("Compare requires an explicit manual selection")
@@ -375,6 +388,8 @@ jobs:
           values["enabled"] = str(enabled).lower()
           values["mode"] = mode
           values["capture_enabled"] = str(current_source).lower()
+          values["review_plan"] = review_plan
+          values["review_enabled"] = str(bool(review_plan)).lower()
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as target:
               for key, value in values.items():
                   target.write(key + "=" + value + "\n")
@@ -383,7 +398,7 @@ jobs:
       - name: Capture bounded public Work, Health and Releases sources
         id: public_sources
         if: steps.compare_selection.outputs.capture_enabled == 'true'
-        uses: egohygiene/relay/actions/repository-intelligence-github-sources@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        uses: egohygiene/relay/actions/repository-intelligence-github-sources@5d27be5ce1599df883e31f14cd894eb18622c18c
         with:
           github-token: ${{ github.token }}
           sources: work,health,releases
@@ -416,9 +431,33 @@ jobs:
         shell: bash
         run: cp -- "${SOURCE_PRODUCER_RECEIPT}" .relay/repository-intelligence-deployment/source-producer.json
 
+      - name: Normalize supplied public typed audit and architecture reviews
+        id: review_feed
+        if: steps.compare_selection.outputs.review_enabled == 'true'
+        uses: egohygiene/relay/actions/repository-intelligence-review-feed@5d27be5ce1599df883e31f14cd894eb18622c18c
+        with:
+          source-root: ${{ github.workspace }}
+          plan: ${{ steps.compare_selection.outputs.review_plan }}
+          repository: ${{ github.repository }}
+          represented-commit: ${{ steps.publisher.outputs.intelligence-commit }}
+          as-of: ${{ steps.public_sources.outputs.as-of }}
+          output-directory: .cache/repository-review-feed
+
+      - name: Retain the separate normalized review-feed artifact
+        id: review_feed_upload
+        if: always() && steps.review_feed.outputs.artifact-directory != ''
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: identity-review-feed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ steps.review_feed.outputs.artifact-directory }}
+          include-hidden-files: true
+          overwrite: false
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Build validated Repository Intelligence from canonical ADRs
         id: intelligence
-        uses: egohygiene/relay/actions/repository-intelligence@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        uses: egohygiene/relay/actions/repository-intelligence@5d27be5ce1599df883e31f14cd894eb18622c18c
         with:
           collect-adrs: "true"
           collect-journey: "true"
@@ -426,6 +465,8 @@ jobs:
           collect-dependencies: ${{ steps.compare_selection.outputs.capture_enabled }}
           source-capture-artifact-id: ${{ steps.source_capture_upload.outputs.artifact-id }}
           source-capture-artifact-digest: ${{ steps.source_capture_upload.outputs.artifact-digest }}
+          observatory-audits: ${{ steps.review_feed.outputs.repository-audits }}
+          observatory-sanity: ${{ steps.review_feed.outputs.repository-sanity }}
           as-of: ${{ steps.public_sources.outputs.as-of }}
           output-directory: renderer/dist/intelligence
           work-directory: .cache/repository-intelligence
@@ -436,7 +477,7 @@ jobs:
       - name: Retain the selected native pair and compose Compare in place
         id: compare
         if: steps.compare_selection.outputs.enabled == 'true'
-        uses: egohygiene/relay/actions/repository-intelligence-compare-artifact@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        uses: egohygiene/relay/actions/repository-intelligence-compare-artifact@5d27be5ce1599df883e31f14cd894eb18622c18c
         with:
           source-directory: ${{ github.workspace }}/.cache/repository-intelligence/sources
           intelligence-directory: renderer/dist/intelligence
@@ -450,6 +491,13 @@ jobs:
           baseline-run-attempt: ${{ steps.compare_selection.outputs.run_attempt }}
           retention-days: "30"
 
+      - name: Keep the review-feed receipt with private publication evidence
+        if: steps.compare_selection.outputs.review_enabled == 'true'
+        env:
+          REVIEW_FEED_RECEIPT: ${{ steps.review_feed.outputs.receipt-path }}
+        shell: bash
+        run: cp -- "${REVIEW_FEED_RECEIPT}" .relay/repository-intelligence-deployment/review-feed.json
+
       - name: Compose the consumer-owned Decisions alias
         run: >-
           python3 scripts/identity_decisions_publication.py
@@ -459,13 +507,13 @@ jobs:
 
       - name: Verify composed routes and byte-preserved Brand Kit
         id: composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@5d27be5ce1599df883e31f14cd894eb18622c18c
         with:
           operation: verify-composition
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ steps.publisher.outputs.intelligence-commit }}
-          relay-revision: 981ddf4367c67fcd625e54321d95bab027f6c0f2
+          relay-revision: 5d27be5ce1599df883e31f14cd894eb18622c18c
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
 
@@ -483,6 +531,10 @@ jobs:
           SOURCE_CAPTURE_ID: ${{ steps.source_capture_upload.outputs.artifact-id }}
           SOURCE_CAPTURE_DIGEST: ${{ steps.source_capture_upload.outputs.artifact-digest }}
           SOURCE_CAPTURE_AS_OF: ${{ steps.public_sources.outputs.as-of }}
+          REVIEW_FEED_ENABLED: ${{ steps.compare_selection.outputs.review_enabled }}
+          REVIEW_FEED_RECEIPT_SHA256: ${{ steps.review_feed.outputs.receipt-sha256 }}
+          REVIEW_FEED_ARTIFACT_ID: ${{ steps.review_feed_upload.outputs.artifact-id }}
+          REVIEW_FEED_ARTIFACT_DIGEST: ${{ steps.review_feed_upload.outputs.artifact-digest }}
         shell: bash
         run: |
           set -euo pipefail
@@ -499,7 +551,7 @@ jobs:
                   "tag": os.environ["RELEASE_TAG"],
                   "revision": os.environ["RELEASE_COMMIT"],
               },
-              "relay_revision": "981ddf4367c67fcd625e54321d95bab027f6c0f2",
+              "relay_revision": "5d27be5ce1599df883e31f14cd894eb18622c18c",
           }
           if os.environ["SOURCE_CAPTURE_ID"]:
               binding["source_capture"] = {
@@ -523,6 +575,18 @@ jobs:
                       "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
                   } if artifact_id else None,
               }
+          if os.environ["REVIEW_FEED_ENABLED"] == "true":
+              binding["review_feed"] = {
+                  "repository": "egohygiene/identity",
+                  "represented_commit": os.environ["INTELLIGENCE_COMMIT"],
+                  "as_of": os.environ["SOURCE_CAPTURE_AS_OF"],
+                  "receipt_sha256": os.environ["REVIEW_FEED_RECEIPT_SHA256"],
+                  "artifact_name": "identity-review-feed-" + os.environ["GITHUB_RUN_ID"] + "-" + os.environ["GITHUB_RUN_ATTEMPT"],
+                  "artifact_id": os.environ["REVIEW_FEED_ARTIFACT_ID"],
+                  "artifact_digest": os.environ["REVIEW_FEED_ARTIFACT_DIGEST"],
+                  "run_id": os.environ["GITHUB_RUN_ID"],
+                  "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+              }
           Path(".relay/repository-intelligence-deployment/source-binding.json").write_text(
               json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8"
           )
@@ -539,6 +603,7 @@ jobs:
             .relay/repository-intelligence-deployment/composition-verification.json
             .relay/repository-intelligence-deployment/source-binding.json
             .relay/repository-intelligence-deployment/source-producer.json
+            .relay/repository-intelligence-deployment/review-feed.json
             .relay/repository-intelligence-deployment/rollback-site.tar
             .relay/repository-intelligence-deployment/rollback-record.json
             .relay/repository-intelligence-deployment/rollback-capture.json
@@ -591,13 +656,13 @@ jobs:
 
       - name: Revalidate downloaded composition before deployment
         id: composition
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@5d27be5ce1599df883e31f14cd894eb18622c18c
         with:
           operation: verify-composition
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
-          relay-revision: 981ddf4367c67fcd625e54321d95bab027f6c0f2
+          relay-revision: 5d27be5ce1599df883e31f14cd894eb18622c18c
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
 
@@ -679,13 +744,13 @@ jobs:
         if: >-
           always() && steps.download.outcome == 'success' &&
           contains(fromJSON('["success","failure","cancelled"]'), steps.deployment.outcome)
-        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@981ddf4367c67fcd625e54321d95bab027f6c0f2
+        uses: egohygiene/relay/actions/repository-intelligence-deployment-provenance@5d27be5ce1599df883e31f14cd894eb18622c18c
         with:
           operation: record-receipt
           site-directory: renderer/dist
           intelligence-directory: renderer/dist/intelligence
           consumer-revision: ${{ needs.build.outputs.intelligence_commit }}
-          relay-revision: 981ddf4367c67fcd625e54321d95bab027f6c0f2
+          relay-revision: 5d27be5ce1599df883e31f14cd894eb18622c18c
           required-routes: '["/","/brand-kit/","/intelligence/","/intelligence/decisions/","/decisions/"]'
           aliases: '[{"route":"/decisions/","target":"/intelligence/decisions/"}]'
           workflow-run-id: ${{ github.run_id }}
