@@ -7,24 +7,24 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-09T18:05:19Z'
+  updated_at: '2026-11-11T19:18:00Z'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Adopt current public source feeds and optional native Compare in Identity's existing Pages publisher.
+  purpose: Adopt the shared source-bound typed review feed in Identity's existing Repository Intelligence publisher.
   includes:
-  - Current producer, builder, Compare and provenance selections use the exact reviewed Relay 981ddf4367c67fcd625e54321d95bab027f6c0f2,
-    merged through PR 176. Matching default-branch push/manual builds capture public Work/Health/Releases,
-    upload their exact same-run artifact and pass actual producer time plus artifact ID/digest to native intake.
-    Declared dependencies enable only on those fresh capture paths.
-  - Manual Compare defaults off. Seed retains a real first pair without a fabricated baseline; compare requires
-    the complete exact prior selection. Native build and optional composition share the actual capture clock.
-    Final composed manifest/tree evidence is read after Compare and alias composition.
-  - Existing release/historical replay, Brand Kit composition, ADR source selection, job/deployment gates and
-    recorded recovery bytes retain their contracts. Added Actions/issues/PR/check scopes are read-only; bounded
-    operational receipts stay outside the site.
+  - Current action, builder and provenance selectors adopt exact public Relay 5d27be5ce1599df883e31f14cd894eb18622c18c
+    from draft PR181. Optional explicit checked-in typed reports feed the existing Observatory repository models
+    at the actual current represented revision and shared capture clock; original report subjects and times
+    remain historical when applicable.
+  - Ordinary bounded feed artifacts and receipt/upload/source bindings stay outside the Pages tree. Empty or
+    absent selections retain unavailable evidence; malformed selected reports deny the candidate without weakening
+    existing publication gates.
+  - Existing native product composition, job/event/permission guards, frozen recovery selections, and historical
+    receipt/helper bytes remain intact. No audit, architecture review, owner normalization, native build, provider
+    or publication was executed.
   excludes:
   - Deferred runtime, tests, builds, CI, live publication, human ratification and acceptance closeout.
   precedence:
@@ -42,68 +42,74 @@ scope:
   - docs/publication/INTELLIGENCE_CANDIDATE.md
   - publication/decisions-rollback.json
   - scripts/identity_decisions_publication.py
+  - docs/publication/REVIEW_FEEDS.md
   - https://github.com/egohygiene/pace/issues/13
 work:
-  objective: Adopt current public source feeds and optional native Compare in Identity's existing Pages publisher.
+  objective: Adopt the shared source-bound typed review feed in Identity's existing Repository Intelligence
+    publisher.
   success_conditions:
-  - Current source evidence uses one exact immutable producer/builder/profile revision and actual capture clock.
-  - Compare selection and artifact outcomes remain explicit without changing publisher authority or historical
-    evidence.
-  - The final composition verification consumes the final bundle, preserving product and recovery constraints.
+  - Same-frame owner models feed the repository builder, while fleet models and operational receipts remain
+    separate ordinary evidence.
+  - Empty and historical evidence does not become current, passing or human-approved evidence.
+  - Existing consumer publisher and frozen recovery gates are preserved.
   active_issue:
     provider: github
     id: egohygiene/pace#13
     url: https://github.com/egohygiene/pace/issues/13
   next:
     kind: action
-    id: qualify-current-identity-sources
-    description: During the deferred organization verification pass, retain real source/artifact/native/Compare
-      and consumer publication/recovery evidence at the selected exact pin before closing adoption acceptance.
+    id: review-typed-feed-adoption
+    description: Review this draft with Relay181 and the other consumer/organization slices. During the separately
+      deferred qualification phase, supply actual compatible reports and retain transport, native, publication
+      and recovery evidence before acceptance closeout.
     readiness: ready
     references:
     - https://github.com/egohygiene/pace/issues/13
     depends_on: []
 state:
   base:
-    revision: e2457ef14b44f52faa03dc402bc3099434d7b028
+    revision: 401b2f1de298a171fbb5bf4ee6b510e0cf12c301
     ref: refs/heads/main
-    verified_at: '2026-11-09T18:05:19Z'
+    verified_at: '2026-11-11T19:18:00Z'
   candidate:
-    branch: codex/intelligence-native-compare
+    branch: codex/identity-review-feed-consumer
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-09T18:05:19Z'
-    default_branch_revision: e2457ef14b44f52faa03dc402bc3099434d7b028
+    observed_at: '2026-11-11T19:18:00Z'
+    default_branch_revision: 401b2f1de298a171fbb5bf4ee6b510e0cf12c301
     issue_state: open
     pull_request_state: not-applicable
-    notes: Identity main e2457ef and closed migration issue 69 were verified; fleet adoption remains open in
-      Pace 13. Relay shared source/transport and owner-model integration is merged through 176. No current
-      provider run, upload or publication was executed.
+    notes: Fresh main 401b2f1de298a171fbb5bf4ee6b510e0cf12c301 remains the candidate base. Functional consumer
+      source ac2f026e9480614a87aded540424f94805a526f1 received independent static peer review; Relay181 exposes
+      the exact selected functional source. Pace13 and organization41 remain open. No execution, upload or
+      deployment is claimed.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-09T18:05:19Z'
+  reviewed_at: '2026-11-11T19:18:00Z'
   reviewed_by: Codex
   evidence:
-  - command: Independent static source and workflow-gate review, unique-key YAML, embedded Bash/Python syntax,
-      exact current/frozen source selection inspection, continuity schema/size/links and whitespace
+  - command: Independent static source/clock/API/pin/privacy and original publisher-guard review; YAML, embedded
+      Bash/Python syntax, bounded hidden-artifact retention, frozen source/helper preservation, continuity
+      schema/size/links and whitespace
     outcome: limited
-    observed_at: '2026-11-09T18:05:19Z'
+    observed_at: '2026-11-11T19:18:00Z'
     notes: Static source and metadata inspection only; no application execution.
   - command: Native/runtime execution, tests, builds, CI investigation, browser/provider/consumer/publication
       qualification
     outcome: not-run
-    observed_at: '2026-11-09T18:05:19Z'
+    observed_at: '2026-11-11T19:18:00Z'
     notes: Deferred at maintainer request; source merges do not establish acceptance.
   environment_limitations:
-  - Tests, builds, native/runtime execution, actual provider/artifact intake, CI, browsers, publication and
-    rollback qualification remain deferred.
-  - Real successful captures and a compatible prior pair are required for meaningful Compare; no baseline or
-    deployment is invented.
-  - Existing human decisions and release prerequisites remain their own sources of authority.
+  - Tests, builds, owner/helper/native/application execution, actual provider/artifact transport, CI, browsers,
+    publication and recovery qualification remain deferred at user request.
+  - This checked-in report profile preserves historical subjects and observation clocks; it does not execute
+    the audit sweep or supply a current-review capture profile.
+  - Real human dispositions, existing source holds, ordinary consumer compatibility and final acceptance retain
+    their owning sources.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -130,35 +136,35 @@ Read scoped instructions, canonical sources above and this checkpoint. Verify mu
 
 ## Current objective and success conditions
 
-Adopt current public source feeds and optional native Compare in Identity's existing Pages publisher. Current source evidence uses one exact immutable producer/builder/profile revision and actual capture clock. Compare selection and artifact outcomes remain explicit without changing publisher authority or historical evidence. The final composition verification consumes the final bundle, preserving product and recovery constraints.
+Adopt the shared source-bound typed review feed in Identity's existing Repository Intelligence publisher. Same-frame owner models feed the repository builder, while fleet models and operational receipts remain separate ordinary evidence. Empty and historical evidence does not become current, passing or human-approved evidence. Existing consumer publisher and frozen recovery gates are preserved.
 
 ## State snapshot
 
-Candidate `codex/intelligence-native-compare` is based on observed main `e2457ef14b44f52faa03dc402bc3099434d7b028`. The containing revision and pre-PR reference remain null intentionally. Identity main e2457ef and closed migration issue 69 were verified; fleet adoption remains open in Pace 13. Relay shared source/transport and owner-model integration is merged through 176. No current provider run, upload or publication was executed.
+Candidate `codex/identity-review-feed-consumer` is based on observed main `401b2f1de298a171fbb5bf4ee6b510e0cf12c301`. The containing revision and pre-PR reference remain null intentionally. Fresh main 401b2f1de298a171fbb5bf4ee6b510e0cf12c301 remains the candidate base. Functional consumer source ac2f026e9480614a87aded540424f94805a526f1 received independent static peer review; Relay181 exposes the exact selected functional source. Pace13 and organization41 remain open. No execution, upload or deployment is claimed.
 
 ## Completed and material changes
 
-Current producer, builder, Compare and provenance selections use the exact reviewed Relay 981ddf4367c67fcd625e54321d95bab027f6c0f2, merged through PR 176. Matching default-branch push/manual builds capture public Work/Health/Releases, upload their exact same-run artifact and pass actual producer time plus artifact ID/digest to native intake. Declared dependencies enable only on those fresh capture paths.
+Current action, builder and provenance selectors adopt exact public Relay 5d27be5ce1599df883e31f14cd894eb18622c18c from draft PR181. Optional explicit checked-in typed reports feed the existing Observatory repository models at the actual current represented revision and shared capture clock; original report subjects and times remain historical when applicable.
 
-Manual Compare defaults off. Seed retains a real first pair without a fabricated baseline; compare requires the complete exact prior selection. Native build and optional composition share the actual capture clock. Final composed manifest/tree evidence is read after Compare and alias composition.
+Ordinary bounded feed artifacts and receipt/upload/source bindings stay outside the Pages tree. Empty or absent selections retain unavailable evidence; malformed selected reports deny the candidate without weakening existing publication gates.
 
-Existing release/historical replay, Brand Kit composition, ADR source selection, job/deployment gates and recorded recovery bytes retain their contracts. Added Actions/issues/PR/check scopes are read-only; bounded operational receipts stay outside the site.
+Existing native product composition, job/event/permission guards, frozen recovery selections, and historical receipt/helper bytes remain intact. No audit, architecture review, owner normalization, native build, provider or publication was executed.
 
 ## Validation and review evidence
 
-Independent static source and workflow-gate review, unique-key YAML, embedded Bash/Python syntax, exact current/frozen source selection inspection, continuity schema/size/links and whitespace. Static inspection only. Native/runtime execution, tests, builds, CI investigation, browsers, provider reads and publication qualification were not run.
+Independent static source/clock/API/pin/privacy and original publisher-guard review; YAML, embedded Bash/Python syntax, bounded hidden-artifact retention, frozen source/helper preservation, continuity schema/size/links and whitespace. Static source inspection only. Native/application execution, tests, builds, CI investigation, browser/model/source-capture provider execution and publication qualification were not run. Read-only source and Git metadata observations are separate.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Tests, builds, native/runtime execution, actual provider/artifact intake, CI, browsers, publication and rollback qualification remain deferred. Real successful captures and a compatible prior pair are required for meaningful Compare; no baseline or deployment is invented. Existing human decisions and release prerequisites remain their own sources of authority.
+Tests, builds, owner/helper/native/application execution, actual provider/artifact transport, CI, browsers, publication and recovery qualification remain deferred at user request. This checked-in report profile preserves historical subjects and observation clocks; it does not execute the audit sweep or supply a current-review capture profile. Real human dispositions, existing source holds, ordinary consumer compatibility and final acceptance retain their owning sources.
 
 ## Next dependency-ready work
 
-During the deferred organization verification pass, retain real source/artifact/native/Compare and consumer publication/recovery evidence at the selected exact pin before closing adoption acceptance.
+Review this draft with Relay181 and the other consumer/organization slices. During the separately deferred qualification phase, supply actual compatible reports and retain transport, native, publication and recovery evidence before acceptance closeout.
 
 ## Parallel changes and reconciliation
 
-Applied create-decisions-document 2.1.0 from Aether dc8a16851f452763ef4f7fbe4bf057d4500b1921 at handoff. ADR not required: this is routine adoption of merged bounded source/Compare contracts in the existing publisher, with no new ownership or lifecycle decision. Canonical ADR history, release inputs and recovery are preserved.
+Reference existing Identity ADR0017/0019 and proposed ADR0022 composition boundaries. The exact pinned Aether decision skill/policy was consulted; no new lifecycle or ownership decision is introduced. User will review the new draft PRs; do not merge this batch.
 
 ## Privacy and redaction
 
