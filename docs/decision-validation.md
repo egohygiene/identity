@@ -16,7 +16,7 @@ calls Relay without copying its validator or acquiring publication authority.
 | Holon materialization contract | `a7734dba83305276b12932fcd4ce348044d9a2e9` |
 
 These are the advisory architecture-validation selections. The existing Pages
-publisher separately selects Relay `9358083e6dd8b15a0f2a3bb23c0b1e2b3ea3b2ff`
+publisher separately selects Relay `5d27be5ce1599df883e31f14cd894eb18622c18c`
 for its builder and composition/deployment provenance; see the
 [portable Intelligence candidate](publication/INTELLIGENCE_CANDIDATE.md).
 That unqualified publication upgrade preserves this advisory workflow and all
