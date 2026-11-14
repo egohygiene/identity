@@ -83,7 +83,16 @@ jobs:
       - name: Run command parity and unit tests
         run: cargo test --locked --all-features
 
+      - name: Install checksum-pinned Task for portable entrypoint coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/install_task_for_checks.sh ".cache/identity/check-tools/bin"
+          printf '%s\n' "$GITHUB_WORKSPACE/.cache/identity/check-tools/bin" >> "$GITHUB_PATH"
+
       - name: Run v1 schema, diagnostics, and migration tests
+        env:
+          IDENTITY_REQUIRE_FRONTENDS: "1"
         run: >-
           python3 -m unittest discover
           --start-directory tests
