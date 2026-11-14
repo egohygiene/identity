@@ -1,5 +1,9 @@
 # Source preparation checkpoint — 2026-11-05
 
+Historical preparation record. The [2026-11-14 closeout](SOURCE_CLOSEOUT_2026-11-14.md)
+supersedes mutable PR/test/scheduling statements below; original source and
+receipt meanings remain unchanged.
+
 Base: `19d3d16bd149ddb61a03924a2b688e8e689af68b` (merged PR137).
 The current campaign prepares reviewable source drafts for #133, #98 and #83.
 Refactors, audits, runtime tests, hosted CI qualification, merges and affected

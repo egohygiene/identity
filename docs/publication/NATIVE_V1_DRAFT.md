@@ -1,10 +1,12 @@
-# Native v1 release-publication draft
+# Native v1 release-publication source handoff
 
-This is unqualified source under [draft PR139](https://github.com/egohygiene/identity/pull/139),
-not a selected release configuration or deployment. The existing
+This source is merged through [PR139](https://github.com/egohygiene/identity/pull/139),
+with a [synthetic deterministic build/verify proof](../work/98/SYNTHETIC_PUBLICATION.md).
+It is not a selected real release configuration or deployment. The existing
 [publication path](IDENTITY_PAGES.md) and exact `v1.0.0` compatibility mapping
 remain selected and unchanged. [ADR-0034](../decisions/ADR-0034-native-release-publication-input.md)
-is proposed; tests/CI and actual source-to-publication qualification are deferred.
+is proposed. Actual Identity self-source, release/platform/CI and live/rollback
+qualification remain pending.
 
 ## Input and release boundary
 

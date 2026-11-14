@@ -1,0 +1,18 @@
+{
+  "classification": "synthetic native publisher integration; not real self-source or release",
+  "fixtureCommit": "222bdf690ab55f758cda2e487713f84f59a68083",
+  "fixtureTag": "v1.0.0",
+  "nativeArtifacts": 15,
+  "publicSiteFiles": 24,
+  "sourcePreserved": true,
+  "twoBuildsIdentical": true,
+  "canonicalSourceDigest": "ea3644770636c18e45cc317f15c812bf5d1b9edc717e20043cb57caa04ee9c0e",
+  "archiveInventoryDigest": "961729d4d34f27883ae74387a33cb4d552fbbda7b1a0e4e5cfb0e4120c101f39",
+  "archiveSha256": "ece6e7fe7885cb5d974a7e62dc3f9d4ceb7025db00639d680cd6edf6bcc3f13c",
+  "negativeCases": [
+    "archive-byte tampering",
+    "release Git blob drift",
+    "stale canonical-source-to-native-output binding"
+  ],
+  "restoredVerification": "passed"
+}

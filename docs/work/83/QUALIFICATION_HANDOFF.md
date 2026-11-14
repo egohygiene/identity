@@ -1,5 +1,11 @@
 # Source-campaign documentation and deferred qualification
 
+This is the historical 2026-11-05 handoff. The
+[2026-11-14 source closeout](../116/SOURCE_CLOSEOUT_2026-11-14.md) supersedes its
+mutable PR/source/test state and records the remaining finite audit/CI and
+owner-fact gates. Original receipts and unrun statements below keep their
+original date and scope.
+
 This is the bounded documentation draft for
 [#83](https://github.com/egohygiene/identity/issues/83), not its final closure.
 Main remains `19d3d16bd149ddb61a03924a2b688e8e689af68b`. The draft stack is:

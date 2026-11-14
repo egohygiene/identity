@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-11-05
+updated: 2026-11-14
 governed_by:
   - architecture-system
 depends_on:
@@ -48,10 +48,12 @@ installation, and live-verification gates. [ROADMAP.md](ROADMAP.md) records
 current stabilization and kit-completion work. Current-main repairs do not
 change the contents of an earlier release.
 
-The [source-only campaign](docs/work/116/SOURCE_PREPARATION.md) prepares
-unmerged/unqualified `v1-init` and native-publication drafts. Their guides
-describe proposed review-branch behavior, not a new implemented-on-main,
-released or deployed capability. The later campaign retains full acceptance.
+The [original source-preparation campaign](docs/work/116/SOURCE_PREPARATION.md)
+is historical: the initializer and native-publication source are now merged.
+[Initializer acceptance](docs/work/133/CLOSEOUT.md), the local extraction and
+browser receipts, and the [current source closeout](docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md)
+describe their exact local scope. The full audit, `act`, native-platform,
+real self-source, release and deployment gates remain separate.
 
 ## System inventory
 

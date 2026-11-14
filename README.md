@@ -49,9 +49,11 @@ verification and rollback. Then [assemble a complete Brand Kit](docs/consumers/C
 The [command guide](docs/USAGE.md) documents the existing CLI and optional
 projections, with explicit consumer paths. `init` currently creates the legacy
 v0 source; manual v1 authoring remains supported. The
-[explicit v1 initializer draft](docs/consumers/V1_INITIALIZATION.md) is under
-[#133](https://github.com/egohygiene/identity/issues/133); it is unmerged,
-unqualified and absent from published `v1.0.0`.
+[explicit v1 initializer](docs/consumers/V1_INITIALIZATION.md) is implemented
+on main with [local preservation/copy-binary acceptance](docs/work/133/CLOSEOUT.md).
+It prepares a separate review candidate and is absent from published `v1.0.0`.
+Optional [outreach email and social-kit examples](examples/outreach/README.md)
+reuse the existing Press Kit workflow.
 
 ## Work on this repository
 
@@ -104,6 +106,6 @@ the visual boards and mascot preview.
 [#98](https://github.com/egohygiene/identity/issues/98) retains root v1
 self-source, rights, release and dogfood acceptance after the bounded Brand Kit
 child scopes. [#70](https://github.com/egohygiene/identity/issues/70) retains
-stabilization and quality work; [#83](https://github.com/egohygiene/identity/issues/83)
-retains final documentation reconciliation. Current source, qualified evidence,
+stabilization and quality work. The [current source handoff](docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md)
+records documentation reconciliation and the remaining gates. Current source, qualified evidence,
 released artifacts, deployed pages and accepted decisions have separate status.

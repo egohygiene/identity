@@ -1,17 +1,24 @@
 # Identity source and publication owner packet
 
-Status: **unqualified source draft; no publication approval requested**.
-Main baseline: `19d3d16bd149ddb61a03924a2b688e8e689af68b`.
+Status: **source integrated; real self-source/rights and release acceptance pending**.
+PR138/139/140 source is merged. [Initializer acceptance](../133/CLOSEOUT.md),
+[current engineering evidence](../116/SOURCE_CLOSEOUT_2026-11-14.md) and the
+[synthetic native publication proof](SYNTHETIC_PUBLICATION.md) retain their exact
+scope. The actual root candidate remains incomplete. Answer the
+[owner questionnaire](QUESTIONNAIRE.md) to supply missing creative/rights facts.
+Those answers do not select a release or deployment.
+
+Original preparation baseline: `19d3d16bd149ddb61a03924a2b688e8e689af68b`.
 Initializer source checkpoint: `ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2`
-in [draft PR138](https://github.com/egohygiene/identity/pull/138).
-The #98 draft is stacked for review continuity, not a new issue dependency.
+in [merged PR138](https://github.com/egohygiene/identity/pull/138).
+The original stack was review continuity, not a new issue dependency.
 
 Exact native-publisher source checkpoint:
 `413aae01f53205312cdba4fdae60222f9f16d605` in
-[draft PR139](https://github.com/egohygiene/identity/pull/139).
+[merged PR139](https://github.com/egohygiene/identity/pull/139).
 [PR140](https://github.com/egohygiene/identity/pull/140) adds the documentation
-handoff and limited source-stack build ledger. Neither checkpoint is qualified
-or selected for release.
+handoff and original source-stack build ledger. Neither original checkpoint is
+selected as a qualified release.
 
 ## Verified source and unresolved ownership facts
 
@@ -38,22 +45,22 @@ SVG, invent a new master or add a new imagery engine to evade it.
 
 Proposed version: **v1.1.0**, subject to compatibility/qualification review.
 No tag or package-version bump is made here. The exact release commit is
-**not selected**; neither main nor these unqualified drafts are release-ready.
+**not selected**; full current-source quality and real-source gates remain.
 
 | Artifact/evidence | Current disposition |
 | --- | --- |
-| Source/rights inventory and manually prepared v1 candidate | Reviewable files in this draft; candidate is incomplete and not canonical root source |
-| Native-v1 publisher adapter | Draft source in [PR139](https://github.com/egohygiene/identity/pull/139); syntax/static checks only, no runtime pass |
+| Source/rights inventory and manually prepared v1 candidate | Reviewable files remain incomplete and are not canonical root source; the questionnaire collects missing owner facts |
+| Native-v1 publisher adapter | Merged PR139; two synthetic builds produce identical verified 24-file sites, with archive/source/stale-binding rejection. This is not real self-dogfood. |
 | Generated self Brand Kit, publication ZIP/manifest/checksums | Unrun; no candidate output or hashes fabricated |
 | Release binary/archive, SPDX SBOM, dependency license inventory, attestation | Unbuilt/unrun for the proposed release |
-| Complete qualification matrix and exact qualified revision | Unrun; no qualified revision |
-| Live canonical Brand Kit | Fresh site.json read still selects v1.0.0 at aaad8839104704cf57bfa846539b3b875421e03d; this is not new publication evidence |
+| Complete qualification matrix and exact qualified revision | Scoped local results exist; full audit, act and native-platform matrix remain pending. No release-qualified revision exists. |
+| Live canonical Brand Kit | 2026-11-14 site.json still selects v1.0.0 at aaad8839104704cf57bfa846539b3b875421e03d. This is a manifest observation, not new publication or full live-byte proof. |
 | Rollback artifact and exercised restore | Existing historical receipts are preserved; new capture/rehearsal remains unrun |
 
-The [source-campaign checkpoint](../116/SOURCE_PREPARATION.md) records actual
-base installer/build/browser-download evidence and its limits. Those results
-do not qualify this source. Keep passed, failed, skipped, unavailable and unrun
-distinct in the later release ledger.
+The [original source-campaign checkpoint](../116/SOURCE_PREPARATION.md) remains
+historical. The [current closeout](../116/SOURCE_CLOSEOUT_2026-11-14.md) records
+subsequent scoped checks. Keep passed, failed, skipped, unavailable and unrun
+distinct in the release ledger.
 
 The [native handoff guide](../../publication/NATIVE_V1_DRAFT.md) specifies its
 release-owned configuration, immutable native inputs and separate digest
@@ -71,9 +78,10 @@ to a verified annotated-tag selection instead of fabricating its own commit.
 | egohygiene.io/identity/ | Independent organization route owner: install exact reviewed Identity composite | Confirm actual route owner/action, cross-host release agreement and independent restore; no other-repository change is authorized here |
 | /intelligence/decisions/ and /decisions/ | Existing Identity/Relay composition and independent ADR source pin | Preserve routes, public filtering, navigation and separate bindings; proposed ADRs remain proposed |
 
-Current renderer/publication/ADR-path merges automatically run Pages deployment
-without an environment reviewer. Keep these drafts unmerged. Review/merge
-planning must account for that side effect before authorizing any merge.
+The existing Pages push triggers remain unchanged. This source campaign uses
+`[skip ci]` commits/merges and dispatches no hosted workflow. A later deployment
+still needs the selected real release, prior recovery artifact and actual
+live/rollback proof; source integration is not publication evidence.
 
 ## Consumer-owner handoff
 
