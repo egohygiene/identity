@@ -669,7 +669,7 @@ issues: [86]
 
 <!-- roadmap-step
 id: IDN-Q26
-status: ready
+status: complete
 depends_on: [IDN-Q12, IDN-Q13, IDN-Q17, IDN-Q18]
 issues: [87]
 -->
@@ -679,9 +679,9 @@ issues: [87]
 
 **Exit criteria:**
 
-- [ ] Formatting, Clippy, behavior, deterministic output, approvals, drift, confinement, writer, recovery, and provenance checks pass.
+- [x] Formatting, Clippy, behavior, deterministic output, approvals, drift, confinement, writer, recovery, and provenance checks pass.
 
-**Evidence and scope:** [#87](https://github.com/egohygiene/identity/issues/87). Its #73/#74/#78/#79 prerequisites are complete, so it is dependency-ready. The execution order still places refactors after the first usable kit; readiness does not authorize starting it. Use small extractions without stronger durability claims.
+**Evidence and scope:** [#87](https://github.com/egohygiene/identity/issues/87) is implemented and locally qualified in the [Rust extraction record](docs/work/116/RUST_EXTRACTION.md): forty unchanged function bodies, eight private modules, full Rust/Clippy/provenance checks and exact before/after output comparisons. Public interfaces and durability guarantees are preserved.
 
 <!-- roadmap-step
 id: IDN-Q27
