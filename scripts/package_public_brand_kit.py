@@ -12,6 +12,7 @@ import re
 import stat
 import zipfile
 from pathlib import Path
+from urllib.parse import quote, unquote
 
 
 TAG_PATTERN = re.compile(r"^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$")
@@ -24,6 +25,9 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--stage-directory", required=True, type=Path)
     parser.add_argument("--release-tag", required=True)
     parser.add_argument("--release-commit", required=True)
+    parser.add_argument("--asset-root", type=Path,
+                        help="Explicit prepared native inventory; requires canonical source binding.")
+    parser.add_argument("--canonical-source-digest")
     return parser.parse_args()
 
 
@@ -52,10 +56,10 @@ def write_json(path: Path, value: object) -> None:
     )
 
 
-def write_archive(path: Path, asset_root: Path, records: list[dict[str, object]]) -> None:
+def write_archive(path: Path, asset_root: Path, records: list[dict[str, object]], *, encoded_paths: bool = False) -> None:
     with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for record in records:
-            relative_path = Path(str(record["path"]))
+            relative_path = Path(unquote(str(record["path"])) if encoded_paths else str(record["path"]))
             info = zipfile.ZipInfo(f"identity-brand-kit/{relative_path.as_posix()}")
             info.date_time = (1980, 1, 1, 0, 0, 0)
             info.compress_type = zipfile.ZIP_DEFLATED
@@ -71,9 +75,25 @@ def main() -> int:
         raise RuntimeError("release commit must be a lowercase 40-character Git SHA")
 
     source_root = arguments.source_root.resolve()
-    asset_root = source_root / "assets" / "identity"
+    native_mode = arguments.asset_root is not None
+    if native_mode != (arguments.canonical_source_digest is not None):
+        raise RuntimeError("native asset root and canonical source digest must be selected together")
+    if native_mode and re.fullmatch(r"[0-9a-f]{64}", arguments.canonical_source_digest) is None:
+        raise RuntimeError("canonical source digest must be a lowercase SHA-256")
+    asset_root = arguments.asset_root.resolve() if native_mode else source_root / "assets" / "identity"
     if not asset_root.is_dir():
         raise RuntimeError(f"Identity asset root is missing: {asset_root}")
+    if native_mode:
+        for path in asset_root.rglob("*"):
+            metadata = path.lstat()
+            if stat.S_ISLNK(metadata.st_mode) or bool(getattr(metadata, "st_file_attributes", 0) &
+                    getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)) or \
+                    not (stat.S_ISDIR(metadata.st_mode) or stat.S_ISREG(metadata.st_mode)):
+                raise RuntimeError("prepared native inventory must contain regular local files")
+        native_manifest = json.loads((asset_root / ".identity-manifest.json").read_text())
+        if native_manifest.get("schema") != "identity.compiler-manifest/v1" or \
+                native_manifest.get("sourceDigest") != arguments.canonical_source_digest:
+            raise RuntimeError("native compiler source binding does not match the selected canonical digest")
 
     stage_directory = arguments.stage_directory.resolve()
     package_directory = stage_directory / "packages"
@@ -85,11 +105,13 @@ def main() -> int:
         contents = path.read_bytes()
         records.append(
             {
-                "path": relative_path.as_posix(),
+                "path": quote(relative_path.as_posix(), safe="/-_.!~*'()") if native_mode else relative_path.as_posix(),
                 "sha256": sha256_bytes(contents),
                 "sizeBytes": len(contents),
             }
         )
+    if native_mode:
+        records.sort(key=lambda record: str(record["path"]))
 
     version = arguments.release_tag.removeprefix("v")
     archive_name = f"identity-brand-kit-v{version}.zip"
@@ -99,7 +121,7 @@ def main() -> int:
     manifest_path = package_directory / manifest_name
     checksums_path = package_directory / checksums_name
 
-    write_archive(archive_path, asset_root, records)
+    write_archive(archive_path, asset_root, records, encoded_paths=native_mode)
     archive_sha256 = sha256_bytes(archive_path.read_bytes())
     manifest = {
         "schema": "identity.public-brand-kit-manifest/v1",
@@ -118,6 +140,8 @@ def main() -> int:
         },
         "files": records,
     }
+    if native_mode:
+        manifest.update(sourceMode="native-v1", canonicalSourceDigest=arguments.canonical_source_digest)
     write_json(manifest_path, manifest)
     manifest_sha256 = sha256_bytes(manifest_path.read_bytes())
     checksums_path.write_text(

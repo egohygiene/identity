@@ -12,6 +12,8 @@ import { createDesignSystemView } from "../src/design-system.js";
 import { createPressKitView } from "../src/press-kit.js";
 import { normalizeArtifactPath, normalizeAssetBaseUrl } from "../src/artifact-paths.js";
 import { verifyArtifactPaths } from "../src/download-integrity.js";
+import { joinAssetUrl } from "../src/model.js";
+import { prepareKit, outputPath } from "../lib/kit-bundle.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rendererRoot = path.resolve(scriptDirectory, "..");
@@ -28,6 +30,13 @@ const configPath = argumentsMap.config
   ? path.resolve(repositoryRoot, argumentsMap.config)
   : path.resolve(sourceRoot, "publication/identity-brand-kit.config.json");
 const config = await readJson(configPath);
+if (![undefined, "legacy-assets", "native-v1"].includes(config.sourceMode)) {
+  throw new Error("Unknown publication source mode.");
+}
+const nativeMode = config.sourceMode === "native-v1";
+if (nativeMode && (!argumentsMap["source-root"] || !argumentsMap["release-tag"] || !argumentsMap["release-commit"])) {
+  throw new Error("Native publication requires an explicitly selected release source, stable tag and commit.");
+}
 const releaseTag = argumentsMap["release-tag"] || config.release.defaultTag;
 const releaseCommit = argumentsMap["release-commit"] || config.release.defaultCommit;
 const releaseVersion = assertStableRelease(releaseTag, releaseCommit);
@@ -40,35 +49,71 @@ for (const key of Object.keys(browserAssets)) {
     throw new Error(`Unknown browser asset role: ${key}`);
   }
 }
-const designSystemDirectory = argumentsMap["design-system-directory"]
-  ? path.resolve(argumentsMap["design-system-directory"])
-  : null;
-const pressKitDirectory = argumentsMap["press-kit-directory"]
-  ? path.resolve(argumentsMap["press-kit-directory"])
-  : null;
+const designSystemDirectory = nativeMode
+  ? await nativeInput("designSystem", "design-system-directory")
+  : argumentsMap["design-system-directory"] ? path.resolve(argumentsMap["design-system-directory"]) : null;
+const pressKitDirectory = nativeMode
+  ? await nativeInput("pressKit", "press-kit-directory")
+  : argumentsMap["press-kit-directory"] ? path.resolve(argumentsMap["press-kit-directory"]) : null;
 const sourceAssetRoot = path.resolve(sourceRoot, "assets/identity");
 const buildRoot = path.resolve(rendererRoot, ".identity-public-build");
 const publicDirectory = path.join(buildRoot, "public");
 const modelPath = path.join(buildRoot, "brand-kit.view-model.json");
 const publicationPath = path.join(buildRoot, "publication.json");
+const nativeAssetRoot = path.join(buildRoot, "native-assets");
 
 await assertDirectory(sourceAssetRoot, "immutable Identity asset root");
-await verifyArtifactPaths([
-  ...config.assets.map((asset) => asset.sourcePath),
-  ...Object.values(browserAssets),
-], { artifactRoot: sourceAssetRoot });
+let nativeKit = null;
+if (nativeMode) {
+  runSelectedConfigVerifier();
+  nativeKit = await prepareKit({ artifactRoot: sourceAssetRoot,
+    designSystemDirectory, pressKitDirectory, browserAssets });
+  if (nativeKit.model.projectId !== "identity" || nativeKit.model.release.version !== releaseVersion) {
+    throw new Error("Native Identity model does not match the selected release project/version.");
+  }
+  const reserved = new Set(["CNAME", "site.json", ...["zip", "manifest.json", "SHA256SUMS"]
+    .map((suffix) => `packages/identity-brand-kit-v${releaseVersion}.${suffix}`)]);
+  for (const relative of nativeKit.files.keys()) {
+    if (reserved.has(relative) || relative === "brand-kit" || relative.startsWith("brand-kit/")) {
+      throw new Error(`Native artifact collides with a publisher-owned path: ${relative}`);
+    }
+  }
+  if (config.openGraphImage && !nativeKit.files.has(normalizeArtifactPath(config.openGraphImage))) {
+    throw new Error("Native Open Graph image is absent from the verified selected artifacts.");
+  }
+  await outputPath(outputDirectory, [sourceAssetRoot, designSystemDirectory, pressKitDirectory]);
+} else {
+  await verifyArtifactPaths([
+    ...config.assets.map((asset) => asset.sourcePath), ...Object.values(browserAssets),
+  ], { artifactRoot: sourceAssetRoot });
+}
+for (const input of [sourceAssetRoot, designSystemDirectory, pressKitDirectory].filter(Boolean)) {
+  const relative = path.relative(buildRoot, await fs.realpath(input));
+  if (!relative || (!relative.startsWith(`..${path.sep}`) && relative !== ".." && !path.isAbsolute(relative))) {
+    throw new Error("Publication staging cannot contain a selected input.");
+  }
+}
 await fs.rm(buildRoot, { recursive: true, force: true });
 await fs.mkdir(buildRoot, { recursive: true });
-await fs.cp(sourceAssetRoot, publicDirectory, { recursive: true });
+if (nativeMode) {
+  for (const [relative, bytes] of nativeKit.files) {
+    const destination = path.join(nativeAssetRoot, ...relative.split("/").map(decodeURIComponent));
+    await fs.mkdir(path.dirname(destination), { recursive: true });
+    await fs.writeFile(destination, bytes);
+  }
+  await fs.cp(nativeAssetRoot, publicDirectory, { recursive: true });
+} else {
+  await fs.cp(sourceAssetRoot, publicDirectory, { recursive: true });
+}
 await copyPublicationFiles();
-const designSystem = designSystemDirectory
+const designSystem = !nativeMode && designSystemDirectory
   ? await copyDesignSystemArtifacts(designSystemDirectory)
   : null;
-const pressKit = pressKitDirectory
+const pressKit = !nativeMode && pressKitDirectory
   ? await copyPressKitArtifacts(pressKitDirectory)
   : null;
 
-runPythonPackager();
+runPythonPackager(nativeKit?.model.release.sourceDigest);
 const packageManifestPath = path.join(
   publicDirectory,
   "packages",
@@ -76,13 +121,15 @@ const packageManifestPath = path.join(
 );
 const packageManifest = await readJson(packageManifestPath);
 const packageManifestSha256 = sha256(await fs.readFile(packageManifestPath));
-const model = await buildViewModel(packageManifest, designSystem, pressKit);
+const model = nativeMode ? nativeKit.model : await buildViewModel(packageManifest, designSystem, pressKit);
 const publication = {
   canonicalUrl: config.canonicalUrl,
   releaseTag,
   releaseUrl: packageManifest.release.url,
   manifestPath: `packages/${path.basename(packageManifestPath)}`,
   manifestSha256: packageManifestSha256,
+  ...(nativeMode ? { inventoryDigest: packageManifest.sourceDigest,
+    archivePath: `packages/${packageManifest.archive.path}` } : {}),
 };
 
 await fs.writeFile(modelPath, `${JSON.stringify(model, null, 2)}\n`, "utf8");
@@ -100,6 +147,7 @@ await fs.writeFile(
       aliases: ["/brand-kit/"],
       release: packageManifest.release,
       sourceDigest: packageManifest.sourceDigest,
+      ...(nativeMode ? { sourceMode: "native-v1", canonicalSourceDigest: model.release.sourceDigest } : {}),
       publicationManifest: publication.manifestPath,
       publicationManifestSha256: publication.manifestSha256,
       assetBaseUrl,
@@ -131,8 +179,10 @@ runNode(
     }).flatMap(([flag, value]) => value === undefined ? [] : [`--${flag}`, value]),
     "--canonical-url",
     config.canonicalUrl,
-    "--open-graph-image",
-    `${config.canonicalUrl}brand/open-graph.svg`,
+    ...(nativeMode ? ["--audience", "public"] : []),
+    ...(!nativeMode ? ["--open-graph-image", `${config.canonicalUrl}brand/open-graph.svg`]
+      : config.openGraphImage ? ["--open-graph-image",
+        new URL(joinAssetUrl(assetBaseUrl, normalizeArtifactPath(config.openGraphImage)), config.canonicalUrl).href] : []),
     "--publication",
     publicationPath,
   ],
@@ -189,7 +239,7 @@ async function copyPressKitArtifacts(directory) {
   });
 }
 
-function runPythonPackager() {
+function runPythonPackager(canonicalSourceDigest) {
   const result = spawnSync(
     "python3",
     [
@@ -202,12 +252,41 @@ function runPythonPackager() {
       releaseTag,
       "--release-commit",
       releaseCommit,
+      ...(nativeMode ? ["--asset-root", nativeAssetRoot,
+        "--canonical-source-digest", canonicalSourceDigest] : []),
     ],
     { cwd: repositoryRoot, encoding: "utf8", stdio: "inherit" },
   );
   if (result.status !== 0) {
     throw new Error("The public Brand Kit packager failed.");
   }
+}
+
+function runSelectedConfigVerifier() {
+  const result = spawnSync(process.env.IDENTITY_PYTHON || (process.platform === "win32" ? "python" : "python3"), [
+    path.join(repositoryRoot, "scripts/verify_publication_release_configs.py"),
+    "--repository-root", repositoryRoot, "--source-root", sourceRoot,
+    "--config", configPath, "--release-tag", releaseTag, "--release-commit", releaseCommit,
+  ], { cwd: repositoryRoot, stdio: "inherit" });
+  if (result.status !== 0) throw new Error("Native publication release/input binding failed.");
+}
+
+async function nativeInput(role, flag) {
+  const value = config.nativeInputs?.[role];
+  if (value === undefined) {
+    if (argumentsMap[flag]) throw new Error(`Native optional input ${role} must be selected by release-owned config.`);
+    return null;
+  }
+  const relative = normalizeArtifactPath(value, `Native ${role} directory`);
+  const directory = await fs.realpath(path.join(sourceRoot, ...relative.split("/").map(decodeURIComponent)));
+  const within = path.relative(await fs.realpath(sourceRoot), directory);
+  if (!within || within === ".." || within.startsWith(`..${path.sep}`) || path.isAbsolute(within)) {
+    throw new Error(`Native ${role} input escapes its release tree.`);
+  }
+  if (argumentsMap[flag] && await fs.realpath(path.resolve(argumentsMap[flag])) !== directory) {
+    throw new Error(`Native ${role} CLI input disagrees with release-owned selection.`);
+  }
+  return directory;
 }
 
 function runNode(argumentsList, environment) {

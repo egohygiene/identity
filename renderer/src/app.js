@@ -1350,6 +1350,11 @@ function ProvenanceSection({ model, assetBaseUrl, publication }) {
             ),
             h("p", { className: "support-note" }, "Manifest SHA-256"),
             h("code", null, publication.manifestSha256),
+            publication.inventoryDigest ? h("p", { className: "support-note" },
+              "Published asset inventory SHA-256: ", h("code", null, publication.inventoryDigest)) : null,
+            publication.archivePath ? h("p", null, h("a", {
+              className: "text-link", href: joinAssetUrl(assetBaseUrl, publication.archivePath), download: true,
+            }, "Download published kit")) : null,
           )
         : null,
       h(

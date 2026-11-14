@@ -1,5 +1,10 @@
 # Identity public publication surfaces
 
+The unqualified [native v1 publisher draft](NATIVE_V1_DRAFT.md) prepares the
+actual self-source handoff under #98. It is opt-in source work, not the current
+live path or a new release/deployment. The existing `v1.0.0` compatibility
+selection and historical receipts below remain unchanged.
+
 For the native consumer's complete generated kit, use the separate
 [assembly and offline verification guide](../consumers/COMPLETE_BRAND_KIT.md).
 That command produces a reviewable artifact directory and `kit.json`; it does

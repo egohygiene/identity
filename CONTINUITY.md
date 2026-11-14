@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T20:54:40+00:00'
+  updated_at: '2026-11-14T20:56:19+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Integrate the explicit v1 initializer with current main and continue the open-issue campaign.
+  purpose: Integrate opt-in native publication with current Identity main.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,37 +35,36 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Integrate the explicit v1 initializer with current main and continue the open-issue campaign.
+  objective: Integrate opt-in native publication with current Identity main.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#133
-    url: https://github.com/egohygiene/identity/issues/133
+    id: egohygiene/identity#98
+    url: https://github.com/egohygiene/identity/issues/98
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge the reconciled initializer and integrate the remaining stacked publication/documentation
-      PRs.
+    description: Merge PR139 and PR140, then continue bounded issue implementation.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: c179a9486410b63c4fa62316b4ccb835cf77ad63
+    revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
     ref: refs/heads/main
-    verified_at: '2026-11-14T20:54:40+00:00'
+    verified_at: '2026-11-14T20:56:19+00:00'
   candidate:
-    branch: codex/133-v1-initializer
+    branch: codex/98-native-publication-source
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T20:54:40+00:00'
-    default_branch_revision: c179a9486410b63c4fa62316b4ccb835cf77ad63
+    observed_at: '2026-11-14T20:56:19+00:00'
+    default_branch_revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
     issue_state: open
     pull_request_state: unknown
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
@@ -73,18 +72,18 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T20:54:40+00:00'
+  reviewed_at: '2026-11-14T20:56:19+00:00'
   reviewed_by: Codex
   evidence:
-  - command: 'python3 -m unittest discover -s tests -p test_verify_retired_guidance.py: three passed; retirement
-      guard passed; initializer syntax, schemas, generated-validator and extraction integrity checks passed'
+  - command: cargo build --locked, publication release-config verification and three config tests, renderer
+      syntax, extraction integrity, three documentation tests and documentation links passed
     outcome: passed
-    observed_at: '2026-11-14T20:54:40+00:00'
+    observed_at: '2026-11-14T20:56:19+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Initializer behavioral acceptance, native publication, refactors, platform/browser/Docker qualification
-    and final tracker closure remain pending. Broad audit and act CI are later work. Root self-source rights
-    and human facts remain in the owner packet.
+  - Native publisher behavioral acceptance and real root source rights remain pending. Browser/Docker/platform,
+    release/live/rollback and contrasting-consumer evidence are not supplied by source merges. Broad audit
+    and act are later work.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -111,27 +110,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Integrate the explicit v1 initializer with current main and continue the open-issue campaign.
+Integrate opt-in native publication with current Identity main.
 
 ## State snapshot
 
-Observed main: c179a9486410b63c4fa62316b4ccb835cf77ad63. Candidate branch: codex/133-v1-initializer. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: ed0270b0b6ffa9c0d844b965f953987b57d9e53c. Candidate branch: codex/98-native-publication-source. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-PR146 is merged at c179a9486410b63c4fa62316b4ccb835cf77ad63. This reconciliation preserves current publisher and retirement changes while retaining the explicit candidate-only initializer. ADR-0033 remains proposed with null approval.
+PR146 and PR138 are merged. This candidate retains the native-v1 publisher adapter and proposed self-source inventory while preserving newer Intelligence Compare and typed-review feeds. A reproduced documentation-check failure from the supported downloaded tool cache is fixed by pruning cache directories; repository documentation remains checked. Legacy selectors and ADR dispositions are unchanged.
 
 ## Validation and review evidence
 
-python3 -m unittest discover -s tests -p test_verify_retired_guidance.py: three passed; retirement guard passed; initializer syntax, schemas, generated-validator and extraction integrity checks passed. These results establish only their named local scope.
+cargo build --locked, publication release-config verification and three config tests, renderer syntax, extraction integrity, three documentation tests and documentation links passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Initializer behavioral acceptance, native publication, refactors, platform/browser/Docker qualification and final tracker closure remain pending. Broad audit and act CI are later work. Root self-source rights and human facts remain in the owner packet.
+Native publisher behavioral acceptance and real root source rights remain pending. Browser/Docker/platform, release/live/rollback and contrasting-consumer evidence are not supplied by source merges. Broad audit and act are later work.
 
 ## Next dependency-ready work
 
-Merge the reconciled initializer and integrate the remaining stacked publication/documentation PRs.
+Merge PR139 and PR140, then continue bounded issue implementation.
 
 ## Parallel changes and reconciliation
 

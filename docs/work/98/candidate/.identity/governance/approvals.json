@@ -1,0 +1,5 @@
+{
+  "$schema": "https://egohygiene.github.io/identity/contracts/v1/approvals.schema.json",
+  "schema": "identity.approvals/v1",
+  "decisions": []
+}

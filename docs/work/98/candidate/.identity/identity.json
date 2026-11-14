@@ -1,0 +1,31 @@
+{
+  "$schema": "https://egohygiene.github.io/identity/contracts/v1/project.schema.json",
+  "schema": "identity.project/v1",
+  "project": {
+    "id": "identity",
+    "displayName": "identity",
+    "repository": "https://github.com/egohygiene/identity",
+    "tagline": "brand kit generator",
+    "kind": "product"
+  },
+  "layers": [],
+  "documents": {
+    "brief": ".identity/brief.md",
+    "targets": ".identity/targets/profiles.json",
+    "provenance": ".identity/governance/provenance.json",
+    "approvals": ".identity/governance/approvals.json",
+    "guidance": {
+      "voice": null,
+      "usage": null
+    }
+  },
+  "directories": {
+    "sources": ".identity/sources",
+    "candidates": ".identity/candidates",
+    "references": ".identity/references"
+  },
+  "compatibility": {
+    "acceptedSchemaMajor": 1,
+    "migrationFrom": []
+  }
+}

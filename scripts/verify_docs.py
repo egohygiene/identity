@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
@@ -15,6 +16,7 @@ from urllib.parse import unquote
 MARKDOWN_LINK = re.compile(r"!?\[[^]]*\]\(([^)]+)\)")
 EXTERNAL_SCHEMES = ("http:", "https:", "mailto:", "tel:")
 IGNORED_DIRECTORIES = {
+    ".cache",
     ".git",
     "node_modules",
     "target",
@@ -63,11 +65,11 @@ def verify_markdown_file(document: Path) -> list[str]:
 
 
 def verify_repository(repository_root: Path) -> list[str]:
-    documents = sorted(
-        document
-        for document in repository_root.rglob("*.md")
-        if not IGNORED_DIRECTORIES.intersection(document.relative_to(repository_root).parts)
-    )
+    documents = []
+    for directory, subdirectories, files in os.walk(repository_root):
+        subdirectories[:] = sorted(set(subdirectories) - IGNORED_DIRECTORIES)
+        documents.extend(Path(directory) / name for name in files if name.endswith(".md"))
+    documents.sort()
     return [error for document in documents for error in verify_markdown_file(document)]
 
 
