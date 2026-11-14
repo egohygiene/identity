@@ -223,6 +223,11 @@ an automatic run.
 
 ## Decisions composition checkpoint — 2026-10-10
 
+The [Intelligence source-adoption packet](INTELLIGENCE_CANDIDATE.md) records
+the next public Git Journey/Search extension and its deferred qualification.
+The source revisions, file counts and deployment claims in this dated section
+remain historical evidence; they do not establish the candidate's publication.
+
 The current implementation adds Repository Intelligence to the existing Brand
 Kit publisher and host. [Proposed ADR-0022](../decisions/ADR-0022-decisions-publication-composition.md)
 records this consumer choice separately from accepted ADR-0017 and the earlier

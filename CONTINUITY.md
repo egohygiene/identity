@@ -7,19 +7,19 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-05T05:56:17Z'
+  updated_at: '2026-11-14T20:55:42+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Prepare the actual Identity self-source/rights and native publisher draft under issue98.
+  purpose: Integrate opt-in native publication with current Identity main.
   includes:
-  - Existing source/rights inventory and incomplete real Identity candidate.
-  - Native publication handoff proposal and consolidated owner packet.
+  - Authorized open-PR integration and bounded open-issue implementation.
+  - Exact local validation and remaining acceptance gates.
   excludes:
-  - Refactors, runtime tests, hosted CI, merges and issue closure.
-  - Creative/rights approval, release, deployment and other-repository changes.
+  - Later repository audit and act CI campaign.
+  - Human ADR disposition, invented rights, new release and deployment.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -29,95 +29,60 @@ scope:
   canonical_sources:
   - AGENTS.md
   - ROADMAP.md
+  - docs/decisions/README.md
+  - docs/decisions/policy-reference.json
+  - docs/consumers/V1_INITIALIZATION.md
   - docs/work/98/OWNER_PACKET.md
-  - docs/work/98/source-inventory.json
-  - docs/decisions/ADR-0034-native-release-publication-input.md
-  - https://github.com/egohygiene/identity/issues/98
+  - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Prepare source, owner facts and native publisher handoff without qualification or publication.
+  objective: Integrate opt-in native publication with current Identity main.
   success_conditions:
-  - Retain local request, standalone candidate and missing-fact boundaries.
-  - Push bounded draft checkpoints with actual source and deferred acceptance recorded.
+  - Preserve public contracts, canonical source, approvals and existing publication selectors.
+  - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
     id: egohygiene/identity#98
     url: https://github.com/egohygiene/identity/issues/98
   next:
     kind: action
-    id: identity-83-source-documentation
-    description: Prepare the bounded issue83 documentation handoff and final source-only matrix; preserve unrun
-      qualification and all owner gates.
+    id: identity-open-work-follow-through
+    description: Merge PR139, then reconcile and merge PR140 before continuing issue implementation.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/83
-    - https://github.com/egohygiene/identity/pull/139
+    - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2
-    ref: refs/heads/codex/133-v1-initializer
-    verified_at: '2026-11-05T05:56:17Z'
+    revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
+    ref: refs/heads/main
+    verified_at: '2026-11-14T20:55:42+00:00'
   candidate:
     branch: codex/98-native-publication-source
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#139
-      url: https://github.com/egohygiene/identity/pull/139
+    pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-05T05:23:14Z'
-    default_branch_revision: 19d3d16bd149ddb61a03924a2b688e8e689af68b
+    observed_at: '2026-11-14T20:55:42+00:00'
+    default_branch_revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
     issue_state: open
-    pull_request_state: draft
-    notes: Main remains19d3d16; draft138 and stacked draft139 are open. This source preparation supplies no
-      current-source runtime qualification or issue closure.
-  parallel_changes:
-  - provider: github
-    id: egohygiene/identity#138
-    url: https://github.com/egohygiene/identity/pull/138
+    pull_request_state: unknown
+    notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
+      continuing.
+  parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-05T05:56:17Z'
+  reviewed_at: '2026-11-14T20:55:42+00:00'
   reviewed_by: Codex
   evidence:
-  - command: bash scripts/dev-env.sh setup; bash scripts/dev-env.sh browsers
+  - command: publication release-config verification, publication-config unit tests, renderer source parsing,
+      documentation links and extraction integrity passed
     outcome: passed
-    observed_at: '2026-11-05T05:23:14Z'
-    notes: Base 19d3d16 built with Rust1.97.1/pnpm11.21.0; Chromium151.0.7922.34 revision1234 installed. Tracked
-      source remained unchanged; this does not qualify later candidate source.
-  - command: Live main/issues/PRs/release/site.json reads and managed Docker health probe
-    outcome: passed
-    observed_at: '2026-11-05T05:23:14Z'
-    notes: Injected authentication and command execution work; Docker health requires local-socket execution
-      permission. Detailed protection endpoint is403; metadata reports unprotected and rulesets are empty.
-  - command: Runtime/regression/native/browser/AX suites, audit and hosted CI
-    outcome: not-run
-    observed_at: '2026-11-05T05:23:14Z'
-    notes: Deferred to a separate campaign; no merge, release, deployment or consumer adoption.
-  - command: Python AST/new-schema JSON parsing; bounded rustfmt; cargo build --locked --offline; git diff
-      --check; roadmap-block/PNG comparison
-    outcome: passed
-    observed_at: '2026-11-05T05:32:42Z'
-    notes: Structural/build evidence for the draft only. Forty roadmap blocks and approved PNG are preserved;
-      no initializer behavior or regression suite executed.
-  - command: Publication Python AST, candidate JSON/workflow YAML parsing; node --check on changed publisher/verifier/download/UI
-      modules; git diff --check
-    outcome: passed
-    observed_at: '2026-11-05T05:48:49Z'
-    notes: Syntax/static source preparation only; native/legacy publication paths, file integrity failures,
-      release workflows and UI behavior are unrun.
-  - command: Source/byte inventory preservation; Python AST and node --check; pinned continuity JSON Schema/size
-      inspection
-    outcome: passed
-    observed_at: '2026-11-05T05:56:17Z'
-    notes: 43 original source files, two exact candidate masters, legacy release configuration/index,40 roadmap
-      blocks and approved PNG preserved. No runtime or official owner-domain qualification.
+    observed_at: '2026-11-14T20:55:42+00:00'
+    notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Downloaded browsers and Docker health do not qualify fonts or the approved screenshot.
-  - Onboarding skill unavailable; available cloud runtime and pinned repository guidance were read.
-  - Current source, rights, platform/review/CI and final tracker acceptance remain open.
+  - Native publisher acceptance and real root self-source rights remain pending. Browser/Docker/platform, release/live/rollback
+    and contrasting-consumer evidence are not supplied by a source merge. Broad audit and act are later work.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -136,48 +101,48 @@ privacy:
 
 ## Purpose and precedence
 
-This is the unqualified issue98 self-source/publisher draft, stacked on PR138. User/runtime instructions, scoped instructions, live state and canonical sources outrank this snapshot.
+User/runtime instructions, scoped repository instructions, live state and canonical sources outrank this checkpoint.
 
 ## Resume protocol
 
-Read AGENTS, the initializer guide, source-campaign checkpoint and live issue133/116. Recheck main, candidate head and peer PRs before acting. PR137 is merged; do not repeat the README split or earlier source merges.
+Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs before choosing the next work item. Historical source-campaign deferrals do not override the current authorized campaign.
 
 ## Current objective and success conditions
 
-Prepare the real Identity source/rights candidate and an opt-in native publisher handoff. Reuse verified generated material, preserve legacy release bindings and keep missing rights/creative decisions explicit.
+Integrate opt-in native publication with current Identity main.
 
 ## State snapshot
 
-Main remains 19d3d16bd149ddb61a03924a2b688e8e689af68b; this PR is stacked on initializer checkpoint ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2. Its containing source commit/PR need fresh inspection; no release or self-referential hash is fabricated.
+Observed main: ed0270b0b6ffa9c0d844b965f953987b57d9e53c. Candidate branch: codex/98-native-publication-source. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-PR139 inventories 43 existing source/package files and retains an incomplete manually prepared self-source candidate. Its native publisher adapter consumes verified native/optional artifacts, preserves native bytes, separates canonical/inventory digests and binds release-owned files to selected Git blobs. ADR-0034 remains proposed; the owner packet records missing rights and deferred qualification. PR138 remains a separate unqualified initializer draft.
+PR146 and PR138 are merged. This candidate retains the native-v1 publisher adapter and proposed self-source inventory, while preserving newer Intelligence Compare and typed-review feed integration. Legacy v1.0.0 selectors and ADR dispositions remain unchanged.
 
 ## Validation and review evidence
 
-Bootstrap passed on original main; initializer Rust compilation passed on PR138. Publication Python/JS syntax, JSON/YAML, pinned continuity schema/size and source-byte preservation passed for this draft. Detailed disposition is in docs/work/98/DRAFT.md. No native publisher path, runtime/regression suite, audit or CI ran.
+publication release-config verification, publication-config unit tests, renderer source parsing, documentation links and extraction integrity passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Refactors, audits, tests, hosted CI, merges and affected issue closures are deferred to a separate campaign. Unknown root asset rights and actual self-source/release/adoption stay issue98. Detailed protection API access is403. Publisher-affecting merges can automatically deploy and therefore remain draft.
+Native publisher acceptance and real root self-source rights remain pending. Browser/Docker/platform, release/live/rollback and contrasting-consumer evidence are not supplied by a source merge. Broad audit and act are later work.
 
 ## Next dependency-ready work
 
-Complete the native publisher source draft and consolidated packet, then prepare issue83 documentation. Keep original dependencies, missing owner facts and deferred acceptance intact.
+Merge PR139, then reconcile and merge PR140 before continuing issue implementation.
 
 ## Parallel changes and reconciliation
 
-No peer open PR was observed before this initial draft. Recheck before handoff. The new public initializer needs proposed ADR-0033 under the exact pinned Aether skill; routine scheduling needs no new ADR. Existing dispositions and historical receipts remain unchanged.
+Preserve newer Repository Intelligence/typed-feed publisher changes when integrating older product branches. Merge does not approve an ADR. Aether create-decisions-document 2.1.0 and continuity 1.1.0 were read from exact Git objects at dc8a16851f452763ef4f7fbe4bf057d4500b1921; Hygiene policy 1.2.0, ratification and migration were read at a05b14f8b9e2772124f879f818e09a911e996ad8. Initializer/native-publication interfaces reference proposed ADR-0033/0034; routine invariant-preserving cleanup needs no new ADR.
 
 ## Privacy and redaction
 
-Retain only public-safe repository facts, exact revisions, commands and bounded outcomes. Exclude credentials, private conversation, private paths and unrelated context.
+Retain public repository facts and bounded evidence. Exclude credentials, private conversation, sensitive personal/business data, private local paths and unrelated context.
 
 ## Handoff update protocol
 
-Refresh after actual source/static checks and immediately before updating the draft. Keep all twelve headings and the 240-line/16384-byte budget. Never substitute source delivery or old test receipts for current qualification.
+Refresh after scoped domain checks and before handoff. Validate the pinned continuity schema, twelve headings, 240-line/16384-byte limits and whitespace. Keep failed, unavailable and unrun checks explicit.
 
 ## Compaction and supersession
 
-Git and the owning issues retain history. This file keeps only the current objective, evidence limits and next action. IDN-Q06 remains planned and unissued; no ecosystem-policy or component expansion is selected.
+Git and owning issues retain history. Keep this file focused on current work. Preserve roadmap IDs/dependencies, ADR lifecycle/approval and the approved screenshot bytes.
