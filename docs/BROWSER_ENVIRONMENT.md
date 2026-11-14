@@ -23,6 +23,13 @@ browser runs with fixed CI settings, UTC and 1 GiB shared memory. Its network is
 disabled except for loopback, where the local static preview/downloads run.
 Installation happens separately during the frozen image build.
 
+The build forwards existing proxy-variable names without recording their
+values. On managed networks needing an additional certificate bundle, use
+`--proxy-ca /path/to/ca-bundle.pem`. BuildKit mounts this file only during the
+font/package installation steps; it is not copied into the image or output
+receipt. TLS verification and the exact font/package checksums remain enabled.
+The browser runtime still has no external network.
+
 The profile selects the official Playwright 1.62.1 Noble image by OCI digest,
 matching the locked test package. Only the recorded Linux/amd64 execution is
 qualified by retained evidence. An arm64 Docker engine may emulate this image;
@@ -33,8 +40,8 @@ The same command accepts --mode ci for an invocation label; settings, image,
 fonts and assertions remain identical. The reference workflow runs CI mode
 and also replays the default local entrypoint on its Docker host. That is a
 hosted local-entrypoint replay, not proof that this authoring workspace ran
-Docker. This workspace has no usable container engine; native host tests remain
-separate evidence.
+Docker. Whether an authoring workspace has a usable engine must be checked
+there; native host tests remain separate evidence.
 
 ## Fixed settings and font evidence
 
@@ -61,7 +68,7 @@ from a CSS family name. No font is downloaded while rendering.
 
 ## Positive and deliberate-drift proof
 
-Qualification runs the existing six E2E checks against the unchanged baseline.
+Qualification discovers the current E2E checks against the unchanged baseline.
 It then changes only disposable built CSS, reruns the original screenshot
 assertion and requires a real comparison failure with a fresh diff image.
 A timeout or unrelated failure is not accepted as drift detection. The CSS

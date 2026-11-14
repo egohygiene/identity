@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T21:08:52+00:00'
+  updated_at: '2026-11-14T21:23:40+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Complete bounded Rust compiler, quality and motion extraction.
+  purpose: Qualify the current local Docker browser environment without changing visual baselines.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,37 +35,37 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Complete bounded Rust compiler, quality and motion extraction.
+  objective: Qualify the current local Docker browser environment without changing visual baselines.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#87
-    url: https://github.com/egohygiene/identity/issues/87
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge the Rust extraction, then qualify the local browser profile and continue renderer/initializer
-      implementation.
+    description: Run the repaired browser wrapper at the committed checkpoint and retain all three phase receipts
+      before closing issue80.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: e4ec2847e1a7be70f22e6dd33267498cfbfe19a0
+    revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
     ref: refs/heads/main
-    verified_at: '2026-11-14T21:08:52+00:00'
+    verified_at: '2026-11-14T21:23:40+00:00'
   candidate:
-    branch: codex/87-rust-modules
+    branch: codex/80-proxy-browser-bootstrap
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T21:08:52+00:00'
-    default_branch_revision: e4ec2847e1a7be70f22e6dd33267498cfbfe19a0
+    observed_at: '2026-11-14T21:23:40+00:00'
+    default_branch_revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
     issue_state: open
     pull_request_state: unknown
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
@@ -73,19 +73,18 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T21:08:52+00:00'
+  reviewed_at: '2026-11-14T21:23:40+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Rust formatting and all-target/all-feature Clippy passed; 118 Rust tests passed with three explicit
-      helper ignores; forty body hashes and three fourteen-file before/after generated inventories match; docs
-      and extraction/provenance checks passed
+  - command: Five browser-wrapper Python tests and twenty-three JavaScript qualification tests passed; docs
+      and renderer syntax checks passed; task-owned Docker build caches were cleared after disk exhaustion
     outcome: passed
-    observed_at: '2026-11-14T21:08:52+00:00'
+    observed_at: '2026-11-14T21:23:40+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Issue80 current Docker/browser qualification, renderer extraction, initializer acceptance, outreach examples,
-    setup dispatch and final documentation remain. Full audit/act/native-platform and release acceptance remain
-    separate; self-source owner facts remain unresolved.
+  - The complete repaired local wrapper still needs a passed source-bound receipt. No screenshot or tolerance
+    changed. CI-mode replay, renderer extraction, initializer cases, setup coverage and final docs remain;
+    full audit/act/release and owner facts remain separate.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -112,27 +111,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Complete bounded Rust compiler, quality and motion extraction.
+Qualify the current local Docker browser environment without changing visual baselines.
 
 ## State snapshot
 
-Observed main: e4ec2847e1a7be70f22e6dd33267498cfbfe19a0. Candidate branch: codex/87-rust-modules. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 0ce87e35790dc224b04fae5176a676cf86b9b90f. Candidate branch: codex/80-proxy-browser-bootstrap. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-Forty unchanged function bodies move to eight private responsibility modules. Public interfaces, filesystem recovery, source authority and diagnostics remain intact. docs/work/116/RUST_EXTRACTION.md and its per-function hash receipt retain the actual validation and exact output comparisons. Issues84/85/86 are closed through merged PR147.
+The local native-amd64 Docker engine and digest-pinned browser image work. Build-only proxy/CA support repairs the reproduced font-fetch failure. An optional-kernel proc-children fallback preserves exact direct-child executable/argv verification. Existing nine browser cases, deliberate screenshot failure and restored pass succeeded before the metadata issue; final qualification of the repaired wrapper is pending.
 
 ## Validation and review evidence
 
-Rust formatting and all-target/all-feature Clippy passed; 118 Rust tests passed with three explicit helper ignores; forty body hashes and three fourteen-file before/after generated inventories match; docs and extraction/provenance checks passed. These results establish only their named local scope.
+Five browser-wrapper Python tests and twenty-three JavaScript qualification tests passed; docs and renderer syntax checks passed; task-owned Docker build caches were cleared after disk exhaustion. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Issue80 current Docker/browser qualification, renderer extraction, initializer acceptance, outreach examples, setup dispatch and final documentation remain. Full audit/act/native-platform and release acceptance remain separate; self-source owner facts remain unresolved.
+The complete repaired local wrapper still needs a passed source-bound receipt. No screenshot or tolerance changed. CI-mode replay, renderer extraction, initializer cases, setup coverage and final docs remain; full audit/act/release and owner facts remain separate.
 
 ## Next dependency-ready work
 
-Merge the Rust extraction, then qualify the local browser profile and continue renderer/initializer implementation.
+Run the repaired browser wrapper at the committed checkpoint and retain all three phase receipts before closing issue80.
 
 ## Parallel changes and reconciliation
 

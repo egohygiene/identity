@@ -188,9 +188,26 @@ function inventory(paths) {
   return [...files].sort().map((file) => ({ path: file, sha256: sha256(readFileSync(file)) }));
 }
 
-function ownedChildPids() {
-  return readFileSync(`/proc/${process.pid}/task/${process.pid}/children`, "utf8")
-    .trim().split(/\s+/u).filter(Boolean).map(Number);
+export function ownedChildPids(procRoot = "/proc", parentPid = process.pid) {
+  try {
+    return readFileSync(`${procRoot}/${parentPid}/task/${parentPid}/children`, "utf8")
+      .trim().split(/\s+/u).filter(Boolean).map(Number);
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  // The children file depends on an optional Linux kernel configuration.
+  // Observe PPid directly when absent; executable/argv binding below is unchanged.
+  const children = [];
+  for (const entry of readdirSync(procRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory() || !/^[1-9][0-9]*$/u.test(entry.name)) continue;
+    try {
+      const status = readFileSync(path.join(procRoot, entry.name, "status"), "utf8");
+      if (Number(status.match(/^PPid:\s+(\d+)$/mu)?.[1]) === parentPid) children.push(Number(entry.name));
+    } catch (error) {
+      if (error.code !== "ENOENT" && error.code !== "ESRCH") throw error;
+    }
+  }
+  return children.sort((a, b) => a - b);
 }
 
 function ownedBrowserProcess(profile, priorChildren) {
