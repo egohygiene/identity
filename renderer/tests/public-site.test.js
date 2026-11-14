@@ -22,7 +22,7 @@ describe("release-backed public asset rights", () => {
       const repository = path.join(temporary, "consumer");
       const renderer = path.join(repository, "renderer");
       fs.mkdirSync(renderer, { recursive: true });
-      for (const name of ["src", "scripts", "index.template.html", "vite.config.js", "package.json"]) {
+      for (const name of ["src", "scripts", "lib", "index.template.html", "vite.config.js", "package.json"]) {
         fs.cpSync(path.join(rendererRoot, name), path.join(renderer, name), { recursive: true });
       }
       fs.symlinkSync(path.join(rendererRoot, "node_modules"), path.join(renderer, "node_modules"), "junction");

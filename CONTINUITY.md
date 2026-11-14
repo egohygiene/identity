@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T21:58:43+00:00'
+  updated_at: '2026-11-14T22:27:40+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Deliver direct portable-entrypoint coverage and repair observed pnpm preparation mismatches.
+  purpose: Integrate renderer extraction with fresh exact-source local browser proof.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,57 +35,60 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Deliver direct portable-entrypoint coverage and repair observed pnpm preparation mismatches.
+  objective: Integrate renderer extraction with fresh exact-source local browser proof.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#82
-    url: https://github.com/egohygiene/identity/issues/82
+    id: egohygiene/identity#88
+    url: https://github.com/egohygiene/identity/issues/88
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge this helper coverage/repair, then qualify the renderer extraction and reconcile final
-      documentation.
+    description: Merge PR153, reconcile current documentation and preserve the finite audit/act and owner-fact
+      handoff.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 376232249209f3304843795f6113baf7dd504019
+    revision: 12c8877b9b74ab02e883a74ec9349afe52eaadd0
     ref: refs/heads/main
-    verified_at: '2026-11-14T21:58:43+00:00'
+    verified_at: '2026-11-14T22:27:40+00:00'
   candidate:
-    branch: codex/82-portable-entrypoints
+    branch: codex/88-renderer-components
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#153
+      url: https://github.com/egohygiene/identity/pull/153
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T21:58:43+00:00'
-    default_branch_revision: 376232249209f3304843795f6113baf7dd504019
+    observed_at: '2026-11-14T22:27:40+00:00'
+    default_branch_revision: 12c8877b9b74ab02e883a74ec9349afe52eaadd0
     issue_state: open
-    pull_request_state: unknown
+    pull_request_state: draft
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
       continuing.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T21:58:43+00:00'
+  reviewed_at: '2026-11-14T22:27:40+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Five protocol tests with actual Make/Task passed; real standalone setup, repeated Make setup and
-      Task browser dry run passed after repairs; Task archive checksum/version, Bash syntax, docs and provenance
-      checks passed
+  - command: Fresh local Docker qualification at clean65807c6 and retained raw hashes pass; 424 renderer tests,
+      integrated Python188 cases/two existing skips, function hashes/HTML equality, canonical builds, public-site
+      verification and docs checks pass
     outcome: passed
-    observed_at: '2026-11-14T21:58:43+00:00'
+    observed_at: '2026-11-14T22:27:40+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Current-source clean-base Docker and CI acceptance remain deferred to the later act campaign; issue82 stays
-    open. Issue80 has actual local browser proof but retains CI acceptance. Renderer extraction and final docs
-    continue; self-source owner facts and release/native-platform matrix remain pending.
+  - Issue88 retains its issue80/current-source CI prerequisite for the later act phase. Issue82 retains clean-base/CI
+    execution. Final documentation and owner questionnaire are in preparation; actual root source rights/release/adoption
+    and full audit/platform acceptance remain pending.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -112,27 +115,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Deliver direct portable-entrypoint coverage and repair observed pnpm preparation mismatches.
+Integrate renderer extraction with fresh exact-source local browser proof.
 
 ## State snapshot
 
-Observed main: 376232249209f3304843795f6113baf7dd504019. Candidate branch: codex/82-portable-entrypoints. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 12c8877b9b74ab02e883a74ec9349afe52eaadd0. Candidate branch: codex/88-renderer-components. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-Five bounded tests execute the actual helper through standalone, Make and checksum-pinned Task, covering repetition, frozen versions, cache/activation, exact dispatch and faults. Two real setups and a non-CI Task browser dry run pass. pnpm11 configuration and CI virtual-store defaults are made consistent; dependency drift fails explicitly. Existing validation installs pinned check-only Task and requires both frontends.
+Twenty-four functions remain exact, public reference HTML is byte-identical, and all424 renderer tests pass. Clean source65807c6 passes the complete native-amd64 Docker wrapper: nine positives, deliberate screenshot failure and restored pass without retries/skips/baseline changes. All hashed artifacts are retained under docs/evidence/browser-local-2026-11-14/renderer-65807c6. Integrated Python188 cases pass with two existing skips; public builds verify.
 
 ## Validation and review evidence
 
-Five protocol tests with actual Make/Task passed; real standalone setup, repeated Make setup and Task browser dry run passed after repairs; Task archive checksum/version, Bash syntax, docs and provenance checks passed. These results establish only their named local scope.
+Fresh local Docker qualification at clean65807c6 and retained raw hashes pass; 424 renderer tests, integrated Python188 cases/two existing skips, function hashes/HTML equality, canonical builds, public-site verification and docs checks pass. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Current-source clean-base Docker and CI acceptance remain deferred to the later act campaign; issue82 stays open. Issue80 has actual local browser proof but retains CI acceptance. Renderer extraction and final docs continue; self-source owner facts and release/native-platform matrix remain pending.
+Issue88 retains its issue80/current-source CI prerequisite for the later act phase. Issue82 retains clean-base/CI execution. Final documentation and owner questionnaire are in preparation; actual root source rights/release/adoption and full audit/platform acceptance remain pending.
 
 ## Next dependency-ready work
 
-Merge this helper coverage/repair, then qualify the renderer extraction and reconcile final documentation.
+Merge PR153, reconcile current documentation and preserve the finite audit/act and owner-fact handoff.
 
 ## Parallel changes and reconciliation
 

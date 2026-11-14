@@ -697,7 +697,7 @@ issues: [88]
 
 - [ ] Release/audience/path regressions, accessibility, keyboard/routing, downloads, and qualified visual checks remain green.
 
-**Evidence and scope:** [#88](https://github.com/egohygiene/identity/issues/88) is deferred with the other refactors until after the selected product work. #80/Q19 remains its unmet browser prerequisite; preserve first-kit contracts and reviewed visuals when extraction resumes.
+**Evidence and scope:** [#88](https://github.com/egohygiene/identity/issues/88) now has the [implemented private extraction](docs/work/116/RENDERER_EXTRACTION.md), twenty-four exact function hashes, byte-identical reference HTML, 424 renderer passes and fresh nine-case local Docker/AX/visual/keyboard/download proof at clean `65807c6d65238f280fd748cede6f4a6e48275bb5`. Source contracts and the approved PNG are unchanged. #80/Q19 still retains current-source CI acceptance, so this prerequisite and final issue88 acceptance remain for the later `act` phase.
 
 <!-- roadmap-step
 id: IDN-Q28
