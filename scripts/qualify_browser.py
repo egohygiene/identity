@@ -249,8 +249,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-directory", type=Path, required=True, help="New or empty evidence directory outside the checkout")
     parser.add_argument("--mode", choices=("local", "ci"), default="local", help="Invocation label only; both modes use the same fixed environment")
+    parser.add_argument("--proxy-ca", type=Path, help="Optional build-only CA bundle mounted as a BuildKit secret; never copied into the image")
     args = parser.parse_args()
     try:
+        proxy_ca = args.proxy_ca.resolve(strict=True) if args.proxy_ca else None
+        if proxy_ca is not None and not proxy_ca.is_file():
+            raise ValueError("--proxy-ca must select a regular CA bundle")
         destination = output_destination(args.output_directory)
         destination.mkdir(parents=True, exist_ok=True)
     except (OSError, ValueError) as error:
@@ -273,7 +277,8 @@ def main() -> int:
     tag: str | None = None
 
     def public_text(value: str) -> str:
-        return value.replace(str(destination), "<output-directory>").replace(str(REPOSITORY), "<repository>")
+        value = value.replace(str(destination), "<output-directory>").replace(str(REPOSITORY), "<repository>")
+        return value.replace(str(proxy_ca), "<build-proxy-ca>") if proxy_ca else value
 
     def run(arguments: list[str], *, capture: bool = False, timeout: int = 1800) -> str:
         public_arguments = [public_text(item) for item in arguments]
@@ -321,7 +326,16 @@ def main() -> int:
         verify_registry_binding(profile, registry, base_image)
         envelope["base_image"] = base_image
         tag = "identity-browser-qualification:" + uuid.uuid4().hex[:12]
-        run(["docker", "build", "--pull", "--platform", PLATFORM, "--file", "dev/browser/Dockerfile", "--build-arg", "BROWSER_IMAGE=" + profile["image"], "--tag", tag, "."])
+        build = ["docker", "build", "--pull", "--platform", PLATFORM, "--file", "dev/browser/Dockerfile", "--build-arg", "BROWSER_IMAGE=" + profile["image"], "--tag", tag]
+        # Docker's predefined proxy arguments keep values out of image layers.
+        # Forward names only: logs/receipts must never capture proxy credentials.
+        proxy_names = [name for name in ("HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "no_proxy") if os.environ.get(name)]
+        for name in proxy_names:
+            build.extend(["--build-arg", name])
+        if proxy_ca:
+            build.extend(["--secret", f"id=identity_proxy_ca,src={proxy_ca}"])
+        envelope["build_network"] = {"proxy_variables": proxy_names, "ca_secret_selected": proxy_ca is not None}
+        run([*build, "."])
         built_image = inspect(tag)
         if (built_image["os"], built_image["architecture"]) != ("linux", "amd64"):
             raise RuntimeError("The built browser image does not match the selected platform")

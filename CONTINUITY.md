@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T21:28:22+00:00'
+  updated_at: '2026-11-14T21:33:53+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Complete explicit v1 initializer implementation acceptance.
+  purpose: Complete explicit v1 initializer acceptance on the qualified local-browser source.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,7 +35,7 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Complete explicit v1 initializer implementation acceptance.
+  objective: Complete explicit v1 initializer acceptance on the qualified local-browser source.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
@@ -46,45 +46,49 @@ work:
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge this initializer acceptance and continue renderer/setup/outreach and final documentation.
+    description: Merge PR150 and close issue133 implementation acceptance, then continue optional outreach
+      and renderer/setup work.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
+    revision: 12e9473c413b26651a93911e1a74652f729c71f9
     ref: refs/heads/main
-    verified_at: '2026-11-14T21:28:22+00:00'
+    verified_at: '2026-11-14T21:33:53+00:00'
   candidate:
     branch: codex/133-initializer-validation
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#150
+      url: https://github.com/egohygiene/identity/pull/150
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T21:28:22+00:00'
-    default_branch_revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
+    observed_at: '2026-11-14T21:33:53+00:00'
+    default_branch_revision: 12e9473c413b26651a93911e1a74652f729c71f9
     issue_state: open
-    pull_request_state: unknown
+    pull_request_state: open
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
       continuing.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T21:28:22+00:00'
+  reviewed_at: '2026-11-14T21:33:53+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Fourteen initializer Python tests passed; copied-binary Rust integration, target Clippy and formatting
-      passed; an actual incomplete report validates against the report schema; docs, bundle and extraction/provenance
-      checks passed
+  - command: Fourteen Python scenarios and copied-binary Rust integration passed; target Clippy/formatting,
+      report-schema validation, docs, standalone-bundle and provenance checks passed. Only continuity was reconciled
+      after the source merge.
     outcome: passed
-    observed_at: '2026-11-14T21:28:22+00:00'
+    observed_at: '2026-11-14T21:33:53+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Full audit/act and native-platform qualification remain later work. Local browser PR149 and optional outreach
-    are concurrent. Identity artwork/copy/default owner facts remain pending; no root source promotion or release
-    occurs.
+  - The broader audit, act and native-platform matrix remain later work. Issue80 retains current-source CI
+    acceptance. Outreach, renderer extraction and setup coverage continue. Root self-source artwork/copy/default
+    owner decisions remain pending.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -111,27 +115,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Complete explicit v1 initializer implementation acceptance.
+Complete explicit v1 initializer acceptance on the qualified local-browser source.
 
 ## State snapshot
 
-Observed main: 0ce87e35790dc224b04fae5176a676cf86b9b90f. Candidate branch: codex/133-initializer-validation. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 12e9473c413b26651a93911e1a74652f729c71f9. Candidate branch: codex/133-initializer-validation. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-Fourteen Python scenarios and a copied-binary Rust integration case cover absent/v0/v1 consumers, exact source and approval imports, missing facts, unsafe paths, repeat runs, deterministic reports and partial-output failure. The guide and docs/work/133/CLOSEOUT.md distinguish this local acceptance from later native/CI and real self-source work. Production initializer source and schemas are unchanged.
+PR149 is merged with complete actual local Docker browser proof. This initializer acceptance adds fourteen Python cases and one copied-binary Rust case; all pass. The guide and closeout retain source/approval preservation, missing facts, unsafe/repeated/failing invocations and v0 behavior. Production initializer code and schemas are unchanged.
 
 ## Validation and review evidence
 
-Fourteen initializer Python tests passed; copied-binary Rust integration, target Clippy and formatting passed; an actual incomplete report validates against the report schema; docs, bundle and extraction/provenance checks passed. These results establish only their named local scope.
+Fourteen Python scenarios and copied-binary Rust integration passed; target Clippy/formatting, report-schema validation, docs, standalone-bundle and provenance checks passed. Only continuity was reconciled after the source merge.. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Full audit/act and native-platform qualification remain later work. Local browser PR149 and optional outreach are concurrent. Identity artwork/copy/default owner facts remain pending; no root source promotion or release occurs.
+The broader audit, act and native-platform matrix remain later work. Issue80 retains current-source CI acceptance. Outreach, renderer extraction and setup coverage continue. Root self-source artwork/copy/default owner decisions remain pending.
 
 ## Next dependency-ready work
 
-Merge this initializer acceptance and continue renderer/setup/outreach and final documentation.
+Merge PR150 and close issue133 implementation acceptance, then continue optional outreach and renderer/setup work.
 
 ## Parallel changes and reconciliation
 
