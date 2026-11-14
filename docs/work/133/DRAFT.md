@@ -1,5 +1,9 @@
 # Explicit v1 initializer draft
 
+Historical source-preparation record. PR138 is now merged; the 2026-11-14
+[local acceptance closeout](CLOSEOUT.md) records the subsequently executed
+scenario matrix. The unrun statements below describe the original draft.
+
 Base: `19d3d16bd149ddb61a03924a2b688e8e689af68b`.
 Review: [draft PR138](https://github.com/egohygiene/identity/pull/138).
 Decision: proposed [ADR-0033](../../decisions/ADR-0033-explicit-v1-initialization-candidates.md).

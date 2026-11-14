@@ -1,8 +1,10 @@
 # Explicit v1 initialization candidates
 
-This is the draft interface for [#133](https://github.com/egohygiene/identity/issues/133).
-It is not in the published `v1.0.0` release. Runtime acceptance and CI are
-deferred; pin the exact reviewed draft implementation before later execution.
+This explicit interface implements [#133](https://github.com/egohygiene/identity/issues/133).
+It is not in the published `v1.0.0` release. Pin a reviewed source revision;
+[local acceptance](../work/133/CLOSEOUT.md) covers the preparation/preservation
+matrix and copied binary on Linux. Full platform and CI qualification remain
+with #70.
 [ADR-0033](../decisions/ADR-0033-explicit-v1-initialization-candidates.md)
 remains proposed.
 
@@ -75,11 +77,14 @@ Holon owns scaffold materialization, Realm immutable installation, Aether agent
 guidance, and EgoLint/Relay delegated checking and enforcement; see the existing
 [handoffs](INITIALIZATION_AND_VALIDATION_HANDOFFS.md).
 
-## Deferred acceptance
+## Acceptance and limits
 
-The later campaign must cover absent, v0-only and existing-v1 consumers;
+Fourteen Python regressions cover absent, v0-only and existing-v1 consumers;
 partial facts; unsupported/invalid inputs; path conflicts, links and failure
-preservation; repeated invocation; exact import bytes; and successful source
-validation only after actual required facts/evidence are supplied. Include
-copied-binary/offline execution, cross-platform path handling and the existing
-v0 parity/source-authority regressions. No case is claimed executed here.
+preservation; repeated invocation; exact import bytes and deterministic reports.
+A copied-binary integration case proves embedded isolated execution, v0
+init/validate preservation, source imports and missing-runtime failure. See the
+[acceptance record](../work/133/CLOSEOUT.md) for exact scope and actual outcomes.
+The fixtures supply explicit synthetic required facts and decisions; this does
+not approve a real consumer's identity. Native-platform qualification outside
+the tested Linux environment remains part of the later quality campaign.
