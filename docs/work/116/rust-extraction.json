@@ -1,0 +1,247 @@
+{
+  "baseRevision": "e4ec2847e1a7be70f22e6dd33267498cfbfe19a0",
+  "operation": "private function extraction; public interfaces retained",
+  "functions": [
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "validate_adapter_descriptor",
+      "bodySha256": "73362794dd1f48760299ed91b18f0642da734fafdc601295c234d9bed28219d3",
+      "to": "src/compiler/validation.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "validate_request",
+      "bodySha256": "eced08e33ce6b5767b4ed360570d673c5d0cb80d3892cfba269f42ad4eb608e5",
+      "to": "src/compiler/validation.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "validate_intent",
+      "bodySha256": "7ed491ebdf86e7f0a7a8e4b2b542ecccdf2342cc92cfb0cdd0eacf487512f0ec",
+      "to": "src/compiler/validation.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "validate_resolved_identity",
+      "bodySha256": "dd026c810715f1b41756693897c842be5cb83fb2e6d6af3722fc0435dd322a54",
+      "to": "src/compiler/validation.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "valid_identifier",
+      "bodySha256": "369ddd2326d0df4092c6c6af44034353c9e7b51292a49d9ed55c3b634432694b",
+      "to": "src/compiler/validation.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "valid_sha256",
+      "bodySha256": "95e7d9c07d406afb3b69d1199ae317c8be1c6fd577349213284dd9a71b494f66",
+      "to": "src/compiler/validation.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "load_manifest",
+      "bodySha256": "8bda300e8ee505fabaa3aaabea3edcbf81986b847260a2fd26bee4f6dc91c690",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "build_plan",
+      "bodySha256": "bb1ac17d3ffb558738723810c580e5690302abba9f3a6c4ffbe68178c6dabb3b",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "build_manifest",
+      "bodySha256": "5e0e21ad62fd00be70cab8b1c37f0a05151d371f63f78922ad548f9b97d5fe88",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "blocked_action",
+      "bodySha256": "f40954831c06858a48bea7543f4600cc7d85ec5c04ed682aecff5e91670f68a8",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "blocked_action_with_descriptor",
+      "bodySha256": "f0bce8af38c9f5676f20aa62a51e145626285832d5c08c414dadd6bf0cdedf0b",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "input_fingerprint",
+      "bodySha256": "c7805d26c50a25a75dc9b1c0b4a14cfac01f4097bff701dca6431ca30eaa6ef3",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "plan_digest",
+      "bodySha256": "bedccf93e1c08f2e9fac0edb9c91b7f0d55dd98076ca202ff15c5bb1ebc5bfdd",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "canonical_hash",
+      "bodySha256": "8a825e44af75b9d81e50ebe5f826ff957d4c18b2026565a469df146b212fdfbf",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/compiler/mod.rs",
+      "name": "byte_len",
+      "bodySha256": "d093d2d6b8f959c03d57764278c48a84f8eeb16dd8034e45a8c87c2e17c2d15c",
+      "to": "src/compiler/planning.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "source_digest_check",
+      "bodySha256": "74365606f4501506f7856f051e5bcf2f8442ddc4fd487ca58318128056780208",
+      "to": "src/quality/source.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "alt_text_check",
+      "bodySha256": "451194aa3c8865d4cd7b8830d3c86d9fc375cfd7dc9d37c4a347cc2ac653a844",
+      "to": "src/quality/source.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "license_check",
+      "bodySha256": "f03b1d8a5b9e06032c87653886db35d3d1c6801e171eef367c390af14d84536a",
+      "to": "src/quality/source.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "origin_check",
+      "bodySha256": "fb61752eeb873ee275587bd81583fb057348b285fcfcd40d3d2b2a7498219037",
+      "to": "src/quality/source.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "approval_check",
+      "bodySha256": "3f810730b76c7a64ef7095584bf57061515dbc6876a1d3b558b5d492b6708c62",
+      "to": "src/quality/source.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "svg_source_checks",
+      "bodySha256": "fca1dfcfba64cb73e1976e371a1b564aefcd700136d76be8932e16b4b7270145",
+      "to": "src/quality/source.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "artifact_digest_check",
+      "bodySha256": "5e1985e1a2eb1a15884f08253c6ec71899d3944ca0b796331c689e2ff12f4385",
+      "to": "src/quality/artifacts.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "artifact_budget_check",
+      "bodySha256": "c4743287f0819594da580bbe5252112d95364df7e559ba47f1e13acd02a9b1c9",
+      "to": "src/quality/artifacts.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "png_dimensions_check",
+      "bodySha256": "17da7b8636cb3dd49b8ac9547dca325ac3c62dbf25d4f294fa973a1f64cd1a42",
+      "to": "src/quality/artifacts.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "generated_svg_check",
+      "bodySha256": "76db2aea443de5d6a0c0a315f570160202d5f8c2abb2da6a2cd1a730401b6dc1",
+      "to": "src/quality/artifacts.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "maskable_evidence_check",
+      "bodySha256": "a97b80337eaa72d4ad9a8f906940f529d9f53fca75d6f2b67e4ac24f4bf29f3a",
+      "to": "src/quality/artifacts.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "visual_baseline_check",
+      "bodySha256": "3d6252c30d0bcee71ac6be413eb35d922adc9c12fa45ab792b0f2306dd2e8784",
+      "to": "src/quality/artifacts.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "duration_check",
+      "bodySha256": "3795cbb0fc7aa4e365f6dfa4f36310b3affb1aa4052e16ec785a912b4ef788d6",
+      "to": "src/quality/tokens.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "contrast_ratio",
+      "bodySha256": "a04fc70703d8266fa3ca5133ec2a2a2d5fdf730928823c4d0a4f6576e72121e7",
+      "to": "src/quality/tokens.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "srgb_color",
+      "bodySha256": "2eac9291106c5da2f97fa7cb6f8edac52e77a3bfc3eeeafaccb4770d341886c5",
+      "to": "src/quality/tokens.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "relative_luminance",
+      "bodySha256": "301c6e4200db0f592c97cb90d4ad382bd0603fc91b6018d2b0894506e1ef00e1",
+      "to": "src/quality/tokens.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "linear_channel",
+      "bodySha256": "61b2c9726702260788bdcee54dafd487a56939545d05083d4f05ee510bc0ead7",
+      "to": "src/quality/tokens.rs"
+    },
+    {
+      "from": "src/quality/mod.rs",
+      "name": "duration_ms",
+      "bodySha256": "feeb8a33cb771fed92bf5c2cf4365c9f46da5ff72ae2ef97d544fbf57db7812a",
+      "to": "src/quality/tokens.rs"
+    },
+    {
+      "from": "src/motion/mod.rs",
+      "name": "source_checks",
+      "bodySha256": "2366a6364e532048d24a0491fb6dd4d1aa41e87e8d2dc3d4b5579afb2c144942",
+      "to": "src/motion/provenance.rs"
+    },
+    {
+      "from": "src/motion/mod.rs",
+      "name": "capture_checks",
+      "bodySha256": "829a7e6d7ed934cdb232d64265e0cf3b6cfe3467789543ba7d0486f44b6d5366",
+      "to": "src/motion/provenance.rs"
+    },
+    {
+      "from": "src/motion/mod.rs",
+      "name": "behavior_checks",
+      "bodySha256": "e60dd01dded9910f5e60dcba378cd01680a7215e0633040968e90b8203297dd3",
+      "to": "src/motion/behavior.rs"
+    },
+    {
+      "from": "src/motion/mod.rs",
+      "name": "requires_fallback",
+      "bodySha256": "09384d5dbdae67eaa3ce943dc8d5f1689f47fead648fe1894f18c6ec558adf48",
+      "to": "src/motion/behavior.rs"
+    },
+    {
+      "from": "src/motion/mod.rs",
+      "name": "fallback_check",
+      "bodySha256": "49f5356584ef7d5a2f75e241724f3e0bc01ed810c165e5263659e61d1df7d2b7",
+      "to": "src/motion/behavior.rs"
+    },
+    {
+      "from": "src/motion/mod.rs",
+      "name": "output_checks",
+      "bodySha256": "00841fa89b13ea9876b3f3af82081350bc9b04d3a6388017d5d7f659cc2d8cdf",
+      "to": "src/motion/artifacts.rs"
+    },
+    {
+      "from": "src/motion/mod.rs",
+      "name": "baseline_check",
+      "bodySha256": "d93276902a9851d1cabf5e860cf24b5335d21ef87015ce9a02b8f664f5277ece",
+      "to": "src/motion/artifacts.rs"
+    }
+  ],
+  "bodyVerification": "40 exact unchanged function bodies after rustfmt"
+}
