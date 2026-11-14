@@ -1,15 +1,4 @@
-# Copyright 2026 Ego Hygiene
-# SPDX-License-Identifier: MIT
-
-# Identity's generated manifests and quality fixtures include SHA-256 evidence.
-# Keep tracked text byte-stable across Windows, macOS, and Linux checkouts.
-* text=auto eol=lf
-
-# Binary projections remain byte-for-byte data, never line-ending-normalized text.
-*.gif binary
-*.ico binary
-*.jpg binary
-*.jpeg binary
-*.png binary
-*.webp binary
-*.zip binary
+# Retain external browser proof exactly, including generated diagnostic whitespace.
+docs/evidence/browser-local-2026-11-14/** -text
+docs/evidence/browser-local-2026-11-14/**/error-context.md -diff
+docs/evidence/browser-local-2026-11-14/**/*.log -diff

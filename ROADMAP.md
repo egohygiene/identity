@@ -569,7 +569,7 @@ issues: [80]
 
 - [ ] Unchanged approved baselines pass locally and in CI; a deliberate change fails without tolerance relaxation or automatic baseline updates.
 
-**Evidence and scope:** [#80](https://github.com/egohygiene/identity/issues/80) remains open in deferred [draft #123](https://github.com/egohygiene/identity/pull/123). Hosted reference/release CI and hosted local-entrypoint replay pass at `400846db7f10823d4b5bc1629213caf03960b59c`; actual local-Docker acceptance remains unavailable and owner-deferred to final stabilization, followed by review. Keep the exit unchecked and #82/#88 blocked. Preserve [ADR-0011](docs/decisions/ADR-0011-accessibility-and-visual-evidence.md), the approved PNG and tolerance; hosted replay is not an actual authoring-workspace Docker run.
+**Evidence and scope:** [#80](https://github.com/egohygiene/identity/issues/80) now has [actual local native-amd64 Docker proof](docs/evidence/browser-local-2026-11-14/README.md) at clean `695f14c0c4f3b272b83b96619246eb981adaf6e5`: nine positive cases, deliberate visual failure and restored pass, with all sixteen hashed artifacts retained. PR123 is merged; its older hosted receipts retain their original scope. Current-source CI execution remains for the later `act` campaign, so this exit and #80 remain open. The current source campaign may prepare #82/#88 against the qualified local profile without claiming that deferred CI gate complete. Preserve [ADR-0011](docs/decisions/ADR-0011-accessibility-and-visual-evidence.md), the approved PNG and tolerance.
 
 <!-- roadmap-step
 id: IDN-Q20

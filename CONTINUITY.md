@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T21:23:40+00:00'
+  updated_at: '2026-11-14T21:31:14+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Qualify the current local Docker browser environment without changing visual baselines.
+  purpose: Retain actual local Docker browser qualification and unblock source refactoring.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,7 +35,7 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Qualify the current local Docker browser environment without changing visual baselines.
+  objective: Retain actual local Docker browser qualification and unblock source refactoring.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
@@ -46,8 +46,8 @@ work:
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Run the repaired browser wrapper at the committed checkpoint and retain all three phase receipts
-      before closing issue80.
+    description: Merge the local browser compatibility/evidence change and continue renderer extraction using
+      this qualified local profile.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
@@ -56,7 +56,7 @@ state:
   base:
     revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
     ref: refs/heads/main
-    verified_at: '2026-11-14T21:23:40+00:00'
+    verified_at: '2026-11-14T21:31:14+00:00'
   candidate:
     branch: codex/80-proxy-browser-bootstrap
     revision: null
@@ -64,7 +64,7 @@ state:
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T21:23:40+00:00'
+    observed_at: '2026-11-14T21:31:14+00:00'
     default_branch_revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
     issue_state: open
     pull_request_state: unknown
@@ -73,18 +73,18 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T21:23:40+00:00'
+  reviewed_at: '2026-11-14T21:31:14+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Five browser-wrapper Python tests and twenty-three JavaScript qualification tests passed; docs
-      and renderer syntax checks passed; task-owned Docker build caches were cleared after disk exhaustion
+  - command: Complete local Docker browser wrapper passed at clean695f14c; all retained artifact hashes match;
+      five Python and twenty-three JavaScript qualification tests passed; docs and source syntax passed
     outcome: passed
-    observed_at: '2026-11-14T21:23:40+00:00'
+    observed_at: '2026-11-14T21:31:14+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - The complete repaired local wrapper still needs a passed source-bound receipt. No screenshot or tolerance
-    changed. CI-mode replay, renderer extraction, initializer cases, setup coverage and final docs remain;
-    full audit/act/release and owner facts remain separate.
+  - Issue80 remains open for matching current-source CI execution in the later act campaign. Initializer and
+    outreach acceptance PRs are concurrent. Renderer extraction, setup coverage and final docs continue. Root
+    source rights/copy/default owner facts and release/native-platform acceptance remain pending.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -111,7 +111,7 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Qualify the current local Docker browser environment without changing visual baselines.
+Retain actual local Docker browser qualification and unblock source refactoring.
 
 ## State snapshot
 
@@ -119,19 +119,19 @@ Observed main: 0ce87e35790dc224b04fae5176a676cf86b9b90f. Candidate branch: codex
 
 ## Completed and material changes
 
-The local native-amd64 Docker engine and digest-pinned browser image work. Build-only proxy/CA support repairs the reproduced font-fetch failure. An optional-kernel proc-children fallback preserves exact direct-child executable/argv verification. Existing nine browser cases, deliberate screenshot failure and restored pass succeeded before the metadata issue; final qualification of the repaired wrapper is pending.
+At clean source695f14c the complete local native-amd64 Docker qualification passes nine positive cases, deliberate screenshot failure and restored pass. All sixteen hashed artifacts and source/runtime/font/process receipts are retained under docs/evidence/browser-local-2026-11-14. Build-only proxy/CA and optional-proc-interface compatibility fixes preserve the approved PNG, strict ownership checks and offline browser runtime.
 
 ## Validation and review evidence
 
-Five browser-wrapper Python tests and twenty-three JavaScript qualification tests passed; docs and renderer syntax checks passed; task-owned Docker build caches were cleared after disk exhaustion. These results establish only their named local scope.
+Complete local Docker browser wrapper passed at clean695f14c; all retained artifact hashes match; five Python and twenty-three JavaScript qualification tests passed; docs and source syntax passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The complete repaired local wrapper still needs a passed source-bound receipt. No screenshot or tolerance changed. CI-mode replay, renderer extraction, initializer cases, setup coverage and final docs remain; full audit/act/release and owner facts remain separate.
+Issue80 remains open for matching current-source CI execution in the later act campaign. Initializer and outreach acceptance PRs are concurrent. Renderer extraction, setup coverage and final docs continue. Root source rights/copy/default owner facts and release/native-platform acceptance remain pending.
 
 ## Next dependency-ready work
 
-Run the repaired browser wrapper at the committed checkpoint and retain all three phase receipts before closing issue80.
+Merge the local browser compatibility/evidence change and continue renderer extraction using this qualified local profile.
 
 ## Parallel changes and reconciliation
 
