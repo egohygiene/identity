@@ -12,7 +12,7 @@ use std::fs;
 use std::io::{BufRead, BufReader, Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::{Child, Command, Output, Stdio};
-use std::sync::mpsc;
+use std::sync::{Mutex, mpsc};
 use std::time::{Duration, Instant};
 
 use identity::compiler::{
@@ -27,6 +27,11 @@ const TRANSACTIONS: &str = ".cache/identity/transactions";
 const LOCK: &str = ".cache/identity/writer.lock";
 const PROCESS_TIMEOUT: Duration = Duration::from_secs(30);
 const OWNER_READY: &str = "IDENTITY_RECOVERY_OWNER_READY";
+
+// A concurrent fork can briefly inherit another thread's writable executable
+// descriptor before close-on-exec runs. Serialize copying against spawn, not
+// process execution, so copied standalone binaries cannot hit Linux ETXTBSY.
+static COPY_OR_SPAWN: Mutex<()> = Mutex::new(());
 
 fn digest(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
@@ -121,13 +126,14 @@ impl Drop for Process {
 }
 
 fn run(mut command: Command) -> Output {
-    let mut child = Process(
+    let mut child = Process({
+        let _guard = COPY_OR_SPAWN.lock().unwrap();
         command
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()
-            .unwrap(),
-    );
+            .unwrap()
+    });
     let read = |mut pipe: Box<dyn Read + Send>| {
         let (sender, receiver) = mpsc::channel();
         std::thread::spawn(move || {
@@ -177,7 +183,10 @@ impl Standalone {
         } else {
             "identity"
         });
-        fs::copy(env!("CARGO_BIN_EXE_identity"), &binary).unwrap();
+        {
+            let _guard = COPY_OR_SPAWN.lock().unwrap();
+            fs::copy(env!("CARGO_BIN_EXE_identity"), &binary).unwrap();
+        }
         Self {
             _directory: directory,
             binary,
@@ -593,7 +602,8 @@ fn exclusive_owner() {
 }
 
 fn owner(root: &Path) -> Process {
-    let mut child = Process(
+    let mut child = Process({
+        let _guard = COPY_OR_SPAWN.lock().unwrap();
         Command::new(std::env::current_exe().unwrap())
             .args([
                 "--exact",
@@ -607,8 +617,8 @@ fn owner(root: &Path) -> Process {
             .stdout(Stdio::piped())
             .stderr(Stdio::inherit())
             .spawn()
-            .unwrap(),
-    );
+            .unwrap()
+    });
     let stdout = child.0.stdout.take().unwrap();
     let (sender, receiver) = mpsc::channel();
     std::thread::spawn(move || {

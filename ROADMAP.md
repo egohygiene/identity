@@ -621,7 +621,7 @@ issues: [83]
 
 <!-- roadmap-step
 id: IDN-Q23
-status: ready
+status: complete
 depends_on: []
 issues: [84]
 -->
@@ -631,13 +631,13 @@ issues: [84]
 
 **Exit criteria:**
 
-- [ ] Historical branch ownership is checked, completed rewrites are retired, and read-only documentation validation remains.
+- [x] Historical branch ownership is checked, completed rewrites are retired, and read-only documentation validation remains.
 
-**Evidence and scope:** [#84](https://github.com/egohygiene/identity/issues/84). Preserve Git history and do not remove outstanding owned work blindly.
+**Evidence and scope:** [#84](https://github.com/egohygiene/identity/issues/84). Merged PR130 retirement and PR146 regression guard pass [local acceptance](docs/work/116/LOCAL_ACCEPTANCE.md). Git history and current-purpose permissions remain intact.
 
 <!-- roadmap-step
 id: IDN-Q24
-status: blocked
+status: complete
 depends_on: [IDN-Q11, IDN-Q13]
 issues: [85]
 -->
@@ -647,13 +647,13 @@ issues: [85]
 
 **Exit criteria:**
 
-- [ ] Diagnostics, fixture behavior, conformance vectors, extraction provenance, and standalone embedded-validator execution remain stable.
+- [x] Diagnostics, fixture behavior, conformance vectors, extraction provenance, and standalone embedded-validator execution remain stable.
 
-**Evidence and scope:** [#85](https://github.com/egohygiene/identity/issues/85). Moving modules must not make the distributed CLI depend on an Identity checkout.
+**Evidence and scope:** [#85](https://github.com/egohygiene/identity/issues/85) passes [local acceptance](docs/work/116/LOCAL_ACCEPTANCE.md): exact pre-extraction diagnostics, generated-bundle/provenance checks, Python regressions and copied standalone embedded-validator execution. The distributed CLI remains independent of a checkout.
 
 <!-- roadmap-step
 id: IDN-Q25
-status: blocked
+status: complete
 depends_on: [IDN-Q10, IDN-Q13, IDN-Q24]
 issues: [86]
 -->
@@ -663,9 +663,9 @@ issues: [86]
 
 **Exit criteria:**
 
-- [ ] Public/review and cross-language conformance remain covered with unchanged repaired output bytes.
+- [x] Public/review and cross-language conformance remain covered with unchanged repaired output bytes.
 
-**Evidence and scope:** [#86](https://github.com/egohygiene/identity/issues/86). Keep distinct v0/v1 profile semantics and standard-library operation.
+**Evidence and scope:** [#86](https://github.com/egohygiene/identity/issues/86) passes [local acceptance](docs/work/116/LOCAL_ACCEPTANCE.md), including twelve exact pre-extraction output comparisons and shared lifecycle/digest regressions. Distinct v0/v1 profiles and standard-library operation remain intact.
 
 <!-- roadmap-step
 id: IDN-Q26
