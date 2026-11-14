@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
 
-import { installedBrowserMetadata, validateReport } from "../scripts/qualify-browser.mjs";
+import { installedBrowserMetadata, ownedChildPids, validateReport } from "../scripts/qualify-browser.mjs";
 
 const screenshotTitle = "matches the reviewed desktop viewport baseline";
 const approvedBaseline = fileURLToPath(new URL(
@@ -98,6 +98,22 @@ function negativeOptions() {
 }
 
 describe("qualified browser report evidence", () => {
+  test("observes only direct children when the optional kernel children file is absent", () => {
+    for (const [pid, parent] of [[10, 1], [20, 10], [21, 10], [30, 20]]) {
+      fs.mkdirSync(path.join(temporary, String(pid)));
+      fs.writeFileSync(path.join(temporary, String(pid), "status"), `Name:\ttest\nPPid:\t${parent}\n`);
+    }
+    fs.mkdirSync(path.join(temporary, "40")); // Process exited during enumeration.
+    expect(ownedChildPids(temporary, 10)).toEqual([20, 21]);
+  });
+
+  test("uses the kernel children list when that interface is available", () => {
+    const task = path.join(temporary, "10/task/10");
+    fs.mkdirSync(task, { recursive: true });
+    fs.writeFileSync(path.join(task, "children"), "20 21 ");
+    expect(ownedChildPids(temporary, 10)).toEqual([20, 21]);
+  });
+
   test("resolves real frozen-install browser metadata through declared pnpm dependencies", () => {
     const profile = JSON.parse(fs.readFileSync(new URL("../../dev/browser/profile.json", import.meta.url), "utf8"));
     const { playwrightVersion, browsers } = installedBrowserMetadata();
