@@ -11,6 +11,49 @@ If Corepack is absent, the installer installs version 0.34.6 into its prefix
 using npm. Make and Task are optional frontends; neither is needed by the
 standalone installer. Tools already available in the base image are reused.
 
+`tools` verifies the activated pnpm version against `renderer/package.json`
+before dependency installation/building. A successful activation command with
+the wrong version fails explicitly.
+All pnpm commands inherit the same owned store through pnpm 11's
+`pnpm_config_store_dir`;
+dependency installation and later build/browser commands therefore agree on
+the store, including nested package scripts. An explicit inherited override is
+preserved.
+Dependency drift fails before build/browser dispatch by default instead of
+triggering an implicit reinstall; run the explicit `deps`/`setup` command to
+prepare dependencies. An inherited `pnpm_config_verify_deps_before_run`
+selection is respected.
+The global virtual store defaults to disabled in this helper so pnpm's
+CI/non-CI defaults cannot invalidate a prepared checkout between commands;
+an explicit `pnpm_config_enable_global_virtual_store` override is preserved.
+
+## Entry point checks and resource budget
+
+`tests/test_dev_entrypoints.py` executes the actual shared Bash helper through
+standalone, Make and Task commands against synthetic tool protocols. Five
+bounded tests cover repeated setup, exact argument dispatch, frozen versions,
+activation/cache bindings and deliberate version/dispatch faults. They do not
+download dependencies, compile the product or run a browser. The validation
+workflow installs checksum-pinned Task 3.45.3 and requires both frontends for
+this coverage; ordinary standalone setup still requires neither frontend.
+
+The 2026-11-14 [local acceptance](work/82/LOCAL_ACCEPTANCE.md) additionally runs
+two real setups through standalone/Make and a real Task browser dry run. These
+prove the local helper paths, not clean-base Docker or hosted/`act` CI acceptance.
+The existing development-image qualification owns the separate pinned/default
+and custom-base Docker smoke. Current-source execution of that scope remains
+#82's open gate for the later CI campaign.
+
+`task check`/`make check` run the helper's Rust/Python/renderer tests and builds;
+they do not replace the root workflow's release, documentation, mascot,
+publication, decision or provenance validators, supported native-platform
+matrix, or qualified browser/screenshot pass. Browser installation and Linux
+library installation remain explicit, and `--with-deps` requires OS package
+privileges. The protocol suite takes about three seconds here; the two real
+setups reuse the same owned tool/package caches and incrementally built Rust
+artifacts. Run a clean-base Docker qualification once per changed base/helper
+scope rather than repeating expensive builds for every frontend.
+
 ```bash
 task --list                 # Discover the existing repository tasks
 task setup                  # Install tools, dependencies and build

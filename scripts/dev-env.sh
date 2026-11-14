@@ -16,6 +16,10 @@ fi
 export COREPACK_HOME="${COREPACK_HOME:-$IDENTITY_DEV_PREFIX/corepack-cache}"
 export PLAYWRIGHT_BROWSERS_PATH="${PLAYWRIGHT_BROWSERS_PATH:-$IDENTITY_DEV_PREFIX/browsers}"
 export npm_config_cache="${npm_config_cache:-$IDENTITY_DEV_PREFIX/npm-cache}"
+# pnpm 11 reads its own configuration prefix, including nested script commands.
+export pnpm_config_store_dir="${pnpm_config_store_dir:-${npm_config_store_dir:-$IDENTITY_DEV_PREFIX/pnpm-store}}"
+export pnpm_config_verify_deps_before_run="${pnpm_config_verify_deps_before_run:-error}"
+export pnpm_config_enable_global_virtual_store="${pnpm_config_enable_global_virtual_store:-false}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$IDENTITY_DEV_PREFIX/xdg-cache}"
 export PATH="$IDENTITY_DEV_PREFIX/bin:$IDENTITY_DEV_PREFIX/corepack-cli/node_modules/.bin:$CARGO_HOME/bin:$PATH"
 # Recent Corepack versions use Node's native fetch. Enable its supported
@@ -39,7 +43,7 @@ tools() {
     curl --fail --show-error --location https://sh.rustup.rs -o "$IDENTITY_DEV_PREFIX/rustup-init.sh"
     bash "$IDENTITY_DEV_PREFIX/rustup-init.sh" -y --no-modify-path --profile minimal --default-toolchain none
   fi
-  local channel
+  local channel expected_package_manager activated_version
   channel="$(python3 -c 'import sys,tomllib; print(tomllib.load(open(sys.argv[1], "rb"))["toolchain"]["channel"])' "$repo_root/rust-toolchain.toml")"
   rustup toolchain install "$channel" --profile minimal --component clippy,rustfmt
   if ! command -v corepack >/dev/null 2>&1; then
@@ -47,14 +51,20 @@ tools() {
     npm install --prefix "$IDENTITY_DEV_PREFIX/corepack-cli" --no-audit --no-fund corepack@0.34.6
   fi
   corepack enable --install-directory "$IDENTITY_DEV_PREFIX/bin"
-  (cd "$repo_root/renderer" && corepack pnpm --version)
+  expected_package_manager="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["packageManager"])' "$repo_root/renderer/package.json")"
+  activated_version="$(cd "$repo_root/renderer" && corepack pnpm --version)"
+  if [[ "pnpm@${activated_version}" != "$expected_package_manager" ]]; then
+    printf 'Activated pnpm %s differs from required %s\n' "$activated_version" "$expected_package_manager" >&2
+    return 1
+  fi
+  printf '%s\n' "$activated_version"
 }
 
 deps() {
   cd "$repo_root"
   cargo fetch --locked
   cd renderer
-  corepack pnpm install --frozen-lockfile --store-dir "$IDENTITY_DEV_PREFIX/pnpm-store"
+  corepack pnpm install --frozen-lockfile --store-dir "$pnpm_config_store_dir"
 }
 
 build() {

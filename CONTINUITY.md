@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T21:37:05+00:00'
+  updated_at: '2026-11-14T21:58:43+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Deliver editable outreach email and social-kit examples through the existing workflow.
+  purpose: Deliver direct portable-entrypoint coverage and repair observed pnpm preparation mismatches.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,37 +35,37 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Deliver editable outreach email and social-kit examples through the existing workflow.
+  objective: Deliver direct portable-entrypoint coverage and repair observed pnpm preparation mismatches.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#145
-    url: https://github.com/egohygiene/identity/issues/145
+    id: egohygiene/identity#82
+    url: https://github.com/egohygiene/identity/issues/82
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge the outreach examples and continue renderer extraction, setup-entrypoint coverage and
-      final documentation.
+    description: Merge this helper coverage/repair, then qualify the renderer extraction and reconcile final
+      documentation.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: b7eb00cf18f38d118062a73f2768057a82ec6e6a
+    revision: 376232249209f3304843795f6113baf7dd504019
     ref: refs/heads/main
-    verified_at: '2026-11-14T21:37:05+00:00'
+    verified_at: '2026-11-14T21:58:43+00:00'
   candidate:
-    branch: codex/145-outreach-examples
+    branch: codex/82-portable-entrypoints
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T21:37:05+00:00'
-    default_branch_revision: b7eb00cf18f38d118062a73f2768057a82ec6e6a
+    observed_at: '2026-11-14T21:58:43+00:00'
+    default_branch_revision: 376232249209f3304843795f6113baf7dd504019
     issue_state: open
     pull_request_state: unknown
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
@@ -73,19 +73,19 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T21:37:05+00:00'
+  reviewed_at: '2026-11-14T21:58:43+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Documented Press Kit generation and read-only package verification, release-announcement generation
-      and read-only inventory verification all passed in a disposable consumer; source guidance/copy/asset
-      references and documentation links passed
+  - command: Five protocol tests with actual Make/Task passed; real standalone setup, repeated Make setup and
+      Task browser dry run passed after repairs; Task archive checksum/version, Bash syntax, docs and provenance
+      checks passed
     outcome: passed
-    observed_at: '2026-11-14T21:37:05+00:00'
+    observed_at: '2026-11-14T21:58:43+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - These are editable fictional examples, not real campaign approval or sending/publication. Broad audit/act
-    and native-platform acceptance remain later work. Browser CI, renderer/setup source work and actual self-source
-    owner decisions retain their owning issues.
+  - Current-source clean-base Docker and CI acceptance remain deferred to the later act campaign; issue82 stays
+    open. Issue80 has actual local browser proof but retains CI acceptance. Renderer extraction and final docs
+    continue; self-source owner facts and release/native-platform matrix remain pending.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -112,27 +112,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Deliver editable outreach email and social-kit examples through the existing workflow.
+Deliver direct portable-entrypoint coverage and repair observed pnpm preparation mismatches.
 
 ## State snapshot
 
-Observed main: b7eb00cf18f38d118062a73f2768057a82ec6e6a. Candidate branch: codex/145-outreach-examples. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 376232249209f3304843795f6113baf7dd504019. Candidate branch: codex/82-portable-entrypoints. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-Original email and three-audience/channel social drafts reuse the exact fictional public boilerplate and existing approved sample visual, alt text and rights. The end-to-end guide separates canonical source from campaign drafts and generated Press Kit/announcement packages. Upstream Open Source Pledge structural references are attributed. Q36 retains its existing ID and dependencies while linking issue145.
+Five bounded tests execute the actual helper through standalone, Make and checksum-pinned Task, covering repetition, frozen versions, cache/activation, exact dispatch and faults. Two real setups and a non-CI Task browser dry run pass. pnpm11 configuration and CI virtual-store defaults are made consistent; dependency drift fails explicitly. Existing validation installs pinned check-only Task and requires both frontends.
 
 ## Validation and review evidence
 
-Documented Press Kit generation and read-only package verification, release-announcement generation and read-only inventory verification all passed in a disposable consumer; source guidance/copy/asset references and documentation links passed. These results establish only their named local scope.
+Five protocol tests with actual Make/Task passed; real standalone setup, repeated Make setup and Task browser dry run passed after repairs; Task archive checksum/version, Bash syntax, docs and provenance checks passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-These are editable fictional examples, not real campaign approval or sending/publication. Broad audit/act and native-platform acceptance remain later work. Browser CI, renderer/setup source work and actual self-source owner decisions retain their owning issues.
+Current-source clean-base Docker and CI acceptance remain deferred to the later act campaign; issue82 stays open. Issue80 has actual local browser proof but retains CI acceptance. Renderer extraction and final docs continue; self-source owner facts and release/native-platform matrix remain pending.
 
 ## Next dependency-ready work
 
-Merge the outreach examples and continue renderer extraction, setup-entrypoint coverage and final documentation.
+Merge this helper coverage/repair, then qualify the renderer extraction and reconcile final documentation.
 
 ## Parallel changes and reconciliation
 
