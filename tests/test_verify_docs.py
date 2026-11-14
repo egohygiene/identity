@@ -38,6 +38,18 @@ class VerifyDocsTests(unittest.TestCase):
         self.assertEqual(len(errors), 1)
         self.assertIn("missing link target", errors[0])
 
+    def test_downloaded_tool_cache_is_not_repository_documentation(self) -> None:
+        verify_docs = load_verify_docs_module()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            cache = root / ".cache" / "identity" / "dev-env" / "rustup"
+            cache.mkdir(parents=True)
+            (cache / "README.md").write_text("[upstream](missing-upstream.md)\n")
+            (root / "README.md").write_text("[source](missing-source.md)\n")
+            errors = verify_docs.verify_repository(root)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("missing-source.md", errors[0])
+
 
 if __name__ == "__main__":
     unittest.main()

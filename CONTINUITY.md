@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T20:55:42+00:00'
+  updated_at: '2026-11-14T20:56:19+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -46,7 +46,7 @@ work:
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge PR139, then reconcile and merge PR140 before continuing issue implementation.
+    description: Merge PR139 and PR140, then continue bounded issue implementation.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
@@ -55,7 +55,7 @@ state:
   base:
     revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
     ref: refs/heads/main
-    verified_at: '2026-11-14T20:55:42+00:00'
+    verified_at: '2026-11-14T20:56:19+00:00'
   candidate:
     branch: codex/98-native-publication-source
     revision: null
@@ -63,7 +63,7 @@ state:
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T20:55:42+00:00'
+    observed_at: '2026-11-14T20:56:19+00:00'
     default_branch_revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
     issue_state: open
     pull_request_state: unknown
@@ -72,17 +72,18 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T20:55:42+00:00'
+  reviewed_at: '2026-11-14T20:56:19+00:00'
   reviewed_by: Codex
   evidence:
-  - command: publication release-config verification, publication-config unit tests, renderer source parsing,
-      documentation links and extraction integrity passed
+  - command: cargo build --locked, publication release-config verification and three config tests, renderer
+      syntax, extraction integrity, three documentation tests and documentation links passed
     outcome: passed
-    observed_at: '2026-11-14T20:55:42+00:00'
+    observed_at: '2026-11-14T20:56:19+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Native publisher acceptance and real root self-source rights remain pending. Browser/Docker/platform, release/live/rollback
-    and contrasting-consumer evidence are not supplied by a source merge. Broad audit and act are later work.
+  - Native publisher behavioral acceptance and real root source rights remain pending. Browser/Docker/platform,
+    release/live/rollback and contrasting-consumer evidence are not supplied by source merges. Broad audit
+    and act are later work.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -117,19 +118,19 @@ Observed main: ed0270b0b6ffa9c0d844b965f953987b57d9e53c. Candidate branch: codex
 
 ## Completed and material changes
 
-PR146 and PR138 are merged. This candidate retains the native-v1 publisher adapter and proposed self-source inventory, while preserving newer Intelligence Compare and typed-review feed integration. Legacy v1.0.0 selectors and ADR dispositions remain unchanged.
+PR146 and PR138 are merged. This candidate retains the native-v1 publisher adapter and proposed self-source inventory while preserving newer Intelligence Compare and typed-review feeds. A reproduced documentation-check failure from the supported downloaded tool cache is fixed by pruning cache directories; repository documentation remains checked. Legacy selectors and ADR dispositions are unchanged.
 
 ## Validation and review evidence
 
-publication release-config verification, publication-config unit tests, renderer source parsing, documentation links and extraction integrity passed. These results establish only their named local scope.
+cargo build --locked, publication release-config verification and three config tests, renderer syntax, extraction integrity, three documentation tests and documentation links passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Native publisher acceptance and real root self-source rights remain pending. Browser/Docker/platform, release/live/rollback and contrasting-consumer evidence are not supplied by a source merge. Broad audit and act are later work.
+Native publisher behavioral acceptance and real root source rights remain pending. Browser/Docker/platform, release/live/rollback and contrasting-consumer evidence are not supplied by source merges. Broad audit and act are later work.
 
 ## Next dependency-ready work
 
-Merge PR139, then reconcile and merge PR140 before continuing issue implementation.
+Merge PR139 and PR140, then continue bounded issue implementation.
 
 ## Parallel changes and reconciliation
 
