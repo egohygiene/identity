@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T20:57:11+00:00'
+  updated_at: '2026-11-14T21:03:32+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Integrate the source documentation stack and continue all actionable Identity issues.
+  purpose: Complete landed Python and workflow-retirement issues and continue remaining implementation.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,37 +35,36 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Integrate the source documentation stack and continue all actionable Identity issues.
+  objective: Complete landed Python and workflow-retirement issues and continue remaining implementation.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#83
-    url: https://github.com/egohygiene/identity/issues/83
+    id: egohygiene/identity#116
+    url: https://github.com/egohygiene/identity/issues/116
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge PR140, then qualify the already-landed validator/projection work and implement remaining
-      bounded features and refactors.
+    description: Merge this bounded acceptance batch and implement issue87 compiler/quality/motion extractions.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 7871822dd683a4ae5113d561695849b613363124
+    revision: 80729d12acb52a3d578b0561c42222a558bfde9c
     ref: refs/heads/main
-    verified_at: '2026-11-14T20:57:11+00:00'
+    verified_at: '2026-11-14T21:03:32+00:00'
   candidate:
-    branch: codex/83-source-campaign-docs
+    branch: codex/identity-open-work
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T20:57:11+00:00'
-    default_branch_revision: 7871822dd683a4ae5113d561695849b613363124
+    observed_at: '2026-11-14T21:03:32+00:00'
+    default_branch_revision: 80729d12acb52a3d578b0561c42222a558bfde9c
     issue_state: open
     pull_request_state: unknown
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
@@ -73,18 +72,19 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T20:57:11+00:00'
+  reviewed_at: '2026-11-14T21:03:32+00:00'
   reviewed_by: Codex
   evidence:
-  - command: documentation link checker, renderer source parsing and standalone-validator drift check passed;
-      earlier integrated Rust build and scoped publication/documentation regressions passed
+  - command: '169 Python cases: 167 passed and two existing skips; 14 native v1 consumer tests passed; 12 exact
+      projection comparisons and 15 diagnostic comparisons matched; retirement/docs/bundle/provenance checks
+      passed; recovery suite passed three configurations after the harness repair'
     outcome: passed
-    observed_at: '2026-11-14T20:57:11+00:00'
+    observed_at: '2026-11-14T21:03:32+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Final documentation follows remaining implementation. Browser/Docker/platform qualification, comprehensive
-    stabilization and act remain later work. Real root source rights and public-copy choices remain unresolved
-    in the owner packet.
+  - Remaining Rust/renderer extractions, initializer regression coverage, optional outreach, setup dispatch
+    and final documentation are in progress. Comprehensive audit and act CI remain later work; browser/native/release/rights
+    acceptance is not implied.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -111,27 +111,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Integrate the source documentation stack and continue all actionable Identity issues.
+Complete landed Python and workflow-retirement issues and continue remaining implementation.
 
 ## State snapshot
 
-Observed main: 7871822dd683a4ae5113d561695849b613363124. Candidate branch: codex/83-source-campaign-docs. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 80729d12acb52a3d578b0561c42222a558bfde9c. Candidate branch: codex/identity-open-work. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-PR146, PR138 and PR139 are merged. PR140 documentation is reconciled onto the current publisher and initializer source. Earlier draft-source and qualification handoffs remain dated historical evidence. The cache-scanning documentation-check defect is fixed; no ADR disposition or release selector is changed.
+All four original PRs are merged. Local acceptance for issues84/85/86 is recorded in docs/work/116/LOCAL_ACCEPTANCE.md, with stable diagnostics and exact projection bytes. The initializer schema inventory is corrected. A reproduced Linux copied-executable test race is addressed by serializing fixture copying against both spawn sites, preserving concurrent child execution and production behavior.
 
 ## Validation and review evidence
 
-documentation link checker, renderer source parsing and standalone-validator drift check passed; earlier integrated Rust build and scoped publication/documentation regressions passed. These results establish only their named local scope.
+169 Python cases: 167 passed and two existing skips; 14 native v1 consumer tests passed; 12 exact projection comparisons and 15 diagnostic comparisons matched; retirement/docs/bundle/provenance checks passed; recovery suite passed three configurations after the harness repair. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Final documentation follows remaining implementation. Browser/Docker/platform qualification, comprehensive stabilization and act remain later work. Real root source rights and public-copy choices remain unresolved in the owner packet.
+Remaining Rust/renderer extractions, initializer regression coverage, optional outreach, setup dispatch and final documentation are in progress. Comprehensive audit and act CI remain later work; browser/native/release/rights acceptance is not implied.
 
 ## Next dependency-ready work
 
-Merge PR140, then qualify the already-landed validator/projection work and implement remaining bounded features and refactors.
+Merge this bounded acceptance batch and implement issue87 compiler/quality/motion extractions.
 
 ## Parallel changes and reconciliation
 

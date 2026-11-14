@@ -289,6 +289,8 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                 "diagnostics.schema.json",
                 "identity-experience-content.schema.json",
                 "identity-experience-publication.schema.json",
+                "initialization-report.schema.json",
+                "initialization-request.schema.json",
                 "launch-document-request.schema.json",
                 "launch-document.schema.json",
                 "motion-policy.schema.json",
