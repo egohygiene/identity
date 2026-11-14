@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T21:33:53+00:00'
+  updated_at: '2026-11-14T21:37:05+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Complete explicit v1 initializer acceptance on the qualified local-browser source.
+  purpose: Deliver editable outreach email and social-kit examples through the existing workflow.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,60 +35,57 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Complete explicit v1 initializer acceptance on the qualified local-browser source.
+  objective: Deliver editable outreach email and social-kit examples through the existing workflow.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#133
-    url: https://github.com/egohygiene/identity/issues/133
+    id: egohygiene/identity#145
+    url: https://github.com/egohygiene/identity/issues/145
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge PR150 and close issue133 implementation acceptance, then continue optional outreach
-      and renderer/setup work.
+    description: Merge the outreach examples and continue renderer extraction, setup-entrypoint coverage and
+      final documentation.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 12e9473c413b26651a93911e1a74652f729c71f9
+    revision: b7eb00cf18f38d118062a73f2768057a82ec6e6a
     ref: refs/heads/main
-    verified_at: '2026-11-14T21:33:53+00:00'
+    verified_at: '2026-11-14T21:37:05+00:00'
   candidate:
-    branch: codex/133-initializer-validation
+    branch: codex/145-outreach-examples
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#150
-      url: https://github.com/egohygiene/identity/pull/150
+    pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T21:33:53+00:00'
-    default_branch_revision: 12e9473c413b26651a93911e1a74652f729c71f9
+    observed_at: '2026-11-14T21:37:05+00:00'
+    default_branch_revision: b7eb00cf18f38d118062a73f2768057a82ec6e6a
     issue_state: open
-    pull_request_state: open
+    pull_request_state: unknown
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
       continuing.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T21:33:53+00:00'
+  reviewed_at: '2026-11-14T21:37:05+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Fourteen Python scenarios and copied-binary Rust integration passed; target Clippy/formatting,
-      report-schema validation, docs, standalone-bundle and provenance checks passed. Only continuity was reconciled
-      after the source merge.
+  - command: Documented Press Kit generation and read-only package verification, release-announcement generation
+      and read-only inventory verification all passed in a disposable consumer; source guidance/copy/asset
+      references and documentation links passed
     outcome: passed
-    observed_at: '2026-11-14T21:33:53+00:00'
+    observed_at: '2026-11-14T21:37:05+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - The broader audit, act and native-platform matrix remain later work. Issue80 retains current-source CI
-    acceptance. Outreach, renderer extraction and setup coverage continue. Root self-source artwork/copy/default
-    owner decisions remain pending.
+  - These are editable fictional examples, not real campaign approval or sending/publication. Broad audit/act
+    and native-platform acceptance remain later work. Browser CI, renderer/setup source work and actual self-source
+    owner decisions retain their owning issues.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -115,27 +112,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Complete explicit v1 initializer acceptance on the qualified local-browser source.
+Deliver editable outreach email and social-kit examples through the existing workflow.
 
 ## State snapshot
 
-Observed main: 12e9473c413b26651a93911e1a74652f729c71f9. Candidate branch: codex/133-initializer-validation. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: b7eb00cf18f38d118062a73f2768057a82ec6e6a. Candidate branch: codex/145-outreach-examples. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-PR149 is merged with complete actual local Docker browser proof. This initializer acceptance adds fourteen Python cases and one copied-binary Rust case; all pass. The guide and closeout retain source/approval preservation, missing facts, unsafe/repeated/failing invocations and v0 behavior. Production initializer code and schemas are unchanged.
+Original email and three-audience/channel social drafts reuse the exact fictional public boilerplate and existing approved sample visual, alt text and rights. The end-to-end guide separates canonical source from campaign drafts and generated Press Kit/announcement packages. Upstream Open Source Pledge structural references are attributed. Q36 retains its existing ID and dependencies while linking issue145.
 
 ## Validation and review evidence
 
-Fourteen Python scenarios and copied-binary Rust integration passed; target Clippy/formatting, report-schema validation, docs, standalone-bundle and provenance checks passed. Only continuity was reconciled after the source merge.. These results establish only their named local scope.
+Documented Press Kit generation and read-only package verification, release-announcement generation and read-only inventory verification all passed in a disposable consumer; source guidance/copy/asset references and documentation links passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The broader audit, act and native-platform matrix remain later work. Issue80 retains current-source CI acceptance. Outreach, renderer extraction and setup coverage continue. Root self-source artwork/copy/default owner decisions remain pending.
+These are editable fictional examples, not real campaign approval or sending/publication. Broad audit/act and native-platform acceptance remain later work. Browser CI, renderer/setup source work and actual self-source owner decisions retain their owning issues.
 
 ## Next dependency-ready work
 
-Merge PR150 and close issue133 implementation acceptance, then continue optional outreach and renderer/setup work.
+Merge the outreach examples and continue renderer extraction, setup-entrypoint coverage and final documentation.
 
 ## Parallel changes and reconciliation
 

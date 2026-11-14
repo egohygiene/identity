@@ -833,11 +833,18 @@ issues: [105]
 id: IDN-Q36
 status: complete
 depends_on: [IDN-Q35]
-issues: [106]
+issues: [106, 145]
 -->
 #### IDN-Q36 — Select optional launch and document templates
 
 **Outcome:** A requested template reuses approved kit content and project-supplied changing facts.
+
+The additive [#145](https://github.com/egohygiene/identity/issues/145) follow-up
+provides [editable outreach email and social examples](examples/outreach/README.md)
+and an [end-to-end guide](docs/consumers/OUTREACH_KITS.md). Actual Press Kit and
+release-announcement exports verify from the fictional consumer, with original
+example wording and unchanged approved example artwork. Sending and posting
+remain consumer decisions. This reuses the existing Q36 step and dependencies.
 
 **Exit criteria:**
 
