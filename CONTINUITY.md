@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T21:31:14+00:00'
+  updated_at: '2026-11-14T21:33:53+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Retain actual local Docker browser qualification and unblock source refactoring.
+  purpose: Complete explicit v1 initializer acceptance on the qualified local-browser source.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,56 +35,60 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Retain actual local Docker browser qualification and unblock source refactoring.
+  objective: Complete explicit v1 initializer acceptance on the qualified local-browser source.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#80
-    url: https://github.com/egohygiene/identity/issues/80
+    id: egohygiene/identity#133
+    url: https://github.com/egohygiene/identity/issues/133
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge the local browser compatibility/evidence change and continue renderer extraction using
-      this qualified local profile.
+    description: Merge PR150 and close issue133 implementation acceptance, then continue optional outreach
+      and renderer/setup work.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
+    revision: 12e9473c413b26651a93911e1a74652f729c71f9
     ref: refs/heads/main
-    verified_at: '2026-11-14T21:31:14+00:00'
+    verified_at: '2026-11-14T21:33:53+00:00'
   candidate:
-    branch: codex/80-proxy-browser-bootstrap
+    branch: codex/133-initializer-validation
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#150
+      url: https://github.com/egohygiene/identity/pull/150
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T21:31:14+00:00'
-    default_branch_revision: 0ce87e35790dc224b04fae5176a676cf86b9b90f
+    observed_at: '2026-11-14T21:33:53+00:00'
+    default_branch_revision: 12e9473c413b26651a93911e1a74652f729c71f9
     issue_state: open
-    pull_request_state: unknown
+    pull_request_state: open
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
       continuing.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T21:31:14+00:00'
+  reviewed_at: '2026-11-14T21:33:53+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Complete local Docker browser wrapper passed at clean695f14c; all retained artifact hashes match;
-      five Python and twenty-three JavaScript qualification tests passed; docs and source syntax passed
+  - command: Fourteen Python scenarios and copied-binary Rust integration passed; target Clippy/formatting,
+      report-schema validation, docs, standalone-bundle and provenance checks passed. Only continuity was reconciled
+      after the source merge.
     outcome: passed
-    observed_at: '2026-11-14T21:31:14+00:00'
+    observed_at: '2026-11-14T21:33:53+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Issue80 remains open for matching current-source CI execution in the later act campaign. Initializer and
-    outreach acceptance PRs are concurrent. Renderer extraction, setup coverage and final docs continue. Root
-    source rights/copy/default owner facts and release/native-platform acceptance remain pending.
+  - The broader audit, act and native-platform matrix remain later work. Issue80 retains current-source CI
+    acceptance. Outreach, renderer extraction and setup coverage continue. Root self-source artwork/copy/default
+    owner decisions remain pending.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -111,27 +115,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Retain actual local Docker browser qualification and unblock source refactoring.
+Complete explicit v1 initializer acceptance on the qualified local-browser source.
 
 ## State snapshot
 
-Observed main: 0ce87e35790dc224b04fae5176a676cf86b9b90f. Candidate branch: codex/80-proxy-browser-bootstrap. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 12e9473c413b26651a93911e1a74652f729c71f9. Candidate branch: codex/133-initializer-validation. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-At clean source695f14c the complete local native-amd64 Docker qualification passes nine positive cases, deliberate screenshot failure and restored pass. All sixteen hashed artifacts and source/runtime/font/process receipts are retained under docs/evidence/browser-local-2026-11-14. Build-only proxy/CA and optional-proc-interface compatibility fixes preserve the approved PNG, strict ownership checks and offline browser runtime.
+PR149 is merged with complete actual local Docker browser proof. This initializer acceptance adds fourteen Python cases and one copied-binary Rust case; all pass. The guide and closeout retain source/approval preservation, missing facts, unsafe/repeated/failing invocations and v0 behavior. Production initializer code and schemas are unchanged.
 
 ## Validation and review evidence
 
-Complete local Docker browser wrapper passed at clean695f14c; all retained artifact hashes match; five Python and twenty-three JavaScript qualification tests passed; docs and source syntax passed. These results establish only their named local scope.
+Fourteen Python scenarios and copied-binary Rust integration passed; target Clippy/formatting, report-schema validation, docs, standalone-bundle and provenance checks passed. Only continuity was reconciled after the source merge.. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Issue80 remains open for matching current-source CI execution in the later act campaign. Initializer and outreach acceptance PRs are concurrent. Renderer extraction, setup coverage and final docs continue. Root source rights/copy/default owner facts and release/native-platform acceptance remain pending.
+The broader audit, act and native-platform matrix remain later work. Issue80 retains current-source CI acceptance. Outreach, renderer extraction and setup coverage continue. Root self-source artwork/copy/default owner decisions remain pending.
 
 ## Next dependency-ready work
 
-Merge the local browser compatibility/evidence change and continue renderer extraction using this qualified local profile.
+Merge PR150 and close issue133 implementation acceptance, then continue optional outreach and renderer/setup work.
 
 ## Parallel changes and reconciliation
 
