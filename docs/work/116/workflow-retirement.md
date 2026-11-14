@@ -40,3 +40,17 @@ validation remain deferred, so #84 is not declared accepted or closed here.
 
 ADR not required: retire completed one-time implementation scaffolding without
 changing a durable policy, interface or human decision disposition.
+
+## Local acceptance follow-through
+
+The retirement itself landed in `5a5fe0874ef94824dce77808f8c167dca1f5f96c`
+through merged PR130. Current main retains all seven workflow purposes above;
+the historical feature branch remains absent. The read-only validation workflow
+now runs `scripts/verify_retired_guidance.py`, which rejects either retired
+definition (including `.yaml`) or a renamed active workflow targeting the old
+branch. Synthetic controls also permit existing release writers and historical
+Markdown. The ordinary documentation-link verifier is unchanged.
+
+This closes the missing local regression/validation checkpoint, not the wider
+Identity stabilization or hosted qualification program. No workflow was
+dispatched and no publication settings, branch protections or ADR states changed.
