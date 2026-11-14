@@ -20,6 +20,8 @@ pub struct Cli {
 pub enum Command {
     /// Initialize a consumer-owned .identity directory.
     Init(InitArguments),
+    /// Prepare a separate v1 source candidate from a local request, without adopting it.
+    V1Init(V1InitArguments),
     /// Validate the project specification and selected profiles.
     Validate(RepositoryArguments),
     /// Resolve selected profiles into an explainable asset plan.
@@ -65,6 +67,19 @@ pub struct InitArguments {
     /// Replace identity files that already exist.
     #[arg(long, default_value_t = false)]
     pub force: bool,
+}
+
+#[derive(Debug, Args)]
+pub struct V1InitArguments {
+    /// Existing consumer repository root.
+    #[arg(long, default_value = ".")]
+    pub repository_root: PathBuf,
+    /// Repository-relative local initialization request JSON.
+    #[arg(long)]
+    pub request: PathBuf,
+    /// New repository-relative candidate directory; never canonical source or generated output.
+    #[arg(long)]
+    pub output_directory: PathBuf,
 }
 
 #[derive(Clone, Copy, Debug, ValueEnum)]

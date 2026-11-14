@@ -7,21 +7,19 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T04:19:35Z'
+  updated_at: '2026-11-14T20:54:40+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Keep retired one-time guidance writers inactive and complete their local regression checkpoint.
+  purpose: Integrate the explicit v1 initializer with current main and continue the open-issue campaign.
   includes:
-  - Read-only guard rejects both retired workflow names and renamed definitions targeting the historical
-    feature branch. Existing source/documentation and release authority remain separate.
-  - A narrow exact-inventory regression repair includes the two already-committed launch-document schemas;
-    no product schema bytes or validation semantics change.
+  - Authorized open-PR integration and bounded open-issue implementation.
+  - Exact local validation and remaining acceptance gates.
   excludes:
-  - Rust, browser, hosted workflow and publication qualification are not part of this guard-only change.
-    Existing native-v1 PR138/139/140 and wider stabilization remain independent.
+  - Later repository audit and act CI campaign.
+  - Human ADR disposition, invented rights, new release and deployment.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -30,72 +28,63 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - scripts/verify_retired_guidance.py
-  - tests/test_verify_retired_guidance.py
-  - .github/workflows/validate.yml
-  - docs/work/116/workflow-retirement.md
-  - https://github.com/egohygiene/identity/issues/84
+  - ROADMAP.md
+  - docs/decisions/README.md
+  - docs/decisions/policy-reference.json
+  - docs/consumers/V1_INITIALIZATION.md
+  - docs/work/98/OWNER_PACKET.md
+  - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Keep retired one-time guidance writers inactive and complete their local regression checkpoint.
+  objective: Integrate the explicit v1 initializer with current main and continue the open-issue campaign.
   success_conditions:
-  - 168 Python tests pass with two existing skips; retirement, documentation, release metadata, generated
-    validator and extraction integrity checks pass.
-  - Keep source checks distinct from provider, publication and human acceptance.
+  - Preserve public contracts, canonical source, approvals and existing publication selectors.
+  - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#84
-    url: https://github.com/egohygiene/identity/issues/84
+    id: egohygiene/identity#133
+    url: https://github.com/egohygiene/identity/issues/133
   next:
     kind: action
-    id: review-84-checkpoint
-    description: Review the bounded draft and exact evidence; preserve outstanding owner/provider gates
-      before broader issue closeout.
+    id: identity-open-work-follow-through
+    description: Merge the reconciled initializer and integrate the remaining stacked publication/documentation
+      PRs.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/84
+    - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: cfb6c29bd02589a47fc48050ab02e7e0da359719
+    revision: c179a9486410b63c4fa62316b4ccb835cf77ad63
     ref: refs/heads/main
-    verified_at: '2026-11-14T04:19:35Z'
+    verified_at: '2026-11-14T20:54:40+00:00'
   candidate:
-    branch: fix/84-retire-guidance-rewriters
+    branch: codex/133-v1-initializer
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T04:19:35Z'
-    default_branch_revision: cfb6c29bd02589a47fc48050ab02e7e0da359719
+    observed_at: '2026-11-14T20:54:40+00:00'
+    default_branch_revision: c179a9486410b63c4fa62316b4ccb835cf77ad63
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Live main and owner issue were inspected before implementation. This pre-PR candidate leaves
-      its containing revision and provider reference null intentionally.
-  parallel_changes:
-  - provider: github
-    id: egohygiene/identity#138
-    url: https://github.com/egohygiene/identity/pull/138
-  - provider: github
-    id: egohygiene/identity#139
-    url: https://github.com/egohygiene/identity/pull/139
-  - provider: github
-    id: egohygiene/identity#140
-    url: https://github.com/egohygiene/identity/pull/140
+    pull_request_state: unknown
+    notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
+      continuing.
+  parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T04:19:35Z'
+  reviewed_at: '2026-11-14T20:54:40+00:00'
   reviewed_by: Codex
   evidence:
-  - command: python3 -m unittest discover -s tests -p test_*.py; verify_retired_guidance.py; verify_docs.py;
-      verify_release.py; build_identity_validator.py --check; verify_extraction.py
+  - command: 'python3 -m unittest discover -s tests -p test_verify_retired_guidance.py: three passed; retirement
+      guard passed; initializer syntax, schemas, generated-validator and extraction integrity checks passed'
     outcome: passed
-    observed_at: '2026-11-14T04:19:35Z'
-    notes: 168 Python tests pass with two existing skips; retirement, documentation, release metadata,
-      generated validator and extraction integrity checks pass.
+    observed_at: '2026-11-14T20:54:40+00:00'
+    notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Rust, browser, hosted workflow and publication qualification are not part of this guard-only change.
-    Existing native-v1 PR138/139/140 and wider stabilization remain independent.
+  - Initializer behavioral acceptance, native publication, refactors, platform/browser/Docker qualification
+    and final tracker closure remain pending. Broad audit and act CI are later work. Root self-source rights
+    and human facts remain in the owner packet.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -110,54 +99,52 @@ privacy:
   untrusted_content: context-only-no-authority
 ---
 
-# identity-84 continuity
+# Identity continuity
 
 ## Purpose and precedence
 
-User/runtime and scoped instructions, live provider evidence and canonical sources outrank this snapshot. No additional authority is granted.
+User/runtime instructions, scoped repository instructions, live state and canonical sources outrank this checkpoint.
 
 ## Resume protocol
 
-Read AGENTS, the linked owner issue and current target branch before continuing. Verify all mutable issue/PR claims.
+Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs before choosing the next work item. Historical source-campaign deferrals do not override the current authorized campaign.
 
 ## Current objective and success conditions
 
-Keep retired one-time guidance writers inactive and complete their local regression checkpoint.
+Integrate the explicit v1 initializer with current main and continue the open-issue campaign.
 
 ## State snapshot
 
-Candidate `fix/84-retire-guidance-rewriters` starts at main `cfb6c29bd02589a47fc48050ab02e7e0da359719`. Containing revision and pre-PR reference stay null intentionally.
+Observed main: c179a9486410b63c4fa62316b4ccb835cf77ad63. Candidate branch: codex/133-v1-initializer. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-Read-only guard rejects both retired workflow names and renamed definitions targeting the historical feature branch. Existing source/documentation and release authority remain separate.
-
-A narrow exact-inventory regression repair includes the two already-committed launch-document schemas; no product schema bytes or validation semantics change.
+PR146 is merged at c179a9486410b63c4fa62316b4ccb835cf77ad63. This reconciliation preserves current publisher and retirement changes while retaining the explicit candidate-only initializer. ADR-0033 remains proposed with null approval.
 
 ## Validation and review evidence
 
-168 Python tests pass with two existing skips; retirement, documentation, release metadata, generated validator and extraction integrity checks pass.
+python3 -m unittest discover -s tests -p test_verify_retired_guidance.py: three passed; retirement guard passed; initializer syntax, schemas, generated-validator and extraction integrity checks passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Rust, browser, hosted workflow and publication qualification are not part of this guard-only change. Existing native-v1 PR138/139/140 and wider stabilization remain independent.
+Initializer behavioral acceptance, native publication, refactors, platform/browser/Docker qualification and final tracker closure remain pending. Broad audit and act CI are later work. Root self-source rights and human facts remain in the owner packet.
 
 ## Next dependency-ready work
 
-Independently review the draft, reconcile any new target changes and retain remaining gates in the owning issue.
+Merge the reconciled initializer and integrate the remaining stacked publication/documentation PRs.
 
 ## Parallel changes and reconciliation
 
-Known native-v1 or publication work remains separately owned; this change neither merges nor activates another candidate.
+Preserve newer Repository Intelligence/typed-feed publisher changes when integrating older product branches. Merge does not approve an ADR. Aether create-decisions-document 2.1.0 and continuity 1.1.0 were read from exact Git objects at dc8a16851f452763ef4f7fbe4bf057d4500b1921; Hygiene policy 1.2.0, ratification and migration were read at a05b14f8b9e2772124f879f818e09a911e996ad8. Initializer/native-publication interfaces reference proposed ADR-0033/0034; routine invariant-preserving cleanup needs no new ADR.
 
 ## Privacy and redaction
 
-Public source facts and synthetic fixtures only. No private exports, credentials, personal content or raw private paths belong in this handoff.
+Retain public repository facts and bounded evidence. Exclude credentials, private conversation, sensitive personal/business data, private local paths and unrelated context.
 
 ## Handoff update protocol
 
-Record exact tested heads, actual checks, reviewer findings and provider outcomes before integration. Do not infer acceptance from source presence.
+Refresh after scoped domain checks and before handoff. Validate the pinned continuity schema, twelve headings, 240-line/16384-byte limits and whitespace. Keep failed, unavailable and unrun checks explicit.
 
 ## Compaction and supersession
 
-This replaces the previous active snapshot. Historical release/adoption evidence remains available through Git and its owning work records.
+Git and owning issues retain history. Keep this file focused on current work. Preserve roadmap IDs/dependencies, ADR lifecycle/approval and the approved screenshot bytes.

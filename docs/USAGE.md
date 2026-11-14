@@ -49,6 +49,12 @@ documented below. See the
 [Empathy extraction evidence](../docs/migration/EMPATHY_EXTRACTION.md).
 ## Identity v1 source
 
+The unqualified [#133 initializer draft](consumers/V1_INITIALIZATION.md) adds
+explicit `v1-init --repository-root ROOT --request FILE --output-directory DIR`
+source-candidate preparation. It does not change v0 `init`/`validate`, promote
+source or generate assets. It is absent from published `v1.0.0`; runtime
+acceptance and CI are deferred. Manual v1 authoring remains supported.
+
 Validator maintenance uses focused canonical modules under
 [`scripts/identity_validation/`](../scripts/identity_validation/README.md).
 Regenerate `scripts/validate_identity.py` with

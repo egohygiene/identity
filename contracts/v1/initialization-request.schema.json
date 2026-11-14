@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://egohygiene.github.io/identity/contracts/v1/initialization-request.schema.json",
+  "title": "Identity local v1 initialization request",
+  "description": "Supplied facts and local inputs for a separate candidate. Omitted facts remain missing; no approval or source adoption is implied.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema": {"const": "identity.initialization-request/v1"},
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "project.schema.json#/properties/project/properties/id"},
+        "displayName": {"$ref": "project.schema.json#/properties/project/properties/displayName"},
+        "repository": {"$ref": "project.schema.json#/properties/project/properties/repository"},
+        "tagline": {"$ref": "project.schema.json#/properties/project/properties/tagline"},
+        "kind": {"$ref": "project.schema.json#/properties/project/properties/kind"}
+      }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "kind", "priority", "tokens"],
+        "properties": {
+          "id": {"$ref": "project.schema.json#/$defs/identifier"},
+          "kind": {"$ref": "project.schema.json#/$defs/layer/properties/kind"},
+          "priority": {"$ref": "project.schema.json#/$defs/layer/properties/priority"},
+          "tokens": {"$ref": "project.schema.json#/$defs/relativePath"}
+        }
+      }
+    },
+    "targets": {"$ref": "project.schema.json#/$defs/relativePath"},
+    "sourceRoot": {
+      "oneOf": [
+        {"const": "."},
+        {"$ref": "project.schema.json#/$defs/relativePath"}
+      ]
+    }
+  },
+  "allOf": [{
+    "if": {"required": ["sourceRoot"]},
+    "then": {"not": {"anyOf": [
+      {"required": ["project"]}, {"required": ["layers"]}, {"required": ["targets"]}
+    ]}}
+  }]
+}

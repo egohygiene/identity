@@ -1,0 +1,5 @@
+{
+  "$schema": "../../contracts/v1/initialization-request.schema.json",
+  "schema": "identity.initialization-request/v1",
+  "sourceRoot": "."
+}

@@ -18,6 +18,12 @@ on 2026-10-19. The [authoring worksheet](AUTHORING.md),
 
 ## Existing initialization and authoring
 
+The 2026-11-05 [explicit initializer source draft](V1_INITIALIZATION.md) now
+proposes `v1-init` from a local request into a separate candidate. This is
+unmerged/unqualified source under #133, not a published capability or completion
+of the future acceptance below. The dated inspected-interface statements in
+this guide retain their original meaning. Manual authoring remains supported.
+
 `identity init` initializes **v0**, writing `.identity/identity.toml`,
 `.identity/brief.md` and `.identity/sources/README.md`. Its `--force` option
 permits replacement of those initialized files; it is not a v1 migration or

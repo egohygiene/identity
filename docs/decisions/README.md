@@ -56,6 +56,7 @@ records and nine proposed records.
 | ADR-0030 | Assemble native consumer kits with a complete offline inventory | proposed | 2026-10-21 | [ADR-0030](ADR-0030-consumer-kit-assembly.md) |
 | ADR-0031 | Keep product components outside the Identity foundations contract | proposed | 2026-11-02 | [ADR-0031](ADR-0031-product-component-ownership.md) |
 | ADR-0032 | Generate optional announcement drafts from approved copy and explicit facts | proposed | 2026-11-02 | [ADR-0032](ADR-0032-optional-launch-document-drafts.md) |
+| ADR-0033 | Prepare explicit v1 initialization candidates from local requests | proposed | 2026-11-05 | [ADR-0033](ADR-0033-explicit-v1-initialization-candidates.md) |
 
 ## Ongoing capture
 
