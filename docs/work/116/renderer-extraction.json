@@ -1,0 +1,153 @@
+{
+  "baseRevision": "376232249209f3304843795f6113baf7dd504019",
+  "operation": "private view extraction; unchanged app export and immutable input contract",
+  "functions": [
+    {
+      "name": "Section",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/shared.js",
+      "functionSha256": "d162e64b34d8fe853f9caaebca83d309ccf4050beb64853882f8100a50e3d3cb"
+    },
+    {
+      "name": "DefinitionList",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/shared.js",
+      "functionSha256": "abe671694da5a7d7d634fc67fbf56b013ecf95e3dddbc51f51c180ff835ab350"
+    },
+    {
+      "name": "CopyControl",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/shared.js",
+      "functionSha256": "fa068f45f9f4bddaab5ff59c6cfe2657f7cae65528466a1e591226994fb3a4ec"
+    },
+    {
+      "name": "EmptyState",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/shared.js",
+      "functionSha256": "0daf1bf5ad4acd6542cf0f9b65443a98975f1f3eebf49e1cad25dc7885a60054"
+    },
+    {
+      "name": "humanize",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/shared.js",
+      "functionSha256": "0f595214beb8186661314ada3160a9e361e598a3d5757e16375b14271ee2cec5"
+    },
+    {
+      "name": "shouldUseCode",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/shared.js",
+      "functionSha256": "7709cf3e0fa3acb440aa9d95675d4398a4409ec3598e898a0864f5057ee08f92"
+    },
+    {
+      "name": "GuidanceSection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "10cbedaf544346310b68f995fa0af742eed1aa4ae550d1162fa3e09c3e72f675"
+    },
+    {
+      "name": "isStructuredVoice",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "1e2dabb8f7db28bf68cf6b05e983252766d977f368437e3276b32aaa58558704"
+    },
+    {
+      "name": "StructuredVoice",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "5f897da3e22f9dff1538a4aa52ae9d3b03126b5470bca43a6a529280ed32e708"
+    },
+    {
+      "name": "VoiceText",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "1b70ec4f35a7fe26db7fc5d0017a6b1d18010d501807664553b582f442b54cca"
+    },
+    {
+      "name": "VoiceList",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "e7ac7be44599fd3e774d90c8574c6c832ec81162acb18e5dcce3ab760436c0ba"
+    },
+    {
+      "name": "VoiceExamples",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "f1db302305518a825096897002145b6af50183a946c54c5c803ba2c6bfe01498"
+    },
+    {
+      "name": "StructuredUsage",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "bdc60c586edb0183c57390c0dae6d86ae189782b481d512ed6f170f1a89c244a"
+    },
+    {
+      "name": "LegalGuidance",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "7ebec8a0a38a92a4988345760019e5c2cd0c19e22c711714cc7adce9cad6af2e"
+    },
+    {
+      "name": "AssetRights",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "bd73d5fc1db81d10a40bd095cfc10cbd8aa8ec63ae71126859bcaaa88fee34c9"
+    },
+    {
+      "name": "GuidanceValue",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/guidance.js",
+      "functionSha256": "fb771346d6c0e3bfbd572c58b68fbc47a8e72db366403efae0f82d089f1f82a0"
+    },
+    {
+      "name": "DesignSystemSection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/design-system.js",
+      "functionSha256": "e45b8f7a423cbaec05c997b903277f9aee1702b59574825daa22e731998ab3cb"
+    },
+    {
+      "name": "PressKitSection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/press-kit.js",
+      "functionSha256": "8bfa5d13be650f2aac77c7e95b6a04d5b27c3ff03815629850fe457143d70677"
+    },
+    {
+      "name": "AssetsSection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/assets.js",
+      "functionSha256": "20e5a0697df735b0bd71d93408fad08705afd5ec3f08093b98b17ba65145c3c0"
+    },
+    {
+      "name": "AssetDownloads",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/assets.js",
+      "functionSha256": "e99f25f13c2f1bee51c785c42022a16f6d86da94cb11871d2597b4e22f472beb"
+    },
+    {
+      "name": "ColorSection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/foundations.js",
+      "functionSha256": "c61e3ab62b8cb9fc82e773668045f6b5588f10ae0845e4a622a0dc78d5abdc02"
+    },
+    {
+      "name": "TypographySection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/foundations.js",
+      "functionSha256": "1ade6d0a8068881df5b4529dd765fc806c5c055759c7a92a1f97ae3aa385376a"
+    },
+    {
+      "name": "DownloadsSection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/downloads.js",
+      "functionSha256": "0a21b1ff5c69f4633458d60030b9d06b5012e50ec844531438f97d8d7348feb8"
+    },
+    {
+      "name": "ProvenanceSection",
+      "from": "renderer/src/app.js",
+      "to": "renderer/src/components/downloads.js",
+      "functionSha256": "8a1f0f43adadb2dc7ac3c625b1d69e8e469738271346bdb1976a95d56a583cc0"
+    }
+  ],
+  "inputDerivationSha256": "f7d5ebbff1e87dea3cac1086c8e3e8a6f40d8bfa9b37461a27d7b3d4325e60e7",
+  "inputAdapter": "renderer/src/page-input.js; original validation/selection derivation retained verbatim, then returned to the page",
+  "integrationBase": "12c8877b9b74ab02e883a74ec9349afe52eaadd0"
+}
