@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-11-05
+updated: 2026-11-14
 governed_by:
   - architecture-decisions
 depends_on:
@@ -66,8 +66,9 @@ The 2026-11-05 source campaign adds proposed
 [ADR-0033](docs/decisions/ADR-0033-explicit-v1-initialization-candidates.md)
 for separate initialization candidates and
 [ADR-0034](docs/decisions/ADR-0034-native-release-publication-input.md)
-for the native release-publication handoff. Both retain null approval and
-unqualified implementation evidence. All existing dispositions and historical
+for the native release-publication handoff. Both retain null approval. Their
+source is merged with scoped initializer and synthetic publisher checks;
+implementation/verification do not approve either decision. All existing dispositions and historical
 records remain unchanged; the canonical index owns the full current corpus.
 
 ## Identifier format migration (2026-10-18)

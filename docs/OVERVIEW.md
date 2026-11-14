@@ -102,15 +102,18 @@ released artifacts, deployed pages, and accepted ADRs are separate evidence.
 The stabilization and complete-kit sequence is maintained in
 [ROADMAP.md](../ROADMAP.md). Current source adds `v1-inspect` and `v1-recover` for
 supported interruption handling; select an exact reviewed commit or a later
-release containing them. #83 retains broader final documentation reconciliation.
+release containing them. The [current closeout](work/116/SOURCE_CLOSEOUT_2026-11-14.md)
+records the final documentation reconciliation under #83.
 
-The 2026-11-05 source campaign adds review-branch drafts for
+The 2026-11-05 source campaign prepared
 [v1 initialization](consumers/V1_INITIALIZATION.md) and the
-[native publisher handoff](publication/NATIVE_V1_DRAFT.md). Neither is merged,
-runtime-qualified, released or deployed. The actual self-source candidate has
-missing rights/creative facts recorded in the [owner packet](work/98/OWNER_PACKET.md).
-Refactors, audits, tests and CI qualification are deferred to a separate
-campaign; current-main whole-repository acceptance is still pending.
+[native publisher handoff](publication/NATIVE_V1_DRAFT.md). Both source interfaces
+are now merged. The initializer's local preservation/runtime checks pass, and
+synthetic native publication builds/verifies deterministically. The
+[current source closeout](work/116/SOURCE_CLOSEOUT_2026-11-14.md) records scoped
+extraction, browser and setup results. Actual self-source facts remain in the
+[owner questionnaire](work/98/QUESTIONNAIRE.md). Full audit, `act`, supported
+native platforms and real release/adoption acceptance remain pending.
 
 | Capability | State | Tracking |
 | --- | --- | --- |

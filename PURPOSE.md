@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-11-05
+updated: 2026-11-14
 governed_by:
   - architecture-purpose
 depends_on: []
@@ -90,10 +90,12 @@ Identity fulfills its purpose when:
 - **Remaining:** [ROADMAP.md](ROADMAP.md) maps stabilization #70–#88 and Brand Kit completion #98–#109. Merged post-v1 repairs are not retroactively part of v1.0.0.
 - **Deferred:** Managed services, marketplaces, and provider-specific creative generation are outside v1 unless a later decision changes the roadmap.
 
-The 2026-11-05 [source-only campaign](docs/work/116/SOURCE_PREPARATION.md)
-prepares explicit initialization and native publication drafts, without
-qualifying current source or changing the published release. Actual root source,
-rights and new-release/adoption gates remain explicit in the
-[owner packet](docs/work/98/OWNER_PACKET.md); the later qualification campaign
-retains its original acceptance criteria.
+The 2026-11-05 [source-preparation record](docs/work/116/SOURCE_PREPARATION.md)
+retains its original draft evidence. That source is now merged, with scoped
+local initializer, extraction, browser and publisher-integration checks in the
+[current closeout](docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md). The published
+release is unchanged. Actual root source, rights and new-release/adoption gates
+remain explicit in the [owner packet](docs/work/98/OWNER_PACKET.md) and its
+[questionnaire](docs/work/98/QUESTIONNAIRE.md); the later audit/CI campaign
+retains its acceptance criteria.
 

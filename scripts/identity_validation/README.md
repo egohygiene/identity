@@ -28,4 +28,7 @@ The extraction records structural source/AST preservation in
 `docs/work/116/validator-extraction.json`. That record is a dated refactor
 receipt, not fixture outcome or cross-language runtime evidence. Existing
 source/digest/confinement/approval suites and all CLI/import/embedded-consumer
-checks remain deferred to the agreed sweep before acceptance.
+checks subsequently pass in the 2026-11-14
+[local acceptance](../../docs/work/116/LOCAL_ACCEPTANCE.md). That later record
+also compares exact pre-extraction diagnostics/projection bytes. Full final
+audit, platform and CI qualification remain separate.

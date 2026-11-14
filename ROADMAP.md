@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-11-05
+updated: 2026-11-14
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -26,7 +26,25 @@ supersedes: []
 
 # Identity Roadmap
 
-## Source preparation checkpoint — 2026-11-05
+## Current source closeout — 2026-11-14
+
+The [source closeout](docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md) supersedes the
+older mutable scheduling snapshots below. All four original open PRs are
+merged; retirement/Python/Rust extraction, explicit initialization and outreach
+scopes have local acceptance. Renderer extraction is merged with exact HTML,
+424 renderer passes and fresh nine-case qualified local Docker proof. The
+integrated Python run has 186 passes and two existing skips. Documentation
+reconciliation completes Q22; none of these results is a new release or ADR
+approval.
+
+The remaining gates stay #70/#80/#82/#88 for the requested audit/`act` and
+retained CI/platform acceptance, #98 for actual source/rights/release/adoption,
+and #116 for final reconciliation. The [owner questionnaire](docs/work/98/QUESTIONNAIRE.md)
+collects missing facts without inventing approval. Preserve all forty stable
+IDs and dependency edges, current recovery/publication ownership and the
+approved PNG. IDN-Q06 remains planned/unissued.
+
+## Historical source preparation checkpoint — 2026-11-05
 
 The current [source campaign](docs/work/116/SOURCE_PREPARATION.md) starts from
 merged PR137 at `19d3d16bd149ddb61a03924a2b688e8e689af68b`. It prepares
@@ -605,7 +623,7 @@ issues: [82]
 
 <!-- roadmap-step
 id: IDN-Q22
-status: ready
+status: complete
 depends_on: [IDN-Q09, IDN-Q10, IDN-Q15, IDN-Q16]
 issues: [83]
 -->
@@ -615,9 +633,9 @@ issues: [83]
 
 **Exit criteria:**
 
-- [ ] Final #76/#77 behavior is documented across help, consumer guides, architecture, and publication boundaries; relevant validators pass.
+- [x] Final #76/#77 behavior is documented across help, consumer guides, architecture, and publication boundaries; relevant validators pass.
 
-**Evidence and scope:** [#83](https://github.com/egohygiene/identity/issues/83) is dependency-ready after #77 merged through #121; its early IDN-Q09 pass and download/recovery prerequisites are complete. Priority now places final documentation reconciliation after the product work and deferred environment/CI/refactor phase. Preserve current-contract, publication and setup evidence; scheduling does not add a hard prerequisite.
+**Evidence and scope:** [#83](https://github.com/egohygiene/identity/issues/83) is reconciled in the [2026-11-14 closeout](docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md). Current initializer/renderer/setup/recovery capabilities, source/release/deployment/ADR distinctions, publication/rollback owners and the remaining finite gates are explicit. Documentation links, publication architecture/config, release metadata and source-preservation checks pass. This documentation result does not close the later quality or real source/release gates.
 
 <!-- roadmap-step
 id: IDN-Q23

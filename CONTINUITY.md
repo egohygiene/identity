@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T22:27:40+00:00'
+  updated_at: '2026-11-14T22:39:57+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Integrate renderer extraction with fresh exact-source local browser proof.
+  purpose: Complete current documentation and owner questionnaire after the integrated source campaign.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,60 +35,57 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Integrate renderer extraction with fresh exact-source local browser proof.
+  objective: Complete current documentation and owner questionnaire after the integrated source campaign.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#88
-    url: https://github.com/egohygiene/identity/issues/88
+    id: egohygiene/identity#83
+    url: https://github.com/egohygiene/identity/issues/83
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge PR153, reconcile current documentation and preserve the finite audit/act and owner-fact
-      handoff.
+    description: Merge the documentation handoff, reconcile live issue status, then obtain the questionnaire
+      facts and start the separately requested audit/act phase.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 12c8877b9b74ab02e883a74ec9349afe52eaadd0
+    revision: 2fbf1f1f301159fa878c846552ce58617426c7ff
     ref: refs/heads/main
-    verified_at: '2026-11-14T22:27:40+00:00'
+    verified_at: '2026-11-14T22:39:57+00:00'
   candidate:
-    branch: codex/88-renderer-components
+    branch: codex/83-final-source-docs
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#153
-      url: https://github.com/egohygiene/identity/pull/153
+    pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T22:27:40+00:00'
-    default_branch_revision: 12c8877b9b74ab02e883a74ec9349afe52eaadd0
+    observed_at: '2026-11-14T22:39:57+00:00'
+    default_branch_revision: 2fbf1f1f301159fa878c846552ce58617426c7ff
     issue_state: open
-    pull_request_state: draft
+    pull_request_state: unknown
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
       continuing.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T22:27:40+00:00'
+  reviewed_at: '2026-11-14T22:39:57+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Fresh local Docker qualification at clean65807c6 and retained raw hashes pass; 424 renderer tests,
-      integrated Python188 cases/two existing skips, function hashes/HTML equality, canonical builds, public-site
-      verification and docs checks pass
+  - command: Documentation links, publication architecture/config, release metadata and extraction verification
+      pass; all40 roadmap IDs/88edges,32 prior ADR bytes, proposed/null ADR33/34 and approved screenshot are
+      preserved; prior scoped local checks are indexed in docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md
     outcome: passed
-    observed_at: '2026-11-14T22:27:40+00:00'
+    observed_at: '2026-11-14T22:39:57+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Issue88 retains its issue80/current-source CI prerequisite for the later act phase. Issue82 retains clean-base/CI
-    execution. Final documentation and owner questionnaire are in preparation; actual root source rights/release/adoption
-    and full audit/platform acceptance remain pending.
+  - After issue83 documentation integration, issues70/80/82/88 retain audit, act, CI/clean-base and platform
+    gates;98 needs actual owner facts/rights, self-source, release/publication/rollback and contrasting consumer
+    proof;116 closes last. No new release/deployment or human ADR approval is claimed.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -115,27 +112,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Integrate renderer extraction with fresh exact-source local browser proof.
+Complete current documentation and owner questionnaire after the integrated source campaign.
 
 ## State snapshot
 
-Observed main: 12c8877b9b74ab02e883a74ec9349afe52eaadd0. Candidate branch: codex/88-renderer-components. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 2fbf1f1f301159fa878c846552ce58617426c7ff. Candidate branch: codex/83-final-source-docs. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-Twenty-four functions remain exact, public reference HTML is byte-identical, and all424 renderer tests pass. Clean source65807c6 passes the complete native-amd64 Docker wrapper: nine positives, deliberate screenshot failure and restored pass without retries/skips/baseline changes. All hashed artifacts are retained under docs/evidence/browser-local-2026-11-14/renderer-65807c6. Integrated Python188 cases pass with two existing skips; public builds verify.
+Original PRs 138/139/140/146 and follow-ups 147-153 are merged. Issues84-87,133,145 are closed. Current docs reconcile merged initializer/native publisher, bounded extractions, setup and exact local browser proof. Q22 and the concise Task-first README/index are complete; the owner questionnaire and synthetic native-publication proof retain actual scope.
 
 ## Validation and review evidence
 
-Fresh local Docker qualification at clean65807c6 and retained raw hashes pass; 424 renderer tests, integrated Python188 cases/two existing skips, function hashes/HTML equality, canonical builds, public-site verification and docs checks pass. These results establish only their named local scope.
+Documentation links, publication architecture/config, release metadata and extraction verification pass; all40 roadmap IDs/88edges,32 prior ADR bytes, proposed/null ADR33/34 and approved screenshot are preserved; prior scoped local checks are indexed in docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Issue88 retains its issue80/current-source CI prerequisite for the later act phase. Issue82 retains clean-base/CI execution. Final documentation and owner questionnaire are in preparation; actual root source rights/release/adoption and full audit/platform acceptance remain pending.
+After issue83 documentation integration, issues70/80/82/88 retain audit, act, CI/clean-base and platform gates;98 needs actual owner facts/rights, self-source, release/publication/rollback and contrasting consumer proof;116 closes last. No new release/deployment or human ADR approval is claimed.
 
 ## Next dependency-ready work
 
-Merge PR153, reconcile current documentation and preserve the finite audit/act and owner-fact handoff.
+Merge the documentation handoff, reconcile live issue status, then obtain the questionnaire facts and start the separately requested audit/act phase.
 
 ## Parallel changes and reconciliation
 
