@@ -37,3 +37,13 @@ it is not supplied by changing the invocation label. #80 stays open for that
 remaining CI acceptance. No release, deployment or human visual approval occurs.
 
 ADR-Ref: egohygiene/identity#ADR-0011 (reference).
+
+## Post-extraction qualification
+
+The [renderer-source receipt](renderer-65807c6/host-qualification.json) and all
+of its hashed artifacts are retained separately under `renderer-65807c6/`.
+At clean source `65807c6d65238f280fd748cede6f4a6e48275bb5`, all nine positive
+cases, deliberate screenshot failure and restored pass succeed with no retries
+or skips. The same approved PNG, immutable browser/fonts/settings and strict
+process ownership checks remain intact. Local vfs build layers were reduced;
+this does not substitute for current-source CI execution.

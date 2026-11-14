@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T22:05:04+00:00'
+  updated_at: '2026-11-14T22:27:40+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Extract private renderer responsibilities and qualify unchanged visuals.
+  purpose: Integrate renderer extraction with fresh exact-source local browser proof.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,7 +35,7 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Extract private renderer responsibilities and qualify unchanged visuals.
+  objective: Integrate renderer extraction with fresh exact-source local browser proof.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
@@ -46,8 +46,8 @@ work:
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Run the qualified local browser wrapper at this source and retain the fresh visual/AX/keyboard/download
-      proof.
+    description: Merge PR153, reconcile current documentation and preserve the finite audit/act and owner-fact
+      handoff.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
@@ -56,36 +56,39 @@ state:
   base:
     revision: 12c8877b9b74ab02e883a74ec9349afe52eaadd0
     ref: refs/heads/main
-    verified_at: '2026-11-14T22:05:04+00:00'
+    verified_at: '2026-11-14T22:27:40+00:00'
   candidate:
     branch: codex/88-renderer-components
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#153
+      url: https://github.com/egohygiene/identity/pull/153
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T22:05:04+00:00'
+    observed_at: '2026-11-14T22:27:40+00:00'
     default_branch_revision: 12c8877b9b74ab02e883a74ec9349afe52eaadd0
     issue_state: open
-    pull_request_state: unknown
+    pull_request_state: draft
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
       continuing.
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T22:05:04+00:00'
+  reviewed_at: '2026-11-14T22:27:40+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Twenty-four function hashes and before/after reference HTML match; 424 renderer cases pass; integrated
-      Python188 cases complete with two existing skips; canonical helper build, legacy public build/verify,
-      syntax and docs checks pass
+  - command: Fresh local Docker qualification at clean65807c6 and retained raw hashes pass; 424 renderer tests,
+      integrated Python188 cases/two existing skips, function hashes/HTML equality, canonical builds, public-site
+      verification and docs checks pass
     outcome: passed
-    observed_at: '2026-11-14T22:05:04+00:00'
+    observed_at: '2026-11-14T22:27:40+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - A fresh committed-source local Docker browser run is pending before renderer acceptance. Issue80/82 retain
-    current-source CI/clean-base gates for the later act campaign. Final docs and real Identity owner facts
-    remain; no release or deployment is claimed.
+  - Issue88 retains its issue80/current-source CI prerequisite for the later act phase. Issue82 retains clean-base/CI
+    execution. Final documentation and owner questionnaire are in preparation; actual root source rights/release/adoption
+    and full audit/platform acceptance remain pending.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -112,7 +115,7 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Extract private renderer responsibilities and qualify unchanged visuals.
+Integrate renderer extraction with fresh exact-source local browser proof.
 
 ## State snapshot
 
@@ -120,19 +123,19 @@ Observed main: 12c8877b9b74ab02e883a74ec9349afe52eaadd0. Candidate branch: codex
 
 ## Completed and material changes
 
-Twenty-four exact view functions move to seven private modules and immutable input derivation moves verbatim to page-input.js. The public page export, reference HTML, CSS, event hooks and models are unchanged. All424 renderer tests pass after completing the PR139 runtime fixture. Browser build layers are consolidated to fit the observed local vfs storage limits without changing image/fonts/settings.
+Twenty-four functions remain exact, public reference HTML is byte-identical, and all424 renderer tests pass. Clean source65807c6 passes the complete native-amd64 Docker wrapper: nine positives, deliberate screenshot failure and restored pass without retries/skips/baseline changes. All hashed artifacts are retained under docs/evidence/browser-local-2026-11-14/renderer-65807c6. Integrated Python188 cases pass with two existing skips; public builds verify.
 
 ## Validation and review evidence
 
-Twenty-four function hashes and before/after reference HTML match; 424 renderer cases pass; integrated Python188 cases complete with two existing skips; canonical helper build, legacy public build/verify, syntax and docs checks pass. These results establish only their named local scope.
+Fresh local Docker qualification at clean65807c6 and retained raw hashes pass; 424 renderer tests, integrated Python188 cases/two existing skips, function hashes/HTML equality, canonical builds, public-site verification and docs checks pass. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-A fresh committed-source local Docker browser run is pending before renderer acceptance. Issue80/82 retain current-source CI/clean-base gates for the later act campaign. Final docs and real Identity owner facts remain; no release or deployment is claimed.
+Issue88 retains its issue80/current-source CI prerequisite for the later act phase. Issue82 retains clean-base/CI execution. Final documentation and owner questionnaire are in preparation; actual root source rights/release/adoption and full audit/platform acceptance remain pending.
 
 ## Next dependency-ready work
 
-Run the qualified local browser wrapper at this source and retain the fresh visual/AX/keyboard/download proof.
+Merge PR153, reconcile current documentation and preserve the finite audit/act and owner-fact handoff.
 
 ## Parallel changes and reconciliation
 

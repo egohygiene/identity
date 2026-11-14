@@ -1,0 +1,57 @@
+
+Running 1 test using 1 worker
+F
+
+  1) [chromium] › tests/e2e/renderer.spec.js:136:1 › matches the reviewed desktop viewport baseline 
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      1408445 pixels (ratio 0.98 of all image pixels) are different.
+
+      Snapshot: brand-kit-page.png
+
+    Call log:
+      - Expect "toHaveScreenshot(brand-kit-page.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - 1408445 pixels (ratio 0.98 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - 1408445 pixels (ratio 0.98 of all image pixels) are different.
+
+
+      138 |   await page.reload();
+      139 |   await page.evaluate(() => document.fonts.ready);
+    > 140 |   await expect(page).toHaveScreenshot("brand-kit-page.png", {
+          |                      ^
+      141 |     animations: "disabled",
+      142 |     fullPage: false,
+      143 |   });
+        at /opt/identity/renderer/tests/e2e/renderer.spec.js:140:22
+
+    attachment #1: brand-kit-page (image/png) ──────────────────────────────────────────────────────
+    Expected: tests/e2e/__snapshots__/brand-kit-page.png
+    Received: ../../../evidence/browser-ghUZO7/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png
+    Diff:     ../../../evidence/browser-ghUZO7/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../evidence/browser-ghUZO7/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../evidence/browser-ghUZO7/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../../evidence/browser-ghUZO7/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/e2e/renderer.spec.js:136:1 › matches the reviewed desktop viewport baseline ─
+[WebServer] $ vite preview -- --host 127.0.0.1 --port 4173

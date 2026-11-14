@@ -31,8 +31,11 @@ identical.
   covered. Source, rights, approvals and the approved PNG are unchanged.
 - The integrated Python suite completes 188 cases: 186 pass and two existing
   skips. The current helper setup and checksum-pinned Task preparation pass.
-- A fresh qualified Docker run of this committed extraction is the next
-  acceptance step; the earlier nine-case receipt qualifies its own source.
+- The [fresh local Docker receipt](../../evidence/browser-local-2026-11-14/renderer-65807c6/host-qualification.json) passes at clean source
+  `65807c6d65238f280fd748cede6f4a6e48275bb5`: all nine positive cases,
+  required deliberate screenshot failure and restored pass; no skips/retries.
+  All raw proof hashes match after retention. The approved PNG is unchanged.
+  Issue88 retains its issue80/current-source CI prerequisite for the later act phase.
 
 The browser Dockerfile combines its font/package installation into one layer
 and keeps its working directory at the renderer. This reduces observed local
