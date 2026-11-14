@@ -104,6 +104,14 @@ The stabilization and complete-kit sequence is maintained in
 supported interruption handling; select an exact reviewed commit or a later
 release containing them. #83 retains broader final documentation reconciliation.
 
+The 2026-11-05 source campaign adds review-branch drafts for
+[v1 initialization](consumers/V1_INITIALIZATION.md) and the
+[native publisher handoff](publication/NATIVE_V1_DRAFT.md). Neither is merged,
+runtime-qualified, released or deployed. The actual self-source candidate has
+missing rights/creative facts recorded in the [owner packet](work/98/OWNER_PACKET.md).
+Refactors, audits, tests and CI qualification are deferred to a separate
+campaign; current-main whole-repository acceptance is still pending.
+
 | Capability | State | Tracking |
 | --- | --- | --- |
 | Brand Kit product contract | Accepted | [#6](https://github.com/egohygiene/identity/issues/6) |

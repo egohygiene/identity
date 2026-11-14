@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-10-18
+updated: 2026-11-05
 governed_by:
   - architecture-architecture
 depends_on:
@@ -27,6 +27,22 @@ supersedes: []
 ## Purpose and scope
 
 Identity uses a layered, contract-driven architecture to turn reviewed brand intent into verified Brand Kit projections and an understandable reference experience. This document owns structural boundaries, dependency direction, integration rules, authority boundaries, and current-to-target evolution. [SYSTEM.md](SYSTEM.md) owns logical responsibilities.
+
+## Source interfaces under review — 2026-11-05
+
+The [initializer draft](docs/consumers/V1_INITIALIZATION.md) prepares a separate
+candidate and report from supplied local data; manual reviewed adoption stays
+outside that command. Proposed ADR-0033 supplies no human decision disposition.
+
+The [native publisher draft](docs/publication/NATIVE_V1_DRAFT.md) keeps canonical
+validation in a separate release-source gate and passes verified generated
+artifacts to the existing renderer. It preserves native bytes and distinguishes
+canonical-source from public-inventory digests. Proposed ADR-0034 and source
+code do not authorize a release, deployment or organization-route installation.
+The existing legacy publication remains selected. Both drafts are unmerged and
+unqualified; the [owner packet](docs/work/98/OWNER_PACKET.md) retains actual
+source/rights, quality, release and adoption gates. No new component library,
+policy migration or provider-specific imagery engine is selected.
 
 ## Product architecture
 

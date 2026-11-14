@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-10-18
+updated: 2026-11-05
 governed_by:
   - architecture-decisions
 depends_on:
@@ -61,6 +61,14 @@ their own human dispositions. ADR-0023 proposes the shared source-digest
 compatibility contract for #74. The migration map retains the earlier
 open questions as history; [ROADMAP.md](ROADMAP.md) owns current execution
 order. Detailed ADR-0004 onward retain their existing paths.
+
+The 2026-11-05 source campaign adds proposed
+[ADR-0033](docs/decisions/ADR-0033-explicit-v1-initialization-candidates.md)
+for separate initialization candidates and
+[ADR-0034](docs/decisions/ADR-0034-native-release-publication-input.md)
+for the native release-publication handoff. Both retain null approval and
+unqualified implementation evidence. All existing dispositions and historical
+records remain unchanged; the canonical index owns the full current corpus.
 
 ## Identifier format migration (2026-10-18)
 

@@ -8,7 +8,7 @@ status: active
 owners:
   - egohygiene
 created: 2026-08-19
-updated: 2026-10-18
+updated: 2026-11-05
 governed_by:
   - architecture-system
 depends_on:
@@ -48,6 +48,11 @@ installation, and live-verification gates. [ROADMAP.md](ROADMAP.md) records
 current stabilization and kit-completion work. Current-main repairs do not
 change the contents of an earlier release.
 
+The [source-only campaign](docs/work/116/SOURCE_PREPARATION.md) prepares
+unmerged/unqualified `v1-init` and native-publication drafts. Their guides
+describe proposed review-branch behavior, not a new implemented-on-main,
+released or deployed capability. The later campaign retains full acceptance.
+
 ## System inventory
 
 | System | State | Responsibility | Inputs | Outputs | Tracking |
@@ -72,7 +77,7 @@ change the contents of an earlier release.
 | Interface | Authority | Contract |
 | --- | --- | --- |
 | Source interface | Consumer | Versioned `.identity/` directory; canonical human-reviewed intent |
-| CLI interface | Identity | `init`, `validate`, `plan`, and `handoff` retain v0 extraction parity; `studio-review` checks an explicitly approved handoff; `v1-generate` and `v1-verify` expose the v1 package boundary |
+| CLI interface | Identity | `init`, `validate`, `plan`, and `handoff` retain v0 extraction parity; `studio-review` checks an explicitly approved handoff; `v1-generate`/`v1-verify` expose the v1 package boundary; current source also provides explicit `v1-inspect`/`v1-recover`. Draft `v1-init` remains separate and unqualified. |
 | Compiler library interface | Identity | Implemented v1 Rust ports and models for validation, resolution, mutation-free planning, adapter compatibility, rendering, verification, manifests, transactional apply, and recovery |
 | Package interface | Identity | Implemented v1 profile/version selection plus generated tokens, assets, metadata, guidance, checksums, package indexes, compatibility behavior, and deterministic archive contract |
 | Brand Kit view-model interface | Identity | Framework-neutral representation consumed by renderers and public surfaces |
@@ -81,11 +86,14 @@ change the contents of an earlier release.
 | Publication interface | Owning website or product | Explicit promotion of a verified immutable release with rollback data |
 | Evidence interface | Identity, Relay, Observatory | `identity.quality-report/v1` plus `identity.motion-policy/v1` and `identity.visual-motion-manifest/v1`, stable diagnostics, compiler manifests, coverage/skips, review evidence, and health signals as documented by [QUALITY_GATES_V1.md](docs/contracts/QUALITY_GATES_V1.md) and [VISUAL_MOTION_V1.md](docs/contracts/VISUAL_MOTION_V1.md) |
 
-On current source, both v1 commands and `V1ConsumerPipeline::load` invoke the
+On current source, v1 generation/verification and `V1ConsumerPipeline::load` invoke the
 embedded authoritative validator and require Python 3.11+. See the
-[source contract](docs/contracts/IDENTITY_V1.md). Recovery is currently a Rust
-artifact-store API, not a distributed CLI command: #77 follows transaction
-workspace and writer hardening in #78/#79. Legacy v1 transaction journals fail
+[source contract](docs/contracts/IDENTITY_V1.md). Current source includes
+read-only `v1-inspect` and explicit `v1-recover` after #77/#78/#79; select a
+reviewed implementation containing them because published `v1.0.0` predates
+the repairs. Inspection is independent of source validation/Python; recovery
+revalidates and rolls back under exclusive writer ownership. Use the same
+explicit repository/output roots. Legacy v1 transaction journals fail
 closed because they lack recovery authority evidence; preserve their workspace
 and use independently reviewed backups rather than relabelling the journal.
 The [compiler contract](docs/contracts/COMPILER_V1.md) owns that current rule.

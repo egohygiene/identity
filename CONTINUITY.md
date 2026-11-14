@@ -7,13 +7,13 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-14T20:56:19+00:00'
+  updated_at: '2026-11-14T20:57:11+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Integrate opt-in native publication with current Identity main.
+  purpose: Integrate the source documentation stack and continue all actionable Identity issues.
   includes:
   - Authorized open-PR integration and bounded open-issue implementation.
   - Exact local validation and remaining acceptance gates.
@@ -35,36 +35,37 @@ scope:
   - docs/work/98/OWNER_PACKET.md
   - https://github.com/egohygiene/identity/issues/116
 work:
-  objective: Integrate opt-in native publication with current Identity main.
+  objective: Integrate the source documentation stack and continue all actionable Identity issues.
   success_conditions:
   - Preserve public contracts, canonical source, approvals and existing publication selectors.
   - Record actual checks and leave unsupported acceptance explicit.
   active_issue:
     provider: github
-    id: egohygiene/identity#98
-    url: https://github.com/egohygiene/identity/issues/98
+    id: egohygiene/identity#83
+    url: https://github.com/egohygiene/identity/issues/83
   next:
     kind: action
     id: identity-open-work-follow-through
-    description: Merge PR139 and PR140, then continue bounded issue implementation.
+    description: Merge PR140, then qualify the already-landed validator/projection work and implement remaining
+      bounded features and refactors.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
+    revision: 7871822dd683a4ae5113d561695849b613363124
     ref: refs/heads/main
-    verified_at: '2026-11-14T20:56:19+00:00'
+    verified_at: '2026-11-14T20:57:11+00:00'
   candidate:
-    branch: codex/98-native-publication-source
+    branch: codex/83-source-campaign-docs
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-14T20:56:19+00:00'
-    default_branch_revision: ed0270b0b6ffa9c0d844b965f953987b57d9e53c
+    observed_at: '2026-11-14T20:57:11+00:00'
+    default_branch_revision: 7871822dd683a4ae5113d561695849b613363124
     issue_state: open
     pull_request_state: unknown
     notes: Git fetch and connected GitHub issue/PR reads verified the campaign source. Recheck live state before
@@ -72,18 +73,18 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-14T20:56:19+00:00'
+  reviewed_at: '2026-11-14T20:57:11+00:00'
   reviewed_by: Codex
   evidence:
-  - command: cargo build --locked, publication release-config verification and three config tests, renderer
-      syntax, extraction integrity, three documentation tests and documentation links passed
+  - command: documentation link checker, renderer source parsing and standalone-validator drift check passed;
+      earlier integrated Rust build and scoped publication/documentation regressions passed
     outcome: passed
-    observed_at: '2026-11-14T20:56:19+00:00'
+    observed_at: '2026-11-14T20:57:11+00:00'
     notes: Scoped local evidence only; no hosted CI, release or deployment is claimed.
   environment_limitations:
-  - Native publisher behavioral acceptance and real root source rights remain pending. Browser/Docker/platform,
-    release/live/rollback and contrasting-consumer evidence are not supplied by source merges. Broad audit
-    and act are later work.
+  - Final documentation follows remaining implementation. Browser/Docker/platform qualification, comprehensive
+    stabilization and act remain later work. Real root source rights and public-copy choices remain unresolved
+    in the owner packet.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -110,27 +111,27 @@ Read AGENTS.md and the canonical sources above. Verify main, open issues and PRs
 
 ## Current objective and success conditions
 
-Integrate opt-in native publication with current Identity main.
+Integrate the source documentation stack and continue all actionable Identity issues.
 
 ## State snapshot
 
-Observed main: ed0270b0b6ffa9c0d844b965f953987b57d9e53c. Candidate branch: codex/98-native-publication-source. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
+Observed main: 7871822dd683a4ae5113d561695849b613363124. Candidate branch: codex/83-source-campaign-docs. Its containing revision is deliberately not self-referenced. Original open PRs were #138, #139, #140 and #146; inspect current provider state.
 
 ## Completed and material changes
 
-PR146 and PR138 are merged. This candidate retains the native-v1 publisher adapter and proposed self-source inventory while preserving newer Intelligence Compare and typed-review feeds. A reproduced documentation-check failure from the supported downloaded tool cache is fixed by pruning cache directories; repository documentation remains checked. Legacy selectors and ADR dispositions are unchanged.
+PR146, PR138 and PR139 are merged. PR140 documentation is reconciled onto the current publisher and initializer source. Earlier draft-source and qualification handoffs remain dated historical evidence. The cache-scanning documentation-check defect is fixed; no ADR disposition or release selector is changed.
 
 ## Validation and review evidence
 
-cargo build --locked, publication release-config verification and three config tests, renderer syntax, extraction integrity, three documentation tests and documentation links passed. These results establish only their named local scope.
+documentation link checker, renderer source parsing and standalone-validator drift check passed; earlier integrated Rust build and scoped publication/documentation regressions passed. These results establish only their named local scope.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Native publisher behavioral acceptance and real root source rights remain pending. Browser/Docker/platform, release/live/rollback and contrasting-consumer evidence are not supplied by source merges. Broad audit and act are later work.
+Final documentation follows remaining implementation. Browser/Docker/platform qualification, comprehensive stabilization and act remain later work. Real root source rights and public-copy choices remain unresolved in the owner packet.
 
 ## Next dependency-ready work
 
-Merge PR139 and PR140, then continue bounded issue implementation.
+Merge PR140, then qualify the already-landed validator/projection work and implement remaining bounded features and refactors.
 
 ## Parallel changes and reconciliation
 

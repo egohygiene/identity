@@ -6,6 +6,13 @@ Initializer source checkpoint: `ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2`
 in [draft PR138](https://github.com/egohygiene/identity/pull/138).
 The #98 draft is stacked for review continuity, not a new issue dependency.
 
+Exact native-publisher source checkpoint:
+`413aae01f53205312cdba4fdae60222f9f16d605` in
+[draft PR139](https://github.com/egohygiene/identity/pull/139).
+[PR140](https://github.com/egohygiene/identity/pull/140) adds the documentation
+handoff and limited source-stack build ledger. Neither checkpoint is qualified
+or selected for release.
+
 ## Verified source and unresolved ownership facts
 
 [source-inventory.json](source-inventory.json) binds actual repository bytes,
