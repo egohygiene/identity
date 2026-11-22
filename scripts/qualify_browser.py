@@ -330,7 +330,7 @@ def main() -> int:
         proxy_ca = args.proxy_ca.resolve(strict=True) if args.proxy_ca else None
         if proxy_ca is not None and not proxy_ca.is_file():
             raise ValueError("Invalid CA bundle")
-    except (OSError, ValueError):
+    except (OSError, ValueError, RuntimeError):
         parser.error("--proxy-ca must select an existing regular CA bundle")
     try:
         destination = output_destination(args.output_directory)

@@ -134,11 +134,19 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
             private = root / "synthetic-private-author" / "private-ca" / "missing.pem"
             directory = root / "synthetic-private-directory"
             directory.mkdir()
-            for label, value, cli in (
+            cases = [
                 ("missing-env", private, []), ("directory-env", directory, []),
                 ("missing-cli", None, ["--proxy-ca", str(private)]),
                 ("directory-cli", None, ["--proxy-ca", str(directory)]),
-            ):
+            ]
+            loop = root / "synthetic-private-loop.pem"
+            try:
+                loop.symlink_to(loop.name)
+            except (OSError, NotImplementedError):
+                pass
+            else:
+                cases.extend((("loop-env", loop, []), ("loop-cli", None, ["--proxy-ca", str(loop)])))
+            for label, value, cli in cases:
                 destination = root / (label + "-evidence")
                 environment = {"IDENTITY_BROWSER_PROXY_CA": str(value)} if value else {}
                 printed = io.StringIO()
@@ -152,7 +160,7 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
                     execute.assert_not_called()
                 self.assertFalse(destination.exists())
                 self.assertIn("must select an existing regular CA bundle", printed.getvalue())
-                for secret_path_part in (str(root), "synthetic-private-author", "private-ca", "synthetic-private-directory"):
+                for secret_path_part in (str(root), "synthetic-private-author", "private-ca", "synthetic-private-directory", "synthetic-private-loop"):
                     self.assertNotIn(secret_path_part, printed.getvalue())
 
     def test_vfs_disk_preflight_refuses_the_reproduced_small_store(self):
