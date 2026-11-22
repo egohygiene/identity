@@ -1,0 +1,135 @@
+{
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .Server}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "520c29d8dbc8c502dd7a00fb2ded995585a38ca811aed80f6916a6d502dab9d7"
+    },
+    {
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "{{json .}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "4835fc12ab666fb15b43ef95da8a1664b4f216db9bf036ea34d856de3c8b0139"
+    },
+    {
+      "command": [
+        "docker",
+        "pull",
+        "--platform",
+        "linux/amd64",
+        "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0"
+      ],
+      "exit_code": 0,
+      "output_sha256": "0a7c6d4bb6ce2aa602b067160b6b988ed685c0d44f39ae0432e2b53aefff29e1"
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0"
+      ],
+      "exit_code": 0,
+      "output_sha256": "8671791e663dc671e4b9f57c43946d2702e159f81ff5ffc0ce85e6fa934d293e"
+    },
+    {
+      "command": [
+        "docker",
+        "build",
+        "--pull",
+        "--platform",
+        "linux/amd64",
+        "--file",
+        "dev/Dockerfile",
+        "--tag",
+        "identity-qualification-default:be5ffd88e74a",
+        "."
+      ],
+      "exit_code": 1,
+      "output_sha256": "9894c69e4ccf80fb001025a0d90a0dd87334b085aa9da6989b8ae59b57a378b1"
+    }
+  ],
+  "default_base": "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+  "docker_server": {
+    "Arch": "amd64",
+    "KernelVersion": "6.18.57",
+    "Os": "linux",
+    "Version": "28.4.0"
+  },
+  "failure": "RuntimeError: Command failed with exit code 1: docker",
+  "images": [],
+  "kind": "dated development-image qualification receipt",
+  "limits": [
+    "Only the pinned default and recorded derived non-root base are qualified on linux/amd64.",
+    "No browser/font/screenshot environment or all-entrypoint CI matrix is qualified.",
+    "No private proxy environment, credentials or certificate bytes are recorded.",
+    "No release, registry push, deployment or creative approval occurs."
+  ],
+  "observed_at": "2026-11-22T18:48:00.799569+00:00",
+  "pinned_base_identity": {
+    "architecture": "amd64",
+    "cmd": [
+      "node"
+    ],
+    "entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "id": "sha256:03905f546fa8c284c377142124957871d1e8b9ddd0d69e869e233b9eeffd7790",
+    "os": "linux",
+    "repo_digests": [
+      "node@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0"
+    ],
+    "user": ""
+  },
+  "platform": "linux/amd64",
+  "registry_observation": {
+    "config_digest": "sha256:03905f546fa8c284c377142124957871d1e8b9ddd0d69e869e233b9eeffd7790",
+    "index_digest": "sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+    "path": "docs/evidence/identity-development-base-registry-2026-10-20.json",
+    "platform_manifest_digest": "sha256:7f7f17f773027e7f0475fa829fc0d793d75918fda85b9e517c9cc5aa46200406"
+  },
+  "source": {
+    "build_source_inventory": {
+      "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+      "files": 421,
+      "scope": "Critical files; all tracked non-Markdown files outside docs; all tracked fixture files including canonical Markdown. Includes assets/publication/profiles/defaults/packages where present. Documentation-only changes outside fixtures and the critical registry receipt are excluded.",
+      "sha256": "354a844da2d54740f30818678a4de8bd3836312f5a0214e17e6b4d30f7521212"
+    },
+    "critical_files_sha256": {
+      ".dockerignore": "af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",
+      ".github/workflows/development-image.yml": "9f32b34e61201151c08e5da32ce258a9b0ed3e4968f76c2a1b2a97ea074c043c",
+      "Cargo.lock": "7fdbc3cc28d1da2b1299fdcca6a2b5e8c055522261f0d84ff71e01233e830450",
+      "Cargo.toml": "ceeb25ebbf9848f19d296d67a695559c9ab5b002eb6fb472928826fccd07dd28",
+      "dev/Dockerfile": "4b2a037c147dd0ac7b3679c3d9a3d2c3a16268b1bb8b0f325696a86ab73352e3",
+      "dev/qualification/Dockerfile": "6dcbe0ffc89a356bb11ad2ed80817723e365d2c978fb85cb7af6c48d090ecf0c",
+      "dev/qualification/smoke.py": "440892d3558a970577fe1ec6f4f22b7416b9e963f06984c9a097724180fcf470",
+      "dev/qualification/source_inputs.py": "2d5b1db4b1c7eb88424ddcf1ef07e38f76e222026694018d54513e4422b2d68b",
+      "docs/evidence/identity-development-base-registry-2026-10-20.json": "2b2551f59fa92fdd8af1620e28fe31f621818577e946bb775c805497cab94add",
+      "renderer/package.json": "f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f",
+      "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+      "rust-toolchain.toml": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+      "scripts/dev-env.sh": "467cf8e34e706ffdba7ef0bfee638e9b1da8527330e7deba1b317f2a272e81f7",
+      "scripts/qualify_dev_image.py": "2c02b78c607f0e84058198c2ceb505c5ec76d9abd5b181a006de60faad15df89"
+    },
+    "git_revision": "82249b2ab12cc9caab32f1c1e0236e73107f5951",
+    "git_worktree_clean": true
+  },
+  "status": "failed",
+  "storage_budget": {
+    "available_bytes": 9031909376,
+    "basis": "Conservative local operational reserve, not a sufficient-capacity guarantee.",
+    "driver": "overlay2",
+    "minimum_free_bytes": 8589934592,
+    "reason": "Reserve checked on the locally observable Docker data filesystem; concurrent jobs and VFS copies can require more.",
+    "status": "sufficient-reserve"
+  }
+}

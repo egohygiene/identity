@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tomllib
 import uuid
 
 
@@ -24,6 +26,47 @@ HOST_MARKER = "IDENTITY_DEV_QUALIFICATION_RECEIPT="
 CONTAINER_MARKER = "IDENTITY_DEV_CONTAINER_RECEIPT="
 REGISTRY_RECEIPT = "docs/evidence/identity-development-base-registry-2026-10-20.json"
 GIB = 1024 ** 3
+PROXY_VARIABLES = ("HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "no_proxy")
+CONTAINER_PROXY_CA = "/run/identity-development-proxy-ca.pem"
+INPUTS_SPEC = importlib.util.spec_from_file_location(
+    "identity_development_source_inputs", REPOSITORY / "dev/qualification/source_inputs.py",
+)
+SOURCE_INPUTS = importlib.util.module_from_spec(INPUTS_SPEC)
+INPUTS_SPEC.loader.exec_module(SOURCE_INPUTS)
+
+
+def selected_proxy_ca(explicit: Path | None, environment: dict[str, str]) -> Path | None:
+    """Trust is selected only by the scoped option, with explicit CLI precedence."""
+    selected = explicit if explicit is not None else environment.get("IDENTITY_DEVELOPMENT_PROXY_CA")
+    if not selected:
+        return None
+    if re.search(r'[,"\x00-\x1f\x7f]', str(selected)):
+        raise ValueError("--proxy-ca must select a regular CA bundle with a Docker-mount-safe path")
+    try:
+        resolved = Path(selected).resolve(strict=True)
+    except (OSError, RuntimeError) as error:
+        raise ValueError("--proxy-ca must select an existing readable regular CA bundle") from error
+    if not resolved.is_file() or re.search(r'[,"\x00-\x1f\x7f]', str(resolved)):
+        raise ValueError("--proxy-ca must select a regular CA bundle with a Docker-mount-safe path")
+    return resolved
+
+
+def network_arguments(proxy_ca: Path | None, environment: dict[str, str]) -> tuple[list[str], list[str], dict[str, object]]:
+    """Forward proxy names, never values, using Docker's predefined proxy support."""
+    names = [name for name in PROXY_VARIABLES if environment.get(name)]
+    build = [part for name in names for part in ("--build-arg", name)]
+    runtime = [part for name in names for part in ("--env", name)]
+    if proxy_ca is not None:
+        build.extend(["--secret", f"id=identity_proxy_ca,src={proxy_ca}"])
+        runtime.extend(["--mount", f"type=bind,source={proxy_ca},target={CONTAINER_PROXY_CA},readonly"])
+        for name in ("CURL_CA_BUNDLE", "SSL_CERT_FILE", "CARGO_HTTP_CAINFO", "NODE_EXTRA_CA_CERTS"):
+            runtime.extend(["--env", f"{name}={CONTAINER_PROXY_CA}"])
+    return build, runtime, {
+        "proxy_variables": names,
+        "ca_secret_selected": proxy_ca is not None,
+        "runtime_ca_readonly_bind_selected": proxy_ca is not None,
+        "system_trust_modified": False,
+    }
 
 
 def storage_budget(storage: dict[str, object], endpoint: str, minimum_gib: int | None) -> dict[str, object]:
@@ -108,14 +151,33 @@ def container_receipt(output: str) -> dict[str, object]:
     if len(records) != 1:
         raise RuntimeError("Container smoke must emit exactly one structured qualification receipt")
     receipt = json.loads(records[0])
-    if receipt.get("status") != "passed" or receipt.get("platform") != PLATFORM:
+    if not isinstance(receipt, dict) or receipt.get("status") != "passed" or receipt.get("platform") != PLATFORM:
         raise RuntimeError("Container smoke did not qualify linux/amd64 successfully")
+    repeat = receipt.get("repeat_setup")
+    if not isinstance(repeat, dict) or repeat.get("status") != "passed" or repeat.get("source_inputs_preserved") is not True:
+        raise RuntimeError("Container smoke did not qualify actual repeated setup")
+    expected_pins = {
+        "rustc": tomllib.loads((REPOSITORY / "rust-toolchain.toml").read_text())["toolchain"]["channel"],
+        "pnpm": json.loads((REPOSITORY / "renderer/package.json").read_text())["packageManager"].split("@", 1)[1],
+    }
+    if repeat.get("runtime_pins_preserved") != expected_pins:
+        raise RuntimeError("Repeated setup runtime pins differ from the selected source")
+    if repeat.get("source_inputs_sha256") != SOURCE_INPUTS.source_inventory(REPOSITORY):
+        raise RuntimeError("Repeated setup input inventory differs from the selected source")
+    commands = receipt.get("commands")
+    if not isinstance(commands, list):
+        raise RuntimeError("Container smoke must record its repeated setup command")
+    setups = [row for row in commands if isinstance(row, dict) and row.get("command") == ["bash", "scripts/dev-env.sh", "setup"]]
+    if (len(setups) != 1 or type(setups[0].get("exit_code")) is not int
+            or setups[0].get("exit_code") != 0 or setups[0].get("expected_exit_codes") != [0]):
+        raise RuntimeError("Container smoke must record exactly one successful repeated setup command")
     return receipt
 
 
 def source_evidence() -> dict[str, object]:
     critical = (
         "dev/Dockerfile", "dev/qualification/Dockerfile", "dev/qualification/smoke.py",
+        "dev/qualification/source_inputs.py",
         "scripts/qualify_dev_image.py", "scripts/dev-env.sh", ".dockerignore",
         ".github/workflows/development-image.yml", "Cargo.toml", "Cargo.lock",
         "rust-toolchain.toml", "renderer/package.json", "renderer/pnpm-lock.yaml",
@@ -144,11 +206,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--receipt", type=Path, required=True, help="Destination for public qualification JSON")
     parser.add_argument("--minimum-free-gib", type=int, help="Local Docker data free-space reserve (default: 24 GiB for vfs, 8 otherwise); 0 explicitly bypasses for independently budgeted or remote engines")
+    parser.add_argument("--proxy-ca", type=Path, help="Optional public CA bundle: ephemeral BuildKit secret and read-only smoke bind; defaults to IDENTITY_DEVELOPMENT_PROXY_CA")
     args = parser.parse_args()
     if args.minimum_free_gib is not None and args.minimum_free_gib < 0:
         parser.error("--minimum-free-gib must be nonnegative")
     try:
         args.receipt = receipt_destination(args.receipt)
+        proxy_ca = selected_proxy_ca(args.proxy_ca, os.environ)
     except (OSError, ValueError) as error:
         parser.error(str(error))
     commands: list[dict[str, object]] = []
@@ -166,13 +230,18 @@ def main() -> int:
         ],
     }
     tags = []
+    build_network, runtime_network, receipt["network"] = network_arguments(proxy_ca, os.environ)
+
+    def public_text(value: str) -> str:
+        return value.replace(str(proxy_ca), "<proxy-ca>") if proxy_ca else value
 
     def run(arguments: list[str], *, capture: bool = False) -> str:
-        print("Running: " + " ".join(arguments), flush=True)
+        public_arguments = [public_text(item) for item in arguments]
+        print("Running: " + " ".join(public_arguments), flush=True)
         result = subprocess.run(arguments, cwd=REPOSITORY, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)
         if not capture or result.returncode:
-            print(result.stdout, end="", flush=True)
-        commands.append({"command": arguments, "exit_code": result.returncode, "output_sha256": sha256(result.stdout.encode())})
+            print(public_text(result.stdout), end="", flush=True)
+        commands.append({"command": public_arguments, "exit_code": result.returncode, "output_sha256": sha256(result.stdout.encode())})
         if result.returncode:
             raise RuntimeError(f"Command failed with exit code {result.returncode}: {arguments[0]}")
         return result.stdout
@@ -217,11 +286,11 @@ def main() -> int:
         custom_base_tag = f"identity-qualification-custom-base:{nonce}"
         custom_tag = f"identity-qualification-custom:{nonce}"
         tags.extend((custom_tag, custom_base_tag, default_tag))
-        run(["docker", "build", "--pull", "--platform", PLATFORM, "--file", "dev/Dockerfile", "--tag", default_tag, "."])
+        run(["docker", "build", "--pull", "--platform", PLATFORM, "--file", "dev/Dockerfile", *build_network, "--tag", default_tag, "."])
         default_identity = inspect(default_tag)
         verify_inheritance(pinned_identity, default_identity)
         default_output = run([
-            "docker", "run", "--rm", "--platform", PLATFORM, default_tag,
+            "docker", "run", "--rm", "--platform", PLATFORM, *runtime_network, default_tag,
             "bash", "/opt/identity/scripts/dev-env.sh", "exec", "python3", "dev/qualification/smoke.py",
             "--expected-uid", "0", "--expected-gid", "0",
         ])
@@ -236,6 +305,7 @@ def main() -> int:
             raise RuntimeError("The custom base did not declare the intended non-root development user")
         run([
             "docker", "build", "--platform", PLATFORM, "--file", "dev/Dockerfile",
+            *build_network,
             "--build-arg", f"BASE_IMAGE={custom_base_tag}",
             "--build-arg", "IDENTITY_DEV_UID=1000", "--build-arg", "IDENTITY_DEV_GID=1000",
             "--tag", custom_tag, ".",
@@ -243,7 +313,7 @@ def main() -> int:
         custom_identity = inspect(custom_tag)
         verify_inheritance(custom_base_identity, custom_identity)
         custom_output = run([
-            "docker", "run", "--rm", "--platform", PLATFORM, custom_tag,
+            "docker", "run", "--rm", "--platform", PLATFORM, *runtime_network, custom_tag,
             "bash", "/opt/identity/scripts/dev-env.sh", "exec", "python3", "dev/qualification/smoke.py",
             "--expected-uid", "1000", "--expected-gid", "1000",
         ])

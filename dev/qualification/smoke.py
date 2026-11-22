@@ -19,6 +19,8 @@ import tempfile
 import threading
 import tomllib
 
+from source_inputs import source_inventory
+
 
 MARKER = "IDENTITY_DEV_CONTAINER_RECEIPT="
 REPOSITORY = Path(__file__).resolve().parents[2]
@@ -59,6 +61,28 @@ def run(
 
 
 COMMANDS: list[dict[str, object]] = []
+
+
+def repeat_setup(repository: Path) -> dict[str, object]:
+    """Exercise the real helper again without permitting input or pin drift."""
+    before = source_inventory(repository)
+    expected_rust = tomllib.loads((repository / "rust-toolchain.toml").read_text())["toolchain"]["channel"]
+    expected_pnpm = json.loads((repository / "renderer/package.json").read_text())["packageManager"].split("@", 1)[1]
+    run(["bash", "scripts/dev-env.sh", "setup"], cwd=repository)
+    if source_inventory(repository) != before:
+        raise RuntimeError("Repeat setup changed a qualification source input")
+    actual_rust = run(["rustc", "--version"], cwd=repository)
+    actual_pnpm = run(["corepack", "pnpm", "--version"], cwd=repository / "renderer")
+    if not actual_rust.startswith(f"rustc {expected_rust} ") or actual_pnpm != expected_pnpm:
+        raise RuntimeError("Repeat setup changed or failed to preserve the selected runtime pins")
+    return {
+        "status": "passed",
+        "classification": "Actual second shared-helper setup in the built image; not synthetic frontend dispatch.",
+        "source_inputs_preserved": True,
+        "source_inputs_sha256": before,
+        "source_scope": "Rust product source, minimal canonical fixture, toolchain/dependency manifests and locks.",
+        "runtime_pins_preserved": {"rustc": expected_rust, "pnpm": expected_pnpm},
+    }
 
 
 def synthetic_ca_probe() -> dict[str, object]:
@@ -203,6 +227,7 @@ def main() -> None:
         raise RuntimeError("The activated pnpm differs from the repository pin")
     if int(versions["node"].lstrip("v").split(".", 1)[0]) < 24:
         raise RuntimeError("The qualified Node runtime must be 24 or newer")
+    repeated_setup = repeat_setup(REPOSITORY)
     ca_probe = synthetic_ca_probe()
 
     fixture = REPOSITORY / "tests/fixtures/v1/valid/minimal/.identity"
@@ -245,6 +270,7 @@ def main() -> None:
         "uid": os.getuid(), "gid": os.getgid(),
         "os_release": (Path("/etc/os-release").read_text()),
         "runtime_versions": versions,
+        "repeat_setup": repeated_setup,
         "writable_paths": writable,
         "strict_node_tls": True,
         "synthetic_ca_probe": ca_probe,
