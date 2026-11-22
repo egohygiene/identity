@@ -94,8 +94,9 @@
     },
     {
       "path": "assets/identity/brand/LOGO_USE.md",
-      "sizeBytes": 4503,
-      "sha256": "fae68c8b3d5ebaf25746f6c1ac2ea4bfe701e4ea5269ccbc9a510163f215c87d"
+      "sizeBytes": 4731,
+      "sha256": "f80b941d9e68a816d78ecafff4615220a507b35f38ea8699a1a11f870467af0b",
+      "boundRevision": "52451886a48a96bc4db32ed267f593d7c1e45254"
     },
     {
       "path": "publication/identity-brand-kit.config.json",
@@ -146,8 +147,8 @@
     },
     {
       "path": "docs/work/98/self-source-review/governance.proposed.json",
-      "sizeBytes": 8043,
-      "sha256": "159ca63541a13541142b57f7b56fff6ad018fd7db5ddae684c49c5113270f6c4"
+      "sizeBytes": 8175,
+      "sha256": "5da54d9baf81dc2ef78f79962be4c6bf2b4d107b2983266b3d26dbc266fe1869"
     },
     {
       "path": "docs/work/98/self-source-review/layers/identity-local-product.tokens.json",
@@ -179,5 +180,36 @@
     "No root .identity promotion or global default policy.",
     "No fake approvals, invented rights/source history, runtime/schema changes, release/deployment or other-repository write.",
     "Layer/schema checks and deliberately incomplete full-source validation remain distinct."
+  ],
+  "resourceBindingPolicy": "The sourceRevision records original packet inspection at ec8fce30. Individual source inputs with boundRevision select that exact immutable resource; all other original inputs retain the original observation. This is not a claim that the complete checkout was evaluated at an upgraded resource revision.",
+  "sourceUpgradeRecords": [
+    {
+      "path": "assets/identity/brand/LOGO_USE.md",
+      "fromRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+      "fromSha256": "fae68c8b3d5ebaf25746f6c1ac2ea4bfe701e4ea5269ccbc9a510163f215c87d",
+      "fromSizeBytes": 4503,
+      "toRevision": "52451886a48a96bc4db32ed267f593d7c1e45254",
+      "toSha256": "f80b941d9e68a816d78ecafff4615220a507b35f38ea8699a1a11f870467af0b",
+      "toSizeBytes": 4731,
+      "changeKind": "export-safe immutable reference links only",
+      "hrefReplacements": [
+        {
+          "from": "../../../docs/decisions/ADR-0035-scoped-logo-use-policy.md",
+          "to": "https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/docs/decisions/ADR-0035-scoped-logo-use-policy.md"
+        },
+        {
+          "from": "../../../mascot/LICENSE.md",
+          "to": "https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/mascot/LICENSE.md"
+        },
+        {
+          "from": "../../../docs/work/98/OWNER_ANSWERS_2026-11-22.md",
+          "to": "https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/docs/work/98/OWNER_ANSWERS_2026-11-22.md"
+        }
+      ],
+      "allOtherPolicyBytesPreserved": true,
+      "masterBindingsAndPermissionTermsPreserved": true,
+      "pinnedTargetDocumentsMatchOriginalObservedBytes": true,
+      "approvalEffect": "No new creative approval, license grant, source adoption or ADR lifecycle change is inferred from navigation repair."
+    }
   ]
 }

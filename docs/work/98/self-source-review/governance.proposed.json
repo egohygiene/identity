@@ -7,9 +7,11 @@
   "sourceRecord": "../OWNER_ANSWERS_2026-11-22.md",
   "licensePolicy": {
     "path": "assets/identity/brand/LOGO_USE.md",
-    "sha256": "fae68c8b3d5ebaf25746f6c1ac2ea4bfe701e4ea5269ccbc9a510163f215c87d",
+    "sha256": "f80b941d9e68a816d78ecafff4615220a507b35f38ea8699a1a11f870467af0b",
     "id": "LicenseRef-EgoHygiene-Identity-Logo-Use-1.0",
-    "credit": "Ego Hygiene — Identity"
+    "credit": "Ego Hygiene — Identity",
+    "sourceRevision": "52451886a48a96bc4db32ed267f593d7c1e45254",
+    "sourceUpgradeRecord": "REVIEW.json#/sourceUpgradeRecords/0"
   },
   "masters": [
     {
