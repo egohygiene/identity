@@ -39,8 +39,8 @@ product runtime feature or a claim of all-frontend image coverage.
   records; three scoped proxy/trust controls enforce CLI precedence, invalid-file/symlink-loop refusal without private path disclosure, names-only transport and read-only trust selection; seven original storage/configuration/receipt boundaries remain.
 - Python compilation and `git diff --check` pass.
 
-These controls use disposable fixtures and command doubles. They do not claim
-that real setup or the full default/custom image qualifier has executed.
+The focused controls use disposable fixtures and command doubles; the separate
+actual image run below supplies real setup/image evidence.
 
 ## Demonstrated network gap and bounded repair
 
@@ -62,23 +62,54 @@ container smoke without logging their values. Optional `--proxy-ca`, with scoped
 public-readable ephemeral secret for setup under either inherited user and a read-only container bind for real repeated setup. The
 source path is redacted from public command records. No image-global trust or
 base/tool pin changes are made, and synthetic unknown-CA rejection remains
-required. Fresh repaired-source full qualification remains pending below.
+required. Fresh repaired-source full qualification passed as recorded below.
 
-## Actual execution status
+## Actual full image acceptance — passed
 
-The managed Docker engine uses VFS and the workspace had approximately 6.7 GiB
-free when this checkpoint began. The original guard remains 24 GiB for that
-copying driver and 8 GiB for others, subject to an explicitly measured runner
-budget. No known-failing VFS image pull/build was repeated. The separately prepared
-overlay2 engine passed actual native/runtime/network probes while preserving
-the managed daemon and shared caches.
+Fresh full qualification ran from clean reviewed source
+`8255c5b9ab0e669c2cde6002353515b5a8fc0511`, starting at
+`2026-11-22T19:02:36.009863+00:00`. The separate native Linux amd64 overlay2
+engine had **8,957,652,992 bytes** free at admission, above the original
+**8,589,934,592-byte (8 GiB)** reserve. No reserve override was supplied. The
+managed VFS daemon and its shared images/caches were unchanged.
 
-The original pinned default and non-root custom image qualification remains
-**not yet passed in this checkpoint**. The first actual run failed at dependency
-acquisition as described above. Its complete dependency acquisition, inherited
-user/command metadata, complete cache/TLS/native/renderer proof and repeated real
-setup must pass before #82 can close. #80 remains the separate browser/workflow
-gate. No hosted CI, image publication, tag, release or deployment is performed.
+The exact original Node index/config digest was pulled again after task-owned
+nested-image/cache cleanup. Both the default root image and the derived
+`1000:1000` image built and passed their actual complete smoke:
+
+- 32 recorded smoke commands in each image, including real second `setup`.
+- Exact Rust **1.97.1**, pnpm **11.21.0**, Node **24.22.0**, Python **3.11.2**;
+  the inherited Corepack was **0.36.0** and reused rather than replaced.
+- All **58 selected Rust/canonical-source/manifest/lock inputs** remained exact
+  across repeated setup. All **17 canonical fixture files** and unrelated source
+  remained unchanged during native generation/verification.
+- Inherited user/entrypoint/command metadata and actual writable tool/cache,
+  renderer, dependency and target paths passed under each selected user.
+- Curl and Node rejected the synthetic unknown CA, then accepted explicit trust;
+  strict Node TLS remained enabled. The disposable TLS server stopped.
+- Native generation/verification repeated successfully, all **14 complete
+  generated output files** matched between repetitions and between both images,
+  and renderer checks, tests, build and public validation passed.
+
+Additional actual, network-disabled probes of both built images found no
+persisted proxy values in image configuration/history, no transport proxy/CA
+variables in image configuration and no ephemeral CA files without the runtime
+bind. Their system CA bundle bytes remained equal to the exact pinned base.
+Those probes are bounded checks, not a universal secret scan or security audit.
+
+The [evidence directory](full-image-2026-11-22/SHA256-MANIFEST.json) retains exact
+structured JSON from the original failure, the distinguishing network probes,
+the successful repaired run and image trust-persistence controls. Command/output
+hashes remain intact; raw task-local build/network logs are hashed in the index
+and excluded from the repository. No private proxy values, CA bytes or selected
+host bundle path are retained. Historical receipts were not rewritten.
+
+This clears the current-source **full default/non-root development-image gate**.
+It does not turn that local native proof into hosted runner hardening, a full
+all-entrypoint CI matrix, arbitrary-base/platform support, browser acceptance or
+a release. The earlier five frontend protocols and narrow actual `act` job keep
+their original scope; #80 and final #70/#116 reconciliation retain their owners.
+No hosted CI, image publication, tag, release or deployment occurred.
 
 Decision impact: **ADR not required** for completing the existing image/setup
 coverage and refusing incomplete evidence. Existing ADR-0011 supplies the layered

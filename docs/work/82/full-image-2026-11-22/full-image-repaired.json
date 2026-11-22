@@ -1,0 +1,1652 @@
+{
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .Server}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "520c29d8dbc8c502dd7a00fb2ded995585a38ca811aed80f6916a6d502dab9d7"
+    },
+    {
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "{{json .}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "907becc3e5fb9cf2f59b5512edcebe91e76564ec14f1a920a37b14e912d20e3e"
+    },
+    {
+      "command": [
+        "docker",
+        "pull",
+        "--platform",
+        "linux/amd64",
+        "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0"
+      ],
+      "exit_code": 0,
+      "output_sha256": "e38f671cf581a33f6d2e58c5002043b3f9d5cafa9ea1c3cb4f61c794f9293493"
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0"
+      ],
+      "exit_code": 0,
+      "output_sha256": "e3d904e97788e0ebc701fbbc2a04b087e6a6e4c37883027553f3deb10ba00f0d"
+    },
+    {
+      "command": [
+        "docker",
+        "build",
+        "--pull",
+        "--platform",
+        "linux/amd64",
+        "--file",
+        "dev/Dockerfile",
+        "--build-arg",
+        "HTTP_PROXY",
+        "--build-arg",
+        "HTTPS_PROXY",
+        "--build-arg",
+        "NO_PROXY",
+        "--build-arg",
+        "http_proxy",
+        "--build-arg",
+        "https_proxy",
+        "--build-arg",
+        "no_proxy",
+        "--secret",
+        "id=identity_proxy_ca,src=<proxy-ca>",
+        "--tag",
+        "identity-qualification-default:344f6fed6391",
+        "."
+      ],
+      "exit_code": 0,
+      "output_sha256": "36a012de7cdb0cca067f3eb9ea5b71289ee15346338f3054a9cd5283973e042a"
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "identity-qualification-default:344f6fed6391"
+      ],
+      "exit_code": 0,
+      "output_sha256": "ed3fa2aa65b6e1758ce2bc92a7b5094f8e612088952118e28158418f55037cf2"
+    },
+    {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--env",
+        "HTTP_PROXY",
+        "--env",
+        "HTTPS_PROXY",
+        "--env",
+        "NO_PROXY",
+        "--env",
+        "http_proxy",
+        "--env",
+        "https_proxy",
+        "--env",
+        "no_proxy",
+        "--mount",
+        "type=bind,source=<proxy-ca>,target=/run/identity-development-proxy-ca.pem,readonly",
+        "--env",
+        "CURL_CA_BUNDLE=/run/identity-development-proxy-ca.pem",
+        "--env",
+        "SSL_CERT_FILE=/run/identity-development-proxy-ca.pem",
+        "--env",
+        "CARGO_HTTP_CAINFO=/run/identity-development-proxy-ca.pem",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/identity-development-proxy-ca.pem",
+        "identity-qualification-default:344f6fed6391",
+        "bash",
+        "/opt/identity/scripts/dev-env.sh",
+        "exec",
+        "python3",
+        "dev/qualification/smoke.py",
+        "--expected-uid",
+        "0",
+        "--expected-gid",
+        "0"
+      ],
+      "exit_code": 0,
+      "output_sha256": "d2139e53c18d83b366d2d961d471c5cd03c58a49c261c9f5eb60ab90516cdc95"
+    },
+    {
+      "command": [
+        "docker",
+        "build",
+        "--pull",
+        "--platform",
+        "linux/amd64",
+        "--file",
+        "dev/qualification/Dockerfile",
+        "--build-arg",
+        "BASE_IMAGE=docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+        "--tag",
+        "identity-qualification-custom-base:344f6fed6391",
+        "."
+      ],
+      "exit_code": 0,
+      "output_sha256": "70c28830e29ad01830d23f9f7e7c7823331c66f96221888726d04c336a7b4b86"
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "identity-qualification-custom-base:344f6fed6391"
+      ],
+      "exit_code": 0,
+      "output_sha256": "5fac6b7700d07c30916e8c06dae9eee6020f0afabf6d0962bef89019089161a0"
+    },
+    {
+      "command": [
+        "docker",
+        "build",
+        "--platform",
+        "linux/amd64",
+        "--file",
+        "dev/Dockerfile",
+        "--build-arg",
+        "HTTP_PROXY",
+        "--build-arg",
+        "HTTPS_PROXY",
+        "--build-arg",
+        "NO_PROXY",
+        "--build-arg",
+        "http_proxy",
+        "--build-arg",
+        "https_proxy",
+        "--build-arg",
+        "no_proxy",
+        "--secret",
+        "id=identity_proxy_ca,src=<proxy-ca>",
+        "--build-arg",
+        "BASE_IMAGE=identity-qualification-custom-base:344f6fed6391",
+        "--build-arg",
+        "IDENTITY_DEV_UID=1000",
+        "--build-arg",
+        "IDENTITY_DEV_GID=1000",
+        "--tag",
+        "identity-qualification-custom:344f6fed6391",
+        "."
+      ],
+      "exit_code": 0,
+      "output_sha256": "488ae2287ee3ae942d36dcfeb5623fb6524b78f0ee00572b213e74672b11fd71"
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "identity-qualification-custom:344f6fed6391"
+      ],
+      "exit_code": 0,
+      "output_sha256": "e81ea01f4da6750566e7ba7a8713a932499ee5055bbcf65914f0b6907b2bf42f"
+    },
+    {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--env",
+        "HTTP_PROXY",
+        "--env",
+        "HTTPS_PROXY",
+        "--env",
+        "NO_PROXY",
+        "--env",
+        "http_proxy",
+        "--env",
+        "https_proxy",
+        "--env",
+        "no_proxy",
+        "--mount",
+        "type=bind,source=<proxy-ca>,target=/run/identity-development-proxy-ca.pem,readonly",
+        "--env",
+        "CURL_CA_BUNDLE=/run/identity-development-proxy-ca.pem",
+        "--env",
+        "SSL_CERT_FILE=/run/identity-development-proxy-ca.pem",
+        "--env",
+        "CARGO_HTTP_CAINFO=/run/identity-development-proxy-ca.pem",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/identity-development-proxy-ca.pem",
+        "identity-qualification-custom:344f6fed6391",
+        "bash",
+        "/opt/identity/scripts/dev-env.sh",
+        "exec",
+        "python3",
+        "dev/qualification/smoke.py",
+        "--expected-uid",
+        "1000",
+        "--expected-gid",
+        "1000"
+      ],
+      "exit_code": 0,
+      "output_sha256": "cd3766512bf4c37d809a6c48eed323b647019aa9195ae48cb5ad225c58dfbbc3"
+    }
+  ],
+  "default_base": "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+  "default_custom_output_equal": true,
+  "docker_server": {
+    "Arch": "amd64",
+    "KernelVersion": "6.18.57",
+    "Os": "linux",
+    "Version": "28.4.0"
+  },
+  "images": [
+    {
+      "addon": {
+        "architecture": "amd64",
+        "cmd": [
+          "node"
+        ],
+        "entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "id": "sha256:bf63ddc9dea14566821ec7da06823d124874596bd667a608376c66d64159e031",
+        "os": "linux",
+        "repo_digests": [],
+        "user": ""
+      },
+      "base": {
+        "architecture": "amd64",
+        "cmd": [
+          "node"
+        ],
+        "entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "id": "sha256:03905f546fa8c284c377142124957871d1e8b9ddd0d69e869e233b9eeffd7790",
+        "os": "linux",
+        "repo_digests": [
+          "node@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0"
+        ],
+        "user": ""
+      },
+      "kind": "default",
+      "metadata_preserved": true,
+      "smoke": {
+        "canonical_fixture_files": 17,
+        "canonical_fixture_preserved": true,
+        "commands": [
+          {
+            "command": [
+              "python3",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "cb64a3a0ddcaff0ce013ea3612beda0be4a4d3537087505bd8850d8f8476f4f8"
+          },
+          {
+            "command": [
+              "node",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "2b796b748c85883d00cfea9775eaa143435f0dc06c69311b444cf0dfc98214bc"
+          },
+          {
+            "command": [
+              "npm",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "acb90e420303a6e949fec90f74faf64cc372894b3964e310a261689b898f41b0"
+          },
+          {
+            "command": [
+              "corepack",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "867a70774294546ebe3cac14fa311d8d27922466625e3fd9a42e9a26682a86e7"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "4d24606a920d1175b8017de83c5a19847bd8cfe47aeb71cf43efaa75c1e5a2ec"
+          },
+          {
+            "command": [
+              "rustc",
+              "--version",
+              "--verbose"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "b2bdf493bcf6d1dc55181a0efc2774b6d9cf7bf5c8dcc5bed592c994b2ad38c4"
+          },
+          {
+            "command": [
+              "cargo",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "1aedaa9cce116919d39b1eb303a58865771582bc24fc259aa8e26cb212e0f59e"
+          },
+          {
+            "command": [
+              "rustup",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "65a944af384b931a044d218600198791b8fb026015f1e0bd0b35d33274c6c502"
+          },
+          {
+            "command": [
+              "cc",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "7e575ab6fefd049c43d6a74b298b043016556f4e410e77194274a0414054e807"
+          },
+          {
+            "command": [
+              "curl",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "ca1f9855d7cad028c07367e2f8191b0950fb155cf12c2f0d509f99d4dd03bafb"
+          },
+          {
+            "command": [
+              "getconf",
+              "GNU_LIBC_VERSION"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "d413ead7ce9065771e2e436981fabd86519efcf109a71c81ffa37dd397fa825b"
+          },
+          {
+            "command": [
+              "bash",
+              "scripts/dev-env.sh",
+              "setup"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "710c803b10449a8c8f3fe8ad42f7189fc54acd6c2801666ba0cf4decd22248fd"
+          },
+          {
+            "command": [
+              "rustc",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "4ad84f16acc2f3bdcfbc7b0788f1e74a4e649b962154a585b8f8d0b28eb0dd06"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "4d24606a920d1175b8017de83c5a19847bd8cfe47aeb71cf43efaa75c1e5a2ec"
+          },
+          {
+            "command": [
+              "openssl",
+              "req",
+              "-x509",
+              "-newkey",
+              "rsa:2048",
+              "-nodes",
+              "-days",
+              "1",
+              "-subj",
+              "/CN=Identity disposable qualification CA",
+              "-addext",
+              "basicConstraints=critical,CA:TRUE",
+              "-addext",
+              "keyUsage=critical,keyCertSign,cRLSign",
+              "-keyout",
+              "/tmp/identity-local-ca-1oahqi4q/ca.key",
+              "-out",
+              "/tmp/identity-local-ca-1oahqi4q/ca.pem"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "ca3a668d7d0a605bbc60ee9328de625b2f927e3e0e0cb120d45737537dc0eca9"
+          },
+          {
+            "command": [
+              "openssl",
+              "req",
+              "-new",
+              "-newkey",
+              "rsa:2048",
+              "-nodes",
+              "-subj",
+              "/CN=localhost",
+              "-keyout",
+              "/tmp/identity-local-ca-1oahqi4q/server.key",
+              "-out",
+              "/tmp/identity-local-ca-1oahqi4q/server.csr"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "b563aa8d580af41ef90325a9c914ca129389ce7419d077109e661f84d27325f8"
+          },
+          {
+            "command": [
+              "openssl",
+              "x509",
+              "-req",
+              "-in",
+              "/tmp/identity-local-ca-1oahqi4q/server.csr",
+              "-CA",
+              "/tmp/identity-local-ca-1oahqi4q/ca.pem",
+              "-CAkey",
+              "/tmp/identity-local-ca-1oahqi4q/ca.key",
+              "-CAcreateserial",
+              "-days",
+              "1",
+              "-extfile",
+              "/tmp/identity-local-ca-1oahqi4q/server.ext",
+              "-out",
+              "/tmp/identity-local-ca-1oahqi4q/server.pem"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "f08ddac3de021da3a1b364489940aae250c85bafaae29a600c0e67d54e61cc6a"
+          },
+          {
+            "command": [
+              "curl",
+              "--silent",
+              "--show-error",
+              "--fail",
+              "--connect-timeout",
+              "5",
+              "--max-time",
+              "10",
+              "--noproxy",
+              "*",
+              "https://127.0.0.1:43215/"
+            ],
+            "exit_code": 60,
+            "expected_exit_codes": [
+              60
+            ],
+            "output_sha256": "a7cf2e0f1e2c02353e588d337e1b9378d18957894a889a9fe7d5828c8d85d18a"
+          },
+          {
+            "command": [
+              "curl",
+              "--silent",
+              "--show-error",
+              "--fail",
+              "--connect-timeout",
+              "5",
+              "--max-time",
+              "10",
+              "--noproxy",
+              "*",
+              "--cacert",
+              "/tmp/identity-local-ca-1oahqi4q/ca.pem",
+              "https://127.0.0.1:43215/"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "b79eda0f372bcfa4c5962789c1289376dfa477beffac7d6cb604204a28422783"
+          },
+          {
+            "command": [
+              "node",
+              "--eval",
+              "const https = require(\"node:https\"); const request = https.get(process.argv[1], { timeout: 5000 }, (response) => { let body = \"\"; response.setEncoding(\"utf8\"); response.on(\"data\", (chunk) => body += chunk); response.on(\"end\", () => { if (response.statusCode !== 200 || body !== \"identity-local-ca-probe\\n\") { process.exitCode = 5; } else { console.log(\"trusted\"); } }); }); request.on(\"timeout\", () => request.destroy(new Error(\"timeout\"))); request.on(\"error\", (error) => { console.error(error.code || \"NON_CERTIFICATE_ERROR\"); process.exitCode = [\"UNABLE_TO_VERIFY_LEAF_SIGNATURE\", \"SELF_SIGNED_CERT_IN_CHAIN\", \"DEPTH_ZERO_SELF_SIGNED_CERT\", \"CERT_UNTRUSTED\"].includes(error.code) ? 3 : 4; });",
+              "https://127.0.0.1:43215/"
+            ],
+            "exit_code": 3,
+            "expected_exit_codes": [
+              3
+            ],
+            "output_sha256": "8da11e7edcac0e2d9ee9ab038b0436657653aa860fb4abf5cc57257dd53682ce"
+          },
+          {
+            "command": [
+              "node",
+              "--eval",
+              "const https = require(\"node:https\"); const request = https.get(process.argv[1], { timeout: 5000 }, (response) => { let body = \"\"; response.setEncoding(\"utf8\"); response.on(\"data\", (chunk) => body += chunk); response.on(\"end\", () => { if (response.statusCode !== 200 || body !== \"identity-local-ca-probe\\n\") { process.exitCode = 5; } else { console.log(\"trusted\"); } }); }); request.on(\"timeout\", () => request.destroy(new Error(\"timeout\"))); request.on(\"error\", (error) => { console.error(error.code || \"NON_CERTIFICATE_ERROR\"); process.exitCode = [\"UNABLE_TO_VERIFY_LEAF_SIGNATURE\", \"SELF_SIGNED_CERT_IN_CHAIN\", \"DEPTH_ZERO_SELF_SIGNED_CERT\", \"CERT_UNTRUSTED\"].includes(error.code) ? 3 : 4; });",
+              "https://127.0.0.1:43215/"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "7bd39a7cbcf687fd60f819645b8bcaf731a9f19cb102484a7b84530516d7e8b8"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-_j9y5wzf/identity",
+              "--help"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "42a893d02a81311ad4fd01867619c7f7bbfc2e0f629627ac433a17c0c325a98a"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-_j9y5wzf/identity",
+              "v1-inspect",
+              "--help"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "37d2f5e5cfe6db6277b9382ed1c6ab9d27f9fa76f73c0b3eb13b263f5be1faef"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-_j9y5wzf/identity",
+              "v1-recover",
+              "--help"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "f488b8fd216dc85acce5e1d6d885b9dcb0c6edcfb0e97935747fcfc7e354a3de"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-_j9y5wzf/identity",
+              "v1-generate",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-_j9y5wzf/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-_j9y5wzf/identity",
+              "v1-verify",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-_j9y5wzf/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-_j9y5wzf/identity",
+              "v1-generate",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-_j9y5wzf/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-_j9y5wzf/identity",
+              "v1-verify",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-_j9y5wzf/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "check"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "0ddc862d5d9ba3ec1b990e3a94c36d5ebfc537378d0a0c8629a1aaad1aed2b61"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "test"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "90ecbf987b2291d6dadf83b15c2f3392c5d02be462bf36d5729fef6142b7d51b"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "build"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "b763e7ff3a10a9943ea13715e9dbab4234402cd0fe4371c8b3fac27098435e07"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "validate:public"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "a1d6cf3e8815b8134842f7f1ec384360116b38028bfd35148ed7e5aa875cdc49"
+          }
+        ],
+        "complete_output_inventory": {
+          ".identity-manifest.json": "8ae2ce997660342630b6d497951311473ad5ee30a05edae4e14c25a53eb19b03",
+          "brand/mark.svg": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+          "packages/guidance/README.md": "72de4e2cc95c2a1f6e2f788ed6bb15cbc69406f0d8eb571dc4ab54439211824d",
+          "packages/guidance/voice-and-usage.json": "3bf4c7cff181589933894af641d4ff43d2cc05e9b164ce6a043926cf40584e8d",
+          "packages/metadata/metadata.json": "b393cf7e6a79f7d419950c481ec2bee3615cee267a8c3fa475bf522e24c98be0",
+          "packages/metadata/open-graph.html": "30701a683ddf7dbc5fa5236234c27c887cb879ed6486ff936266f0dcb805c0d0",
+          "packages/metadata/package.json": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f",
+          "packages/renderer/brand-kit.view-model.json": "ca1e6f9cce42f1d62f51379f76632cad72fb7e039d677dd5d1a8366ba47fe3b8",
+          "packages/tokens/package.json": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843",
+          "packages/tokens/tailwind.theme.json": "0ab35788a542e279f92ef3ea93eaff323bbc75814d5931b7a2f3a21e8baa57a0",
+          "packages/tokens/tokens.css": "83423fb81f57a4f2176ae4ec417900a9427b0daf10ddd9ace27663221573ba1b",
+          "packages/tokens/tokens.d.ts": "3e8f23156481845d31e3964c302887c503da69041a2e5af3779ddd08a75290ea",
+          "packages/tokens/tokens.js": "648c947db230166a181db4ca21ffd7ebb981598da806a58c56e3c44ef5205c1a",
+          "packages/tokens/tokens.json": "6fb60127c6433f7e8ba91999c7c54bd4ed754458013e1acf23e7e2f0036e96b9"
+        },
+        "gid": 0,
+        "limits": [
+          "No browser installation, screenshot baseline or font-environment qualification.",
+          "No claim about arbitrary custom bases, architectures or native host platforms.",
+          "No release, registry push or deployment."
+        ],
+        "os_release": "PRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"12\"\nVERSION=\"12 (bookworm)\"\nVERSION_CODENAME=bookworm\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+        "platform": "linux/amd64",
+        "proxy_values_recorded": false,
+        "repeat_setup": {
+          "classification": "Actual second shared-helper setup in the built image; not synthetic frontend dispatch.",
+          "runtime_pins_preserved": {
+            "pnpm": "11.21.0",
+            "rustc": "1.97.1"
+          },
+          "source_inputs_preserved": true,
+          "source_inputs_sha256": {
+            "Cargo.lock": "7fdbc3cc28d1da2b1299fdcca6a2b5e8c055522261f0d84ff71e01233e830450",
+            "Cargo.toml": "ceeb25ebbf9848f19d296d67a695559c9ab5b002eb6fb472928826fccd07dd28",
+            "renderer/package.json": "f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "rust-toolchain.toml": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+            "src/brandkit/archive.rs": "7c735711393c8ec273030cf99fbaf6493c7af0c97abb7d1eaf6c7ecc44040054",
+            "src/brandkit/guidance.rs": "803d7b2fdecbac8437e6704ba960a6246e302b314d03a3ecc0a5977e8d590219",
+            "src/brandkit/mod.rs": "37c1cc27a4fa2a94e036a47b6e5c548b94751695800bf3bcb38f3d06d7b455e8",
+            "src/brandkit/model.rs": "97cc819d2e3fb351a23223dcaf3395a2a9920a040ea642e05e654711d07f36b6",
+            "src/brandkit/profiles.rs": "07453a6687864f9a6dfe1fc5e8c03d331c5e2f261c2e77faaa10eec8800d6cff",
+            "src/brandkit/render.rs": "8326265de3ce6bf1547dce5a1f09888026a45dce915d9789518afed215842a34",
+            "src/brandkit/tests.rs": "5aa2dba3dbc7e40bfd1d3587fde0e39dfa207a495da75f49271fddbe9e011e33",
+            "src/cli.rs": "4ffa8c27cdfb6fd8e5a4062feac4ca614dceedd020ffc069591e945b4bedd1d7",
+            "src/commands.rs": "bbe87cfe997e3e6a14217ec0733afd9798c77b1fd9362521167eb28aca27c5e4",
+            "src/compiler/filesystem.rs": "a4af1714eca221d40e4c60ab08a492d453d09cd6d8685bda394f6c20778d8f03",
+            "src/compiler/filesystem/tests.rs": "ab8de20ab6fde99abd929cedfcfadbf38dcc945187c793580dc1a0b29dcaf234",
+            "src/compiler/filesystem/tests/inspection_tests.rs": "009c06811978deb033d7b704e69f5c67cc084d65cdc7b54065548e8b41127e86",
+            "src/compiler/filesystem/tests/process_tests.rs": "43ab67a9dad1fb13b2e9e829fb61044bbf8d4fdaf418ac8f3b29d7816cdffa4a",
+            "src/compiler/mod.rs": "9be4ec82f8f64a68a7d23ccb6ab5596a95ad1e1bd11690b6c17567bb5778a9db",
+            "src/compiler/planning.rs": "99acdf475c5c5c7a2071d2e118651dde0b95987d5cbe8818280f23799627493f",
+            "src/compiler/tests.rs": "9c3505e0f09b369b77948bcf1512f133cee95e0e6038e2814bcadcbbfd4e4f3e",
+            "src/compiler/validation.rs": "f297f107cbdfe132ce7da3fa09a2891eac3d3c2e1e704a756bdfa2d2bf83b637",
+            "src/contract.rs": "7e18331543b0a8d2820ebb0889f50d566840880ea37dc8bbb03b69c1b2882a96",
+            "src/lib.rs": "86015d23e9a0abb63e7ce9aa251783a29bcf91a134828af7df9ef343a8e4f3e9",
+            "src/main.rs": "a665a03eacf10e0a6cd9fb31c1bd6c72058798ef5bfe8e1b8d909691380efc28",
+            "src/motion/artifacts.rs": "504952ae342c2d944511fc4745efe41294fcce98e0504810f7c040c5a4e6c3a7",
+            "src/motion/behavior.rs": "cf2c9284f8f5aec82ea2bdb82bb6c995de318284da99b20e4e6d3d484f709639",
+            "src/motion/mod.rs": "482a5eda7612af89f713badfef2f27960e51ac240d2ad690d941af28d91697cb",
+            "src/motion/provenance.rs": "fd9cda52a60ec7736213cd4f8a893467634674d942332e4806b0965713cd3ac8",
+            "src/motion/tests.rs": "b387432927a8c5c2aa31f9eb0a7b0e8be244a4e83b7f199566040f9ea8daab6c",
+            "src/output.rs": "ac274a7fc099e1fef177cea505c2c872365315bfa9becfd001e7a326a5020d12",
+            "src/quality/artifacts.rs": "517b3577ee9d94aa1676bda5d8b2efe5359af133231b1ca55a42f3b26f5e0b8d",
+            "src/quality/mod.rs": "ff71fb72d0c280efbe60c5c2816fe9b0856adb9ceb3c180e5138afb50e596c2f",
+            "src/quality/source.rs": "5dcd251b7072a33ab2775ccd2990f21f9e86b2807b34659dbaea67cec7b09d08",
+            "src/quality/tests.rs": "ded6e738d7fa4436aef36c259e2ca039083ef9b011f97bbb515d58ade84d6518",
+            "src/quality/tokens.rs": "0a7f133155e9735cc1a8d471bd74d773302f27f4e767ab948f91aba4543232bf",
+            "src/reference_renderer.rs": "f4e3f28b2fd23582f6525cc96ac5271739bb0ae6e96940be0ca2dd4e89cf57df",
+            "src/v1_consumer.rs": "c82e1eafc5c5d2c06d460d10a4b6c823540d8c687acb55bcf100821fe7d450c7",
+            "src/v1_consumer/preflight.rs": "a61d4b348a7058bdb4e07d990fab9d16cd1300568b2d67152d932e6317a2ae98",
+            "src/v1_consumer/source_digest.rs": "7bfb68cea55045b7a45f82ee39270a52a62cec8f4d3c6c2f0fb378116e2aea1c",
+            "src/v1_initializer.rs": "1b0f40aca9b627347b8e740d37fe4bdafd19fc4734df5e6c98fa3ed3e1802c54",
+            "tests/fixtures/v1/valid/minimal/.identity/brief.md": "797e315b6561c0cc9a54db7d2ad63698dd32e1b4be040e5383ed534e4c491739",
+            "tests/fixtures/v1/valid/minimal/.identity/candidates/README.md": "bb4eb0c1819bef9e021d1b49b1d284a6487b120dd597ab7403c698d5a0b65fc3",
+            "tests/fixtures/v1/valid/minimal/.identity/defaults/organization.tokens.json": "c7c9313829c1995afe25e5c08e72b73fbf0db46bdc2de77e451259e0e12a509e",
+            "tests/fixtures/v1/valid/minimal/.identity/governance/approvals.json": "4e7e1b5e394d5784a4b0e2a4f9eacf529f6566391b70d0821ef7a7c28f54406f",
+            "tests/fixtures/v1/valid/minimal/.identity/governance/provenance.json": "cf223a4a13ccb28712cd1fecf75aa55dfd24bc7c87922aef446d56404785376b",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/design-references.json": "bb023285f7d40b40239a465bee68a09887047f86f458fb530471739384bb2339",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/design-system.json": "aec24474cce5410d245a55cf86ea55720c17fd786e2f798ec9758d637c203077",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/mascot.json": "9bbba3b8735a081a42aab8c05bd97a6f2e761a652a176a6823b6d1b42cd42aeb",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/usage.json": "11c1db6df15d1bfa8ef87791c0e3aa883b32aa02f1d7f3335f159bada89479b0",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/voice.json": "347865d1faeebd6beea86463419c7a59bf11ec91a3f63821d3f723a9146f77f3",
+            "tests/fixtures/v1/valid/minimal/.identity/identity.json": "67794ddfea2b4f48e6c686cf3da0f47c6e43c9ff830c1f3fe27cd22bc5db7803",
+            "tests/fixtures/v1/valid/minimal/.identity/overrides/product.tokens.json": "f03b0d20a09c9fd7b33a556799c5d23c2bf248fbcd7fba37c47825a4146a3632",
+            "tests/fixtures/v1/valid/minimal/.identity/references/README.md": "fe51f057f11efd7cc58c3416112128fa7985a73b54e0a3b2f1742b098646fe26",
+            "tests/fixtures/v1/valid/minimal/.identity/sources/kern.svg": "c1d0d2acc3f516d09db95e3f02ff9631ff0f5f476970b1194f0981396c1cc637",
+            "tests/fixtures/v1/valid/minimal/.identity/sources/legacy-wordmark.svg": "9313a860eb179176e7c4d7603d7720b270bd51dd7287e14b4d8f55213621dd41",
+            "tests/fixtures/v1/valid/minimal/.identity/sources/mark.svg": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+            "tests/fixtures/v1/valid/minimal/.identity/targets/profiles.json": "6c2ee37649d86750677540c4b85b32151affc4a2b07357407e6b378a86c8120e"
+          },
+          "source_scope": "Rust product source, minimal canonical fixture, toolchain/dependency manifests and locks.",
+          "status": "passed"
+        },
+        "repeated_output_equal": true,
+        "runtime_versions": {
+          "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+          "cc": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+          "corepack": "0.36.0",
+          "curl": "curl 7.88.1 (x86_64-pc-linux-gnu) libcurl/7.88.1 OpenSSL/3.0.22 zlib/1.2.13 brotli/1.0.9 zstd/1.5.4 libidn2/2.3.3 libpsl/0.21.2 (+libidn2/2.3.3) libssh2/1.10.0 nghttp2/1.52.0 librtmp/2.3 OpenLDAP/2.5.13\nRelease-Date: 2023-02-20, security patched: 7.88.1-10+deb12u15\nProtocols: dict file ftp ftps gopher gophers http https imap imaps ldap ldaps mqtt pop3 pop3s rtmp rtsp scp sftp smb smbs smtp smtps telnet tftp\nFeatures: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM NTLM_WB PSL SPNEGO SSL threadsafe TLS-SRP UnixSockets zstd",
+          "libc": "glibc 2.36",
+          "node": "v24.22.0",
+          "npm": "11.19.1",
+          "pnpm": "11.21.0",
+          "python": "Python 3.11.2",
+          "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 22.1.6",
+          "rustup": "rustup 1.29.3 (edbc831ce 2026-11-02)\ninfo: This is the version for the rustup toolchain manager, not the rustc compiler.\ninfo: the currently active `rustc` version is `rustc 1.97.1 (8bab26f4f 2026-07-14)`"
+        },
+        "shipping_cli_sha256": "a088a8ed5d393563dc85d2a60a45f2090ba4965761d8e71a3fae4d181826bdf5",
+        "status": "passed",
+        "strict_node_tls": true,
+        "synthetic_ca_probe": {
+          "certificate_or_key_bytes_recorded": false,
+          "classification": "synthetic localhost CA-binding check; not a private proxy qualification",
+          "disposable_server_stopped": true,
+          "explicit_ca_accepted": {
+            "curl_cacert": true,
+            "node_extra_ca_certs": true
+          },
+          "system_trust_modified": false,
+          "unknown_ca_rejected": {
+            "curl": true,
+            "node": true
+          }
+        },
+        "uid": 0,
+        "unrelated_source_preserved": true,
+        "writable_paths": {
+          ".": {
+            "owner_uid": 0,
+            "writable": true
+          },
+          "CARGO_HOME": {
+            "owner_uid": 0,
+            "path": "/opt/identity-dev/cargo",
+            "writable": true
+          },
+          "COREPACK_HOME": {
+            "owner_uid": 0,
+            "path": "/opt/identity-dev/corepack-cache",
+            "writable": true
+          },
+          "IDENTITY_DEV_PREFIX": {
+            "owner_uid": 0,
+            "path": "/opt/identity-dev",
+            "writable": true
+          },
+          "PLAYWRIGHT_BROWSERS_PATH": {
+            "owner_uid": 0,
+            "path": "/opt/identity-dev/browsers",
+            "writable": true
+          },
+          "RUSTUP_HOME": {
+            "owner_uid": 0,
+            "path": "/opt/identity-dev/rustup",
+            "writable": true
+          },
+          "XDG_CACHE_HOME": {
+            "owner_uid": 0,
+            "path": "/opt/identity-dev/xdg-cache",
+            "writable": true
+          },
+          "npm_config_cache": {
+            "owner_uid": 0,
+            "path": "/opt/identity-dev/npm-cache",
+            "writable": true
+          },
+          "pnpm-store": {
+            "owner_uid": 0,
+            "writable": true
+          },
+          "renderer": {
+            "owner_uid": 0,
+            "writable": true
+          },
+          "renderer/node_modules": {
+            "owner_uid": 0,
+            "writable": true
+          },
+          "target": {
+            "owner_uid": 0,
+            "writable": true
+          }
+        }
+      }
+    },
+    {
+      "addon": {
+        "architecture": "amd64",
+        "cmd": [
+          "node"
+        ],
+        "entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "id": "sha256:0e971403341c4da9c4fd39de6ccefe10f16e2ff07933c7e5ecd411236e334093",
+        "os": "linux",
+        "repo_digests": [],
+        "user": "1000:1000"
+      },
+      "base": {
+        "architecture": "amd64",
+        "cmd": [
+          "node"
+        ],
+        "entrypoint": [
+          "docker-entrypoint.sh"
+        ],
+        "id": "sha256:af23f0942d3b28b6c373e8a94eeb0b2427f0c75cf2d89293ddfb66ee369b6dee",
+        "os": "linux",
+        "repo_digests": [],
+        "user": "1000:1000"
+      },
+      "kind": "custom-non-root",
+      "metadata_preserved": true,
+      "smoke": {
+        "canonical_fixture_files": 17,
+        "canonical_fixture_preserved": true,
+        "commands": [
+          {
+            "command": [
+              "python3",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "cb64a3a0ddcaff0ce013ea3612beda0be4a4d3537087505bd8850d8f8476f4f8"
+          },
+          {
+            "command": [
+              "node",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "2b796b748c85883d00cfea9775eaa143435f0dc06c69311b444cf0dfc98214bc"
+          },
+          {
+            "command": [
+              "npm",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "acb90e420303a6e949fec90f74faf64cc372894b3964e310a261689b898f41b0"
+          },
+          {
+            "command": [
+              "corepack",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "867a70774294546ebe3cac14fa311d8d27922466625e3fd9a42e9a26682a86e7"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "4d24606a920d1175b8017de83c5a19847bd8cfe47aeb71cf43efaa75c1e5a2ec"
+          },
+          {
+            "command": [
+              "rustc",
+              "--version",
+              "--verbose"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "b2bdf493bcf6d1dc55181a0efc2774b6d9cf7bf5c8dcc5bed592c994b2ad38c4"
+          },
+          {
+            "command": [
+              "cargo",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "1aedaa9cce116919d39b1eb303a58865771582bc24fc259aa8e26cb212e0f59e"
+          },
+          {
+            "command": [
+              "rustup",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "65a944af384b931a044d218600198791b8fb026015f1e0bd0b35d33274c6c502"
+          },
+          {
+            "command": [
+              "cc",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "7e575ab6fefd049c43d6a74b298b043016556f4e410e77194274a0414054e807"
+          },
+          {
+            "command": [
+              "curl",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "ca1f9855d7cad028c07367e2f8191b0950fb155cf12c2f0d509f99d4dd03bafb"
+          },
+          {
+            "command": [
+              "getconf",
+              "GNU_LIBC_VERSION"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "d413ead7ce9065771e2e436981fabd86519efcf109a71c81ffa37dd397fa825b"
+          },
+          {
+            "command": [
+              "bash",
+              "scripts/dev-env.sh",
+              "setup"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "16622ed3b128a854d80ca7ce65e87f33f36f6da06e308ec4119c454fec888d6a"
+          },
+          {
+            "command": [
+              "rustc",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "4ad84f16acc2f3bdcfbc7b0788f1e74a4e649b962154a585b8f8d0b28eb0dd06"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "--version"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "4d24606a920d1175b8017de83c5a19847bd8cfe47aeb71cf43efaa75c1e5a2ec"
+          },
+          {
+            "command": [
+              "openssl",
+              "req",
+              "-x509",
+              "-newkey",
+              "rsa:2048",
+              "-nodes",
+              "-days",
+              "1",
+              "-subj",
+              "/CN=Identity disposable qualification CA",
+              "-addext",
+              "basicConstraints=critical,CA:TRUE",
+              "-addext",
+              "keyUsage=critical,keyCertSign,cRLSign",
+              "-keyout",
+              "/tmp/identity-local-ca-79z56zvh/ca.key",
+              "-out",
+              "/tmp/identity-local-ca-79z56zvh/ca.pem"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "7f8d5ee467086a08997ed1a6b9cc5ff0a02f5dad6d0aa9daed495cc67f2df857"
+          },
+          {
+            "command": [
+              "openssl",
+              "req",
+              "-new",
+              "-newkey",
+              "rsa:2048",
+              "-nodes",
+              "-subj",
+              "/CN=localhost",
+              "-keyout",
+              "/tmp/identity-local-ca-79z56zvh/server.key",
+              "-out",
+              "/tmp/identity-local-ca-79z56zvh/server.csr"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "f0c61bf750c3edbabc4b7a83a756e16bda3b77e82845f89600c16432b15c98ea"
+          },
+          {
+            "command": [
+              "openssl",
+              "x509",
+              "-req",
+              "-in",
+              "/tmp/identity-local-ca-79z56zvh/server.csr",
+              "-CA",
+              "/tmp/identity-local-ca-79z56zvh/ca.pem",
+              "-CAkey",
+              "/tmp/identity-local-ca-79z56zvh/ca.key",
+              "-CAcreateserial",
+              "-days",
+              "1",
+              "-extfile",
+              "/tmp/identity-local-ca-79z56zvh/server.ext",
+              "-out",
+              "/tmp/identity-local-ca-79z56zvh/server.pem"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "f08ddac3de021da3a1b364489940aae250c85bafaae29a600c0e67d54e61cc6a"
+          },
+          {
+            "command": [
+              "curl",
+              "--silent",
+              "--show-error",
+              "--fail",
+              "--connect-timeout",
+              "5",
+              "--max-time",
+              "10",
+              "--noproxy",
+              "*",
+              "https://127.0.0.1:39973/"
+            ],
+            "exit_code": 60,
+            "expected_exit_codes": [
+              60
+            ],
+            "output_sha256": "a7cf2e0f1e2c02353e588d337e1b9378d18957894a889a9fe7d5828c8d85d18a"
+          },
+          {
+            "command": [
+              "curl",
+              "--silent",
+              "--show-error",
+              "--fail",
+              "--connect-timeout",
+              "5",
+              "--max-time",
+              "10",
+              "--noproxy",
+              "*",
+              "--cacert",
+              "/tmp/identity-local-ca-79z56zvh/ca.pem",
+              "https://127.0.0.1:39973/"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "b79eda0f372bcfa4c5962789c1289376dfa477beffac7d6cb604204a28422783"
+          },
+          {
+            "command": [
+              "node",
+              "--eval",
+              "const https = require(\"node:https\"); const request = https.get(process.argv[1], { timeout: 5000 }, (response) => { let body = \"\"; response.setEncoding(\"utf8\"); response.on(\"data\", (chunk) => body += chunk); response.on(\"end\", () => { if (response.statusCode !== 200 || body !== \"identity-local-ca-probe\\n\") { process.exitCode = 5; } else { console.log(\"trusted\"); } }); }); request.on(\"timeout\", () => request.destroy(new Error(\"timeout\"))); request.on(\"error\", (error) => { console.error(error.code || \"NON_CERTIFICATE_ERROR\"); process.exitCode = [\"UNABLE_TO_VERIFY_LEAF_SIGNATURE\", \"SELF_SIGNED_CERT_IN_CHAIN\", \"DEPTH_ZERO_SELF_SIGNED_CERT\", \"CERT_UNTRUSTED\"].includes(error.code) ? 3 : 4; });",
+              "https://127.0.0.1:39973/"
+            ],
+            "exit_code": 3,
+            "expected_exit_codes": [
+              3
+            ],
+            "output_sha256": "8da11e7edcac0e2d9ee9ab038b0436657653aa860fb4abf5cc57257dd53682ce"
+          },
+          {
+            "command": [
+              "node",
+              "--eval",
+              "const https = require(\"node:https\"); const request = https.get(process.argv[1], { timeout: 5000 }, (response) => { let body = \"\"; response.setEncoding(\"utf8\"); response.on(\"data\", (chunk) => body += chunk); response.on(\"end\", () => { if (response.statusCode !== 200 || body !== \"identity-local-ca-probe\\n\") { process.exitCode = 5; } else { console.log(\"trusted\"); } }); }); request.on(\"timeout\", () => request.destroy(new Error(\"timeout\"))); request.on(\"error\", (error) => { console.error(error.code || \"NON_CERTIFICATE_ERROR\"); process.exitCode = [\"UNABLE_TO_VERIFY_LEAF_SIGNATURE\", \"SELF_SIGNED_CERT_IN_CHAIN\", \"DEPTH_ZERO_SELF_SIGNED_CERT\", \"CERT_UNTRUSTED\"].includes(error.code) ? 3 : 4; });",
+              "https://127.0.0.1:39973/"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "7bd39a7cbcf687fd60f819645b8bcaf731a9f19cb102484a7b84530516d7e8b8"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-a8hb883x/identity",
+              "--help"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "42a893d02a81311ad4fd01867619c7f7bbfc2e0f629627ac433a17c0c325a98a"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-a8hb883x/identity",
+              "v1-inspect",
+              "--help"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "37d2f5e5cfe6db6277b9382ed1c6ab9d27f9fa76f73c0b3eb13b263f5be1faef"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-a8hb883x/identity",
+              "v1-recover",
+              "--help"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "f488b8fd216dc85acce5e1d6d885b9dcb0c6edcfb0e97935747fcfc7e354a3de"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-a8hb883x/identity",
+              "v1-generate",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-a8hb883x/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-a8hb883x/identity",
+              "v1-verify",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-a8hb883x/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-a8hb883x/identity",
+              "v1-generate",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-a8hb883x/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "93597d82d7c5227f7e32259c76976016c88ff243d224bbe9f7156f2bf7983419"
+          },
+          {
+            "command": [
+              "/tmp/identity-dev-qualification-a8hb883x/identity",
+              "v1-verify",
+              "--repository-root",
+              "/tmp/identity-dev-qualification-a8hb883x/consumer"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "a1d9aeb824b10966b5831abb389a963ae9d295623a51bcd0fd4099929068de68"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "check"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "0ddc862d5d9ba3ec1b990e3a94c36d5ebfc537378d0a0c8629a1aaad1aed2b61"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "test"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "37346d94f3b2af8ca623104d458acfab155ca6aca51e31f67a19b86c0779e07f"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "build"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "cc9221e57b749c9dc3d4f2f0ffa5cea52909710e1be7acec16cdbb3cc475e949"
+          },
+          {
+            "command": [
+              "corepack",
+              "pnpm",
+              "run",
+              "validate:public"
+            ],
+            "exit_code": 0,
+            "expected_exit_codes": [
+              0
+            ],
+            "output_sha256": "7f16ea5aa192949588019b99167c8aebfcb296b07ec77f06ad9408cf416c6c4d"
+          }
+        ],
+        "complete_output_inventory": {
+          ".identity-manifest.json": "8ae2ce997660342630b6d497951311473ad5ee30a05edae4e14c25a53eb19b03",
+          "brand/mark.svg": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+          "packages/guidance/README.md": "72de4e2cc95c2a1f6e2f788ed6bb15cbc69406f0d8eb571dc4ab54439211824d",
+          "packages/guidance/voice-and-usage.json": "3bf4c7cff181589933894af641d4ff43d2cc05e9b164ce6a043926cf40584e8d",
+          "packages/metadata/metadata.json": "b393cf7e6a79f7d419950c481ec2bee3615cee267a8c3fa475bf522e24c98be0",
+          "packages/metadata/open-graph.html": "30701a683ddf7dbc5fa5236234c27c887cb879ed6486ff936266f0dcb805c0d0",
+          "packages/metadata/package.json": "5d1f5a5db300379fa7fafe7845311b1d5796f0bffb083ed6a44cd3cc51dd528f",
+          "packages/renderer/brand-kit.view-model.json": "ca1e6f9cce42f1d62f51379f76632cad72fb7e039d677dd5d1a8366ba47fe3b8",
+          "packages/tokens/package.json": "d37c7947f8662c1c970b03d2bdfb05e5e4a629f2c9156edee0bf217d1ec27843",
+          "packages/tokens/tailwind.theme.json": "0ab35788a542e279f92ef3ea93eaff323bbc75814d5931b7a2f3a21e8baa57a0",
+          "packages/tokens/tokens.css": "83423fb81f57a4f2176ae4ec417900a9427b0daf10ddd9ace27663221573ba1b",
+          "packages/tokens/tokens.d.ts": "3e8f23156481845d31e3964c302887c503da69041a2e5af3779ddd08a75290ea",
+          "packages/tokens/tokens.js": "648c947db230166a181db4ca21ffd7ebb981598da806a58c56e3c44ef5205c1a",
+          "packages/tokens/tokens.json": "6fb60127c6433f7e8ba91999c7c54bd4ed754458013e1acf23e7e2f0036e96b9"
+        },
+        "gid": 1000,
+        "limits": [
+          "No browser installation, screenshot baseline or font-environment qualification.",
+          "No claim about arbitrary custom bases, architectures or native host platforms.",
+          "No release, registry push or deployment."
+        ],
+        "os_release": "PRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"12\"\nVERSION=\"12 (bookworm)\"\nVERSION_CODENAME=bookworm\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+        "platform": "linux/amd64",
+        "proxy_values_recorded": false,
+        "repeat_setup": {
+          "classification": "Actual second shared-helper setup in the built image; not synthetic frontend dispatch.",
+          "runtime_pins_preserved": {
+            "pnpm": "11.21.0",
+            "rustc": "1.97.1"
+          },
+          "source_inputs_preserved": true,
+          "source_inputs_sha256": {
+            "Cargo.lock": "7fdbc3cc28d1da2b1299fdcca6a2b5e8c055522261f0d84ff71e01233e830450",
+            "Cargo.toml": "ceeb25ebbf9848f19d296d67a695559c9ab5b002eb6fb472928826fccd07dd28",
+            "renderer/package.json": "f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f",
+            "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+            "rust-toolchain.toml": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+            "src/brandkit/archive.rs": "7c735711393c8ec273030cf99fbaf6493c7af0c97abb7d1eaf6c7ecc44040054",
+            "src/brandkit/guidance.rs": "803d7b2fdecbac8437e6704ba960a6246e302b314d03a3ecc0a5977e8d590219",
+            "src/brandkit/mod.rs": "37c1cc27a4fa2a94e036a47b6e5c548b94751695800bf3bcb38f3d06d7b455e8",
+            "src/brandkit/model.rs": "97cc819d2e3fb351a23223dcaf3395a2a9920a040ea642e05e654711d07f36b6",
+            "src/brandkit/profiles.rs": "07453a6687864f9a6dfe1fc5e8c03d331c5e2f261c2e77faaa10eec8800d6cff",
+            "src/brandkit/render.rs": "8326265de3ce6bf1547dce5a1f09888026a45dce915d9789518afed215842a34",
+            "src/brandkit/tests.rs": "5aa2dba3dbc7e40bfd1d3587fde0e39dfa207a495da75f49271fddbe9e011e33",
+            "src/cli.rs": "4ffa8c27cdfb6fd8e5a4062feac4ca614dceedd020ffc069591e945b4bedd1d7",
+            "src/commands.rs": "bbe87cfe997e3e6a14217ec0733afd9798c77b1fd9362521167eb28aca27c5e4",
+            "src/compiler/filesystem.rs": "a4af1714eca221d40e4c60ab08a492d453d09cd6d8685bda394f6c20778d8f03",
+            "src/compiler/filesystem/tests.rs": "ab8de20ab6fde99abd929cedfcfadbf38dcc945187c793580dc1a0b29dcaf234",
+            "src/compiler/filesystem/tests/inspection_tests.rs": "009c06811978deb033d7b704e69f5c67cc084d65cdc7b54065548e8b41127e86",
+            "src/compiler/filesystem/tests/process_tests.rs": "43ab67a9dad1fb13b2e9e829fb61044bbf8d4fdaf418ac8f3b29d7816cdffa4a",
+            "src/compiler/mod.rs": "9be4ec82f8f64a68a7d23ccb6ab5596a95ad1e1bd11690b6c17567bb5778a9db",
+            "src/compiler/planning.rs": "99acdf475c5c5c7a2071d2e118651dde0b95987d5cbe8818280f23799627493f",
+            "src/compiler/tests.rs": "9c3505e0f09b369b77948bcf1512f133cee95e0e6038e2814bcadcbbfd4e4f3e",
+            "src/compiler/validation.rs": "f297f107cbdfe132ce7da3fa09a2891eac3d3c2e1e704a756bdfa2d2bf83b637",
+            "src/contract.rs": "7e18331543b0a8d2820ebb0889f50d566840880ea37dc8bbb03b69c1b2882a96",
+            "src/lib.rs": "86015d23e9a0abb63e7ce9aa251783a29bcf91a134828af7df9ef343a8e4f3e9",
+            "src/main.rs": "a665a03eacf10e0a6cd9fb31c1bd6c72058798ef5bfe8e1b8d909691380efc28",
+            "src/motion/artifacts.rs": "504952ae342c2d944511fc4745efe41294fcce98e0504810f7c040c5a4e6c3a7",
+            "src/motion/behavior.rs": "cf2c9284f8f5aec82ea2bdb82bb6c995de318284da99b20e4e6d3d484f709639",
+            "src/motion/mod.rs": "482a5eda7612af89f713badfef2f27960e51ac240d2ad690d941af28d91697cb",
+            "src/motion/provenance.rs": "fd9cda52a60ec7736213cd4f8a893467634674d942332e4806b0965713cd3ac8",
+            "src/motion/tests.rs": "b387432927a8c5c2aa31f9eb0a7b0e8be244a4e83b7f199566040f9ea8daab6c",
+            "src/output.rs": "ac274a7fc099e1fef177cea505c2c872365315bfa9becfd001e7a326a5020d12",
+            "src/quality/artifacts.rs": "517b3577ee9d94aa1676bda5d8b2efe5359af133231b1ca55a42f3b26f5e0b8d",
+            "src/quality/mod.rs": "ff71fb72d0c280efbe60c5c2816fe9b0856adb9ceb3c180e5138afb50e596c2f",
+            "src/quality/source.rs": "5dcd251b7072a33ab2775ccd2990f21f9e86b2807b34659dbaea67cec7b09d08",
+            "src/quality/tests.rs": "ded6e738d7fa4436aef36c259e2ca039083ef9b011f97bbb515d58ade84d6518",
+            "src/quality/tokens.rs": "0a7f133155e9735cc1a8d471bd74d773302f27f4e767ab948f91aba4543232bf",
+            "src/reference_renderer.rs": "f4e3f28b2fd23582f6525cc96ac5271739bb0ae6e96940be0ca2dd4e89cf57df",
+            "src/v1_consumer.rs": "c82e1eafc5c5d2c06d460d10a4b6c823540d8c687acb55bcf100821fe7d450c7",
+            "src/v1_consumer/preflight.rs": "a61d4b348a7058bdb4e07d990fab9d16cd1300568b2d67152d932e6317a2ae98",
+            "src/v1_consumer/source_digest.rs": "7bfb68cea55045b7a45f82ee39270a52a62cec8f4d3c6c2f0fb378116e2aea1c",
+            "src/v1_initializer.rs": "1b0f40aca9b627347b8e740d37fe4bdafd19fc4734df5e6c98fa3ed3e1802c54",
+            "tests/fixtures/v1/valid/minimal/.identity/brief.md": "797e315b6561c0cc9a54db7d2ad63698dd32e1b4be040e5383ed534e4c491739",
+            "tests/fixtures/v1/valid/minimal/.identity/candidates/README.md": "bb4eb0c1819bef9e021d1b49b1d284a6487b120dd597ab7403c698d5a0b65fc3",
+            "tests/fixtures/v1/valid/minimal/.identity/defaults/organization.tokens.json": "c7c9313829c1995afe25e5c08e72b73fbf0db46bdc2de77e451259e0e12a509e",
+            "tests/fixtures/v1/valid/minimal/.identity/governance/approvals.json": "4e7e1b5e394d5784a4b0e2a4f9eacf529f6566391b70d0821ef7a7c28f54406f",
+            "tests/fixtures/v1/valid/minimal/.identity/governance/provenance.json": "cf223a4a13ccb28712cd1fecf75aa55dfd24bc7c87922aef446d56404785376b",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/design-references.json": "bb023285f7d40b40239a465bee68a09887047f86f458fb530471739384bb2339",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/design-system.json": "aec24474cce5410d245a55cf86ea55720c17fd786e2f798ec9758d637c203077",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/mascot.json": "9bbba3b8735a081a42aab8c05bd97a6f2e761a652a176a6823b6d1b42cd42aeb",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/usage.json": "11c1db6df15d1bfa8ef87791c0e3aa883b32aa02f1d7f3335f159bada89479b0",
+            "tests/fixtures/v1/valid/minimal/.identity/guidance/voice.json": "347865d1faeebd6beea86463419c7a59bf11ec91a3f63821d3f723a9146f77f3",
+            "tests/fixtures/v1/valid/minimal/.identity/identity.json": "67794ddfea2b4f48e6c686cf3da0f47c6e43c9ff830c1f3fe27cd22bc5db7803",
+            "tests/fixtures/v1/valid/minimal/.identity/overrides/product.tokens.json": "f03b0d20a09c9fd7b33a556799c5d23c2bf248fbcd7fba37c47825a4146a3632",
+            "tests/fixtures/v1/valid/minimal/.identity/references/README.md": "fe51f057f11efd7cc58c3416112128fa7985a73b54e0a3b2f1742b098646fe26",
+            "tests/fixtures/v1/valid/minimal/.identity/sources/kern.svg": "c1d0d2acc3f516d09db95e3f02ff9631ff0f5f476970b1194f0981396c1cc637",
+            "tests/fixtures/v1/valid/minimal/.identity/sources/legacy-wordmark.svg": "9313a860eb179176e7c4d7603d7720b270bd51dd7287e14b4d8f55213621dd41",
+            "tests/fixtures/v1/valid/minimal/.identity/sources/mark.svg": "b6d5becc4b80588f06199662463f17aaee45d069a135a8b6f6742805eaac20ad",
+            "tests/fixtures/v1/valid/minimal/.identity/targets/profiles.json": "6c2ee37649d86750677540c4b85b32151affc4a2b07357407e6b378a86c8120e"
+          },
+          "source_scope": "Rust product source, minimal canonical fixture, toolchain/dependency manifests and locks.",
+          "status": "passed"
+        },
+        "repeated_output_equal": true,
+        "runtime_versions": {
+          "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+          "cc": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+          "corepack": "0.36.0",
+          "curl": "curl 7.88.1 (x86_64-pc-linux-gnu) libcurl/7.88.1 OpenSSL/3.0.22 zlib/1.2.13 brotli/1.0.9 zstd/1.5.4 libidn2/2.3.3 libpsl/0.21.2 (+libidn2/2.3.3) libssh2/1.10.0 nghttp2/1.52.0 librtmp/2.3 OpenLDAP/2.5.13\nRelease-Date: 2023-02-20, security patched: 7.88.1-10+deb12u15\nProtocols: dict file ftp ftps gopher gophers http https imap imaps ldap ldaps mqtt pop3 pop3s rtmp rtsp scp sftp smb smbs smtp smtps telnet tftp\nFeatures: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM NTLM_WB PSL SPNEGO SSL threadsafe TLS-SRP UnixSockets zstd",
+          "libc": "glibc 2.36",
+          "node": "v24.22.0",
+          "npm": "11.19.1",
+          "pnpm": "11.21.0",
+          "python": "Python 3.11.2",
+          "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 22.1.6",
+          "rustup": "rustup 1.29.3 (edbc831ce 2026-11-02)\ninfo: This is the version for the rustup toolchain manager, not the rustc compiler.\ninfo: the currently active `rustc` version is `rustc 1.97.1 (8bab26f4f 2026-07-14)`"
+        },
+        "shipping_cli_sha256": "a088a8ed5d393563dc85d2a60a45f2090ba4965761d8e71a3fae4d181826bdf5",
+        "status": "passed",
+        "strict_node_tls": true,
+        "synthetic_ca_probe": {
+          "certificate_or_key_bytes_recorded": false,
+          "classification": "synthetic localhost CA-binding check; not a private proxy qualification",
+          "disposable_server_stopped": true,
+          "explicit_ca_accepted": {
+            "curl_cacert": true,
+            "node_extra_ca_certs": true
+          },
+          "system_trust_modified": false,
+          "unknown_ca_rejected": {
+            "curl": true,
+            "node": true
+          }
+        },
+        "uid": 1000,
+        "unrelated_source_preserved": true,
+        "writable_paths": {
+          ".": {
+            "owner_uid": 1000,
+            "writable": true
+          },
+          "CARGO_HOME": {
+            "owner_uid": 1000,
+            "path": "/opt/identity-dev/cargo",
+            "writable": true
+          },
+          "COREPACK_HOME": {
+            "owner_uid": 1000,
+            "path": "/opt/identity-dev/corepack-cache",
+            "writable": true
+          },
+          "IDENTITY_DEV_PREFIX": {
+            "owner_uid": 1000,
+            "path": "/opt/identity-dev",
+            "writable": true
+          },
+          "PLAYWRIGHT_BROWSERS_PATH": {
+            "owner_uid": 1000,
+            "path": "/opt/identity-dev/browsers",
+            "writable": true
+          },
+          "RUSTUP_HOME": {
+            "owner_uid": 1000,
+            "path": "/opt/identity-dev/rustup",
+            "writable": true
+          },
+          "XDG_CACHE_HOME": {
+            "owner_uid": 1000,
+            "path": "/opt/identity-dev/xdg-cache",
+            "writable": true
+          },
+          "npm_config_cache": {
+            "owner_uid": 1000,
+            "path": "/opt/identity-dev/npm-cache",
+            "writable": true
+          },
+          "pnpm-store": {
+            "owner_uid": 1000,
+            "writable": true
+          },
+          "renderer": {
+            "owner_uid": 1000,
+            "writable": true
+          },
+          "renderer/node_modules": {
+            "owner_uid": 1000,
+            "writable": true
+          },
+          "target": {
+            "owner_uid": 1000,
+            "writable": true
+          }
+        }
+      }
+    }
+  ],
+  "kind": "dated development-image qualification receipt",
+  "limits": [
+    "Only the pinned default and recorded derived non-root base are qualified on linux/amd64.",
+    "No browser/font/screenshot environment or all-entrypoint CI matrix is qualified.",
+    "No private proxy environment, credentials or certificate bytes are recorded.",
+    "No release, registry push, deployment or creative approval occurs."
+  ],
+  "network": {
+    "ca_secret_selected": true,
+    "proxy_variables": [
+      "HTTP_PROXY",
+      "HTTPS_PROXY",
+      "NO_PROXY",
+      "http_proxy",
+      "https_proxy",
+      "no_proxy"
+    ],
+    "runtime_ca_readonly_bind_selected": true,
+    "system_trust_modified": false
+  },
+  "observed_at": "2026-11-22T19:02:36.009863+00:00",
+  "pinned_base_identity": {
+    "architecture": "amd64",
+    "cmd": [
+      "node"
+    ],
+    "entrypoint": [
+      "docker-entrypoint.sh"
+    ],
+    "id": "sha256:03905f546fa8c284c377142124957871d1e8b9ddd0d69e869e233b9eeffd7790",
+    "os": "linux",
+    "repo_digests": [
+      "node@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0"
+    ],
+    "user": ""
+  },
+  "platform": "linux/amd64",
+  "registry_observation": {
+    "config_digest": "sha256:03905f546fa8c284c377142124957871d1e8b9ddd0d69e869e233b9eeffd7790",
+    "index_digest": "sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+    "path": "docs/evidence/identity-development-base-registry-2026-10-20.json",
+    "platform_manifest_digest": "sha256:7f7f17f773027e7f0475fa829fc0d793d75918fda85b9e517c9cc5aa46200406"
+  },
+  "source": {
+    "build_source_inventory": {
+      "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+      "files": 421,
+      "scope": "Critical files; all tracked non-Markdown files outside docs; all tracked fixture files including canonical Markdown. Includes assets/publication/profiles/defaults/packages where present. Documentation-only changes outside fixtures and the critical registry receipt are excluded.",
+      "sha256": "3eafe0eaf504e69944f2fb28f1868e59000255226af9d653dcda810a43216a40"
+    },
+    "critical_files_sha256": {
+      ".dockerignore": "af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",
+      ".github/workflows/development-image.yml": "9f32b34e61201151c08e5da32ce258a9b0ed3e4968f76c2a1b2a97ea074c043c",
+      "Cargo.lock": "7fdbc3cc28d1da2b1299fdcca6a2b5e8c055522261f0d84ff71e01233e830450",
+      "Cargo.toml": "ceeb25ebbf9848f19d296d67a695559c9ab5b002eb6fb472928826fccd07dd28",
+      "dev/Dockerfile": "f4837f3aef0ae0cafbca96b9ac2865c5e56024fb0ac8c9768bbaa23f8eed2197",
+      "dev/qualification/Dockerfile": "6dcbe0ffc89a356bb11ad2ed80817723e365d2c978fb85cb7af6c48d090ecf0c",
+      "dev/qualification/smoke.py": "440892d3558a970577fe1ec6f4f22b7416b9e963f06984c9a097724180fcf470",
+      "dev/qualification/source_inputs.py": "2d5b1db4b1c7eb88424ddcf1ef07e38f76e222026694018d54513e4422b2d68b",
+      "docs/evidence/identity-development-base-registry-2026-10-20.json": "2b2551f59fa92fdd8af1620e28fe31f621818577e946bb775c805497cab94add",
+      "renderer/package.json": "f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f",
+      "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+      "rust-toolchain.toml": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+      "scripts/dev-env.sh": "467cf8e34e706ffdba7ef0bfee638e9b1da8527330e7deba1b317f2a272e81f7",
+      "scripts/qualify_dev_image.py": "72aabe825c588a2a3406de57e380af900e2f5ba6e4df382f1470c325d563636c"
+    },
+    "git_revision": "8255c5b9ab0e669c2cde6002353515b5a8fc0511",
+    "git_worktree_clean": true
+  },
+  "status": "passed",
+  "storage_budget": {
+    "available_bytes": 8957652992,
+    "basis": "Conservative local operational reserve, not a sufficient-capacity guarantee.",
+    "driver": "overlay2",
+    "minimum_free_bytes": 8589934592,
+    "reason": "Reserve checked on the locally observable Docker data filesystem; concurrent jobs and VFS copies can require more.",
+    "status": "sufficient-reserve"
+  }
+}

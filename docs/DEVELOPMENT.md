@@ -40,9 +40,10 @@ this coverage; ordinary standalone setup still requires neither frontend.
 The 2026-11-14 [local acceptance](work/82/LOCAL_ACCEPTANCE.md) additionally runs
 two real setups through standalone/Make and a real Task browser dry run. These
 prove the local helper paths, not clean-base Docker or hosted/`act` CI acceptance.
-The existing development-image qualification owns the separate pinned/default
-and custom-base Docker smoke. Current-source execution of that scope remains
-#82's open gate for the later CI campaign.
+The development-image qualification owns the separate pinned/default and
+custom-base Docker smoke. The [2026-11-22 full image record](work/82/FULL_IMAGE_2026-11-22.md)
+now proves that scope on native Linux amd64, including actual repeated setup in
+both images. Browser/workflow and broader entrypoint CI retain their own scope.
 
 `task check`/`make check` run the helper's Rust/Python/renderer tests and builds;
 they do not replace the root workflow's release, documentation, mascot,
