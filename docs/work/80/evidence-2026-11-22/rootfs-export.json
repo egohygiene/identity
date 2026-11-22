@@ -1,0 +1,10 @@
+{
+  "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+  "platform": "linux/amd64",
+  "tool": "crane0.20.6",
+  "tool_sha256": "37bb5678107d75ef368793655ac8a6885d984733a1d5696150207ed3befd3ed3",
+  "operation": "flattened OCI export for local diagnostic; not official Docker profile qualification",
+  "members": 35733,
+  "declared_bytes": 2448817349,
+  "elapsed_seconds": 30.08
+}

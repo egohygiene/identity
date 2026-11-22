@@ -1,0 +1,23 @@
+{
+  "kind": "actual local act workflow attempt",
+  "source_revision": "57704aea75ee12074592ad0a6c9ad1ec692a9b9c",
+  "workflow": ".github/workflows/reference-renderer.yml",
+  "workflow_sha256": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+  "job": "validate",
+  "event": "workflow_dispatch",
+  "act_version": "0.2.97",
+  "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+  "runner_image": "ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+  "container_cpus": 2,
+  "container_memory_bytes": 3221225472,
+  "concurrent_jobs": 1,
+  "exit_code": 1,
+  "stage": "pinned action acquisition before workflow steps",
+  "failure": "GoGit cloning step-security/harden-runner at05e31511f85b41b11d1cf0ef85d0992719546e2c returned authentication required. No GitHub credential was passed. The pinned action tree remained readable through the connected GitHub REST tool.",
+  "secrets_passed": false,
+  "hosted_ci": false,
+  "browser_step_executed": false,
+  "artifact_step_executed": false,
+  "own_container_cleanup": "act --rm; no active containers after exit",
+  "log": "actual-act-attempt.log"
+}

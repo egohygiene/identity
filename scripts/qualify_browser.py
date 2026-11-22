@@ -16,6 +16,7 @@ import shutil
 import subprocess
 import sys
 from typing import BinaryIO
+from urllib.parse import urlsplit
 import uuid
 
 
@@ -83,7 +84,7 @@ def write_host_receipt(handle: BinaryIO, destination: Path, envelope: dict[str, 
     os.fsync(handle.fileno())
 
 
-def storage_preflight(info: dict[str, object], repository: Path, destination: Path) -> dict[str, object]:
+def storage_preflight(info: dict[str, object], endpoint: object, repository: Path, destination: Path) -> dict[str, object]:
     """Refuse known-small stores before downloading the pinned browser layers.
 
     VFS materializes cumulative image/build snapshots. The current 2.49-GB
@@ -96,6 +97,15 @@ def storage_preflight(info: dict[str, object], repository: Path, destination: Pa
     if not isinstance(driver, str) or not driver:
         raise RuntimeError("Docker did not report its storage driver")
     minimum = 16 * GIB if driver == "vfs" else 4 * GIB
+    try:
+        selected = urlsplit(endpoint) if isinstance(endpoint, str) else None
+    except ValueError:
+        selected = None
+    local = selected is not None and selected.scheme == "unix" and not selected.netloc and Path(selected.path).is_absolute() and not selected.query and not selected.fragment
+    if not local or not isinstance(data_root, str) or not Path(data_root).is_absolute():
+        return {"driver": driver, "minimumFreeBytes": minimum, "observations": [],
+                "endpointKind": "remote-or-unobservable", "status": "failed",
+                "budgetIsNotACapacityGuarantee": True}
     locations = [("repository", repository), ("evidence", destination)]
     if isinstance(data_root, str) and data_root:
         locations.append(("daemon-data-root", Path(data_root)))
@@ -109,7 +119,7 @@ def storage_preflight(info: dict[str, object], repository: Path, destination: Pa
             observations.append({"location": name, "status": "observed", "freeBytes": free})
     daemon_known = any(item["location"] == "daemon-data-root" and item["status"] == "observed" for item in observations)
     passed = daemon_known and all(item.get("freeBytes", -1) >= minimum for item in observations)
-    return {"driver": driver, "minimumFreeBytes": minimum, "observations": observations,
+    return {"driver": driver, "minimumFreeBytes": minimum, "observations": observations, "endpointKind": "local-unix",
             "status": "passed" if passed else "failed", "budgetIsNotACapacityGuarantee": True}
 
 
@@ -396,7 +406,14 @@ def main() -> int:
         storage = json.loads(run([
             "docker", "info", "--format", '{"driver":{{json .Driver}},"dataRoot":{{json .DockerRootDir}}}',
         ], capture=True, timeout=60))
-        envelope["storage_preflight"] = storage_preflight(storage, REPOSITORY, destination)
+        # Docker gives DOCKER_CONTEXT precedence over DOCKER_HOST. Otherwise an
+        # explicitly selected host takes precedence over the saved CLI context.
+        endpoint = None if os.environ.get("DOCKER_CONTEXT") else os.environ.get("DOCKER_HOST")
+        if not endpoint:
+            endpoint = json.loads(run([
+                "docker", "context", "inspect", "--format", "{{json .Endpoints.docker.Host}}",
+            ], capture=True, timeout=60))
+        envelope["storage_preflight"] = storage_preflight(storage, endpoint, REPOSITORY, destination)
         if envelope["storage_preflight"]["status"] != "passed":
             raise RuntimeError("Browser preparation storage is below its driver budget or cannot be observed; no image was pulled")
         run(["docker", "pull", "--platform", PLATFORM, profile["image"]], timeout=900)

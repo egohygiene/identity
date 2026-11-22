@@ -1,0 +1,17 @@
+time="2026-11-22T06:52:17Z" level=info msg="Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'"
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Set up job
+[Validate reference renderer/Validate static Brand Kit renderer] 🚀  Start image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270
+time="2026-11-22T06:52:17Z" level=info msg="Start server on http://127.0.0.1:35680"
+[Validate reference renderer/Validate static Brand Kit renderer]   🐳  docker pull image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 username= forcePull=false
+[Validate reference renderer/Validate static Brand Kit renderer]   🐳  docker create image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Validate reference renderer/Validate static Brand Kit renderer]   🐳  docker run image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Validate reference renderer/Validate static Brand Kit renderer]   🐳  docker exec cmd=[node --no-warnings -e console.log(process.execPath)] user= workdir=
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Set up job
+[Validate reference renderer/Validate static Brand Kit renderer]   ☁  git clone 'https://github.com/step-security/harden-runner' # ref=05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer] Unable to clone https://github.com/step-security/harden-runner refs/heads/05e31511f85b41b11d1cf0ef85d0992719546e2c: authentication required: Invalid username or token. Password authentication is not supported for Git operations.
+[Validate reference renderer/Validate static Brand Kit renderer] authentication required: Invalid username or token. Password authentication is not supported for Git operations.
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Complete job
+[Validate reference renderer/Validate static Brand Kit renderer] Cleaning up container for job Validate static Brand Kit renderer
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Complete job
+[Validate reference renderer/Validate static Brand Kit renderer] 🏁  Job failed
+Error: authentication required: Invalid username or token. Password authentication is not supported for Git operations.

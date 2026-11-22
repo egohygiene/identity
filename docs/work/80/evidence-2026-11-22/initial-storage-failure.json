@@ -1,0 +1,14 @@
+{
+  "kind": "failure observation reconstructed from an actual private qualifier log",
+  "source_revision": "5cb5b91d5fa848650e46cae0f0490e6323bc836a",
+  "wrapper_exit_code": 120,
+  "phase": "Docker build preparation, before its first RUN",
+  "failure": "no space left on device while preparing BuildKit base snapshot",
+  "driver": "vfs",
+  "pinned_base_pull_completed": true,
+  "valid_host_receipt_retained": false,
+  "host_receipt_limitation": "The original write_text path left a zero-byte host receipt when the shared filesystem filled; raw process log is retained privately. This record is an observation of failure, not a successful qualification receipt.",
+  "private_raw_log_sha256": "a54c6066b925577ee327100470cfbe7cf24e3fe5c1dd3f739b3bcc49e31c008f",
+  "concurrency_limit": "Other authorized source checks were also writing to the shared filesystem; no isolated capacity threshold is claimed.",
+  "cleanup": "Removed only this attempt\u2019s pulled Playwright image and exact newly created BuildKit cache IDs. Shared act image and older cache were preserved."
+}

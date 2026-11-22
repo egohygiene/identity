@@ -1,0 +1,97 @@
+{
+  "files": {
+    "actual-act-attempt.json": {
+      "bytes": 1195,
+      "sha256": "2e843fd6c2d14736545a1fe67288414829ee57fcb667831559a34ab11cc8ccdb"
+    },
+    "actual-act-attempt.log": {
+      "bytes": 2688,
+      "sha256": "ad81b7a8de71baba044c71f8c90d6153770a6786ce7376c3a81b0dd270c1cbaa"
+    },
+    "derived-runtime/browser-fJyMDf/negative/artifacts/.last-run.json": {
+      "bytes": 96,
+      "sha256": "f1e1860b159e970da86c936a625e84e254ea2147d8f2b8410572804abe955271"
+    },
+    "derived-runtime/browser-fJyMDf/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png": {
+      "bytes": 130680,
+      "sha256": "f6a4e295255e8135e8b63d9b74e852a545e6fa22850bacd35a477ae2e9c2e7f3"
+    },
+    "derived-runtime/browser-fJyMDf/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png": {
+      "bytes": 68619,
+      "sha256": "a20785f5cd908a88cd4b972ea89ce6cfdab10a78d2c60d331df9e280ad690aa7"
+    },
+    "derived-runtime/browser-fJyMDf/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png": {
+      "bytes": 149285,
+      "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+    },
+    "derived-runtime/browser-fJyMDf/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md": {
+      "bytes": 24465,
+      "sha256": "32155aafff80fcce8cce63fae30373c4b93264fd4fa6f8f998e3da1098d4fe57"
+    },
+    "derived-runtime/browser-fJyMDf/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip": {
+      "bytes": 500536,
+      "sha256": "c8e4c2385803134d2914ff5378a9036daab1abb8705af8208c14cea2ced5ef44"
+    },
+    "derived-runtime/browser-fJyMDf/negative/command.log": {
+      "bytes": 3314,
+      "sha256": "0b93cd37d3744ec2f9b0af352bab0468a1f3605c01a248c44f805b9bf6c955fb"
+    },
+    "derived-runtime/browser-fJyMDf/negative/report.json": {
+      "bytes": 10225,
+      "sha256": "8e3d55b8d8fbe5971c1a58bcc1ae2eb7a56d1e1359ede7dce1e1cc187fc3ddba"
+    },
+    "derived-runtime/browser-fJyMDf/positive/artifacts/.last-run.json": {
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    "derived-runtime/browser-fJyMDf/positive/command.log": {
+      "bytes": 129,
+      "sha256": "11e8b1b0032f49a600c41ac8a6b1e0b95fe536c4bca5dd84909da6cad976b7d4"
+    },
+    "derived-runtime/browser-fJyMDf/positive/report.json": {
+      "bytes": 12164,
+      "sha256": "ffcd6bba6a76d6cb989771e4c305e222a4b2d43a5d311acd44cafe284b7870cd"
+    },
+    "derived-runtime/browser-fJyMDf/preview.log": {
+      "bytes": 77,
+      "sha256": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88"
+    },
+    "derived-runtime/browser-fJyMDf/restored/artifacts/.last-run.json": {
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    "derived-runtime/browser-fJyMDf/restored/command.log": {
+      "bytes": 111,
+      "sha256": "55f5761fe80728bf9f14f46b94a3ec3e91b45448a4c34dc01ad63b37cc064258"
+    },
+    "derived-runtime/browser-fJyMDf/restored/report.json": {
+      "bytes": 3157,
+      "sha256": "efd9804900e39549a58dc695076a9362643118ab1072d12038f2c359ea494e5d"
+    },
+    "derived-runtime/qualification.json": {
+      "bytes": 38569,
+      "sha256": "3092dca37881b04760fd014fbb117d51bb3345f1f72b77735ca48e6a74670181"
+    },
+    "derived-runtime-diagnostic.json": {
+      "bytes": 45766,
+      "sha256": "eaab976968f4f8e52dd55021f998d1fe0984cf006e9a5ac40927825a292965d6"
+    },
+    "initial-storage-failure.json": {
+      "bytes": 1070,
+      "sha256": "f6ff24f4b9eba1b231b5bff06bbb72d6208bc2633a6c673ee3146af6f02e0d63"
+    },
+    "registry-verification.json": {
+      "bytes": 896,
+      "sha256": "194096ae8e9d1506c56a342a75f2fa70b94d93d2e92553c820daca5457bd04bc"
+    },
+    "rootfs-export.json": {
+      "bytes": 454,
+      "sha256": "14b163508f77c6be397d1ec20aa5bbb1d0779eea8ce5e741b9af0996dfcfef02"
+    },
+    "storage-preflight.json": {
+      "bytes": 8711,
+      "sha256": "888b403bb715596ca3969f3598c57e1f14c74abc59e796fc177a1bad4f6bc8d7"
+    }
+  },
+  "self_excluded": true
+}
