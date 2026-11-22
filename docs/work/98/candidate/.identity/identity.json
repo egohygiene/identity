@@ -5,7 +5,7 @@
     "id": "identity",
     "displayName": "identity",
     "repository": "https://github.com/egohygiene/identity",
-    "tagline": "brand kit generator",
+    "tagline": "project identity specification",
     "kind": "product"
   },
   "layers": [],
