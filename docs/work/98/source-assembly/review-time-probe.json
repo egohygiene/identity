@@ -1,0 +1,26 @@
+{
+  "recordKind": "bounded synthetic fixture probe; not real approval/source acceptance",
+  "implementationRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "observedAt": "2026-11-22T18:22:10.509459+00:00",
+  "fixture": "tests/fixtures/v1/valid/minimal/.identity/",
+  "construction": "Copy to a fresh temporary consumer; set all 14 fictional decisions[].reviewedAt to 2026-11-22; preserve all other bytes/subjects. Remove the disposable tree afterward.",
+  "changedDecisionCount": 14,
+  "command": [
+    "python3",
+    "scripts/validate_identity.py",
+    "--repository-root",
+    "TEMP_CONSUMER",
+    "--format",
+    "json"
+  ],
+  "observed": {
+    "exitCode": 0,
+    "valid": true,
+    "diagnostics": []
+  },
+  "contractExpectation": "Reject date-only reviewedAt as IDN1404; explicit time+UTCoffset required.",
+  "formatChecker": "No date-time checker registered; schemaformat validation unavailable, not passed.",
+  "actualIdentityApprovalCreated": false,
+  "runtimeChanged": false,
+  "nextOwner": "Existing Identity #70 parser quality checkpoint"
+}

@@ -1,0 +1,99 @@
+{
+  "recordKind": "review-only assembly inventory; no self-hash or approval assertion",
+  "sourceRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "files": {
+    "ASSEMBLY.proposed.json": {
+      "bytes": 871,
+      "sha256": "82ed5d080792e0b21c8279eaec8877e15b8b51be03202ec220a0717de2889efb"
+    },
+    "DESCRIPTORS.proposed.json": {
+      "bytes": 5671,
+      "sha256": "2d5730555e2fa83093456724f30a0a9f97fa9a8a73154cb798933dd67539acf5"
+    },
+    "OUTPUTS.proposed.json": {
+      "bytes": 1892,
+      "sha256": "b615c0bc353c84b650bc0c274e6f10387860bf0fdfcc5cc5856b461c96f47835"
+    },
+    "README.md": {
+      "bytes": 5231,
+      "sha256": "f01e4fe177f1be037cb934490c20a55488f90ce7848c03ec2ef35fa9d3cadbb9"
+    },
+    "REVIEW_TIME_FINDING.md": {
+      "bytes": 1822,
+      "sha256": "4e27e40a13e11420b548191644eb7f5871c80bb2c253f81e8f34cf5ebdc5f9fb"
+    },
+    "assembly-validation.json": {
+      "bytes": 5151,
+      "sha256": "9286da1e4e660aadb863f766c6ec8a51f86ef851c02dcf281c2ccca22728749a"
+    },
+    "candidate/.identity/brief.md": {
+      "bytes": 1525,
+      "sha256": "0f869ff9410c8fd837da26d103dcf3504c40eee75c70aaa8efe3f56e4314c899"
+    },
+    "candidate/.identity/candidates/masters/emblem.svg": {
+      "bytes": 2387,
+      "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c"
+    },
+    "candidate/.identity/candidates/masters/lockup-horizontal.svg": {
+      "bytes": 2531,
+      "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed"
+    },
+    "candidate/.identity/defaults/organization-empty.tokens.json": {
+      "bytes": 626,
+      "sha256": "6b74d2954b0027185196dfa6641f1ae59bda593d0dd0d41d436b615f5d4dc9d1"
+    },
+    "candidate/.identity/governance/approvals.json": {
+      "bytes": 1892,
+      "sha256": "bfe088570b7cd4b7178f3885bfa17f1c6a38bedfda1a55cb0033525e31ff91ca"
+    },
+    "candidate/.identity/governance/provenance.json": {
+      "bytes": 3709,
+      "sha256": "ab8dc92308ab95249f52180fc3450a084f9c74463a2dde091cdad238918bd7c1"
+    },
+    "candidate/.identity/identity.json": {
+      "bytes": 1389,
+      "sha256": "ef90141ef81934a4bcadc5d8d383dd91740cc75a75e3f1c51ec410fb298106bc"
+    },
+    "candidate/.identity/overrides/identity-local-product.tokens.json": {
+      "bytes": 2431,
+      "sha256": "7146ea326b4278cd35d5a6bc85db766d5144aed584f5087a3d1a2fd359cdf851"
+    },
+    "candidate/.identity/references/README.md": {
+      "bytes": 125,
+      "sha256": "ce0c6386c87a49e7a81f2e9ad016dffa275b15aa117f7b089b06f29ead20a9a0"
+    },
+    "candidate/.identity/sources/README.md": {
+      "bytes": 230,
+      "sha256": "cc248acb9aecd754c978ee579273dd3af983266242990bde6ed05ef0e9084fc5"
+    },
+    "candidate/.identity/sources/emblem.svg": {
+      "bytes": 2387,
+      "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c"
+    },
+    "candidate/.identity/sources/lockup-horizontal.svg": {
+      "bytes": 2531,
+      "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed"
+    },
+    "candidate/.identity/targets/profiles.json": {
+      "bytes": 346,
+      "sha256": "6facc3f9d5d4bdea9909aeb4cec5ceeec3130b710090da00fb1088c0078257dd"
+    },
+    "candidate/README.md": {
+      "bytes": 1210,
+      "sha256": "62535c08c0e89c4e5e6854e7fc54794676065e629c19c45f8b48d69e69ba295d"
+    },
+    "proposal-verification.json": {
+      "bytes": 1855,
+      "sha256": "298660344bc376878078ed31c8d74e3f91eaf742da0447a5fa74a1a2fbdf0053"
+    },
+    "review-time-probe.json": {
+      "bytes": 1059,
+      "sha256": "1f883167eac13696657cb44dce528c1da8fcaa00c9fb04653d48587ebd233e15"
+    },
+    "usage.proposed.json": {
+      "bytes": 6194,
+      "sha256": "88cf9143d141b4a2ac3d868f2cce7c718e7223a1e14ad296de8a5fbd04e92c21"
+    }
+  },
+  "selfExcluded": "SHA256-MANIFEST.json"
+}

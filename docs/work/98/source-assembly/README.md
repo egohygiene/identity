@@ -55,12 +55,30 @@ explicit new packet review can supply its actual review timestamp and approve
 these new descriptors or usage selection. A merge or the command to continue
 engineering work does not select them.
 
-The next proposed candidate will place these files in the existing v1 topology
-without altering root `.identity/`, the earlier active incomplete candidate,
-the original masters, runtime/schema contracts or ADR dispositions. Validation
-will retain exact missing-review diagnostics rather than fill a fabricated
-timestamp. Source validity, generation, selected-output verification and real
-publisher acceptance remain separate checks under #98.
+The separate [assembled candidate](candidate/README.md) now places these files
+in the existing v1 topology without altering root `.identity/`, the earlier
+active incomplete candidate, original masters, runtime/schema contracts or ADR
+dispositions. Its exact structural option is still **unselected**, and native
+governance retains null timestamps. The matching authoritative validator
+returns exactly two `IDN1404` findings at those `reviewedAt` fields. That narrows
+the mechanical gaps; it does not select the pending layers, descriptors or
+outputs on the owner's behalf.
+
+The pinned local native test executable rejects both generation and read-only
+verification before producing output, with the same missing-review diagnostics.
+All 14 candidate files and the original active candidate remain unchanged.
+[assembly-validation.json](assembly-validation.json) binds the actual commands,
+local build/input identity, refusal results and candidate hashes. It is not a
+successful source, release, downloaded-install or publisher receipt. No new
+synthetic approval was inserted to force a successful producer run.
+
+The proposal schema checks cover closed structure and known values. The local
+Python JSON Schema installation has no registered `date-time` checker, so those
+checks do not independently validate timestamp formats. A separate controlled
+fixture probe exposed the existing approval parser accepting a bare date;
+[the bounded finding](REVIEW_TIME_FINDING.md) records that issue for #70 rather
+than using it to bypass the pending source review. Source validity, generation,
+selected-output verification and real publisher acceptance remain separate.
 
 Decision impact: reference ADR-0001/0004/0012 and proposed ADR-0035. These are
 concrete review inputs under existing contracts, with no new runtime or policy
