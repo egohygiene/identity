@@ -83,6 +83,16 @@ actual run, upstream hardening may report self-hosted or unsupported behavior;
 retain that exact result rather than label it GitHub-hosted protection. Do not
 disable or rewrite a security step merely to produce a green result.
 
+Managed proxy networks may also need an explicit local environment file for
+act to pass proxy settings to action processes. Keep that file outside the
+checkout, restrict its permissions, and never retain its values in evidence.
+Node 24's supported `NODE_USE_ENV_PROXY=1` opt-in can be needed by Corepack's
+fetches. Set `IDENTITY_BROWSER_PROXY_CA` to a public CA bundle when the browser
+build needs additional trust: the original workflow then uses the qualifier's
+existing BuildKit secret transport without changing its command or disabling
+TLS checks. These are local caller settings, not alternate browser/profile or
+hosted-runner acceptance.
+
 ## Docker and evidence remain separate
 
 The original browser command still requires its pinned image, registry/font

@@ -37,7 +37,12 @@ That reservation does not guarantee recovery from every storage/I/O failure.
 
 The build forwards existing proxy-variable names without recording their
 values. On managed networks needing an additional certificate bundle, use
-`--proxy-ca /path/to/ca-bundle.pem`. BuildKit mounts this file only during the
+`--proxy-ca /path/to/ca-bundle.pem`, or set `IDENTITY_BROWSER_PROXY_CA` for a
+caller such as the unchanged local workflow. An explicit CLI path takes
+precedence; an unset or empty variable leaves the ordinary behavior unchanged.
+Missing paths and directories fail before image acquisition. Both forms use
+the same regular-file validation and build-only secret transport.
+BuildKit mounts this file only during the
 font/package installation steps; it is not copied into the image or output
 receipt. TLS verification and the exact font/package checksums remain enabled.
 The browser runtime still has no external network.

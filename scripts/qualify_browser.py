@@ -323,7 +323,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-directory", type=Path, required=True, help="New or empty evidence directory outside the checkout")
     parser.add_argument("--mode", choices=("local", "ci"), default="local", help="Invocation label only; both modes use the same fixed environment")
-    parser.add_argument("--proxy-ca", type=Path, help="Optional build-only CA bundle mounted as a BuildKit secret; never copied into the image")
+    parser.add_argument("--proxy-ca", type=Path, default=os.environ.get("IDENTITY_BROWSER_PROXY_CA") or None,
+                        help="Optional build-only CA bundle (defaults to IDENTITY_BROWSER_PROXY_CA); mounted as a BuildKit secret, never copied into the image")
     args = parser.parse_args()
     try:
         proxy_ca = args.proxy_ca.resolve(strict=True) if args.proxy_ca else None

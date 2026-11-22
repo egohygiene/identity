@@ -72,6 +72,77 @@ def output(receipt, directory):
 
 
 class BrowserQualificationBoundaryTests(unittest.TestCase):
+    def test_proxy_ca_environment_and_cli_precedence_reach_the_same_secret_boundary(self):
+        # Stop at the actual build argument boundary, before a build/browser can
+        # run. A selected bundle must use the existing secret transport and its
+        # private path must not leak into the public receipt or printed output.
+        registry = json.loads((QUALIFY.REPOSITORY / "docs/evidence/identity-browser-registry-2026-10-20.json").read_text())
+        config = registry["image_config"]
+        image = {"Id": registry["config_digest"], "Os": "linux", "Architecture": "amd64",
+                 "RepoDigests": [registry["image"]], "Config": {"User": config["user"], "Entrypoint": config["entrypoint"], "Cmd": config["cmd"]}}
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            inherited, explicit = root / "inherited.pem", root / "explicit.pem"
+            inherited.write_text("synthetic CA input; no TLS is performed\n")
+            explicit.write_text("different synthetic CA input\n")
+            for label, environment_value, cli, selected in (
+                ("unset", None, [], None), ("empty", "", [], None),
+                ("environment", str(inherited), [], inherited),
+                ("cli-overrides-environment", str(root / "missing.pem"), ["--proxy-ca", str(explicit)], explicit),
+            ):
+                calls = []
+
+                def stop_at_build(arguments, **options):
+                    calls.append(arguments)
+                    if arguments[1] == "version":
+                        value = json.dumps({"Os": "linux", "Arch": "amd64"})
+                    elif arguments[1] == "info":
+                        value = json.dumps({"driver": "overlay2", "dataRoot": str(root)})
+                    elif arguments[1:3] == ["image", "inspect"]:
+                        value = json.dumps([image])
+                    elif arguments[1] == "build":
+                        return subprocess.CompletedProcess(arguments, 23, stdout="Synthetic stop before image build\n")
+                    else:
+                        value = ""
+                    return subprocess.CompletedProcess(arguments, 0, stdout=value)
+
+                environment = {"DOCKER_CONTEXT": "", "DOCKER_HOST": "unix:///synthetic/docker.sock"}
+                if environment_value is not None:
+                    environment["IDENTITY_BROWSER_PROXY_CA"] = environment_value
+                destination = root / label
+                printed = io.StringIO()
+                with self.subTest(label=label), patch.dict(os.environ, environment, clear=True), \
+                     patch.object(QUALIFY.sys, "argv", ["qualify_browser.py", "--output-directory", str(destination), *cli]), \
+                     patch.object(QUALIFY, "source_evidence", return_value={"scope": "synthetic negative boundary"}), \
+                     patch.object(QUALIFY.subprocess, "run", side_effect=stop_at_build), \
+                     patch.object(QUALIFY.shutil, "disk_usage", return_value=SimpleNamespace(free=20 * QUALIFY.GIB)), \
+                     redirect_stdout(printed), redirect_stderr(printed):
+                    self.assertEqual(QUALIFY.main(), 1)
+                build = next(call for call in calls if call[1] == "build")
+                self.assertEqual([item for item in build if item.startswith("id=identity_proxy_ca,")],
+                                 [f"id=identity_proxy_ca,src={selected}"] if selected else [])
+                record = json.loads((destination / "host-qualification.json").read_text())
+                self.assertEqual(record["build_network"]["ca_secret_selected"], selected is not None)
+                self.assertNotIn("qualification", record)
+                for private in (str(inherited), str(explicit), str(root / "missing.pem")):
+                    self.assertNotIn(private, printed.getvalue())
+                    self.assertNotIn(private, json.dumps(record))
+
+    def test_missing_or_non_file_environment_ca_stops_before_output_or_docker(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for label, value in (("missing", root / "missing.pem"), ("directory", root)):
+                destination = root / (label + "-evidence")
+                with self.subTest(label=label), patch.dict(os.environ, {"IDENTITY_BROWSER_PROXY_CA": str(value)}, clear=True), \
+                     patch.object(QUALIFY.sys, "argv", ["qualify_browser.py", "--output-directory", str(destination)]), \
+                     patch.object(QUALIFY.subprocess, "run") as execute, \
+                     redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                    with self.assertRaises(SystemExit) as error:
+                        QUALIFY.main()
+                    self.assertEqual(error.exception.code, 2)
+                    execute.assert_not_called()
+                self.assertFalse(destination.exists())
+
     def test_vfs_disk_preflight_refuses_the_reproduced_small_store(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
