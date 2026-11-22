@@ -11,7 +11,7 @@ Those answers do not select a release or deployment.
 [November 22 owner answers](OWNER_ANSWERS_2026-11-22.md) select the existing
 emblem/horizontal masters and report ChatGPT-assisted origin. The owner selected
 the scoped logo-use policy/credit, name/new tagline/short copy, existing palette
-and Inter, optional Kern, and local-baseline preparation for review. Exact
+and Inter, optional Kern, and local-baseline preparation for review.
 Reviewer `szmyty` and full copy/voice/principles are confirmed. Exact governance
 entries and review of the prepared local baseline bytes remain pending.
 The same checkpoint verifies avatar transparency and repairs the glitched
@@ -56,6 +56,13 @@ Proposed version: **v1.1.0**, subject to compatibility/qualification review.
 No tag or package-version bump is made here. The exact release commit is
 **not selected**; full current-source quality and real-source gates remain.
 
+The requested broad Rust CLI delivery is captured in the proposed
+[next-release compatibility matrix](../../releases/NEXT_RELEASE_MATRIX.md).
+It stages native macOS/Linux/Windows archives, conditional ARM64/musl expansion,
+native package channels and verification of actual downloaded bytes. The
+published `v1.0.0` tag/assets remain immutable; Cargo still intentionally has
+`publish = false`. No new target, channel or package is qualified by this plan.
+
 | Artifact/evidence | Current disposition |
 | --- | --- |
 | Source/rights inventory and manually prepared v1 candidate | Reviewable files remain incomplete and are not canonical root source; the questionnaire collects missing owner facts |
@@ -63,6 +70,8 @@ No tag or package-version bump is made here. The exact release commit is
 | Generated self Brand Kit, publication ZIP/manifest/checksums | Unrun; no candidate output or hashes fabricated |
 | Release binary/archive, SPDX SBOM, dependency license inventory, attestation | Unbuilt/unrun for the proposed release |
 | Complete qualification matrix and exact qualified revision | Scoped local results exist; full audit, act and native-platform matrix remain pending. No release-qualified revision exists. |
+| Broad binary/channel compatibility matrix | Proposed next-release cohorts and evidence requirements are documented; builds, native installs, channel publication and support promotion are unrun. |
+| Companion agent skill | Aether-owned authoring workflow/specification is separate from Identity's Rust binary and runtime. Pin its actual release/implementation when available; no skill publication or tool installation is inferred. |
 | Live canonical Brand Kit | 2026-11-14 site.json still selects v1.0.0 at aaad8839104704cf57bfa846539b3b875421e03d. This is a manifest observation, not new publication or full live-byte proof. |
 | Rollback artifact and exercised restore | Existing historical receipts are preserved; new capture/rehearsal remains unrun |
 
@@ -130,12 +139,21 @@ before any other-repository write.
    investigation. Missing required reviews/platform/CI evidence remains a gate.
 3. Prepare the exact merged release revision, immutable artifact checksums,
    SBOM/license inventory/provenance, native/publication handoff and recoverable
-   prior site/composite. Update this single packet with actual evidence.
+   prior site/composite. Execute the selected target/channel gates in the
+   next-release matrix, recording ABI/runtime minima, actual downloaded install,
+   upgrade/uninstall/rollback and integrity/authenticity results. Update this
+   single packet with actual evidence; do not promote build-only or blocked rows.
 4. Request explicit approval for the named release/tag/commit, Pages deployment
    and rollback exercise, organization-owner action, and any Mantle write.
    No paid service or runner is selected; expenditure requires separate approval.
 5. Close #98 only after actual self-dogfood, release/live/rollback and consumer
    upgrade/drift/rollback proof. Reconcile #116 last after a fresh open-issue query.
+
+The maintainer's intent to finish issues before broad release means finish the
+implementation and engineering gates first. #98/#116 include release evidence
+and stay open until it is complete; all issues need not close before the release
+work that completes them. The existing v1 guide and past release/source
+receipts are not relabeled as evidence for the new matrix.
 
 IDN-Q06 remains planned, unissued future scope under #83. Foundations overlap
 does not establish a dedicated quest-line token profile. No new issue, component
