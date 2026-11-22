@@ -1,0 +1,23 @@
+{
+  "after_inheriting_child_exits": {
+    "errno": null,
+    "exit_code": 0
+  },
+  "after_isolated_writer_exits_with_unrelated_child_still_live": {
+    "errno": null,
+    "exit_code": 0
+  },
+  "copied_bytes_unchanged": true,
+  "parent_writer_inherited_by_live_child": {
+    "errno": 26,
+    "exit_code": null
+  },
+  "platform": "linux",
+  "schema": "identity.executable-copy-mechanism-probe/v1",
+  "scope": "Controlled mechanism evidence; not historical CI causality or Identity product qualification.",
+  "system_executable_sha256": "b381cc8c55ec524b9fa92897f0882e855357468b4a763519cec47e05994d61ff",
+  "while_isolated_writer_is_live": {
+    "errno": 26,
+    "exit_code": null
+  }
+}
