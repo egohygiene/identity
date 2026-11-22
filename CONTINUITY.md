@@ -7,24 +7,23 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T18:31:06.092872+00:00'
+  updated_at: '2026-11-22T18:44:56.584461+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Enforce the existing approval review-time date-time contract in the offline validator and embedded
-    native preflight.
+  purpose: Record the task-owned isolated Docker backend and observed capability/transport repair for
+    original Identity
   includes:
-  - Require actual strings and complete RFC3339 date/time grammar with explicit offset before calendar
-    validation.
-  - Preserve source bytes, IDN1404 and existing entrypoints; regenerate the offline standalone bundle.
-  - Retain actual before/after fictional-fixture probes and Python/native no-mutation regression evidence.
+  - Actual overlay2 engine, measured shared tmpfs capacity, bounded helper resources and source-bound
+    observations.
+  - Runnable scoped procedure and specific repaired runc/network/proxy failures without credentials.
   excludes:
-  - No inferred human review times, new approval policy, root-source adoption or creative/ADR lifecycle
-    promotion.
-  - Other timestamp fields, lifecycle date semantics, hosted workflows, new platform qualification and
-    publication remain separate.
+  - Shared-daemon configuration changes, global pruning, raw host devices, unrelated user files and private
+    credentials.
+  - Profile/pin/guard changes, inferred full product acceptance, hosted CI, new approval, source adoption
+    or release.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -33,93 +32,85 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - contracts/v1/approvals.schema.json
-  - scripts/identity_validation/governance.py
-  - scripts/validate_identity.py
-  - docs/work/70/review-time-20261122/VALIDATION.md
-  - docs/work/70/review-time-20261122/before-after.json
-  - docs/work/98/self-source-review/README.md
+  - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
+  - docs/work/80/ISOLATED_DOCKER_2026-11-22.md
+  - docs/work/80/evidence-2026-11-22/isolated-docker-runtime.json
+  - https://github.com/egohygiene/identity/issues/80
+  - https://github.com/egohygiene/identity/issues/82
 work:
-  objective: Enforce the existing approval review-time date-time contract in the offline validator and
-    embedded native preflight.
+  objective: Record the task-owned isolated Docker backend and observed capability/transport repair for
+    original Identity
   success_conditions:
-  - Reject date-only, naive/basic/week-date, numeric/coerced and malformed-offset approval values.
-  - Accept declared lowercase UTC, arbitrary fractional precision and valid calendar/offset forms without
-    changing source bytes.
-  - Prove authoritative standalone and actual native CLI/library rejection before mutation; keep historical
-    and human evidence limits explicit.
+  - Preserve unchanged original profiles, immutable image pins and actual storage gates.
+  - Establish real isolated Docker image/run/build capabilities and repair namespace-specific transport
+    with TLS enabled.
+  - Keep runtime probes distinct from browser/dev source-bound qualification and human or hosted acceptance.
   active_issue:
     provider: github
-    id: egohygiene/identity#70
-    url: https://github.com/egohygiene/identity/issues/70
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: qualify-original-browser-and-clean-image-paths
-    description: Continue the separate browser/action acquisition and full clean-image qualification checkpoints,
-      then review the exact self-source choices. Keep all new changes in draft PRs for review.
+    id: original-profile-workflow-then-dev
+    description: Browser owner replays original workflow locally, then clean only owned nested images/cache
+      and run full dev default/nonroot setup-twice qualification. Preserve actual receipt outcomes.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/80
     - https://github.com/egohygiene/identity/issues/82
-    - https://github.com/egohygiene/identity/issues/98
     depends_on: []
 state:
   base:
-    revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
-    ref: refs/heads/main
-    verified_at: '2026-11-22T18:31:06.092872+00:00'
+    revision: edca416d58d15b06ccc05029b0803bc27e65fe18
+    ref: refs/heads/codex/70-rfc3339-review-times-20261122
+    verified_at: '2026-11-22T18:44:56.584461+00:00'
   candidate:
-    branch: codex/70-rfc3339-review-times-20261122
+    branch: codex/80-qualified-browser-stack-20261122
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
+    observed_at: '2026-11-22T18:44:56.584461+00:00'
     default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
     issue_state: open
     pull_request_state: not-applicable
-    notes: Current main verified; earlier158 through162 and Aether140 are merged. Six Identity issues
-      remain open. This source-repair PR does not yet exist; new browser/dev/source checkpoints are separate
-      in-progress branches.
+    notes: Main remains 75ca39f; six Identity finish issues remain open. Earlier158 through162 and Aether140
+      are merged. Parent drafts 163 are open; this next child PR does not yet exist. No new sprint PR
+      is merged or published.
   parallel_changes:
   - provider: github
-    id: egohygiene/aether#141
-    url: https://github.com/egohygiene/aether/pull/141
+    id: egohygiene/identity#163
+    url: https://github.com/egohygiene/identity/pull/163
+  - provider: github
+    id: egohygiene/aether#142
+    url: https://github.com/egohygiene/aether/pull/142
 review:
   status: partial
-  reviewed_at: '2026-11-22T18:31:06.092872+00:00'
+  reviewed_at: '2026-11-22T18:43:27.562510+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Full generated standalone-validator fixture suite and actual before/after isolated script
-      probes
+  - command: Own Docker 28.4 overlay2 generated-image import/run/cgroup/BuildKit capability probes
     outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: 16methods,18invalid/7valid timestamp subcases and7actual before/after synthetic-fixture probes.
-      Corrects old date-only/numeric/naive admission and lowercase-UTC refusal; no source rewrites.
-  - command: Full Python discovery with IDENTITY_REQUIRE_FRONTENDS=1
+    observed_at: '2026-11-22T18:43:27.562510+00:00'
+    notes: Tiny controlled workload only; UID 1234 ownership and UID 0/1000 execution preserved. Not product-profile
+      acceptance.
+  - command: Namespace-correct proxy normalization then Docker exact digest manifest inspect
     outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: 212discovered:210passed/two existing optionalexperience/nativeWindows skips. Actual Make and
-      checksum-pinnedTask available.
-  - command: cargo fmt; strict all-target/all-feature Clippy; locked offline cargo test
+    observed_at: '2026-11-22T18:43:27.562510+00:00'
+    notes: Pinned Playwright and Node metadata retrieved with TLS enabled. Initial actual MCR pull timeout
+      and combined Node tag/digest manifest CLI failure remain recorded.
+  - command: Client/daemon actual data-root measurements and scoped helper inspect
     outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: 119native tests pass/four explicithelper ignores. Actual CLI/library date-only/naive preflight
-      negatives preserve source,sentinel,output andcache boundaries.
-  - command: Standalone drift, extraction provenance, docs, whitespace and independent contract review
-    outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: Checks pass; no blocking review finding. No schema/diagnostic-code or platform/release change.
-      See exact source-bound work record.
+    observed_at: '2026-11-22T18:43:27.562510+00:00'
+    notes: Same device/inode, shared 9.44 GB tmpfs;12 GiB helper and narrower parent cgroup budget recorded.
+      Source/evidence/data are one pool.
   environment_limitations:
-  - Only approval reviewedAt is repaired; other explicit date-time fields need separate bounded checks.
-  - Existing calendar parser leap-second limitation is retained; timestamp syntax does not prove a human
-    event.
-  - Actual source choices and timestamps remain pending owner review; no root adoption or generated self-kit
-    acceptance.
-  - Original Docker/native-platform/consumer/release gates remain; no hosted workflow or publication performed.
-  - No official released EgoLint continuity conformance; pinned schema/headings/budget checks are structural.
+  - Original direct browser pass is owned by its clean 9d11d99 receipt; local workflow replay and full
+    dev run are separate active work.
+  - Runtime capability and metadata evidence supply no hosted/native/human acceptance or full WCAG claim.
+  - Browser first, dev second; original non-VFS reserves remain unchanged and actual capacity is measured
+    before each run.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -138,48 +129,48 @@ privacy:
 
 ## Purpose and precedence
 
-Runtime/user and scoped instructions, live evidence and canonical source outrank this operational snapshot. This is a draft implementation repair of an existing validity requirement.
+This scoped handoff records an actual isolated Docker runtime, subordinate to user instructions, repository contracts and live trackers. It does not adopt source or approve product outputs.
 
 ## Resume protocol
 
-Read AGENTS, the approval schema and source-bound work record. Verify main and current draft PRs before acting. Earlier Identity158→162 and Aether140 are merged; preserve historical receipts and unrelated checkouts.
+Read AGENTS and the runtime note/receipt. Recheck live main/issues and coordinate the single heavy-image slot. Local origin/main is 75ca39f. Existing owner choices, tokens, rights and native-record gaps from work98 remain unchanged.
 
 ## Current objective and success conditions
 
-Enforce the existing approval review-time date-time contract in the offline validator and embedded native preflight.
+Use real overlay2 capacity for original browser/dev qualification while retaining profile, image pins, storage guards, TLS and exact source binding. Keep engine probes separate from product acceptance.
 
 ## State snapshot
 
-Base/main is75ca39f3fc7e5e9e0b5578af58c966cd2590a652. Candidate codex/70-rfc3339-review-times-20261122 has no containing revision or pre-PR reference. This is separate from the ongoing browser/dev/source-assembly checkpoints.
+Stack base is `codex/70-rfc3339-review-times-20261122` at `edca416d58d15b06ccc05029b0803bc27e65fe18`. Candidate `codex/80-qualified-browser-stack-20261122` is a draft child with no containing-revision or pre-PR self-reference. Main remains `75ca39f3fc7e5e9e0b5578af58c966cd2590a652`. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code.
 
 ## Completed and material changes
 
-Approval review timestamps no longer gain an invented midnight or timezone through permissive parsing/coercion. Full grammar and calendar validation preserve IDN1404/source bytes, allow valid lowercase UTC and rebuild the standalone validator used by the native bridge. Actual fixture probes and native preflight negatives retain no-mutation evidence.
+Real import/run/build/ownership/cgroup/network probes pass. Protected runc reexec works after a byte-identical normal-file copy; own network/cgroup views are scoped writable. Namespace-correct proxy normalization fixes actual Docker metadata transport with TLS enabled. The original browser qualifier has passed on clean 9d11d99; its separate checkpoint owns acceptance.
 
 ## Validation and review evidence
 
-The work70/review-time-20261122 record contains exact source and before/after probes. Full Python212methods passes with2existing skips; native119passes/4helper ignores, strictClippy,format,standalone drift,extraction,docs andwhitespace pass. Independent read-only contract/standalone review finds no blocker.
+The JSON receipt records engine/executable hashes, measured shared filesystem, helper constraints, capability scope and exact image metadata results. Initial capacity refusal, runc/netns failures and MCR timeout remain explicit in the procedure. Pinned Aether decision-authoring v2.1.0 was read from Git object dc8a16851f452763ef4f7fbe4bf057d4500b1921; governing ADR is 0011.
 
 ## Blockers, risks, unknowns, and deferred work
 
-This is approval reviewedAt only; other date-time validators and date-only lifecycle semantics are not silently changed. Existing leap-second limitation remains. Actual owner choices/new review instants, original Docker acceptance, native platform/install coverage and release/live/consumer gates remain separate.
+Workflow replay and complete dev default/nonroot setup-twice execution are independently owned and active. Tmpfs consumes the same finite memory budget; source/evidence/data are not separate reserves. Hosted/native/human and source/adoption/release gates remain independent. Never infer acceptance from the tiny generated image.
 
 ## Next dependency-ready work
 
-Finish the source-verified local workflow acquisition and isolated-backend browser/dev qualification. Review exact self-source layer/descriptors/output choices before adoption. #98 retains real producer/publisher/release proof; #116 closes last.
+Finish browser workflow replay, preserve small source-bound evidence durably, then remove only own nested images/cache before dev's unchanged 8 GiB non-VFS guard. Stop on genuine failures and preserve their scope. No global prune or implicit profile/pin change.
 
 ## Parallel changes and reconciliation
 
-Aether141 implements build-only metadata projection; its host-adapter child remains separate. Identity browser/dev workers own original qualification paths; source assembly retains explicitly unselected proposals. Reconcile parent continuity by meaning before stacking; do not concatenate stale snapshots.
+This checkpoint follows parent draft PRs #163. The engineering parent enforces existing approval timestamp validity and retains unknown actual-owner review times. Each browser, development-image and source-assembly record retains its own represented source and qualification limits. Review parents before children; keep source adoption and actual release/deployment separate. Aether metadata projection and installed-host verification retain their separate draft chain under Aether38.
 
 ## Privacy and redaction
 
-Public source facts, standard fixture mutations and sanitized evidence only. No credentials, private transcript, host paths or invented actual-owner approvals.
+Retain public source/tool hashes, bounded observed capacities and failure classes. Exclude proxy values, credentials, private certificates/keys, user paths and unrelated data. The public CA bundle was read-only; TLS remains enabled.
 
 ## Handoff update protocol
 
-Refresh after domain checks before PR handoff; validate pinned metadata, twelve headings and fixed budgets. Reference ADR0001/0005 and existing approvals schema. The pinned Aether decision/continuity workflow remains selected; no new ADR or lifecycle promotion.
+Validate docs/JSON/whitespace and pinned continuity metadata, exact twelve headings and 16384-byte/240-line budgets. Decision impact: reference accepted ADR-0011 for scoped execution/evidence; no new contract, runtime default, policy or human lifecycle is selected.
 
 ## Compaction and supersession
 
-Git and linked work records retain previous observations. This handoff replaces current operational prose while preserving historical source, approvals and release evidence.
+The runtime recipe and source-bound owners retain detailed results. Preserve prior approvals and exact issue IDs. Teardown only owned helper state after evidence is saved; shared daemon configuration/cached image remain intact, with helper lifecycle recorded through it.
