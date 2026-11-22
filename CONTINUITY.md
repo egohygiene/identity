@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T06:50:26.853951+00:00'
+  updated_at: '2026-11-22T06:52:19.170324+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -71,16 +71,20 @@ state:
   candidate:
     branch: codex/70-engineering-baseline-20261122
     revision: null
-    pull_request: null
-    handoff_state: ready-for-review
+    pull_request:
+      provider: github
+      id: egohygiene/identity#158
+      url: https://github.com/egohygiene/identity/pull/158
+    handoff_state: review-reference-recorded
   live:
     status: verified
     observed_at: '2026-11-22T06:45:59.440107+00:00'
     default_branch_revision: ec8fce30c3c96c7781238eb0a8899d6f0cee0a40
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Main independently rechecked. Earlier155/156/157 and Aether139 are merged. Six Identity issues
-      remain; this first sprint draft has no PR yet.
+    pull_request_state: draft
+    notes: Main remains ec8fce3. Earlier155/156/157 and Aether139 are merged. Draft158 now records the
+      first engineering checkpoint; all six finish issues remain open. Later stack children are not yet
+      published.
   parallel_changes: []
 review:
   status: partial
@@ -105,9 +109,10 @@ review:
   - command: python3 -m unittest discover --start-directory tests --pattern test_release_*.py --verbose
     outcome: passed
     observed_at: '2026-11-22T06:50:26.853951+00:00'
-    notes: 18 focused release tests pass, including14new actual-Git admission cases. Independent read-only
-      review finds no blocker; actionlint/YAML checks pass. This is sampled remote admission, not atomic
-      ref locking or publication proof.
+    notes: 20 focused release tests pass:14actual-Git admission cases plus actual-publication-Bash coverage.
+      Six stable/RC/build-metadata selections and admission refusal exercise fake executables only; stable
+      hyphenated metadata regression fails on old code and passes after repair. Independent admission
+      review and actionlint pass; no real publication.
   - command: Actual public build followed by repository documentation verification
     outcome: passed
     observed_at: '2026-11-22T06:50:26.853951+00:00'
@@ -149,11 +154,11 @@ Qualify the merged Linux engineering baseline and repair demonstrated test-harne
 
 ## State snapshot
 
-Main/base is ec8fce30c3c96c7781238eb0a8899d6f0cee0a40. Candidate codex/70-engineering-baseline-20261122 has no self-referential revision/PR. This is the first planned draft checkpoint of the authorized overnight stack.
+Main/base is ec8fce30c3c96c7781238eb0a8899d6f0cee0a40. Candidate codex/70-engineering-baseline-20261122 has draft PR158 and no self-referential containing revision. This is the first planned draft checkpoint of the authorized overnight stack.
 
 ## Completed and material changes
 
-The exact merged baseline passes native119 tests, Python186 tests and renderer424 tests with explicit existing helper ignores/optional skips. Remote annotated-tag admission now binds the event commit, paired versions and current main ancestry before packaging/attestation/upload/release. Three exported policy links are now portable without changing terms. The separate copied-executable writer removes an uncovered parent-process descriptor inheritance window while preserving production behavior and test parallelism. Its controlled probe does not assert historical CI causality.
+The exact merged baseline passes native119 tests, Python186 tests and renderer424 tests with explicit existing helper ignores/optional skips. Remote annotated-tag admission now binds the event commit, paired versions and current main ancestry before packaging/attestation/upload/release. Stable build-metadata tags retain stable publication classification. Three exported policy links are now portable without changing terms. The separate copied-executable writer removes an uncovered parent-process descriptor inheritance window while preserving production behavior and test parallelism. Its controlled probe does not assert historical CI causality.
 
 ## Validation and review evidence
 
