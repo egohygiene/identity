@@ -1,0 +1,123 @@
+{
+  "$schema": "https://egohygiene.github.io/identity/contracts/v1/usage.schema.json",
+  "schema": "identity.usage/v1",
+  "sections": [
+    {
+      "id": "marks",
+      "title": "Identity marks",
+      "description": "Proposed guidance for the exact selected emblem and horizontal lockup.",
+      "rules": [
+        {
+          "id": "preserve-selected-masters",
+          "kind": "do",
+          "category": "mark",
+          "instruction": "Keep the selected SVG artboards intact; use the proposed clear-space and digital-size guidance for the matching master.",
+          "rationale": "Preserve the reviewed artwork and make any new layout guidance explicit.",
+          "details": [
+            "Keep the complete SVG artboard uncropped. Leave clear space on every side equal to at least one eighth of the displayed artboard height (64 SVG units at the original 512-unit height).",
+            "Recommended digital width: 64 CSS pixels for the full-detail emblem. Review smaller instances in their actual context or select a separately reviewed small-icon variant. This display guidance adds no condition to the logo-use permission.",
+            "Keep the complete SVG artboard uncropped. Leave clear space on every side equal to at least one eighth of the displayed artboard height (50 SVG units at the original 400-unit height).",
+            "Recommended digital width: 600 CSS pixels for the complete lockup, retaining the existing tagline. At that width its 28-unit tagline is 14 CSS pixels high before font-specific metrics. Use the standalone emblem in narrower layouts; review smaller lockup instances in their actual context. This is not a legibility, contrast or WCAG guarantee and adds no condition to the logo-use permission."
+          ],
+          "contexts": [
+            "documentation",
+            "project-ui"
+          ],
+          "governance": {
+            "subject": "usage:identity-marks",
+            "state": "candidate",
+            "visibility": "public",
+            "provenance": {
+              "method": "handoff-candidate",
+              "source": "Assistant-authored source-assembly proposal based on unchanged Identity SVGs and existing logo-use policy at 75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+              "capturedAt": "2026-11-22T18:16:38.809093+00:00"
+            },
+            "approval": null
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "mark",
+      "label": "Identity emblem",
+      "kind": "mark",
+      "path": ".identity/sources/emblem.svg",
+      "status": "active",
+      "availability": "public",
+      "replacement": null,
+      "downloadName": "identity-emblem.svg",
+      "notes": "Proposed explicit public selection of unchanged owner-selected source. No small-icon redesign is introduced.",
+      "governance": {
+        "subject": "mark",
+        "state": "candidate",
+        "visibility": "public",
+        "provenance": {
+          "method": "handoff-candidate",
+          "source": "Assistant-authored source-assembly proposal based on unchanged Identity SVGs and existing logo-use policy at 75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+          "capturedAt": "2026-11-22T18:16:38.809093+00:00"
+        },
+        "approval": null
+      }
+    },
+    {
+      "id": "horizontal-lockup",
+      "label": "Identity horizontal lockup",
+      "kind": "wordmark",
+      "path": ".identity/sources/lockup-horizontal.svg",
+      "status": "active",
+      "availability": "public",
+      "replacement": null,
+      "downloadName": "identity-horizontal-lockup.svg",
+      "notes": "Proposed explicit public selection of unchanged owner-selected source. The master retains its existing brand kit generator tagline; no new-tagline derivative is selected.",
+      "governance": {
+        "subject": "horizontal-lockup",
+        "state": "candidate",
+        "visibility": "public",
+        "provenance": {
+          "method": "handoff-candidate",
+          "source": "Assistant-authored source-assembly proposal based on unchanged Identity SVGs and existing logo-use policy at 75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+          "capturedAt": "2026-11-22T18:16:38.809093+00:00"
+        },
+        "approval": null
+      }
+    }
+  ],
+  "accessibility": {
+    "summary": "Use a contextual accessible name for meaningful Identity branding and preserve actual displayed text.",
+    "rules": [
+      "Use the exact reviewed descriptor for a standalone meaningful logo.",
+      "Avoid repeating a logo description when an adjacent accessible label already identifies the same link.",
+      "The supplied strings and recommended sizes do not establish contrast, legibility or WCAG conformance."
+    ],
+    "governance": {
+      "subject": "usage:identity-accessibility",
+      "state": "candidate",
+      "visibility": "public",
+      "provenance": {
+        "method": "handoff-candidate",
+        "source": "Assistant-authored source-assembly proposal based on unchanged Identity SVGs and existing logo-use policy at 75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+        "capturedAt": "2026-11-22T18:16:38.809093+00:00"
+      },
+      "approval": null
+    }
+  },
+  "legal": {
+    "trademark": "Use the covered artwork for truthful Identity identification and integration; do not imply an endorsement or use unchanged/confusingly similar marks as another product brand.",
+    "copyright": "The owner reports ChatGPT-assisted origin; exact reference/generation lineage remains unidentified. The scoped permission applies to rights Ego Hygiene can grant and asserts no exclusive copyright in all AI output.",
+    "attribution": "Ego Hygiene — Identity. Retain the scoped logo-use policy with redistributed covered artwork.",
+    "thirdPartyLicenses": [],
+    "governance": {
+      "subject": "usage:identity-logo-permission",
+      "state": "candidate",
+      "visibility": "public",
+      "provenance": {
+        "method": "handoff-candidate",
+        "source": "Assistant-authored source-assembly proposal based on unchanged Identity SVGs and existing logo-use policy at 75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+        "capturedAt": "2026-11-22T18:16:38.809093+00:00"
+      },
+      "approval": null
+    }
+  }
+}
