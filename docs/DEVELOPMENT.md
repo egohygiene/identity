@@ -204,6 +204,20 @@ python3 scripts/qualify_dev_image.py \
   --receipt /tmp/identity-dev-qualification.json
 ```
 
+Before pulling or building, the qualifier checks the locally observable Docker
+data filesystem. Its conservative free-space reserve is 24 GiB for Docker's
+copying `vfs` driver and 8 GiB for other drivers. These operational estimates do
+not guarantee capacity: layer copies, Rust outputs and concurrent jobs can need
+more. A VFS pull/build can consume much more than the image's reported size.
+Coordinate simultaneous qualification jobs and use a larger Docker data volume
+when necessary; the qualifier never prunes shared images or caches.
+
+Use `--minimum-free-gib N` only with a measured runner budget. A remote engine or
+an inaccessible data directory produces an unknown result and stops before
+pull/build, rather than substituting the client's free space. After checking
+capacity on the daemon host, `--minimum-free-gib 0` explicitly bypasses this
+guard; the receipt records the bypass. Keep that limitation with the evidence.
+
 The same script runs in the bounded
 [development-image workflow](../.github/workflows/development-image.yml). It builds
 the default without an override and an explicitly selected custom base with an
@@ -213,6 +227,16 @@ synthetic localhost CA rejection/explicit trust with curl and Node, CLI help and
 unit tests, build and public validation. Retain the receipt with exact source
 hashes and hosted run evidence; review failures before changing the pin. Keep
 the previous reviewed digest and receipt available in Git for rollback.
+
+The workflow also has an independent five-minute `portable-entrypoints` job.
+It installs checksum-pinned Task, requires real Make/Task frontends, and runs
+the existing synthetic external-tool protocols through the actual shared
+helper, including repeated setup and deliberately wrong activation/dispatch.
+That job can run with `act` without building a development image. Its success
+does not qualify real dependency acquisition, the default/custom Docker image,
+browser rendering, or hosted runner hardening; the full `qualify` job remains
+required for image acceptance. The current bounded local receipt is retained
+in [the #82 acceptance record](work/82/LOCAL_ACCEPTANCE.md).
 
 This is development-image qualification, not an image release, SBOM/security
 audit, hermetic bootstrap or browser/font/screenshot qualification. Rust and

@@ -12,6 +12,7 @@ on:
       - "scripts/dev-env.sh"
       - "scripts/qualify_dev_image.py"
       - "tests/test_qualify_dev_image.py"
+      - "tests/test_dev_entrypoints.py"
       - "docs/evidence/identity-development-base-registry-*.json"
       - "Cargo.toml"
       - "Cargo.lock"
@@ -31,6 +32,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  portable-entrypoints:
+    name: Exercise standalone, Make and Task dispatch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Harden runner
+        if: ${{ env.ACT != 'true' }}
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+      - name: Checkout Identity
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install checksum-pinned check-only Task
+        run: |
+          bash scripts/install_task_for_checks.sh "${{ runner.temp }}/identity-check-tools/bin"
+          echo "${{ runner.temp }}/identity-check-tools/bin" >> "$GITHUB_PATH"
+      - name: Exercise portable entry points and deliberate faults
+        env:
+          IDENTITY_REQUIRE_FRONTENDS: "1"
+        run: python3 -m unittest discover --start-directory tests --pattern test_dev_entrypoints.py --verbose
+
   qualify:
     name: Qualify pinned default and non-root custom base
     runs-on: ubuntu-24.04

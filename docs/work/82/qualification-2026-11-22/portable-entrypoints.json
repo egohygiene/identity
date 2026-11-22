@@ -1,0 +1,83 @@
+{
+  "earlier_attempts": [
+    "act worktreeconfig parsing and action-clone authentication failure before tests",
+    "Pinned action mirrors restored job startup; container Task download failed without effective proxy bindings",
+    "Bare --env NAME forwarding left proxy bindings ineffective; explicit values restored verified download"
+  ],
+  "execution": {
+    "act": "0.2.97",
+    "cached_image": true,
+    "cpus": 2,
+    "docker_socket_mounted": false,
+    "docker_storage_driver": "vfs",
+    "event": "workflow_dispatch (local emulation only)",
+    "force_pull": false,
+    "fresh_container": true,
+    "host_tool_caches_mounted": false,
+    "image": "ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+    "image_config": "sha256:7d95db24dde3481619581f7e0b06b1aaa57d1aab2cf0e1da0521c5309a308212",
+    "job": "portable-entrypoints",
+    "memory_bytes": 1073741824,
+    "platform": "linux/amd64",
+    "workflow": ".github/workflows/development-image.yml"
+  },
+  "kind": "dated portable entrypoint local workflow evidence",
+  "limits": [
+    "Only actual standalone Bash/Make/Task routing against synthetic external-tool protocols is qualified by these five tests.",
+    "Rust/Node/pnpm dependency acquisition and real setup/build are not exercised by this job.",
+    "Cached act image is not the pinned default development base or qualified non-root custom image.",
+    "No full clean-base development image acceptance, browser qualification, hosted CI run, release or publication is claimed.",
+    "Issue #82 remains open pending its full current-source default/custom image gate."
+  ],
+  "local_substitutions": {
+    "action_fetch": "Exact pinned public codeload commit archives supplied through --local-repository after act clone authentication failure",
+    "actions": [
+      {
+        "archive_bytes": 4698842,
+        "archive_sha256": "413243d94dd2f88f038e96f9ec940928361a0e8db4fedd55d61ec3f183dead35",
+        "repository": "step-security/harden-runner",
+        "revision": "05e31511f85b41b11d1cf0ef85d0992719546e2c"
+      },
+      {
+        "archive_bytes": 476180,
+        "archive_sha256": "b59292069298c7be5ffd9c636431a229faff70ece00e0c24fd31baeb7b309fa3",
+        "repository": "actions/checkout",
+        "revision": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+      }
+    ],
+    "checkout": "act copied a disposable standalone Git checkout of the candidate; no hosted checkout occurred",
+    "hardening": "Main harden-runner step skipped for ACT=true; act executed its self-hosted pre-step, which is not hosted hardening evidence",
+    "proxy": "Required proxy bindings explicitly forwarded and public host CA mounted read-only; values and certificate bytes omitted; TLS verification retained",
+    "sanitization": "Host checkout/action-mirror paths and emulated correlation ID replaced; ANSI color removed and trailing whitespace trimmed in retained log"
+  },
+  "log": {
+    "path": "portable-entrypoints-act.log",
+    "sha256": "638f648220674ed230f41fcc5bcc83dbd04d08b10f77ddcce05f108676116758"
+  },
+  "observed_at": "2026-11-22T06:46:52.640172+00:00",
+  "results": {
+    "job_exit_code": 0,
+    "task_archive_downloaded_and_verified_in_container": true,
+    "task_archive_sha256": "2c39d989ba8ab6ed37c025e9094e37240360fa2d69158504fc7a7486c88dc26f",
+    "task_version": "3.45.3",
+    "tests_failed": 0,
+    "tests_passed": 5,
+    "tests_skipped": 0,
+    "unittest_seconds": 2.181
+  },
+  "source": {
+    "base_revision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+    "candidate": "base plus uncommitted portable-entrypoints workflow job; source bytes listed below",
+    "input_sha256": {
+      ".github/workflows/development-image.yml": "9f32b34e61201151c08e5da32ce258a9b0ed3e4968f76c2a1b2a97ea074c043c",
+      "Makefile": "41c0fa39dac162431c1edd1dbfde161ac71eb073e871c76a04b960523475b580",
+      "Taskfile.yml": "ce3592994a3f4d90c23982a9b265d78ec08c08ee60b2d162b00e79322640af1b",
+      "renderer/package.json": "f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f",
+      "rust-toolchain.toml": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+      "scripts/dev-env.sh": "467cf8e34e706ffdba7ef0bfee638e9b1da8527330e7deba1b317f2a272e81f7",
+      "scripts/install_task_for_checks.sh": "467f9c773ea0947e42d841433dac7bd03654a0a6272f62379cedd1f9a7e58e29",
+      "tests/test_dev_entrypoints.py": "8a0af2422e84b2e4d1846fcde0afa3ef05ffac04b180706212c90689d7f5f154"
+    }
+  },
+  "status": "passed"
+}
