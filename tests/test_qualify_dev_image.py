@@ -52,6 +52,9 @@ class QualificationBoundaryTests(unittest.TestCase):
                            "NODE_EXTRA_CA_CERTS": str(configured), "SSL_CERT_FILE": str(configured)}
             self.assertEqual(QUALIFY.selected_proxy_ca(None, environment), configured)
             self.assertEqual(QUALIFY.selected_proxy_ca(explicit, environment), explicit)
+            safe = root / "public CA=Ω.pem"
+            safe.write_text("public CA fixture\n")
+            self.assertEqual(QUALIFY.selected_proxy_ca(safe, environment), safe)
             self.assertIsNone(QUALIFY.selected_proxy_ca(None, {"NODE_EXTRA_CA_CERTS": str(configured)}))
             with self.assertRaisesRegex(ValueError, "^--proxy-ca must select an existing readable regular CA bundle$"):
                 QUALIFY.selected_proxy_ca(root / "missing.pem", environment)
@@ -61,10 +64,20 @@ class QualificationBoundaryTests(unittest.TestCase):
                 QUALIFY.selected_proxy_ca(loop, environment)
             with self.assertRaises(ValueError):
                 QUALIFY.selected_proxy_ca(root, environment)
-            ambiguous = root / "comma,bundle.pem"
-            ambiguous.write_text("CA fixture\n")
+            for filename in ('comma,bundle.pem', 'quote"bundle.pem', 'line\nbundle.pem', 'tab\tbundle.pem'):
+                ambiguous = root / filename
+                ambiguous.write_text("CA fixture\n")
+                with self.subTest(filename=filename), self.assertRaises(ValueError):
+                    QUALIFY.selected_proxy_ca(ambiguous, environment)
+            ambiguous_link = root / 'quote"link.pem'
+            ambiguous_link.symlink_to(explicit.name)
             with self.assertRaises(ValueError):
-                QUALIFY.selected_proxy_ca(ambiguous, environment)
+                QUALIFY.selected_proxy_ca(ambiguous_link, environment)
+            unsafe_target = root / "comma,bundle.pem"
+            safe_link = root / "safe-link.pem"
+            safe_link.symlink_to(unsafe_target.name)
+            with self.assertRaises(ValueError):
+                QUALIFY.selected_proxy_ca(safe_link, environment)
 
     def test_proxy_transport_uses_names_and_optional_readonly_trust_without_values(self):
         environment = {name: f"private-value-{name}" for name in QUALIFY.PROXY_VARIABLES}
