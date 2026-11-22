@@ -3,6 +3,7 @@
 """Failure-boundary checks for the Docker qualification evidence reader."""
 
 import importlib.util
+from copy import deepcopy
 import json
 import os
 from pathlib import Path
@@ -17,6 +18,20 @@ SPEC.loader.exec_module(QUALIFY)
 
 
 class QualificationBoundaryTests(unittest.TestCase):
+    def successful_receipt(self):
+        return {
+            "status": "passed", "platform": "linux/amd64",
+            "repeat_setup": {
+                "status": "passed", "source_inputs_preserved": True,
+                "source_inputs_sha256": QUALIFY.SOURCE_INPUTS.source_inventory(QUALIFY.REPOSITORY),
+                "runtime_pins_preserved": {
+                    "rustc": QUALIFY.tomllib.loads((QUALIFY.REPOSITORY / "rust-toolchain.toml").read_text())["toolchain"]["channel"],
+                    "pnpm": json.loads((QUALIFY.REPOSITORY / "renderer/package.json").read_text())["packageManager"].split("@", 1)[1],
+                },
+            },
+            "commands": [{"command": ["bash", "scripts/dev-env.sh", "setup"], "exit_code": 0, "expected_exit_codes": [0]}],
+        }
+
     def test_storage_estimate_handles_vfs_boundaries_remote_and_explicit_bypass(self):
         storage = {"Driver": "vfs", "DockerRootDir": "/daemon-data"}
         usage = mock.Mock(free=24 * QUALIFY.GIB)
@@ -112,12 +127,43 @@ class QualificationBoundaryTests(unittest.TestCase):
                     QUALIFY.verify_inheritance(base, changed)
 
     def test_ambiguous_failed_or_wrong_platform_container_receipts_fail(self):
-        valid = QUALIFY.CONTAINER_MARKER + json.dumps({"status": "passed", "platform": "linux/amd64"})
+        valid = QUALIFY.CONTAINER_MARKER + json.dumps(self.successful_receipt())
         self.assertEqual(QUALIFY.container_receipt("ordinary logs\n" + valid)["status"], "passed")
         for output in ("ordinary logs", valid + "\n" + valid, valid.replace("passed", "failed"), valid.replace("amd64", "arm64")):
             with self.subTest(output=output):
                 with self.assertRaises(RuntimeError):
                     QUALIFY.container_receipt(output)
+
+    def test_repeat_setup_is_bound_to_actual_selected_source_and_pins(self):
+        valid = self.successful_receipt()
+        absent = deepcopy(valid)
+        del absent["repeat_setup"]
+        candidates = [absent]
+        for key, value in (
+            ("status", "failed"), ("source_inputs_preserved", False),
+            ("source_inputs_sha256", {}), ("runtime_pins_preserved", {"rustc": "wrong", "pnpm": "wrong"}),
+        ):
+            candidate = deepcopy(valid)
+            candidate["repeat_setup"][key] = value
+            candidates.append(candidate)
+        forged = deepcopy(valid)
+        first = next(iter(forged["repeat_setup"]["source_inputs_sha256"]))
+        forged["repeat_setup"]["source_inputs_sha256"][first] = "0" * 64
+        candidates.append(forged)
+        for candidate in candidates:
+            with self.subTest(receipt=candidate):
+                with self.assertRaises(RuntimeError):
+                    QUALIFY.container_receipt(QUALIFY.CONTAINER_MARKER + json.dumps(candidate))
+
+    def test_repeat_setup_must_have_one_successful_actual_command_record(self):
+        valid = self.successful_receipt()
+        for commands in (None, [], valid["commands"] * 2,
+                         [{**valid["commands"][0], "exit_code": 1}],
+                         [{**valid["commands"][0], "exit_code": False}]):
+            candidate = {**valid, "commands": commands}
+            with self.subTest(commands=commands):
+                with self.assertRaises(RuntimeError):
+                    QUALIFY.container_receipt(QUALIFY.CONTAINER_MARKER + json.dumps(candidate))
 
     def test_stale_registry_or_wrong_pulled_config_cannot_be_qualified(self):
         reference = "node:24-bookworm@sha256:" + "a" * 64

@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tomllib
 import uuid
 
 
@@ -24,6 +26,11 @@ HOST_MARKER = "IDENTITY_DEV_QUALIFICATION_RECEIPT="
 CONTAINER_MARKER = "IDENTITY_DEV_CONTAINER_RECEIPT="
 REGISTRY_RECEIPT = "docs/evidence/identity-development-base-registry-2026-10-20.json"
 GIB = 1024 ** 3
+INPUTS_SPEC = importlib.util.spec_from_file_location(
+    "identity_development_source_inputs", REPOSITORY / "dev/qualification/source_inputs.py",
+)
+SOURCE_INPUTS = importlib.util.module_from_spec(INPUTS_SPEC)
+INPUTS_SPEC.loader.exec_module(SOURCE_INPUTS)
 
 
 def storage_budget(storage: dict[str, object], endpoint: str, minimum_gib: int | None) -> dict[str, object]:
@@ -108,14 +115,33 @@ def container_receipt(output: str) -> dict[str, object]:
     if len(records) != 1:
         raise RuntimeError("Container smoke must emit exactly one structured qualification receipt")
     receipt = json.loads(records[0])
-    if receipt.get("status") != "passed" or receipt.get("platform") != PLATFORM:
+    if not isinstance(receipt, dict) or receipt.get("status") != "passed" or receipt.get("platform") != PLATFORM:
         raise RuntimeError("Container smoke did not qualify linux/amd64 successfully")
+    repeat = receipt.get("repeat_setup")
+    if not isinstance(repeat, dict) or repeat.get("status") != "passed" or repeat.get("source_inputs_preserved") is not True:
+        raise RuntimeError("Container smoke did not qualify actual repeated setup")
+    expected_pins = {
+        "rustc": tomllib.loads((REPOSITORY / "rust-toolchain.toml").read_text())["toolchain"]["channel"],
+        "pnpm": json.loads((REPOSITORY / "renderer/package.json").read_text())["packageManager"].split("@", 1)[1],
+    }
+    if repeat.get("runtime_pins_preserved") != expected_pins:
+        raise RuntimeError("Repeated setup runtime pins differ from the selected source")
+    if repeat.get("source_inputs_sha256") != SOURCE_INPUTS.source_inventory(REPOSITORY):
+        raise RuntimeError("Repeated setup input inventory differs from the selected source")
+    commands = receipt.get("commands")
+    if not isinstance(commands, list):
+        raise RuntimeError("Container smoke must record its repeated setup command")
+    setups = [row for row in commands if isinstance(row, dict) and row.get("command") == ["bash", "scripts/dev-env.sh", "setup"]]
+    if (len(setups) != 1 or type(setups[0].get("exit_code")) is not int
+            or setups[0].get("exit_code") != 0 or setups[0].get("expected_exit_codes") != [0]):
+        raise RuntimeError("Container smoke must record exactly one successful repeated setup command")
     return receipt
 
 
 def source_evidence() -> dict[str, object]:
     critical = (
         "dev/Dockerfile", "dev/qualification/Dockerfile", "dev/qualification/smoke.py",
+        "dev/qualification/source_inputs.py",
         "scripts/qualify_dev_image.py", "scripts/dev-env.sh", ".dockerignore",
         ".github/workflows/development-image.yml", "Cargo.toml", "Cargo.lock",
         "rust-toolchain.toml", "renderer/package.json", "renderer/pnpm-lock.yaml",

@@ -228,6 +228,13 @@ unit tests, build and public validation. Retain the receipt with exact source
 hashes and hosted run evidence; review failures before changing the pin. Keep
 the previous reviewed digest and receipt available in Git for rollback.
 
+Each built image also runs the real shared `setup` helper a second time. The
+smoke compares Rust source, the minimal canonical fixture, toolchain/dependency
+manifests and lockfiles before and after, then rechecks Rust/pnpm pins. The host
+admits this subreceipt only when its complete selected input inventory matches
+the host source and one successful repeat command is recorded. A stale receipt
+without that evidence does not establish current repeated-setup acceptance.
+
 The workflow also has an independent five-minute `portable-entrypoints` job.
 It installs checksum-pinned Task, requires real Make/Task frontends, and runs
 the existing synthetic external-tool protocols through the actual shared
