@@ -173,6 +173,15 @@ class LocalActionPreparationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "linked"):
             PREPARE.acquire(self.action, self.cache)
 
+    def test_duplicate_json_lock_fields_fail_before_output_or_acquisition(self):
+        original = self.lock_path.read_text()
+        self.lock_path.write_text('{"kind":"shadow",' + original[1:])
+        destination = self.base / "duplicate-lock-output"
+        with patch.object(PREPARE, "acquire", side_effect=AssertionError("must not acquire")):
+            with self.assertRaisesRegex(ValueError, "duplicate JSON key"):
+                PREPARE.prepare(self.root, self.lock_path, destination, self.cache)
+        self.assertFalse(destination.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

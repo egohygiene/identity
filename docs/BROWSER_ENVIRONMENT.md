@@ -58,6 +58,9 @@ there; native host tests remain separate evidence.
 When replayed through `act`, the host receipt uses `local-act-ci` or
 `local-act-local-entrypoint-replay` even though that runner also sets
 `GITHUB_ACTIONS=true`. A local workflow replay is not GitHub-hosted CI evidence.
+For a transport failure acquiring an exact public action, use the reviewed
+[local action mirror procedure](LOCAL_WORKFLOW_REPLAY.md). It preserves the
+original workflow pins and separates source acquisition from actual execution.
 
 ## Fixed settings and font evidence
 

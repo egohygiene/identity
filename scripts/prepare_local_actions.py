@@ -32,6 +32,15 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def unique_json_object(pairs: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Action lock contains a duplicate JSON key")
+        result[key] = value
+    return result
+
+
 def git_object(kind: str, data: bytes) -> bytes:
     return hashlib.sha1(kind.encode() + b" " + str(len(data)).encode() + b"\0" + data).digest()
 
@@ -191,7 +200,7 @@ def acquire(action: dict, archive_directory: Path | None) -> bytes:
 def prepare(root: Path, lock_path: Path, destination: Path, archive_directory: Path | None) -> dict:
     root = root.resolve()
     lock_data = lock_path.read_bytes()
-    lock = json.loads(lock_data)
+    lock = json.loads(lock_data, object_pairs_hook=unique_json_object)
     workflow, actions = validate_lock(lock, root)
     destination = destination.resolve()
     if destination == root or root in destination.parents or destination.exists():
