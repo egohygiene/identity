@@ -1,7 +1,7 @@
 # Original Docker and local workflow browser proof — 2026-11-22
 
-Issues: [#80](https://github.com/egohygiene/identity/issues/80) and its
-[#88](https://github.com/egohygiene/identity/issues/88) prerequisite.
+Issues: [#80](https://github.com/egohygiene/identity/issues/80) and dependent
+[#88](https://github.com/egohygiene/identity/issues/88).
 Executed clean source: `a56399b33548cab075e4442e64605035bccd973f`.
 Integration base: `75ca39f3fc7e5e9e0b5578af58c966cd2590a652`.
 
