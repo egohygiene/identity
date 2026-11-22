@@ -1,0 +1,241 @@
+{
+  "checkpoint": "identity-renderer-acceptance-2026-11-22",
+  "sourceRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+  "observedAt": "2026-11-22T06:38:43Z",
+  "issue": "https://github.com/egohygiene/identity/issues/88",
+  "issueState": "open",
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "11.21.0",
+    "vitest": "4.1.10",
+    "react": "19.2.8",
+    "dependencyInstall": "frozen lockfile; 88 reused packages; zero package downloads"
+  },
+  "sourceCheck": {
+    "javascriptFiles": 51,
+    "result": "passed"
+  },
+  "extraction": {
+    "record": "docs/work/116/renderer-extraction.json",
+    "integrationBase": "12c8877b9b74ab02e883a74ec9349afe52eaadd0",
+    "unchangedFunctions": 24,
+    "recordedFunctionHashesMatch": true,
+    "inputDerivationVerbatim": true,
+    "inputDerivationSha256": "f7d5ebbff1e87dea3cac1086c8e3e8a6f40d8bfa9b37461a27d7b3d4325e60e7"
+  },
+  "staticMarkup": {
+    "fixture": "renderer/fixtures/example.brand-kit.view-model.json",
+    "base": "12c8877b9b74ab02e883a74ec9349afe52eaadd0",
+    "comparedCases": 16,
+    "exactMarkupEqual": true,
+    "cases": [
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "./",
+        "publication": false,
+        "htmlBytes": 16654,
+        "sha256": "3fa83e19eac9ee0fbaef084c1ba6cc0cc68b3bf574f5ac178dc2576c2d1df288"
+      },
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "./",
+        "publication": true,
+        "htmlBytes": 17134,
+        "sha256": "d16e6d15c96e55a469f305dc57d202c3e554530e2004d27a5f61175231b0a541"
+      },
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "../identity/",
+        "publication": false,
+        "htmlBytes": 16714,
+        "sha256": "5cbe44e455cb62738bfe6950e67a9bcf3707c555e79486063cffb2ec44d33744"
+      },
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "../identity/",
+        "publication": true,
+        "htmlBytes": 17204,
+        "sha256": "1eb70ac407ef5714c045809e3765e3028e1932eb226c30acfcab6d64fe14d764"
+      },
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "/products/example/v1/",
+        "publication": false,
+        "htmlBytes": 16768,
+        "sha256": "60ff48565b856903be345872506c5018a64ed33ba35a270cb12d695cce5f4661"
+      },
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "/products/example/v1/",
+        "publication": true,
+        "htmlBytes": 17267,
+        "sha256": "389466e1c19c31cea6db1123e955e4fe5ee7704da28ed28be23ba76b105ebd81"
+      },
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "https://cdn.example.test/identity/v1/",
+        "publication": false,
+        "htmlBytes": 16864,
+        "sha256": "c24dbf306d6734af0f1b7852a4ed534825916a68d4db246cb1313fff43a23109"
+      },
+      {
+        "publicOnly": false,
+        "assetBaseUrl": "https://cdn.example.test/identity/v1/",
+        "publication": true,
+        "htmlBytes": 17379,
+        "sha256": "aec0b76711f325c9203d4f34bf1311d3c4a892ba50e1c5a34fc40bec8618675f"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "./",
+        "publication": false,
+        "htmlBytes": 14184,
+        "sha256": "81630feda5b2520e7ec54c1c44e6e6f1c4245cde62e548219f83038abc7a945e"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "./",
+        "publication": true,
+        "htmlBytes": 14664,
+        "sha256": "60dcf1b67b8ae411639603a2d5cfab1b58a58548f399b8aec4ac0e059100d160"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "../identity/",
+        "publication": false,
+        "htmlBytes": 14244,
+        "sha256": "95eff02b0e19df0356d1c13bfc58af44dfc3665705cdc157b2e4247b4f5c1e5d"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "../identity/",
+        "publication": true,
+        "htmlBytes": 14734,
+        "sha256": "a6c91ea6e5c2931a007bba4f1871580a1b70d19786532cf3d3a725b4089e0744"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "/products/example/v1/",
+        "publication": false,
+        "htmlBytes": 14298,
+        "sha256": "afe8a66cb3b5512bc5fc8b48ba228d32b11921f2ed8f0c3a296f2e29fee6bf76"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "/products/example/v1/",
+        "publication": true,
+        "htmlBytes": 14797,
+        "sha256": "5d70246ddc84e8c193522290a11fcb177fa0481969fcf05bfb3eec33538959f5"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "https://cdn.example.test/identity/v1/",
+        "publication": false,
+        "htmlBytes": 14394,
+        "sha256": "9b84203d69f060d2a2b4cfd986333f1ea9a0af5b33c17af173b2f2f889574f4e"
+      },
+      {
+        "publicOnly": true,
+        "assetBaseUrl": "https://cdn.example.test/identity/v1/",
+        "publication": true,
+        "htmlBytes": 14909,
+        "sha256": "d69d255e967880c24199fcaa0388131979704f936248897f7cb73c59ddda632d"
+      }
+    ]
+  },
+  "focusedTests": {
+    "numTotalTestSuites": 24,
+    "numPassedTestSuites": 24,
+    "numFailedTestSuites": 0,
+    "numTotalTests": 235,
+    "numPassedTests": 235,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numTodoTests": 0,
+    "success": true,
+    "files": [
+      {
+        "path": "renderer/tests/app.test.js",
+        "status": "passed",
+        "tests": 7
+      },
+      {
+        "path": "renderer/tests/artifact-paths.integration.test.js",
+        "status": "passed",
+        "tests": 11
+      },
+      {
+        "path": "renderer/tests/artifact-paths.test.js",
+        "status": "passed",
+        "tests": 160
+      },
+      {
+        "path": "renderer/tests/download-integrity.test.js",
+        "status": "passed",
+        "tests": 22
+      },
+      {
+        "path": "renderer/tests/downloads.test.js",
+        "status": "passed",
+        "tests": 22
+      },
+      {
+        "path": "renderer/tests/guidance.integration.test.js",
+        "status": "passed",
+        "tests": 4
+      },
+      {
+        "path": "renderer/tests/model.test.js",
+        "status": "passed",
+        "tests": 3
+      },
+      {
+        "path": "renderer/tests/public-site.test.js",
+        "status": "passed",
+        "tests": 2
+      },
+      {
+        "path": "renderer/tests/rights.test.js",
+        "status": "passed",
+        "tests": 4
+      }
+    ]
+  },
+  "unchangedSinceExtractionBase": [
+    {
+      "path": "renderer/src/model.js",
+      "sha256": "06e7dddfafc1ca679c86184070b19ed4ecf7c76ea86cd9c3a2a8049b4de4294e"
+    },
+    {
+      "path": "renderer/src/client.js",
+      "sha256": "05f7e37c14d7c16b99dd7b8a57db14384d1aa0cb9f466d20a28b7be960776644"
+    },
+    {
+      "path": "renderer/index.template.html",
+      "sha256": "12d0ff2e8a1b4d43ccbf72d317eee1b564090ee64ac99c54c980d5871bd183fe"
+    },
+    {
+      "path": "renderer/src/styles.css",
+      "sha256": "4eeea66cc214a5263ad8b27d1f0df344d8f15abd59fabb056927282b679f4d5a"
+    },
+    {
+      "path": "renderer/src/section-states.css",
+      "sha256": "f45b00496e62acfff4a726d4e1b37eedd75660d2ea232751859d97d6acaca5dd"
+    },
+    {
+      "path": "renderer/playwright.config.js",
+      "sha256": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9"
+    },
+    {
+      "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+      "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+    }
+  ],
+  "limitations": [
+    "The initial Vitest invocation failed at startup with ENOSPC before any test ran; after shared regenerable-cache cleanup, the recorded nine-file rerun passed.",
+    "Static axe coverage disables color-contrast and does not establish full WCAG conformance, real keyboard behavior or screenshot equality.",
+    "The 16 exact-markup comparisons cover the supplied reference fixture and props matrix, not every possible model.",
+    "No browser run, matching-workflow CI result, release qualification, deployment or manual creative approval is claimed by this checkpoint.",
+    "Retained #80/current-source matching-workflow acceptance remains pending; #88 stays open."
+  ]
+}
