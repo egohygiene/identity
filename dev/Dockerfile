@@ -11,8 +11,23 @@ WORKDIR /opt/identity
 ARG IDENTITY_DEV_UID=0
 ARG IDENTITY_DEV_GID=0
 COPY --chown=${IDENTITY_DEV_UID}:${IDENTITY_DEV_GID} . .
-RUN bash scripts/dev-env.sh setup
+# Optional caller-selected public trust is ephemeral; never alter image trust.
+RUN --mount=type=secret,id=identity_proxy_ca \
+    if [ -f /run/secrets/identity_proxy_ca ]; then \
+      export CURL_CA_BUNDLE=/run/secrets/identity_proxy_ca \
+        SSL_CERT_FILE=/run/secrets/identity_proxy_ca \
+        CARGO_HTTP_CAINFO=/run/secrets/identity_proxy_ca \
+        NODE_EXTRA_CA_CERTS=/run/secrets/identity_proxy_ca; \
+    fi; \
+    bash scripts/dev-env.sh setup
 # Browser dependencies are an explicit image option, independent of CLI setup.
 ARG WITH_BROWSERS=0
-RUN if [ "$WITH_BROWSERS" = 1 ]; then bash scripts/dev-env.sh browsers --with-deps; fi
+RUN --mount=type=secret,id=identity_proxy_ca \
+    if [ -f /run/secrets/identity_proxy_ca ]; then \
+      export CURL_CA_BUNDLE=/run/secrets/identity_proxy_ca \
+        SSL_CERT_FILE=/run/secrets/identity_proxy_ca \
+        CARGO_HTTP_CAINFO=/run/secrets/identity_proxy_ca \
+        NODE_EXTRA_CA_CERTS=/run/secrets/identity_proxy_ca; \
+    fi; \
+    if [ "$WITH_BROWSERS" = 1 ]; then bash scripts/dev-env.sh browsers --with-deps; fi
 # Does not replace the base image's ENTRYPOINT or CMD. The wrapper activates tools.

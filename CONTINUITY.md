@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T18:26:00.599757+00:00'
+  updated_at: '2026-11-22T18:52:23.676664+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -73,7 +73,7 @@ state:
   base:
     revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
     ref: refs/heads/main
-    verified_at: '2026-11-22T18:26:00.599757+00:00'
+    verified_at: '2026-11-22T18:52:23.676664+00:00'
   candidate:
     branch: codex/82-full-image-qualification-20261122
     revision: null
@@ -81,7 +81,7 @@ state:
     handoff_state: in-progress
   live:
     status: verified
-    observed_at: '2026-11-22T18:26:00.599757+00:00'
+    observed_at: '2026-11-22T18:52:23.676664+00:00'
     default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
     issue_state: open
     pull_request_state: not-applicable
@@ -91,27 +91,28 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-22T18:26:00.599757+00:00'
+  reviewed_at: '2026-11-22T18:52:23.676664+00:00'
   reviewed_by: Codex
   evidence:
   - command: python3 -m unittest discover --start-directory tests --pattern test_*dev_image*.py --verbose
     outcome: passed
-    observed_at: '2026-11-22T18:26:00.599757+00:00'
-    notes: Thirteen focused controls pass:four repeat-setup smoke controls,two host-subreceipt controls
-      and seven existing boundaries. Fixture/command doubles do not establish native image execution.
+    observed_at: '2026-11-22T18:52:23.676664+00:00'
+    notes: Fifteen focused controls pass:four repeat-setup controls,two host-subreceipt controls,two scoped
+      proxy/trust controls and seven existing boundaries. Fixture/command doubles do not establish native image execution.
   - command: python3 -m py_compile on changed qualification modules/tests; python3 scripts/verify_docs.py
       --repository-root .; git diff --check
     outcome: passed
-    observed_at: '2026-11-22T18:26:00.599757+00:00'
+    observed_at: '2026-11-22T18:52:23.676664+00:00'
     notes: Syntax, current documentation targets and source whitespace pass.
-  - command: Original default/non-root full qualification
-    outcome: not-run
-    observed_at: '2026-11-22T18:26:00.599757+00:00'
-    notes: Managed VFS budget is insufficient; parent runtime work is preparing a separate bounded backend.
-      No known-failing multi-GB image pull is repeated and no guard is bypassed merely to force a pass.
+  - command: Original full qualifier and exact pinned-base proxy/CA probes
+    outcome: failed
+    observed_at: '2026-11-22T18:52:23.676664+00:00'
+    notes: Clean82249b2 passed original8GiBguard and exact Node pull/config binding on native overlay2.
+      Setup failed curl7 without forwarded proxy. Names-only proxy probe rejected unknownCA60; explicit
+      readonly publicCA passed0. Repaired-source complete qualification is still pending.
   environment_limitations:
-  - Actual full current-source image builds, real cold dependency acquisition and repeated real setup
-    remain unrun at this preparation checkpoint.
+  - First actual image run failed at setup networking. Repaired-source full image builds and repeated
+    real setup remain pending; preparation tests and short CA probes do not supply full acceptance.
   - Browser/hosted CI/platform/release acceptance is separate; the prior five protocol tests are not image
     qualification.
   - No released EgoLint continuity-conformance claim; metadata/headings/budget use the existing pinned
@@ -150,15 +151,15 @@ Main/base is75ca39f3fc7e5e9e0b5578af58c966cd2590a652. Candidate codex/82-full-im
 
 ## Completed and material changes
 
-The original smoke omitted a real second setup inside either image. The current candidate invokes the same shared helper again, preserves selected Rust/canonical-fixture/manifest/lock bytes and rechecks runtime pins. A shared pure selector lets host admission compare the actual emitted input map to the selected host source and require one successful repeat command. No production identity semantics, pins or image base changes.
+The smoke now runs real setup again and host admission requires exact selected source/pins and one successful repeat command. The first full run demonstrated missing proxy forwarding; exact-base probes then proved missing explicit CA trust. Bounded opt-in BuildKit secret/read-only runtime CA and names-only proxy forwarding preserve image trust, pins and source. No production identity semantics or image base changes.
 
 ## Validation and review evidence
 
-Thirteen focused controls pass, including source/lock mutation, failed setup, runtime drift, missing/forged inventory and missing/duplicate/failed command refusal. Python compilation, documentation links and whitespace pass. These are fixture/command-double tests; full actual image execution is not reported passed.
+Fifteen focused controls pass, including input/pin preservation and forged-receipt rejection, scoped CA selection/CLI precedence, invalid-file refusal and names-only/read-only transport. Syntax, documentation and whitespace pass. Original full qualifier passed exact-base acquisition but failed setup networking; actual proxy-only60/explicitCA0 probes isolate the trust gap. Full repaired-source acceptance remains pending.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The managed VFS store cannot meet its existing reserve. A separate runtime worker is testing a bounded backend while browser qualification gets the first heavy slot. Full pinned default/non-root image acceptance, actual dependency/cache/user/TLS/native/renderer results and new repeated real setup remain pending. #80/#88 and final #70/#98/#116 gates retain their owners.
+The managed VFS store remains unchanged. Separate native overlay2 passed the original8GiBguard; the first setup failure is retained. Browser temporarily uses the heavy slot while the bounded trust repair is checked. Fresh original-reserve default/non-root acquisition/cache/user/TLS/native/renderer and actual repetition remain pending. Other issue gates retain their owners.
 
 ## Next dependency-ready work
 

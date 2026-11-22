@@ -18,6 +18,55 @@ SPEC.loader.exec_module(QUALIFY)
 
 
 class QualificationBoundaryTests(unittest.TestCase):
+    def test_proxy_trust_is_scoped_explicit_and_cli_takes_precedence(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            configured = root / "configured.pem"
+            explicit = root / "explicit.pem"
+            configured.write_text("configured public CA fixture\n")
+            explicit.write_text("explicit public CA fixture\n")
+            environment = {"IDENTITY_DEVELOPMENT_PROXY_CA": str(configured),
+                           "NODE_EXTRA_CA_CERTS": str(configured), "SSL_CERT_FILE": str(configured)}
+            self.assertEqual(QUALIFY.selected_proxy_ca(None, environment), configured)
+            self.assertEqual(QUALIFY.selected_proxy_ca(explicit, environment), explicit)
+            self.assertIsNone(QUALIFY.selected_proxy_ca(None, {"NODE_EXTRA_CA_CERTS": str(configured)}))
+            with self.assertRaises(FileNotFoundError):
+                QUALIFY.selected_proxy_ca(root / "missing.pem", environment)
+            with self.assertRaises(ValueError):
+                QUALIFY.selected_proxy_ca(root, environment)
+            ambiguous = root / "comma,bundle.pem"
+            ambiguous.write_text("CA fixture\n")
+            with self.assertRaises(ValueError):
+                QUALIFY.selected_proxy_ca(ambiguous, environment)
+
+    def test_proxy_transport_uses_names_and_optional_readonly_trust_without_values(self):
+        environment = {name: f"private-value-{name}" for name in QUALIFY.PROXY_VARIABLES}
+        environment.update({"ALL_PROXY": "private-all-proxy", "NODE_EXTRA_CA_CERTS": "/ambient-ca"})
+        build, runtime, receipt = QUALIFY.network_arguments(None, environment)
+        for name, value in environment.items():
+            self.assertNotIn(value, build)
+            self.assertNotIn(value, runtime)
+            self.assertNotIn(value, json.dumps(receipt))
+        self.assertEqual(build[::2], ["--build-arg"] * 6)
+        self.assertEqual(runtime[::2], ["--env"] * 6)
+        self.assertEqual(build[1::2], list(QUALIFY.PROXY_VARIABLES))
+        self.assertEqual(runtime[1::2], list(QUALIFY.PROXY_VARIABLES))
+        self.assertFalse(receipt["ca_secret_selected"])
+        self.assertFalse(receipt["runtime_ca_readonly_bind_selected"])
+        self.assertEqual(QUALIFY.network_arguments(None, {}), ([], [], {
+            "proxy_variables": [], "ca_secret_selected": False,
+            "runtime_ca_readonly_bind_selected": False, "system_trust_modified": False,
+        }))
+        ca = Path("/selected/public CA.pem")
+        build, runtime, receipt = QUALIFY.network_arguments(ca, environment)
+        self.assertEqual(build[-2:], ["--secret", f"id=identity_proxy_ca,src={ca}"])
+        self.assertIn(f"type=bind,source={ca},target={QUALIFY.CONTAINER_PROXY_CA},readonly", runtime)
+        for name in ("CURL_CA_BUNDLE", "SSL_CERT_FILE", "CARGO_HTTP_CAINFO", "NODE_EXTRA_CA_CERTS"):
+            self.assertIn(f"{name}={QUALIFY.CONTAINER_PROXY_CA}", runtime)
+        self.assertTrue(receipt["ca_secret_selected"])
+        self.assertTrue(receipt["runtime_ca_readonly_bind_selected"])
+        self.assertFalse(receipt["system_trust_modified"])
+
     def successful_receipt(self):
         return {
             "status": "passed", "platform": "linux/amd64",

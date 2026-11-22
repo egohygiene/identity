@@ -33,26 +33,49 @@ product runtime feature or a claim of all-frontend image coverage.
 ## Checks executed during preparation
 
 - `python3 -m unittest discover --start-directory tests --pattern 'test_*dev_image*.py' --verbose`:
-  **13 tests pass**. Four smoke controls cover success, lockfile/source mutation,
+  **15 tests pass**. Four smoke controls cover success, lockfile/source mutation,
   setup failure and runtime pin drift. Two additional host-reader controls reject
   missing/forged inventories, wrong pins and absent/duplicate/failed command
-  records; seven original storage/configuration/receipt boundaries remain.
+  records; two scoped proxy/trust controls enforce CLI precedence, invalid-file refusal, names-only transport and read-only trust selection; seven original storage/configuration/receipt boundaries remain.
 - Python compilation and `git diff --check` pass.
 
 These controls use disposable fixtures and command doubles. They do not claim
 that real setup or the full default/custom image qualifier has executed.
+
+## Demonstrated network gap and bounded repair
+
+The first original full run used a separate native Linux amd64 overlay2 engine
+with **9,031,909,376 bytes** free, exceeding the unchanged 8 GiB reserve. From
+clean preparation commit `82249b2ab12cc9caab32f1c1e0236e73107f5951`, the exact
+pinned Node index pull, platform and image-config binding passed. The first
+setup build then failed: curl could not connect to sh.rustup.rs (exit 7). The
+qualifier had not forwarded the host's required proxy argument names.
+
+Two actual probes in that exact pinned base separated connectivity from trust:
+with populated proxy names forwarded, curl rejected the untrusted TLS issuer
+(exit 60); with the same names and an explicitly selected read-only public CA
+bundle, the same endpoint succeeded (exit 0). Neither probe installed trust.
+
+The qualifier now forwards the populated predefined proxy names for builds and
+container smoke without logging their values. Optional `--proxy-ca`, with scoped
+`IDENTITY_DEVELOPMENT_PROXY_CA` default and CLI precedence, selects a BuildKit
+secret for setup and a read-only container bind for real repeated setup. The
+source path is redacted from public command records. No image-global trust or
+base/tool pin changes are made, and synthetic unknown-CA rejection remains
+required. Fresh repaired-source full qualification remains pending below.
 
 ## Actual execution status
 
 The managed Docker engine uses VFS and the workspace had approximately 6.7 GiB
 free when this checkpoint began. The original guard remains 24 GiB for that
 copying driver and 8 GiB for others, subject to an explicitly measured runner
-budget. No known-failing VFS image pull/build is repeated merely to obtain a
-fresh failure receipt. Parent runtime work is investigating a separate bounded
-engine/backend while preserving the managed daemon and shared caches.
+budget. No known-failing VFS image pull/build was repeated. The separately prepared
+overlay2 engine passed actual native/runtime/network probes while preserving
+the managed daemon and shared caches.
 
 The original pinned default and non-root custom image qualification remains
-**not run in this checkpoint yet**. Its actual dependency acquisition, inherited
+**not yet passed in this checkpoint**. The first actual run failed at dependency
+acquisition as described above. Its complete dependency acquisition, inherited
 user/command metadata, complete cache/TLS/native/renderer proof and repeated real
 setup must pass before #82 can close. #80 remains the separate browser/workflow
 gate. No hosted CI, image publication, tag, release or deployment is performed.

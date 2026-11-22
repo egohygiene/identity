@@ -169,10 +169,19 @@ unless explicitly requested.
 ### Proxy trust
 
 The Docker host/builder must reach the registry and any required proxy. The base
-owner provisions a TLS proxy's trusted **public CA certificate** into the OS
-trust store used by curl/Rust and Node's trust configuration (for example,
-`NODE_EXTRA_CA_CERTS` pointing to a readable certificate file when required).
-Forward proxy build arguments only when the host requires them. The installer
+owner can provision a TLS proxy's trusted **public CA certificate** for
+curl/Rust and Node. For development-image qualification, use
+`--proxy-ca /path/to/public-ca-bundle.pem`, or the scoped
+`IDENTITY_DEVELOPMENT_PROXY_CA` default; an explicit CLI option wins. The selected
+regular bundle is an optional BuildKit secret during setup and a read-only bind
+during the smoke's actual repeated setup. It is not copied into the image or
+installed into system trust. Ambient CA variables do not select this option.
+Direct `docker build` callers can select the matching
+`--secret id=identity_proxy_ca,src=/path/to/public-ca-bundle.pem` themselves.
+
+The qualifier forwards only populated standard HTTP/HTTPS/no-proxy variable
+names as Docker's predefined build arguments and container environment options.
+It does not record proxy values or the selected bundle's local path. The installer
 preserves supplied proxy/cache bindings and enables Node environment-proxy
 handling on supported Node versions. It never disables TLS verification or
 imports private host credentials. Do not bake proxy credentials into the image
