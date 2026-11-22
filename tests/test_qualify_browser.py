@@ -72,6 +72,124 @@ def output(receipt, directory):
 
 
 class BrowserQualificationBoundaryTests(unittest.TestCase):
+    def test_proxy_ca_environment_and_cli_precedence_reach_the_same_secret_boundary(self):
+        # Stop at the actual build argument boundary, before a build/browser can
+        # run. A selected bundle must use the existing secret transport and its
+        # private path must not leak into the public receipt or printed output.
+        registry = json.loads((QUALIFY.REPOSITORY / "docs/evidence/identity-browser-registry-2026-10-20.json").read_text())
+        config = registry["image_config"]
+        image = {"Id": registry["config_digest"], "Os": "linux", "Architecture": "amd64",
+                 "RepoDigests": [registry["image"]], "Config": {"User": config["user"], "Entrypoint": config["entrypoint"], "Cmd": config["cmd"]}}
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            inherited, explicit = root / "inherited.pem", root / "explicit.pem"
+            inherited.write_text("synthetic CA input; no TLS is performed\n")
+            explicit.write_text("different synthetic CA input\n")
+            unused = root / 'unused,"private-env.pem'
+            unused.write_text("synthetic unusable inherited selector\n")
+            for label, environment_value, cli, selected in (
+                ("unset", None, [], None), ("empty", "", [], None),
+                ("environment", str(inherited), [], inherited),
+                ("cli-overrides-environment", str(root / "missing.pem"), ["--proxy-ca", str(explicit)], explicit),
+                ("cli-overrides-unsafe-environment", str(unused), ["--proxy-ca", str(explicit)], explicit),
+            ):
+                calls = []
+
+                def stop_at_build(arguments, **options):
+                    calls.append(arguments)
+                    if arguments[1] == "version":
+                        value = json.dumps({"Os": "linux", "Arch": "amd64"})
+                    elif arguments[1] == "info":
+                        value = json.dumps({"driver": "overlay2", "dataRoot": str(root)})
+                    elif arguments[1:3] == ["image", "inspect"]:
+                        value = json.dumps([image])
+                    elif arguments[1] == "build":
+                        return subprocess.CompletedProcess(arguments, 23, stdout="Synthetic stop before image build\n")
+                    else:
+                        value = ""
+                    return subprocess.CompletedProcess(arguments, 0, stdout=value)
+
+                environment = {"DOCKER_CONTEXT": "", "DOCKER_HOST": "unix:///synthetic/docker.sock"}
+                if environment_value is not None:
+                    environment["IDENTITY_BROWSER_PROXY_CA"] = environment_value
+                destination = root / label
+                printed = io.StringIO()
+                with self.subTest(label=label), patch.dict(os.environ, environment, clear=True), \
+                     patch.object(QUALIFY.sys, "argv", ["qualify_browser.py", "--output-directory", str(destination), *cli]), \
+                     patch.object(QUALIFY, "source_evidence", return_value={"scope": "synthetic negative boundary"}), \
+                     patch.object(QUALIFY.subprocess, "run", side_effect=stop_at_build), \
+                     patch.object(QUALIFY.shutil, "disk_usage", return_value=SimpleNamespace(free=20 * QUALIFY.GIB)), \
+                     redirect_stdout(printed), redirect_stderr(printed):
+                    self.assertEqual(QUALIFY.main(), 1)
+                build = next(call for call in calls if call[1] == "build")
+                self.assertEqual([item for item in build if item.startswith("id=identity_proxy_ca,")],
+                                 [f"id=identity_proxy_ca,src={selected}"] if selected else [])
+                record = json.loads((destination / "host-qualification.json").read_text())
+                self.assertEqual(record["build_network"]["ca_secret_selected"], selected is not None)
+                self.assertNotIn("qualification", record)
+                for private in (str(inherited), str(explicit), str(root / "missing.pem"), str(unused)):
+                    self.assertNotIn(private, printed.getvalue())
+                    self.assertNotIn(private, json.dumps(record))
+
+    def test_missing_or_non_file_environment_ca_stops_before_output_or_docker(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            private = root / "synthetic-private-author" / "private-ca" / "missing.pem"
+            directory = root / "synthetic-private-directory"
+            directory.mkdir()
+            cases = [
+                ("missing-env", private, []), ("directory-env", directory, []),
+                ("missing-cli", None, ["--proxy-ca", str(private)]),
+                ("directory-cli", None, ["--proxy-ca", str(directory)]),
+            ]
+            loop = root / "synthetic-private-loop.pem"
+            try:
+                loop.symlink_to(loop.name)
+            except (OSError, NotImplementedError):
+                pass
+            else:
+                cases.extend((("loop-env", loop, []), ("loop-cli", None, ["--proxy-ca", str(loop)])))
+            # These regular files really exist: the selector must refuse the
+            # canonical path's CSV delimiter/control bytes, not merely fail a
+            # missing-file check. NUL is already rejected by pathlib itself.
+            for number, character in enumerate([",", '"', *map(chr, range(1, 32)), chr(127)]):
+                unsafe = root / ("synthetic-private-ca" + character + "bundle.pem")
+                unsafe.write_text("synthetic existing CA input\n")
+                cases.extend(((f"unsafe-{number}-env", unsafe, []),
+                              (f"unsafe-{number}-cli", None, ["--proxy-ca", str(unsafe)])))
+            alias = root / "safe-ca-alias.pem"
+            try:
+                alias.symlink_to("synthetic-private-ca,bundle.pem")
+            except (OSError, NotImplementedError):
+                pass
+            else:
+                cases.extend((("unsafe-target-env", alias, []), ("unsafe-target-cli", None, ["--proxy-ca", str(alias)])))
+            clean = root / "clean-ca.pem"
+            clean.write_text("synthetic usable target\n")
+            unsafe_alias = root / 'synthetic-private,"alias.pem'
+            try:
+                unsafe_alias.symlink_to(clean.name)
+            except (OSError, NotImplementedError):
+                pass
+            else:
+                cases.extend((("unsafe-alias-env", unsafe_alias, []), ("unsafe-alias-cli", None, ["--proxy-ca", str(unsafe_alias)])))
+            for label, value, cli in cases:
+                destination = root / (label + "-evidence")
+                environment = {"IDENTITY_BROWSER_PROXY_CA": str(value)} if value else {}
+                printed = io.StringIO()
+                with self.subTest(label=label), patch.dict(os.environ, environment, clear=True), \
+                     patch.object(QUALIFY.sys, "argv", ["qualify_browser.py", "--output-directory", str(destination), *cli]), \
+                     patch.object(QUALIFY.subprocess, "run") as execute, \
+                     redirect_stdout(printed), redirect_stderr(printed):
+                    with self.assertRaises(SystemExit) as error:
+                        QUALIFY.main()
+                    self.assertEqual(error.exception.code, 2)
+                    execute.assert_not_called()
+                self.assertFalse(destination.exists())
+                self.assertIn("must select an existing regular CA bundle", printed.getvalue())
+                for secret_path_part in (str(root), "synthetic-private-author", "private-ca", "synthetic-private-directory", "synthetic-private-loop"):
+                    self.assertNotIn(secret_path_part, printed.getvalue())
+
     def test_vfs_disk_preflight_refuses_the_reproduced_small_store(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
