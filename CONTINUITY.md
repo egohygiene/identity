@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T07:04:56.465436+00:00'
+  updated_at: '2026-11-22T07:09:25.489579+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -45,6 +45,8 @@ scope:
   - docs/work/98/self-source-review/REVIEW.json
   - docs/work/98/candidate/README.md
   - https://github.com/egohygiene/identity/issues/98
+  - docs/work/116/SPRINT_2026-11-22.md
+  - docs/work/116/sprint-2026-11-22.json
 work:
   objective: Prepare exact Identity-local layer and same-subject governance review inputs without adopting
     canonical source or inventing approvals.
@@ -60,14 +62,14 @@ work:
     url: https://github.com/egohygiene/identity/issues/98
   next:
     kind: action
-    id: review-exact-self-source-assembly
-    description: 'Review exact empty-inheritance versus actual-snapshot choice, local bytes/mapping/layer
-      metadata and native descriptor/timestamp assembly. Preserve known owner choices; independent #70
-      engineering acceptance can continue.'
+    id: review-draft-stack-and-exact-self-source
+    description: 'Review draft158→159→160→161→162 and the exact self-source packet. Preserve unselected
+      layer/token/governance facts and full Docker/native/consumer gates; #116 closes last.'
     readiness: ready
     references:
+    - https://github.com/egohygiene/identity/pull/158
+    - https://github.com/egohygiene/identity/pull/162
     - https://github.com/egohygiene/identity/issues/98
-    - https://github.com/egohygiene/identity/issues/70
     depends_on: []
 state:
   base:
@@ -77,17 +79,20 @@ state:
   candidate:
     branch: codex/98-self-source-stack-20261122
     revision: null
-    pull_request: null
-    handoff_state: ready-for-review
+    pull_request:
+      provider: github
+      id: egohygiene/identity#162
+      url: https://github.com/egohygiene/identity/pull/162
+    handoff_state: review-reference-recorded
   live:
     status: verified
     observed_at: '2026-11-22T07:04:56.465436+00:00'
     default_branch_revision: ec8fce30c3c96c7781238eb0a8899d6f0cee0a40
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Merged main remains ec8fce3; six finish issues remain open. Earlier155/156/157 and Aether139
-      are merged. Parent draft PRs 158,159,160,161 are open; this next child PR does not yet exist. No
-      overnight sprint PR is merged or published.
+    pull_request_state: draft
+    notes: Main remains ec8fce3. Drafts158→159→160→161→162 are open; separate Aether140 records actual
+      compatible-host qualification and retained portability failure. All six Identity finish issues remain
+      open; no sprint draft is merged or released.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#158
@@ -101,9 +106,12 @@ state:
   - provider: github
     id: egohygiene/identity#161
     url: https://github.com/egohygiene/identity/pull/161
+  - provider: github
+    id: egohygiene/aether#140
+    url: https://github.com/egohygiene/aether/pull/140
 review:
   status: partial
-  reviewed_at: '2026-11-22T06:45:15.025181+00:00'
+  reviewed_at: '2026-11-22T07:09:25.489579+00:00'
   reviewed_by: Codex
   evidence:
   - command: Existing JSON Schemas and isolated identity_validation.tokens.load_layers with exact staged
@@ -143,6 +151,13 @@ review:
     observed_at: '2026-11-22T06:45:15.025181+00:00'
     notes: Draft2020-12 metadata and twelve headings pass within16384bytes/240lines; no official released
       EgoLint continuity-conformance claim.
+  - command: Integrated Python suite, actual double public build, actionlint and evidence/source binding
+      verification
+    outcome: passed
+    observed_at: '2026-11-22T07:09:25.489579+00:00'
+    notes: Represented8a7a1bc:208passes/2existing skips;46-file frontend outputs identical;3workflows
+      lint;23browser committed-file hashes and13source/7review pins match. Compiled product inputs remain
+      baseline-identical; active owner candidate still expected IDN1301. See work116 sprint receipt.
   environment_limitations:
   - Exact token/mapping/inheritance/layer review remains required; passing isolated layer checks supplies
     no organizational authority or adoption.
@@ -182,13 +197,15 @@ Prepare exact local layer options and same-subject governance data for owner rev
 
 ## State snapshot
 
-Stack base is `codex/88-renderer-stack-20261122` at `0200568536aac3ee1f0ef060397064d200a74f93`. Candidate `codex/98-self-source-stack-20261122` is a draft child with no containing-revision or pre-PR self-reference. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code. Live main remains `ec8fce30c3c96c7781238eb0a8899d6f0cee0a40`.
+Stack base is `codex/88-renderer-stack-20261122` at `0200568536aac3ee1f0ef060397064d200a74f93`. Candidate `codex/98-self-source-stack-20261122` is draft PR162 with no containing-revision self-reference. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code. Live main remains `ec8fce30c3c96c7781238eb0a8899d6f0cee0a40`.
 
 ## Completed and material changes
 
 The review packet stages a zero-value organization-inheritance layer and a nine-value final Identity-local product layer with exact hashes/declarations. A real approved organization snapshot remains the alternative. color.text maps explicitly to color.text.default in the draft. Confirmed master/reviewer/copy/terms are bound without asking them again. Native-record drafts retain exact timestamp/new descriptor gaps and are not imported to active arrays. Existing candidate/owner handoffs link the packet.
 
 ## Validation and review evidence
+
+The integrated handoff in docs/work/116/SPRINT_2026-11-22.md records all five draft links, 208 Python passes/two existing skips, identical public builds, workflow lint and exact evidence hashes. Earlier baseline/native/renderer results retain their represented source.
 
 Two token schemas and layer entries pass. Isolated load_layers resolves nine original values with zero replacements; a wrong digest is rejected. Full active candidate remains exit1/IDN1301. Native draft schema gaps are explicit. Existing documentation/whitespace and unchanged implementation/master/native-array checks pass. Pinned Aether decision 2.1.0 and continuity 1.1.0 sources/guides were read through exact Git objects at dc8a16851f452763ef4f7fbe4bf057d4500b1921; policy reference remains Hygiene 1.2.0.
 
