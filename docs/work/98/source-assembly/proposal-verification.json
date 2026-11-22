@@ -1,0 +1,56 @@
+{
+  "recordKind": "component verification of unselected descriptor/output proposal; not approved source",
+  "observedAt": "2026-11-22T18:24:25.106566+00:00",
+  "sourceRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "results": {
+    "proposedProvenanceAssetSchemaRecords": 2,
+    "candidateUsageSchema": "passed",
+    "nativeApprovalExpectedErrors": [
+      {
+        "subject": "mark",
+        "expectedErrorPath": [
+          "decisions",
+          0,
+          "reviewedAt"
+        ],
+        "reason": "Exact new packet review remains pending; retain null instead of fabricating an instant."
+      },
+      {
+        "subject": "horizontal-lockup",
+        "expectedErrorPath": [
+          "decisions",
+          0,
+          "reviewedAt"
+        ],
+        "reason": "Exact new packet review remains pending; retain null instead of fabricating an instant."
+      }
+    ],
+    "descriptorReview": "pending",
+    "outputSelection": "pending",
+    "layerSelection": "pending",
+    "dateTimeFormatChecker": "unavailable in installed jsonschema; structural schema checks only; exact computed capture timestamps have explicit UTC offsets"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5231,
+      "sha256": "f01e4fe177f1be037cb934490c20a55488f90ce7848c03ec2ef35fa9d3cadbb9"
+    },
+    {
+      "path": "DESCRIPTORS.proposed.json",
+      "bytes": 5671,
+      "sha256": "2d5730555e2fa83093456724f30a0a9f97fa9a8a73154cb798933dd67539acf5"
+    },
+    {
+      "path": "OUTPUTS.proposed.json",
+      "bytes": 1892,
+      "sha256": "b615c0bc353c84b650bc0c274e6f10387860bf0fdfcc5cc5856b461c96f47835"
+    },
+    {
+      "path": "usage.proposed.json",
+      "bytes": 6194,
+      "sha256": "88cf9143d141b4a2ac3d868f2cce7c718e7223a1e14ad296de8a5fbd04e92c21"
+    }
+  ],
+  "previousProposalCommit": "98b1e8b3f5c0bcd8f4eb44fd3c812ec588fbd1d9"
+}

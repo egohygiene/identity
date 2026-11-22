@@ -1,0 +1,19 @@
+{
+  "recordKind": "review-only materialized topology; not adopted source or approval evidence",
+  "sourceRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "preparedAt": "2026-11-22T18:18:58.868985+00:00",
+  "candidateRoot": "candidate",
+  "choices": {
+    "inheritance": "option-A-staged-unselected",
+    "exactTokenLayerSelection": null,
+    "descriptorBundleSelection": null,
+    "classificationAndOutputSelection": null,
+    "optionalPublicUsageSelection": null
+  },
+  "knownVisualSelections": "../self-source-review/governance.proposed.json",
+  "descriptorProposal": "DESCRIPTORS.proposed.json",
+  "outputProposal": "OUTPUTS.proposed.json",
+  "nativeApprovalStatus": "schema-invalid due to null reviewedAt; known visual selections are recorded without invented original instants or new descriptor approval",
+  "schema": null,
+  "canonicalRootAdopted": false
+}

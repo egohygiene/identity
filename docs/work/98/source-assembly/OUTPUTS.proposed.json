@@ -1,0 +1,58 @@
+{
+  "recordKind": "proposed consumer classification and output selection; no adopted source or release policy",
+  "status": "review-required",
+  "preparedAt": "2026-11-22T18:16:38.809093+00:00",
+  "sourceRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "coreProposal": {
+    "kind": "product",
+    "enabledProfiles": [
+      {
+        "id": "core",
+        "version": "1.0.0"
+      },
+      {
+        "id": "tokens",
+        "version": "1.0.0"
+      },
+      {
+        "id": "metadata",
+        "version": "1.0.0"
+      }
+    ],
+    "voice": null,
+    "usage": null,
+    "selected": null,
+    "reason": "Smallest existing proposed executable selection. It supplies core/token/metadata outputs without inventing voice foundation/audience contexts or selecting every presentation surface."
+  },
+  "optionalPublicUsageProposal": {
+    "selected": null,
+    "record": "usage.proposed.json",
+    "publicAssets": [
+      "mark",
+      "horizontal-lockup"
+    ],
+    "downloadNames": [
+      "identity-emblem.svg",
+      "identity-horizontal-lockup.svg"
+    ],
+    "reason": "Explicit usage selection is needed for the generic renderer to advertise these source-asset downloads. A valid nullable core alone leaves public assets/downloads empty.",
+    "limits": [
+      "All new usage governance stays candidate with null approval until review.",
+      "This does not create new-tagline artwork, Kern PNG compiler support or a complete reviewed public Brand Kit."
+    ]
+  },
+  "deferredProfiles": [
+    "web",
+    "pwa",
+    "github",
+    "docs",
+    "social",
+    "archive"
+  ],
+  "deferredMeaning": "Not selected for this first source assembly; this is not a permanent inapplicability decision.",
+  "layerSelection": "Root owner question about option A/B and exact nine-token/mapping bytes remains pending independently.",
+  "review": {
+    "reviewedBy": null,
+    "reviewedAt": null
+  }
+}

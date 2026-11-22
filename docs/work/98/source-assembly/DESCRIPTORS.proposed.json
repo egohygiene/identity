@@ -1,0 +1,105 @@
+{
+  "recordKind": "assistant-authored descriptor proposal for explicit owner review; not approved provenance or usage policy",
+  "status": "review-required",
+  "preparedAt": "2026-11-22T18:16:38.809093+00:00",
+  "sourceRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "ownerEvidence": "../OWNER_ANSWERS_2026-11-22.md",
+  "sourcePolicy": "assets/identity/brand/LOGO_USE.md",
+  "scope": "The two unchanged selected Identity SVG masters only; no artwork, legacy tagline, Kern governance or legal permission changes.",
+  "assets": [
+    {
+      "subject": "mark",
+      "sourcePath": "assets/identity/brand/emblem.svg",
+      "sourceRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+      "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c",
+      "viewBox": [
+        0.0,
+        0.0,
+        512.0,
+        512.0
+      ],
+      "existingTitle": "identity crystal prism emblem",
+      "proposed": {
+        "accessibility": {
+          "altText": "Identity emblem: a vertical crystal prism surrounded by gold orbital rings."
+        },
+        "usage": {
+          "safeZone": "Keep the complete SVG artboard uncropped. Leave clear space on every side equal to at least one eighth of the displayed artboard height (64 SVG units at the original 512-unit height).",
+          "minimumSize": "Recommended digital width: 64 CSS pixels for the full-detail emblem. Review smaller instances in their actual context or select a separately reviewed small-icon variant. This display guidance adds no condition to the logo-use permission.",
+          "restrictions": [
+            "Display/bundle to represent Identity, including icon-font use; do not imply endorsement or make the unchanged/confusingly similar mark another product's brand.",
+            "A genuinely distinct renamed derivative may represent another project under the selected logo-use policy."
+          ]
+        }
+      },
+      "rationale": {
+        "clearSpaceRatio": {
+          "numerator": 1,
+          "denominator": 8,
+          "basis": "artboard height",
+          "originalSvgUnits": 64
+        },
+        "minimumDigitalWidthCssPx": 64,
+        "sourceFact": "Artboard dimensions, unchanged title/content and horizontal tagline font-size are read from the exact source SVG.",
+        "newProposal": "The clear-space ratio and recommended minimum sizes are authored proposals, not existing approved dimensions or measured accessibility results."
+      },
+      "review": {
+        "selected": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      }
+    },
+    {
+      "subject": "horizontal-lockup",
+      "sourcePath": "assets/identity/brand/lockup-horizontal.svg",
+      "sourceRevision": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+      "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed",
+      "viewBox": [
+        0.0,
+        0.0,
+        1200.0,
+        400.0
+      ],
+      "existingTitle": "identity — brand kit generator",
+      "proposed": {
+        "accessibility": {
+          "altText": "identity wordmark with crystal-prism emblem and the tagline “brand kit generator”."
+        },
+        "usage": {
+          "safeZone": "Keep the complete SVG artboard uncropped. Leave clear space on every side equal to at least one eighth of the displayed artboard height (50 SVG units at the original 400-unit height).",
+          "minimumSize": "Recommended digital width: 600 CSS pixels for the complete lockup, retaining the existing tagline. At that width its 28-unit tagline is 14 CSS pixels high before font-specific metrics. Use the standalone emblem in narrower layouts; review smaller lockup instances in their actual context. This is not a legibility, contrast or WCAG guarantee and adds no condition to the logo-use permission.",
+          "restrictions": [
+            "Display/bundle to represent Identity, including icon-font use; do not imply endorsement or make the unchanged/confusingly similar mark another product's brand.",
+            "A genuinely distinct renamed derivative may represent another project under the selected logo-use policy."
+          ]
+        }
+      },
+      "rationale": {
+        "clearSpaceRatio": {
+          "numerator": 1,
+          "denominator": 8,
+          "basis": "artboard height",
+          "originalSvgUnits": 50
+        },
+        "minimumDigitalWidthCssPx": 600,
+        "sourceFact": "Artboard dimensions, unchanged title/content and horizontal tagline font-size are read from the exact source SVG.",
+        "newProposal": "The clear-space ratio and recommended minimum sizes are authored proposals, not existing approved dimensions or measured accessibility results."
+      },
+      "review": {
+        "selected": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      }
+    }
+  ],
+  "reviewBoundary": "Approval of visual masters and previous copy does not approve these new descriptor strings. Keep proposals outside active native records until exact review. Record only the actual new packet-review timestamp after an explicit owner response.",
+  "unchangedFacts": [
+    "Existing exact master hashes and reviewer szmyty are already confirmed.",
+    "The horizontal master visibly says brand kit generator; the selected project-copy tagline remains project identity specification.",
+    "Source creation date/model/reference kits remain unknown.",
+    "Kern retains independent CC-BY-4.0 provenance; current generic producer cannot ingest its PNG records."
+  ],
+  "notEstablished": [
+    "No print minimum, rendered-font measurement, color contrast, WCAG compliance, trademark registration or exclusive AI copyright is asserted."
+  ]
+}
