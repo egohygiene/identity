@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T06:45:59.440107+00:00'
+  updated_at: '2026-11-22T06:50:26.853951+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -18,7 +18,8 @@ scope:
   includes:
   - Current-source Rust/Python/renderer/integrity baseline and truthful environmental failures.
   - Isolated copied-executable consumer test writer with controlled inherited-descriptor mechanism evidence.
-  - Bounded release-tag admission investigation and remaining engineering/owner-review gates.
+  - Exact remote annotated-tag/commit/main-ancestry admission before release artifact writes, and portable
+    exported policy references.
   excludes:
   - No new supported platform, hosted CI, actual release, tag, deployment or skill publication.
   - No canonical self-source adoption, exact layer/token approval, asset redesign or ADR lifecycle promotion.
@@ -36,6 +37,8 @@ scope:
   - docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md
   - docs/releases/NEXT_RELEASE_MATRIX.md
   - docs/work/98/OWNER_PACKET.md
+  - scripts/verify_release_admission.py
+  - docs/work/70/release-tag-admission-2026-11-22.md
 work:
   objective: Qualify the merged Linux engineering baseline and repair demonstrated test-harness and release-admission
     gaps in reviewable draft checkpoints.
@@ -52,8 +55,8 @@ work:
   next:
     kind: action
     id: complete-bounded-admission-repair-and-qualifier-stack
-    description: 'Complete the independently investigated annotated-tag/commit admission repair, then
-      stack #80 browser, #82 setup, #88 renderer and #98 exact self-source review checkpoints.'
+    description: 'Stack the qualified #80 browser, #82 setup, #88 renderer and #98 exact self-source review
+      checkpoints; retain their full Docker/native/human gates and review the stack before merge.'
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/70
@@ -69,7 +72,7 @@ state:
     branch: codex/70-engineering-baseline-20261122
     revision: null
     pull_request: null
-    handoff_state: in-progress
+    handoff_state: ready-for-review
   live:
     status: verified
     observed_at: '2026-11-22T06:45:59.440107+00:00'
@@ -81,7 +84,7 @@ state:
   parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-22T06:45:59.440107+00:00'
+  reviewed_at: '2026-11-22T06:50:26.853951+00:00'
   reviewed_by: Codex
   evidence:
   - command: Merged-source local Rust/Python/renderer/integrity baseline
@@ -99,11 +102,17 @@ review:
     observed_at: '2026-11-22T06:45:59.440107+00:00'
     notes: Initial Cargo commands failed ENOSPC; actual Cargo reruns after owned/generated cache cleanup
       passed. Ordinary pinned browser recipe did not execute after storage failure.
-  - command: Release admission audit
-    outcome: limited
-    observed_at: '2026-11-22T06:45:59.440107+00:00'
-    notes: Version/existence checks do not enforce the documented annotated immutable main-source binding.
-      A bounded helper/workflow repair is in progress on a separate branch.
+  - command: python3 -m unittest discover --start-directory tests --pattern test_release_*.py --verbose
+    outcome: passed
+    observed_at: '2026-11-22T06:50:26.853951+00:00'
+    notes: 18 focused release tests pass, including14new actual-Git admission cases. Independent read-only
+      review finds no blocker; actionlint/YAML checks pass. This is sampled remote admission, not atomic
+      ref locking or publication proof.
+  - command: Actual public build followed by repository documentation verification
+    outcome: passed
+    observed_at: '2026-11-22T06:50:26.853951+00:00'
+    notes: Three exported-policy relative-link failures were reproduced and repaired with immutable links.
+      Rebuilt public projection and docs verification pass; terms/masterbytes/historical source unchanged.
   environment_limitations:
   - 'Matching browser workflow and full clean-base image acceptance remain separate #80/#82 gates.'
   - Native macOS/Windows and actual downloaded release installation, upgrade and rollback remain unqualified.
@@ -144,7 +153,7 @@ Main/base is ec8fce30c3c96c7781238eb0a8899d6f0cee0a40. Candidate codex/70-engine
 
 ## Completed and material changes
 
-The exact merged baseline passes native119 tests, Python186 tests and renderer424 tests with explicit existing helper ignores/optional skips. The separate copied-executable writer removes an uncovered parent-process descriptor inheritance window while preserving production behavior and test parallelism. Its controlled probe does not assert historical CI causality.
+The exact merged baseline passes native119 tests, Python186 tests and renderer424 tests with explicit existing helper ignores/optional skips. Remote annotated-tag admission now binds the event commit, paired versions and current main ancestry before packaging/attestation/upload/release. Three exported policy links are now portable without changing terms. The separate copied-executable writer removes an uncovered parent-process descriptor inheritance window while preserving production behavior and test parallelism. Its controlled probe does not assert historical CI causality.
 
 ## Validation and review evidence
 
@@ -152,11 +161,11 @@ See docs/work/70/BASELINE_2026-11-22.md and EXECUTABLE_COPY_INVESTIGATION.md for
 
 ## Blockers, risks, unknowns, and deferred work
 
-Release-tag admission repair is still in progress. Docker VFS materialization exhausted the ordinary browser build budget; #80/#82 retain actual acceptance. The local-act context fix, bounded entrypoint workflow and renderer/self-source packets are separate worker checkpoints. Actual source review, full engineering acceptance, release/live/consumer proof and #116 closure remain open.
+Release-tag admission is implemented and locally tested; remote ref observations do not atomically lock publication. Docker VFS materialization exhausted the ordinary browser build budget; #80/#82 retain actual acceptance. The local-act context fix, bounded entrypoint workflow and renderer/self-source packets are separate worker checkpoints. Actual source review, full engineering acceptance, release/live/consumer proof and #116 closure remain open.
 
 ## Next dependency-ready work
 
-Finish and locally qualify the bounded release admission repair, then integrate the browser/setup/renderer/self-source checkpoints in dependency order. Keep all five draft PRs for maintainer review; do not merge, tag, release or deploy.
+Integrate the browser/setup/renderer/self-source checkpoints in dependency order. Keep all five draft PRs for maintainer review; do not merge, tag, release or deploy.
 
 ## Parallel changes and reconciliation
 
