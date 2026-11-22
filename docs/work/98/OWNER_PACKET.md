@@ -4,16 +4,22 @@ Status: **source integrated; real self-source/rights and release acceptance pend
 PR138/139/140 source is merged. [Initializer acceptance](../133/CLOSEOUT.md),
 [current engineering evidence](../116/SOURCE_CLOSEOUT_2026-11-14.md) and the
 [synthetic native publication proof](SYNTHETIC_PUBLICATION.md) retain their exact
-scope. The actual root candidate remains incomplete. Answer the
-[owner questionnaire](QUESTIONNAIRE.md) to supply missing creative/rights facts.
-Those answers do not select a release or deployment.
+scope. The actual root candidate remains incomplete. The
+[owner questionnaire](QUESTIONNAIRE.md) and captured answers retain the settled
+brand choices; the [exact self-source review](self-source-review/README.md)
+isolates remaining assembly/inheritance decisions without repeating those
+questions. Those choices do not select a release or deployment.
 
 [November 22 owner answers](OWNER_ANSWERS_2026-11-22.md) select the existing
 emblem/horizontal masters and report ChatGPT-assisted origin. The owner selected
 the scoped logo-use policy/credit, name/new tagline/short copy, existing palette
 and Inter, optional Kern, and local-baseline preparation for review.
 Reviewer `szmyty` and full copy/voice/principles are confirmed. Exact governance
-entries and review of the prepared local baseline bytes remain pending.
+assembly and review of the prepared local baseline bytes remain pending. The
+new packet stages same-subject master/copy bindings, proposed declarations and
+exact nine-value layers; active source still has empty layers/native arrays and
+fails the complete validator deliberately. Isolated layer checks are not
+project acceptance or organization authority.
 The same checkpoint verifies avatar transparency and repairs the glitched
 legacy README raster from the unchanged existing high-resolution bytes.
 
@@ -38,11 +44,11 @@ keeps unresolved rights/creative choices outside approved records.
 
 | Material | Existing evidence | Required owner action |
 | --- | --- | --- |
-| Emblem, lockup, avatars, social/browser assets and reference boards | `assets/identity/manifest.json` declares the 2026-08-22 direction; November 22 owner intake selects the exact emblem/horizontal masters and reports ChatGPT creation under maintainer guidance | Finalize actual artwork-use terms, attribution, reviewer and same-subject governance records. Exact external references remain unidentified; visual selection is separate from rights. Software MIT does not supply artwork permissions. |
+| Emblem, lockup, avatars, social/browser assets and reference boards | `assets/identity/manifest.json` declares the 2026-08-22 direction; November 22 owner intake selects the exact emblem/horizontal masters, reviewer, scoped terms/credit and reports ChatGPT creation under maintainer guidance | Complete the subject-bound native metadata and newly authored accessibility/usage records from the exact review packet. Do not repeat settled master/reviewer/terms choices. Exact external references remain unidentified; visual selection is separate from rights. Software MIT does not supply artwork permissions. |
 | Kern | Existing master, byte-bound derivative manifest, CC-BY-4.0 attribution and two explicit subject approvals in `mascot/` | Preserve existing subjects and exact variants. Confirm any new v1 mapping separately; never retarget an old approval to a new asset ID. |
 | Project name/repository/tagline | Existing release-publication configuration and authored README | Confirm proposed project classification and public source selection; review any reused copy as its actual governed subject. |
-| Colors and typography | Current manifest palette and publication tokens, including existing Inter/system fallbacks | Select the actual organization-default snapshot, product layer and exact intended token/font facts. No organization defaults or font redistribution rights are inferred. |
-| Public short/long descriptions and usage | Existing authored material and declared legacy guidance | Supply/select exact public copy, usage, legal and accessibility records with real matching decisions. The candidate contains proposals, not approvals. |
+| Colors and typography | Current manifest palette/publication tokens; owner confirmed existing palette/Inter direction and local-baseline preparation for review | Choose explicit empty organization inheritance or a real reviewed organization snapshot, then review the exact local bytes, `color.text.default` lookup mapping and layer declarations together. No organization-wide defaults or font redistribution rights are inferred. |
+| Public short/long descriptions and usage | Owner-confirmed short/two-sentence long copy, voice and principles; existing declared legacy guidance | Assemble the confirmed strings without asking them again. Newly authored usage/legal/accessibility and optional projection records retain their own matching review; native drafts are not adopted approval. |
 
 The native Rust consumer currently rejects non-SVG provenance assets, including
 otherwise source-valid PNG/font records. Kern's independently governed package
@@ -130,11 +136,13 @@ before any other-repository write.
 
 ## Remaining gates and precise future approvals
 
-1. Rights/creative owner supplies the missing facts in the first table against
-   the exact inventory/candidate subjects. This is source review, not release
-   permission or ADR acceptance.
-2. The separate engineering campaign completes #80/#82/#84–#88, final #83 and
-   #70, plus every #133 case, against its final source. Include native install,
+1. Review the exact remaining inheritance/token/representation and native
+   governance choices in the first table and self-source packet. Preserve
+   already-confirmed masters, reviewer, terms and copy; source review is not
+   release permission or ADR acceptance.
+2. The separate engineering campaign completes retained #80/#82/#88 and #70
+   acceptance against final source, preserving completed #83–#87/#133 scopes
+   and rerunning affected cases where needed. Include native install,
    clean-room, browser/fonts/AX/visual, #106/#107 and the retained OS-error26
    investigation. Missing required reviews/platform/CI evidence remains a gate.
 3. Prepare the exact merged release revision, immutable artifact checksums,

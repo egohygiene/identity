@@ -1,0 +1,34 @@
+{
+  "recordKind": "review-only Identity v1 layer fragment; not an adopted project manifest",
+  "status": "review-required",
+  "option": "explicit-empty-inheritance-plus-local-product",
+  "reviewedAgainstRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+  "layers": [
+    {
+      "id": "identity-empty-organization-defaults",
+      "kind": "organization-defaults",
+      "priority": 0,
+      "tokens": ".identity/defaults/organization-empty.tokens.json",
+      "sha256": "6b74d2954b0027185196dfa6641f1ae59bda593d0dd0d41d436b615f5d4dc9d1"
+    },
+    {
+      "id": "identity-local",
+      "kind": "product-override",
+      "priority": 10,
+      "tokens": ".identity/overrides/identity-local-product.tokens.json",
+      "sha256": "7146ea326b4278cd35d5a6bc85db766d5144aed584f5087a3d1a2fd359cdf851"
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "layers/organization-empty.tokens.json",
+      "copyToAfterReview": ".identity/defaults/organization-empty.tokens.json"
+    },
+    {
+      "path": "layers/identity-local-product.tokens.json",
+      "copyToAfterReview": ".identity/overrides/identity-local-product.tokens.json"
+    }
+  ],
+  "scope": "Only this Identity consumer; zero inherited organization token values. Never infer that absence of an identified snapshot means this choice was approved.",
+  "alternative": "Supply an actual reviewed organization token snapshot first; re-evaluate every colliding Identity token and its same-subject override approval."
+}
