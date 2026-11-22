@@ -25,6 +25,7 @@ on:
       - "scripts/release_smoke.py"
       - "scripts/release_inventory.py"
       - "scripts/verify_release.py"
+      - "scripts/verify_release_admission.py"
       - "scripts/verify_docs.py"
       - "CHANGELOG.md"
       - "SECURITY.md"
@@ -103,6 +104,8 @@ jobs:
     if: github.ref_type == 'tag'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    outputs:
+      release_tag_object: ${{ steps.release-admission.outputs.tag_object_sha }}
     permissions:
       contents: read
       attestations: write
@@ -112,7 +115,19 @@ jobs:
       - name: Checkout Identity
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          fetch-depth: 0
           persist-credentials: false
+
+      - name: Admit the remote annotated release selection
+        id: release-admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_release_admission.py \
+            --repository-root "." \
+            --tag "${GITHUB_REF_NAME}" \
+            --expected-commit "${GITHUB_SHA}" \
+            --github-output "${GITHUB_OUTPUT}"
 
       - name: Install pinned Rust toolchain
         shell: bash
@@ -173,10 +188,34 @@ jobs:
           cd "dist"
           sha256sum --binary -- * > "SHA256SUMS"
 
+      - name: Recheck the remote release selection before attesting provenance
+        shell: bash
+        env:
+          EXPECTED_TAG_OBJECT: ${{ steps.release-admission.outputs.tag_object_sha }}
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_release_admission.py \
+            --repository-root "." \
+            --tag "${GITHUB_REF_NAME}" \
+            --expected-commit "${GITHUB_SHA}" \
+            --expected-tag-object "${EXPECTED_TAG_OBJECT}"
+
       - name: Attest Linux archive provenance
         uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
         with:
           subject-path: "dist/*.tar.gz"
+
+      - name: Recheck the remote release selection before uploading assets
+        shell: bash
+        env:
+          EXPECTED_TAG_OBJECT: ${{ steps.release-admission.outputs.tag_object_sha }}
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_release_admission.py \
+            --repository-root "." \
+            --tag "${GITHUB_REF_NAME}" \
+            --expected-commit "${GITHUB_SHA}" \
+            --expected-tag-object "${EXPECTED_TAG_OBJECT}"
 
       - name: Upload release assets
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -212,15 +251,21 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+          EXPECTED_TAG_OBJECT: ${{ needs.package-linux.outputs.release_tag_object }}
         run: |
           set -euo pipefail
+          python3 scripts/verify_release_admission.py \
+            --repository-root "." \
+            --tag "${GITHUB_REF_NAME}" \
+            --expected-commit "${GITHUB_SHA}" \
+            --expected-tag-object "${EXPECTED_TAG_OBJECT}"
           arguments=(
             "${GITHUB_REF_NAME}"
             --verify-tag
             --title "Identity ${GITHUB_REF_NAME}"
             --generate-notes
           )
-          if [[ "${GITHUB_REF_NAME}" == *-* ]]; then
+          if [[ "${GITHUB_REF_NAME%%+*}" == *-* ]]; then
             arguments+=(--prerelease)
           fi
           gh release create "${arguments[@]}" release-assets/*

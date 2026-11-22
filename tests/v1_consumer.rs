@@ -6,7 +6,8 @@
 use std::collections::BTreeSet;
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::process::Command;
+use std::process::{Command, Stdio};
+use std::time::{Duration, Instant};
 
 use identity::brandkit::{
     BrandKitModel, GuidanceAudience, ProfileSelection, compiler_request, register_builtin_adapters,
@@ -897,7 +898,7 @@ fn standalone_binary_uses_embedded_preflight_and_ignores_consumer_python_code() 
     } else {
         "identity"
     });
-    fs::copy(env!("CARGO_BIN_EXE_identity"), &bin).unwrap();
+    copy_standalone_binary(&bin);
     fs::create_dir(root.path().join("scripts")).unwrap();
     for relative in [
         "json.py",
@@ -935,4 +936,62 @@ fn standalone_binary_uses_embedded_preflight_and_ignores_consumer_python_code() 
             );
         }
     }
+}
+
+fn copy_standalone_binary(destination: &Path) {
+    // Other tests call the library's Python preflight, which spawns children in
+    // this process. A mutex around only this file's Command calls cannot keep
+    // those forks from inheriting a writable executable descriptor. Do all
+    // executable writing in a separate, single-test process and wait for it to
+    // exit before executing the copy. Parent-process concurrency stays enabled.
+    let mut child = Command::new(std::env::current_exe().unwrap())
+        .args([
+            "--exact",
+            "isolated_executable_copy_worker",
+            "--ignored",
+            "--nocapture",
+            "--test-threads=1",
+        ])
+        .env("IDENTITY_EXECUTABLE_COPY_DESTINATION", destination)
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    let started = Instant::now();
+    while child.try_wait().unwrap().is_none() {
+        if started.elapsed() >= Duration::from_secs(30) {
+            let _ = child.kill();
+            let _ = child.wait();
+            panic!("isolated executable copy timed out");
+        }
+        std::thread::sleep(Duration::from_millis(10));
+    }
+    let output = child.wait_with_output().unwrap();
+    assert!(
+        output.status.success(),
+        "isolated copy failed: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let stdout = String::from_utf8(output.stdout).unwrap();
+    let worker = stdout
+        .lines()
+        .find_map(|line| line.strip_prefix("IDENTITY_EXECUTABLE_COPY_WORKER="))
+        .expect("the isolated copy worker must actually execute")
+        .parse::<u32>()
+        .unwrap();
+    assert_ne!(worker, std::process::id());
+    assert_eq!(
+        fs::read(destination).unwrap(),
+        fs::read(env!("CARGO_BIN_EXE_identity")).unwrap(),
+        "the independent executable must preserve the actual CLI bytes"
+    );
+}
+
+#[test]
+#[ignore = "isolated executable writer; invoked only by the standalone consumer test"]
+fn isolated_executable_copy_worker() {
+    let destination =
+        std::env::var_os("IDENTITY_EXECUTABLE_COPY_DESTINATION").expect("copy destination");
+    fs::copy(env!("CARGO_BIN_EXE_identity"), destination).unwrap();
+    println!("\nIDENTITY_EXECUTABLE_COPY_WORKER={}", std::process::id());
 }

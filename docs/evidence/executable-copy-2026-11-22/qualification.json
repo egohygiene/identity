@@ -1,0 +1,64 @@
+{
+  "record_kind": "bounded-executable-copy-test-harness-qualification",
+  "date": "2026-11-22",
+  "base_source": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+  "platform": "Linux x86_64",
+  "rust_toolchain": "1.97.1",
+  "python": "3.12.14",
+  "build_jobs": 1,
+  "dependency_mode": "locked offline prepared cache",
+  "source_sha256": {
+    "tests/v1_consumer.rs": "2d1fd686192181f504c963fca4c465614812d8fa0696e4ceb59c4c35c4d9e9b9",
+    "tests/probes/executable_copy_isolation.py": "a6bb48a18293984189846193e3bfdba6fbbf20936fbb48227d6e9b8f3ffaaa1c",
+    "tests/consumer_recovery.rs": "f1e3fd93acddd9463380b13fbf194a5ba8575710ad5bcf982c95de3ebd228723",
+    "src/v1_consumer/preflight.rs": "a61d4b348a7058bdb4e07d990fab9d16cd1300568b2d67152d932e6317a2ae98"
+  },
+  "checks": [
+    {
+      "command": "python3 tests/probes/executable_copy_isolation.py",
+      "exit_code": 0,
+      "result": "Four deterministic lifecycle expectations passed; original system-executable bytes preserved."
+    },
+    {
+      "command": "cargo test --locked --offline --all-features --test v1_consumer standalone_binary_uses_embedded_preflight_and_ignores_consumer_python_code -- --exact --nocapture",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "filtered_out": 14,
+      "execution_seconds": 0.84
+    },
+    {
+      "command": "cargo test --locked --offline --all-features --test v1_consumer -- --test-threads=16",
+      "exit_code": 0,
+      "passed": 14,
+      "failed": 0,
+      "ignored": 1,
+      "execution_seconds": 15.21,
+      "ignore_scope": "Isolated executable-copy helper; actually invoked by the ordinary copied-binary test."
+    },
+    {
+      "command": "cargo clippy --locked --offline --all-features --test v1_consumer -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "rustfmt --edition 2024 --check tests/v1_consumer.rs",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/verify_docs.py --repository-root .",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "scope_limits": [
+    "Controlled Linux mechanism, not exact historical CI causality.",
+    "No observed unmodified current-source ETXTBSY failure is asserted.",
+    "Product source, recovery synchronization, schema and approvals unchanged.",
+    "No retry, complete-suite/native-platform/hosted-CI/browser/release qualification claim.",
+    "Root owns integrated validation and continuity handoff."
+  ]
+}

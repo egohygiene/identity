@@ -4,7 +4,7 @@ Policy identifier: `LicenseRef-EgoHygiene-Identity-Logo-Use-1.0`.
 
 The maintainer selected these terms and the credit below on 2026-11-22. This
 owner-selected policy is being integrated through Identity #98; the associated
-[ADR-0035](../../../docs/decisions/ADR-0035-scoped-logo-use-policy.md) remains a
+[ADR-0035](https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/docs/decisions/ADR-0035-scoped-logo-use-policy.md) remains a
 proposed architecture record, not an accepted ADR or a published release.
 
 ## Covered artwork
@@ -75,7 +75,7 @@ need a separately reviewed permission rather than an assumed exception.
 ## Separate rights and material
 
 - Kern and its reviewed derivatives retain their independent
-  [CC-BY-4.0 artwork license](../../../mascot/LICENSE.md) and attribution.
+  [CC-BY-4.0 artwork license](https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/mascot/LICENSE.md) and attribution.
 - Software retains the repository's existing software license. This policy
   does not change it.
 - Third-party artwork, fonts, names and other material retain their own rights
@@ -84,6 +84,6 @@ need a separately reviewed permission rather than an assumed exception.
   trademark/copyright enforceability. It does not override rights that a user
   already has independently of this permission.
 
-The [owner-answer record](../../../docs/work/98/OWNER_ANSWERS_2026-11-22.md)
+The [owner-answer record](https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/docs/work/98/OWNER_ANSWERS_2026-11-22.md)
 keeps source selections, provenance gaps and actual approval subjects separate
 from release, publication and ADR lifecycle decisions.

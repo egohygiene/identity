@@ -7,24 +7,22 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T06:18:25.251493+00:00'
+  updated_at: '2026-11-22T06:52:19.170324+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Record the proposed next-release distribution and compatibility plan without changing release
-    artifacts, versions, workflows or current support claims.
+  purpose: Qualify the merged Linux engineering baseline and repair demonstrated test-harness and release-admission
+    gaps in reviewable draft checkpoints.
   includes:
-  - Capture staged native macOS/Linux/Windows cohorts, conditional expansion and package-channel requirements.
-  - Separate historical v1.0.0 delivery from proposed next-version compatibility and actual future support
-    evidence.
-  - 'Reconcile the release process and owner ledger so #98/#116 remain open through their release acceptance.'
+  - Current-source Rust/Python/renderer/integrity baseline and truthful environmental failures.
+  - Isolated copied-executable consumer test writer with controlled inherited-descriptor mechanism evidence.
+  - Exact remote annotated-tag/commit/main-ancestry admission before release artifact writes, and portable
+    exported policy references.
   excludes:
-  - Workflow, Cargo/lockfile, source, schema, asset, version or support-policy changes.
-  - Builds, native/install qualification, hosted CI, signing, tag/release creation, deployment and channel
-    publication.
-  - Canonical self-source promotion, exact token/layer approval or new human decision disposition.
+  - No new supported platform, hosted CI, actual release, tag, deployment or skill publication.
+  - No canonical self-source adoption, exact layer/token approval, asset redesign or ADR lifecycle promotion.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -33,114 +31,99 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
+  - docs/work/70/BASELINE_2026-11-22.md
+  - docs/work/70/baseline-2026-11-22.json
+  - docs/work/70/EXECUTABLE_COPY_INVESTIGATION.md
+  - docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md
   - docs/releases/NEXT_RELEASE_MATRIX.md
-  - docs/releases/RELEASE_PROCESS.md
-  - docs/releases/V1.md
   - docs/work/98/OWNER_PACKET.md
-  - docs/work/98/OWNER_ANSWERS_2026-11-22.md
-  - docs/work/98/candidate/README.md
-  - docs/work/98/candidate/.identity/defaults/README.md
-  - docs/decisions/ADR-0019-immutable-release-contract.md
-  - docs/decisions/policy-reference.json
-  - https://github.com/egohygiene/identity/issues/98
-  - https://github.com/egohygiene/identity/issues/116
+  - scripts/verify_release_admission.py
+  - docs/work/70/release-tag-admission-2026-11-22.md
 work:
-  objective: Record the proposed next-release distribution and compatibility plan without changing release
-    artifacts, versions, workflows or current support claims.
+  objective: Qualify the merged Linux engineering baseline and repair demonstrated test-harness and release-admission
+    gaps in reviewable draft checkpoints.
   success_conditions:
-  - Keep every new cohort/channel planned until required real build, native/downloaded-install and publication
-    evidence exists.
-  - Preserve published v1.0.0 and require a new compatible immutable release selection.
-  - Maintain the existing source/engineering/release/consumer closure order and separate Aether skill
-    installation from the Rust binary/runtime.
+  - Retain exact actual local results, failures, ignores and limits rather than infer platform/release
+    conformance.
+  - Close the copied-binary writable-descriptor exposure without production changes or blanket serial
+    tests.
+  - Preserve existing quality/immutable-release and human identity-governance boundaries.
   active_issue:
     provider: github
-    id: egohygiene/identity#98
-    url: https://github.com/egohygiene/identity/issues/98
+    id: egohygiene/identity#70
+    url: https://github.com/egohygiene/identity/issues/70
   next:
     kind: action
-    id: prepare-self-source-and-qualified-release-candidate
-    description: 'Review/merge the stacked source checkpoints in order, then continue exact local token/layer
-      and subject-governance review under #98 plus engineering acceptance under #70. Prepare and qualify
-      selected release cohorts before a concrete publication handoff.'
+    id: complete-bounded-admission-repair-and-qualifier-stack
+    description: 'Stack the qualified #80 browser, #82 setup, #88 renderer and #98 exact self-source review
+      checkpoints; retain their full Docker/native/human gates and review the stack before merge.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/98
     - https://github.com/egohygiene/identity/issues/70
-    - https://github.com/egohygiene/identity/issues/116
+    - https://github.com/egohygiene/identity/issues/80
+    - https://github.com/egohygiene/identity/issues/98
     depends_on: []
 state:
   base:
-    revision: b0ab233e6ba36dc749ef07bca8b04f0f1870258f
-    ref: refs/heads/codex/98-owner-answers-and-assets-20261122
-    verified_at: '2026-11-22T06:15:27Z'
+    revision: ec8fce30c3c96c7781238eb0a8899d6f0cee0a40
+    ref: refs/heads/main
+    verified_at: '2026-11-22T06:45:59.440107+00:00'
   candidate:
-    branch: codex/98-release-matrix-plan-20261122
+    branch: codex/70-engineering-baseline-20261122
     revision: null
-    pull_request: null
-    handoff_state: ready-for-review
+    pull_request:
+      provider: github
+      id: egohygiene/identity#158
+      url: https://github.com/egohygiene/identity/pull/158
+    handoff_state: review-reference-recorded
   live:
     status: verified
-    observed_at: '2026-11-22T06:15:27Z'
-    default_branch_revision: afc368003bfc6a2101051229efd237c8d6fadf71
+    observed_at: '2026-11-22T06:45:59.440107+00:00'
+    default_branch_revision: ec8fce30c3c96c7781238eb0a8899d6f0cee0a40
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Fresh provider reads verified main afc3680 and open draft PR155 at b687df5 plus open draft
-      PR156 at b0ab233. Issues98/116 remain open. The new child PR does not yet exist; no release/tag
-      selection or publication is claimed.
-  parallel_changes:
-  - provider: github
-    id: egohygiene/identity#155
-    url: https://github.com/egohygiene/identity/pull/155
-  - provider: github
-    id: egohygiene/identity#156
-    url: https://github.com/egohygiene/identity/pull/156
-  - provider: github
-    id: egohygiene/aether#139
-    url: https://github.com/egohygiene/aether/pull/139
+    pull_request_state: draft
+    notes: Main remains ec8fce3. Earlier155/156/157 and Aether139 are merged. Draft158 now records the
+      first engineering checkpoint; all six finish issues remain open. Later stack children are not yet
+      published.
+  parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-22T06:15:27Z'
+  reviewed_at: '2026-11-22T06:50:26.853951+00:00'
   reviewed_by: Codex
   evidence:
-  - command: python3 scripts/verify_docs.py --repository-root .
+  - command: Merged-source local Rust/Python/renderer/integrity baseline
     outcome: passed
-    observed_at: '2026-11-22T06:15:27Z'
-    notes: All current documentation links resolve, including the proposed matrix and owner-ledger references.
-  - command: python3 scripts/verify_release.py --repository-root .
+    observed_at: '2026-11-22T06:45:59.440107+00:00'
+    notes: Rust119pass/3existinghelperignores; Python186pass/2existing skips; renderer424pass/19files;
+      strictClippy, frozen builds and existing integrity checks pass.
+  - command: Controlled descriptor probe, standalone regression and 16-thread consumer suite
     outcome: passed
-    observed_at: '2026-11-22T06:15:27Z'
-    notes: Current Cargo and renderer metadata remain 1.0.0; tag=not-checked. This does not qualify or
-      select a next release.
-  - command: git diff --check
+    observed_at: '2026-11-22T06:45:59.440107+00:00'
+    notes: Mechanism barriers demonstrate errno26 and isolation. Focused standalone1pass; consumer14pass/1explicitworkerignore;
+      strictClippy/format pass. Historical failure causality remains unproven.
+  - command: Initial local Cargo and Docker attempts during VFS expansion
+    outcome: limited
+    observed_at: '2026-11-22T06:45:59.440107+00:00'
+    notes: Initial Cargo commands failed ENOSPC; actual Cargo reruns after owned/generated cache cleanup
+      passed. Ordinary pinned browser recipe did not execute after storage failure.
+  - command: python3 -m unittest discover --start-directory tests --pattern test_release_*.py --verbose
     outcome: passed
-    observed_at: '2026-11-22T06:15:27Z'
-    notes: No whitespace errors in the scoped documentation diff.
-  - command: Historical V1/Cargo/lock/workflow/SUPPORT byte comparison against parent
+    observed_at: '2026-11-22T06:50:26.853951+00:00'
+    notes: 20 focused release tests pass:14actual-Git admission cases plus actual-publication-Bash coverage.
+      Six stable/RC/build-metadata selections and admission refusal exercise fake executables only; stable
+      hyphenated metadata regression fails on old code and passes after repair. Independent admission
+      review and actionlint pass; no real publication.
+  - command: Actual public build followed by repository documentation verification
     outcome: passed
-    observed_at: '2026-11-22T06:15:27Z'
-    notes: Historical release guide, code/version/dependency inputs, release workflow and current support
-      claims are unchanged.
-  - command: Independent read-only release-plan review
-    outcome: passed
-    observed_at: '2026-11-22T06:15:27Z'
-    notes: Parent reports no blocking finding; target/channel states remain proposed and source/engineering/release
-      closure order is explicit.
-  - command: Pinned continuity metadata schema, exact headings and budget verification
-    outcome: passed
-    observed_at: '2026-11-22T06:15:27Z'
-    notes: Draft 2020-12 schema and all twelve headings validate; base/candidate/parallel shapes are explicit
-      and within 16384 bytes/240 lines. Official released EgoLint continuity conformance is not claimed.
+    observed_at: '2026-11-22T06:50:26.853951+00:00'
+    notes: Three exported-policy relative-link failures were reproduced and repaired with immutable links.
+      Rebuilt public projection and docs verification pass; terms/masterbytes/historical source unchanged.
   environment_limitations:
-  - 'The retained self-source candidate is still incomplete: its parent checkpoint reports exit 1 / IDN1301
-    for empty layers. No new candidate-source validation or acceptance is claimed here.'
-  - Exact local token/layer review and formal subject-bound source/governance assembly remain pending.
-  - No new build, native or downloaded-install/upgrade/uninstall/offline/recovery qualification, signing,
-    hosted CI or release/publication evidence is supplied.
-  - Aether companion spec/skill is prepared separately in draft PR139. Host gh skill qualification/publication
-    is blocked on installed gh2.46.0; package/source checks do not establish agent behavior.
-  - Official released EgoLint continuity conformance is not claimed; this handoff uses pinned schema/heading/budget
-    checks.
+  - 'Matching browser workflow and full clean-base image acceptance remain separate #80/#82 gates.'
+  - Native macOS/Windows and actual downloaded release installation, upgrade and rollback remain unqualified.
+  - 'Exact token/layer and subject-governance source review remain #98; incomplete candidates are not
+    valid source.'
+  - No released EgoLint continuity conformance is claimed; pinned schema/heading/budget checks are used.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -159,48 +142,48 @@ privacy:
 
 ## Purpose and precedence
 
-This is a time-qualified operational handoff beneath user/runtime instructions, scoped instructions, live state and canonical sources. It records a proposed release-plan documentation checkpoint, not support promotion or publication authority.
+Runtime/user and scoped instructions, live evidence and canonical sources outrank this current operational handoff. It records a draft engineering sprint, not completion or publication authority.
 
 ## Resume protocol
 
-Read AGENTS, the next-release guide, release process and owner packet. Re-query main, issues #98/#116 and the stacked PRs. Preserve the existing owner answers, exact selected master bytes, draft local baseline and separate engineering/release obligations.
+Read AGENTS and the source-bound records above. Reverify main, open issues and draft stack before acting. Earlier PR155/156/157 and Aether139 are merged; preserve unrelated existing checkouts and historical receipts.
 
 ## Current objective and success conditions
 
-Make broad Rust CLI distribution concrete through a finite staged compatibility plan while retaining honest runtime/ABI, native install, artifact integrity, signing and publication evidence requirements.
+Qualify the merged Linux engineering baseline and repair demonstrated test-harness and release-admission gaps in reviewable draft checkpoints.
 
 ## State snapshot
 
-Base is open draft PR156 at b0ab233e6ba36dc749ef07bca8b04f0f1870258f, after open draft PR155 at b687df51649226882f2b218178c7b10933f48a74. Main remains afc368003bfc6a2101051229efd237c8d6fadf71. This child branch has no containing-revision or PR self-reference. Issues98/116 remain open.
+Main/base is ec8fce30c3c96c7781238eb0a8899d6f0cee0a40. Candidate codex/70-engineering-baseline-20261122 has draft PR158 and no self-referential containing revision. This is the first planned draft checkpoint of the authorized overnight stack.
 
 ## Completed and material changes
 
-NEXT_RELEASE_MATRIX.md proposes four primary native cohorts and conditional ARM64/musl expansion, distribution channels and per-check matrix evidence. RELEASE_PROCESS.md generalizes the next-version candidate procedure and links the guide. OWNER_PACKET.md retains selected release/self-source gates and records the broader target/channel work. The docs index exposes the plan. Published v1.0.0 is immutable; v1.1.0 is only a proposal subject to compatibility review, with no selected new tag or release commit.
+The exact merged baseline passes native119 tests, Python186 tests and renderer424 tests with explicit existing helper ignores/optional skips. Remote annotated-tag admission now binds the event commit, paired versions and current main ancestry before packaging/attestation/upload/release. Stable build-metadata tags retain stable publication classification. Three exported policy links are now portable without changing terms. The separate copied-executable writer removes an uncovered parent-process descriptor inheritance window while preserving production behavior and test parallelism. Its controlled probe does not assert historical CI causality.
 
 ## Validation and review evidence
 
-Existing documentation links, release metadata with tag not checked and whitespace checks pass. Historical V1 guide, Cargo/lock, workflow and SUPPORT bytes remain unchanged. Independent read-only review reports no blocker. These are documentation/source-scope checks, not new native, CI, package or release evidence. Pinned Aether decision guidance 2.1.0 and Hygiene policy 1.2.0 retain their existing selected revisions.
+See docs/work/70/BASELINE_2026-11-22.md and EXECUTABLE_COPY_INVESTIGATION.md for exact commands and receipts. StrictClippy, formatting, frozen renderer/public builds, validator drift, publication/asset/docs/extraction and109JSONparse checks pass. Initial ENOSPC failures remain distinct from successful reruns. No hosted CI or native-platform generalization.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The actual self-source candidate remains incomplete with retained IDN1301 for empty layers; exact token/layer review and formal source/governance assembly are pending. #70/#80/#82/#88 retain engineering qualification. New matrix rows are planned/conditional, not supported; Python 3.11+ remains a current v1 runtime dependency. Signing identities, actual ABI minima, package channels and downloadable artifacts require their own proof. No new version, tag or release is selected.
+Release-tag admission is implemented and locally tested; remote ref observations do not atomically lock publication. Docker VFS materialization exhausted the ordinary browser build budget; #80/#82 retain actual acceptance. The local-act context fix, bounded entrypoint workflow and renderer/self-source packets are separate worker checkpoints. Actual source review, full engineering acceptance, release/live/consumer proof and #116 closure remain open.
 
 ## Next dependency-ready work
 
-Review and merge the stack #155, then #156, then this plan, reconciling continuity semantically. Continue #98 exact baseline/source preparation and independent #70 engineering acceptance. Prepare source-changing release repairs before final qualification; then qualify the actual selected target/channel artifacts before publication. Complete #98 release/live/rollback/consumer proof and close #116 last, without requiring zero open issues before their release acceptance.
+Integrate the browser/setup/renderer/self-source checkpoints in dependency order. Keep all five draft PRs for maintainer review; do not merge, tag, release or deploy.
 
 ## Parallel changes and reconciliation
 
-PR155 and PR156 remain open drafts and own earlier scoped changes. Aether's companion workflow spec/skill is prepared separately in draft PR139; its version/install/publication is distinct from Identity's Rust CLI and Python runtime. Its package/source checks pass, while the real gh skill host gate remains blocked on gh2.46.0. Preserve newer peer changes and historical receipts.
+Concurrent workers own separate branches for70admission,80,82,88,98. Stack only scoped commits and reconcile continuity semantically. The governance/source/schema/asset contracts and proposed ADR lifecycles remain unchanged.
 
 ## Privacy and redaction
 
-Only public repository facts, selected source references and proposed technical requirements appear here. Exclude private conversation transcripts, credentials, personal details and local filesystem topology.
+Public-safe source facts, synthetic fixtures and sanitized evidence only. No private transcript, credentials, proxy values, unrelated personal context or local filesystem topology in committed receipts.
 
 ## Handoff update protocol
 
-Refresh after actual checks and before PR handoff; validate pinned metadata, twelve headings and byte/line budgets. ADR-Ref: egohygiene/identity#ADR-0019 (reference). This documents broader future qualification under the existing immutable-release boundary; it does not adopt a new runtime/channel, alter a public contract or promote any ADR lifecycle.
+Refresh after domain checks before each draft PR update. Validate the pinned schema, twelve headings, budgets and whitespace. Reference ADR0011 andADR0019; the isolated test-harness repair needs no duplicate ADR. Pinned Aether skill2.1.0/continuity1.1.0 and Hygiene1.2.0 retain their selected source revisions.
 
 ## Compaction and supersession
 
-Git and the owning issues retain history. Keep this snapshot compact; preserve the historical v1.0.0 guide/artifacts and prior source/approval/recovery records rather than relabeling them as new-release evidence.
+Git and linked work trackers retain history. Replace current operational prose and preserve historical receipts, approved baseline and immutable v1.0.0 release facts.
