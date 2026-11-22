@@ -3,11 +3,16 @@
 """Failure-boundary checks for source-preserving browser qualification."""
 
 import copy
+from contextlib import redirect_stderr, redirect_stdout
 import importlib.util
+import io
 import json
+import os
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 SPEC = importlib.util.spec_from_file_location("qualify_browser", Path(__file__).resolve().parents[1] / "scripts/qualify_browser.py")
@@ -65,6 +70,31 @@ def output(receipt, directory):
 
 
 class BrowserQualificationBoundaryTests(unittest.TestCase):
+    def test_local_act_receipts_do_not_claim_hosted_ci(self):
+        # Exercise the real host-receipt writer in the same runner environment
+        # exposed by act. Deliberately fail Docker preflight: no browser/image
+        # execution is needed to prove truthful failure-context reporting.
+        with tempfile.TemporaryDirectory() as temporary:
+            for mode, expected in (("ci", "local-act-ci"), ("local", "local-act-local-entrypoint-replay")):
+                destination = Path(temporary) / mode
+                argv = ["qualify_browser.py", "--mode", mode, "--output-directory", str(destination)]
+                failure = subprocess.CompletedProcess(["docker"], 19, stdout="Synthetic Docker preflight failure\n")
+                original_run = subprocess.run
+
+                def preflight_only(arguments, **options):
+                    if arguments[0] == "docker":
+                        return failure
+                    return original_run(arguments, **options)
+
+                with self.subTest(mode=mode), patch.dict(os.environ, {"ACT": "true", "GITHUB_ACTIONS": "true"}), \
+                     patch.object(QUALIFY.sys, "argv", argv), patch.object(QUALIFY.subprocess, "run", side_effect=preflight_only), \
+                     redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                    self.assertEqual(QUALIFY.main(), 1)
+                receipt = json.loads((destination / "host-qualification.json").read_text())
+                self.assertEqual(receipt["status"], "failed")
+                self.assertEqual(receipt["execution_context"], expected)
+                self.assertNotIn("qualification", receipt)
+
     def test_output_cannot_overwrite_source_or_reuse_stale_evidence(self):
         with tempfile.TemporaryDirectory() as temporary:
             parent = Path(temporary)

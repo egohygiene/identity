@@ -43,6 +43,10 @@ hosted local-entrypoint replay, not proof that this authoring workspace ran
 Docker. Whether an authoring workspace has a usable engine must be checked
 there; native host tests remain separate evidence.
 
+When replayed through `act`, the host receipt uses `local-act-ci` or
+`local-act-local-entrypoint-replay` even though that runner also sets
+`GITHUB_ACTIONS=true`. A local workflow replay is not GitHub-hosted CI evidence.
+
 ## Fixed settings and font evidence
 
 The profile fixes locale en-US, timezone UTC, scale 1, light color scheme,

@@ -259,8 +259,14 @@ def main() -> int:
         destination.mkdir(parents=True, exist_ok=True)
     except (OSError, ValueError) as error:
         parser.error(str(error))
-    hosted = os.environ.get("GITHUB_ACTIONS") == "true"
-    context = "hosted-local-entrypoint-replay" if hosted and args.mode == "local" else "github-actions-ci" if hosted else "local-host"
+    # act exposes GITHUB_ACTIONS=true while replaying a workflow locally.
+    # Its explicit marker must take precedence over the compatible runner flag.
+    local_act = os.environ.get("ACT") == "true"
+    hosted = os.environ.get("GITHUB_ACTIONS") == "true" and not local_act
+    if local_act:
+        context = "local-act-local-entrypoint-replay" if args.mode == "local" else "local-act-ci"
+    else:
+        context = "hosted-local-entrypoint-replay" if hosted and args.mode == "local" else "github-actions-ci" if hosted else "local-host"
     commands: list[dict[str, object]] = []
     envelope: dict[str, object] = {
         "kind": "dated browser-environment qualification host receipt",
@@ -270,6 +276,7 @@ def main() -> int:
         "limits": [
             "The invocation mode labels a caller; both use identical image/rendering settings.",
             "A hosted local-entrypoint replay is not an actual Docker run in an unavailable developer workspace.",
+            "Local act workflow replays are not GitHub-hosted CI evidence.",
             "Only the recorded image/platform/fonts/settings and unchanged approved baseline are qualified.",
             "No baseline regeneration, tolerance relaxation, release, deployment or human approval occurs.",
         ],
