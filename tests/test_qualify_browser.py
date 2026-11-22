@@ -131,17 +131,29 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
     def test_missing_or_non_file_environment_ca_stops_before_output_or_docker(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            for label, value in (("missing", root / "missing.pem"), ("directory", root)):
+            private = root / "synthetic-private-author" / "private-ca" / "missing.pem"
+            directory = root / "synthetic-private-directory"
+            directory.mkdir()
+            for label, value, cli in (
+                ("missing-env", private, []), ("directory-env", directory, []),
+                ("missing-cli", None, ["--proxy-ca", str(private)]),
+                ("directory-cli", None, ["--proxy-ca", str(directory)]),
+            ):
                 destination = root / (label + "-evidence")
-                with self.subTest(label=label), patch.dict(os.environ, {"IDENTITY_BROWSER_PROXY_CA": str(value)}, clear=True), \
-                     patch.object(QUALIFY.sys, "argv", ["qualify_browser.py", "--output-directory", str(destination)]), \
+                environment = {"IDENTITY_BROWSER_PROXY_CA": str(value)} if value else {}
+                printed = io.StringIO()
+                with self.subTest(label=label), patch.dict(os.environ, environment, clear=True), \
+                     patch.object(QUALIFY.sys, "argv", ["qualify_browser.py", "--output-directory", str(destination), *cli]), \
                      patch.object(QUALIFY.subprocess, "run") as execute, \
-                     redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                     redirect_stdout(printed), redirect_stderr(printed):
                     with self.assertRaises(SystemExit) as error:
                         QUALIFY.main()
                     self.assertEqual(error.exception.code, 2)
                     execute.assert_not_called()
                 self.assertFalse(destination.exists())
+                self.assertIn("must select an existing regular CA bundle", printed.getvalue())
+                for secret_path_part in (str(root), "synthetic-private-author", "private-ca", "synthetic-private-directory"):
+                    self.assertNotIn(secret_path_part, printed.getvalue())
 
     def test_vfs_disk_preflight_refuses_the_reproduced_small_store(self):
         with tempfile.TemporaryDirectory() as temporary:

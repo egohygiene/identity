@@ -329,7 +329,10 @@ def main() -> int:
     try:
         proxy_ca = args.proxy_ca.resolve(strict=True) if args.proxy_ca else None
         if proxy_ca is not None and not proxy_ca.is_file():
-            raise ValueError("--proxy-ca must select a regular CA bundle")
+            raise ValueError("Invalid CA bundle")
+    except (OSError, ValueError):
+        parser.error("--proxy-ca must select an existing regular CA bundle")
+    try:
         destination = output_destination(args.output_directory)
         destination.mkdir(parents=True, exist_ok=True)
         receipt_file = reserve_host_receipt(destination)
