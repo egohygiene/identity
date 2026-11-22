@@ -21,3 +21,6 @@ docs/evidence/browser-local-2026-11-14/**/*.log -diff
 docs/work/80/evidence-2026-11-22/** -text
 docs/work/80/evidence-2026-11-22/**/error-context.md -diff
 docs/work/80/evidence-2026-11-22/**/*.log -diff
+docs/work/80/action-replay-2026-11-22/** -text
+docs/work/80/action-replay-2026-11-22/**/error-context.md -diff
+docs/work/80/action-replay-2026-11-22/**/*.log -diff

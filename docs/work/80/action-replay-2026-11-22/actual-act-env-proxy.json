@@ -1,0 +1,69 @@
+{
+  "exit_code": 1,
+  "elapsedSeconds": 89.342,
+  "source_revision": "9d11d9993555bbe1736cda5c43e4c2a8239e657c",
+  "workflow": ".github/workflows/reference-renderer.yml",
+  "workflowSha256": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+  "execution": "actual act host executor inside task-owned isolated runtime helper",
+  "actionMirrors": [
+    {
+      "archiveBytes": 4698842,
+      "archiveSha256": "413243d94dd2f88f038e96f9ec940928361a0e8db4fedd55d61ec3f183dead35",
+      "archiveUrl": "https://codeload.github.com/step-security/harden-runner/tar.gz/05e31511f85b41b11d1cf0ef85d0992719546e2c",
+      "directory": "actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c",
+      "extractedBytes": 15235283,
+      "files": 72,
+      "gitTreeSha1": "ff47551a42d7f99402b166673a87d6f19cf49c7c",
+      "repository": "step-security/harden-runner",
+      "revision": "05e31511f85b41b11d1cf0ef85d0992719546e2c",
+      "verifiedGitTree": "ff47551a42d7f99402b166673a87d6f19cf49c7c"
+    },
+    {
+      "archiveBytes": 476180,
+      "archiveSha256": "b59292069298c7be5ffd9c636431a229faff70ece00e0c24fd31baeb7b309fa3",
+      "archiveUrl": "https://codeload.github.com/actions/checkout/tar.gz/3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "directory": "actions/actions--checkout--3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "extractedBytes": 2089254,
+      "files": 101,
+      "gitTreeSha1": "150e70ecad5ebf06a559a01ea3a56d9a3236d2b1",
+      "repository": "actions/checkout",
+      "revision": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "verifiedGitTree": "150e70ecad5ebf06a559a01ea3a56d9a3236d2b1"
+    },
+    {
+      "archiveBytes": 1745101,
+      "archiveSha256": "4023ca6e4bfb441f113117fadf0dab62135c07aa53af156a3673836a5ef94333",
+      "archiveUrl": "https://codeload.github.com/actions/setup-node/tar.gz/249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "directory": "actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "extractedBytes": 8151710,
+      "files": 158,
+      "gitTreeSha1": "e2d479cfddf6ecba7417f6e66c4cf25f31fe4e81",
+      "repository": "actions/setup-node",
+      "revision": "249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "verifiedGitTree": "e2d479cfddf6ecba7417f6e66c4cf25f31fe4e81"
+    },
+    {
+      "archiveBytes": 1912055,
+      "archiveSha256": "d14fb1cada435a236a66b448fbb370cd126564c2c2d6cb52abd14d20bcbb9748",
+      "archiveUrl": "https://codeload.github.com/actions/upload-artifact/tar.gz/043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "directory": "actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "extractedBytes": 9476204,
+      "files": 58,
+      "gitTreeSha1": "9eac56dcf4bfeeb308ee3d0d7d49913c3d65b676",
+      "repository": "actions/upload-artifact",
+      "revision": "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "verifiedGitTree": "9eac56dcf4bfeeb308ee3d0d7d49913c3d65b676"
+    }
+  ],
+  "nodeEnvironmentProxyOptIn": true,
+  "noGitHubSecretsPassed": true,
+  "hosted_ci": false,
+  "rawLogSha256": "63dd947533dfd594f9d8f44059dc8a5024d06572a9a7a3c7cf2885ca42d8212b",
+  "sanitizedLogSha256": "41d25058d8d95e320b98e28e9553895150aae7ae2c6d226e2cc558d978a6b75d",
+  "log": "actual-act-env-proxy.log",
+  "redactions": [
+    "task-local checkout/cache/mirror/runtime paths",
+    "private proxy environment values when present",
+    "disposable local-emulation correlation identifier"
+  ]
+}

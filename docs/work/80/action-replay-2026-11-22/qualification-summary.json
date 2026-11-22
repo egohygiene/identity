@@ -1,0 +1,108 @@
+{
+  "kind": "identity original local Docker and actual local-workflow browser qualification",
+  "sourceRevision": "a56399b33548cab075e4442e64605035bccd973f",
+  "sourceInventorySha256": "07bb513dd71ad84f2980fed5479cf683a7689b749c7700d35f92a322ffbd3726",
+  "runs": [
+    {
+      "directory": "original-docker",
+      "status": "passed",
+      "context": "local-host",
+      "sourceRevision": "a56399b33548cab075e4442e64605035bccd973f",
+      "sourceWorktreeClean": true,
+      "sourceInventory": {
+        "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+        "files": 423,
+        "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+        "sha256": "07bb513dd71ad84f2980fed5479cf683a7689b749c7700d35f92a322ffbd3726"
+      },
+      "profileSha256": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+      "hostReceiptSha256": "819baa45b2b0c52ed31842f439045925e5c1ca70baad726f237f39ccbb2cb5c7",
+      "positivePassed": 9,
+      "intentionalScreenshotFailures": 1,
+      "restoredPassed": 1,
+      "skipped": 0,
+      "artifactFiles": 16,
+      "baselineSha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+      "baselineUnchanged": true,
+      "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+      "enginePlatformRelation": "native-amd64",
+      "driver": "overlay2",
+      "capacityGuardBytes": 4294967296
+    },
+    {
+      "directory": "original-workflow-ci",
+      "status": "passed",
+      "context": "local-act-ci",
+      "sourceRevision": "a56399b33548cab075e4442e64605035bccd973f",
+      "sourceWorktreeClean": true,
+      "sourceInventory": {
+        "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+        "files": 423,
+        "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+        "sha256": "07bb513dd71ad84f2980fed5479cf683a7689b749c7700d35f92a322ffbd3726"
+      },
+      "profileSha256": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+      "hostReceiptSha256": "c1ca9e0d41316a64f0dec1212968d2e24dc3b71429fef832e195cf3c81f7ae09",
+      "positivePassed": 9,
+      "intentionalScreenshotFailures": 1,
+      "restoredPassed": 1,
+      "skipped": 0,
+      "artifactFiles": 16,
+      "baselineSha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+      "baselineUnchanged": true,
+      "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+      "enginePlatformRelation": "native-amd64",
+      "driver": "overlay2",
+      "capacityGuardBytes": 4294967296
+    },
+    {
+      "directory": "original-workflow-local",
+      "status": "passed",
+      "context": "local-act-local-entrypoint-replay",
+      "sourceRevision": "a56399b33548cab075e4442e64605035bccd973f",
+      "sourceWorktreeClean": true,
+      "sourceInventory": {
+        "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+        "files": 423,
+        "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+        "sha256": "07bb513dd71ad84f2980fed5479cf683a7689b749c7700d35f92a322ffbd3726"
+      },
+      "profileSha256": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+      "hostReceiptSha256": "14d6a938871fe4a4e4ad00e04cde64f8aa808522b42bb03c61a1e9b3623adb80",
+      "positivePassed": 9,
+      "intentionalScreenshotFailures": 1,
+      "restoredPassed": 1,
+      "skipped": 0,
+      "artifactFiles": 16,
+      "baselineSha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+      "baselineUnchanged": true,
+      "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+      "enginePlatformRelation": "native-amd64",
+      "driver": "overlay2",
+      "capacityGuardBytes": 4294967296
+    }
+  ],
+  "actualWorkflow": {
+    "receipt": "actual-act-final.json",
+    "browserStepsPassed": true,
+    "wholeWorkflowPassed": false,
+    "exitCode": 1,
+    "failure": "Local act artifact server rejects the unchanged upload-artifact CreateArtifact mime_type field",
+    "frontendVitestPassed": 424,
+    "frontendSourceParses": 51,
+    "githubHosted": false
+  },
+  "scope": [
+    "Original pinned Dockerfile/profile/workflow/actions and approved baseline are preserved.",
+    "Local act CI/default-entrypoint execution is distinct from GitHub-hosted qualification.",
+    "No tag, release, deployment, artifact publication or new creative approval."
+  ],
+  "history": [
+    "physical-source-capacity-refusal.json",
+    "pre-repair-registry-failure.json",
+    "actual-act-host-executor.json",
+    "actual-act-prepared-cache.json",
+    "actual-act-env-proxy.json"
+  ],
+  "decisionImpact": "Reference accepted ADR-0011; local acquisition and trust transport preserve the existing environment/approval contract."
+}

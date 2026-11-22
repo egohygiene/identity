@@ -1,0 +1,20 @@
+{
+  "kind": "actual local act strict dry-run",
+  "sourceRevision": "3512de7538f1611de46d90b5ef165cc3e06a4b34",
+  "workflow": ".github/workflows/reference-renderer.yml",
+  "workflowSha256": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+  "actVersion": "0.2.97",
+  "actSha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+  "exitCode": 0,
+  "localSourceMirrors": 4,
+  "actualWorkflowStepExecution": false,
+  "hostedCi": false,
+  "rawLogSha256": "5a4edb534a9d03d9d7b8c48be245e0921820b5875d65c094f1bf0e232ff0d0db",
+  "sanitizedLogSha256": "d44f219d0068dbeb8d8ea07946fcec91a4f074ef08068d702d5d9a4f8dd8dc2a",
+  "redactions": [
+    "task-owned local checkout, mirror and cache paths"
+  ],
+  "limits": [
+    "Source resolution and workflow planning only, no action execution or browser/CI acceptance."
+  ]
+}

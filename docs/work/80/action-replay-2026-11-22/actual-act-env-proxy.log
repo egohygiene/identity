@@ -1,0 +1,277 @@
+time="2026-11-22T18:45:41Z" level=info msg="Using docker host 'unix://<task-runtime>/docker.sock', and daemon socket 'unix://<task-runtime>/docker.sock'"
+time="2026-11-22T18:45:41Z" level=info msg="Start server on http://127.0.0.1:35681"
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Set up job
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Set up job
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c to <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath 'action.yml' from <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Pre Harden runner
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath '' from <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer]   | [harden-runner] pre-step
+[Validate reference renderer/Validate static Brand Kit renderer]   | [!] Current Configuration: 
+[Validate reference renderer/Validate static Brand Kit renderer]   | {"repo":"egohygiene/identity","run_id":"1","correlation_id":"<local-replay>","working_directory":"<local-action-cache>/f2665529ac25936b/hostexecutor","api_url":"https://agent.api.stepsecurity.io/v1","telemetry_url":"https://prod.app-api.stepsecurity.io/v1","allowed_endpoints":"","denied_endpoints":"","egress_policy":"audit","disable_telemetry":false,"disable_sudo":false,"disable_sudo_and_containers":false,"disable_file_monitoring":false,"private":false,"is_github_hosted":false,"is_debug":false,"one_time_key":"","api_key":"","use_policy_store":false,"deploy_on_self_hosted_vm":false}
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32mView security insights and recommended policy at:[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | https://app.stepsecurity.io/github/egohygiene/identity/actions/runs/1
+[Validate reference renderer/Validate static Brand Kit renderer]   | RUNNER_NAME: 
+[Validate reference renderer/Validate static Brand Kit renderer]   | This job is running on a self-hosted runner.
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Pre Harden runner [426.987315ms]
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 to <verified-action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 and subpath 'action.yml' from <verified-action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a to <verified-action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath 'action.yml' from <verified-action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Harden runner
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath '' from <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer]   | [harden-runner] main-step
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32mView security insights and recommended policy at:[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | https://app.stepsecurity.io/github/egohygiene/identity/actions/runs/1
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Harden runner [246.218461ms]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Checkout Identity
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Checkout Identity [166.816144ms]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Set up Node.js
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 and subpath '' from <verified-action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+[Validate reference renderer/Validate static Brand Kit renderer]   | Found in cache @ <local-action-cache>/tool_cache/node/24.22.3/x64
+[Validate reference renderer/Validate static Brand Kit renderer]   ❓  ::group::Environment details
+[Validate reference renderer/Validate static Brand Kit renderer]   | node: v24.22.3
+[Validate reference renderer/Validate static Brand Kit renderer]   | npm: 11.19.1
+[Validate reference renderer/Validate static Brand Kit renderer]   | yarn: 1.22.22
+[Validate reference renderer/Validate static Brand Kit renderer]   ❓  ::endgroup::
+[Validate reference renderer/Validate static Brand Kit renderer]   🚧  ::warning::The runner was not able to contact the cache service. Caching will be skipped
+[Validate reference renderer/Validate static Brand Kit renderer]   ❓ add-matcher <local-action-cache>/f2665529ac25936b/act/actions/actions-setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38/.github/tsc.json
+[Validate reference renderer/Validate static Brand Kit renderer]   ❓ add-matcher <local-action-cache>/f2665529ac25936b/act/actions/actions-setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38/.github/eslint-stylish.json
+[Validate reference renderer/Validate static Brand Kit renderer]   ❓ add-matcher <local-action-cache>/f2665529ac25936b/act/actions/actions-setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38/.github/eslint-compact.json
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Set up Node.js [963.287518ms]
+[Validate reference renderer/Validate static Brand Kit renderer]   ⚙  ::set-output:: node-version=v24.22.3
+[Validate reference renderer/Validate static Brand Kit renderer]   ⚙  ::add-path:: <local-action-cache>/tool_cache/node/24.22.3/x64/bin
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Activate pinned pnpm
+[Validate reference renderer/Validate static Brand Kit renderer]   | Preparing pnpm@11.21.0 for immediate activation...
+[Validate reference renderer/Validate static Brand Kit renderer]   | 11.21.0
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Activate pinned pnpm [1.860768814s]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Install frozen renderer dependencies
+[Validate reference renderer/Validate static Brand Kit renderer]   | [36m?[39m Verifying lockfile against supply-chain policies (114 entries)...
+[Validate reference renderer/Validate static Brand Kit renderer]   | Lockfile is up to date, resolution step is skipped
+[Validate reference renderer/Validate static Brand Kit renderer]   | Progress: resolved [96m1[39m, reused [96m0[39m, downloaded [96m0[39m, added [96m0[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | Packages: [32m+88[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | Progress: resolved [96m88[39m, reused [96m0[39m, downloaded [96m0[39m, added [96m0[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | Packages are hard linked from the content-addressable store to the virtual store.
+[Validate reference renderer/Validate static Brand Kit renderer]   |   Content-addressable store is at: <task-runtime>/.pnpm-store/v11
+[Validate reference renderer/Validate static Brand Kit renderer]   |   Virtual store is at:             node_modules/.pnpm
+[Validate reference renderer/Validate static Brand Kit renderer]   | Progress: resolved [96m88[39m, reused [96m0[39m, downloaded [96m59[39m, added [96m59[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m✓[39m Lockfile passes supply-chain policies (114 entries in 3s)
+[Validate reference renderer/Validate static Brand Kit renderer]   | Progress: resolved [96m88[39m, reused [96m0[39m, downloaded [96m86[39m, added [96m86[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | Progress: resolved [96m88[39m, reused [96m0[39m, downloaded [96m88[39m, added [96m88[39m, done
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [96mdependencies:[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m+[39m react [90m19.2.8[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m+[39m react-dom [90m19.2.8[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [96mdevDependencies:[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m+[39m @playwright/test [90m1.62.1[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m+[39m axe-core [90m4.11.0[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m+[39m jsdom [90m30.0.1[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m+[39m vite [90m8.2.0[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m+[39m vitest [90m4.1.10[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | Done in 4s using pnpm v11.21.0
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Install frozen renderer dependencies [4.118216157s]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Validate renderer contracts, behavior and public output
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m$ node scripts/check-source.mjs[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | Checked 51 JavaScript source files.
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m$ vitest run[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90m<local-action-cache>/f2665529ac25936b/hostexecutor/renderer[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/press-kit.integration.test.js [2m([22m[2m12 tests[22m[2m)[22m[33m 2642[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m renders generated approved material with optional paragraph null [33m 451[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/foundations.test.js [2m([22m[2m31 tests[22m[2m)[22m[33m 410[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/download-integrity.test.js [2m([22m[2m22 tests[22m[2m)[22m[32m 109[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/guidance.integration.test.js [2m([22m[2m4 tests[22m[2m)[22m[33m 1234[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m filters mixed-lifecycle from HTML and embedded model data [33m 421[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m filters withheld-singletons-and-containers from HTML and embedded model data [33m 333[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/downloads.test.js [2m([22m[2m22 tests[22m[2m)[22m[33m 1702[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/browser-qualification.test.js [2m([22m[2m23 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/app.test.js [2m([22m[2m7 tests[22m[2m)[22m[33m 1060[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m passes automated accessibility checks for the static document [33m 657[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/public-site.test.js [2m([22m[2m2 tests[22m[2m)[22m[33m 2085[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m preserves supplied rights and leaves absent metadata unresolved without changing the release archive [33m 1565[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m rejects a missing configured asset before packaging or rendering [33m 519[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/presentation.test.js [2m([22m[2m11 tests[22m[2m)[22m[33m 652[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/design-system.integration.test.js [2m([22m[2m12 tests[22m[2m)[22m[33m 2878[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m renders matching guidance and all four downloads (legacy TOML: false) [33m 678[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m renders matching guidance and all four downloads (legacy TOML: true) [33m 406[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m rejects handbook value with a matching digest before replacing an existing page [33m 317[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/artifact-paths.integration.test.js [2m([22m[2m11 tests[22m[2m)[22m[33m 1844[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m validates an explicitly supplied optional artifact directory [33m 347[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m downloads the unchanged generated files through a configured HTTP directory [33m 398[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/press-kit.test.js [2m([22m[2m34 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/rights.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 266[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/kit-bundle.test.js [2m([22m[2m7 tests[22m[2m)[22m[33m 15774[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m builds every actual download for minimal from retained generated inputs [33m 1480[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m builds every actual download for expanded from retained generated inputs [33m 2687[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m builds every actual download for mantle from retained generated inputs [33m 1484[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m repeated complete builds have identical inventories and honor an explicit deployment base [33m 5208[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m rejects a stale handbook and damaged native/Press Kit artifacts before creating output [33m 3050[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |      [33m[2m✓[22m[39m rejects source/output overlap and preserves existing nonempty destinations [33m 1501[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/design-system.test.js [2m([22m[2m52 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/artifact-paths.test.js [2m([22m[2m160 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/project-copy.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 269[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/studio.test.js [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   |  [32m✓[39m tests/model.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m Test Files [22m [1m[32m19 passed[39m[22m[90m (19)[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m      Tests [22m [1m[32m424 passed[39m[22m[90m (424)[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m   Start at [22m 18:45:53
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m   Duration [22m 41.31s[2m (transform 303ms, setup 0ms, import 7.26s, tests 31.03s, environment 2ms)[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m$ pnpm run render && vite build[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m$ node scripts/render-static.mjs[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | Rendered static Brand Kit: <local-action-cache>/f2665529ac25936b/hostexecutor/renderer/index.html
+[Validate reference renderer/Validate static Brand Kit renderer]   | [36mvite v8.2.0 [32mbuilding client environment for production...[36m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | transforming...
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m✓[0m 32 modules transformed.
+[Validate reference renderer/Validate static Brand Kit renderer]   | rendering chunks...
+[Validate reference renderer/Validate static Brand Kit renderer]   | computing gzip size...
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2mdist/[0m[32mindex.html                 [0m[1;2m 22.66 kB[0m[2m │ gzip:  5.62 kB[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2mdist/[0m[2massets/[0m[35mindex-DaejL57Q.css  [0m[1;2m 13.14 kB[0m[2m │ gzip:  3.35 kB[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2mdist/[0m[2massets/[0m[36mindex-Bwltvv3k.js   [0m[1;2m248.28 kB[0m[2m │ gzip: 76.42 kB[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m✓ built in 117ms[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m$ pnpm run build:public && pnpm run verify:public[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m$ node scripts/build-public-site.mjs[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | packaged public Brand Kit: release=v1.0.0, files=37, sourceDigest=307063182cf42bbfc9816a18720ea7ccfd842a2d95133f5d9fb1f3612beaf27d
+[Validate reference renderer/Validate static Brand Kit renderer]   | Rendered static Brand Kit: <local-action-cache>/f2665529ac25936b/hostexecutor/renderer/index.html
+[Validate reference renderer/Validate static Brand Kit renderer]   | [36mvite v8.2.0 [32mbuilding client environment for production...[36m[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | transforming...
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m✓[0m 32 modules transformed.
+[Validate reference renderer/Validate static Brand Kit renderer]   | rendering chunks...
+[Validate reference renderer/Validate static Brand Kit renderer]   | computing gzip size...
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2mdist/[0m[32mindex.html                 [0m[1;2m 96.86 kB[0m[2m │ gzip: 13.38 kB[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2mdist/[0m[2massets/[0m[35mindex-DaejL57Q.css  [0m[1;2m 13.14 kB[0m[2m │ gzip:  3.35 kB[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2mdist/[0m[2massets/[0m[36mindex-Bwltvv3k.js   [0m[1;2m248.28 kB[0m[2m │ gzip: 76.42 kB[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32m✓ built in 150ms[39m
+[Validate reference renderer/Validate static Brand Kit renderer]   | Built public Brand Kit: <local-action-cache>/f2665529ac25936b/hostexecutor/renderer/dist from v1.0.0 (307063182cf42bbfc9816a18720ea7ccfd842a2d95133f5d9fb1f3612beaf27d)
+[Validate reference renderer/Validate static Brand Kit renderer]   | [2m$ node scripts/verify-public-site.mjs[22m
+[Validate reference renderer/Validate static Brand Kit renderer]   | Verified public Brand Kit site: <local-action-cache>/f2665529ac25936b/hostexecutor/renderer/dist
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Validate renderer contracts, behavior and public output [50.357480348s]
+[Validate reference renderer/Validate static Brand Kit renderer]   ⚙  Summary - ## Vitest Test Report
+
+### Summary
+
+- **Test Files**: ✅ **19 passes** · 19 total
+- **Test Results**: ✅ **424 passes** · 424 total
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Qualify the shared browser environment
+[Validate reference renderer/Validate static Brand Kit renderer]   | Running: docker version --format {{json .Server}}
+[Validate reference renderer/Validate static Brand Kit renderer]   | Running: docker info --format {"driver":{{json .Driver}},"dataRoot":{{json .DockerRootDir}}}
+[Validate reference renderer/Validate static Brand Kit renderer]   | Running: docker pull --platform linux/amd64 mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+[Validate reference renderer/Validate static Brand Kit renderer]   | mcr.microsoft.com/playwright@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e: Pulling from playwright
+[Validate reference renderer/Validate static Brand Kit renderer]   | Digest: sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+[Validate reference renderer/Validate static Brand Kit renderer]   | Status: Image is up to date for mcr.microsoft.com/playwright@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+[Validate reference renderer/Validate static Brand Kit renderer]   | mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+[Validate reference renderer/Validate static Brand Kit renderer]   | Running: docker image inspect mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+[Validate reference renderer/Validate static Brand Kit renderer]   | Running: docker build --pull --platform linux/amd64 --file dev/browser/Dockerfile --build-arg BROWSER_IMAGE=mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e --tag identity-browser-qualification:a0e849b57502 --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg NO_PROXY --build-arg http_proxy --build-arg https_proxy --build-arg no_proxy .
+[Validate reference renderer/Validate static Brand Kit renderer]   | #0 building with "default" instance using docker driver
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #1 [internal] load build definition from Dockerfile
+[Validate reference renderer/Validate static Brand Kit renderer]   | #1 transferring dockerfile: 1.34kB done
+[Validate reference renderer/Validate static Brand Kit renderer]   | #1 DONE 0.0s
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #2 [internal] load metadata for mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+[Validate reference renderer/Validate static Brand Kit renderer]   | #2 DONE 0.1s
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #3 [internal] load .dockerignore
+[Validate reference renderer/Validate static Brand Kit renderer]   | #3 transferring context: 218B done
+[Validate reference renderer/Validate static Brand Kit renderer]   | #3 DONE 0.0s
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #4 [internal] load build context
+[Validate reference renderer/Validate static Brand Kit renderer]   | #4 DONE 0.0s
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #5 [stage-0 1/4] FROM mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+[Validate reference renderer/Validate static Brand Kit renderer]   | #5 DONE 0.0s
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #4 [internal] load build context
+[Validate reference renderer/Validate static Brand Kit renderer]   | #4 transferring context: 10.86MB 0.1s done
+[Validate reference renderer/Validate static Brand Kit renderer]   | #4 DONE 0.1s
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #6 [stage-0 2/4] WORKDIR /opt/identity/renderer
+[Validate reference renderer/Validate static Brand Kit renderer]   | #6 CACHED
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #7 [stage-0 3/4] COPY . /opt/identity
+[Validate reference renderer/Validate static Brand Kit renderer]   | #7 DONE 0.1s
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 [stage-0 4/4] RUN --mount=type=secret,id=identity_proxy_ca     export NODE_USE_ENV_PROXY=1     && if [ -f /run/secrets/identity_proxy_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/identity_proxy_ca; fi     && node ../dev/browser/install-fonts.mjs     && mkdir -p /opt/identity-browser-tools/bin     && if ! command -v corepack >/dev/null 2>&1; then npm install --prefix /opt/identity-browser-tools/corepack --no-audit --no-fund corepack@0.34.6; fi     && corepack enable --install-directory /opt/identity-browser-tools/bin     && corepack pnpm install --frozen-lockfile     && corepack pnpm run build
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273 node:internal/modules/run_main:107
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273     triggerUncaughtException(
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273     ^
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273 [TypeError: fetch failed] {
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273   [cause]: Error: self-signed certificate in certificate chain
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273       at TLSSocket.onConnectSecure (node:internal/tls/wrap:1748:34)
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273       at TLSSocket.emit (node:events:509:28)
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273       at TLSSocket._finishInit (node:internal/tls/wrap:1185:8)
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273       at ssl.onhandshakedone (node:internal/tls/wrap:966:12) {
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273     code: 'SELF_SIGNED_CERT_IN_CHAIN'
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273   }
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273 }
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273 
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 0.273 Node.js v24.18.1
+[Validate reference renderer/Validate static Brand Kit renderer]   | #8 ERROR: process "/bin/sh -c export NODE_USE_ENV_PROXY=1     && if [ -f /run/secrets/identity_proxy_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/identity_proxy_ca; fi     && node ../dev/browser/install-fonts.mjs     && mkdir -p /opt/identity-browser-tools/bin     && if ! command -v corepack >/dev/null 2>&1; then npm install --prefix /opt/identity-browser-tools/corepack --no-audit --no-fund corepack@0.34.6; fi     && corepack enable --install-directory /opt/identity-browser-tools/bin     && corepack pnpm install --frozen-lockfile     && corepack pnpm run build" did not complete successfully: exit code: 1
+[Validate reference renderer/Validate static Brand Kit renderer]   | ------
+[Validate reference renderer/Validate static Brand Kit renderer]   |  > [stage-0 4/4] RUN --mount=type=secret,id=identity_proxy_ca     export NODE_USE_ENV_PROXY=1     && if [ -f /run/secrets/identity_proxy_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/identity_proxy_ca; fi     && node ../dev/browser/install-fonts.mjs     && mkdir -p /opt/identity-browser-tools/bin     && if ! command -v corepack >/dev/null 2>&1; then npm install --prefix /opt/identity-browser-tools/corepack --no-audit --no-fund corepack@0.34.6; fi     && corepack enable --install-directory /opt/identity-browser-tools/bin     && corepack pnpm install --frozen-lockfile     && corepack pnpm run build:
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273   [cause]: Error: self-signed certificate in certificate chain
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273       at TLSSocket.onConnectSecure (node:internal/tls/wrap:1748:34)
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273       at TLSSocket.emit (node:events:509:28)
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273       at TLSSocket._finishInit (node:internal/tls/wrap:1185:8)
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273       at ssl.onhandshakedone (node:internal/tls/wrap:966:12) {
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273     code: 'SELF_SIGNED_CERT_IN_CHAIN'
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273   }
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273 }
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273 
+[Validate reference renderer/Validate static Brand Kit renderer]   | 0.273 Node.js v24.18.1
+[Validate reference renderer/Validate static Brand Kit renderer]   | ------
+[Validate reference renderer/Validate static Brand Kit renderer]   | Dockerfile:12
+[Validate reference renderer/Validate static Brand Kit renderer]   | --------------------
+[Validate reference renderer/Validate static Brand Kit renderer]   |   11 |     # One installation layer also bounds temporary storage on local vfs daemons.
+[Validate reference renderer/Validate static Brand Kit renderer]   |   12 | >>> RUN --mount=type=secret,id=identity_proxy_ca \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   13 | >>>     export NODE_USE_ENV_PROXY=1 \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   14 | >>>     && if [ -f /run/secrets/identity_proxy_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/identity_proxy_ca; fi \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   15 | >>>     && node ../dev/browser/install-fonts.mjs \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   16 | >>>     && mkdir -p /opt/identity-browser-tools/bin \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   17 | >>>     && if ! command -v corepack >/dev/null 2>&1; then npm install --prefix /opt/identity-browser-tools/corepack --no-audit --no-fund corepack@0.34.6; fi \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   18 | >>>     && corepack enable --install-directory /opt/identity-browser-tools/bin \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   19 | >>>     && corepack pnpm install --frozen-lockfile \
+[Validate reference renderer/Validate static Brand Kit renderer]   |   20 | >>>     && corepack pnpm run build
+[Validate reference renderer/Validate static Brand Kit renderer]   |   21 |     
+[Validate reference renderer/Validate static Brand Kit renderer]   | --------------------
+[Validate reference renderer/Validate static Brand Kit renderer]   | ERROR: failed to build: failed to solve: process "/bin/sh -c export NODE_USE_ENV_PROXY=1     && if [ -f /run/secrets/identity_proxy_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/identity_proxy_ca; fi     && node ../dev/browser/install-fonts.mjs     && mkdir -p /opt/identity-browser-tools/bin     && if ! command -v corepack >/dev/null 2>&1; then npm install --prefix /opt/identity-browser-tools/corepack --no-audit --no-fund corepack@0.34.6; fi     && corepack enable --install-directory /opt/identity-browser-tools/bin     && corepack pnpm install --frozen-lockfile     && corepack pnpm run build" did not complete successfully: exit code: 1
+[Validate reference renderer/Validate static Brand Kit renderer]   | RuntimeError: Command failed with exit code 1: docker
+[Validate reference renderer/Validate static Brand Kit renderer]   | IDENTITY_BROWSER_HOST_RECEIPT={"approved_baseline_after_sha256":"53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543","artifact_files_sha256":{},"artifact_inventory_excludes_host_receipt":true,"base_image":{"architecture":"amd64","cmd":["/bin/bash"],"entrypoint":null,"id":"sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb","os":"linux","repo_digests":["mcr.microsoft.com/playwright@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"],"user":""},"build_network":{"ca_secret_selected":false,"proxy_variables":["HTTP_PROXY","HTTPS_PROXY","NO_PROXY","http_proxy","https_proxy","no_proxy"]},"commands":[{"command":["docker","version","--format","{{json .Server}}"],"exit_code":0,"output_sha256":"520c29d8dbc8c502dd7a00fb2ded995585a38ca811aed80f6916a6d502dab9d7"},{"command":["docker","info","--format","{\"driver\":{{json .Driver}},\"dataRoot\":{{json .DockerRootDir}}}"],"exit_code":0,"output_sha256":"811e137b3fe403640345bad4f26cd2a00c6fd0e03314845719f0cd086a48b82a"},{"command":["docker","pull","--platform","linux/amd64","mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"],"exit_code":0,"output_sha256":"990389ff3599cf916791529cd52cd1e24cd18b4a38c694bc968b76442a2796a9"},{"command":["docker","image","inspect","mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e"],"exit_code":0,"output_sha256":"7d9db9a2c451c60b12b9705a794e9216f755c6a16420c645bb34428b695c429b"},{"command":["docker","build","--pull","--platform","linux/amd64","--file","dev/browser/Dockerfile","--build-arg","BROWSER_IMAGE=mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e","--tag","identity-browser-qualification:a0e849b57502","--build-arg","HTTP_PROXY","--build-arg","HTTPS_PROXY","--build-arg","NO_PROXY","--build-arg","http_proxy","--build-arg","https_proxy","--build-arg","no_proxy","."],"exit_code":1,"output_sha256":"c28319bc8d361abad0a717dfccf1992f6da0b8cbcdb3f8f1640b98b27e260f1b"}],"docker_server":{"Arch":"amd64","KernelVersion":"6.18.57","Os":"linux","Version":"28.4.0"},"engine_platform_relation":"native-amd64","execution_context":"local-act-ci","failure":"RuntimeError: Command failed with exit code 1: docker","kind":"dated browser-environment qualification host receipt","limits":["The invocation mode labels a caller; both use identical image/rendering settings.","A hosted local-entrypoint replay is not an actual Docker run in an unavailable developer workspace.","Local act workflow replays are not GitHub-hosted CI evidence.","Only the recorded image/platform/fonts/settings and unchanged approved baseline are qualified.","No baseline regeneration, tolerance relaxation, release, deployment or human approval occurs."],"mode":"ci","observed_at":"2026-11-22T18:46:40.026956+00:00","own_image_cleanup_exit_code":1,"platform":"linux/amd64","profile":{"baseline":{"approvalRevision":"85f650f936950094a608f5c477b9a59d4be29a87","path":"renderer/tests/e2e/__snapshots__/brand-kit-page.png","sha256":"53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"},"chromium":{"colorProfile":"srgb","revision":"1234","version":"151.0.7922.34"},"fontFiles":[{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf","sha256":"5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"},{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf","sha256":"ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"},{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf","sha256":"3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"},{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf","sha256":"a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"},{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf","sha256":"3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"},{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf","sha256":"c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"},{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf","sha256":"847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"},{"path":"/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf","sha256":"8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"}],"fontPackages":[{"bytes":502232,"name":"fonts-dejavu-mono","sha256":"8a599d6553307db7ecb795d2f0e5a301e03234afc75c7358b0ba43466454c89a","url":"https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-mono_2.37-8_all.deb","version":"2.37-8"},{"bytes":835172,"name":"fonts-dejavu-core","sha256":"40049660c194f3b8a2541fc7369efebb10e9f94bdac836a2f38fafedd10fa73a","url":"https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-8_all.deb","version":"2.37-8"}],"fontSourceReceipt":"docs/evidence/identity-browser-fonts-2026-10-20.json","image":"mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e","kind":"qualified browser environment","packageManager":"pnpm@11.21.0","platform":"linux/amd64","playwright":"1.62.1","registryReceipt":"docs/evidence/identity-browser-registry-2026-10-20.json","settings":{"colorScheme":"light","deviceScaleFactor":1,"locale":"en-US","reducedMotion":"no-preference","timezoneId":"UTC","viewport":{"height":1000,"width":1440}}},"registry":{"config_digest":"sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb","image":"mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e","index_digest":"sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e","manifest_digest":"sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac","platform":"linux/amd64"},"source":{"build_source_inventory":{"encoding":"sorted UTF-8 relative path, NUL, lowercase SHA-256, newline","files":423,"scope":"Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.","sha256":"86e458529874a92ea24fc88ea47aabc8022d42272b8bc09c326d44b73781a6e9"},"critical_files_sha256":{".dockerignore":"af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",".github/workflows/decision-validation.yml":"4b490e6ee629afce4df22eb3d1aa11de55d17d0bcd88a73e4a371850043422e4",".github/workflows/development-image.yml":"9f32b34e61201151c08e5da32ce258a9b0ed3e4968f76c2a1b2a97ea074c043c",".github/workflows/identity-experience.yml":"7a5968888eb338cf8c804c211171bee63e33d0444417c6aa338b378ef98ea2a1",".github/workflows/publish-brand-kit.yml":"464dc25cc55ca8554f64a32f746bb1e6c34e9869dd1055943c9f7c2a56ba7be3",".github/workflows/reference-renderer.yml":"56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",".github/workflows/release.yml":"5090d275d30a1f26c0c1a1ac510c641b02f11ddf8f43b5ea243caaadaedf225c",".github/workflows/validate.yml":"9538c77339296381e302f1e49d55f219ab86fc6722aefb4320bbbb9cb948b2fd","dev/browser/Dockerfile":"031960e25b42865d14cc381dc1c4b06558f508507f3b89dea1d8fdd873670280","dev/browser/install-fonts.mjs":"6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa","dev/browser/profile.json":"0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790","docs/evidence/identity-browser-fonts-2026-10-20.json":"191f09a07796a9d14e71b249b9a6837900ceae6b391a32d590f51b1856f5c711","docs/evidence/identity-browser-registry-2026-10-20.json":"9f1e06793ef3641db2986f2efe0c0f0fe5bebffe4008e155619fb8adb6fe0ec9","renderer/package.json":"f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f","renderer/playwright.config.js":"b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9","renderer/pnpm-lock.yaml":"b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489","renderer/scripts/qualify-browser.mjs":"351a05084f3111918b42609c426944c005bcdec4bf07161cf2776072d86bb26d","renderer/tests/e2e/__snapshots__/brand-kit-page.png":"53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543","renderer/tests/e2e/renderer.spec.js":"5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e","scripts/qualify_browser.py":"a7b3e1318e6aa642cd3080758edbfe9fd0fbf903a17cec96f77a35c857d9dad3"},"git_revision":"9d11d9993555bbe1736cda5c43e4c2a8239e657c","git_worktree_clean":true},"status":"failed","storage_preflight":{"budgetIsNotACapacityGuarantee":true,"driver":"overlay2","endpointKind":"local-unix","minimumFreeBytes":4294967296,"observations":[{"freeBytes":6192709632,"location":"repository","status":"observed"},{"freeBytes":6192709632,"location":"evidence","status":"observed"},{"freeBytes":6192709632,"location":"daemon-data-root","status":"observed"}],"status":"passed"}}
+[Validate reference renderer/Validate static Brand Kit renderer]   ❌  Failure - Main Qualify the shared browser environment [1.144078496s]
+[Validate reference renderer/Validate static Brand Kit renderer] exit status 1
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Upload renderer evidence
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath '' from <verified-action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+[Validate reference renderer/Validate static Brand Kit renderer]   | Multiple search paths detected. Calculating the least common ancestor of all paths
+[Validate reference renderer/Validate static Brand Kit renderer]   | The least common ancestor is <local-action-cache>/f2665529ac25936b. This will be the root directory of the artifact
+[Validate reference renderer/Validate static Brand Kit renderer]   | With the provided path, there will be 47 files uploaded
+[Validate reference renderer/Validate static Brand Kit renderer]   | Artifact name is valid!
+[Validate reference renderer/Validate static Brand Kit renderer]   | Root directory input is valid!
+time="2026-11-22T18:46:41Z" level=error msg="Error decode request body: proto: (line 1:150): unknown field \"mime_type\""
+[Validate reference renderer/Validate static Brand Kit renderer]   | Attempt 1 of 5 failed with error: Unexpected end of JSON input. Retrying request in 3000 ms...
+time="2026-11-22T18:46:44Z" level=error msg="Error decode request body: proto: (line 1:150): unknown field \"mime_type\""
+[Validate reference renderer/Validate static Brand Kit renderer]   | Attempt 2 of 5 failed with error: Unexpected end of JSON input. Retrying request in 4831 ms...
+time="2026-11-22T18:46:49Z" level=error msg="Error decode request body: proto: (line 1:150): unknown field \"mime_type\""
+[Validate reference renderer/Validate static Brand Kit renderer]   | Attempt 3 of 5 failed with error: Unexpected end of JSON input. Retrying request in 10088 ms...
+time="2026-11-22T18:46:59Z" level=error msg="Error decode request body: proto: (line 1:150): unknown field \"mime_type\""
+[Validate reference renderer/Validate static Brand Kit renderer]   | Attempt 4 of 5 failed with error: Unexpected end of JSON input. Retrying request in 10993 ms...
+time="2026-11-22T18:47:10Z" level=error msg="Error decode request body: proto: (line 1:150): unknown field \"mime_type\""
+[Validate reference renderer/Validate static Brand Kit renderer]   ❗  ::error::Failed to CreateArtifact: Failed to make request after 5 attempts: Unexpected end of JSON input
+[Validate reference renderer/Validate static Brand Kit renderer]   ❌  Failure - Main Upload renderer evidence [29.671766157s]
+[Validate reference renderer/Validate static Brand Kit renderer] exit status 1
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Post Harden runner
+[Validate reference renderer/Validate static Brand Kit renderer]   | [harden-runner] post-step
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Post Harden runner [132.483734ms]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Complete job
+[Validate reference renderer/Validate static Brand Kit renderer] Cleaning up container for job Validate static Brand Kit renderer
+Error: Job 'Validate static Brand Kit renderer' failed
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Complete job
+[Validate reference renderer/Validate static Brand Kit renderer] 🏁  Job failed

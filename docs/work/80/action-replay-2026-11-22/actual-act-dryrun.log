@@ -1,0 +1,47 @@
+time="2026-11-22T18:23:17Z" level=info msg="Using docker host 'unix:///var/run/docker.sock', and daemon socket '-'"
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Set up job
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] 🚀  Start image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   🐳  docker pull image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 username= forcePull=false
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   🐳  docker create image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   🐳  docker run image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Set up job
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c to <action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath 'action.yml' from <action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Pre Harden runner
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath '' from <action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Pre Harden runner [165.892548ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 to <action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 and subpath 'action.yml' from <action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a to <action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath 'action.yml' from <action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Harden runner
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath '' from <action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Harden runner [144.417323ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Checkout Identity
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Checkout Identity [14.592423ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Set up Node.js
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 and subpath '' from <action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Set up Node.js [16.671283ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Activate pinned pnpm
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Activate pinned pnpm [32.636464ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Install frozen renderer dependencies
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Install frozen renderer dependencies [20.560627ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Validate renderer contracts, behavior and public output
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Validate renderer contracts, behavior and public output [25.825424ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Qualify the shared browser environment
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Qualify the shared browser environment [37.628994ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Replay the documented local browser entrypoint
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Replay the documented local browser entrypoint [21.279336ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Upload renderer evidence
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath '' from <action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Upload renderer evidence [69.580129ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Post Set up Node.js
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Post Set up Node.js [6.881966ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Post Harden runner
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Post Harden runner [6.391948ms]
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Complete job
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] Cleaning up container for job Validate static Brand Kit renderer
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Complete job
+*DRYRUN* [Validate reference renderer/Validate static Brand Kit renderer] 🏁  Job succeeded
+
+level=info msg=️📣 A newer version of 'act' is available - consider ugrading to 0.2.98.

@@ -7,23 +7,23 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T18:44:56.584461+00:00'
+  updated_at: '2026-11-22T19:09:31.756431+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Record the task-owned isolated Docker backend and observed capability/transport repair for
-    original Identity
+  purpose: Qualify the original Docker browser route and unchanged local workflow through explicit verified
+    action sources and managed-network trust.
   includes:
-  - Actual overlay2 engine, measured shared tmpfs capacity, bounded helper resources and source-bound
-    observations.
-  - Runnable scoped procedure and specific repaired runc/network/proxy failures without credentials.
+  - Prepare full-commit archive and Git-tree verified local action mirrors without workflow edits.
+  - Retain exact matching-source direct, local-act-ci and default-entrypoint browser proof.
+  - Separate original browser step success from the actual local artifact-server failure.
+  - Retain the owned real overlay2 runtime recipe, exact shared filesystem/cgroup measurements and scoped
+    proxy/runc repairs.
   excludes:
-  - Shared-daemon configuration changes, global pruning, raw host devices, unrelated user files and private
-    credentials.
-  - Profile/pin/guard changes, inferred full product acceptance, hosted CI, new approval, source adoption
-    or release.
+  - GitHub-hosted CI, paid services, publication, tags/releases, baseline changes and new creative approval.
+  - Canonical self-source adoption, full native/platform acceptance and other repository writes.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -33,37 +33,45 @@ scope:
   canonical_sources:
   - AGENTS.md
   - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
+  - dev/browser/profile.json
+  - .github/workflows/reference-renderer.yml
+  - dev/local-actions/reference-renderer.lock.json
+  - docs/LOCAL_WORKFLOW_REPLAY.md
+  - docs/work/80/ACTION_REPLAY_2026-11-22.md
+  - docs/work/80/action-replay-2026-11-22/qualification-summary.json
+  - https://github.com/egohygiene/identity/issues/80
+  - https://github.com/egohygiene/identity/issues/88
   - docs/work/80/ISOLATED_DOCKER_2026-11-22.md
   - docs/work/80/evidence-2026-11-22/isolated-docker-runtime.json
-  - https://github.com/egohygiene/identity/issues/80
-  - https://github.com/egohygiene/identity/issues/82
 work:
-  objective: Record the task-owned isolated Docker backend and observed capability/transport repair for
-    original Identity
+  objective: Establish original matching-source local Docker and actual workflow browser proof while retaining
+    exact local transport failures.
   success_conditions:
-  - Preserve unchanged original profiles, immutable image pins and actual storage gates.
-  - Establish real isolated Docker image/run/build capabilities and repair namespace-specific transport
-    with TLS enabled.
-  - Keep runtime probes distinct from browser/dev source-bound qualification and human or hosted acceptance.
+  - Keep profile/image/font/baseline/workflow pins unchanged and preserve truthful caller contexts.
+  - Run nine positives, deliberate screenshot failure and restored pass from direct and both original
+    workflow browser steps.
+  - Retain complete artifact hashes and actual whole-workflow exit without claiming hosted CI or artifact
+    publication.
   active_issue:
     provider: github
     id: egohygiene/identity#80
     url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: original-profile-workflow-then-dev
-    description: Browser owner replays original workflow locally, then clean only owned nested images/cache
-      and run full dev default/nonroot setup-twice qualification. Preserve actual receipt outcomes.
+    id: review-original-browser-proof-and-artifact-transport
+    description: 'Review the three exact a56399b browser passes for #80/#88 and reconcile the draft stack;
+      repair local act artifact MIME protocol separately before claiming whole-workflow green.'
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/80
-    - https://github.com/egohygiene/identity/issues/82
+    - https://github.com/egohygiene/identity/issues/88
+    - https://github.com/egohygiene/identity/issues/70
     depends_on: []
 state:
   base:
     revision: edca416d58d15b06ccc05029b0803bc27e65fe18
     ref: refs/heads/codex/70-rfc3339-review-times-20261122
-    verified_at: '2026-11-22T18:44:56.584461+00:00'
+    verified_at: '2026-11-22T19:09:31.756431+00:00'
   candidate:
     branch: codex/80-qualified-browser-stack-20261122
     revision: null
@@ -71,7 +79,7 @@ state:
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-22T18:44:56.584461+00:00'
+    observed_at: '2026-11-22T19:09:31.756431+00:00'
     default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
     issue_state: open
     pull_request_state: not-applicable
@@ -87,34 +95,60 @@ state:
     url: https://github.com/egohygiene/aether/pull/142
 review:
   status: partial
-  reviewed_at: '2026-11-22T18:43:27.562510+00:00'
+  reviewed_at: '2026-11-22T19:08:19.581987+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Own Docker 28.4 overlay2 generated-image import/run/cgroup/BuildKit capability probes
+  - command: Offline exact archive preparation and actual act --strict --dryrun with four explicit local
+      repositories
     outcome: passed
-    observed_at: '2026-11-22T18:43:27.562510+00:00'
-    notes: Tiny controlled workload only; UID 1234 ownership and UID 0/1000 execution preserved. Not product-profile
-      acceptance.
-  - command: Namespace-correct proxy normalization then Docker exact digest manifest inspect
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: All four archive SHA256/size and complete reconstructed Git trees match reviewed full-commit
+      locks. Dry-run proves acquisition/planning only; actual action execution is separately retained.
+  - command: Focused Python browser and local-action boundary suites; independent read-only source review
     outcome: passed
-    observed_at: '2026-11-22T18:43:27.562510+00:00'
-    notes: Pinned Playwright and Node metadata retrieved with TLS enabled. Initial actual MCR pull timeout
-      and combined Node tag/digest manifest CLI failure remain recorded.
-  - command: Client/daemon actual data-root measurements and scoped helper inspect
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: 22 tests pass. Actual Git tree calculation, hostile archives, pin/workflow drift, budgets and
+      duplicate JSON are rejected. CA CLI precedence and generic path errors cover missing/directory/loops,
+      commas/quotes/all ASCII controls and alias targets.
+  - command: Original direct Docker plus unchanged reference-renderer workflow CI/default-local browser
+      steps
     outcome: passed
-    observed_at: '2026-11-22T18:43:27.562510+00:00'
-    notes: Same device/inode, shared 9.44 GB tmpfs; 12 GiB helper and 16 GiB parent limits are both below engine-visible physical memory.
-      Source/evidence/data are one pool.
+    observed_at: '2026-11-22T18:57:35.045Z'
+    notes: All three at clean a56399b33548cab075e4442e64605035bccd973f, same 423-file inventory 07bb513d...,
+      nativeamd64 overlay2; each 9 positives → 1 intended failure → 1 restored pass, 0 skips/retries.
+      Three host receipts and 48 raw artifacts retain exact hashes; PNG/tolerance unchanged.
+  - command: Actual original reference-renderer workflow through act0.2.97 host executor in disposable
+      helper
+    outcome: limited
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: 51 source parses, 424 Vitest passes, build/public validation and both browser steps pass; whole
+      job exits 1 after 206.755s because local act artifact server rejects unchanged uploader CreateArtifact
+      mime_type. Original hardening pre/main/post execute self-hosted; no hosted-security or publication
+      claim.
+  - command: Retained evidence hashes, protected-source comparison, documentation/compile/whitespace and
+      pinned continuity schema/headings/budgets
+    outcome: passed
+    observed_at: '2026-11-22T19:08:19.581987+00:00'
+    notes: 66 retained files hashed; all 48 raw artifact hashes and three 20-file critical-input sets
+      match. Workflow/profile/renderer/assets/contracts/ADR bytes equal 75ca39f. Metadata has 12 headings
+      within 16384 bytes/240 lines; no released EgoLint conformance claim.
   environment_limitations:
-  - Original direct browser pass is owned by its clean 9d11d99 receipt; local workflow replay and full
-    dev run are separate active work.
-  - Runtime capability and metadata evidence supply no hosted/native/human acceptance or full WCAG claim.
-  - Browser first, dev second; original non-VFS reserves remain unchanged and actual capacity is measured
-    before each run.
+  - Local act is not GitHub-hosted CI; the whole local job remains failed at artifact transport despite
+    passing product/browser steps.
+  - Only recorded native Linux/amd64 original image/profile is qualified; no other platform, release,
+    human visual approval or source adoption follows.
+  - The exact represented source is a56399b; later unrelated integration is not relabeled as an actual
+    run.
+  - Official released EgoLint continuity conformance is not claimed; pinned metadata, headings and budgets
+    are narrower checks.
+  - Owned helper capacity is one shared tmpfs/memory budget; its substantial scoped capabilities are not
+    a supported product installation or hosted security guarantee.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
-  redactions: []
+  redactions:
+  - Private task paths, proxy values and disposable local correlation identifiers in workflow logs; raw/sanitized
+    hashes remain distinct.
   excluded:
   - secrets-and-credentials
   - private-conversation-text
@@ -129,15 +163,15 @@ privacy:
 
 ## Purpose and precedence
 
-This scoped handoff records an actual isolated Docker runtime, subordinate to user instructions, repository contracts and live trackers. It does not adopt source or approve product outputs.
+This handoff follows user/runtime instructions, scoped instructions, live state and canonical source. It records exact browser engineering proof without approving brand source or release policy.
 
 ## Resume protocol
 
-Read AGENTS and the runtime note/receipt. Recheck live main/issues and coordinate the single heavy-image slot. Local origin/main is 75ca39f. Existing owner choices, tokens, rights and native-record gaps from work98 remain unchanged.
+Read AGENTS, ADR-0011, the browser profile and ACTION_REPLAY_2026-11-22.md. Recheck main/issues/PRs before continuing. Older #80 diagnostics and merged #158–162 receipts keep their historical sources and limits.
 
 ## Current objective and success conditions
 
-Use real overlay2 capacity for original browser/dev qualification while retaining profile, image pins, storage guards, TLS and exact source binding. Keep engine probes separate from product acceptance.
+Verify original local Docker and both original workflow browser paths from one exact clean source, with unchanged baseline/tolerance, bounded local acquisition and explicit trust configuration. Keep the full workflow result honest.
 
 ## State snapshot
 
@@ -145,19 +179,21 @@ Stack base is `codex/70-rfc3339-review-times-20261122` at `edca416d58d15b06ccc05
 
 ## Completed and material changes
 
-Real import/run/build/ownership/cgroup/network probes pass. Protected runc reexec works after a byte-identical normal-file copy; own network/cgroup views are scoped writable. Namespace-correct proxy normalization fixes actual Docker metadata transport with TLS enabled. The original browser qualifier has passed on clean 9d11d99; its separate checkpoint owns acceptance.
+A bounded first-party helper prepares four exact pinned public action mirrors, binding archive SHA256/size and reconstructed Git trees to reviewed workflow bytes. Optional IDENTITY_BROWSER_PROXY_CA uses the existing build-secret transport; explicit CLI wins and unset/empty behavior is unchanged. Invalid CA selectors fail before Docker without leaking paths. The owned overlay2 runtime recipe and observation are included, preserving shared filesystem/cgroup limits and scoped proxy/runc repairs. Default daemon configuration remains untouched. No workflow/action/profile/font/PNG/tolerance/ADR is changed.
 
 ## Validation and review evidence
 
-The JSON receipt records engine/executable hashes, measured shared filesystem, helper constraints, capability scope and exact image metadata results. Initial capacity refusal, runc/netns failures and MCR timeout remain explicit in the procedure. Pinned Aether decision-authoring v2.1.0 was read from Git object dc8a16851f452763ef4f7fbe4bf057d4500b1921; governing ADR is 0011.
+Three complete actual original-Docker runs at clean a56399b share the 423-file 07bb513d... inventory: direct local-host, original local-act-ci and original local-act-local-entrypoint-replay. Each passes 9 positives, intentionally fails the visual mutation and restores 1 pass, with 0 skips/retries. Three raw host receipts bind 48 artifacts, runtime/fonts/settings and unchanged PNG 53d7d144.... The original workflow also passes 51 source parses, 424 Vitest tests and build/public validation. Focused Python22 tests and independent review pass. Detailed hashes/receipts are in the domain packet.
+
+The full actual act job exits 1 at the unchanged uploader's local-server MIME protocol. Pre/main/post hardening run as self-hosted; default act local checkout uses no GitHub secret. This is not hosted hardening, hosted CI or published artifact evidence. Pinned Aether decision 2.1.0 and continuity 1.1.0 guides at dc8a168 were read; Hygiene policy 1.2.0 remains referenced.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Workflow replay and complete dev default/nonroot setup-twice execution are independently owned and active. Tmpfs consumes the same finite memory budget; source/evidence/data are not separate reserves. Hosted/native/human and source/adoption/release gates remain independent. Never infer acceptance from the tiny generated image.
+Local act's artifact server rejects CreateArtifact mime_type; repair/upgrade that local protocol before reporting whole-workflow green. Other native/platform, source approval, contrast/manual design, distribution and release gates remain separate. Prior owner choices and unresolved #98 source/governance facts are preserved unchanged.
 
 ## Next dependency-ready work
 
-Finish browser workflow replay, preserve small source-bound evidence durably, then remove only own nested images/cache before dev's unchanged 8 GiB non-VFS guard. Stop on genuine failures and preserve their scope. No global prune or implicit profile/pin change.
+Review exact #80/#88 browser evidence and reconcile the draft checkpoint. The independent full #82 run at8255c5b has now passed both root/nonroot variants and is being retained in its child draft; continue final #70 acceptance; #116 remains the final aggregate. Do not promote matrix rows or issue acceptance solely from merged preparation.
 
 ## Parallel changes and reconciliation
 
@@ -165,12 +201,12 @@ This checkpoint follows parent draft PRs #163. The engineering parent enforces e
 
 ## Privacy and redaction
 
-Retain public source/tool hashes, bounded observed capacities and failure classes. Exclude proxy values, credentials, private certificates/keys, user paths and unrelated data. The public CA bundle was read-only; TLS remains enabled.
+Retain public source/pin facts and exact raw browser proof. Workflow logs redact private task paths, proxy values and disposable correlation identifiers and distinguish raw/sanitized hashes. The private local replay envfile and unused temporary cache marker were removed. No private transcript, credentials or personal paths are committed.
 
 ## Handoff update protocol
 
-Validate docs/JSON/whitespace and pinned continuity metadata, exact twelve headings and 16384-byte/240-line budgets. Decision impact: reference accepted ADR-0011 for scoped execution/evidence; no new contract, runtime default, policy or human lifecycle is selected.
+Refresh after checks/provider reads and before the parent draft handoff. Validate pinned metadata, twelve headings and 16384-byte/240-line budgets. Decision impact: reference accepted ADR-0011; local acquisition/trust transports preserve its existing contract, without a new ADR, approval or lifecycle change.
 
 ## Compaction and supersession
 
-The runtime recipe and source-bound owners retain detailed results. Preserve prior approvals and exact issue IDs. Teardown only owned helper state after evidence is saved; shared daemon configuration/cached image remain intact, with helper lifecycle recorded through it.
+Git, issues and date-scoped domain receipts retain detail. Preserve the exact source/caller/native contexts and known upload failure on compaction; do not replace the old source records with a later merged-head claim.
