@@ -97,7 +97,7 @@ review:
   - command: Client/daemon actual data-root measurements and scoped helper inspect
     outcome: passed
     observed_at: '2026-11-22T18:43:27.562510+00:00'
-    notes: Same device/inode, shared 9.44 GB tmpfs;12 GiB helper and narrower parent cgroup budget recorded.
+    notes: Same device/inode, shared 9.44 GB tmpfs; 12 GiB helper and 16 GiB parent limits are both below engine-visible physical memory.
       Source/evidence/data are one pool.
   environment_limitations:
   - Original direct browser pass is owned by its clean 9d11d99 receipt; local workflow replay and full
