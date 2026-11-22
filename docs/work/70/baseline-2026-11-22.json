@@ -1,0 +1,283 @@
+{
+  "checkpoint": "identity-70-local-engineering-baseline",
+  "observed_at": "2026-11-22T06:42:40.361468+00:00",
+  "repository": "egohygiene/identity",
+  "represented_revision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+  "context": "local-linux-x86_64-authoring-host",
+  "tools": {
+    "rust": "1.97.1",
+    "python": "3.12.14",
+    "node": "24.19.0",
+    "pnpm": "11.21.0",
+    "task": "3.45.3"
+  },
+  "checks": [
+    {
+      "name": "rust-version",
+      "command": [
+        "rustc",
+        "--version"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.029
+    },
+    {
+      "name": "cargo-metadata",
+      "command": [
+        "cargo",
+        "metadata",
+        "--locked",
+        "--format-version",
+        "1",
+        "--no-deps"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.114
+    },
+    {
+      "name": "rust-format",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.266
+    },
+    {
+      "name": "rust-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 30.046
+    },
+    {
+      "name": "rust-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--all-features"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 67.883
+    },
+    {
+      "name": "standalone-validator",
+      "command": [
+        "python3",
+        "scripts/build_identity_validator.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.166
+    },
+    {
+      "name": "verify_release",
+      "command": [
+        "python3",
+        "scripts/verify_release.py",
+        "--repository-root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.064
+    },
+    {
+      "name": "verify_docs",
+      "command": [
+        "python3",
+        "scripts/verify_docs.py",
+        "--repository-root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.115
+    },
+    {
+      "name": "verify_retired_guidance",
+      "command": [
+        "python3",
+        "scripts/verify_retired_guidance.py",
+        "--repository-root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.034
+    },
+    {
+      "name": "verify_mascot",
+      "command": [
+        "python3",
+        "scripts/verify_mascot.py",
+        "--repository-root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.992
+    },
+    {
+      "name": "verify_publication_architecture",
+      "command": [
+        "python3",
+        "scripts/verify_publication_architecture.py",
+        "--repository-root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.036
+    },
+    {
+      "name": "verify_publication_release_configs",
+      "command": [
+        "python3",
+        "scripts/verify_publication_release_configs.py",
+        "--repository-root",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.066
+    },
+    {
+      "name": "verify_extraction",
+      "command": [
+        "python3",
+        "scripts/verify_extraction.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.064
+    },
+    {
+      "name": "minimal-fixture",
+      "command": [
+        "python3",
+        "scripts/validate_identity.py",
+        "--repository-root",
+        "tests/fixtures/v1/valid/minimal",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.114
+    },
+    {
+      "name": "python-compile",
+      "command": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "scripts",
+        "tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.38
+    },
+    {
+      "name": "renderer-source",
+      "command": [
+        "pnpm",
+        "run",
+        "check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.281
+    },
+    {
+      "name": "renderer-tests",
+      "command": [
+        "pnpm",
+        "test"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 33.01
+    },
+    {
+      "name": "renderer-build",
+      "command": [
+        "pnpm",
+        "build"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.742
+    },
+    {
+      "name": "renderer-public",
+      "command": [
+        "pnpm",
+        "run",
+        "validate:public"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.774
+    },
+    {
+      "name": "python-tests",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "--start-directory",
+        "tests",
+        "--pattern",
+        "test_*.py",
+        "--verbose"
+      ],
+      "environment": {
+        "IDENTITY_REQUIRE_FRONTENDS": "1"
+      },
+      "exit_code": 0,
+      "discovered": 188,
+      "passed": 186,
+      "skipped": 2
+    },
+    {
+      "name": "parse-json",
+      "exit_code": 0,
+      "parsed_documents": 109
+    }
+  ],
+  "native_test_totals": {
+    "passed": 119,
+    "failed": 0,
+    "ignored_helpers": 3
+  },
+  "renderer_test_totals": {
+    "passed": 424,
+    "failed": 0,
+    "files": 19
+  },
+  "prior_failed_attempts": [
+    {
+      "checks": [
+        "rust-clippy",
+        "rust-tests"
+      ],
+      "cause": "ENOSPC during concurrent Docker VFS image materialization",
+      "disposition": "Retained as failed attempts; rerun after owned/generated cache cleanup succeeded."
+    }
+  ],
+  "limitations": [
+    "No hosted CI dispatch or matching browser-workflow acceptance.",
+    "No new native macOS/Windows or downloaded release/install qualification.",
+    "Existing fixtures and source-built public site do not establish actual Identity self-source or live publication.",
+    "No tag, release, deployment, human lifecycle promotion or stable agent skill publication."
+  ],
+  "decision_impact": {
+    "operation": "reference",
+    "records": [
+      "egohygiene/identity#ADR-0011",
+      "egohygiene/identity#ADR-0019"
+    ]
+  }
+}
