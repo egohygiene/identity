@@ -97,7 +97,7 @@ review:
   - command: python3 -m unittest discover --start-directory tests --pattern test_*dev_image*.py --verbose
     outcome: passed
     observed_at: '2026-11-22T18:52:23.676664+00:00'
-    notes: Fifteen focused controls pass:four repeat-setup controls,two host-subreceipt controls,two scoped
+    notes: Sixteen focused controls pass:four repeat-setup controls,two host-subreceipt controls,three scoped
       proxy/trust controls and seven existing boundaries. Fixture/command doubles do not establish native image execution.
   - command: python3 -m py_compile on changed qualification modules/tests; python3 scripts/verify_docs.py
       --repository-root .; git diff --check
@@ -155,7 +155,7 @@ The smoke now runs real setup again and host admission requires exact selected s
 
 ## Validation and review evidence
 
-Fifteen focused controls pass, including input/pin preservation and forged-receipt rejection, scoped CA selection/CLI precedence, invalid-file refusal and names-only/read-only transport. Syntax, documentation and whitespace pass. Original full qualifier passed exact-base acquisition but failed setup networking; actual proxy-only60/explicitCA0 probes isolate the trust gap. Full repaired-source acceptance remains pending.
+Sixteen focused controls pass, including input/pin preservation and forged-receipt rejection, scoped CA selection/CLI precedence, invalid-file/loop refusal without path disclosure and names-only/read-only transport. Syntax, documentation and whitespace pass. Original full qualifier passed exact-base acquisition but failed setup networking; actual proxy-only60/explicitCA0 probes isolate the trust gap. Full repaired-source acceptance remains pending.
 
 ## Blockers, risks, unknowns, and deferred work
 

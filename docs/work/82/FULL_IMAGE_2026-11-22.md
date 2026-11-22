@@ -33,10 +33,10 @@ product runtime feature or a claim of all-frontend image coverage.
 ## Checks executed during preparation
 
 - `python3 -m unittest discover --start-directory tests --pattern 'test_*dev_image*.py' --verbose`:
-  **15 tests pass**. Four smoke controls cover success, lockfile/source mutation,
+  **16 tests pass**. Four smoke controls cover success, lockfile/source mutation,
   setup failure and runtime pin drift. Two additional host-reader controls reject
   missing/forged inventories, wrong pins and absent/duplicate/failed command
-  records; two scoped proxy/trust controls enforce CLI precedence, invalid-file refusal, names-only transport and read-only trust selection; seven original storage/configuration/receipt boundaries remain.
+  records; three scoped proxy/trust controls enforce CLI precedence, invalid-file/symlink-loop refusal without private path disclosure, names-only transport and read-only trust selection; seven original storage/configuration/receipt boundaries remain.
 - Python compilation and `git diff --check` pass.
 
 These controls use disposable fixtures and command doubles. They do not claim
@@ -59,7 +59,7 @@ bundle, the same endpoint succeeded (exit 0). Neither probe installed trust.
 The qualifier now forwards the populated predefined proxy names for builds and
 container smoke without logging their values. Optional `--proxy-ca`, with scoped
 `IDENTITY_DEVELOPMENT_PROXY_CA` default and CLI precedence, selects a BuildKit
-secret for setup and a read-only container bind for real repeated setup. The
+public-readable ephemeral secret for setup under either inherited user and a read-only container bind for real repeated setup. The
 source path is redacted from public command records. No image-global trust or
 base/tool pin changes are made, and synthetic unknown-CA rejection remains
 required. Fresh repaired-source full qualification remains pending below.

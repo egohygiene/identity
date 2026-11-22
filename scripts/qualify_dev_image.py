@@ -40,7 +40,10 @@ def selected_proxy_ca(explicit: Path | None, environment: dict[str, str]) -> Pat
     selected = explicit if explicit is not None else environment.get("IDENTITY_DEVELOPMENT_PROXY_CA")
     if not selected:
         return None
-    resolved = Path(selected).resolve(strict=True)
+    try:
+        resolved = Path(selected).resolve(strict=True)
+    except (OSError, RuntimeError) as error:
+        raise ValueError("--proxy-ca must select an existing readable regular CA bundle") from error
     if not resolved.is_file() or "," in str(resolved):
         raise ValueError("--proxy-ca must select a regular CA bundle with no comma in its path")
     return resolved

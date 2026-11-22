@@ -12,7 +12,7 @@ ARG IDENTITY_DEV_UID=0
 ARG IDENTITY_DEV_GID=0
 COPY --chown=${IDENTITY_DEV_UID}:${IDENTITY_DEV_GID} . .
 # Optional caller-selected public trust is ephemeral; never alter image trust.
-RUN --mount=type=secret,id=identity_proxy_ca \
+RUN --mount=type=secret,id=identity_proxy_ca,mode=0444 \
     if [ -f /run/secrets/identity_proxy_ca ]; then \
       export CURL_CA_BUNDLE=/run/secrets/identity_proxy_ca \
         SSL_CERT_FILE=/run/secrets/identity_proxy_ca \
@@ -22,7 +22,7 @@ RUN --mount=type=secret,id=identity_proxy_ca \
     bash scripts/dev-env.sh setup
 # Browser dependencies are an explicit image option, independent of CLI setup.
 ARG WITH_BROWSERS=0
-RUN --mount=type=secret,id=identity_proxy_ca \
+RUN --mount=type=secret,id=identity_proxy_ca,mode=0444 \
     if [ -f /run/secrets/identity_proxy_ca ]; then \
       export CURL_CA_BUNDLE=/run/secrets/identity_proxy_ca \
         SSL_CERT_FILE=/run/secrets/identity_proxy_ca \

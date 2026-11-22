@@ -4,6 +4,8 @@
 
 import importlib.util
 from copy import deepcopy
+from contextlib import redirect_stderr
+import io
 import json
 import os
 from pathlib import Path
@@ -18,6 +20,27 @@ SPEC.loader.exec_module(QUALIFY)
 
 
 class QualificationBoundaryTests(unittest.TestCase):
+    def test_invalid_ca_cli_refuses_before_docker_without_revealing_local_paths(self):
+        with tempfile.TemporaryDirectory(prefix="private-ca-selection-") as temporary:
+            root = Path(temporary)
+            loop = root / "loop.pem"
+            loop.symlink_to(loop.name)
+            configured = root / "fallback.pem"
+            configured.write_text("public CA fixture\n")
+            for invalid in (root / "missing.pem", loop, root):
+                with self.subTest(invalid=invalid):
+                    error = io.StringIO()
+                    with (mock.patch.object(QUALIFY.subprocess, "run") as docker,
+                          mock.patch.dict(os.environ, {"IDENTITY_DEVELOPMENT_PROXY_CA": str(configured)}),
+                          mock.patch("sys.argv", ["qualify_dev_image.py", "--receipt", str(root / "receipt.json"),
+                                                  "--proxy-ca", str(invalid)]), redirect_stderr(error)):
+                        with self.assertRaises(SystemExit) as raised:
+                            QUALIFY.main()
+                    self.assertEqual(raised.exception.code, 2)
+                    self.assertNotIn(str(root), error.getvalue())
+                    self.assertIn("--proxy-ca must select", error.getvalue())
+                    docker.assert_not_called()
+
     def test_proxy_trust_is_scoped_explicit_and_cli_takes_precedence(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -30,8 +53,12 @@ class QualificationBoundaryTests(unittest.TestCase):
             self.assertEqual(QUALIFY.selected_proxy_ca(None, environment), configured)
             self.assertEqual(QUALIFY.selected_proxy_ca(explicit, environment), explicit)
             self.assertIsNone(QUALIFY.selected_proxy_ca(None, {"NODE_EXTRA_CA_CERTS": str(configured)}))
-            with self.assertRaises(FileNotFoundError):
+            with self.assertRaisesRegex(ValueError, "^--proxy-ca must select an existing readable regular CA bundle$"):
                 QUALIFY.selected_proxy_ca(root / "missing.pem", environment)
+            loop = root / "loop.pem"
+            loop.symlink_to(loop.name)
+            with self.assertRaisesRegex(ValueError, "^--proxy-ca must select an existing readable regular CA bundle$"):
+                QUALIFY.selected_proxy_ca(loop, environment)
             with self.assertRaises(ValueError):
                 QUALIFY.selected_proxy_ca(root, environment)
             ambiguous = root / "comma,bundle.pem"
