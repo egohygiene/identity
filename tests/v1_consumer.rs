@@ -801,6 +801,18 @@ fn cli_and_library_enforce_authoritative_source_diagnostics_before_mutation() {
             serde_json::json!("unrelated-decision"),
             "IDN1404",
         ),
+        (
+            ".identity/governance/approvals.json",
+            "/decisions/0/reviewedAt",
+            serde_json::json!("2026-11-22"),
+            "IDN1404",
+        ),
+        (
+            ".identity/governance/approvals.json",
+            "/decisions/0/reviewedAt",
+            serde_json::json!("2026-11-22T18:00:00"),
+            "IDN1404",
+        ),
     ] {
         let root = TempDir::new().unwrap();
         copy_tree(&fixture_root(), root.path());

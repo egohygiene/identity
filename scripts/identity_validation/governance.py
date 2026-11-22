@@ -4,6 +4,7 @@
 from __future__ import annotations
 from datetime import datetime
 from pathlib import Path
+import re
 from typing import Any
 from .common import (
     ACCESSIBILITY_KEYS,
@@ -25,6 +26,26 @@ from .common import (
     sha256,
     valid_relative_path,
 )
+
+
+def valid_review_timestamp(value: Any) -> bool:
+    """Require the declared date-time grammar before checking calendar values."""
+
+    if not isinstance(value, str) or re.fullmatch(
+        r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}"
+        r"(?:\.[0-9]+)?(?:[Zz]|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])",
+        value,
+    ) is None:
+        return False
+    normalized = value[:10] + "T" + value[11:]
+    if normalized[-1] in "Zz":
+        normalized = normalized[:-1] + "+00:00"
+    try:
+        # Keep the existing calendar parser's leap-second limitation. This is
+        # validation only: preserve the actual recorded timestamp bytes.
+        return datetime.fromisoformat(normalized).utcoffset() is not None
+    except ValueError:
+        return False
 
 
 def validate_approvals(
@@ -103,9 +124,7 @@ def validate_approvals(
                     "approval evidence field must be non-empty",
                     "Record the human reviewer and evidence.",
                 )
-        try:
-            datetime.fromisoformat(str(value.get("reviewedAt", "")).replace("Z", "+00:00"))
-        except ValueError:
+        if not valid_review_timestamp(value.get("reviewedAt")):
             diagnostic(
                 diagnostics,
                 "IDN1404",

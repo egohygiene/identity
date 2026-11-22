@@ -103,6 +103,50 @@ class IdentityV1ValidatorTests(unittest.TestCase):
     def test_complete_v1_fixture_is_valid(self) -> None:
         self.assertEqual(validator.validate_identity(VALID_FIXTURE), [])
 
+    def test_approval_review_requires_string_complete_time_and_explicit_offset(self) -> None:
+        invalid = [
+            "2026-11-22", 20261122, None, True,
+            "2026-11-22T18:00:00", "2026-11-22T18:00Z",
+            "2026-11-22 18:00:00Z", "20261122T180000Z",
+            "2026-W47-7T18:00:00Z", "2026-11-22X18:00:00Z",
+            "2026-11-22T18:00:00+0000", "2026-11-22T18:00:00+00:60",
+            "2026-11-22T18:00:00+24:00", "2026-11-22T18:00:00+00:00:01",
+            "2026-11-22T18:00:00,5Z", "2026-02-29T18:00:00Z",
+            "2026-11-22T24:00:00Z", "2026-11-22T18:00:00Z\n",
+        ]
+        for timestamp in invalid:
+            with self.subTest(timestamp=timestamp), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                path = repository / ".identity/governance/approvals.json"
+                approvals = json.loads(path.read_text(encoding="utf-8"))
+                approvals["decisions"][0]["reviewedAt"] = timestamp
+                write_json(path, approvals)
+                before = path.read_bytes()
+                diagnostics = validator.validate_identity(repository)
+                self.assertEqual([item.code for item in diagnostics], ["IDN1404"])
+                self.assertTrue(diagnostics[0].path.endswith("/decisions/0/reviewedAt"))
+                self.assertEqual(path.read_bytes(), before)
+
+    def test_approval_review_accepts_declared_date_time_forms_without_rewriting(self) -> None:
+        valid = [
+            "2026-11-22T18:00:00Z", "2026-11-22t18:00:00z",
+            "2026-11-22T18:00:00.123456789Z", "2026-11-22T18:00:00+05:30",
+            "2026-11-22T18:00:00-00:00", "2026-11-22T18:00:00+23:59",
+            "2024-02-29T00:00:00Z",
+        ]
+        for timestamp in valid:
+            with self.subTest(timestamp=timestamp), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                path = repository / ".identity/governance/approvals.json"
+                approvals = json.loads(path.read_text(encoding="utf-8"))
+                approvals["decisions"][0]["reviewedAt"] = timestamp
+                write_json(path, approvals)
+                before = path.read_bytes()
+                self.assertEqual(validator.validate_identity(repository), [])
+                self.assertEqual(path.read_bytes(), before)
+
     def test_guidance_paths_accept_independent_explicit_null_declarations(self) -> None:
         for declared_voice in (False, True):
             for declared_usage in (False, True):
