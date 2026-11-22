@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
 
 SPEC = importlib.util.spec_from_file_location("qualify_dev_image", Path(__file__).resolve().parents[1] / "scripts/qualify_dev_image.py")
@@ -16,6 +17,55 @@ SPEC.loader.exec_module(QUALIFY)
 
 
 class QualificationBoundaryTests(unittest.TestCase):
+    def test_storage_estimate_handles_vfs_boundaries_remote_and_explicit_bypass(self):
+        storage = {"Driver": "vfs", "DockerRootDir": "/daemon-data"}
+        usage = mock.Mock(free=24 * QUALIFY.GIB)
+        with mock.patch.object(QUALIFY.shutil, "disk_usage", return_value=usage) as inspect:
+            self.assertEqual(QUALIFY.storage_budget(storage, "unix:///socket", None)["status"], "sufficient-reserve")
+            usage.free -= 1
+            self.assertEqual(QUALIFY.storage_budget(storage, "unix:///socket", None)["status"], "insufficient")
+            self.assertEqual(QUALIFY.storage_budget(storage, "unix:///socket", 1)["status"], "sufficient-reserve")
+            usage.free = 8 * QUALIFY.GIB
+            self.assertEqual(QUALIFY.storage_budget({**storage, "Driver": "overlay2"}, "unix:///socket", None)["status"], "sufficient-reserve")
+            usage.free -= 1
+            self.assertEqual(QUALIFY.storage_budget({**storage, "Driver": "overlay2"}, "unix:///socket", None)["status"], "insufficient")
+            inspect.reset_mock()
+            report = QUALIFY.storage_budget(storage, "ssh://remote", None)
+            self.assertEqual(report["status"], "unknown")
+            self.assertIsNone(report["available_bytes"])
+            self.assertEqual(QUALIFY.storage_budget(storage, "ssh://remote", 0)["status"], "explicitly-bypassed")
+            inspect.assert_not_called()
+        with mock.patch.object(QUALIFY.shutil, "disk_usage", side_effect=PermissionError):
+            self.assertEqual(QUALIFY.storage_budget(storage, "unix:///socket", None)["status"], "unknown")
+
+    def test_insufficient_vfs_budget_writes_failure_receipt_before_pull_or_build(self):
+        commands = []
+
+        def docker(arguments, **kwargs):
+            commands.append(arguments)
+            if arguments[1] == "version":
+                output = {"Os": "linux", "Arch": "amd64"}
+            elif arguments[1] == "info":
+                output = {"Driver": "vfs", "DockerRootDir": "/daemon-data"}
+            else:
+                self.fail("No pull, build or other mutation is permitted before storage preflight")
+            return QUALIFY.subprocess.CompletedProcess(arguments, 0, json.dumps(output))
+
+        with tempfile.TemporaryDirectory() as temporary:
+            receipt = Path(temporary) / "qualification.json"
+            with (mock.patch.object(QUALIFY.subprocess, "run", side_effect=docker),
+                  mock.patch.object(QUALIFY, "source_evidence", return_value={}),
+                  mock.patch.object(QUALIFY.shutil, "disk_usage", return_value=mock.Mock(free=8 * QUALIFY.GIB)),
+                  mock.patch.dict(os.environ, {"DOCKER_HOST": "unix:///socket", "DOCKER_CONTEXT": ""}),
+                  mock.patch("sys.argv", ["qualify_dev_image.py", "--receipt", str(receipt)])):
+                self.assertEqual(QUALIFY.main(), 1)
+            retained = json.loads(receipt.read_text())
+            self.assertEqual(retained["status"], "failed")
+            self.assertEqual(retained["storage_budget"]["status"], "insufficient")
+            self.assertEqual(retained["storage_budget"]["minimum_free_bytes"], 24 * QUALIFY.GIB)
+            self.assertNotIn("/daemon-data", receipt.read_text())
+            self.assertEqual([command[1] for command in commands], ["version", "info"])
+
     def test_receipt_cannot_overwrite_source_or_a_directory(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

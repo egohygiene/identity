@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 import uuid
@@ -22,6 +23,30 @@ PLATFORM = "linux/amd64"
 HOST_MARKER = "IDENTITY_DEV_QUALIFICATION_RECEIPT="
 CONTAINER_MARKER = "IDENTITY_DEV_CONTAINER_RECEIPT="
 REGISTRY_RECEIPT = "docs/evidence/identity-development-base-registry-2026-10-20.json"
+GIB = 1024 ** 3
+
+
+def storage_budget(storage: dict[str, object], endpoint: str, minimum_gib: int | None) -> dict[str, object]:
+    """Bound known local disk pressure; an estimate never proves enough capacity."""
+    driver = storage.get("Driver")
+    minimum = minimum_gib if minimum_gib is not None else (24 if driver == "vfs" else 8)
+    report: dict[str, object] = {
+        "driver": driver, "minimum_free_bytes": minimum * GIB,
+        "available_bytes": None,
+        "basis": "Conservative local operational reserve, not a sufficient-capacity guarantee.",
+    }
+    if minimum == 0:
+        return {**report, "status": "explicitly-bypassed"}
+    directory = storage.get("DockerRootDir")
+    if not isinstance(endpoint, str) or not endpoint.startswith("unix://") or not isinstance(directory, str) or not Path(directory).is_absolute():
+        return {**report, "status": "unknown", "reason": "Daemon storage is not locally observable; measure it on the daemon host or use --minimum-free-gib 0 with an independently checked budget."}
+    try:
+        available = shutil.disk_usage(directory).free
+    except OSError:
+        return {**report, "status": "unknown", "reason": "Daemon storage cannot be inspected locally; measure it on the daemon host or use --minimum-free-gib 0 with an independently checked budget."}
+    report["available_bytes"] = available
+    return {**report, "status": "sufficient-reserve" if available >= minimum * GIB else "insufficient",
+            "reason": "Reserve checked on the locally observable Docker data filesystem; concurrent jobs and VFS copies can require more."}
 
 
 def sha256(data: bytes) -> str:
@@ -118,7 +143,10 @@ def source_evidence() -> dict[str, object]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--receipt", type=Path, required=True, help="Destination for public qualification JSON")
+    parser.add_argument("--minimum-free-gib", type=int, help="Local Docker data free-space reserve (default: 24 GiB for vfs, 8 otherwise); 0 explicitly bypasses for independently budgeted or remote engines")
     args = parser.parse_args()
+    if args.minimum_free_gib is not None and args.minimum_free_gib < 0:
+        parser.error("--minimum-free-gib must be nonnegative")
     try:
         args.receipt = receipt_destination(args.receipt)
     except (OSError, ValueError) as error:
@@ -171,6 +199,13 @@ def main() -> int:
         receipt["docker_server"] = {key: server.get(key) for key in ("Version", "Os", "Arch", "KernelVersion")}
         if (server.get("Os"), server.get("Arch")) != ("linux", "amd64"):
             raise RuntimeError("The qualification requires a native Linux amd64 Docker engine")
+        storage = json.loads(run(["docker", "info", "--format", "{{json .}}"], capture=True))
+        endpoint = None if os.environ.get("DOCKER_CONTEXT") else os.environ.get("DOCKER_HOST")
+        if not endpoint:
+            endpoint = json.loads(run(["docker", "context", "inspect", "--format", "{{json .Endpoints.docker.Host}}"], capture=True))
+        receipt["storage_budget"] = storage_budget(storage, endpoint, args.minimum_free_gib)
+        if receipt["storage_budget"]["status"] in ("insufficient", "unknown"):
+            raise RuntimeError("Docker storage preflight refused pull/build: " + str(receipt["storage_budget"]))
         run(["docker", "pull", "--platform", PLATFORM, base])
         pinned_identity = inspect(base)
         verify_registry_binding(base, pinned_identity, registry)

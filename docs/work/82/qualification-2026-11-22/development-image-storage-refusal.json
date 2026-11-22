@@ -1,0 +1,93 @@
+{
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .Server}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "e8a2125971d77058e54d2ba54d3d9d66132f46be8c86ca40173bc9d9eb6f227a"
+    },
+    {
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "{{json .}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "f21e0b0e0d007a2d16e408bdddc8048a211f50e815fd31df921656558c20a100"
+    },
+    {
+      "command": [
+        "docker",
+        "context",
+        "inspect",
+        "--format",
+        "{{json .Endpoints.docker.Host}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "6e9377dc256a087822b2dfcb54ff61ad6707c28e88e43bb474d2299e4ddd2877"
+    }
+  ],
+  "default_base": "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+  "docker_server": {
+    "Arch": "amd64",
+    "KernelVersion": "6.18.57",
+    "Os": "linux",
+    "Version": "28.4.0"
+  },
+  "failure": "RuntimeError: Docker storage preflight refused pull/build: {'driver': 'vfs', 'minimum_free_bytes': 25769803776, 'available_bytes': 4668297216, 'basis': 'Conservative local operational reserve, not a sufficient-capacity guarantee.', 'status': 'insufficient', 'reason': 'Reserve checked on the locally observable Docker data filesystem; concurrent jobs and VFS copies can require more.'}",
+  "images": [],
+  "kind": "dated development-image qualification receipt",
+  "limits": [
+    "Only the pinned default and recorded derived non-root base are qualified on linux/amd64.",
+    "No browser/font/screenshot environment or all-entrypoint CI matrix is qualified.",
+    "No private proxy environment, credentials or certificate bytes are recorded.",
+    "No release, registry push, deployment or creative approval occurs."
+  ],
+  "observed_at": "2026-11-22T06:44:52.983610+00:00",
+  "platform": "linux/amd64",
+  "registry_observation": {
+    "config_digest": "sha256:03905f546fa8c284c377142124957871d1e8b9ddd0d69e869e233b9eeffd7790",
+    "index_digest": "sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+    "path": "docs/evidence/identity-development-base-registry-2026-10-20.json",
+    "platform_manifest_digest": "sha256:7f7f17f773027e7f0475fa829fc0d793d75918fda85b9e517c9cc5aa46200406"
+  },
+  "source": {
+    "build_source_inventory": {
+      "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+      "files": 415,
+      "scope": "Critical files; all tracked non-Markdown files outside docs; all tracked fixture files including canonical Markdown. Includes assets/publication/profiles/defaults/packages where present. Documentation-only changes outside fixtures and the critical registry receipt are excluded.",
+      "sha256": "26fde51ca3579c767be18c22e3160a1d142c3ce167d857e54d59cece0169174d"
+    },
+    "critical_files_sha256": {
+      ".dockerignore": "af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",
+      ".github/workflows/development-image.yml": "9f32b34e61201151c08e5da32ce258a9b0ed3e4968f76c2a1b2a97ea074c043c",
+      "Cargo.lock": "7fdbc3cc28d1da2b1299fdcca6a2b5e8c055522261f0d84ff71e01233e830450",
+      "Cargo.toml": "ceeb25ebbf9848f19d296d67a695559c9ab5b002eb6fb472928826fccd07dd28",
+      "dev/Dockerfile": "4b2a037c147dd0ac7b3679c3d9a3d2c3a16268b1bb8b0f325696a86ab73352e3",
+      "dev/qualification/Dockerfile": "6dcbe0ffc89a356bb11ad2ed80817723e365d2c978fb85cb7af6c48d090ecf0c",
+      "dev/qualification/smoke.py": "65b3dacb8bf75ccaaa5007f07770607ff0beaea67ff9266cc3b107a7cb17ac2a",
+      "docs/evidence/identity-development-base-registry-2026-10-20.json": "2b2551f59fa92fdd8af1620e28fe31f621818577e946bb775c805497cab94add",
+      "renderer/package.json": "f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f",
+      "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+      "rust-toolchain.toml": "279d77167cec5426fa80f457cd066dc74a360fbe4e2816f4f3fa01487a918fdc",
+      "scripts/dev-env.sh": "467cf8e34e706ffdba7ef0bfee638e9b1da8527330e7deba1b317f2a272e81f7",
+      "scripts/qualify_dev_image.py": "bbdc4625659ba5725220f3e94bae3430144ec05fefe1319058256d74704ee643"
+    },
+    "git_revision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+    "git_worktree_clean": false
+  },
+  "status": "failed",
+  "storage_budget": {
+    "available_bytes": 4668297216,
+    "basis": "Conservative local operational reserve, not a sufficient-capacity guarantee.",
+    "driver": "vfs",
+    "minimum_free_bytes": 25769803776,
+    "reason": "Reserve checked on the locally observable Docker data filesystem; concurrent jobs and VFS copies can require more.",
+    "status": "insufficient"
+  }
+}

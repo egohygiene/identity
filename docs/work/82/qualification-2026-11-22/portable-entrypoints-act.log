@@ -1,0 +1,48 @@
+time="2026-11-22T06:43:51Z" level=info msg="Using docker host 'unix:///var/run/docker.sock', and daemon socket '-'"
+[Qualify development image/Exercise standalone, Make and Task dispatch] ⭐ Run Set up job
+[Qualify development image/Exercise standalone, Make and Task dispatch] 🚀  Start image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker pull image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 username= forcePull=false
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker create image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker run image=ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270 platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker exec cmd=[node --no-warnings -e console.log(process.execPath)] user= workdir=
+[Qualify development image/Exercise standalone, Make and Task dispatch]   ✅  Success - Set up job
+[Qualify development image/Exercise standalone, Make and Task dispatch] LocalRepositoryCache matched https://github.com/step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c to <pinned-action-mirrors>/step-security-harden-runner
+[Qualify development image/Exercise standalone, Make and Task dispatch] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath 'action.yml' from <pinned-action-mirrors>/step-security-harden-runner
+[Qualify development image/Exercise standalone, Make and Task dispatch] ⭐ Run Pre Harden runner
+[Qualify development image/Exercise standalone, Make and Task dispatch] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath '' from <pinned-action-mirrors>/step-security-harden-runner
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker exec cmd=[/opt/acttoolcache/node/24.22.2/x64/bin/node /var/run/act/actions/step-security-harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c/dist/pre/index.js] user= workdir=
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | [harden-runner] pre-step
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | [!] Current Configuration:
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | {"repo":"egohygiene/identity","run_id":"1","correlation_id":"<local-emulation>","working_directory":"<candidate-checkout>","api_url":"https://agent.api.stepsecurity.io/v1","telemetry_url":"https://prod.app-api.stepsecurity.io/v1","allowed_endpoints":"","denied_endpoints":"","egress_policy":"audit","disable_telemetry":false,"disable_sudo":false,"disable_sudo_and_containers":false,"disable_file_monitoring":false,"private":false,"is_github_hosted":false,"is_debug":false,"one_time_key":"","api_key":"","use_policy_store":false,"deploy_on_self_hosted_vm":false}
+[Qualify development image/Exercise standalone, Make and Task dispatch]   |
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | View security insights and recommended policy at:
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | https://app.stepsecurity.io/github/egohygiene/identity/actions/runs/1
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | RUNNER_NAME:
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | This job is running on a self-hosted runner.
+[Qualify development image/Exercise standalone, Make and Task dispatch]   ✅  Success - Pre Harden runner [284.436024ms]
+[Qualify development image/Exercise standalone, Make and Task dispatch] ⭐ Run Main Checkout Identity
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker cp src=<candidate-checkout>/. dst=<candidate-checkout>
+[Qualify development image/Exercise standalone, Make and Task dispatch]   ✅  Success - Main Checkout Identity [292.94724ms]
+[Qualify development image/Exercise standalone, Make and Task dispatch] ⭐ Run Main Install checksum-pinned check-only Task
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker exec cmd=[bash -e /var/run/act/workflow/2] user= workdir=
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | /tmp/identity-check-tools/bin/.task-download.f1FZFp/task.tar.gz: OK
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | 3.45.3
+[Qualify development image/Exercise standalone, Make and Task dispatch]   ✅  Success - Main Install checksum-pinned check-only Task [799.313291ms]
+[Qualify development image/Exercise standalone, Make and Task dispatch]   ⚙  ::add-path:: /tmp/identity-check-tools/bin
+[Qualify development image/Exercise standalone, Make and Task dispatch] ⭐ Run Main Exercise portable entry points and deliberate faults
+[Qualify development image/Exercise standalone, Make and Task dispatch]   🐳  docker exec cmd=[bash -e /var/run/act/workflow/3] user= workdir=
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | test_browser_arguments_reach_the_shared_helper_without_installing (test_dev_entrypoints.EntryPointTests.test_browser_arguments_reach_the_shared_helper_without_installing) ... ok
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | test_ci_has_actual_make_and_task_frontends (test_dev_entrypoints.EntryPointTests.test_ci_has_actual_make_and_task_frontends) ... ok
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | test_repeated_setup_uses_frozen_tools_activation_and_owned_cache (test_dev_entrypoints.EntryPointTests.test_repeated_setup_uses_frozen_tools_activation_and_owned_cache) ... ok
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | test_unknown_dispatch_fails_without_touching_consumer_files (test_dev_entrypoints.EntryPointTests.test_unknown_dispatch_fails_without_touching_consumer_files) ... ok
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | test_wrong_activated_package_manager_fails_before_dependency_or_build_work (test_dev_entrypoints.EntryPointTests.test_wrong_activated_package_manager_fails_before_dependency_or_build_work) ... ok
+[Qualify development image/Exercise standalone, Make and Task dispatch]   |
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | ----------------------------------------------------------------------
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | Ran 5 tests in 2.181s
+[Qualify development image/Exercise standalone, Make and Task dispatch]   |
+[Qualify development image/Exercise standalone, Make and Task dispatch]   | OK
+[Qualify development image/Exercise standalone, Make and Task dispatch]   ✅  Success - Main Exercise portable entry points and deliberate faults [2.301047776s]
+[Qualify development image/Exercise standalone, Make and Task dispatch] ⭐ Run Complete job
+[Qualify development image/Exercise standalone, Make and Task dispatch] Cleaning up container for job Exercise standalone, Make and Task dispatch
+[Qualify development image/Exercise standalone, Make and Task dispatch]   ✅  Success - Complete job
+[Qualify development image/Exercise standalone, Make and Task dispatch] 🏁  Job succeeded
