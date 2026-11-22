@@ -1,0 +1,191 @@
+{
+  "approved_baseline_after_sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+  "artifact_files_sha256": {},
+  "artifact_inventory_excludes_host_receipt": true,
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .Server}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "04eab520ae46261241529383d6fbca8da2ef343df744c98696b28bb76e794c47"
+    },
+    {
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "{\"driver\":{{json .Driver}},\"dataRoot\":{{json .DockerRootDir}}}"
+      ],
+      "exit_code": 0,
+      "output_sha256": "811e137b3fe403640345bad4f26cd2a00c6fd0e03314845719f0cd086a48b82a"
+    }
+  ],
+  "docker_server": {
+    "Arch": "amd64",
+    "KernelVersion": "6.18.57",
+    "Os": "linux",
+    "Version": "28.4.0"
+  },
+  "engine_platform_relation": "native-amd64",
+  "execution_context": "local-host",
+  "failure": "RuntimeError: Browser preparation storage is below its driver budget or cannot be observed; no image was pulled",
+  "kind": "dated browser-environment qualification host receipt",
+  "limits": [
+    "The invocation mode labels a caller; both use identical image/rendering settings.",
+    "A hosted local-entrypoint replay is not an actual Docker run in an unavailable developer workspace.",
+    "Local act workflow replays are not GitHub-hosted CI evidence.",
+    "Only the recorded image/platform/fonts/settings and unchanged approved baseline are qualified.",
+    "No baseline regeneration, tolerance relaxation, release, deployment or human approval occurs."
+  ],
+  "mode": "local",
+  "observed_at": "2026-11-22T18:30:08.566888+00:00",
+  "platform": "linux/amd64",
+  "profile": {
+    "baseline": {
+      "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+      "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+      "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+    },
+    "chromium": {
+      "colorProfile": "srgb",
+      "revision": "1234",
+      "version": "151.0.7922.34"
+    },
+    "fontFiles": [
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+        "sha256": "3a3c502eeff669a231549e80df9f7c49de109bafe303170409e905d0b31a38fe"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf",
+        "sha256": "a5251173370e30760e6919711dcd33e149d216ca4814eb74332bda03fcc7e834"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf",
+        "sha256": "3d7955616e69721f7edb8e1b7a580f8fbd7d737111c6b54266ddc1d9ef13202f"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+        "sha256": "c805f9436dbc268644c1d9584f01a601a653e028e08fd74b9b949f6cf8304d88"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+        "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+        "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+      }
+    ],
+    "fontPackages": [
+      {
+        "bytes": 502232,
+        "name": "fonts-dejavu-mono",
+        "sha256": "8a599d6553307db7ecb795d2f0e5a301e03234afc75c7358b0ba43466454c89a",
+        "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-mono_2.37-8_all.deb",
+        "version": "2.37-8"
+      },
+      {
+        "bytes": 835172,
+        "name": "fonts-dejavu-core",
+        "sha256": "40049660c194f3b8a2541fc7369efebb10e9f94bdac836a2f38fafedd10fa73a",
+        "url": "https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.37-8_all.deb",
+        "version": "2.37-8"
+      }
+    ],
+    "fontSourceReceipt": "docs/evidence/identity-browser-fonts-2026-10-20.json",
+    "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+    "kind": "qualified browser environment",
+    "packageManager": "pnpm@11.21.0",
+    "platform": "linux/amd64",
+    "playwright": "1.62.1",
+    "registryReceipt": "docs/evidence/identity-browser-registry-2026-10-20.json",
+    "settings": {
+      "colorScheme": "light",
+      "deviceScaleFactor": 1,
+      "locale": "en-US",
+      "reducedMotion": "no-preference",
+      "timezoneId": "UTC",
+      "viewport": {
+        "height": 1000,
+        "width": 1440
+      }
+    }
+  },
+  "registry": {
+    "config_digest": "sha256:fee853fafa59550d162cef52bca02d907694b44ebf6ef9fb075bcc0c65d8dedb",
+    "image": "mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+    "index_digest": "sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+    "manifest_digest": "sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac",
+    "platform": "linux/amd64"
+  },
+  "source": {
+    "build_source_inventory": {
+      "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+      "files": 423,
+      "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+      "sha256": "86e458529874a92ea24fc88ea47aabc8022d42272b8bc09c326d44b73781a6e9"
+    },
+    "critical_files_sha256": {
+      ".dockerignore": "af53b70c3be0cd13f9445135b73f288255c299ca9b8e49d32a10abbac7f225a1",
+      ".github/workflows/decision-validation.yml": "4b490e6ee629afce4df22eb3d1aa11de55d17d0bcd88a73e4a371850043422e4",
+      ".github/workflows/development-image.yml": "9f32b34e61201151c08e5da32ce258a9b0ed3e4968f76c2a1b2a97ea074c043c",
+      ".github/workflows/identity-experience.yml": "7a5968888eb338cf8c804c211171bee63e33d0444417c6aa338b378ef98ea2a1",
+      ".github/workflows/publish-brand-kit.yml": "464dc25cc55ca8554f64a32f746bb1e6c34e9869dd1055943c9f7c2a56ba7be3",
+      ".github/workflows/reference-renderer.yml": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+      ".github/workflows/release.yml": "5090d275d30a1f26c0c1a1ac510c641b02f11ddf8f43b5ea243caaadaedf225c",
+      ".github/workflows/validate.yml": "9538c77339296381e302f1e49d55f219ab86fc6722aefb4320bbbb9cb948b2fd",
+      "dev/browser/Dockerfile": "031960e25b42865d14cc381dc1c4b06558f508507f3b89dea1d8fdd873670280",
+      "dev/browser/install-fonts.mjs": "6c09e54e039b710984655c7d60be83ba4a5d429727cd053df5253db01d429efa",
+      "dev/browser/profile.json": "0f80c5ee4fa65ccb697399471f10de11adbadc37973ca22966aa337e0e19c790",
+      "docs/evidence/identity-browser-fonts-2026-10-20.json": "191f09a07796a9d14e71b249b9a6837900ceae6b391a32d590f51b1856f5c711",
+      "docs/evidence/identity-browser-registry-2026-10-20.json": "9f1e06793ef3641db2986f2efe0c0f0fe5bebffe4008e155619fb8adb6fe0ec9",
+      "renderer/package.json": "f6069281b03191b42be6d9ad89e8c5ee884dedd555f0cdce049d8fb6c4146b5f",
+      "renderer/playwright.config.js": "b97cbd42101ad391afd45003baa5a4d01f856884efa7241a4eee61da45c86fd9",
+      "renderer/pnpm-lock.yaml": "b6010634af1f120a51a0ce242dc743f5691a4557feed4dc647dfbcdd69782489",
+      "renderer/scripts/qualify-browser.mjs": "351a05084f3111918b42609c426944c005bcdec4bf07161cf2776072d86bb26d",
+      "renderer/tests/e2e/__snapshots__/brand-kit-page.png": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+      "renderer/tests/e2e/renderer.spec.js": "5ed1d83f998a269e1cd7219d75e25807db134456a6cd9157e09638c98c5ca58e",
+      "scripts/qualify_browser.py": "a7b3e1318e6aa642cd3080758edbfe9fd0fbf903a17cec96f77a35c857d9dad3"
+    },
+    "git_revision": "9d11d9993555bbe1736cda5c43e4c2a8239e657c",
+    "git_worktree_clean": true
+  },
+  "status": "failed",
+  "storage_preflight": {
+    "budgetIsNotACapacityGuarantee": true,
+    "driver": "overlay2",
+    "endpointKind": "local-unix",
+    "minimumFreeBytes": 4294967296,
+    "observations": [
+      {
+        "freeBytes": 2639409152,
+        "location": "repository",
+        "status": "observed"
+      },
+      {
+        "freeBytes": 2639409152,
+        "location": "evidence",
+        "status": "observed"
+      },
+      {
+        "freeBytes": 9410396160,
+        "location": "daemon-data-root",
+        "status": "observed"
+      }
+    ],
+    "status": "failed"
+  }
+}

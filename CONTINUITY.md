@@ -7,25 +7,20 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T07:09:25.489579+00:00'
+  updated_at: '2026-11-22T19:08:19.581987+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Prepare exact Identity-local layer and same-subject governance review inputs without adopting
-    canonical source or inventing approvals.
+  purpose: Qualify the original Docker browser route and unchanged local workflow through explicit verified action sources and managed-network trust.
   includes:
-  - Stage an explicit empty-inheritance/local-product option and preserve an actual-organization-snapshot
-    alternative.
-  - Bind nine exact selected token values, lookup mapping, masters, confirmed copy and incomplete native
-    record drafts to hashes/evidence.
-  - Keep full active-candidate invalidity distinct from passing isolated schema/layer checks.
+  - Prepare full-commit archive and Git-tree verified local action mirrors without workflow edits.
+  - Retain exact matching-source direct, local-act-ci and default-entrypoint browser proof.
+  - Separate original browser step success from the actual local artifact-server failure.
   excludes:
-  - Root .identity promotion, adopting empty inheritance or local token bytes, organization-wide defaults
-    and new human approval.
-  - Runtime/schema/profile/asset changes, full engineering/native/browser/CI qualification, generation,
-    release/deployment and other-repository writes.
+  - GitHub-hosted CI, paid services, publication, tags/releases, baseline changes and new creative approval.
+  - Canonical self-source adoption, full native/platform acceptance and other repository writes.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -34,143 +29,91 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - docs/contracts/IDENTITY_V1.md
-  - docs/decisions/ADR-0001-creative-approval-human-owned.md
-  - docs/decisions/ADR-0004-dtcg-token-contract.md
-  - docs/decisions/ADR-0012-local-layered-identity-v1.md
-  - docs/decisions/ADR-0035-scoped-logo-use-policy.md
-  - docs/work/98/OWNER_ANSWERS_2026-11-22.md
-  - docs/work/98/OWNER_PACKET.md
-  - docs/work/98/self-source-review/README.md
-  - docs/work/98/self-source-review/REVIEW.json
-  - docs/work/98/candidate/README.md
-  - https://github.com/egohygiene/identity/issues/98
-  - docs/work/116/SPRINT_2026-11-22.md
-  - docs/work/116/sprint-2026-11-22.json
+  - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
+  - dev/browser/profile.json
+  - .github/workflows/reference-renderer.yml
+  - dev/local-actions/reference-renderer.lock.json
+  - docs/LOCAL_WORKFLOW_REPLAY.md
+  - docs/work/80/ACTION_REPLAY_2026-11-22.md
+  - docs/work/80/action-replay-2026-11-22/qualification-summary.json
+  - https://github.com/egohygiene/identity/issues/80
+  - https://github.com/egohygiene/identity/issues/88
 work:
-  objective: Prepare exact Identity-local layer and same-subject governance review inputs without adopting
-    canonical source or inventing approvals.
+  objective: Establish original matching-source local Docker and actual workflow browser proof while retaining exact local transport failures.
   success_conditions:
-  - Produce exact reviewable declarations/token hashes and same-subject drafts without changing the active
-    manifest/native arrays.
-  - Preserve confirmed choices and all nine original type/value records; make text lookup and actual inheritance
-    choices explicit.
-  - Retain expected exit1/IDN1301 for active incomplete source and no root adoption or release claim.
+  - Keep profile/image/font/baseline/workflow pins unchanged and preserve truthful caller contexts.
+  - Run nine positives, deliberate screenshot failure and restored pass from direct and both original workflow browser steps.
+  - Retain complete artifact hashes and actual whole-workflow exit without claiming hosted CI or artifact publication.
   active_issue:
     provider: github
-    id: egohygiene/identity#98
-    url: https://github.com/egohygiene/identity/issues/98
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: review-draft-stack-and-exact-self-source
-    description: 'Review draft158→159→160→161→162 and the exact self-source packet. Preserve unselected
-      layer/token/governance facts and full Docker/native/consumer gates; #116 closes last.'
+    id: review-original-browser-proof-and-artifact-transport
+    description: 'Review the three exact a56399b browser passes for #80/#88 and reconcile the draft stack; repair local act artifact MIME protocol separately before claiming whole-workflow green.'
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/pull/158
-    - https://github.com/egohygiene/identity/pull/162
-    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/80
+    - https://github.com/egohygiene/identity/issues/88
+    - https://github.com/egohygiene/identity/issues/70
     depends_on: []
 state:
   base:
-    revision: 0200568536aac3ee1f0ef060397064d200a74f93
-    ref: refs/heads/codex/88-renderer-stack-20261122
-    verified_at: '2026-11-22T07:04:56.465436+00:00'
+    revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
+    ref: refs/heads/main
+    verified_at: '2026-11-22T19:03:09Z'
   candidate:
-    branch: codex/98-self-source-stack-20261122
+    branch: codex/80-pinned-action-replay-20261122
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#162
-      url: https://github.com/egohygiene/identity/pull/162
-    handoff_state: review-reference-recorded
+    pull_request: null
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-22T07:04:56.465436+00:00'
-    default_branch_revision: ec8fce30c3c96c7781238eb0a8899d6f0cee0a40
+    observed_at: '2026-11-22T19:03:09Z'
+    default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
     issue_state: open
-    pull_request_state: draft
-    notes: Main remains ec8fce3. Drafts158→159→160→161→162 are open; separate Aether140 records actual
-      compatible-host qualification and retained portability failure. All six Identity finish issues remain
-      open; no sprint draft is merged or released.
+    pull_request_state: not-applicable
+    notes: 'Provider main remains75ca39f; #80 is open. Parallel approval-timestamp PR163 is draft; this domain branch has no PR yet. No merge, hosted dispatch, release or deployment was performed by this checkpoint.'
   parallel_changes:
   - provider: github
-    id: egohygiene/identity#158
-    url: https://github.com/egohygiene/identity/pull/158
-  - provider: github
-    id: egohygiene/identity#159
-    url: https://github.com/egohygiene/identity/pull/159
-  - provider: github
-    id: egohygiene/identity#160
-    url: https://github.com/egohygiene/identity/pull/160
-  - provider: github
-    id: egohygiene/identity#161
-    url: https://github.com/egohygiene/identity/pull/161
-  - provider: github
-    id: egohygiene/aether#140
-    url: https://github.com/egohygiene/aether/pull/140
+    id: egohygiene/identity#163
+    url: https://github.com/egohygiene/identity/pull/163
 review:
   status: partial
-  reviewed_at: '2026-11-22T07:09:25.489579+00:00'
+  reviewed_at: '2026-11-22T19:08:19.581987+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Existing JSON Schemas and isolated identity_validation.tokens.load_layers with exact staged
-      documents
+  - command: Offline exact archive preparation and actual act --strict --dryrun with four explicit local repositories
     outcome: passed
-    observed_at: '2026-11-22T06:43:30.964613+00:00'
-    notes: Both token docs/layer entries pass; nine original type/value records resolve in the product
-      layer with zero replacements. A wrong SHA256 control reports IDN1302; validation.json retains exact
-      scope.
-  - command: python3 scripts/validate_identity.py --repository-root docs/work/98/candidate --format json
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: All four archive SHA256/size and complete reconstructed Git trees match reviewed full-commit locks. Dry-run proves acquisition/planning only; actual action execution is separately retained.
+  - command: Focused Python browser and local-action boundary suites; independent read-only source review
+    outcome: passed
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: 22 tests pass. Actual Git tree calculation, hostile archives, pin/workflow drift, budgets and duplicate JSON are rejected. CA CLI precedence and generic path errors cover missing/directory/loops, commas/quotes/all ASCII controls and alias targets.
+  - command: Original direct Docker plus unchanged reference-renderer workflow CI/default-local browser steps
+    outcome: passed
+    observed_at: '2026-11-22T18:57:35.045Z'
+    notes: All three at clean a56399b33548cab075e4442e64605035bccd973f, same 423-file inventory 07bb513d..., nativeamd64 overlay2; each 9 positives → 1 intended failure → 1 restored pass, 0 skips/retries. Three host receipts and 48 raw artifacts retain exact hashes; PNG/tolerance unchanged.
+  - command: Actual original reference-renderer workflow through act0.2.97 host executor in disposable helper
     outcome: limited
-    observed_at: '2026-11-22T06:43:30.964613+00:00'
-    notes: Actual exit1/valid:false with IDN1301 at /layers, expected for unadopted source. Input hashes
-      unchanged during validation; this is not a project pass.
-  - command: Native approval/provenance draft schema inspection
-    outcome: limited
-    observed_at: '2026-11-22T06:43:30.964613+00:00'
-    notes: Draft approvals intentionally lack exact reviewedAt; provenance drafts intentionally lack reviewed
-      altText/safeZone/minimumSize. Expected error paths are retained rather than inventing values.
-  - command: python3 scripts/verify_docs.py --repository-root . and git diff --check
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: 51 source parses, 424 Vitest passes, build/public validation and both browser steps pass; whole job exits 1 after 206.755s because local act artifact server rejects unchanged uploader CreateArtifact mime_type. Original hardening pre/main/post execute self-hosted; no hosted-security or publication claim.
+  - command: Retained evidence hashes, protected-source comparison, documentation/compile/whitespace and pinned continuity schema/headings/budgets
     outcome: passed
-    observed_at: '2026-11-22T06:43:30.964613+00:00'
-    notes: Existing documentation links and whitespace pass for the review packet.
-  - command: Base comparison of active manifest/native arrays/original local baseline and implementation/asset/ADR
-      inputs
-    outcome: passed
-    observed_at: '2026-11-22T06:43:30.964613+00:00'
-    notes: Those inputs are unchanged; no root .identity exists. Only review work records and scoped handoffs
-      change.
-  - command: Independent read-only source/layer/governance packet review
-    outcome: passed
-    observed_at: '2026-11-22T06:45:15.025181+00:00'
-    notes: Reviewer reports no blocker; exact pins/values, unchanged masters/native arrays, explicit schema
-      gaps and unselected empty-inheritance scope are verified.
-  - command: Pinned continuity metadata schema, exact headings and byte/line budget validation
-    outcome: passed
-    observed_at: '2026-11-22T06:45:15.025181+00:00'
-    notes: Draft2020-12 metadata and twelve headings pass within16384bytes/240lines; no official released
-      EgoLint continuity-conformance claim.
-  - command: Integrated Python suite, actual double public build, actionlint and evidence/source binding
-      verification
-    outcome: passed
-    observed_at: '2026-11-22T07:09:25.489579+00:00'
-    notes: Represented8a7a1bc:208passes/2existing skips;46-file frontend outputs identical;3workflows
-      lint;23browser committed-file hashes and13source/7review pins match. Compiled product inputs remain
-      baseline-identical; active owner candidate still expected IDN1301. See work116 sprint receipt.
+    observed_at: '2026-11-22T19:08:19.581987+00:00'
+    notes: 66 retained files hashed; all 48 raw artifact hashes and three 20-file critical-input sets match. Workflow/profile/renderer/assets/contracts/ADR bytes equal 75ca39f. Metadata has 12 headings within 16384 bytes/240 lines; no released EgoLint conformance claim.
   environment_limitations:
-  - Exact token/mapping/inheritance/layer review remains required; passing isolated layer checks supplies
-    no organizational authority or adoption.
-  - Review date is known but exact original review instant is not supplied; native drafts retain null
-    rather than fabricate it. New descriptors remain unreviewed.
-  - No source/producer generation, complete public-kit, contrast, full native/browser/CI or release qualification
-    is supplied.
-  - Official released EgoLint continuity conformance is not claimed; pinned metadata/heading/budget checks
-    are narrower evidence.
+  - Local act is not GitHub-hosted CI; the whole local job remains failed at artifact transport despite passing product/browser steps.
+  - Only recorded native Linux/amd64 original image/profile is qualified; no other platform, release, human visual approval or source adoption follows.
+  - The exact represented source is a56399b; later unrelated integration is not relabeled as an actual run.
+  - Official released EgoLint continuity conformance is not claimed; pinned metadata, headings and budgets are narrower checks.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
-  redactions: []
+  redactions:
+  - Private task paths, proxy values and disposable local correlation identifiers in workflow logs; raw/sanitized hashes remain distinct.
   excluded:
   - secrets-and-credentials
   - private-conversation-text
@@ -185,50 +128,50 @@ privacy:
 
 ## Purpose and precedence
 
-This handoff is subordinate to user/runtime instructions, scoped instructions, live state and canonical sources. It describes an exact review packet, not adopted brand source or organization policy.
+This handoff follows user/runtime instructions, scoped instructions, live state and canonical source. It records exact browser engineering proof without approving brand source or release policy.
 
 ## Resume protocol
 
-Read AGENTS, owner answers, the source/layer contracts and self-source-review/README.md. Recheck main/issues/PRs before continuing. The former distribution-plan snapshot is historical; PR155/156/157 are merged and their selected facts/rights/limits remain intact.
+Read AGENTS, ADR-0011, the browser profile and ACTION_REPLAY_2026-11-22.md. Recheck main/issues/PRs before continuing. Older #80 diagnostics and merged #158–162 receipts keep their historical sources and limits.
 
 ## Current objective and success conditions
 
-Prepare exact local layer options and same-subject governance data for owner review, preserve already-confirmed selections, and make component validation versus actual source acceptance explicit.
+Verify original local Docker and both original workflow browser paths from one exact clean source, with unchanged baseline/tolerance, bounded local acquisition and explicit trust configuration. Keep the full workflow result honest.
 
 ## State snapshot
 
-Stack base is `codex/88-renderer-stack-20261122` at `0200568536aac3ee1f0ef060397064d200a74f93`. Candidate `codex/98-self-source-stack-20261122` is draft PR162 with no containing-revision self-reference. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code. Live main remains `ec8fce30c3c96c7781238eb0a8899d6f0cee0a40`.
+Base/live main is 75ca39f. Domain branch is codex/80-pinned-action-replay-20261122; its containing revision/PR are intentionally null. The represented qualified source is a56399b33548cab075e4442e64605035bccd973f, not a later integration revision. Parallel PR163 remains draft.
 
 ## Completed and material changes
 
-The review packet stages a zero-value organization-inheritance layer and a nine-value final Identity-local product layer with exact hashes/declarations. A real approved organization snapshot remains the alternative. color.text maps explicitly to color.text.default in the draft. Confirmed master/reviewer/copy/terms are bound without asking them again. Native-record drafts retain exact timestamp/new descriptor gaps and are not imported to active arrays. Existing candidate/owner handoffs link the packet.
+A bounded first-party helper prepares four exact pinned public action mirrors, binding archive SHA256/size and reconstructed Git trees to reviewed workflow bytes. Optional IDENTITY_BROWSER_PROXY_CA uses the existing build-secret transport; explicit CLI wins and unset/empty behavior is unchanged. Invalid CA selectors fail before Docker without leaking paths. No workflow/action/profile/font/PNG/tolerance/ADR is changed.
 
 ## Validation and review evidence
 
-The integrated handoff in docs/work/116/SPRINT_2026-11-22.md records all five draft links, 208 Python passes/two existing skips, identical public builds, workflow lint and exact evidence hashes. Earlier baseline/native/renderer results retain their represented source.
+Three complete actual original-Docker runs at clean a56399b share the 423-file 07bb513d... inventory: direct local-host, original local-act-ci and original local-act-local-entrypoint-replay. Each passes 9 positives, intentionally fails the visual mutation and restores 1 pass, with 0 skips/retries. Three raw host receipts bind 48 artifacts, runtime/fonts/settings and unchanged PNG 53d7d144.... The original workflow also passes 51 source parses, 424 Vitest tests and build/public validation. Focused Python22 tests and independent review pass. Detailed hashes/receipts are in the domain packet.
 
-Two token schemas and layer entries pass. Isolated load_layers resolves nine original values with zero replacements; a wrong digest is rejected. Full active candidate remains exit1/IDN1301. Native draft schema gaps are explicit. Existing documentation/whitespace and unchanged implementation/master/native-array checks pass. Pinned Aether decision 2.1.0 and continuity 1.1.0 sources/guides were read through exact Git objects at dc8a16851f452763ef4f7fbe4bf057d4500b1921; policy reference remains Hygiene 1.2.0.
+The full actual act job exits 1 at the unchanged uploader's local-server MIME protocol. Pre/main/post hardening run as self-hosted; default act local checkout uses no GitHub secret. This is not hosted hardening, hosted CI or published artifact evidence. Pinned Aether decision 2.1.0 and continuity 1.1.0 guides at dc8a168 were read; Hygiene policy 1.2.0 remains referenced.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Exact inheritance, local token bytes/mapping/declarations and native descriptor/timestamp assembly need review. Missing organization source does not approve empty inheritance. Known review dates must not become invented historical instants. External generation/reference history stays unidentified. The unchanged horizontal SVG retains its old tagline; a new-tagline visual derivative needs separate review. Kern keeps independent rights and the generic native PNG limitation.
+Local act's artifact server rejects CreateArtifact mime_type; repair/upgrade that local protocol before reporting whole-workflow green. Other native/platform, source approval, contrast/manual design, distribution and release gates remain separate. Prior owner choices and unresolved #98 source/governance facts are preserved unchanged.
 
 ## Next dependency-ready work
 
-Review the exact packet choices, then assemble only the selected candidate source and run its full matching validator/producer/publication checks. Independent #70/#80/#82/#88 engineering acceptance proceeds under its owner. #98 retains real self-source, qualified release/live/rollback and contrasting-consumer proof; #116 closes last.
+Review exact #80/#88 browser evidence and reconcile the draft checkpoint. Continue independently owned #82 engineering qualification and #70 closure; #116 remains the final aggregate. Do not promote matrix rows or issue acceptance solely from merged preparation.
 
 ## Parallel changes and reconciliation
 
-This checkpoint follows parent draft PRs #158 → #159 → #160 → #161. Review/merge parents before children and reconcile continuity semantically. The engineering parent owns tag admission, copied-executable isolation and portable policy references; each domain checkpoint retains its own actual qualification limits. All sprint branches remain for maintainer review.
+Parent owns timestamp PR163, the isolated runtime recipe, development qualification and final stack publication. Reconcile continuity semantically; retain the exact qualified a563 source and separate passed browser steps from failed artifact transport. Only owned nested Docker resources were cleaned after heavy-slot release; unrelated global state was preserved.
 
 ## Privacy and redaction
 
-Only public repository facts, selected brand source/evidence and exact review inputs are retained. Exclude private conversation transcripts, personal facts, credentials and local filesystem paths.
+Retain public source/pin facts and exact raw browser proof. Workflow logs redact private task paths, proxy values and disposable correlation identifiers and distinguish raw/sanitized hashes. The private local replay envfile and unused temporary cache marker were removed. No private transcript, credentials or personal paths are committed.
 
 ## Handoff update protocol
 
-Refresh after actual checks and before parent PR handoff; verify pinned metadata, twelve headings and 16384-byte/240-line budgets. Decision impact: reference ADR-0001/0004/0012 and separately proposed ADR-0035; review-only assembly changes no schema, runtime, authority or lifecycle. No duplicate ADR is required.
+Refresh after checks/provider reads and before the parent draft handoff. Validate pinned metadata, twelve headings and 16384-byte/240-line budgets. Decision impact: reference accepted ADR-0011; local acquisition/trust transports preserve its existing contract, without a new ADR, approval or lifecycle change.
 
 ## Compaction and supersession
 
-Git, owner issues and the scoped packet retain detailed evidence. Keep the snapshot compact and preserve all prior approvals, source bytes, known rights, roadmap identities and immutable release history.
+Git, issues and date-scoped domain receipts retain detail. Preserve the exact source/caller/native contexts and known upload failure on compaction; do not replace the old source records with a later merged-head claim.

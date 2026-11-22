@@ -1,0 +1,47 @@
+{
+  "kind": "Exact public action commit-to-tree source observations",
+  "observedVia": "Connected GitHub GET /repos/{repository}/git/commits/{revision}; public codeload archive acquisition",
+  "sourceRepositoryRevision": "9d11d9993555bbe1736cda5c43e4c2a8239e657c",
+  "actions": [
+    {
+      "repository": "step-security/harden-runner",
+      "revision": "05e31511f85b41b11d1cf0ef85d0992719546e2c",
+      "gitTreeSha1": "ff47551a42d7f99402b166673a87d6f19cf49c7c",
+      "commitApi": "https://api.github.com/repos/step-security/harden-runner/git/commits/05e31511f85b41b11d1cf0ef85d0992719546e2c",
+      "archiveSha256": "413243d94dd2f88f038e96f9ec940928361a0e8db4fedd55d61ec3f183dead35",
+      "archiveBytes": 4698842,
+      "reconstructedTreeMatches": true
+    },
+    {
+      "repository": "actions/checkout",
+      "revision": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "gitTreeSha1": "150e70ecad5ebf06a559a01ea3a56d9a3236d2b1",
+      "commitApi": "https://api.github.com/repos/actions/checkout/git/commits/3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "archiveSha256": "b59292069298c7be5ffd9c636431a229faff70ece00e0c24fd31baeb7b309fa3",
+      "archiveBytes": 476180,
+      "reconstructedTreeMatches": true
+    },
+    {
+      "repository": "actions/setup-node",
+      "revision": "249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "gitTreeSha1": "e2d479cfddf6ecba7417f6e66c4cf25f31fe4e81",
+      "commitApi": "https://api.github.com/repos/actions/setup-node/git/commits/249970729cb0ef3589644e2896645e5dc5ba9c38",
+      "archiveSha256": "4023ca6e4bfb441f113117fadf0dab62135c07aa53af156a3673836a5ef94333",
+      "archiveBytes": 1745101,
+      "reconstructedTreeMatches": true
+    },
+    {
+      "repository": "actions/upload-artifact",
+      "revision": "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "gitTreeSha1": "9eac56dcf4bfeeb308ee3d0d7d49913c3d65b676",
+      "commitApi": "https://api.github.com/repos/actions/upload-artifact/git/commits/043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "archiveSha256": "d14fb1cada435a236a66b448fbb370cd126564c2c2d6cb52abd14d20bcbb9748",
+      "archiveBytes": 1912055,
+      "reconstructedTreeMatches": true
+    }
+  ],
+  "limits": [
+    "These are reviewed public object observations and digest/tree matches, not publisher signature verification.",
+    "Upstream action code is not executed by source preparation."
+  ]
+}

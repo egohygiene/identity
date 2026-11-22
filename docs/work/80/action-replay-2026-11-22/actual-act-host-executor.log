@@ -1,0 +1,51 @@
+time="2026-11-22T18:42:14Z" level=info msg="Using docker host 'unix://<task-runtime>/docker.sock', and daemon socket 'unix://<task-runtime>/docker.sock'"
+time="2026-11-22T18:42:14Z" level=info msg="Start server on http://127.0.0.1:35681"
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Set up job
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Set up job
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c to <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath 'action.yml' from <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Pre Harden runner
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath '' from <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer]   | [harden-runner] pre-step
+[Validate reference renderer/Validate static Brand Kit renderer]   | [!] Current Configuration: 
+[Validate reference renderer/Validate static Brand Kit renderer]   | {"repo":"egohygiene/identity","run_id":"1","correlation_id":"<local-replay>","working_directory":"<local-action-cache>/5e6e5c5c1a4b69fb/hostexecutor","api_url":"https://agent.api.stepsecurity.io/v1","telemetry_url":"https://prod.app-api.stepsecurity.io/v1","allowed_endpoints":"","denied_endpoints":"","egress_policy":"audit","disable_telemetry":false,"disable_sudo":false,"disable_sudo_and_containers":false,"disable_file_monitoring":false,"private":false,"is_github_hosted":false,"is_debug":false,"one_time_key":"","api_key":"","use_policy_store":false,"deploy_on_self_hosted_vm":false}
+[Validate reference renderer/Validate static Brand Kit renderer]   | 
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32mView security insights and recommended policy at:[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | https://app.stepsecurity.io/github/egohygiene/identity/actions/runs/1
+[Validate reference renderer/Validate static Brand Kit renderer]   | RUNNER_NAME: 
+[Validate reference renderer/Validate static Brand Kit renderer]   | This job is running on a self-hosted runner.
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Pre Harden runner [516.688067ms]
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 to <verified-action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 and subpath 'action.yml' from <verified-action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache matched https://github.com/actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a to <verified-action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath 'action.yml' from <verified-action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Harden runner
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir step-security/harden-runner with ref 05e31511f85b41b11d1cf0ef85d0992719546e2c and subpath '' from <verified-action-mirrors>/actions/step-security--harden-runner--05e31511f85b41b11d1cf0ef85d0992719546e2c
+[Validate reference renderer/Validate static Brand Kit renderer]   | [harden-runner] main-step
+[Validate reference renderer/Validate static Brand Kit renderer]   | [32mView security insights and recommended policy at:[0m
+[Validate reference renderer/Validate static Brand Kit renderer]   | https://app.stepsecurity.io/github/egohygiene/identity/actions/runs/1
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Harden runner [300.022776ms]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Checkout Identity
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Checkout Identity [188.820613ms]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Set up Node.js
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/setup-node with ref 249970729cb0ef3589644e2896645e5dc5ba9c38 and subpath '' from <verified-action-mirrors>/actions/actions--setup-node--249970729cb0ef3589644e2896645e5dc5ba9c38
+[Validate reference renderer/Validate static Brand Kit renderer]   | Attempting to download 24...
+[Validate reference renderer/Validate static Brand Kit renderer]   | connect ECONNREFUSED 140.82.114.5:443
+[Validate reference renderer/Validate static Brand Kit renderer]   | Falling back to download directly from Node
+[Validate reference renderer/Validate static Brand Kit renderer]   ❗  ::error::
+[Validate reference renderer/Validate static Brand Kit renderer]   ❌  Failure - Main Set up Node.js [5.288430732s]
+[Validate reference renderer/Validate static Brand Kit renderer] exit status 1
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Main Upload renderer evidence
+[Validate reference renderer/Validate static Brand Kit renderer] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath '' from <verified-action-mirrors>/actions/actions--upload-artifact--043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+[Validate reference renderer/Validate static Brand Kit renderer]   | Multiple search paths detected. Calculating the least common ancestor of all paths
+[Validate reference renderer/Validate static Brand Kit renderer]   | The least common ancestor is <local-action-cache>/5e6e5c5c1a4b69fb. This will be the root directory of the artifact
+[Validate reference renderer/Validate static Brand Kit renderer]   🚧  ::warning::No files were found with the provided path: renderer/dist/%0Arenderer/playwright-report/%0Arenderer/test-results/%0A<local-action-cache>/5e6e5c5c1a4b69fb/tmp/identity-browser-ci/%0A<local-action-cache>/5e6e5c5c1a4b69fb/tmp/identity-browser-local/. No artifacts will be uploaded.
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Main Upload renderer evidence [257.212021ms]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Post Harden runner
+[Validate reference renderer/Validate static Brand Kit renderer]   | [harden-runner] post-step
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Post Harden runner [80.692271ms]
+[Validate reference renderer/Validate static Brand Kit renderer] ⭐ Run Complete job
+[Validate reference renderer/Validate static Brand Kit renderer] Cleaning up container for job Validate static Brand Kit renderer
+[Validate reference renderer/Validate static Brand Kit renderer]   ✅  Success - Complete job
+[Validate reference renderer/Validate static Brand Kit renderer] 🏁  Job failed
+Error: Job 'Validate static Brand Kit renderer' failed
