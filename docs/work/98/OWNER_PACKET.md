@@ -8,6 +8,15 @@ scope. The actual root candidate remains incomplete. Answer the
 [owner questionnaire](QUESTIONNAIRE.md) to supply missing creative/rights facts.
 Those answers do not select a release or deployment.
 
+[November 22 owner answers](OWNER_ANSWERS_2026-11-22.md) select the existing
+emblem/horizontal masters and report ChatGPT-assisted origin. The owner selected
+the scoped logo-use policy/credit, name/new tagline/short copy, existing palette
+and Inter, optional Kern, and local-baseline preparation for review. Exact
+Reviewer `szmyty` and full copy/voice/principles are confirmed. Exact governance
+entries and review of the prepared local baseline bytes remain pending.
+The same checkpoint verifies avatar transparency and repairs the glitched
+legacy README raster from the unchanged existing high-resolution bytes.
+
 Original preparation baseline: `19d3d16bd149ddb61a03924a2b688e8e689af68b`.
 Initializer source checkpoint: `ad28ab4f99d5e6a09b7e02536cf3e788347eb4b2`
 in [merged PR138](https://github.com/egohygiene/identity/pull/138).
@@ -29,7 +38,7 @@ keeps unresolved rights/creative choices outside approved records.
 
 | Material | Existing evidence | Required owner action |
 | --- | --- | --- |
-| Emblem, lockup, avatars, social/browser assets and reference boards | `assets/identity/manifest.json` declares the 2026-08-22 human-selected direction; production files are generated outputs | Select exact canonical masters; supply actual creator/method/source/capture evidence, artwork license/attribution/restrictions and exact subject approvals. Software MIT does not supply those permissions. |
+| Emblem, lockup, avatars, social/browser assets and reference boards | `assets/identity/manifest.json` declares the 2026-08-22 direction; November 22 owner intake selects the exact emblem/horizontal masters and reports ChatGPT creation under maintainer guidance | Finalize actual artwork-use terms, attribution, reviewer and same-subject governance records. Exact external references remain unidentified; visual selection is separate from rights. Software MIT does not supply artwork permissions. |
 | Kern | Existing master, byte-bound derivative manifest, CC-BY-4.0 attribution and two explicit subject approvals in `mascot/` | Preserve existing subjects and exact variants. Confirm any new v1 mapping separately; never retarget an old approval to a new asset ID. |
 | Project name/repository/tagline | Existing release-publication configuration and authored README | Confirm proposed project classification and public source selection; review any reused copy as its actual governed subject. |
 | Colors and typography | Current manifest palette and publication tokens, including existing Inter/system fallbacks | Select the actual organization-default snapshot, product layer and exact intended token/font facts. No organization defaults or font redistribution rights are inferred. |

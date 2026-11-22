@@ -5,6 +5,21 @@ versions and compatibility metadata are computed from the repository; you do
 not need to supply them. These questions select actual source facts and creative
 choices. They do not approve a release, deployment or an ADR.
 
+## Answers captured — 2026-11-22
+
+The [owner-answer record](OWNER_ANSWERS_2026-11-22.md) captures the chat answers
+and exact selected bytes. Both existing logo masters are selected. The owner
+reports ChatGPT-assisted creation under their guidance, with other kits used
+mainly for dimensions/coverage; exact external references remain unidentified.
+The owner selected the scoped logo-use policy and `Ego Hygiene — Identity`
+credit, lowercase name, specification-first tagline/description, existing
+palette/Inter, optional Kern, and preparation of a local baseline for review.
+Reviewer `szmyty` and the supplied longer copy/voice/principles are confirmed.
+Exact source/governance records and token/layer review remain pending.
+Avatar corners are verified
+transparent; the glitched legacy README raster has a bounded repair in this
+candidate. The original questions below remain available for completing intake.
+
 ## A. Artwork, origin and permissions
 
 Proposed exact masters:
@@ -85,20 +100,20 @@ is the source for the existing name, tagline, voice and token-role proposals.
 ## Copyable answer sheet
 
 ```text
-A1 masters:
-A2 creator/tools:
-A3 public source record:
-A4 artwork permission/license:
-A5 attribution/restrictions:
-A6 reviewer:
-B1 name/type/tagline/short copy:
-B2 longer copy:
-B3 voice/principles:
+A1 masters: Existing emblem and horizontal logo selected; see exact hashes in owner record.
+A2 creator/tools: ChatGPT under maintainer guidance; other brand kits informed dimensions/coverage.
+A3 public source record: Exact external kits and generation links not supplied.
+A4 artwork permission/license: Scoped reference/integration/icon-font policy selected; exact draft policy and governance records in preparation.
+A5 attribution/restrictions: Ego Hygiene — Identity. No misleading endorsement or taking branding for another product; genuinely distinct renamed derivatives permitted.
+A6 reviewer: szmyty, explicitly confirmed for the exact masters and selected brand choices.
+B1 name/type/tagline/short copy: lowercase identity; project identity specification; supplied specification-first description selected. Existing product classification remains a proposal.
+B2 longer copy: Approved short description plus: Each project owns its .identity/ source and creative approvals.
+B3 voice/principles: clear, precise, present; Clarity in form. Alignment in purpose. Essence in everything.
 B4 usage/alt-text drafting:
-C1 palette/roles:
-C2 fonts:
-C3 defaults source or local proposal:
-C4 Kern:
+C1 palette/roles: Retain existing palette and publication roles.
+C2 fonts: Retain Inter with system-ui/sans-serif fallbacks.
+C3 defaults source or local proposal: Prepare Identity-local baseline for review; no organization-wide default declared.
+C4 Kern: Retain existing optional, separately governed package.
 ```
 
 Once facts are supplied, prepare the exact source candidate, computed digests

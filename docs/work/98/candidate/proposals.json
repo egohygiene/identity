@@ -17,32 +17,71 @@
       "candidate": ".identity/candidates/masters/emblem.svg",
       "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c",
       "proposedV1Subject": "mark",
-      "rights": "not supplied",
-      "approval": "not supplied"
+      "rights": "Owner selected the scoped Identity logo-use policy and credit; exact policy/governance record is being prepared.",
+      "approval": "Maintainer szmyty confirmed exact visual master selection in chat; formal same-subject v1 governance entry remains to be prepared.",
+      "selection": {
+        "status": "owner-selected-visual-master",
+        "date": "2026-11-22",
+        "evidence": "https://github.com/egohygiene/identity/issues/98",
+        "reviewer": "szmyty"
+      }
     },
     {
       "source": "assets/identity/brand/lockup-horizontal.svg",
       "candidate": ".identity/candidates/masters/lockup-horizontal.svg",
       "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed",
       "proposedV1Subject": "horizontal-lockup",
-      "rights": "not supplied",
-      "approval": "not supplied"
+      "rights": "Owner selected the scoped Identity logo-use policy and credit; exact policy/governance record is being prepared.",
+      "approval": "Maintainer szmyty confirmed exact visual master selection in chat; formal same-subject v1 governance entry remains to be prepared.",
+      "selection": {
+        "status": "owner-selected-visual-master",
+        "date": "2026-11-22",
+        "evidence": "https://github.com/egohygiene/identity/issues/98",
+        "reviewer": "szmyty"
+      }
     }
   ],
   "publicCopyProposal": {
     "source": "https://github.com/egohygiene/identity/blob/19d3d16bd149ddb61a03924a2b688e8e689af68b/README.md",
     "excerpt": "Identity specifies and validates a project's identity, then turns reviewed source into reproducible design tokens, creative guidance, assets and a Brand Kit. Each project owns its `.identity/` source and creative approvals.",
-    "selectionAndApproval": "pending; no long boilerplate synthesized"
+    "selectionAndApproval": "Owner szmyty confirmed the lowercase name, specification-first tagline, supplied short/two-sentence long copy and existing voice/principles; formal source records are being prepared."
   },
   "tokenSources": [
     "assets/identity/manifest.json",
     "publication/identity-brand-kit.config.json"
   ],
   "unresolved": [
-    "Actual organization-default snapshot and reviewed final product layer.",
-    "Canonical master selection, original lineage and artwork permissions.",
-    "Same-subject decisions for every adopted asset, override and public record.",
-    "Exact approved short/long copy, usage/legal and typography facts.",
+    "Review the explicitly Identity-local baseline and final product-layer candidate; do not claim organization-wide approval.",
+    "Prepare exact logo-use/attribution and same-subject governance records; unknown external references remain explicitly unidentified.",
+    "Bind all selected overrides/public records and actual output profiles to exact review subjects.",
+    "Draft exact usage, alt text and full public-copy records from owner-selected wording for source review.",
     "Native producer support/approved integration of the existing independent Kern package."
-  ]
+  ],
+  "ownerReview": {
+    "date": "2026-11-22",
+    "sourceRevision": "afc368003bfc6a2101051229efd237c8d6fadf71",
+    "record": "../OWNER_ANSWERS_2026-11-22.md",
+    "evidence": "https://github.com/egohygiene/identity/issues/98",
+    "captureMethod": "Maintainer answers in chat, recorded by assistant; no public transcript URL supplied.",
+    "creation": "ChatGPT-assisted creation under maintainer guidance.",
+    "references": "Open-source brand kits informed dimensions and coverage; exact kits/URLs not identified.",
+    "logoUsePolicy": "Owner selected the proposed scoped reference/integration/icon-font policy and Ego Hygiene — Identity credit. Formal policy wording and governance entries are to be prepared.",
+    "reviewer": "szmyty",
+    "confirmedCopy": {
+      "displayName": "identity",
+      "tagline": "project identity specification",
+      "shortDescription": "Identity specifies and validates a project's identity, then turns reviewed source into reproducible design tokens, creative guidance, assets and a Brand Kit.",
+      "longDescription": "Identity specifies and validates a project's identity, then turns reviewed source into reproducible design tokens, creative guidance, assets and a Brand Kit. Each project owns its `.identity/` source and creative approvals.",
+      "voice": [
+        "clear",
+        "precise",
+        "present"
+      ],
+      "principles": [
+        "Clarity in form.",
+        "Alignment in purpose.",
+        "Essence in everything."
+      ]
+    }
+  }
 }

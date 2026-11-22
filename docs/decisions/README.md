@@ -21,8 +21,10 @@ and truthful missing rights metadata. ADR-0029 proposes governed public asset
 selection and selected-output download metadata. ADR-0030 proposes complete native consumer-kit assembly and an offline output inventory.
 ADRs 0031–0034 separately propose product-component ownership, announcement
 drafts, explicit v1 initialization candidates and native release publication.
-These thirteen proposals have no lifecycle approval; the corpus contains 21
-accepted records and thirteen proposed records.
+ADR-0035 proposes scoped Identity logo reuse, identification and distinct
+derivatives, separately from software and Kern licensing.
+These fourteen proposals have no lifecycle approval; the corpus contains 21
+accepted records and fourteen proposed records.
 
 | ID | Title | Decision status | Date | Canonical record |
 | --- | --- | --- | --- | --- |
@@ -60,6 +62,7 @@ accepted records and thirteen proposed records.
 | ADR-0032 | Generate optional announcement drafts from approved copy and explicit facts | proposed | 2026-11-02 | [ADR-0032](ADR-0032-optional-launch-document-drafts.md) |
 | ADR-0033 | Prepare explicit v1 initialization candidates from local requests | proposed | 2026-11-05 | [ADR-0033](ADR-0033-explicit-v1-initialization-candidates.md) |
 | ADR-0034 | Publish verified native v1 artifacts through the existing release publisher | proposed | 2026-11-05 | [ADR-0034](ADR-0034-native-release-publication-input.md) |
+| ADR-0035 | Scope Identity logo reuse to truthful identification and distinct derivatives | proposed | 2026-11-22 | [ADR-0035](ADR-0035-scoped-logo-use-policy.md) |
 
 ## Ongoing capture
 
