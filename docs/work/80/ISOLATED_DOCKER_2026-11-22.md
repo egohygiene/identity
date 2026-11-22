@@ -157,7 +157,9 @@ docker exec "$helper_name" bash -c \
 env -u DOCKER_CONTEXT DOCKER_HOST="unix://$runtime_root/docker.sock" \
   docker info --format '{{.Driver}} {{.DockerRootDir}}'
 stat -f "$runtime_root/data"
+stat -c '%d %i' "$runtime_root/data"
 docker exec "$helper_name" stat -f "$runtime_root/data"
+docker exec "$helper_name" stat -c '%d %i' "$runtime_root/data"
 ```
 
 Compare filesystem/device/inode/available-byte measurements from both
