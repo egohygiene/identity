@@ -1,0 +1,215 @@
+{
+  "recordKind": "non-normative review work record; not an Identity product contract or acceptance receipt",
+  "status": "review-required-incomplete-active-source",
+  "sourceRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+  "preparedAt": "2026-11-22T06:40:02.252266+00:00",
+  "parentIssue": "https://github.com/egohygiene/identity/issues/98",
+  "activeCandidate": "docs/work/98/candidate",
+  "activeSourceStatus": {
+    "canonicalRootPromoted": false,
+    "layersAdopted": false,
+    "nativeApprovalsAdded": false,
+    "nativeProvenanceAdded": false,
+    "generated": false,
+    "expectedFullValidation": "exit1 / IDN1301 /layers"
+  },
+  "alreadyConfirmed": {
+    "ownerRecord": "../OWNER_ANSWERS_2026-11-22.md",
+    "masters": [
+      "mark",
+      "horizontal-lockup"
+    ],
+    "reviewer": "szmyty",
+    "policy": "LicenseRef-EgoHygiene-Identity-Logo-Use-1.0",
+    "credit": "Ego Hygiene — Identity",
+    "copyRecord": "public-copy.proposed.json",
+    "direction": "Existing palette/Inter; optional independently governed Kern; local baseline preparation for review."
+  },
+  "reviewDecisions": [
+    {
+      "id": "inheritance",
+      "scope": "this Identity consumer only",
+      "selected": null,
+      "options": [
+        "Review explicit zero-token organization inheritance plus the Identity-local product layer (exact option A files).",
+        "Identify an actual reviewed organization snapshot; derive and review each real colliding override (option B)."
+      ],
+      "mustNotInfer": "Missing organization source is not approval of option A or an organization-wide palette."
+    },
+    {
+      "id": "exact-tokens-and-layer-metadata",
+      "selected": null,
+      "record": "layers.proposed.json",
+      "lookupChange": {
+        "from": "color.text",
+        "to": "color.text.default",
+        "reviewRequired": true
+      },
+      "preservedRecordCount": 9
+    },
+    {
+      "id": "native-governance-assembly",
+      "selected": null,
+      "record": "governance.proposed.json",
+      "knownReviewDate": "2026-11-22",
+      "missing": [
+        "Exact native review timestamp representation; do not invent a historical instant.",
+        "Reviewed altText/safeZone/minimumSize for each actual governed source asset."
+      ],
+      "mustNotInfer": "The already-confirmed visual choice does not approve newly authored descriptors or token bytes."
+    },
+    {
+      "id": "actual-classification-and-output-selection",
+      "selected": null,
+      "currentCandidateKind": "product",
+      "currentCandidateProfiles": [
+        "core@1.0.0",
+        "tokens@1.0.0",
+        "metadata@1.0.0"
+      ],
+      "status": "existing proposals; not promoted by this packet"
+    }
+  ],
+  "additionalDerivativeNote": "The unchanged horizontal master retains its legacy embedded tagline; any new-tagline visual derivative needs a separate review subject.",
+  "sourceInputInventory": [
+    {
+      "path": "docs/work/98/OWNER_ANSWERS_2026-11-22.md",
+      "sizeBytes": 7244,
+      "sha256": "2ccbe416432594cac936d91227bbb406be0cf1564238c0b3ee585a89570f3434"
+    },
+    {
+      "path": "docs/work/98/candidate/.identity/defaults/identity-local.tokens.json",
+      "sizeBytes": 1928,
+      "sha256": "7b484e7fc8e987c7a14aa705ab47c394bc663ad80da1ff1f831409a329ad153d"
+    },
+    {
+      "path": "assets/identity/brand/emblem.svg",
+      "sizeBytes": 2387,
+      "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c"
+    },
+    {
+      "path": "assets/identity/brand/lockup-horizontal.svg",
+      "sizeBytes": 2531,
+      "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed"
+    },
+    {
+      "path": "assets/identity/brand/LOGO_USE.md",
+      "sizeBytes": 4731,
+      "sha256": "f80b941d9e68a816d78ecafff4615220a507b35f38ea8699a1a11f870467af0b",
+      "boundRevision": "52451886a48a96bc4db32ed267f593d7c1e45254"
+    },
+    {
+      "path": "publication/identity-brand-kit.config.json",
+      "sizeBytes": 10423,
+      "sha256": "2562b379cea999d1b88fc0491e033ada08c10eae18504b4f8b3b5f7ade5e6f5b"
+    },
+    {
+      "path": "contracts/v1/tokens.schema.json",
+      "sizeBytes": 4699,
+      "sha256": "07046647158b32cd77d003aa0e57d2874185b5484ad6c2db4a75c573ca429430"
+    },
+    {
+      "path": "contracts/v1/project.schema.json",
+      "sizeBytes": 4308,
+      "sha256": "2594d307fb644fe59b6dd06ef937872f0bc17a38536dcc4e1e0d452ad060015a"
+    },
+    {
+      "path": "contracts/v1/approvals.schema.json",
+      "sizeBytes": 1547,
+      "sha256": "bc958303fb359380d9042fc0e99949250d962e34c901307106f1f258bb67e301"
+    },
+    {
+      "path": "contracts/v1/provenance.schema.json",
+      "sizeBytes": 2845,
+      "sha256": "a876fe775cf16382ae85c74f79a8849c69a71a61faefd84380ebaefd412ea03b"
+    },
+    {
+      "path": "scripts/validate_identity.py",
+      "sizeBytes": 188773,
+      "sha256": "aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5"
+    },
+    {
+      "path": "scripts/identity_validation/tokens.py",
+      "sizeBytes": 21477,
+      "sha256": "8b35096758ae167a98b6d8bb6dc682c4232949387d2c62d5075dcb003c55f666"
+    },
+    {
+      "path": "scripts/identity_validation/governance.py",
+      "sizeBytes": 12688,
+      "sha256": "77924af4d5c3ac6bc203795334b121948cb3ebcb33b39d308ee560169fb6797e"
+    }
+  ],
+  "reviewFileInventory": [
+    {
+      "path": "docs/work/98/self-source-review/README.md",
+      "sizeBytes": 8146,
+      "sha256": "50c6ee1dc53c561a1279b32ae78ec19c94176cad6c11bfeb1ec302006611ec60"
+    },
+    {
+      "path": "docs/work/98/self-source-review/governance.proposed.json",
+      "sizeBytes": 8175,
+      "sha256": "5da54d9baf81dc2ef78f79962be4c6bf2b4d107b2983266b3d26dbc266fe1869"
+    },
+    {
+      "path": "docs/work/98/self-source-review/layers/identity-local-product.tokens.json",
+      "sizeBytes": 2431,
+      "sha256": "7146ea326b4278cd35d5a6bc85db766d5144aed584f5087a3d1a2fd359cdf851"
+    },
+    {
+      "path": "docs/work/98/self-source-review/layers/organization-empty.tokens.json",
+      "sizeBytes": 626,
+      "sha256": "6b74d2954b0027185196dfa6641f1ae59bda593d0dd0d41d436b615f5d4dc9d1"
+    },
+    {
+      "path": "docs/work/98/self-source-review/layers.proposed.json",
+      "sizeBytes": 1468,
+      "sha256": "807abf6ef404d68854df6a8e9e400f9a63da342fe17a05da200ea2f0ce3a9680"
+    },
+    {
+      "path": "docs/work/98/self-source-review/public-copy.proposed.json",
+      "sizeBytes": 1635,
+      "sha256": "802f7ad33462a8c14b11f80c4a17e1cfc523812fb9cf20c083a29b28e5fce057"
+    },
+    {
+      "path": "docs/work/98/self-source-review/validation.json",
+      "sizeBytes": 6141,
+      "sha256": "88c142ac35695c20e212ef7ef3c315752f398f3e2e2591e9a835569221a7cb43"
+    }
+  ],
+  "scopeLimits": [
+    "No root .identity promotion or global default policy.",
+    "No fake approvals, invented rights/source history, runtime/schema changes, release/deployment or other-repository write.",
+    "Layer/schema checks and deliberately incomplete full-source validation remain distinct."
+  ],
+  "resourceBindingPolicy": "The sourceRevision records original packet inspection at ec8fce30. Individual source inputs with boundRevision select that exact immutable resource; all other original inputs retain the original observation. This is not a claim that the complete checkout was evaluated at an upgraded resource revision.",
+  "sourceUpgradeRecords": [
+    {
+      "path": "assets/identity/brand/LOGO_USE.md",
+      "fromRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+      "fromSha256": "fae68c8b3d5ebaf25746f6c1ac2ea4bfe701e4ea5269ccbc9a510163f215c87d",
+      "fromSizeBytes": 4503,
+      "toRevision": "52451886a48a96bc4db32ed267f593d7c1e45254",
+      "toSha256": "f80b941d9e68a816d78ecafff4615220a507b35f38ea8699a1a11f870467af0b",
+      "toSizeBytes": 4731,
+      "changeKind": "export-safe immutable reference links only",
+      "hrefReplacements": [
+        {
+          "from": "../../../docs/decisions/ADR-0035-scoped-logo-use-policy.md",
+          "to": "https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/docs/decisions/ADR-0035-scoped-logo-use-policy.md"
+        },
+        {
+          "from": "../../../mascot/LICENSE.md",
+          "to": "https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/mascot/LICENSE.md"
+        },
+        {
+          "from": "../../../docs/work/98/OWNER_ANSWERS_2026-11-22.md",
+          "to": "https://github.com/egohygiene/identity/blob/b0ab233e6ba36dc749ef07bca8b04f0f1870258f/docs/work/98/OWNER_ANSWERS_2026-11-22.md"
+        }
+      ],
+      "allOtherPolicyBytesPreserved": true,
+      "masterBindingsAndPermissionTermsPreserved": true,
+      "pinnedTargetDocumentsMatchOriginalObservedBytes": true,
+      "approvalEffect": "No new creative approval, license grant, source adoption or ADR lifecycle change is inferred from navigation repair."
+    }
+  ]
+}

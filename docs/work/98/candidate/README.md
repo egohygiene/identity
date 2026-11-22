@@ -17,6 +17,14 @@ selection, not an owner adoption. Public usage and voice remain unadopted;
 formal approval/provenance arrays are empty. These omissions deliberately keep
 readiness incomplete.
 
+The [exact self-source review packet](../self-source-review/README.md) now stages
+two concrete inheritance options, option A's byte-pinned empty-inheritance and
+Identity-local product documents, the explicit `color.text.default` mapping,
+confirmed copy, and same-subject governance record drafts. Its scoped component
+checks do not adopt those declarations or make this active candidate valid.
+The authoritative candidate check still returns `IDN1301` for empty layers.
+Known visual/reviewer/copy/policy choices need not be asked again.
+
 The existing emblem/lockup are copied **byte-for-byte into candidates/masters**
 as owner-selected canonical-master candidates. Their exact bytes and selected
 logo-use policy are recorded, but formal subject-bound v1 governance entries

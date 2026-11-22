@@ -1,0 +1,38 @@
+{
+  "recordKind": "owner-confirmed copy values for later governed record assembly; not an adopted optional projection",
+  "sourceRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+  "sourceRecord": "../OWNER_ANSWERS_2026-11-22.md",
+  "evidence": "https://github.com/egohygiene/identity/issues/98",
+  "reviewer": "szmyty",
+  "confirmedReviewDate": "2026-11-22",
+  "values": {
+    "displayName": "identity",
+    "tagline": "project identity specification",
+    "shortDescription": "Identity specifies and validates a project's identity, then turns reviewed source into reproducible design tokens, creative guidance, assets and a Brand Kit.",
+    "longDescription": "Identity specifies and validates a project's identity, then turns reviewed source into reproducible design tokens, creative guidance, assets and a Brand Kit. Each project owns its `.identity/` source and creative approvals.",
+    "voice": [
+      "clear",
+      "precise",
+      "present"
+    ],
+    "principles": [
+      "Clarity in form.",
+      "Alignment in purpose.",
+      "Essence in everything."
+    ]
+  },
+  "alreadyConfirmed": [
+    "lowercase name",
+    "tagline",
+    "short description",
+    "two-sentence long description",
+    "voice adjectives",
+    "principles",
+    "reviewer"
+  ],
+  "assemblyLimits": [
+    "Do not ask these selection questions again.",
+    "No full new voice context, audience/localization policy, exact usage/alt text or public asset descriptor was approved by selecting these strings.",
+    "Native optional projection governance and exact representation still require honest assembly; candidate voice/usage remain null."
+  ]
+}

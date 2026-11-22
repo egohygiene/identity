@@ -1,0 +1,215 @@
+{
+  "recordKind": "scoped review-packet verification; not an approved-source or public-kit receipt",
+  "observedAt": "2026-11-22T06:38:37.780629+00:00",
+  "sourceRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+  "activeCandidate": {
+    "command": "python3 scripts/validate_identity.py --repository-root docs/work/98/candidate --format json",
+    "exitCode": 1,
+    "valid": false,
+    "disposition": "expected incomplete source; not promoted",
+    "diagnostics": [
+      {
+        "code": "IDN1301",
+        "message": "layers must be a non-empty array",
+        "path": "/layers",
+        "recovery": "Declare organization defaults followed by one product override.",
+        "severity": "error"
+      }
+    ],
+    "candidateBytesPreservedByValidation": true,
+    "finalObservedAt": "2026-11-22T06:44:12.421245+00:00",
+    "manifestSha256": "394dd9537b76610e4f866abcad1989fcae19ce732a97f2c42c5b621ba4173100",
+    "approvalsSha256": "46c952eaffbfb977df9df77cc97c95efde022a8db5fb4b32f8948daac390cd33",
+    "provenanceSha256": "824a1a8f8b6fd62af6ae0ba3bd48079742e68b56595b73ca67e72df16813b7bd"
+  },
+  "optionAComponents": {
+    "scope": "JSON schemas for two token docs/manifest layer entries and load_layers only, using disposable paths; not full project/source/producer execution",
+    "schemaPassed": true,
+    "loadLayersPassed": true,
+    "resolvedTokenCount": 9,
+    "overrideApprovalsRequired": [],
+    "allNineTypeValueRecordsPreserved": true,
+    "changedLookup": {
+      "from": "color.text",
+      "to": "color.text.default",
+      "status": "review-required"
+    },
+    "tokenMappings": [
+      {
+        "publicationPath": "color.brand.primary",
+        "proposedDtcgPath": "color.brand.primary",
+        "type": "color",
+        "value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4157,
+            0.298,
+            1
+          ],
+          "alpha": 1
+        },
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "color.brand.secondary",
+        "proposedDtcgPath": "color.brand.secondary",
+        "type": "color",
+        "value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4314,
+            0.6588,
+            1
+          ],
+          "alpha": 1
+        },
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "color.canvas",
+        "proposedDtcgPath": "color.canvas",
+        "type": "color",
+        "value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0392,
+            0.0392,
+            0.0549
+          ],
+          "alpha": 1
+        },
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "color.surface",
+        "proposedDtcgPath": "color.surface",
+        "type": "color",
+        "value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1176,
+            0.1059,
+            0.149
+          ],
+          "alpha": 1
+        },
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "color.text",
+        "proposedDtcgPath": "color.text.default",
+        "type": "color",
+        "value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.9373,
+            0.9137
+          ],
+          "alpha": 1
+        },
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "color.text.muted",
+        "proposedDtcgPath": "color.text.muted",
+        "type": "color",
+        "value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8039,
+            0.7294,
+            0.6039
+          ],
+          "alpha": 1
+        },
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "color.border",
+        "proposedDtcgPath": "color.border",
+        "type": "color",
+        "value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7373,
+            0.6627,
+            1
+          ],
+          "alpha": 0.42
+        },
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "typography.body.family",
+        "proposedDtcgPath": "typography.body.family",
+        "type": "fontFamily",
+        "value": [
+          "Inter",
+          "system-ui",
+          "sans-serif"
+        ],
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      },
+      {
+        "publicationPath": "typography.heading.family",
+        "proposedDtcgPath": "typography.heading.family",
+        "type": "fontFamily",
+        "value": [
+          "Inter",
+          "system-ui",
+          "sans-serif"
+        ],
+        "valuePreserved": true,
+        "resolvedLayer": "identity-local"
+      }
+    ],
+    "wrongHashControl": {
+      "expectedCode": "IDN1302",
+      "observedCodes": [
+        "IDN1302"
+      ]
+    }
+  },
+  "governanceDrafts": [
+    {
+      "subject": "mark",
+      "nativeApprovalReady": false,
+      "expectedApprovalSchemaErrorPaths": [
+        "decisions/0/reviewedAt"
+      ],
+      "nativeProvenanceReady": false,
+      "expectedProvenanceSchemaErrorPaths": [
+        "assets/0/accessibility/altText",
+        "assets/0/usage/minimumSize",
+        "assets/0/usage/safeZone"
+      ]
+    },
+    {
+      "subject": "horizontal-lockup",
+      "nativeApprovalReady": false,
+      "expectedApprovalSchemaErrorPaths": [
+        "decisions/0/reviewedAt"
+      ],
+      "nativeProvenanceReady": false,
+      "expectedProvenanceSchemaErrorPaths": [
+        "assets/0/accessibility/altText",
+        "assets/0/usage/minimumSize",
+        "assets/0/usage/safeZone"
+      ]
+    }
+  ],
+  "noClaim": [
+    "No organization-default authority or empty-inheritance adoption.",
+    "No native approval/provenance record admission.",
+    "No producer, generation, public download, complete-kit, contrast, browser, native-platform or release proof."
+  ]
+}

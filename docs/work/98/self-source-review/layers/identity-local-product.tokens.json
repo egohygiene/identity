@@ -1,0 +1,120 @@
+{
+  "$schema": "https://egohygiene.github.io/identity/contracts/v1/tokens.schema.json",
+  "$description": "FOR REVIEW ONLY: Identity-local final product layer, preserving the nine existing publication type/value records. color.text is explicitly represented as color.text.default. Exact bytes, lookup mapping and layer declaration require review; this is not organization policy.",
+  "$extensions": {
+    "org.egohygiene.identity": {
+      "schema": "identity.tokens/v1",
+      "layer": {
+        "id": "identity-local",
+        "kind": "product-override",
+        "priority": 10
+      }
+    }
+  },
+  "color": {
+    "$type": "color",
+    "brand": {
+      "primary": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4157,
+            0.298,
+            1
+          ],
+          "alpha": 1
+        }
+      },
+      "secondary": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4314,
+            0.6588,
+            1
+          ],
+          "alpha": 1
+        }
+      }
+    },
+    "canvas": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0392,
+          0.0392,
+          0.0549
+        ],
+        "alpha": 1
+      }
+    },
+    "surface": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1176,
+          0.1059,
+          0.149
+        ],
+        "alpha": 1
+      }
+    },
+    "text": {
+      "default": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.9373,
+            0.9137
+          ],
+          "alpha": 1
+        }
+      },
+      "muted": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8039,
+            0.7294,
+            0.6039
+          ],
+          "alpha": 1
+        }
+      }
+    },
+    "border": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7373,
+          0.6627,
+          1
+        ],
+        "alpha": 0.42
+      }
+    }
+  },
+  "typography": {
+    "body": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": [
+          "Inter",
+          "system-ui",
+          "sans-serif"
+        ]
+      }
+    },
+    "heading": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": [
+          "Inter",
+          "system-ui",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+}

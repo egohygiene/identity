@@ -44,6 +44,15 @@ validation, contrast or renderer qualification. They do not make the incomplete
 self-source candidate valid or approved. Do not promote this draft into the
 repository's canonical `.identity/` merely because those checks pass.
 
+The [exact assembly review](../../../self-source-review/README.md) now supplies
+an alternative that keeps these nine Identity values in the final product layer
+and explicitly proposes **zero inherited organization values** in a preceding
+metadata-only layer. That empty-inheritance choice, exact token bytes, lookup
+mapping and layer metadata are review-required; absence of an identified
+organization snapshot does not approve it. Selecting an actual reviewed
+organization snapshot remains the other option. Neither option is installed in
+the active candidate, and these original baseline bytes remain unchanged.
+
 ADR not required: this prepares a review-only candidate under the existing
 DTCG and local-layer contracts (ADR-0004 and ADR-0012), without changing a
 schema, projection, policy or approved source.

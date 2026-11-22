@@ -20,7 +20,9 @@ the actual selections and remaining review work.
   Identity-local token baseline prepared for review.
 - Mascot: retain Kern as the existing optional, separately governed package.
 
-Confirm remaining copy/reviewer details, review exact token/layer and formal
-governance records, choose actual output profiles and validate the assembled
-candidate before adoption. Product classification is still a proposal. No
-organization-wide token authority, release or deployment is selected here.
+The copy, voice/principles and reviewer are already confirmed. Review exact
+token/layer and formal governance assembly through the
+[self-source review packet](../../self-source-review/README.md), choose actual
+output profiles and validate the assembled candidate before adoption. Product
+classification is still a proposal. No organization-wide token authority,
+release or deployment is selected here.

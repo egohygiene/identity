@@ -17,8 +17,8 @@
       "candidate": ".identity/candidates/masters/emblem.svg",
       "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c",
       "proposedV1Subject": "mark",
-      "rights": "Owner selected the scoped Identity logo-use policy and credit; exact policy/governance record is being prepared.",
-      "approval": "Maintainer szmyty confirmed exact visual master selection in chat; formal same-subject v1 governance entry remains to be prepared.",
+      "rights": "Owner-selected LicenseRef-EgoHygiene-Identity-Logo-Use-1.0 and Ego Hygiene — Identity credit; native provenance/descriptor assembly remains in the exact review packet.",
+      "approval": "Exact visual master and reviewer szmyty are confirmed; subject-bound native-record drafts retain date precision/new descriptor gaps without fabricated approvals.",
       "selection": {
         "status": "owner-selected-visual-master",
         "date": "2026-11-22",
@@ -31,8 +31,8 @@
       "candidate": ".identity/candidates/masters/lockup-horizontal.svg",
       "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed",
       "proposedV1Subject": "horizontal-lockup",
-      "rights": "Owner selected the scoped Identity logo-use policy and credit; exact policy/governance record is being prepared.",
-      "approval": "Maintainer szmyty confirmed exact visual master selection in chat; formal same-subject v1 governance entry remains to be prepared.",
+      "rights": "Owner-selected LicenseRef-EgoHygiene-Identity-Logo-Use-1.0 and Ego Hygiene — Identity credit; native provenance/descriptor assembly remains in the exact review packet.",
+      "approval": "Exact visual master and reviewer szmyty are confirmed; subject-bound native-record drafts retain date precision/new descriptor gaps without fabricated approvals.",
       "selection": {
         "status": "owner-selected-visual-master",
         "date": "2026-11-22",
@@ -51,11 +51,11 @@
     "publication/identity-brand-kit.config.json"
   ],
   "unresolved": [
-    "Review the explicitly Identity-local baseline and final product-layer candidate; do not claim organization-wide approval.",
-    "Prepare exact logo-use/attribution and same-subject governance records; unknown external references remain explicitly unidentified.",
-    "Bind all selected overrides/public records and actual output profiles to exact review subjects.",
-    "Draft exact usage, alt text and full public-copy records from owner-selected wording for source review.",
-    "Native producer support/approved integration of the existing independent Kern package."
+    "Review explicit empty inheritance versus an actual organization snapshot; do not turn missing source into approval of an empty layer.",
+    "Review exact nine-value product token bytes, color.text.default lookup mapping and layer declarations/digests together.",
+    "Complete native governance timestamp representation and new altText/safeZone/minimumSize fields against existing confirmed visual subjects; do not invent review instants or source history.",
+    "Confirm actual project classification/output selection and optional public records; already-selected copy/reviewer/terms need no repeat questions.",
+    "Prepare any new-tagline visual derivative separately from the unchanged approved horizontal master; preserve independently governed Kern and native SVG-only limitations."
   ],
   "ownerReview": {
     "date": "2026-11-22",
@@ -65,7 +65,7 @@
     "captureMethod": "Maintainer answers in chat, recorded by assistant; no public transcript URL supplied.",
     "creation": "ChatGPT-assisted creation under maintainer guidance.",
     "references": "Open-source brand kits informed dimensions and coverage; exact kits/URLs not identified.",
-    "logoUsePolicy": "Owner selected the proposed scoped reference/integration/icon-font policy and Ego Hygiene — Identity credit. Formal policy wording and governance entries are to be prepared.",
+    "logoUsePolicy": "Owner selected LicenseRef-EgoHygiene-Identity-Logo-Use-1.0 and Ego Hygiene — Identity credit. Policy text is integrated; the new exact packet prepares incomplete native provenance/governance records without promoting source.",
     "reviewer": "szmyty",
     "confirmedCopy": {
       "displayName": "identity",
@@ -83,5 +83,18 @@
         "Essence in everything."
       ]
     }
+  },
+  "selfSourceReview": {
+    "record": "../self-source-review/REVIEW.json",
+    "guide": "../self-source-review/README.md",
+    "reviewedAgainstRevision": "ec8fce30c3c96c7781238eb0a8899d6f0cee0a40",
+    "status": "review-required-incomplete-active-source",
+    "layerOptionA": "Explicitly empty organization inheritance followed by the exact Identity-local product values; not adopted.",
+    "layerOptionB": "Identify an actual reviewed organization snapshot and review colliding overrides; no snapshot invented.",
+    "activeLayerListChanged": false,
+    "nativeApprovalsAdded": false,
+    "nativeProvenanceAdded": false,
+    "fullCandidateValidation": "exit1 / IDN1301 /layers; expected incomplete",
+    "componentScope": "Two token schemas and proposed layer-entry schemas plus isolated load_layers only: nine preserved values, zero replacements; does not establish full validity or authority."
   }
 }
