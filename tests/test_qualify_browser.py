@@ -3,11 +3,18 @@
 """Failure-boundary checks for source-preserving browser qualification."""
 
 import copy
+from contextlib import redirect_stderr, redirect_stdout
+import errno
 import importlib.util
+import io
 import json
+import os
 from pathlib import Path
+import subprocess
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 
 SPEC = importlib.util.spec_from_file_location("qualify_browser", Path(__file__).resolve().parents[1] / "scripts/qualify_browser.py")
@@ -65,6 +72,93 @@ def output(receipt, directory):
 
 
 class BrowserQualificationBoundaryTests(unittest.TestCase):
+    def test_vfs_disk_preflight_refuses_the_reproduced_small_store(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            info = {"driver": "vfs", "dataRoot": str(root)}
+            with patch.object(QUALIFY.shutil, "disk_usage", return_value=SimpleNamespace(free=8 * QUALIFY.GIB)):
+                result = QUALIFY.storage_preflight(info, "unix:///var/run/docker.sock", root, root)
+                self.assertEqual(result["status"], "failed")
+                self.assertEqual(result["minimumFreeBytes"], 16 * QUALIFY.GIB)
+            with patch.object(QUALIFY.shutil, "disk_usage", return_value=SimpleNamespace(free=20 * QUALIFY.GIB)):
+                self.assertEqual(QUALIFY.storage_preflight(info, "unix:///var/run/docker.sock", root, root)["status"], "passed")
+            with patch.object(QUALIFY.shutil, "disk_usage", side_effect=FileNotFoundError):
+                self.assertEqual(QUALIFY.storage_preflight(info, "unix:///var/run/docker.sock", root, root)["status"], "failed")
+            for endpoint in ("ssh://example.invalid", "tcp://example.invalid:2375", "unix://relative", None):
+                with self.subTest(endpoint=endpoint), patch.object(QUALIFY.shutil, "disk_usage") as inspect_disk:
+                    self.assertEqual(QUALIFY.storage_preflight(info, endpoint, root, root)["status"], "failed")
+                    inspect_disk.assert_not_called()
+
+    def test_remote_context_cannot_use_a_coincident_local_data_directory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for context in ("remote", ""):
+                destination = root / (context or "explicit-host")
+                calls = []
+                original_run = subprocess.run
+
+                def selected_daemon(arguments, **options):
+                    if arguments[0] != "docker":
+                        return original_run(arguments, **options)
+                    calls.append(arguments)
+                    if arguments[1] == "version":
+                        result = {"Os": "linux", "Arch": "amd64"}
+                    elif arguments[1] == "info":
+                        result = {"driver": "vfs", "dataRoot": str(root)}
+                    elif arguments[1:3] == ["context", "inspect"]:
+                        result = "ssh://example.invalid"
+                    else:
+                        raise AssertionError("A remote/unobservable preflight must stop before image acquisition")
+                    return subprocess.CompletedProcess(arguments, 0, stdout=json.dumps(result))
+
+                environment = {"DOCKER_CONTEXT": context, "DOCKER_HOST": "unix:///var/run/docker.sock" if context else "tcp://example.invalid:2375"}
+                argv = ["qualify_browser.py", "--output-directory", str(destination)]
+                with self.subTest(context=context), patch.dict(os.environ, environment), \
+                     patch.object(QUALIFY.sys, "argv", argv), patch.object(QUALIFY.subprocess, "run", side_effect=selected_daemon), \
+                     patch.object(QUALIFY.shutil, "disk_usage", return_value=SimpleNamespace(free=20 * QUALIFY.GIB)) as inspect_disk, \
+                     redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                    self.assertEqual(QUALIFY.main(), 1)
+                    inspect_disk.assert_not_called()
+                receipt = json.loads((destination / "host-qualification.json").read_text())
+                self.assertEqual(receipt["storage_preflight"]["endpointKind"], "remote-or-unobservable")
+                self.assertEqual(any(call[1:3] == ["context", "inspect"] for call in calls), bool(context))
+
+    def test_failed_receipt_reuses_reserved_storage_without_creating_another_file(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            envelope = {"status": "failed", "failure": "Synthetic preparation storage exhaustion"}
+            with QUALIFY.reserve_host_receipt(root) as reserved:
+                self.assertEqual((root / "host-qualification.json").stat().st_size, QUALIFY.HOST_RECEIPT_BYTES)
+                with patch.object(Path, "open", side_effect=OSError(errno.ENOSPC, "Synthetic no new file allocation")):
+                    QUALIFY.write_host_receipt(reserved, root, envelope)
+            self.assertEqual(json.loads((root / "host-qualification.json").read_text()), envelope)
+            self.assertLess((root / "host-qualification.json").stat().st_size, QUALIFY.HOST_RECEIPT_BYTES)
+
+    def test_local_act_receipts_do_not_claim_hosted_ci(self):
+        # Exercise the real host-receipt writer in the same runner environment
+        # exposed by act. Deliberately fail Docker preflight: no browser/image
+        # execution is needed to prove truthful failure-context reporting.
+        with tempfile.TemporaryDirectory() as temporary:
+            for mode, expected in (("ci", "local-act-ci"), ("local", "local-act-local-entrypoint-replay")):
+                destination = Path(temporary) / mode
+                argv = ["qualify_browser.py", "--mode", mode, "--output-directory", str(destination)]
+                failure = subprocess.CompletedProcess(["docker"], 19, stdout="Synthetic Docker preflight failure\n")
+                original_run = subprocess.run
+
+                def preflight_only(arguments, **options):
+                    if arguments[0] == "docker":
+                        return failure
+                    return original_run(arguments, **options)
+
+                with self.subTest(mode=mode), patch.dict(os.environ, {"ACT": "true", "GITHUB_ACTIONS": "true"}), \
+                     patch.object(QUALIFY.sys, "argv", argv), patch.object(QUALIFY.subprocess, "run", side_effect=preflight_only), \
+                     redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                    self.assertEqual(QUALIFY.main(), 1)
+                receipt = json.loads((destination / "host-qualification.json").read_text())
+                self.assertEqual(receipt["status"], "failed")
+                self.assertEqual(receipt["execution_context"], expected)
+                self.assertNotIn("qualification", receipt)
+
     def test_output_cannot_overwrite_source_or_reuse_stale_evidence(self):
         with tempfile.TemporaryDirectory() as temporary:
             parent = Path(temporary)

@@ -12,8 +12,11 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
+from typing import BinaryIO
+from urllib.parse import urlsplit
 import uuid
 
 
@@ -25,6 +28,8 @@ PLATFORM = "linux/amd64"
 CONTAINER_MARKER = "IDENTITY_BROWSER_RECEIPT="
 HOST_MARKER = "IDENTITY_BROWSER_HOST_RECEIPT="
 FONT_PACKAGE_NAMES = frozenset(("fonts-dejavu-core", "fonts-dejavu-mono"))
+HOST_RECEIPT_BYTES = 1024 * 1024
+GIB = 1024 ** 3
 FONT_FILE_PATHS = frozenset("/usr/share/fonts/truetype/dejavu/" + name for name in (
     "DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "DejaVuSerif.ttf", "DejaVuSerif-Bold.ttf",
     "DejaVuSansMono.ttf", "DejaVuSansMono-Bold.ttf", "DejaVuSansMono-Oblique.ttf", "DejaVuSansMono-BoldOblique.ttf",
@@ -47,6 +52,75 @@ def output_destination(destination: Path, repository: Path = REPOSITORY) -> Path
     if resolved.exists() and any(resolved.iterdir()):
         raise ValueError("--output-directory must be new or empty; retain earlier evidence separately")
     return resolved
+
+
+def reserve_host_receipt(destination: Path) -> BinaryIO:
+    """Allocate the bounded failure record before an image can exhaust storage."""
+    path = destination / "host-qualification.json"
+    handle = path.open("xb+")
+    try:
+        handle.write(b"\0" * HOST_RECEIPT_BYTES)
+        handle.flush()
+        os.fsync(handle.fileno())
+    except BaseException:
+        handle.close()
+        path.unlink(missing_ok=True)
+        raise
+    return handle
+
+
+def write_host_receipt(handle: BinaryIO, destination: Path, envelope: dict[str, object]) -> None:
+    payload = (json.dumps(envelope, indent=2, sort_keys=True) + "\n").encode()
+    if len(payload) > HOST_RECEIPT_BYTES:
+        raise RuntimeError("Host qualification receipt exceeds its reserved byte budget")
+    path = destination / "host-qualification.json"
+    opened, named = os.fstat(handle.fileno()), path.stat(follow_symlinks=False)
+    if (opened.st_dev, opened.st_ino) != (named.st_dev, named.st_ino) or path.is_symlink():
+        raise RuntimeError("The reserved host receipt was replaced during qualification")
+    handle.seek(0)
+    handle.write(payload)
+    handle.truncate()
+    handle.flush()
+    os.fsync(handle.fileno())
+
+
+def storage_preflight(info: dict[str, object], endpoint: object, repository: Path, destination: Path) -> dict[str, object]:
+    """Refuse known-small stores before downloading the pinned browser layers.
+
+    VFS materializes cumulative image/build snapshots. The current 2.49-GB
+    browser image exhausted an 8.5-GiB free store before its first build RUN;
+    require a conservative 16-GiB reserve for that driver, not a size guarantee.
+    Other drivers retain a 4-GiB preparation budget. Observe the actual daemon
+    data root when accessible; do not treat a remote/unobservable store as known.
+    """
+    driver, data_root = info.get("driver"), info.get("dataRoot")
+    if not isinstance(driver, str) or not driver:
+        raise RuntimeError("Docker did not report its storage driver")
+    minimum = 16 * GIB if driver == "vfs" else 4 * GIB
+    try:
+        selected = urlsplit(endpoint) if isinstance(endpoint, str) else None
+    except ValueError:
+        selected = None
+    local = selected is not None and selected.scheme == "unix" and not selected.netloc and Path(selected.path).is_absolute() and not selected.query and not selected.fragment
+    if not local or not isinstance(data_root, str) or not Path(data_root).is_absolute():
+        return {"driver": driver, "minimumFreeBytes": minimum, "observations": [],
+                "endpointKind": "remote-or-unobservable", "status": "failed",
+                "budgetIsNotACapacityGuarantee": True}
+    locations = [("repository", repository), ("evidence", destination)]
+    if isinstance(data_root, str) and data_root:
+        locations.append(("daemon-data-root", Path(data_root)))
+    observations = []
+    for name, path in locations:
+        try:
+            free = shutil.disk_usage(path).free
+        except OSError:
+            observations.append({"location": name, "status": "unobservable"})
+        else:
+            observations.append({"location": name, "status": "observed", "freeBytes": free})
+    daemon_known = any(item["location"] == "daemon-data-root" and item["status"] == "observed" for item in observations)
+    passed = daemon_known and all(item.get("freeBytes", -1) >= minimum for item in observations)
+    return {"driver": driver, "minimumFreeBytes": minimum, "observations": observations, "endpointKind": "local-unix",
+            "status": "passed" if passed else "failed", "budgetIsNotACapacityGuarantee": True}
 
 
 def repository_path(relative: str, repository: Path = REPOSITORY) -> Path:
@@ -257,10 +331,17 @@ def main() -> int:
             raise ValueError("--proxy-ca must select a regular CA bundle")
         destination = output_destination(args.output_directory)
         destination.mkdir(parents=True, exist_ok=True)
+        receipt_file = reserve_host_receipt(destination)
     except (OSError, ValueError) as error:
         parser.error(str(error))
-    hosted = os.environ.get("GITHUB_ACTIONS") == "true"
-    context = "hosted-local-entrypoint-replay" if hosted and args.mode == "local" else "github-actions-ci" if hosted else "local-host"
+    # act exposes GITHUB_ACTIONS=true while replaying a workflow locally.
+    # Its explicit marker must take precedence over the compatible runner flag.
+    local_act = os.environ.get("ACT") == "true"
+    hosted = os.environ.get("GITHUB_ACTIONS") == "true" and not local_act
+    if local_act:
+        context = "local-act-local-entrypoint-replay" if args.mode == "local" else "local-act-ci"
+    else:
+        context = "hosted-local-entrypoint-replay" if hosted and args.mode == "local" else "github-actions-ci" if hosted else "local-host"
     commands: list[dict[str, object]] = []
     envelope: dict[str, object] = {
         "kind": "dated browser-environment qualification host receipt",
@@ -270,6 +351,7 @@ def main() -> int:
         "limits": [
             "The invocation mode labels a caller; both use identical image/rendering settings.",
             "A hosted local-entrypoint replay is not an actual Docker run in an unavailable developer workspace.",
+            "Local act workflow replays are not GitHub-hosted CI evidence.",
             "Only the recorded image/platform/fonts/settings and unchanged approved baseline are qualified.",
             "No baseline regeneration, tolerance relaxation, release, deployment or human approval occurs.",
         ],
@@ -321,6 +403,19 @@ def main() -> int:
         if server.get("Os") != "linux":
             raise RuntimeError("The qualification requires a Linux Docker engine")
         envelope["engine_platform_relation"] = "native-amd64" if server.get("Arch") == "amd64" else "non-native-engine; requested amd64 image may use emulation"
+        storage = json.loads(run([
+            "docker", "info", "--format", '{"driver":{{json .Driver}},"dataRoot":{{json .DockerRootDir}}}',
+        ], capture=True, timeout=60))
+        # Docker gives DOCKER_CONTEXT precedence over DOCKER_HOST. Otherwise an
+        # explicitly selected host takes precedence over the saved CLI context.
+        endpoint = None if os.environ.get("DOCKER_CONTEXT") else os.environ.get("DOCKER_HOST")
+        if not endpoint:
+            endpoint = json.loads(run([
+                "docker", "context", "inspect", "--format", "{{json .Endpoints.docker.Host}}",
+            ], capture=True, timeout=60))
+        envelope["storage_preflight"] = storage_preflight(storage, endpoint, REPOSITORY, destination)
+        if envelope["storage_preflight"]["status"] != "passed":
+            raise RuntimeError("Browser preparation storage is below its driver budget or cannot be observed; no image was pulled")
         run(["docker", "pull", "--platform", PLATFORM, profile["image"]], timeout=900)
         base_image = inspect(profile["image"])
         verify_registry_binding(profile, registry, base_image)
@@ -373,6 +468,8 @@ def main() -> int:
             envelope["failure"] = public_text(f"Approved screenshot unavailable: {error}")
         inventory = {}
         for artifact in sorted(destination.rglob("*")):
+            if artifact == destination / "host-qualification.json":
+                continue
             if artifact.is_file():
                 resolved = artifact.resolve()
                 if destination not in resolved.parents:
@@ -382,7 +479,14 @@ def main() -> int:
                 inventory[artifact.relative_to(destination).as_posix()] = sha256(artifact.read_bytes())
         envelope["artifact_files_sha256"] = inventory
         envelope["artifact_inventory_excludes_host_receipt"] = True
-        (destination / "host-qualification.json").write_text(json.dumps(envelope, indent=2, sort_keys=True) + "\n")
+        try:
+            write_host_receipt(receipt_file, destination, envelope)
+        except (OSError, RuntimeError) as error:
+            envelope["status"] = "failed"
+            envelope["receipt_write_failure"] = public_text(f"{type(error).__name__}: {error}")
+            print(envelope["receipt_write_failure"], file=sys.stderr, flush=True)
+        finally:
+            receipt_file.close()
         print(HOST_MARKER + json.dumps(envelope, sort_keys=True, separators=(",", ":")), flush=True)
     return 0 if envelope["status"] == "passed" else 1
 

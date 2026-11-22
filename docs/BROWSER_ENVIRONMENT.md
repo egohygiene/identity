@@ -23,6 +23,18 @@ browser runs with fixed CI settings, UTC and 1 GiB shared memory. Its network is
 disabled except for loopback, where the local static preview/downloads run.
 Installation happens separately during the frozen image build.
 
+Preparation first checks free space at the checkout, evidence directory and
+observable Docker data root. The current profile requires at least 16 GiB free
+with Docker's copying `vfs` driver, or 4 GiB with other drivers. These are
+conservative preparation budgets, not guarantees against concurrent writers or
+arbitrary filesystem growth. An unobservable daemon store is refused rather
+than reported sufficient. Endpoint selection respects `DOCKER_CONTEXT` before
+`DOCKER_HOST`; only a local absolute Unix endpoint and absolute observable data
+root are measured. A remote/unknown endpoint cannot borrow an identically named
+local directory's free-space result. The wrapper reserves 1 MiB for its host receipt
+before acquisition so a failed image build can retain a bounded failure record.
+That reservation does not guarantee recovery from every storage/I/O failure.
+
 The build forwards existing proxy-variable names without recording their
 values. On managed networks needing an additional certificate bundle, use
 `--proxy-ca /path/to/ca-bundle.pem`. BuildKit mounts this file only during the
@@ -42,6 +54,10 @@ and also replays the default local entrypoint on its Docker host. That is a
 hosted local-entrypoint replay, not proof that this authoring workspace ran
 Docker. Whether an authoring workspace has a usable engine must be checked
 there; native host tests remain separate evidence.
+
+When replayed through `act`, the host receipt uses `local-act-ci` or
+`local-act-local-entrypoint-replay` even though that runner also sets
+`GITHUB_ACTIONS=true`. A local workflow replay is not GitHub-hosted CI evidence.
 
 ## Fixed settings and font evidence
 

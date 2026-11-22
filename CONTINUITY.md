@@ -7,22 +7,24 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T06:52:19.170324+00:00'
+  updated_at: '2026-11-22T07:01:45.401764+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Qualify the merged Linux engineering baseline and repair demonstrated test-harness and release-admission
-    gaps in reviewable draft checkpoints.
+  purpose: Repair browser qualification evidence/preparation boundaries and retain exact failed workflow
+    and separate successful derived-runtime diagnostics.
   includes:
-  - Current-source Rust/Python/renderer/integrity baseline and truthful environmental failures.
-  - Isolated copied-executable consumer test writer with controlled inherited-descriptor mechanism evidence.
-  - Exact remote annotated-tag/commit/main-ancestry admission before release artifact writes, and portable
-    exported policy references.
+  - Keep local act receipts distinct from GitHub-hosted evidence.
+  - Refuse inadequately observable/budgeted Docker stores before acquisition and reserve a bounded failure
+    receipt.
+  - Retain actual failed original-route/workflow observations and separate exact browser diagnostics without
+    changing the original qualified gate.
   excludes:
-  - No new supported platform, hosted CI, actual release, tag, deployment or skill publication.
-  - No canonical self-source adoption, exact layer/token approval, asset redesign or ADR lifecycle promotion.
+  - Profile/font/runtime-version, screenshot, tolerance, creative-source, approval or release changes.
+  - Hosted workflow dispatch, publication, deployment or issue closure.
+  - Claiming derived rootfs evidence is original Docker-image or hosted CI acceptance.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -31,103 +33,111 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - docs/work/70/BASELINE_2026-11-22.md
-  - docs/work/70/baseline-2026-11-22.json
-  - docs/work/70/EXECUTABLE_COPY_INVESTIGATION.md
-  - docs/work/116/SOURCE_CLOSEOUT_2026-11-14.md
-  - docs/releases/NEXT_RELEASE_MATRIX.md
-  - docs/work/98/OWNER_PACKET.md
-  - scripts/verify_release_admission.py
-  - docs/work/70/release-tag-admission-2026-11-22.md
+  - docs/BROWSER_ENVIRONMENT.md
+  - dev/browser/profile.json
+  - scripts/qualify_browser.py
+  - tests/test_qualify_browser.py
+  - .github/workflows/reference-renderer.yml
+  - docs/work/80/BROWSER_CHECKPOINT_2026-11-22.md
+  - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
+  - docs/decisions/policy-reference.json
+  - https://github.com/egohygiene/identity/issues/80
+  - https://github.com/egohygiene/identity/issues/70
 work:
-  objective: Qualify the merged Linux engineering baseline and repair demonstrated test-harness and release-admission
-    gaps in reviewable draft checkpoints.
+  objective: Repair browser qualification evidence/preparation boundaries and retain exact failed workflow
+    and separate successful derived-runtime diagnostics.
   success_conditions:
-  - Retain exact actual local results, failures, ignores and limits rather than infer platform/release
-    conformance.
-  - Close the copied-binary writable-descriptor exposure without production changes or blanket serial
-    tests.
-  - Preserve existing quality/immutable-release and human identity-governance boundaries.
+  - Never label local act as GitHub-hosted CI.
+  - Stop remote/unobservable or known-small Docker preparation without image acquisition and retain bounded
+    failure evidence.
+  - 'Preserve the approved screenshot and all exact profile/font pins; keep original #80 acceptance open.'
   active_issue:
     provider: github
-    id: egohygiene/identity#70
-    url: https://github.com/egohygiene/identity/issues/70
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: complete-bounded-admission-repair-and-qualifier-stack
-    description: 'Stack the qualified #80 browser, #82 setup, #88 renderer and #98 exact self-source review
-      checkpoints; retain their full Docker/native/human gates and review the stack before merge.'
-    readiness: ready
+    id: qualify-original-browser-workflow
+    description: Run the unchanged qualified Docker workflow on adequate observable storage with supported
+      acquisition of the exact pinned actions, then record current-source CI/local-entrypoint acceptance.
+    readiness: blocked
     references:
-    - https://github.com/egohygiene/identity/issues/70
     - https://github.com/egohygiene/identity/issues/80
-    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/70
     depends_on: []
 state:
   base:
-    revision: ec8fce30c3c96c7781238eb0a8899d6f0cee0a40
-    ref: refs/heads/main
-    verified_at: '2026-11-22T06:45:59.440107+00:00'
+    revision: ca7f836234301c276de0136bd7bec80724d3b4c9
+    ref: refs/heads/codex/70-engineering-baseline-20261122
+    verified_at: '2026-11-22T07:01:45.401764+00:00'
   candidate:
-    branch: codex/70-engineering-baseline-20261122
+    branch: codex/80-browser-stack-20261122
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#158
-      url: https://github.com/egohygiene/identity/pull/158
-    handoff_state: review-reference-recorded
+    pull_request: null
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-22T06:45:59.440107+00:00'
+    observed_at: '2026-11-22T07:01:45.401764+00:00'
     default_branch_revision: ec8fce30c3c96c7781238eb0a8899d6f0cee0a40
     issue_state: open
-    pull_request_state: draft
-    notes: Main remains ec8fce3. Earlier155/156/157 and Aether139 are merged. Draft158 now records the
-      first engineering checkpoint; all six finish issues remain open. Later stack children are not yet
-      published.
-  parallel_changes: []
+    pull_request_state: not-applicable
+    notes: Merged main remains ec8fce3; six finish issues remain open. Earlier155/156/157 and Aether139
+      are merged. Parent draft PRs 158 are open; this next child PR does not yet exist. No overnight sprint
+      PR is merged or published.
+  parallel_changes:
+  - provider: github
+    id: egohygiene/identity#158
+    url: https://github.com/egohygiene/identity/pull/158
 review:
   status: partial
-  reviewed_at: '2026-11-22T06:50:26.853951+00:00'
+  reviewed_at: '2026-11-22T07:00:22.289471+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Merged-source local Rust/Python/renderer/integrity baseline
+  - command: python3 -m unittest discover --start-directory tests --pattern test_qualify_browser.py --verbose
     outcome: passed
-    observed_at: '2026-11-22T06:45:59.440107+00:00'
-    notes: Rust119pass/3existinghelperignores; Python186pass/2existing skips; renderer424pass/19files;
-      strictClippy, frozen builds and existing integrity checks pass.
-  - command: Controlled descriptor probe, standalone regression and 16-thread consumer suite
+    observed_at: '2026-11-22T07:00:22.289471+00:00'
+    notes: Nine boundary cases pass, including real failure-receipt serialization, ACT context, reserved
+      writes and remote-context/coincident-path refusal.
+  - command: Actual original Docker qualifier and storage-refusal experiment
+    outcome: failed
+    observed_at: '2026-11-22T07:00:22.289471+00:00'
+    notes: Initial VFS/BuildKit preparation exhausted shared storage; repaired route retained a valid
+      refusal before acquisition. These are not browser passes.
+  - command: Actual reference-renderer.yml validate job through local act 0.2.97
+    outcome: failed
+    observed_at: '2026-11-22T07:00:22.289471+00:00'
+    notes: Cached immutable runner starts; GoGit action acquisition fails before workflow steps. No browser
+      or artifact step executes; container cleanup completes.
+  - command: Existing browser qualifier in separately derived pinned OCI rootfs
     outcome: passed
-    observed_at: '2026-11-22T06:45:59.440107+00:00'
-    notes: Mechanism barriers demonstrate errno26 and isolation. Focused standalone1pass; consumer14pass/1explicitworkerignore;
-      strictClippy/format pass. Historical failure causality remains unproven.
-  - command: Initial local Cargo and Docker attempts during VFS expansion
-    outcome: limited
-    observed_at: '2026-11-22T06:45:59.440107+00:00'
-    notes: Initial Cargo commands failed ENOSPC; actual Cargo reruns after owned/generated cache cleanup
-      passed. Ordinary pinned browser recipe did not execute after storage failure.
-  - command: python3 -m unittest discover --start-directory tests --pattern test_release_*.py --verbose
+    observed_at: '2026-11-22T07:00:22.289471+00:00'
+    notes: 'At clean source 57704ae: nine positives, deliberate comparison failure, restored pass, zero
+      skips/retries; exact fonts/runtime/profile and all 684 copied source files verified. This is local
+      diagnostic scope only.'
+  - command: Independent source/evidence review
     outcome: passed
-    observed_at: '2026-11-22T06:50:26.853951+00:00'
-    notes: 20 focused release tests pass:14actual-Git admission cases plus actual-publication-Bash coverage.
-      Six stable/RC/build-metadata selections and admission refusal exercise fake executables only; stable
-      hyphenated metadata regression fails on old code and passes after repair. Independent admission
-      review and actionlint pass; no real publication.
-  - command: Actual public build followed by repository documentation verification
+    observed_at: '2026-11-22T07:00:22.289471+00:00'
+    notes: Initial remote-endpoint blocker corrected and independently cleared; no remaining blocker reported.
+      Original receipts retain actual source identity.
+  - command: Documentation links, pinned continuity schema/headings/budget, evidence SHA256 inventory
+      and protected-byte checks
     outcome: passed
-    observed_at: '2026-11-22T06:50:26.853951+00:00'
-    notes: Three exported-policy relative-link failures were reproduced and repaired with immutable links.
-      Rebuilt public projection and docs verification pass; terms/masterbytes/historical source unchanged.
+    observed_at: '2026-11-22T07:00:22.289471+00:00'
+    notes: All retained artifact hashes and12headings validate within16384bytes/240lines; profile, baseline,
+      assertions, Dockerfile and every ADR record remain unchanged.
   environment_limitations:
-  - 'Matching browser workflow and full clean-base image acceptance remain separate #80/#82 gates.'
-  - Native macOS/Windows and actual downloaded release installation, upgrade and rollback remain unqualified.
-  - 'Exact token/layer and subject-governance source review remain #98; incomplete candidates are not
-    valid source.'
-  - No released EgoLint continuity conformance is claimed; pinned schema/heading/budget checks are used.
+  - Original qualified Docker workflow/current-source CI acceptance remains open; local derived-rootfs
+    success is narrower evidence.
+  - Shared VFS store was below preparation budget and ordinary act could not acquire a pinned public action
+    through GoGit.
+  - Official released EgoLint continuity conformance is not claimed; pinned schema/headings/budget checks
+    are separate.
+  - '#70/#82/#88/#98/#116 retain their own full acceptance, real source facts and release/adoption requirements.'
 privacy:
   classification: public-repository
   contains_sensitive_data: false
-  redactions: []
+  redactions:
+  - Private local paths and proxy values excluded from retained public evidence.
   excluded:
   - secrets-and-credentials
   - private-conversation-text
@@ -142,48 +152,48 @@ privacy:
 
 ## Purpose and precedence
 
-Runtime/user and scoped instructions, live evidence and canonical sources outrank this current operational handoff. It records a draft engineering sprint, not completion or publication authority.
+This compact checkpoint remains below user/runtime instructions, scoped instructions, live state and canonical contracts. It records a local browser-evidence repair candidate, not completion of Identity or its CI gate.
 
 ## Resume protocol
 
-Read AGENTS and the source-bound records above. Reverify main, open issues and draft stack before acting. Earlier PR155/156/157 and Aether139 are merged; preserve unrelated existing checkouts and historical receipts.
+Read AGENTS, the browser guide, profile, qualifier and issue 80 checkpoint. Re-query main/open PRs before stacking. Preserve exact source identities in historical and new receipts rather than relabeling them as integrated-head evidence.
 
 ## Current objective and success conditions
 
-Qualify the merged Linux engineering baseline and repair demonstrated test-harness and release-admission gaps in reviewable draft checkpoints.
+Report local act truthfully, stop known-small or unobservable Docker storage before acquisition, retain bounded failure records and keep diagnostic browser evidence distinct from the original workflow acceptance.
 
 ## State snapshot
 
-Main/base is ec8fce30c3c96c7781238eb0a8899d6f0cee0a40. Candidate codex/70-engineering-baseline-20261122 has draft PR158 and no self-referential containing revision. This is the first planned draft checkpoint of the authorized overnight stack.
+Stack base is `codex/70-engineering-baseline-20261122` at `ca7f836234301c276de0136bd7bec80724d3b4c9`. Candidate `codex/80-browser-stack-20261122` is a draft child with no containing-revision or pre-PR self-reference. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code. Live main remains `ec8fce30c3c96c7781238eb0a8899d6f0cee0a40`.
 
 ## Completed and material changes
 
-The exact merged baseline passes native119 tests, Python186 tests and renderer424 tests with explicit existing helper ignores/optional skips. Remote annotated-tag admission now binds the event commit, paired versions and current main ancestry before packaging/attestation/upload/release. Stable build-metadata tags retain stable publication classification. Three exported policy links are now portable without changing terms. The separate copied-executable writer removes an uncovered parent-process descriptor inheritance window while preserving production behavior and test parallelism. Its controlled probe does not assert historical CI causality.
+qualify_browser.py distinguishes ACT from GitHub-hosted invocations, checks the selected local Unix daemon and driver budget before pulling, and reuses a 1-MiB reserved failure record. The tests cover actual receipt emission and remote-context precedence. docs/work/80 retains failed Docker/workflow observations and separate successful derived-OCI browser evidence, including actual/diff/expected screenshots and trace. The original profile, fonts, baseline, tolerance and ADR disposition remain unchanged.
 
 ## Validation and review evidence
 
-See docs/work/70/BASELINE_2026-11-22.md and EXECUTABLE_COPY_INVESTIGATION.md for exact commands and receipts. StrictClippy, formatting, frozen renderer/public builds, validator drift, publication/asset/docs/extraction and109JSONparse checks pass. Initial ENOSPC failures remain distinct from successful reruns. No hosted CI or native-platform generalization.
+Nine focused Python cases pass. The actual production workflow act attempt fails acquiring its pinned hardener before steps; the ordinary Docker route does not qualify. A bounded flattened OCI rootfs passes 9 positive cases, rejects deliberate screenshot drift and passes the restored assertion at source 57704ae, with zero skips/retries. Its raw receipt passes the existing strict verifier; all 684 copied source files remain exact. Independent review cleared the endpoint blocker. Detailed results and hashes live in the scoped checkpoint, not this handoff.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Release-tag admission is implemented and locally tested; remote ref observations do not atomically lock publication. Docker VFS materialization exhausted the ordinary browser build budget; #80/#82 retain actual acceptance. The local-act context fix, bounded entrypoint workflow and renderer/self-source packets are separate worker checkpoints. Actual source review, full engineering acceptance, release/live/consumer proof and #116 closure remain open.
+#80 still needs the original qualified workflow on adequate observable storage and successful exact-pin action acquisition. A local derived rootfs is not Docker-image equivalence, production-workflow success or hosted CI. No baseline/tolerance relaxation or new approval is permitted. Other engineering/self-source/release gates retain their owners.
 
 ## Next dependency-ready work
 
-Integrate the browser/setup/renderer/self-source checkpoints in dependency order. Keep all five draft PRs for maintainer review; do not merge, tag, release or deploy.
+The original workflow replay is blocked by current storage/acquisition conditions. Prepare a suitable qualified runner without changing profile identity, then retain current-source CI and local-entrypoint proof. The parent may stack this bounded repair while keeping #80 open and reconciling #70/#82/#88 evidence.
 
 ## Parallel changes and reconciliation
 
-Concurrent workers own separate branches for70admission,80,82,88,98. Stack only scoped commits and reconcile continuity semantically. The governance/source/schema/asset contracts and proposed ADR lifecycles remain unchanged.
+This checkpoint follows parent draft PRs #158. Review/merge parents before children and reconcile continuity semantically. The engineering parent owns tag admission, copied-executable isolation and portable policy references; each domain checkpoint retains its own actual qualification limits. All sprint branches remain for maintainer review.
 
 ## Privacy and redaction
 
-Public-safe source facts, synthetic fixtures and sanitized evidence only. No private transcript, credentials, proxy values, unrelated personal context or local filesystem topology in committed receipts.
+Only public source/profile metadata and sanitized evidence are retained. Private paths, proxy values, credentials and unrelated context are excluded. No Git credentials were forwarded to the workflow/derived runtime.
 
 ## Handoff update protocol
 
-Refresh after domain checks before each draft PR update. Validate the pinned schema, twelve headings, budgets and whitespace. Reference ADR0011 andADR0019; the isolated test-harness repair needs no duplicate ADR. Pinned Aether skill2.1.0/continuity1.1.0 and Hygiene1.2.0 retain their selected source revisions.
+Apply pinned Aether decision guidance 2.1.0 and continuity 1.1.0 read via exact Git objects at dc8a16851f452763ef4f7fbe4bf057d4500b1921. Validate the metadata schema, twelve headings and byte/line budgets after domain checks. ADR-Ref: egohygiene/identity#ADR-0011 (reference); no decision disposition, release contract or creative boundary changes.
 
 ## Compaction and supersession
 
-Git and linked work trackers retain history. Replace current operational prose and preserve historical receipts, approved baseline and immutable v1.0.0 release facts.
+Git and issue 80 retain detailed history. Keep this snapshot compact, preserve raw observations and approved assets, and never promote missing/failed CI evidence into a pass.
