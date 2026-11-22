@@ -121,3 +121,11 @@ do not replace an absent hosted CI observation or the original issue criterion.
 ADR-Ref: egohygiene/identity#ADR-0011 (reference). These repairs enforce truthful
 existing evidence boundaries; profile, font, approved screenshot and human
 decision dispositions are unchanged.
+
+## Raw evidence preservation
+
+The existing `.gitattributes` browser-proof rules also cover this dated evidence
+tree: captured bytes keep their original line endings, and generated logs/error
+contexts remain raw diagnostic data. Their intentional trailing whitespace is
+not normalized to satisfy source whitespace checks; the retained hashes remain
+unchanged. Canonical code and documentation still receive normal diff checks.
