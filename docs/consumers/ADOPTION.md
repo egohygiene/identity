@@ -87,11 +87,19 @@ into canonical intent.
 
 ## 4. Pin and validate the toolchain
 
-Use an immutable Identity release. For `v1.0.0`, install from the locked source
-tag or verify the attached Linux archive as described in the
+Select an immutable reviewed Identity implementation that supports the source
+fields, operations and projections the consumer selects. The examples' nullable
+guidance and the explicit `v1-init` operation require later source than published
+`v1.0.0`; the source schema identifier or Cargo package version alone does not
+establish compatibility. Use matching binary, scripts and schemas. See
+[authoring compatibility](AUTHORING.md) and
+[initializer acceptance](../work/133/CLOSEOUT.md).
+
+For consumers selecting only the older `v1.0.0` capabilities, install from its
+locked source tag or verify the attached Linux archive as described in the
 [release guide](../releases/V1.md).
 
-Run the standard-library validator from the same immutable release source:
+Run the standard-library validator from the same immutable implementation:
 
 ```bash
 python3 scripts/validate_identity.py \
@@ -99,10 +107,10 @@ python3 scripts/validate_identity.py \
   --format "human"
 ```
 
-If a consumer adopts an additive projection merged after the latest stable
-release, pin the exact Identity commit and the SHA-256 digest of every consumed
-script until that capability ships in a new release. Never curl a mutable
-default branch in CI.
+If a consumer adopts source/runtime features or projections merged after its
+selected stable release, pin the exact reviewed Identity commit and the SHA-256
+digest of every consumed script until those capabilities ship in a compatible
+release. Never curl a mutable default branch in CI.
 
 ## 5. Generate and verify the Brand Kit
 

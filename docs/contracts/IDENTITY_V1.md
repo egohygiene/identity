@@ -35,6 +35,7 @@ The v1 topology is:
 │   ├── design-references.json        # optional reviewed reference catalog
 │   ├── press-kit.json                # optional reviewed Press/Media Kit source
 │   ├── social-surfaces.json          # optional pinned surface selections
+│   ├── channel-registry.json         # optional official-account/channel registry
 │   ├── repository-presentation.json  # optional README banner/badge visual source
 │   └── mascot.json                   # optional reviewed character system
 ├── sources/                         # approved canonical source assets

@@ -3,12 +3,12 @@
 This records the bounded initialization and EgoLint handoffs for
 [Identity #99 checkpoint 3](https://github.com/egohygiene/identity/issues/99).
 It distinguishes executable interfaces from future integration requirements.
-It does not implement an initializer, install a validator, adopt an EgoLint
-policy or assert that an adapter already exists. Cross-owner integration stays
-with [Identity #108](https://github.com/egohygiene/identity/issues/108). Its
-2026-11-02 [coordination closeout](../work/108/CLOSEOUT.md) retains this
-interface handoff; the deferred initializer now has its own
-[Identity #133](https://github.com/egohygiene/identity/issues/133).
+It does not install a validator, adopt an EgoLint policy or assert that an
+adapter already exists. [Identity #108](https://github.com/egohygiene/identity/issues/108)
+completed its bounded [coordination handoff](../work/108/CLOSEOUT.md); its closed
+state does not establish downstream implementation. The explicit initializer
+was delivered under [Identity #133](https://github.com/egohygiene/identity/issues/133).
+The current finish campaign remains [#116](https://github.com/egohygiene/identity/issues/116).
 
 The Identity interfaces below were inspected at checkpoint 2 merge
 [`03eaeac72e2cf69c7bf205dd80f53ca25d1629e4`](https://github.com/egohygiene/identity/commit/03eaeac72e2cf69c7bf205dd80f53ca25d1629e4)
@@ -16,19 +16,36 @@ on 2026-10-19. The [authoring worksheet](AUTHORING.md),
 [examples](../../examples/v1/README.md) and
 [adoption guide](ADOPTION.md) are the supported v1 authoring route.
 
-## Existing initialization and authoring
+## Current checkpoint — 2026-11-21
 
-The 2026-11-05 [explicit initializer source draft](V1_INITIALIZATION.md) now
-proposes `v1-init` from a local request into a separate candidate. This is
-unmerged/unqualified source under #133, not a published capability or completion
-of the future acceptance below. The dated inspected-interface statements in
-this guide retain their original meaning. Manual authoring remains supported.
+At inspected main
+[`afc368003bfc6a2101051229efd237c8d6fadf71`](https://github.com/egohygiene/identity/commit/afc368003bfc6a2101051229efd237c8d6fadf71),
+the [explicit v1 initializer](V1_INITIALIZATION.md) is merged. Its
+[local acceptance](../work/133/CLOSEOUT.md) covers fourteen Python cases and a
+copied-binary Linux case, preserving existing source and missing human facts.
+`v1-init` prepares a separate candidate; it does not adopt source, grant creative
+approval or generate a Brand Kit. It remains absent from published `v1.0.0`.
+Full engineering acceptance remains #70 and actual self-source, rights,
+release and adoption remain #98. Manual authoring is still supported.
+
+[EgoLint #35](https://github.com/egohygiene/egolint/issues/35) and
+[#36](https://github.com/egohygiene/egolint/issues/36), its general capability
+and enforcement issues, are now closed.
+At inspected EgoLint
+[`dcd4fc2e91c72e7bdafc002f2e5e55ab7e58478e`](https://github.com/egohygiene/egolint/commit/dcd4fc2e91c72e7bdafc002f2e5e55ab7e58478e),
+its complementary-tool registry and capability selection still contain no
+Identity adapter. General infrastructure delivery is not delegated Identity
+validation. The machine-boundary and policy decisions below remain unresolved;
+do not treat historical issue links as open implementation owners.
+
+## Existing initialization and authoring
 
 `identity init` initializes **v0**, writing `.identity/identity.toml`,
 `.identity/brief.md` and `.identity/sources/README.md`. Its `--force` option
 permits replacement of those initialized files; it is not a v1 migration or
 approval operation. `identity validate`, `plan` and `handoff` also retain their
-v0 purpose. No `v1-init` command exists at the inspected implementation.
+v0 purpose. At the historical 2026-10-19 inspection, `v1-init` did not exist;
+the current explicit command is a separate operation, as described above.
 
 For v1, gather actual facts and review evidence using the worksheet, author
 consumer-owned source, validate it, then explicitly generate selected outputs.
@@ -138,17 +155,17 @@ Choose execution budgets and publication-safe evidence through the existing
 owners. No implicit tool download, source generation, worktree repair, raw
 private payload publication or mutation of human approvals belongs in checking.
 
-## Verified owners and existing work
+## Ownership and historical coordination
 
-The following live issues were inspected on 2026-10-19. They are existing
-coordination paths, not proof that Identity delegation is implemented or a new
-blanket prerequisite for manual authoring.
+The following issues were inspected on 2026-10-19. Their responsibilities remain
+useful context; their historical scheduling and open state are not current
+implementation claims or a blanket prerequisite for manual authoring.
 
 | Owner and existing issue | Responsibility retained |
 | --- | --- |
 | [Identity #108](https://github.com/egohygiene/identity/issues/108) | Coordinate authoritative sources/consumers and the later bounded integration example; retain this handoff and resolve owner decisions before implementation. |
-| [EgoLint #35](https://github.com/egohygiene/egolint/issues/35) | Capability detection/applicability, selection and unavailable/invalid decisions. |
-| [EgoLint #36](https://github.com/egohygiene/egolint/issues/36) | Enforcement modes, normalized evidence and distinct execution failures; no duplicated policy in Identity. |
+| [EgoLint #35](https://github.com/egohygiene/egolint/issues/35) | General capability infrastructure, now closed; not a delivered Identity adapter. |
+| [EgoLint #36](https://github.com/egohygiene/egolint/issues/36) | General enforcement/evidence infrastructure, now closed; not a delivered Identity adapter or duplicated policy in Identity. |
 | [Relay #49](https://github.com/egohygiene/relay/issues/49) | Reusable pinned execution, retention and publication of EgoLint evidence; no reimplementation of Identity or EgoLint validation. |
 | [Holon #41](https://github.com/egohygiene/holon/issues/41) | Selected Identity initialization/package references in future portable organization materialization; repository scaffolding stays with its owner. |
 | [Realm #19](https://github.com/egohygiene/realm/issues/19) | Verified immutable tool installation and supported distribution/fallback selection; no identity authoring or publishing authority. |
@@ -173,17 +190,45 @@ No dedicated open initializer or Identity-delegation issue was found in the
 scoped issue searches at that 2026-10-19 observation. #108 served as intake
 for that checkpoint. At its 2026-11-02 closeout, the initializer requirements
 were transferred to #133 after a fresh duplicate search. Delegated validation
-continues through the existing EgoLint #35/#36 and Relay #49 owner queues;
-their open state was rechecked. This is coordination coverage, not evidence
-that a specific Identity adapter or complete producer report boundary exists.
+was coordinated through EgoLint #35/#36 and Relay #49 at that dated checkpoint.
+The current observation above supersedes those two EgoLint open-state claims.
+That coordination did not implement a specific Identity adapter or complete
+producer report boundary.
 Repository-required files, engineering conformance, contribution enforcement
 and installation remain external responsibilities, not new `.identity/` facts.
 
-## Bounded future v1 initializer requirements
+### Repository contract adoption boundaries
 
-Manual v1 authoring remains supported. A later initializer implementation needs
-an explicit owner-selected scope and review under #133. Its minimum
-acceptance requirements are:
+Identity specifies and validates consumer-owned identity. It does not decide
+which repositories must adopt it. The current cross-owner gap is separate from
+the existing finish campaign:
+
+[Hygiene #128](https://github.com/egohygiene/hygiene/issues/128) captures the
+later applicability, baseline, delegated-checking and adoption work. It does
+not make that rollout a new prerequisite for Identity's original completion
+criteria or existing manual consumer proof.
+
+| Concern | Canonical owner and observed boundary |
+| --- | --- |
+| Required Identity applicability and exceptions | Hygiene. Its [presentation profile](https://github.com/egohygiene/hygiene/blob/e296539a8891ba75ebe3f9816fb7aec5c7c1fc21/catalog/repository-presentation-profile.json) remains proposed `1.0.0-alpha.1`; a public repository banner requirement is not comprehensive v1 source compliance. |
+| Composed repository baseline and golden proof | Empathy. Its [foundation catalog](https://github.com/egohygiene/empathy/blob/e6dbd6b2693786ef331e7f11638ebbbd7a57bfa6/foundation/catalog.json) still selects `.identity/identity.toml` for the product profile. Presence of that v0 file does not prove v1 validity. |
+| New-repository materialization | Holon; reuse its reviewed scaffolding and presentation seams rather than making Identity a repository-file generator. |
+| Delegated checking and evidence execution | EgoLint and Relay respectively. The proposed conditions above require an actual compatible adapter before enforcement. |
+| Existing-repository adoption | Pace and each consumer; preview, review, verify and retain rollback rather than bulk-apply an unreviewed profile. |
+
+These observations do not activate a required-files policy or update any
+consumer pin. A later applicability contract must keep source validity,
+selected-output verification and complete public-kit readiness separate. A
+small repository need not publish every optional surface to validate the
+identity it actually declares. Human facts, rights and same-subject approvals
+cannot be supplied by a passing check.
+
+## Initializer acceptance requirements and retained integration
+
+The following requirements scoped #133 and are retained for compatibility.
+Its implementation and local acceptance are linked above; they are not a new
+initializer backlog. Full platform/CI acceptance remains with the existing
+quality owners, and manual v1 authoring remains supported:
 
 - Preserve the v0 `init`/`validate` interface. Use an explicit v1 selection;
   never reinterpret or overwrite existing v0/v1 source implicitly.
@@ -203,8 +248,10 @@ acceptance requirements are:
   inputs on failure; and validation of a candidate once real required facts and
   reviewed evidence are supplied.
 
-This disposition fulfills #99's handoff-scoping requirement. Actual initializer,
-EgoLint adapter and cross-owner rollout remain future reviewed work. Public
-asset selection/download repairs remain [#101](https://github.com/egohygiene/identity/issues/101)
-and [#105](https://github.com/egohygiene/identity/issues/105); neither a passing
-source check nor this handoff closes them.
+The original disposition fulfilled #99's handoff-scoping requirement. The
+initializer now has its own local acceptance; the EgoLint adapter and
+cross-owner rollout remain future reviewed work. The selected public-asset
+and kit-assembly scopes under [#101](https://github.com/egohygiene/identity/issues/101)
+and [#105](https://github.com/egohygiene/identity/issues/105) are closed. Actual
+Identity self-source, rights, release and dogfood remain with #98; neither a
+passing source check nor this handoff completes them.

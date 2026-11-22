@@ -19,8 +19,10 @@ coordination file. ADR-0027 proposes an optional paragraph description in the
 existing Press Kit boilerplates. ADR-0028 proposes optional asset-usage transport
 and truthful missing rights metadata. ADR-0029 proposes governed public asset
 selection and selected-output download metadata. ADR-0030 proposes complete native consumer-kit assembly and an offline output inventory.
-These nine proposals have no lifecycle approval; the corpus contains 21 accepted
-records and nine proposed records.
+ADRs 0031–0034 separately propose product-component ownership, announcement
+drafts, explicit v1 initialization candidates and native release publication.
+These thirteen proposals have no lifecycle approval; the corpus contains 21
+accepted records and thirteen proposed records.
 
 | ID | Title | Decision status | Date | Canonical record |
 | --- | --- | --- | --- | --- |

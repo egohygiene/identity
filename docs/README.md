@@ -20,8 +20,10 @@ guides run from the checkout root; consumer paths remain explicit.
 | Area | Specification |
 | --- | --- |
 | Source and guidance | [Identity v1](contracts/IDENTITY_V1.md), [guidance](contracts/GUIDANCE_V1.md), [design-system handbook](contracts/DESIGN_SYSTEM_V1.md) |
-| Compilation and output | [Compiler](contracts/COMPILER_V1.md), [Brand Kit packages](contracts/BRAND_KIT_PACKAGES_V1.md) |
+| Source identity | [Canonical source digest](contracts/SOURCE_DIGEST_V1.md) |
+| Compilation and output | [Compiler](contracts/COMPILER_V1.md), [Brand Kit packages](contracts/BRAND_KIT_PACKAGES_V1.md), [Brand Kit renderer](contracts/BRAND_KIT_RENDERER_V1.md) |
 | Optional presentation | [Press and Media Kits](contracts/PRESS_KIT_V1.md), [social surfaces](contracts/SOCIAL_SURFACES_V1.md), [repository presentation](contracts/REPOSITORY_PRESENTATION_V1.md) |
+| Channel governance | [Channel registry](contracts/CHANNEL_REGISTRY_V1.md) |
 | Visual assets and evidence | [Mascot system](contracts/MASCOT_SYSTEM_V1.md), [visual motion](contracts/VISUAL_MOTION_V1.md), [quality gates](contracts/QUALITY_GATES_V1.md) |
 
 The source contract owns normative fields and compatibility. Guides explain how
