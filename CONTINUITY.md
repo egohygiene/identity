@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T19:12:48.742240+00:00'
+  updated_at: '2026-11-22T19:15:16.779779+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -48,6 +48,8 @@ scope:
   - docs/work/98/source-assembly/assembly-validation.json
   - docs/work/98/source-assembly/REVIEW_TIME_FINDING.md
   - docs/work/116/qualification-20261122/self-source-strict-preflight.json
+  - docs/work/116/QUALIFICATION_SPRINT_2026-11-22.md
+  - docs/work/116/qualification-20261122/integrated-checks.json
 work:
   objective: Prepare concrete Identity descriptor/output proposals and a separate mechanically assembled
     candidate while exact owner choices remain unselected.
@@ -73,7 +75,7 @@ state:
   base:
     revision: 18674e0cd88fc7316201d925c83fc3616919234f
     ref: refs/heads/codex/82-qualified-images-stack-20261122
-    verified_at: '2026-11-22T19:12:48.742240+00:00'
+    verified_at: '2026-11-22T19:15:16.779779+00:00'
   candidate:
     branch: codex/98-source-proposal-stack-20261122
     revision: null
@@ -81,7 +83,7 @@ state:
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-22T19:12:48.742240+00:00'
+    observed_at: '2026-11-22T19:15:16.779779+00:00'
     default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
     issue_state: open
     pull_request_state: not-applicable
@@ -103,7 +105,7 @@ state:
     url: https://github.com/egohygiene/aether/pull/142
 review:
   status: partial
-  reviewed_at: '2026-11-22T18:24:25.121653+00:00'
+  reviewed_at: '2026-11-22T19:15:16.610601+00:00'
   reviewed_by: Codex
   evidence:
   - command: Existing provenance/usage schemas on new candidate fragments
@@ -134,6 +136,12 @@ review:
     observed_at: '2026-11-22T18:24:25.121653+00:00'
     notes: Current proposal/manifests match; original active candidate, selected masters, runtime/contracts/profiles/ADRs
       are unchanged. Documentation links and canonical whitespace pass.
+  - command: Integrated full Python and source/evidence/compiled-input comparisons at33948ad
+    outcome: passed
+    observed_at: '2026-11-22T19:15:16.610601+00:00'
+    notes: 234discovered:232passes/two existing skips, actualMake/Task. Docs,bundle,extraction,whitespace
+      and reviewed packets/protected inputs match. Selected native inputs equal testededca; no new native
+      execution inferred. Strict source/native refusal preserves14candidate inputs without output.
   environment_limitations:
   - Exact inheritance/token and new descriptor/output/public-usage choices remain pending owner response.
   - New native review timestamp cannot be supplied without actual explicit packet review; original exact
@@ -178,15 +186,15 @@ New concrete descriptors preserve actual SVG titles/artboards and the horizontal
 
 ## Validation and review evidence
 
-Two provenance fragments and candidate usage pass structural schemas. Full proposed consumer returns exactly two IDN1404 findings; native generation and verify refuse without output or input changes. The offline pinned local CLI build succeeds with unchanged product inputs. The14-decision synthetic control identifies existing date-only timestamp acceptance for the separate root #70 repair now retained in parent163. A new strict-preflight integration receipt repeats validator/native refusal against unchanged candidate bytes after that repair. See assembly-validation and REVIEW_TIME_FINDING; no real approval or full source pass.
+Two provenance fragments and candidate usage pass structural schemas. Full proposed consumer returns exactly two IDN1404 findings; native generation and verify refuse without output or input changes. The offline pinned local CLI build succeeds with unchanged product inputs. The historical14-decision probe records date-only acceptance at75ca39f; parent163 fixes that defect. A new strict-preflight integration receipt repeats validator/native refusal against unchanged candidate bytes after that repair. See assembly-validation, REVIEW_TIME_FINDING and the integrated strict-refusal receipt. Integrated Python234 passes with two existing skips; docs/bundle/extraction and exact packet/protected-input checks pass. No real approval or full source pass.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Owner layer/token and exact descriptor/output choices remain unselected. The optional schema-format checker remains unavailable locally, while parent163 now independently enforces complete approval timestamps. The historical parser finding is not used as authority. Review timestamps remain null; original creation/reference history remains unknown. Native Kern PNG support, new-tagline derivative, full publisher/release/native/Docker acceptance stay separate.
+Owner layer/token and exact descriptor/output choices remain unselected. The optional schema-format checker remains unavailable locally, while parent163 now independently enforces complete approval timestamps. The historical parser finding is not used as authority. Review timestamps remain null; original creation/reference history remains unknown. Native Kern PNG support, a new-tagline derivative, actual self-source publisher/release and remaining native-platform/final-merged acceptance stay separate. Original browser and Linux image proofs are retained in parents164/165.
 
 ## Next dependency-ready work
 
-Review the concrete source bundle and independent inheritance question, then bind actual selections and the actual new packet-review time. Rerun matching strict source/producer checks before canonical adoption or real publisher handoff. Existing known brand choices need not be selected again.
+Read the final QUALIFICATION_SPRINT_2026-11-22 handoff, then review the concrete source bundle and independent inheritance question, then bind actual selections and the actual new packet-review time. Rerun matching strict source/producer checks before canonical adoption or real publisher handoff. Existing known brand choices need not be selected again.
 
 ## Parallel changes and reconciliation
 

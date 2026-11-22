@@ -1,0 +1,39 @@
+{
+  "recordKind": "integrated local checks; separate domain executions retain their represented source",
+  "observedAt": "2026-11-22T19:15:16.610601+00:00",
+  "representedPreHandoffRevision": "33948ad48e14d9468f136e2b7f768e321082092d",
+  "python": {
+    "command": "IDENTITY_REQUIRE_FRONTENDS=1 python -m unittest discover -s tests -p test_*.py -v",
+    "exitCode": 0,
+    "discovered": 234,
+    "passed": 232,
+    "existingSkipped": 2,
+    "durationSeconds": 19.422,
+    "rawLogBytes": 44303,
+    "rawLogSha256": "c7df559b83e240a4f08378502822a1847fec970296c0458ac7b35a4fba04e5f8",
+    "rawLogRetention": "Task-local durable log; not a claim of a public or hosted report.",
+    "actualFrontends": "Make and pinned Task3.45.3 available"
+  },
+  "passedChecks": [
+    "documentation links",
+    "generated standalone validator drift",
+    "extraction/provenance verifier",
+    "whole-source whitespace",
+    "exact reviewed browser/dev/source packet comparisons",
+    "protected root source/assets/ADRs/profile/workflows/renderer unchanged",
+    "configured sensitive-value scan across112 changed text files"
+  ],
+  "nativeEvidence": {
+    "executedRevision": "edca416d58d15b06ccc05029b0803bc27e65fe18",
+    "passed": 119,
+    "helperOnlyIgnored": 4,
+    "formatAndStrictClippy": "passed at that revision",
+    "selectedInputsUnchanged": true,
+    "selectedInputCount": 190,
+    "selectedInputFingerprint": "2b6e91258ff22bf091ebae86d7d7339311a68bb74f1c8a87b831c4a86b438e5f",
+    "selection": "all src/, contracts/, tests/fixtures/, renderer/fixtures/, scripts/identity_validation/; tests/**/*.rs; Cargo.toml/Cargo.lock/rust-toolchain.toml; initializer/generated validator",
+    "limit": "No new native execution or other-platform qualification inferred; this is exact input equality to retained local native evidence."
+  },
+  "sourceChoices": "Two exact owner questions remain pending; no source adoption or invented approval time.",
+  "publication": "No merge, tag, release, hosted dispatch or deployment."
+}
