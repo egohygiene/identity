@@ -330,7 +330,8 @@ def main() -> int:
         proxy_ca = args.proxy_ca.resolve(strict=True) if args.proxy_ca else None
         if proxy_ca is not None and not proxy_ca.is_file():
             raise ValueError("Invalid CA bundle")
-        if proxy_ca is not None and any(character == "," or ord(character) < 32 or ord(character) == 127 for character in str(proxy_ca)):
+        if proxy_ca is not None and any(character in ',"' or ord(character) < 32 or ord(character) == 127
+                                        for path in (args.proxy_ca, proxy_ca) for character in str(path)):
             raise ValueError("Invalid CA secret path")
     except (OSError, ValueError, RuntimeError):
         parser.error("--proxy-ca must select an existing regular CA bundle")

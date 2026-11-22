@@ -85,10 +85,13 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
             inherited, explicit = root / "inherited.pem", root / "explicit.pem"
             inherited.write_text("synthetic CA input; no TLS is performed\n")
             explicit.write_text("different synthetic CA input\n")
+            unused = root / 'unused,"private-env.pem'
+            unused.write_text("synthetic unusable inherited selector\n")
             for label, environment_value, cli, selected in (
                 ("unset", None, [], None), ("empty", "", [], None),
                 ("environment", str(inherited), [], inherited),
                 ("cli-overrides-environment", str(root / "missing.pem"), ["--proxy-ca", str(explicit)], explicit),
+                ("cli-overrides-unsafe-environment", str(unused), ["--proxy-ca", str(explicit)], explicit),
             ):
                 calls = []
 
@@ -124,7 +127,7 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
                 record = json.loads((destination / "host-qualification.json").read_text())
                 self.assertEqual(record["build_network"]["ca_secret_selected"], selected is not None)
                 self.assertNotIn("qualification", record)
-                for private in (str(inherited), str(explicit), str(root / "missing.pem")):
+                for private in (str(inherited), str(explicit), str(root / "missing.pem"), str(unused)):
                     self.assertNotIn(private, printed.getvalue())
                     self.assertNotIn(private, json.dumps(record))
 
@@ -149,7 +152,7 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
             # These regular files really exist: the selector must refuse the
             # canonical path's CSV delimiter/control bytes, not merely fail a
             # missing-file check. NUL is already rejected by pathlib itself.
-            for number, character in enumerate([",", *map(chr, range(1, 32)), chr(127)]):
+            for number, character in enumerate([",", '"', *map(chr, range(1, 32)), chr(127)]):
                 unsafe = root / ("synthetic-private-ca" + character + "bundle.pem")
                 unsafe.write_text("synthetic existing CA input\n")
                 cases.extend(((f"unsafe-{number}-env", unsafe, []),
@@ -161,6 +164,15 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
                 pass
             else:
                 cases.extend((("unsafe-target-env", alias, []), ("unsafe-target-cli", None, ["--proxy-ca", str(alias)])))
+            clean = root / "clean-ca.pem"
+            clean.write_text("synthetic usable target\n")
+            unsafe_alias = root / 'synthetic-private,"alias.pem'
+            try:
+                unsafe_alias.symlink_to(clean.name)
+            except (OSError, NotImplementedError):
+                pass
+            else:
+                cases.extend((("unsafe-alias-env", unsafe_alias, []), ("unsafe-alias-cli", None, ["--proxy-ca", str(unsafe_alias)])))
             for label, value, cli in cases:
                 destination = root / (label + "-evidence")
                 environment = {"IDENTITY_BROWSER_PROXY_CA": str(value)} if value else {}
