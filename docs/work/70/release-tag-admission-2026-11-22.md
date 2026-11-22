@@ -69,3 +69,23 @@ instructions. This implements the existing accepted
 annotated release selection. It introduces no new release boundary or ADR
 disposition. Historical tags, versions, releases and existing evidence remain
 unchanged.
+
+## Follow-up — prerelease flag classification
+
+The existing publication Bash also treated a hyphen in SemVer build metadata
+as a prerelease separator: stable `v1.0.0+linux-x64` received `--prerelease`.
+The condition now removes the `+` metadata suffix before checking for the
+prerelease separator; the full tag remains the release selection and title.
+
+`tests/test_release_workflow.py` extracts the actual checked-in publication
+run block with a bounded standard-library indentation reader and executes it
+under POSIX Bash against disposable command doubles. Six tag cases cover
+stable, stable with build metadata, release candidate and prerelease with
+metadata selections; a second test confirms failed admission prevents the
+fake publication command. The doubles perform no network or publication.
+This regression needs no Python YAML dependency; it skips on non-POSIX hosts
+because this publication job runs on Linux.
+
+All 20 `test_release_*.py` tests pass after the fix, as do actionlint, docs and
+staged whitespace checks. Running the same classification regression against
+the prior committed workflow fails specifically for `v1.0.0+linux-x64`.

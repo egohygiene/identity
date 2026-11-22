@@ -265,7 +265,7 @@ jobs:
             --title "Identity ${GITHUB_REF_NAME}"
             --generate-notes
           )
-          if [[ "${GITHUB_REF_NAME}" == *-* ]]; then
+          if [[ "${GITHUB_REF_NAME%%+*}" == *-* ]]; then
             arguments+=(--prerelease)
           fi
           gh release create "${arguments[@]}" release-assets/*
