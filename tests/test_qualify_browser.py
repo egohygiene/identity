@@ -146,6 +146,21 @@ class BrowserQualificationBoundaryTests(unittest.TestCase):
                 pass
             else:
                 cases.extend((("loop-env", loop, []), ("loop-cli", None, ["--proxy-ca", str(loop)])))
+            # These regular files really exist: the selector must refuse the
+            # canonical path's CSV delimiter/control bytes, not merely fail a
+            # missing-file check. NUL is already rejected by pathlib itself.
+            for number, character in enumerate([",", *map(chr, range(1, 32)), chr(127)]):
+                unsafe = root / ("synthetic-private-ca" + character + "bundle.pem")
+                unsafe.write_text("synthetic existing CA input\n")
+                cases.extend(((f"unsafe-{number}-env", unsafe, []),
+                              (f"unsafe-{number}-cli", None, ["--proxy-ca", str(unsafe)])))
+            alias = root / "safe-ca-alias.pem"
+            try:
+                alias.symlink_to("synthetic-private-ca,bundle.pem")
+            except (OSError, NotImplementedError):
+                pass
+            else:
+                cases.extend((("unsafe-target-env", alias, []), ("unsafe-target-cli", None, ["--proxy-ca", str(alias)])))
             for label, value, cli in cases:
                 destination = root / (label + "-evidence")
                 environment = {"IDENTITY_BROWSER_PROXY_CA": str(value)} if value else {}
