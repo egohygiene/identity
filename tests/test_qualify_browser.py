@@ -4,6 +4,7 @@
 
 import copy
 from contextlib import redirect_stderr, redirect_stdout
+import errno
 import importlib.util
 import io
 import json
@@ -11,6 +12,7 @@ import os
 from pathlib import Path
 import subprocess
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -70,6 +72,30 @@ def output(receipt, directory):
 
 
 class BrowserQualificationBoundaryTests(unittest.TestCase):
+    def test_vfs_disk_preflight_refuses_the_reproduced_small_store(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            info = {"driver": "vfs", "dataRoot": str(root)}
+            with patch.object(QUALIFY.shutil, "disk_usage", return_value=SimpleNamespace(free=8 * QUALIFY.GIB)):
+                result = QUALIFY.storage_preflight(info, root, root)
+                self.assertEqual(result["status"], "failed")
+                self.assertEqual(result["minimumFreeBytes"], 16 * QUALIFY.GIB)
+            with patch.object(QUALIFY.shutil, "disk_usage", return_value=SimpleNamespace(free=20 * QUALIFY.GIB)):
+                self.assertEqual(QUALIFY.storage_preflight(info, root, root)["status"], "passed")
+            with patch.object(QUALIFY.shutil, "disk_usage", side_effect=FileNotFoundError):
+                self.assertEqual(QUALIFY.storage_preflight(info, root, root)["status"], "failed")
+
+    def test_failed_receipt_reuses_reserved_storage_without_creating_another_file(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            envelope = {"status": "failed", "failure": "Synthetic preparation storage exhaustion"}
+            with QUALIFY.reserve_host_receipt(root) as reserved:
+                self.assertEqual((root / "host-qualification.json").stat().st_size, QUALIFY.HOST_RECEIPT_BYTES)
+                with patch.object(Path, "open", side_effect=OSError(errno.ENOSPC, "Synthetic no new file allocation")):
+                    QUALIFY.write_host_receipt(reserved, root, envelope)
+            self.assertEqual(json.loads((root / "host-qualification.json").read_text()), envelope)
+            self.assertLess((root / "host-qualification.json").stat().st_size, QUALIFY.HOST_RECEIPT_BYTES)
+
     def test_local_act_receipts_do_not_claim_hosted_ci(self):
         # Exercise the real host-receipt writer in the same runner environment
         # exposed by act. Deliberately fail Docker preflight: no browser/image
