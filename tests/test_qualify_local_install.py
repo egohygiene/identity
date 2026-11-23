@@ -2,12 +2,14 @@
 # SPDX-License-Identifier: MIT
 """Transport/extraction controls; real CLI qualification is retained separately."""
 from contextlib import redirect_stderr
+import errno
 import gzip
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import io
 import json
 import os
 from pathlib import Path
+import shutil
 import stat
 import sys
 import tarfile
@@ -22,6 +24,19 @@ import qualify_local_install as qualifier
 
 
 class LocalInstallQualificationTests(unittest.TestCase):
+    def _symlink_or_skip(self, link, target, *, directory=False):
+        try:
+            link.symlink_to(target, target_is_directory=directory)
+        except NotImplementedError:
+            self.skipTest("host does not implement symbolic links")
+        except OSError as error:
+            unsupported = {errno.EPERM, errno.EACCES, errno.ENOSYS,
+                           getattr(errno, "EOPNOTSUPP", errno.ENOSYS),
+                           getattr(errno, "ENOTSUP", errno.ENOSYS)}
+            if error.errno in unsupported or getattr(error, "winerror", None) in {1, 50, 1314}:
+                self.skipTest("host filesystem or permissions do not permit test symbolic links")
+            raise
+
     def test_archive_is_deterministic_and_round_trips_exact_bytes(self):
         data = b"candidate executable\n"
         archive = qualifier.candidate_archive(data)
@@ -77,18 +92,29 @@ class LocalInstallQualificationTests(unittest.TestCase):
         with self.assertRaises(qualifier.QualificationError):
             qualifier.archive_binary(gzip.compress(malicious, mtime=0), qualifier.sha256(b"data"))
 
-    def test_new_install_preserves_mode_and_refuses_clobber_or_symlink_prefix(self):
+    def test_new_install_refuses_clobber(self):
         with tempfile.TemporaryDirectory() as directory:
             work = Path(directory)
             prefix = work / "space µ=prefix"
             binary = qualifier.install(b"old", prefix)
             self.assertEqual(binary.read_bytes(), b"old")
-            self.assertEqual(stat.S_IMODE(binary.stat().st_mode), 0o755)
             with self.assertRaises(qualifier.QualificationError):
                 qualifier.install(b"replacement", prefix)
             self.assertEqual(binary.read_bytes(), b"old")
+
+    @unittest.skipUnless(os.name == "posix", "POSIX permission bits are not a Windows file-mode contract")
+    def test_new_install_preserves_posix_mode(self):
+        with tempfile.TemporaryDirectory() as directory:
+            binary = qualifier.install(b"old", Path(directory) / "bin")
+            self.assertEqual(stat.S_IMODE(binary.stat().st_mode), 0o755)
+
+    def test_symlink_install_prefix_is_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            work = Path(directory)
+            prefix = work / "bin"
+            binary = qualifier.install(b"old", prefix)
             link = work / "linked-prefix"
-            link.symlink_to(prefix, target_is_directory=True)
+            self._symlink_or_skip(link, prefix, directory=True)
             with self.assertRaises(qualifier.QualificationError):
                 qualifier.install(b"replacement", link)
             self.assertEqual(binary.read_bytes(), b"old")
@@ -102,13 +128,18 @@ class LocalInstallQualificationTests(unittest.TestCase):
             self.assertEqual(bytes(elf), qualifier.binary_bytes(path, qualifier.sha256(elf)))
             with self.assertRaises(qualifier.QualificationError):
                 qualifier.binary_bytes(path, "0" * 64)
-            link = Path(directory) / "link"
-            link.symlink_to(path)
-            with self.assertRaises(qualifier.QualificationError):
-                qualifier.binary_bytes(link, qualifier.sha256(elf))
             path.write_bytes(b"not a native binary")
             with self.assertRaises(qualifier.QualificationError):
                 qualifier.binary_bytes(path, qualifier.sha256(path.read_bytes()))
+
+    def test_symlink_binary_input_is_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "binary"
+            path.write_bytes(b"input bytes")
+            link = Path(directory) / "link"
+            self._symlink_or_skip(link, path)
+            with self.assertRaises(qualifier.QualificationError):
+                qualifier.binary_bytes(link, qualifier.sha256(path.read_bytes()))
 
     def test_redirect_is_not_followed_even_to_another_loopback_resource(self):
         requested = []
@@ -132,26 +163,35 @@ class LocalInstallQualificationTests(unittest.TestCase):
             server.server_close()
             thread.join(timeout=5)
 
-    def test_existing_or_linked_receipt_refuses_before_running_and_redacts_paths(self):
+    def _assert_receipt_refusal(self, work, output, retained):
+        argv = []
+        for name in ["candidate-binary", "baseline-binary", "consumer-root"]:
+            argv += ["--" + name, str(work / name)]
+        argv += ["--receipt", str(output)]
+        for name in ["candidate-sha256", "baseline-sha256", "candidate-revision", "baseline-revision", "consumer-repository", "consumer-revision"]:
+            argv += ["--" + name, "example"]
+        stderr = io.StringIO()
+        with mock.patch.object(qualifier, "qualify") as run, redirect_stderr(stderr):
+            self.assertEqual(qualifier.main(argv), 1)
+            run.assert_not_called()
+        self.assertNotIn(str(work), stderr.getvalue())
+        self.assertEqual(retained.read_bytes(), b"existing receipt\n")
+
+    def test_existing_receipt_refuses_before_running_and_redacts_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            work = Path(directory)
+            destination = work / "private-receipt"
+            destination.write_bytes(b"existing receipt\n")
+            self._assert_receipt_refusal(work, destination, destination)
+
+    def test_linked_receipt_refuses_before_running_and_redacts_paths(self):
         with tempfile.TemporaryDirectory() as directory:
             work = Path(directory)
             destination = work / "private-receipt"
             destination.write_bytes(b"existing receipt\n")
             linked = work / "linked-receipt"
-            linked.symlink_to(destination)
-            for output in [destination, linked]:
-                argv = []
-                for name in ["candidate-binary", "baseline-binary", "consumer-root"]:
-                    argv += ["--" + name, str(work / name)]
-                argv += ["--receipt", str(output)]
-                for name in ["candidate-sha256", "baseline-sha256", "candidate-revision", "baseline-revision", "consumer-repository", "consumer-revision"]:
-                    argv += ["--" + name, "example"]
-                stderr = io.StringIO()
-                with mock.patch.object(qualifier, "qualify") as run, redirect_stderr(stderr):
-                    self.assertEqual(qualifier.main(argv), 1)
-                    run.assert_not_called()
-                self.assertNotIn(str(work), stderr.getvalue())
-                self.assertEqual(destination.read_bytes(), b"existing receipt\n")
+            self._symlink_or_skip(linked, destination)
+            self._assert_receipt_refusal(work, linked, destination)
 
     def test_successful_initializer_cannot_hide_unrelated_source_deletion(self):
         def mutate(prefix, arguments, consumer, commands, **options):
@@ -166,6 +206,8 @@ class LocalInstallQualificationTests(unittest.TestCase):
             with self.assertRaisesRegex(qualifier.QualificationError, "existing or unrelated"):
                 qualifier.candidate_cli_checks(Path(directory), Path(directory), [])
 
+    @unittest.skipUnless(os.name == "posix" and Path("/usr/bin/env").is_file() and shutil.which("python3"),
+                         "execution fixture requires POSIX shebang dispatch and env/python3")
     def test_installed_command_cannot_change_its_bound_executable(self):
         with tempfile.TemporaryDirectory() as directory:
             work = Path(directory)
