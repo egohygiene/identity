@@ -1,0 +1,73 @@
+{
+  "recordKind": "actual local checks and tested-code identity; not a release/native-platform matrix",
+  "observedAt": "2026-11-23T06:00:13.043496+00:00",
+  "baseRevision": "ad8fca58946ca03f6f07d13be6c64046216569d0",
+  "codeRevision": "d159c680e6161e85854fd45c255d4196aec5c34f",
+  "testedCodeBytesMatchCommit": true,
+  "criticalInputs": {
+    "scripts/identity_validation/channels.py": "861075dcb7906740f1322186f1e68265a3e27550d9fe73cd940422fe6fa7f18d",
+    "scripts/identity_validation/common.py": "763b94376fb1e80d28bccfcac2e60ea86b4a4365bb9de9f7f34615867978d1c6",
+    "scripts/identity_validation/governance.py": "36dd75984ab9598724e5090f75c0f9c3969877afe57412cf058b91341bed4b58",
+    "scripts/identity_validation/guidance.py": "903ccda1dc360740aae7f0ad550b3b0866378b41a7842c834ecaf37aa463b733",
+    "scripts/identity_validation/handbook.py": "f928cc9d24baacecb38572f040c978e7d7c09ad1e945de796e4ddb2b941f33f1",
+    "scripts/validate_identity.py": "516305a9bdcf79f3129bcc4efba3b18feb8a66e9dc249b34dcd04f5f42f24e40",
+    "tests/test_render_channel_registry.py": "ba97f9359fb366b94529beabaf4f3bd834957522d986a5ad784077979a89e7c1",
+    "tests/test_validate_identity_v1.py": "89cbcce12ca7d295c5db889d5ebac13fb4f077e4a036b9e8fcf649b04cb83739",
+    "tests/v1_consumer.rs": "45391d46866180987affe585071dd1e9008c47daaabd0a8bc25418d2df208082"
+  },
+  "python": {
+    "command": "IDENTITY_REQUIRE_FRONTENDS=1 python -m unittest discover -s tests -p test_*.py -v",
+    "exitCode": 0,
+    "discovered": 238,
+    "passed": 236,
+    "existingSkipped": 2,
+    "actualTask": "3.45.3",
+    "rawLog": {
+      "bytes": 45119,
+      "sha256": "e2f5a4cb489503fb8ef36dbe32bc98936eaba1c346d83e9781436080a2f4241d"
+    }
+  },
+  "native": {
+    "commands": [
+      "cargo fmt --all -- --check",
+      "cargo clippy --locked --offline --all-targets --all-features -- -D warnings",
+      "cargo test --locked --offline --all-features"
+    ],
+    "exitCodes": [
+      0,
+      0,
+      0
+    ],
+    "passed": 119,
+    "helperOnlyIgnored": 4,
+    "jobs": 1,
+    "rawLogs": {
+      "fmt.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "clippy.log": {
+        "bytes": 153,
+        "sha256": "f4e975ebd3f433ebdd2ec544371f9b0aa0a6975d178c34a273b6bb9f1c23ac66"
+      },
+      "native-tests.log": {
+        "bytes": 14207,
+        "sha256": "637c3e6558244eb3e3cad321637c919244caf6f5253444e79e239d906a64e10c"
+      }
+    },
+    "localBinary": {
+      "bytes": 65679360,
+      "sha256": "37ff6ca4afee895e60d1ee98ceb76175513c9a971c8feebd67a0742669214907"
+    },
+    "limit": "Local test executable compiled from code bytes subsequently audited to the selected commit; not downloaded/signed/released, not other-OS evidence."
+  },
+  "otherPassed": [
+    "standalone generated-bundle drift",
+    "extraction/provenance verifier",
+    "documentation links",
+    "whitespace",
+    "independent canonical/tests review"
+  ],
+  "rawLogRetention": "Task-local durable logs outside repository; hashes retained without private host paths.",
+  "ownerFacts": "Unchanged; no source review time or offset supplied."
+}
