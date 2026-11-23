@@ -40,9 +40,10 @@ this coverage; ordinary standalone setup still requires neither frontend.
 The 2026-11-14 [local acceptance](work/82/LOCAL_ACCEPTANCE.md) additionally runs
 two real setups through standalone/Make and a real Task browser dry run. These
 prove the local helper paths, not clean-base Docker or hosted/`act` CI acceptance.
-The existing development-image qualification owns the separate pinned/default
-and custom-base Docker smoke. Current-source execution of that scope remains
-#82's open gate for the later CI campaign.
+The development-image qualification owns the separate pinned/default and
+custom-base Docker smoke. The [2026-11-22 full image record](work/82/FULL_IMAGE_2026-11-22.md)
+now proves that scope on native Linux amd64, including actual repeated setup in
+both images. Browser/workflow and broader entrypoint CI retain their own scope.
 
 `task check`/`make check` run the helper's Rust/Python/renderer tests and builds;
 they do not replace the root workflow's release, documentation, mascot,
@@ -169,10 +170,19 @@ unless explicitly requested.
 ### Proxy trust
 
 The Docker host/builder must reach the registry and any required proxy. The base
-owner provisions a TLS proxy's trusted **public CA certificate** into the OS
-trust store used by curl/Rust and Node's trust configuration (for example,
-`NODE_EXTRA_CA_CERTS` pointing to a readable certificate file when required).
-Forward proxy build arguments only when the host requires them. The installer
+owner can provision a TLS proxy's trusted **public CA certificate** for
+curl/Rust and Node. For development-image qualification, use
+`--proxy-ca /path/to/public-ca-bundle.pem`, or the scoped
+`IDENTITY_DEVELOPMENT_PROXY_CA` default; an explicit CLI option wins. The selected
+regular bundle is an optional BuildKit secret during setup and a read-only bind
+during the smoke's actual repeated setup. It is not copied into the image or
+installed into system trust. Ambient CA variables do not select this option.
+Direct `docker build` callers can select the matching
+`--secret id=identity_proxy_ca,src=/path/to/public-ca-bundle.pem` themselves.
+
+The qualifier forwards only populated standard HTTP/HTTPS/no-proxy variable
+names as Docker's predefined build arguments and container environment options.
+It does not record proxy values or the selected bundle's local path. The installer
 preserves supplied proxy/cache bindings and enables Node environment-proxy
 handling on supported Node versions. It never disables TLS verification or
 imports private host credentials. Do not bake proxy credentials into the image
@@ -227,6 +237,13 @@ synthetic localhost CA rejection/explicit trust with curl and Node, CLI help and
 unit tests, build and public validation. Retain the receipt with exact source
 hashes and hosted run evidence; review failures before changing the pin. Keep
 the previous reviewed digest and receipt available in Git for rollback.
+
+Each built image also runs the real shared `setup` helper a second time. The
+smoke compares Rust source, the minimal canonical fixture, toolchain/dependency
+manifests and lockfiles before and after, then rechecks Rust/pnpm pins. The host
+admits this subreceipt only when its complete selected input inventory matches
+the host source and one successful repeat command is recorded. A stale receipt
+without that evidence does not establish current repeated-setup acceptance.
 
 The workflow also has an independent five-minute `portable-entrypoints` job.
 It installs checksum-pinned Task, requires real Make/Task frontends, and runs

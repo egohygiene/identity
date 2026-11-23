@@ -1,0 +1,49 @@
+{
+  "kind": "dated native Linux amd64 development-image qualification evidence index",
+  "tested_source_revision": "8255c5b9ab0e669c2cde6002353515b5a8fc0511",
+  "copied_json_receipts_exactly_from_actual_runs": true,
+  "files": {
+    "full-image-original.json": {
+      "bytes": 5689,
+      "sha256": "c50f23e31e0b40734d84a3e5134df05f9a8f453e5b4772a5879f609f8988dc67"
+    },
+    "full-image-repaired.json": {
+      "bytes": 68602,
+      "sha256": "3ea0574ac66a2536778bda2db776d569434dee011fef468216c8ac9db19fe029"
+    },
+    "proxy-ca-probes.json": {
+      "bytes": 669,
+      "sha256": "7bff1b118c28cc380f499cae6979e0ce50acac3c4a410437e8834cdef1f36c72"
+    },
+    "image-trust-probe.json": {
+      "bytes": 1576,
+      "sha256": "820813f06d8ba13c00a03455aaebd3085fc91f6010a037e8beb16c406d4b4453"
+    }
+  },
+  "private_logs": {
+    "full-image-original.log": {
+      "sha256": "f4f1cd7ed57c5b84d0cb5c13ae3c83abce990dc05b566f83ba48d2571c523ef2",
+      "bytes": 10028,
+      "retained_in_repository": false,
+      "reason": "Raw task-local build/network output is excluded; structured command/result hashes remain in public receipts."
+    },
+    "full-image-repaired.log": {
+      "sha256": "0f790c6e1769fbcd1c7b0a6cdff7b7234701ac33dfd22a96e559c2963f5e8927",
+      "bytes": 167013,
+      "retained_in_repository": false,
+      "reason": "Raw task-local build/network output is excluded; structured command/result hashes remain in public receipts."
+    },
+    "proxy-only.log": {
+      "sha256": "b585cf8c412703892b43943cfc0f9bcb4ac7fcd6fce46dfffc13c611d837755b",
+      "bytes": 812,
+      "retained_in_repository": false,
+      "reason": "Raw task-local build/network output is excluded; structured command/result hashes remain in public receipts."
+    },
+    "proxy-and-explicit-ca.log": {
+      "sha256": "e726a7587ebb6c1ae8f21d7790012545087dcb876b869663a762b81c748dc6f7",
+      "bytes": 1014,
+      "retained_in_repository": false,
+      "reason": "Raw task-local build/network output is excluded; structured command/result hashes remain in public receipts."
+    }
+  }
+}

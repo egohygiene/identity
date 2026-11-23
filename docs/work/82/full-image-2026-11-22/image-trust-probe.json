@@ -1,0 +1,34 @@
+{
+  "kind": "actual default/non-root image trust-persistence negative controls",
+  "source_revision": "8255c5b9ab0e669c2cde6002353515b5a8fc0511",
+  "default_system_trust_bytes_equal_pinned_base": true,
+  "checks": [
+    {
+      "image": "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+      "image_id": "sha256:03905f546fa8c284c377142124957871d1e8b9ddd0d69e869e233b9eeffd7790",
+      "proxy_values_absent_from_config_and_history": true,
+      "transport_environment_absent_from_image_config": true,
+      "ephemeral_ca_paths_absent_without_runtime_bind": true
+    },
+    {
+      "image": "identity-qualification-default:344f6fed6391",
+      "image_id": "sha256:bf63ddc9dea14566821ec7da06823d124874596bd667a608376c66d64159e031",
+      "proxy_values_absent_from_config_and_history": true,
+      "transport_environment_absent_from_image_config": true,
+      "ephemeral_ca_paths_absent_without_runtime_bind": true
+    },
+    {
+      "image": "identity-qualification-custom:344f6fed6391",
+      "image_id": "sha256:0e971403341c4da9c4fd39de6ccefe10f16e2ff07933c7e5ecd411236e334093",
+      "user": "1000:1000",
+      "proxy_values_absent_from_config_and_history": true,
+      "transport_environment_absent_from_image_config": true,
+      "ephemeral_ca_paths_absent_without_runtime_bind": true
+    }
+  ],
+  "limits": [
+    "Actual local images only; not a universal secret scan or external security audit.",
+    "No proxy values or certificate bytes retained."
+  ],
+  "custom_system_trust_bytes_equal_pinned_base": true
+}

@@ -1,0 +1,25 @@
+{
+  "base": "docker.io/library/node:24-bookworm@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+  "proxy_variable_names": [
+    "HTTP_PROXY",
+    "HTTPS_PROXY",
+    "NO_PROXY",
+    "http_proxy",
+    "https_proxy",
+    "no_proxy"
+  ],
+  "results": [
+    {
+      "probe": "proxy-only",
+      "exit_code": 60,
+      "output_sha256": "b585cf8c412703892b43943cfc0f9bcb4ac7fcd6fce46dfffc13c611d837755b",
+      "explicit_public_ca": false
+    },
+    {
+      "probe": "proxy-and-explicit-ca",
+      "exit_code": 0,
+      "output_sha256": "e726a7587ebb6c1ae8f21d7790012545087dcb876b869663a762b81c748dc6f7",
+      "explicit_public_ca": true
+    }
+  ]
+}
