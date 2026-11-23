@@ -211,14 +211,17 @@ def invoke(prefix: Path, arguments: list[str], consumer: Path, commands: list[di
     environment["PYTHONSAFEPATH"] = "1"
     if shutil.which("identity", path=environment["PATH"]) != str(prefix / "identity"):
         raise QualificationError("PATH did not select the isolated installation")
+    selected_digest = sha256((prefix / "identity").read_bytes())
     try:
         result = subprocess.run(["identity", *arguments], cwd=consumer, env=environment, capture_output=True, timeout=60)
     except (OSError, subprocess.TimeoutExpired) as error:
         raise QualificationError("installed command could not complete") from error
+    if sha256((prefix / "identity").read_bytes()) != selected_digest:
+        raise QualificationError("installed command changed its selected executable")
     if result.returncode != expected:
         raise QualificationError("installed command returned an unexpected exit status")
     commands.append({"arguments": ["identity", *[part.replace(str(consumer), "<consumer>") for part in arguments]],
-                     "exitCode": result.returncode, "pythonUnavailable": missing_python,
+                     "exitCode": result.returncode, "pythonUnavailable": missing_python, "installedBinarySha256": selected_digest,
                      "stdoutSha256": sha256(result.stdout), "stderrSha256": sha256(result.stderr)})
     return result
 
@@ -241,7 +244,12 @@ def candidate_cli_checks(prefix: Path, work: Path, commands: list[dict]) -> dict
     invoke(prefix, ["init", "--repository-root", str(consumer), "--project-id", "install-legacy", "--display-name", "Install Legacy"], consumer, commands)
     legacy = authoring.inventory(consumer / ".identity")
     invoke(prefix, ["validate", "--repository-root", str(consumer)], consumer, commands)
+    before_init = authoring.inventory(consumer)
     invoke(prefix, ["v1-init", "--repository-root", str(consumer), "--request", "request.json", "--output-directory", "starter"], consumer, commands)
+    outside_candidate = {path: value for path, value in authoring.inventory(consumer).items()
+                         if path != "starter" and not path.startswith("starter/")}
+    if outside_candidate != before_init:
+        raise QualificationError("candidate initialization changed existing or unrelated source")
     report = json.loads((consumer / "starter/initialization-report.json").read_text())
     if report.get("status") != "incomplete" or report.get("sourceValid") is not False:
         raise QualificationError("partial initialization was not honestly incomplete")
@@ -252,7 +260,7 @@ def candidate_cli_checks(prefix: Path, work: Path, commands: list[dict]) -> dict
             raise QualificationError("refused initialization changed existing files")
     if authoring.inventory(consumer / ".identity") != legacy or (consumer / "assets").exists():
         raise QualificationError("candidate initialization changed legacy source or generated output")
-    return {"v0Preserved": True, "v1CandidateStatus": "incomplete", "existingDestinationRefusedWithoutMutation": True,
+    return {"v0Preserved": True, "unrelatedSourcePreserved": True, "v1CandidateStatus": "incomplete", "existingDestinationRefusedWithoutMutation": True,
             "missingPythonRefusedWithoutMutation": True, "consumerPythonModulesNotExecuted": True}
 
 

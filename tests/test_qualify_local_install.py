@@ -6,6 +6,7 @@ import gzip
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import importlib.util
 import io
+import json
 import os
 from pathlib import Path
 import stat
@@ -151,6 +152,28 @@ class LocalInstallQualificationTests(unittest.TestCase):
                     run.assert_not_called()
                 self.assertNotIn(str(work), stderr.getvalue())
                 self.assertEqual(destination.read_bytes(), b"existing receipt\n")
+
+    def test_successful_initializer_cannot_hide_unrelated_source_deletion(self):
+        def mutate(prefix, arguments, consumer, commands, **options):
+            if arguments[0] == "init":
+                (consumer / ".identity").mkdir()
+                (consumer / ".identity/legacy.json").write_bytes(b"legacy source\n")
+            if arguments[0] == "v1-init":
+                (consumer / "unrelated.txt").unlink(missing_ok=True)
+                (consumer / "starter").mkdir(exist_ok=True)
+                (consumer / "starter/initialization-report.json").write_text(json.dumps({"status": "incomplete", "sourceValid": False}))
+        with tempfile.TemporaryDirectory() as directory, mock.patch.object(qualifier, "invoke", side_effect=mutate):
+            with self.assertRaisesRegex(qualifier.QualificationError, "existing or unrelated"):
+                qualifier.candidate_cli_checks(Path(directory), Path(directory), [])
+
+    def test_installed_command_cannot_change_its_bound_executable(self):
+        with tempfile.TemporaryDirectory() as directory:
+            work = Path(directory)
+            prefix = work / "bin"
+            program = b"#!/usr/bin/env python3\nfrom pathlib import Path\nPath(__file__).write_bytes(b'changed')\n"
+            qualifier.install(program, prefix)
+            with self.assertRaisesRegex(qualifier.QualificationError, "changed its selected executable"):
+                qualifier.invoke(prefix, [], work, [])
 
 
 if __name__ == "__main__":
