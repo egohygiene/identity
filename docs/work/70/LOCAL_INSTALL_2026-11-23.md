@@ -108,3 +108,9 @@ Decision impact: reference accepted ADR-0011/ADR-0019 and the existing consumer
 preservation boundaries. ADR not required: this adds bounded development proof
 of existing install/consumer contracts without a new public runtime, release
 policy or approval authority.
+
+## Test portability followup
+
+At test-only source `ec3350969b47e21f55b8d76edcad11aee89023c6`, generic archive, checksum, ELF, clobber and receipt checks remain portable. POSIX permission/shebang controls have explicit platform requirements; three separate symlink negatives skip only when the filesystem or permissions actually deny link creation. Unexpected link errors still fail. This does not qualify the Linux-only developer harness on another platform.
+
+Actual local Linux verification: **253 Python checks, 251 passed and two existing skips**, with Make and Task 3.45.3, in 20.852 seconds. All 15 focused checks pass. A separate simulated symlink-permission denial yields 12 passes and three precise skips. Full-suite raw log SHA256: `c395a97690e3493db95d3a35a3c472e4280bb692bf6eab76d7460a56e92f2b02`; retained task-locally. The earlier executed candidate transport and binary provenance remain unchanged.

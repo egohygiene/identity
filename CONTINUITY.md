@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-23T06:17:55.800795+00:00'
+  updated_at: '2026-11-23T07:02:37.965057+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -76,17 +76,20 @@ state:
   candidate:
     branch: codex/70-local-install-stack-20261123
     revision: null
-    pull_request: null
+    pull_request:
+      provider: github
+      id: egohygiene/identity#168
+      url: https://github.com/egohygiene/identity/pull/168
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-23T06:17:55.800795+00:00'
+    observed_at: '2026-11-23T07:02:37.965057+00:00'
     default_branch_revision: ad8fca58946ca03f6f07d13be6c64046216569d0
     issue_state: open
-    pull_request_state: not-applicable
-    notes: Earlier163 through166 and Aether141/142 are merged; timestamp167 and architecture143 are draft.
-      This new installation child does not yet have a PR. Original code/binary/consumer receipts retain
-      their exact represented inputs; no source choice, release or new native execution is inferred.
+    pull_request_state: open
+    notes: Earlier163 through166 and Aether141/142 are merged; Identity167/168 and Aether143/144 are draft.
+      This reviewed followup splits only platform-specific test controls; original candidate receipts
+      retain their exact executed revisions. No native Mac/Windows, source-choice or release claim.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#167
@@ -96,7 +99,7 @@ state:
     url: https://github.com/egohygiene/aether/pull/143
 review:
   status: partial
-  reviewed_at: '2026-11-23T06:14:09.080304+00:00'
+  reviewed_at: '2026-11-23T07:02:37.965057+00:00'
   reviewed_by: Codex
   evidence:
   - command: Focused local-install boundary unittest module
@@ -121,6 +124,12 @@ review:
     observed_at: '2026-11-23T06:14:09.080304+00:00'
     notes: 249discovered:247passed/twoexisting skips,19.388s. Root independently reran11focusedcontrols
       and cleared final source afterDEFLATE fix. Packet contains no hostpath/proxy/credential data.
+  - command: Full Python discovery with actual Make/Task at test-only followup ec3350969b47e21f55b8d76edcad11aee89023c6
+    outcome: passed
+    observed_at: '2026-11-23T07:02:37.965057+00:00'
+    notes: 253 discovered:251 passed/two existing skips,20.852s.15 focused controls pass; simulated symlink
+      denial leaves generic checks active with3 precise skips. Raw log SHA256 c395a97690e3493db95d3a35a3c472e4280bb692bf6eab76d7460a56e92f2b02.
+      No product/workflow changes or other-platform execution.
   environment_limitations:
   - NativeLinuxamd64 on one host; no minimumGNUlibc/distribution/macOS/Windows availability claim.
   - Source-candidate local transport does not authenticate compilation, a published release, signatures
@@ -160,7 +169,7 @@ Qualify actual local source-candidate archive download, isolated installation an
 
 ## State snapshot
 
-Stack base is timestamp draft167 at `bef3411e9b374d8cf311fb4e5cadaf236612b7ac`. Candidate `codex/70-local-install-stack-20261123` has null containing revision/pre-PR reference. Main remains `ad8fca58946ca03f6f07d13be6c64046216569d0`. Actual harness source d0ff470, product d159 and baseline edca retain their separate identities.
+Stack base is timestamp draft167 at `bef3411e9b374d8cf311fb4e5cadaf236612b7ac`. Draft168 uses `codex/70-local-install-stack-20261123`; its containing revision remains null to avoid self-reference. Main remains `ad8fca58946ca03f6f07d13be6c64046216569d0`. Actual harness source d0ff470, product d159 and baseline edca retain their separate identities.
 
 ## Completed and material changes
 
@@ -168,7 +177,7 @@ The new standard-library developer harness serves controlled archives on loopbac
 
 ## Validation and review evidence
 
-Eleven focused boundary controls pass. Actual fixed-source proof transfers two15.69MB archives and passes17installed commands, with per-command executable hashes. New and previous19-file Mantle output inventories agree asan observed metric; retained prior outputs/binary verify after rollback. Fourteen source inputs match rawpinned Git blobs; two fresh generations and3readonly drift negatives pass. Full Python249 completes247passes/two existing skips with actualMake/Task. Docs/syntax/hashes/privacy/whitespace and independent root review pass. See the exact receipt/hash index. Root review found invalidDEFLATE escaped the original gzipcatch; zlib.error is now handled and the exact regression/fresh proof pass.
+Eleven focused boundary controls pass. Actual fixed-source proof transfers two15.69MB archives and passes17installed commands, with per-command executable hashes. New and previous19-file Mantle output inventories agree asan observed metric; retained prior outputs/binary verify after rollback. Fourteen source inputs match rawpinned Git blobs; two fresh generations and3readonly drift negatives pass. Full Python249 completes247passes/two existing skips with actualMake/Task. Docs/syntax/hashes/privacy/whitespace and independent root review pass. A subsequent test-only portability followup ec33509 passes253 Python checks (251passed/two existing skips) with actualMake/Task; only POSIX mode/shebang and capability-dependent symlink controls are gated. See the exact receipt/hash index. Root review found invalidDEFLATE escaped the original gzipcatch; zlib.error is now handled and the exact regression/fresh proof pass.
 
 ## Blockers, risks, unknowns, and deferred work
 
