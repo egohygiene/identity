@@ -110,3 +110,6 @@ Retain source/lock/tool hashes, local substitutions, actual command/exit and
 sanitized logs. The preparation receipt intentionally claims neither browser,
 workflow, hosted CI, release nor publication acceptance. #80 and dependent #88
 close only after their actual remaining evidence is established.
+
+For the separately scoped strict ZIP protocol adapter and authenticated actual
+archive proof, see [local artifact transport](LOCAL_ARTIFACT_TRANSPORT.md).

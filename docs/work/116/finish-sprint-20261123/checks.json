@@ -1,0 +1,80 @@
+{
+  "recordKind": "root integrated handoff checks; domain executions retain exact represented source",
+  "observedAt": "2026-11-23T07:11:05.016371+00:00",
+  "representedCodeRevision": "3d6542845c5f669e3d0cfe3425379378e92802cc",
+  "domainPython": {
+    "discovered": 266,
+    "passed": 264,
+    "existingSkipped": 2,
+    "durationSeconds": 23.238,
+    "scope": "Actual local Linux execution; later handoff/continuity-only changes do not imply rerun.",
+    "inputBoundIntegratedLeaf": "3d6542845c5f669e3d0cfe3425379378e92802cc",
+    "command": "python -m unittest discover -s tests",
+    "rawLogBytes": 3709,
+    "rawLogSha256": "897be86c8e980b60dfec5fb00854af8f61452fa50cce5bd006d9cbd557812f8c",
+    "frontendScope": "Standalone/Make in inherited shell; Task absent from that full run. Earlier253 run included actual Task; final affected entrypoint module separately rerun below."
+  },
+  "nativeInputEquality": {
+    "executedRevision": "d159c680e6161e85854fd45c255d4196aec5c34f",
+    "comparedRevision": "3d6542845c5f669e3d0cfe3425379378e92802cc",
+    "selectedInputCount": 190,
+    "gitModeBlobInventorySha256": "b9440a69091a80970fef7eff296a432662b049e57602129c1e180c22065b9eb4",
+    "unchanged": true,
+    "retainedPassed": 119,
+    "retainedHelperOnlyIgnored": 4,
+    "limit": "Exact selected input equality, not a new native or other-platform execution."
+  },
+  "protectedSource": {
+    "comparedWith": "ad8fca58946ca03f6f07d13be6c64046216569d0",
+    "selectedPaths": [
+      "assets",
+      "contracts",
+      "profiles",
+      ".github/workflows",
+      "renderer",
+      "dev/browser",
+      "dev/Dockerfile",
+      "docs/work/98/source-assembly",
+      "docs/work/98/self-source-review",
+      "dev/qualification",
+      "dev/local-actions/reference-renderer.lock.json",
+      "Makefile",
+      "Taskfile.yml",
+      "scripts/prepare_local_actions.py"
+    ],
+    "unchanged": true,
+    "absentPathsPreserved": [
+      ".identity"
+    ]
+  },
+  "retainedArtifactEvidence": {
+    "verifiedFiles": 30,
+    "allHashesMatch": true,
+    "manifestSha256": "2b890658339fea4c7fed2b8b96922d36903876edff68f62ac8a8158da6790d8e"
+  },
+  "cleanup": {
+    "completed": true,
+    "sharedDockerStatePreserved": true,
+    "privateReceiptSha256": "9f6b7ba16548ba1197d652a7ab7d502af571cb4b2db8710f890f755870e6b92f",
+    "scope": "Exact owned helper and tmpfs prefix only; durable evidence retained."
+  },
+  "otherPassed": [
+    "documentation links",
+    "standalone validator drift",
+    "extraction/provenance verifier"
+  ],
+  "ownerSourceChoices": "pending; no actual canonical source adoption, new human timestamp or creative approval",
+  "publication": "No tag, release, deployment or hosted workflow dispatch.",
+  "finalFrontendChecks": {
+    "command": "PATH=<reviewed-task-bin>:$PATH IDENTITY_REQUIRE_FRONTENDS=1 python3 -m unittest discover -s tests -p test_dev_entrypoints.py -v",
+    "codeInputsAt": "3d6542845c5f669e3d0cfe3425379378e92802cc",
+    "workingTreeDelta": "Only root continuity and consolidated handoff/evidence files; entrypoint/helper/test bytes unchanged.",
+    "passed": 5,
+    "skipped": 0,
+    "durationSeconds": 3.045,
+    "taskVersion": "3.45.3",
+    "rawLogBytes": 946,
+    "rawLogSha256": "bbabb3127be0b907336ef1f382cf99099f1f49d590cc131223baa19595de5e39",
+    "observedAt": "2026-11-23T07:14:09.372744+00:00"
+  }
+}

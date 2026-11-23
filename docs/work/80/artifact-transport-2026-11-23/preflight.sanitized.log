@@ -1,0 +1,33 @@
+time="2026-11-23T06:50:47Z" level=info msg="Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'"
+time="2026-11-23T06:50:47Z" level=info msg="Start server on <url>"
+[Actual local artifact transport fixture/transport] ⭐ Run Set up job
+[Actual local artifact transport fixture/transport]   ✅  Success - Set up job
+[Actual local artifact transport fixture/transport] LocalRepositoryCache matched <url> with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a to <local-path>
+[Actual local artifact transport fixture/transport] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath 'action.yml' from <local-path>
+[Actual local artifact transport fixture/transport] ⭐ Run Main Stage exact synthetic fixture in the host executor workspace
+[Actual local artifact transport fixture/transport]   ✅  Success - Main Stage exact synthetic fixture in the host executor workspace [7.589422ms]
+[Actual local artifact transport fixture/transport] ⭐ Run Main Upload actual sentinel files
+[Actual local artifact transport fixture/transport] LocalRepositoryCache read cachedir actions/upload-artifact with ref 043fb46d1a93c77aae656e7c1c64a875d1fc6a0a and subpath '' from <local-path>
+[Actual local artifact transport fixture/transport]   | With the provided path, there will be 2 files uploaded
+[Actual local artifact transport fixture/transport]   | Artifact name is valid!
+[Actual local artifact transport fixture/transport]   | Root directory input is valid!
+[Actual local artifact transport fixture/transport]   | Uploading artifact: identity-transport-probe.zip
+[Actual local artifact transport fixture/transport]   | Beginning upload of artifact content to blob storage
+[Actual local artifact transport fixture/transport]   | Uploaded bytes 334
+[Actual local artifact transport fixture/transport]   | Finished uploading artifact content to blob storage!
+[Actual local artifact transport fixture/transport]   | SHA256 digest of uploaded artifact is 043bd208cafe07d0b666f3c134942d2ee128e249372893de73080bb4496e8961
+[Actual local artifact transport fixture/transport]   | Finalizing artifact upload
+[Actual local artifact transport fixture/transport]   | Artifact identity-transport-probe successfully finalized. Artifact ID 354015264
+[Actual local artifact transport fixture/transport]   | Artifact identity-transport-probe has been successfully uploaded! Final size is 334 bytes. Artifact ID is 354015264
+[Actual local artifact transport fixture/transport]   | Artifact download URL: <url>
+[Actual local artifact transport fixture/transport]   ✅  Success - Main Upload actual sentinel files [496.382146ms]
+[Actual local artifact transport fixture/transport]   ⚙  ::set-output:: artifact-id=354015264
+[Actual local artifact transport fixture/transport]   ⚙  ::set-output:: artifact-digest=043bd208cafe07d0b666f3c134942d2ee128e249372893de73080bb4496e8961
+[Actual local artifact transport fixture/transport]   ⚙  ::set-output:: artifact-url=<url>
+[Actual local artifact transport fixture/transport] ⭐ Run Main Download and verify actual archive
+[Actual local artifact transport fixture/transport]   | Actual local artifact upload/download/SHA256/ZIP inventory passed.
+[Actual local artifact transport fixture/transport]   ✅  Success - Main Download and verify actual archive [86.239472ms]
+[Actual local artifact transport fixture/transport] ⭐ Run Complete job
+[Actual local artifact transport fixture/transport] Cleaning up container for job transport
+[Actual local artifact transport fixture/transport]   ✅  Success - Complete job
+[Actual local artifact transport fixture/transport] 🏁  Job succeeded

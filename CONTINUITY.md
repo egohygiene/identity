@@ -7,26 +7,26 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-23T07:02:37.965057+00:00'
+  updated_at: '2026-11-23T07:14:09.372744+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Qualify actual local source-candidate archive download, isolated installation and pinned-consumer
-    replacement/rollback without publishing or mutating real consumers.
+  purpose: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the
+    unchanged reference workflow.
   includes:
-  - Bounded standard-library loopback transport/checksum/USTAR/new-prefix qualification and actual installed
-    PATH commands.
-  - Actual previous/new local source-candidate replacement, retained-output rollback and existing pinned
-    Mantle authoring proof.
-  - Archive/link/clobber/runtime/source-preservation negatives with source/binary/tool/evidence identity
-    retained.
+  - Pinned public source/toolchain/sender schema and strict ZIP-only local act derivative, with upstream/global
+    tools unchanged.
+  - Actual exact-pinned uploader preflight, full archive hash/inventory and original workflow replay on
+    the combined timestamp/install source candidate.
+  - Strict MIME/protobuf and signed-target negatives; bounded owned-process observation with tokens and
+    signed URLs excluded.
   excludes:
-  - No official-release authentication, publication, version/tag selection, support-matrix promotion or
-    other-platform claim.
-  - No actual Identity source choices, creative/ADR approval, consumer pin changes, system/global installation
-    or interrupted-recovery claim.
+  - No hosted GitHub CI equivalence, security bypass, publication, release signing or platform-matrix
+    promotion.
+  - No creative/source approval, original workflow/action/profile/font/PNG changes, consumer pin changes
+    or global installation.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -36,108 +36,116 @@ scope:
   canonical_sources:
   - AGENTS.md
   - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
-  - docs/decisions/ADR-0019-immutable-release-contract.md
-  - docs/releases/NEXT_RELEASE_MATRIX.md
-  - scripts/qualify_local_install.py
-  - scripts/verify_consumer_authoring.py
-  - docs/consumers/MANTLE_AUTHORING_PROOF.md
+  - docs/LOCAL_WORKFLOW_REPLAY.md
+  - docs/LOCAL_ARTIFACT_TRANSPORT.md
+  - dev/local-actions/act-artifact-compat/lock.json
+  - scripts/prepare_local_act.py
+  - scripts/qualify_local_artifacts.py
+  - scripts/replay_local_artifact_workflow.py
+  - docs/work/80/artifact-transport-2026-11-23/preflight.json
   - docs/work/70/LOCAL_INSTALL_2026-11-23.md
-  - docs/work/70/local-install-20261123/qualification.json
-  - docs/work/70/timestamp-consistency-20261123/VALIDATION.md
+  - docs/work/80/LOCAL_ARTIFACT_TRANSPORT_2026-11-23.md
+  - docs/work/80/artifact-transport-2026-11-23/workflow-replay.json
+  - docs/work/116/FINISH_SPRINT_2026-11-23.md
 work:
-  objective: Qualify actual local source-candidate archive download, isolated installation and pinned-consumer
-    replacement/rollback without publishing or mutating real consumers.
+  objective: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for
+    the unchanged reference workflow.
   success_conditions:
-  - Reject altered/unsafe archives before creating a new isolated install; preserve existing/link targets.
-  - Run actual installed baseline/new/rollback selections using distinct pinned binary bytes and preserve
-    source.
-  - Retain truthful local-native scope, absent-runtime behavior, reproducibility/drift and pending real
-    source/release gates.
+  - Require exact typed field six, legacy descriptor equivalence, ZIP-only MIME and unchanged signed-target
+    authentication.
+  - Require actual pinned uploader upload/download/SHA256 and complete expected ZIP inventory; retain
+    historical failures separately.
+  - Require whole unchanged workflow exit zero plus actual full archive integrity on a frozen combined
+    source; preserve hosted/creative/release boundaries.
   active_issue:
     provider: github
-    id: egohygiene/identity#70
-    url: https://github.com/egohygiene/identity/issues/70
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: review-local-install-evidence-and-reconcile-final-qualification
-    description: Review this candidate mechanism with the timestamp/artifact checkpoint stack; obtain
-      actual source choices and selected release/native-install evidence under existing70/98 before support
-      claims.
+    id: review-and-merge-timestamp-install-artifact-stack
+    description: Review167 then168 then the artifact leaf; reconcile80/82/88 engineering evidence and
+      existing70/98/116 remaining source, native-support and release gates without creating parallel issues.
     readiness: ready
     references:
+    - https://github.com/egohygiene/identity/issues/80
+    - https://github.com/egohygiene/identity/issues/82
+    - https://github.com/egohygiene/identity/issues/88
     - https://github.com/egohygiene/identity/issues/70
     - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: bef3411e9b374d8cf311fb4e5cadaf236612b7ac
-    ref: refs/heads/codex/70-timestamp-consistency-20261123
-    verified_at: '2026-11-23T06:17:55.800795+00:00'
+    revision: 83e57901e8a04b997860567e48e844a0a9acc514
+    ref: refs/heads/codex/70-local-install-stack-20261123
+    verified_at: '2026-11-23T07:07:56.772152+00:00'
   candidate:
-    branch: codex/70-local-install-stack-20261123
+    branch: codex/80-artifact-stack-20261123
     revision: null
-    pull_request:
-      provider: github
-      id: egohygiene/identity#168
-      url: https://github.com/egohygiene/identity/pull/168
+    pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-23T07:02:37.965057+00:00'
+    observed_at: '2026-11-23T07:11:05.249409+00:00'
     default_branch_revision: ad8fca58946ca03f6f07d13be6c64046216569d0
     issue_state: open
-    pull_request_state: open
-    notes: Earlier163 through166 and Aether141/142 are merged; Identity167/168 and Aether143/144 are draft.
-      This reviewed followup splits only platform-specific test controls; original candidate receipts
-      retain their exact executed revisions. No native Mac/Windows, source-choice or release claim.
+    pull_request_state: not-applicable
+    notes: Earlier Identity163 through166 and Aether141/142 are merged. Identity167/168 and Aether143/144
+      are draft; this artifact child is prepared atop168 at83e579. Mainad8/dc3549 verified live. No source
+      choice, new human review time or publication is selected.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#167
     url: https://github.com/egohygiene/identity/pull/167
   - provider: github
+    id: egohygiene/identity#168
+    url: https://github.com/egohygiene/identity/pull/168
+  - provider: github
     id: egohygiene/aether#143
     url: https://github.com/egohygiene/aether/pull/143
+  - provider: github
+    id: egohygiene/aether#144
+    url: https://github.com/egohygiene/aether/pull/144
 review:
   status: partial
-  reviewed_at: '2026-11-23T07:02:37.965057+00:00'
+  reviewed_at: '2026-11-23T07:14:09.372744+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Focused local-install boundary unittest module
+  - command: Checksum/tree-bound named derivative build and strict artifact package tests
     outcome: passed
-    observed_at: '2026-11-23T06:12:36.089787+00:00'
-    notes: 11methods cover real loopback/checksum/redirect, bounded malformed and unsafe archives, ELF/input
-      hashes, clobber/links, selected-executable mutation and unrelated initializer deletion.
-  - command: Actual qualify_local_install.py atd0ff470 with candidate37ff6ca4 and priorf6a84021
+    observed_at: '2026-11-23T07:07:56.772152+00:00'
+    notes: Binarye103cd43/patch1f045f15; exact legacy and patched-minus-field6 descriptor proofs,28 top-level
+      Go tests/15 MIME cases/six target negatives, one explicit existing short-mode integration skip.
+  - command: Actual original reference workflow on clean frozen5afa with four original action trees
     outcome: passed
-    observed_at: '2026-11-23T06:08:15.418984+00:00'
-    notes: Two15.69MB archives transferred/verified/installed;17PATHcommands, absentPython negatives,
-      v0/incompletev1 prep, inspect/idle recovery and actual rollback pass. Same printed1.0.0 versions
-      are byte-bound source candidates, not semver release upgrade.
-  - command: Existing candidate consumer authoring proof on installed binary and unchanged pinned Mantle
+    observed_at: '2026-11-23T07:07:56.772152+00:00'
+    notes: Wholejob0;424 frontend tests. Each browser9positive/one intended mutation failure/one restored
+      pass. Real authenticated4,074,757-byte ZIP127fb7ed matches SDK/Finalize/download and all74 default-selected
+      inputs. Source/action trees preserved.
+  - command: Final integrated Python discovery after parent83e579 and platform-only cache test split
     outcome: passed
-    observed_at: '2026-11-23T06:08:15.418984+00:00'
-    notes: Two fresh19-file output inventories agree;3read-only drift cases fail asrequired;14consumed
-      input files match rawb08045a Git blobs. Originalconsumer/inputbinaries unchanged.
-  - command: Full Python discovery with actual Make/Task; docs/syntax/receipt/privacy/continuity/whitespace
-      checks
+    observed_at: '2026-11-23T07:07:56.772152+00:00'
+    notes: 266discovered/264passed/twoexisting skips,23.238s. Earlier11 focused controls passed on host/helper;
+      final13 focused controls pass on Linux. Mac/Windows capability gates do not claim native execution.
+  - command: 'Root handoff integration: documentation, bundle/extraction, exact protected/native inputs
+      and retained public evidence hashes'
     outcome: passed
-    observed_at: '2026-11-23T06:14:09.080304+00:00'
-    notes: 249discovered:247passed/twoexisting skips,19.388s. Root independently reran11focusedcontrols
-      and cleared final source afterDEFLATE fix. Packet contains no hostpath/proxy/credential data.
-  - command: Full Python discovery with actual Make/Task at test-only followup ec3350969b47e21f55b8d76edcad11aee89023c6
-    outcome: passed
-    observed_at: '2026-11-23T07:02:37.965057+00:00'
-    notes: 253 discovered:251 passed/two existing skips,20.852s.15 focused controls pass; simulated symlink
-      denial leaves generic checks active with3 precise skips. Raw log SHA256 c395a97690e3493db95d3a35a3c472e4280bb692bf6eab76d7460a56e92f2b02.
-      No product/workflow changes or other-platform execution.
+    observed_at: '2026-11-23T07:11:05.249409+00:00'
+    notes: 190 selected native inputs equal executedd159;30 artifact evidence files match hashes. Original
+      workflow/renderer/profile/PNG/assets/root source/proposal unchanged fromad8. Actual runtime cleanup
+      preserves shared Docker state. Source-bound checks in docs/work/116/finish-sprint-20261123/checks.json;
+      no new native run. Final affected frontend module:5passed/no skips with IDENTITY_REQUIRE_FRONTENDS=1
+      and actualTask3.45.3; full266 run itself had standalone/Make only.
   environment_limitations:
-  - NativeLinuxamd64 on one host; no minimumGNUlibc/distribution/macOS/Windows availability claim.
-  - Source-candidate local transport does not authenticate compilation, a published release, signatures
-    or attestation; separate build/source receipts retain provenance.
-  - Inspect/completed-empty recovery only here; actual interrupted-process recovery retains native integration
-    proofs.
-  - Actual Identity source decisions/new human review times and selected release/publication/consumer-upgrade
-    acceptance remain pending.
+  - Actual workflow source is frozen5afa; subsequent test/docs-only integration is separately checked,
+    not relabeled as that workflow execution.
+  - 'Original uploader omits hidden state: six.last-run files have host-receipt source hashes only. Eight
+    browser logs and exact actual ZIP remain private;20 explicit nonlog members are public.'
+  - The observed archive is below4MiB; no large/multiblock, hosted GitHub protection, publication or additional
+    native platform claim.
+  - Actual self-source choices, human creative/accessibility acceptance and remaining native-support/release/publisher/Mantle
+    gates remain under existing70/98/116.
   - Pinned continuity schema/headings/budgets are structural checks, not released EgoLint conformance.
 privacy:
   classification: public-repository
@@ -157,48 +165,48 @@ privacy:
 
 ## Purpose and precedence
 
-User/runtime and scoped instructions, live provider evidence and canonical source outrank this snapshot. This is local development qualification, not new release or creative authority.
+User/runtime and scoped instructions, live provider evidence and canonical source outrank this checkpoint. The optional local derivative supplies evidence transport under ADR0011; it does not confer creative, hosted-security or release authority.
 
 ## Resume protocol
 
-Read AGENTS, existing release/consumer contracts and LOCAL_INSTALL_2026-11-23. Verify main and active PRs before resuming. Prior163→166 and Aether141/142 are merged; preserve their exact source-bound evidence and original checkouts.
+Read AGENTS, the exact lock and LOCAL_ARTIFACT_TRANSPORT_2026-11-23. Verify main and draft167/168 before resuming. Preserve official/global act, original workflow/action pins/profile/fonts/PNG and frozen5afa receipt scope. Review parents before this artifact leaf.
 
 ## Current objective and success conditions
 
-Qualify actual local source-candidate archive download, isolated installation and pinned-consumer replacement/rollback without publishing or mutating real consumers.
+Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the unchanged reference workflow.
 
 ## State snapshot
 
-Stack base is timestamp draft167 at `bef3411e9b374d8cf311fb4e5cadaf236612b7ac`. Draft168 uses `codex/70-local-install-stack-20261123`; its containing revision remains null to avoid self-reference. Main remains `ad8fca58946ca03f6f07d13be6c64046216569d0`. Actual harness source d0ff470, product d159 and baseline edca retain their separate identities.
+Base is updated installation draft168 at 83e57901e8a04b997860567e48e844a0a9acc514, including167. Main remains ad8fca58946ca03f6f07d13be6c64046216569d0. Candidate branch is codex/80-artifact-stack-20261123; containing revision/PR remains null before draft creation. Actual complete original workflow source is 5afa292c41563fe16f48f321eb5ac37459fda3dd; later test/docs integration retains that identity.
 
 ## Completed and material changes
 
-The new standard-library developer harness serves controlled archives on loopback, independently checks their expected digests, admits only a bounded single regular executable and installs only into fresh private prefixes. Real PATH commands exercise baseline/new/rollback selection, initialization, missing runtime, inspection and idle recovery. It reuses the existing consumer authoring proof rather than inventing source or approvals.
+The public lock/patch adds only typed MIME field6, strict ZIP compatibility and escaped emitted signature. Verifier/HMAC/target binding is unchanged. Bounded source/tool builders, actual uploader preflight and full-workflow observer/caller preserve real backend responses and independently verify the complete authenticated ZIP inventory.
 
 ## Validation and review evidence
 
-Eleven focused boundary controls pass. Actual fixed-source proof transfers two15.69MB archives and passes17installed commands, with per-command executable hashes. New and previous19-file Mantle output inventories agree asan observed metric; retained prior outputs/binary verify after rollback. Fourteen source inputs match rawpinned Git blobs; two fresh generations and3readonly drift negatives pass. Full Python249 completes247passes/two existing skips with actualMake/Task. Docs/syntax/hashes/privacy/whitespace and independent root review pass. A subsequent test-only portability followup ec33509 passes253 Python checks (251passed/two existing skips) with actualMake/Task; only POSIX mode/shebang and capability-dependent symlink controls are gated. See the exact receipt/hash index. Root review found invalidDEFLATE escaped the original gzipcatch; zlib.error is now handled and the exact regression/fresh proof pass.
+Whole original workflow passes with424 frontend tests. Each original browser entrypoint passes9positives, observes one intended screenshot failure, then restored pass; profile/fonts/PNG unchanged. Actual4,074,757-byte ZIP127fb7ed equals SDK/Finalize/download and all74 selected file hashes. Independent peer reverified raw archive and inventory. Full final integrated Python266 completes264passes/two existing skips; focused13 pass. Go28 and exact descriptor proofs pass; one pre-existing integration skip is explicit.
 
 ## Blockers, risks, unknowns, and deferred work
 
-This is one native Linuxhost and local candidate artifacts, not official-release download/authentication or broader distribution/install support. No stable version/tag, signing, provenance attestation, deployment or real consumer pin is selected. Actual Identity source questions remain pending. Recovery here is completed/empty state, not a new interrupted-process proof.
+The actual ZIP is below4MiB; no multiblock claim. Default hidden-file selection excludes six.last-run states, whose hashes exist only in host receipts. Exact ZIP/eight browser logs remain private;20 approved nonlog members are public. Local hardening reports self-hosted context. No new human source/creative approval, broader native support or release/publication acceptance is inferred.
 
 ## Next dependency-ready work
 
-Review the local install packet and reconcile with timestamp/artifact fixes; qualify the exact final merged source and selected release cohorts. Bind actual self-source choices only when supplied. #98 retains actual release/live/restore/contrasting-consumer acceptance; #116 reconciles last.
+Review/merge167 then168 then this leaf, reconciling80/82/88 engineering gates. Keep actual native/support follow-up under70, actual self-source/release/publisher/Mantle acceptance under98, and consolidated final reconciliation116 last. Root owns issue/PR updates; do not add duplicate roadmap issues. Next engineering batch prepares actual release packaging/matrix data before final source/native/release acceptance.
 
 ## Parallel changes and reconciliation
 
-This child follows timestamp draft167; review parents before children. Aether143 and its audit sibling own portable skills, while the independent local artifact-transport checkpoint owns the remaining uploader protocol. Preserve all exact-source/domain evidence on integration. Pending actual self-source choices and broader native/release/publication gates remain independent.
+Parent168 now83e579 adds test-only POSIX/symlink capability handling and docs after c27. This leaf preserves frozen5afa workflow evidence and merges that updated parent; final Python suite covers the combination. Aether143→144 owns its independent portable-skill stack. The consolidated116 handoff records both stacks and the remaining issue order. Earlier timestamp/native/consumer receipts keep their original exact inputs.
 
 ## Privacy and redaction
 
-Public source identities, hashes and bounded outcomes only. No private host paths, proxy values, certificate/key bytes or transcript are committed. Receipt command paths are normalized; actual logs remain task-local. Only private disposable installation/consumer copies are mutated.
+Public source identities/hashes and bounded results only. Tokens, signed URLs, proxy values, private paths and raw archives/logs remain task-local. Public browser projection uses only explicit reviewed JSON/PNG/Markdown/trace members, rehashed against the actual ZIP and host receipts; no general extraction or broad log publication.
 
 ## Handoff update protocol
 
-Refresh after domain checks, inspect actual diff, validate pinned schema/twelve headings/size budgets and preserve exact evidence scopes. Reference ADR0011/0019; ADR not required for bounded proof of existing contracts. Pinned Aether decision2.1.0/continuity1.1.0 and Hygiene1.2.0 remain selected, without lifecycle promotion.
+Refresh after actual domain checks, review the diff and validate pinned schema/twelve headings/budgets. Reference ADR0011 for the optional local adapter; routine test/docs fixes need no new ADR. Pinned Aether decision2.1.0/continuity1.1.0 remain selected without lifecycle promotion. Preserve tested source5afa and private-retention boundaries.
 
 ## Compaction and supersession
 
-Git and canonical work records retain earlier observations. Replace stale current-state prose rather than append chronology, preserving exact source, approval and release boundaries.
+Git and exact work packets retain earlier observations. Replace stale current-state prose rather than append chronology; preserve source, human approval and release boundaries.

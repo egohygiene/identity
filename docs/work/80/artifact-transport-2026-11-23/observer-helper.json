@@ -1,0 +1,20 @@
+{
+  "kind": "identity.runtime-helper-observer-probe/v1",
+  "helper": "identity-runtime-20261123",
+  "sourceFiles": {
+    "scripts/observe_local_artifacts.py": "f63ba82104ca5b1c187c003c5750ccfb479d1fe4e37c176f47f7b6638b2185b2",
+    "scripts/local_artifact_roundtrip.py": "8192f28363e84e7a242d16abb08dd6649544e8b6fd1d3ccbc5951013376d3f0c",
+    "scripts/prepare_local_act.py": "caa507d821e6d9991b4f3fcf1999d917a34f7ed19a9bae7689b0ba2a74099b99",
+    "scripts/prepare_local_actions.py": "c5964f78efe66139f7f8491f18c06ced86dd1738a717bbd69c86abb697defc80",
+    "scripts/qualify_local_artifacts.py": "7522a2370c7055b16aeb6a0061f0145c39b719803c6f252dcb1934f4c373ddf0",
+    "tests/test_local_artifacts.py": "09b075016f9f84cccf8505f9d62610380e260d97015641be9a992d195ff5d96b"
+  },
+  "sourceInventoryPreserved": true,
+  "execution": "Inside the explicitly prepared private helper: python3 -m unittest discover -s tests -p test_local_artifacts.py -v",
+  "status": "passed",
+  "exitCode": 0,
+  "tests": 11,
+  "durationSeconds": 2.651,
+  "ownedThreadChildInputCapture": "passed; exact inventory and alias/foreign-root refusal",
+  "scope": "Small fixture and loopback HTTP tests inside prepared helper; no workflow/image pull or product acceptance inferred"
+}

@@ -24,3 +24,8 @@ docs/work/80/evidence-2026-11-22/**/*.log -diff
 docs/work/80/action-replay-2026-11-22/** -text
 docs/work/80/action-replay-2026-11-22/**/error-context.md -diff
 docs/work/80/action-replay-2026-11-22/**/*.log -diff
+docs/work/80/artifact-transport-2026-11-23/** -text
+docs/work/80/artifact-transport-2026-11-23/**/*.log -diff
+docs/work/80/artifact-transport-2026-11-23/**/error-context.md -diff -whitespace
+# A unified patch's context prefixes are exact protocol bytes, not source indentation.
+dev/local-actions/act-artifact-compat/zip-mime.patch -text -whitespace

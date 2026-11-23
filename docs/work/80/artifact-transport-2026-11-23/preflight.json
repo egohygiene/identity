@@ -1,0 +1,51 @@
+{
+  "kind": "identity.local-artifact-preflight/v1",
+  "status": "passed",
+  "context": "explicit trusted host executor and loopback storage, synthetic fixture only",
+  "toolVersion": "act version 0.2.98+identity.zipmime.2",
+  "toolSha256": "e103cd431339dd0be997d5b0a9599a7327da8d1d327ed3fe809636b8fdd2ce90",
+  "uploader": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+  "uploaderGitTree": "9eac56dcf4bfeeb308ee3d0d7d49913c3d65b676",
+  "fixtureWorkflowSha256": "fe7097a00ff27c8d5ebebcc7ea7ce9e1e6bf156b43b71202956c69477dffdde4",
+  "workerSha256": "8192f28363e84e7a242d16abb08dd6649544e8b6fd1d3ccbc5951013376d3f0c",
+  "expectedFiles": {
+    "notes.txt": {
+      "bytes": 58,
+      "sha256": "d9f19ff5566cece2440118935aca023862df50db2dcbabd0740fa5f6b0def004"
+    },
+    "media/sample.bin": {
+      "bytes": 21,
+      "sha256": "c7974fcf9df0c4ae85a178136d17ca805cc0774962f49031795d02b63b9b3c1d"
+    }
+  },
+  "actExitCode": 0,
+  "timedOut": false,
+  "rawLogBytes": 4237,
+  "rawLogSha256": "42d4d159c8c2bb046598b0b2117256c3ee2114985af6b32f8733045f5b53df61",
+  "sanitizedLogSha256": "9193b3990ecd6d327dd3f962ac3c5cc452b34ca214834189187c90dbb8272cee",
+  "officialActOverwritten": false,
+  "hostedWorkflowClaim": false,
+  "roundtrip": {
+    "kind": "identity.local-artifact-roundtrip/v1",
+    "status": "passed",
+    "nonce": "9a8d5b3cf6bec41b0820000000884303",
+    "context": "actual loopback HTTP upload/download; not GitHub-hosted storage",
+    "artifactId": "354015264",
+    "uploaderArchiveSha256": "043bd208cafe07d0b666f3c134942d2ee128e249372893de73080bb4496e8961",
+    "downloadedArchiveSha256": "043bd208cafe07d0b666f3c134942d2ee128e249372893de73080bb4496e8961",
+    "archiveBytes": 334,
+    "files": {
+      "media/sample.bin": {
+        "bytes": 21,
+        "sha256": "c7974fcf9df0c4ae85a178136d17ca805cc0774962f49031795d02b63b9b3c1d"
+      },
+      "notes.txt": {
+        "bytes": 58,
+        "sha256": "d9f19ff5566cece2440118935aca023862df50db2dcbabd0740fa5f6b0def004"
+      }
+    },
+    "signedUrlRecorded": false,
+    "runtimeTokenRecorded": false
+  },
+  "sourceAndInputsPreserved": true
+}
