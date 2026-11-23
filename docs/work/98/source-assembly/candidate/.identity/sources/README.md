@@ -1,0 +1,1 @@
+These exact selected SVG bytes are staged in a proposed consumer topology only. Native approvals retain null review timestamps and the source is intentionally invalid; no canonical adoption or new descriptor approval is inferred.

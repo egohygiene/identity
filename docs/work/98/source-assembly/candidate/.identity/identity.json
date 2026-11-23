@@ -1,0 +1,46 @@
+{
+  "$schema": "https://egohygiene.github.io/identity/contracts/v1/project.schema.json",
+  "schema": "identity.project/v1",
+  "project": {
+    "id": "identity",
+    "displayName": "identity",
+    "repository": "https://github.com/egohygiene/identity",
+    "tagline": "project identity specification",
+    "kind": "product"
+  },
+  "layers": [
+    {
+      "id": "identity-empty-organization-defaults",
+      "kind": "organization-defaults",
+      "priority": 0,
+      "tokens": ".identity/defaults/organization-empty.tokens.json",
+      "sha256": "6b74d2954b0027185196dfa6641f1ae59bda593d0dd0d41d436b615f5d4dc9d1"
+    },
+    {
+      "id": "identity-local",
+      "kind": "product-override",
+      "priority": 10,
+      "tokens": ".identity/overrides/identity-local-product.tokens.json",
+      "sha256": "7146ea326b4278cd35d5a6bc85db766d5144aed584f5087a3d1a2fd359cdf851"
+    }
+  ],
+  "documents": {
+    "brief": ".identity/brief.md",
+    "targets": ".identity/targets/profiles.json",
+    "provenance": ".identity/governance/provenance.json",
+    "approvals": ".identity/governance/approvals.json",
+    "guidance": {
+      "voice": null,
+      "usage": null
+    }
+  },
+  "directories": {
+    "sources": ".identity/sources",
+    "candidates": ".identity/candidates",
+    "references": ".identity/references"
+  },
+  "compatibility": {
+    "acceptedSchemaMajor": 1,
+    "migrationFrom": []
+  }
+}
