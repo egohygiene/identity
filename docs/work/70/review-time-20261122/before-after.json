@@ -1,0 +1,146 @@
+{
+  "checkpoint": "approval-reviewedAt-string-and-rfc3339-grammar",
+  "observed_at": "2026-11-22T18:30:02.220596+00:00",
+  "source_base": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "before_script_sha256": "aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5",
+  "after_script_sha256": "bbde68dfdab6d03f1c59403bbf00f2a6ca290bb61c5447544ef4af30e02e3eb5",
+  "execution": "actual standalone validators under Python -I -S against disposable copies of the existing fictional minimal fixture",
+  "observations": [
+    {
+      "case": "date-only",
+      "reviewedAt": "2026-11-22",
+      "synthetic_decisions": 14,
+      "before": {
+        "exit_code": 0,
+        "valid": true,
+        "diagnostic_codes": [],
+        "diagnostic_count": 0
+      },
+      "after": {
+        "exit_code": 1,
+        "valid": false,
+        "diagnostic_codes": [
+          "IDN1404"
+        ],
+        "diagnostic_count": 14
+      }
+    },
+    {
+      "case": "naive",
+      "reviewedAt": "2026-11-22T18:00:00",
+      "synthetic_decisions": 14,
+      "before": {
+        "exit_code": 0,
+        "valid": true,
+        "diagnostic_codes": [],
+        "diagnostic_count": 0
+      },
+      "after": {
+        "exit_code": 1,
+        "valid": false,
+        "diagnostic_codes": [
+          "IDN1404"
+        ],
+        "diagnostic_count": 14
+      }
+    },
+    {
+      "case": "numeric",
+      "reviewedAt": 20261122,
+      "synthetic_decisions": 14,
+      "before": {
+        "exit_code": 0,
+        "valid": true,
+        "diagnostic_codes": [],
+        "diagnostic_count": 0
+      },
+      "after": {
+        "exit_code": 1,
+        "valid": false,
+        "diagnostic_codes": [
+          "IDN1404"
+        ],
+        "diagnostic_count": 14
+      }
+    },
+    {
+      "case": "lowercase-utc",
+      "reviewedAt": "2026-11-22t18:00:00z",
+      "synthetic_decisions": 14,
+      "before": {
+        "exit_code": 1,
+        "valid": false,
+        "diagnostic_codes": [
+          "IDN1404"
+        ],
+        "diagnostic_count": 14
+      },
+      "after": {
+        "exit_code": 0,
+        "valid": true,
+        "diagnostic_codes": [],
+        "diagnostic_count": 0
+      }
+    },
+    {
+      "case": "valid-offset",
+      "reviewedAt": "2026-11-22T18:00:00.123456789+05:30",
+      "synthetic_decisions": 14,
+      "before": {
+        "exit_code": 0,
+        "valid": true,
+        "diagnostic_codes": [],
+        "diagnostic_count": 0
+      },
+      "after": {
+        "exit_code": 0,
+        "valid": true,
+        "diagnostic_codes": [],
+        "diagnostic_count": 0
+      }
+    },
+    {
+      "case": "invalid-calendar",
+      "reviewedAt": "2026-02-29T18:00:00Z",
+      "synthetic_decisions": 14,
+      "before": {
+        "exit_code": 1,
+        "valid": false,
+        "diagnostic_codes": [
+          "IDN1404"
+        ],
+        "diagnostic_count": 14
+      },
+      "after": {
+        "exit_code": 1,
+        "valid": false,
+        "diagnostic_codes": [
+          "IDN1404"
+        ],
+        "diagnostic_count": 14
+      }
+    },
+    {
+      "case": "invalid-offset-minute",
+      "reviewedAt": "2026-11-22T18:00:00+00:60",
+      "synthetic_decisions": 14,
+      "before": {
+        "exit_code": 0,
+        "valid": true,
+        "diagnostic_codes": [],
+        "diagnostic_count": 0
+      },
+      "after": {
+        "exit_code": 1,
+        "valid": false,
+        "diagnostic_codes": [
+          "IDN1404"
+        ],
+        "diagnostic_count": 14
+      }
+    }
+  ],
+  "source_preserved": true,
+  "scope": "approval reviewedAt only; not other date/time fields or historical human-event verification",
+  "calendar_limit": "existing Python calendar parser rejects leap seconds; no exhaustive leap-second claim"
+}
