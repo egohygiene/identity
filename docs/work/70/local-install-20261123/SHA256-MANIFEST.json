@@ -1,0 +1,24 @@
+{
+  "recordKind": "bounded local install evidence inventory; no self-hash",
+  "files": {
+    "qualification.json": {
+      "bytes": 19617,
+      "sha256": "92819460de2aa698d8ddd37775d98f591c94f3a14cefb4470bef6f8f57eec2de"
+    }
+  },
+  "actualPrivateRunLog": {
+    "bytes": 77,
+    "sha256": "38c807101340348bf1a93c9ba103bd360748545630dbb81cbf2104dd6f0e0d34",
+    "retention": "Task-local log, not a public or hosted report"
+  },
+  "fullPythonCheck": {
+    "command": "IDENTITY_REQUIRE_FRONTENDS=1 python -m unittest discover -s tests -p test_*.py -v",
+    "discovered": 249,
+    "passed": 247,
+    "existingSkipped": 2,
+    "durationSeconds": 19.388,
+    "rawLogBytes": 47258,
+    "rawLogSha256": "77f4d495a1096c44d0cdff7a421fb351c177e2bc501515607d9892a8ed5db878",
+    "rawLogRetention": "Task-local durable log; no hosted execution inferred."
+  }
+}
