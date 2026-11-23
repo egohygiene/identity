@@ -7,25 +7,26 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-23T07:07:56.772152+00:00'
+  updated_at: '2026-11-23T07:14:09.372744+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the unchanged
-    reference workflow.
+  purpose: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the
+    unchanged reference workflow.
   includes:
   - Pinned public source/toolchain/sender schema and strict ZIP-only local act derivative, with upstream/global
     tools unchanged.
-  - Actual exact-pinned uploader preflight, full archive hash/inventory and original workflow replay on the
-    combined timestamp/install source candidate.
-  - Strict MIME/protobuf and signed-target negatives; bounded owned-process observation with tokens and signed
-    URLs excluded.
+  - Actual exact-pinned uploader preflight, full archive hash/inventory and original workflow replay on
+    the combined timestamp/install source candidate.
+  - Strict MIME/protobuf and signed-target negatives; bounded owned-process observation with tokens and
+    signed URLs excluded.
   excludes:
-  - No hosted GitHub CI equivalence, security bypass, publication, release signing or platform-matrix promotion.
-  - No creative/source approval, original workflow/action/profile/font/PNG changes, consumer pin changes or
-    global installation.
+  - No hosted GitHub CI equivalence, security bypass, publication, release signing or platform-matrix
+    promotion.
+  - No creative/source approval, original workflow/action/profile/font/PNG changes, consumer pin changes
+    or global installation.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -45,16 +46,17 @@ scope:
   - docs/work/70/LOCAL_INSTALL_2026-11-23.md
   - docs/work/80/LOCAL_ARTIFACT_TRANSPORT_2026-11-23.md
   - docs/work/80/artifact-transport-2026-11-23/workflow-replay.json
+  - docs/work/116/FINISH_SPRINT_2026-11-23.md
 work:
-  objective: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the
-    unchanged reference workflow.
+  objective: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for
+    the unchanged reference workflow.
   success_conditions:
   - Require exact typed field six, legacy descriptor equivalence, ZIP-only MIME and unchanged signed-target
     authentication.
-  - Require actual pinned uploader upload/download/SHA256 and complete expected ZIP inventory; retain historical
-    failures separately.
-  - Require whole unchanged workflow exit zero plus actual full archive integrity on a frozen combined source;
-    preserve hosted/creative/release boundaries.
+  - Require actual pinned uploader upload/download/SHA256 and complete expected ZIP inventory; retain
+    historical failures separately.
+  - Require whole unchanged workflow exit zero plus actual full archive integrity on a frozen combined
+    source; preserve hosted/creative/release boundaries.
   active_issue:
     provider: github
     id: egohygiene/identity#80
@@ -62,8 +64,8 @@ work:
   next:
     kind: action
     id: review-and-merge-timestamp-install-artifact-stack
-    description: Review167 then168 then the artifact leaf; reconcile80/82/88 engineering evidence and existing70/98/116
-      remaining source, native-support and release gates without creating parallel issues.
+    description: Review167 then168 then the artifact leaf; reconcile80/82/88 engineering evidence and
+      existing70/98/116 remaining source, native-support and release gates without creating parallel issues.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/80
@@ -79,19 +81,19 @@ state:
     ref: refs/heads/codex/70-local-install-stack-20261123
     verified_at: '2026-11-23T07:07:56.772152+00:00'
   candidate:
-    branch: codex/80-artifact-transport-20261123
+    branch: codex/80-artifact-stack-20261123
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-23T07:07:56.772152+00:00'
+    observed_at: '2026-11-23T07:11:05.249409+00:00'
     default_branch_revision: ad8fca58946ca03f6f07d13be6c64046216569d0
     issue_state: open
     pull_request_state: not-applicable
-    notes: Mainad8 remains verified; allsix70/80/82/88/98/116 are open. Draft167/168 are parents;168 now83e579
-      includes only test/docs follow-up after c27. Frozen5afa actual workflow passes; later test/docs integration
-      is not relabeled as that source. This leaf has no PR yet.
+    notes: Earlier Identity163 through166 and Aether141/142 are merged. Identity167/168 and Aether143/144
+      are draft; this artifact child is prepared atop168 at83e579. Mainad8/dc3549 verified live. No source
+      choice, new human review time or publication is selected.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#167
@@ -102,9 +104,12 @@ state:
   - provider: github
     id: egohygiene/aether#143
     url: https://github.com/egohygiene/aether/pull/143
+  - provider: github
+    id: egohygiene/aether#144
+    url: https://github.com/egohygiene/aether/pull/144
 review:
   status: partial
-  reviewed_at: '2026-11-23T07:07:56.772152+00:00'
+  reviewed_at: '2026-11-23T07:14:09.372744+00:00'
   reviewed_by: Codex
   evidence:
   - command: Checksum/tree-bound named derivative build and strict artifact package tests
@@ -123,9 +128,18 @@ review:
     observed_at: '2026-11-23T07:07:56.772152+00:00'
     notes: 266discovered/264passed/twoexisting skips,23.238s. Earlier11 focused controls passed on host/helper;
       final13 focused controls pass on Linux. Mac/Windows capability gates do not claim native execution.
+  - command: 'Root handoff integration: documentation, bundle/extraction, exact protected/native inputs
+      and retained public evidence hashes'
+    outcome: passed
+    observed_at: '2026-11-23T07:11:05.249409+00:00'
+    notes: 190 selected native inputs equal executedd159;30 artifact evidence files match hashes. Original
+      workflow/renderer/profile/PNG/assets/root source/proposal unchanged fromad8. Actual runtime cleanup
+      preserves shared Docker state. Source-bound checks in docs/work/116/finish-sprint-20261123/checks.json;
+      no new native run. Final affected frontend module:5passed/no skips with IDENTITY_REQUIRE_FRONTENDS=1
+      and actualTask3.45.3; full266 run itself had standalone/Make only.
   environment_limitations:
-  - Actual workflow source is frozen5afa; subsequent test/docs-only integration is separately checked, not
-    relabeled as that workflow execution.
+  - Actual workflow source is frozen5afa; subsequent test/docs-only integration is separately checked,
+    not relabeled as that workflow execution.
   - 'Original uploader omits hidden state: six.last-run files have host-receipt source hashes only. Eight
     browser logs and exact actual ZIP remain private;20 explicit nonlog members are public.'
   - The observed archive is below4MiB; no large/multiblock, hosted GitHub protection, publication or additional
@@ -163,7 +177,7 @@ Qualify strict task-local artifact compatibility and authenticated real ZIP inte
 
 ## State snapshot
 
-Base is updated installation draft168 at 83e57901e8a04b997860567e48e844a0a9acc514, including167. Main remains ad8fca58946ca03f6f07d13be6c64046216569d0. Containing revision/PR remains null until handoff. Actual complete original workflow source is 5afa292c41563fe16f48f321eb5ac37459fda3dd; later test/docs integration retains that identity.
+Base is updated installation draft168 at 83e57901e8a04b997860567e48e844a0a9acc514, including167. Main remains ad8fca58946ca03f6f07d13be6c64046216569d0. Candidate branch is codex/80-artifact-stack-20261123; containing revision/PR remains null before draft creation. Actual complete original workflow source is 5afa292c41563fe16f48f321eb5ac37459fda3dd; later test/docs integration retains that identity.
 
 ## Completed and material changes
 
@@ -179,11 +193,11 @@ The actual ZIP is below4MiB; no multiblock claim. Default hidden-file selection 
 
 ## Next dependency-ready work
 
-Review/merge167 then168 then this leaf, reconciling80/82/88 engineering gates. Keep actual native/support follow-up under70, actual self-source/release/publisher/Mantle acceptance under98, and consolidated final reconciliation116 last. Root owns issue/PR updates; do not add duplicate roadmap issues.
+Review/merge167 then168 then this leaf, reconciling80/82/88 engineering gates. Keep actual native/support follow-up under70, actual self-source/release/publisher/Mantle acceptance under98, and consolidated final reconciliation116 last. Root owns issue/PR updates; do not add duplicate roadmap issues. Next engineering batch prepares actual release packaging/matrix data before final source/native/release acceptance.
 
 ## Parallel changes and reconciliation
 
-Parent168 now83e579 adds test-only POSIX/symlink capability handling and docs after c27. This leaf preserves frozen5afa workflow evidence and merges that updated parent; final Python suite covers the combination. Aether143 owns its portable-skill changes. Earlier timestamp/native/consumer receipts keep their original exact inputs.
+Parent168 now83e579 adds test-only POSIX/symlink capability handling and docs after c27. This leaf preserves frozen5afa workflow evidence and merges that updated parent; final Python suite covers the combination. Aether143→144 owns its independent portable-skill stack. The consolidated116 handoff records both stacks and the remaining issue order. Earlier timestamp/native/consumer receipts keep their original exact inputs.
 
 ## Privacy and redaction
 
