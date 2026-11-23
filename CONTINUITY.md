@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-23T06:51:48.946312+00:00'
+  updated_at: '2026-11-23T07:07:56.772152+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -43,6 +43,8 @@ scope:
   - scripts/replay_local_artifact_workflow.py
   - docs/work/80/artifact-transport-2026-11-23/preflight.json
   - docs/work/70/LOCAL_INSTALL_2026-11-23.md
+  - docs/work/80/LOCAL_ARTIFACT_TRANSPORT_2026-11-23.md
+  - docs/work/80/artifact-transport-2026-11-23/workflow-replay.json
 work:
   objective: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the
     unchanged reference workflow.
@@ -59,33 +61,37 @@ work:
     url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: freeze-combined-source-and-run-original-workflow
-    description: Review the bounded observer/caller, freeze the combined167/168/artifact code and execute
-      the full original workflow on the measured owned runtime; retain actual full archive proof.
+    id: review-and-merge-timestamp-install-artifact-stack
+    description: Review167 then168 then the artifact leaf; reconcile80/82/88 engineering evidence and existing70/98/116
+      remaining source, native-support and release gates without creating parallel issues.
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/80
+    - https://github.com/egohygiene/identity/issues/82
+    - https://github.com/egohygiene/identity/issues/88
     - https://github.com/egohygiene/identity/issues/70
+    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: c27ebc1a53220a629994939ef81f88e44e8b5752
+    revision: 83e57901e8a04b997860567e48e844a0a9acc514
     ref: refs/heads/codex/70-local-install-stack-20261123
-    verified_at: '2026-11-23T06:51:48.946312+00:00'
+    verified_at: '2026-11-23T07:07:56.772152+00:00'
   candidate:
     branch: codex/80-artifact-transport-20261123
     revision: null
     pull_request: null
-    handoff_state: in-progress
+    handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-23T06:51:48.946312+00:00'
+    observed_at: '2026-11-23T07:07:56.772152+00:00'
     default_branch_revision: ad8fca58946ca03f6f07d13be6c64046216569d0
     issue_state: open
     pull_request_state: not-applicable
-    notes: Mainad8 is merged through166. Timestamp167 and its installation child168 are draft; this artifact
-      child includes c27 and has no PR yet. No full original-workflow pass is inferred from the successful
-      small actual sender fixture.
+    notes: Mainad8 remains verified; allsix70/80/82/88/98/116 are open. Draft167/168 are parents;168 now83e579
+      includes only test/docs follow-up after c27. Frozen5afa actual workflow passes; later test/docs integration
+      is not relabeled as that source. This leaf has no PR yet.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#167
@@ -98,32 +104,34 @@ state:
     url: https://github.com/egohygiene/aether/pull/143
 review:
   status: partial
-  reviewed_at: '2026-11-23T06:51:48.946312+00:00'
+  reviewed_at: '2026-11-23T07:07:56.772152+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Checksum/tree-bound Go builder; legacy and patched-minus-field6 descriptor proofs; artifact package
-      tests
+  - command: Checksum/tree-bound named derivative build and strict artifact package tests
     outcome: passed
-    observed_at: '2026-11-23T06:51:48.946312+00:00'
-    notes: Actual named v2 derivative e103cd43; 28 top-level Go tests pass,15 MIME cases/six signed-binding
-      negatives; one existing Docker integration test skipped by short mode.
-  - command: Actual final exact-pinned uploader fixture and authenticated signed archive download
+    observed_at: '2026-11-23T07:07:56.772152+00:00'
+    notes: Binarye103cd43/patch1f045f15; exact legacy and patched-minus-field6 descriptor proofs,28 top-level
+      Go tests/15 MIME cases/six target negatives, one explicit existing short-mode integration skip.
+  - command: Actual original reference workflow on clean frozen5afa with four original action trees
     outcome: passed
-    observed_at: '2026-11-23T06:51:48.946312+00:00'
-    notes: Act exit0;334-byte actual ZIP digest043bd208 equals uploader and independent download, complete
-      two-file inventory matches, original input/action bytes preserved.
-  - command: Focused Python transport/observer boundary tests and syntax/whitespace checks
+    observed_at: '2026-11-23T07:07:56.772152+00:00'
+    notes: Wholejob0;424 frontend tests. Each browser9positive/one intended mutation failure/one restored
+      pass. Real authenticated4,074,757-byte ZIP127fb7ed matches SDK/Finalize/download and all74 default-selected
+      inputs. Source/action trees preserved.
+  - command: Final integrated Python discovery after parent83e579 and platform-only cache test split
     outcome: passed
-    observed_at: '2026-11-23T06:51:48.946312+00:00'
-    notes: 11 methods pass, including real loopback replies, inventory/digest rejection, descriptor delta,
-      threaded owned Node descendant capture and ambient act configuration refusal.
+    observed_at: '2026-11-23T07:07:56.772152+00:00'
+    notes: 266discovered/264passed/twoexisting skips,23.238s. Earlier11 focused controls passed on host/helper;
+      final13 focused controls pass on Linux. Mac/Windows capability gates do not claim native execution.
   environment_limitations:
-  - The complete unchanged original workflow has not yet been rerun with this frozen combined candidate; full
-    artifact and browser evidence are pending.
-  - The derivative is explicit task-local Linuxamd64 engineering, not an official act release or publisher-authenticated
-    build.
-  - Existing hosted security limitations, actual self-source choices, human creative review and native release/publication
-    acceptance remain separate.
+  - Actual workflow source is frozen5afa; subsequent test/docs-only integration is separately checked, not
+    relabeled as that workflow execution.
+  - 'Original uploader omits hidden state: six.last-run files have host-receipt source hashes only. Eight
+    browser logs and exact actual ZIP remain private;20 explicit nonlog members are public.'
+  - The observed archive is below4MiB; no large/multiblock, hosted GitHub protection, publication or additional
+    native platform claim.
+  - Actual self-source choices, human creative/accessibility acceptance and remaining native-support/release/publisher/Mantle
+    gates remain under existing70/98/116.
   - Pinned continuity schema/headings/budgets are structural checks, not released EgoLint conformance.
 privacy:
   classification: public-repository
@@ -147,7 +155,7 @@ User/runtime and scoped instructions, live provider evidence and canonical sourc
 
 ## Resume protocol
 
-Read AGENTS, the exact lock and LOCAL_ARTIFACT_TRANSPORT. Verify main and draft167/168 before resuming. Preserve official/global act and the original workflow, all action pins, profile/fonts and approved PNG. Use the exact reviewed derivative hash and new private evidence directories.
+Read AGENTS, the exact lock and LOCAL_ARTIFACT_TRANSPORT_2026-11-23. Verify main and draft167/168 before resuming. Preserve official/global act, original workflow/action pins/profile/fonts/PNG and frozen5afa receipt scope. Review parents before this artifact leaf.
 
 ## Current objective and success conditions
 
@@ -155,35 +163,35 @@ Qualify strict task-local artifact compatibility and authenticated real ZIP inte
 
 ## State snapshot
 
-Base is installation draft168 at c27ebc1a53220a629994939ef81f88e44e8b5752, including timestamp167. Main remains ad8fca58946ca03f6f07d13be6c64046216569d0. This containing code revision/PR is null until committed. Full original-workflow qualification is pending.
+Base is updated installation draft168 at 83e57901e8a04b997860567e48e844a0a9acc514, including167. Main remains ad8fca58946ca03f6f07d13be6c64046216569d0. Containing revision/PR remains null until handoff. Actual complete original workflow source is 5afa292c41563fe16f48f321eb5ac37459fda3dd; later test/docs integration retains that identity.
 
 ## Completed and material changes
 
-The public lock/patch restores the exact upstream schema then adds only typed MIME field6 and a strict ZIP guard. The emitted padded signature is URL-escaped; verifier/HMAC/target binding is unchanged. Bounded source/tool builders, real sender preflight and full-workflow observer/caller preserve actual backend replies and independently check authenticated ZIP inventory.
+The public lock/patch adds only typed MIME field6, strict ZIP compatibility and escaped emitted signature. Verifier/HMAC/target binding is unchanged. Bounded source/tool builders, actual uploader preflight and full-workflow observer/caller preserve real backend responses and independently verify the complete authenticated ZIP inventory.
 
 ## Validation and review evidence
 
-Reviewed Go production patch1f045f15 and descriptor proofs pass. Actual binary e103cd43 reports0.2.98+identity.zipmime.2;28top-level tests pass with15MIME cases/six target negatives and one explicit existing integration skip. Final actual sender fixture exits0, uploads/downloads334bytes, matches digest043bd208 and both exact file hashes. Eleven Python controls pass including threaded-process ownership and ambient configuration refusal. Full workflow remains pending.
+Whole original workflow passes with424 frontend tests. Each original browser entrypoint passes9positives, observes one intended screenshot failure, then restored pass; profile/fonts/PNG unchanged. Actual4,074,757-byte ZIP127fb7ed equals SDK/Finalize/download and all74 selected file hashes. Independent peer reverified raw archive and inventory. Full final integrated Python266 completes264passes/two existing skips; focused13 pass. Go28 and exact descriptor proofs pass; one pre-existing integration skip is explicit.
 
 ## Blockers, risks, unknowns, and deferred work
 
-The tiny ZIP fixture does not prove the complete original workflow or multiblock artifacts. The owned runtime must expose actual measured storage and final clean source. Full observer success is required independently of backend200; inability to identify the actual owned uploader fails proof. No hosted CI, new source/creative approval or release claim is inferred.
+The actual ZIP is below4MiB; no multiblock claim. Default hidden-file selection excludes six.last-run states, whose hashes exist only in host receipts. Exact ZIP/eight browser logs remain private;20 approved nonlog members are public. Local hardening reports self-hosted context. No new human source/creative approval, broader native support or release/publication acceptance is inferred.
 
 ## Next dependency-ready work
 
-Freeze the combined code, run the unchanged workflow on the prepared owned runtime and retain actual full upload/finalization/download/archive SHA plus complete inventory and source-bound browser packets. Reconcile existing70/80/88; actual source/release gates stay under70/98, with116 last.
+Review/merge167 then168 then this leaf, reconciling80/82/88 engineering gates. Keep actual native/support follow-up under70, actual self-source/release/publisher/Mantle acceptance under98, and consolidated final reconciliation116 last. Root owns issue/PR updates; do not add duplicate roadmap issues.
 
 ## Parallel changes and reconciliation
 
-Review167 then168 then this artifact child. Aether143 owns portable-skill changes. Preserve exact prior timestamp/install/native/consumer receipts and historical official/v1 failures; evidence from a different source is not relabeled as the current candidate.
+Parent168 now83e579 adds test-only POSIX/symlink capability handling and docs after c27. This leaf preserves frozen5afa workflow evidence and merges that updated parent; final Python suite covers the combination. Aether143 owns its portable-skill changes. Earlier timestamp/native/consumer receipts keep their original exact inputs.
 
 ## Privacy and redaction
 
-Public source identities, hashes and bounded outcomes only. Runtime tokens, signed URLs, proxy values, private paths and raw archives/logs remain task-local. The observer reads only bounded PID/PPID metadata globally, then command/environment/cwd only for the exact launched act descendants and owned pinned Node uploader.
+Public source identities/hashes and bounded results only. Tokens, signed URLs, proxy values, private paths and raw archives/logs remain task-local. Public browser projection uses only explicit reviewed JSON/PNG/Markdown/trace members, rehashed against the actual ZIP and host receipts; no general extraction or broad log publication.
 
 ## Handoff update protocol
 
-Refresh after actual domain checks, review the diff and validate pinned schema/twelve headings/budgets. Reference ADR0011 for the optional local evidence adapter; ADR not required for routine caller/tests. Pinned Aether decision2.1.0/continuity1.1.0 remain selected without lifecycle promotion.
+Refresh after actual domain checks, review the diff and validate pinned schema/twelve headings/budgets. Reference ADR0011 for the optional local adapter; routine test/docs fixes need no new ADR. Pinned Aether decision2.1.0/continuity1.1.0 remain selected without lifecycle promotion. Preserve tested source5afa and private-retention boundaries.
 
 ## Compaction and supersession
 

@@ -1,0 +1,24 @@
+{
+  "kind": "identity.artifact-integrated-checks/v1",
+  "actualWorkflowSourceRevision": "5afa292c41563fe16f48f321eb5ac37459fda3dd",
+  "integratedParentRevision": "83e57901e8a04b997860567e48e844a0a9acc514",
+  "followupScope": "Test-only POSIX capability controls and documentation/evidence; actual workflow source is not relabeled.",
+  "python": {
+    "command": "python -m unittest discover -s tests",
+    "discovered": 266,
+    "passed": 264,
+    "skipped": 2,
+    "durationSeconds": 23.238,
+    "exitCode": 0,
+    "privateRawLogSha256": "897be86c8e980b60dfec5fb00854af8f61452fa50cce5bd006d9cbd557812f8c"
+  },
+  "artifactFocused": {
+    "tests": 13,
+    "passed": 13,
+    "platform": "actual Linux host; platform-gated controls are not Mac/Windows execution claims"
+  },
+  "testFilesSha256": {
+    "tests/test_local_artifacts.py": "87c8e97c6987f795d8b428f60f5bffe9519d03262352a1e0166312344267bc53",
+    "tests/test_qualify_local_install.py": "44e3f735a673f167fcd8e13792ab0b69b920c581c253cc97aca4ec7b53899c98"
+  }
+}
