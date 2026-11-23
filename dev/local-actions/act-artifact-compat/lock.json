@@ -1,0 +1,96 @@
+{
+  "kind": "identity.local-act-artifact-compat-lock/v1",
+  "derivative": {
+    "name": "identity-act-zipmime",
+    "version": "0.2.98+identity.zipmime.2",
+    "scope": "Explicit task-local ZIP-only compatibility derivative; not an official act release or installed global tool."
+  },
+  "upstream": {
+    "repository": "nektos/act",
+    "version": "0.2.98",
+    "revision": "4a64dea3f051935e0d8c3aa133124722bc50f770",
+    "gitTreeSha1": "d3fc8aca31dee080a6ed243dd262b26850e0ba7e",
+    "archive": {
+      "name": "act-source.tar.gz",
+      "url": "https://codeload.github.com/nektos/act/tar.gz/4a64dea3f051935e0d8c3aa133124722bc50f770",
+      "bytes": 1160669,
+      "sha256": "3bc5a52d490ea30f6af011dcb03859553282527422339eaa35bd515d0023d514"
+    },
+    "knownSymlinks": {
+      "pkg/runner/testdata/workdir/canary-link": "canary"
+    },
+    "officialLinuxArchive": {
+      "name": "act_Linux_x86_64.tar.gz",
+      "url": "https://github.com/nektos/act/releases/download/v0.2.98/act_Linux_x86_64.tar.gz",
+      "sha256": "d3344bd0810c04b000d2444030b08c90ab9fbf905bbe2c3e26298be00c620d65",
+      "bytes": 8485973
+    }
+  },
+  "sender": {
+    "repository": "actions/upload-artifact",
+    "revision": "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+    "version": "7.0.1",
+    "library": "@actions/artifact",
+    "libraryVersion": "6.2.0",
+    "archive": {
+      "name": "artifact-6.2.0.tgz",
+      "url": "https://registry.npmjs.org/@actions/artifact/-/artifact-6.2.0.tgz",
+      "bytes": 55270,
+      "sha256": "0e0880fa39ae061b7e5c709119f8a909fddccdb6132a45878201b85959469039"
+    },
+    "integrity": "sha512-i9kmGy6WfuA6rby4fdD0UMKjT4MicFiKMsB5mUZ+1ggFW7+SzqvFsxLhIXxITkKUhTMVREXQfn/ZAN87EQLQDA==",
+    "schemaPath": "package/lib/generated/results/api/v1/artifact.js",
+    "schemaSha256": "e4309dbbc44f848274f9be6b2404cc8ef8aba02227196db30c54ab995d43b5f8",
+    "field": {
+      "name": "mime_type",
+      "number": 6,
+      "type": "google.protobuf.StringValue"
+    }
+  },
+  "toolchains": {
+    "go": {
+      "version": "go1.26.11",
+      "archive": {
+        "name": "go1.26.11.linux-amd64.tar.gz",
+        "url": "https://go.dev/dl/go1.26.11.linux-amd64.tar.gz",
+        "bytes": 66999944,
+        "sha256": "9849f4e04ee35303714e34fbc3ac8ab44ea3e448a95aa182f91e3b9b79c710ec"
+      },
+      "checksumSource": "https://go.dev/dl/?mode=json"
+    },
+    "protoc": {
+      "version": "36.2",
+      "archive": {
+        "name": "protoc-36.2-linux-x86_64.zip",
+        "url": "https://github.com/protocolbuffers/protobuf/releases/download/v36.2/protoc-36.2-linux-x86_64.zip",
+        "bytes": 3681545,
+        "sha256": "121f6c7afe1d4d0e3ea6aab9432038599250134cbf4474cb1167d2c7decd4278"
+      },
+      "checksumSource": "https://api.github.com/repos/protocolbuffers/protobuf/releases/tags/v36.2"
+    },
+    "protocGenGo": {
+      "module": "google.golang.org/protobuf/cmd/protoc-gen-go",
+      "version": "v1.32.0",
+      "moduleZipHash": "h1:pPC6BG5ex8PDFnkbrGU3EixyhKcQ2aDuBS36lqK/C7I=",
+      "verification": "Go module checksum database sum.golang.org; no checksum verification opt-out."
+    }
+  },
+  "patch": {
+    "path": "dev/local-actions/act-artifact-compat/zip-mime.patch",
+    "bytes": 40942,
+    "sha256": "1f045f15640dc0975977f0b6714d221ead386c702486fa882d0c03b3302e80ac"
+  },
+  "generated": {
+    "originalDescriptorSha256": "4338a156ca92e5c3dc333a2239a8a322f548175f0d65154036964f6cf8cc104f",
+    "legacySchemaDescriptorByteIdentical": true,
+    "patchedProtoSha256": "e7b8c4dc2a29de2fc0e4a84d649075d07d4496c326c0cacdb6d0ca749a662169",
+    "patchedGoSha256": "08bb5e0b53704488c2e4823a6af5f6f02b9dfb42d7ef92339fac2064d8f5981a",
+    "limit": "Restored legacy artifact.proto is reconstructed from upstream generated descriptor, not represented as an upstream-tracked source file."
+  },
+  "patchedFiles": {
+    "pkg/artifacts/artifact.proto": "e7b8c4dc2a29de2fc0e4a84d649075d07d4496c326c0cacdb6d0ca749a662169",
+    "pkg/artifacts/artifact.pb.go": "08bb5e0b53704488c2e4823a6af5f6f02b9dfb42d7ef92339fac2064d8f5981a",
+    "pkg/artifacts/artifacts_v4.go": "883869d62b39bd6be2bbac4e7ea3febb7972fdafb1720e972a84b65f45200438",
+    "pkg/artifacts/identity_zip_mime_test.go": "e9e3a1ef86b69cce75a09284236330c6e5ccbb39bc7a65ae2c082a3b6a905694"
+  }
+}

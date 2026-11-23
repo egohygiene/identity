@@ -2,9 +2,7 @@
 # SPDX-License-Identifier: MIT
 """Canonical internal governance validation; bundled offline by build_identity_validator.py."""
 from __future__ import annotations
-from datetime import datetime
 from pathlib import Path
-import re
 from typing import Any
 from .common import (
     ACCESSIBILITY_KEYS,
@@ -25,27 +23,14 @@ from .common import (
     resolve_local_path,
     sha256,
     valid_relative_path,
+    valid_rfc3339_timestamp,
 )
 
 
 def valid_review_timestamp(value: Any) -> bool:
-    """Require the declared date-time grammar before checking calendar values."""
+    """Retain the existing standalone import facade for approval timestamps."""
 
-    if not isinstance(value, str) or re.fullmatch(
-        r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}"
-        r"(?:\.[0-9]+)?(?:[Zz]|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])",
-        value,
-    ) is None:
-        return False
-    normalized = value[:10] + "T" + value[11:]
-    if normalized[-1] in "Zz":
-        normalized = normalized[:-1] + "+00:00"
-    try:
-        # Keep the existing calendar parser's leap-second limitation. This is
-        # validation only: preserve the actual recorded timestamp bytes.
-        return datetime.fromisoformat(normalized).utcoffset() is not None
-    except ValueError:
-        return False
+    return valid_rfc3339_timestamp(value)
 
 
 def validate_approvals(
@@ -312,6 +297,21 @@ def validate_provenance(
                 f"{pointer}/origin/method",
                 "asset origin method is unsupported",
                 "Use first-party, commissioned, licensed, or generated.",
+            )
+        captured_at = origin.get("capturedAt") if origin is not None else None
+        if (
+            isinstance(captured_at, str)
+            and captured_at.strip()
+            and not valid_rfc3339_timestamp(captured_at)
+        ):
+            # Existing missing/non-string provenance keeps its original
+            # incomplete-origin diagnostic; this closes accepted bad strings.
+            diagnostic(
+                diagnostics,
+                "IDN1405",
+                f"{pointer}/origin/capturedAt",
+                "asset origin capturedAt must be an RFC 3339 timestamp",
+                "Record the source capture time with an explicit UTC offset.",
             )
         accessibility = require_closed(
             value.get("accessibility"),

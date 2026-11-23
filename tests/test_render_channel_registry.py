@@ -156,6 +156,46 @@ class ChannelRegistryProjectionTests(unittest.TestCase):
         with self.assertRaisesRegex(renderer.ProjectionError, "documents.channelRegistry"):
             renderer.build_projection(VALID_FIXTURE)
 
+    def test_registry_review_and_channel_capture_require_complete_offset_times(self) -> None:
+        for section, code in (("registry", "IDN2101"), ("governance", "IDN1602")):
+            for timestamp in ("2026-11-23", 20261123, None, "2026-11-23T12:34:56", "2026-11-23T12:34:56+00:60"):
+                with self.subTest(section=section, timestamp=timestamp), tempfile.TemporaryDirectory() as temporary:
+                    repository = Path(temporary) / "consumer"
+                    shutil.copytree(VALID_FIXTURE, repository)
+                    registry_path = add_registry(repository)
+                    source = json.loads(registry_path.read_text(encoding="utf-8"))
+                    if section == "registry":
+                        source["registry"]["reviewedAt"] = timestamp
+                    else:
+                        source["channels"][0]["governance"]["provenance"]["capturedAt"] = timestamp
+                    write_json(registry_path, source)
+                    before = registry_path.read_bytes()
+                    self.assertEqual([item.code for item in renderer.validator.validate_identity(repository)], [code])
+                    output = subprocess.run([
+                        sys.executable, str(RENDERER_PATH), "--repository-root", str(repository),
+                        "--output-directory", "generated/channels",
+                    ], capture_output=True, text=True, check=False)
+                    self.assertEqual(output.returncode, 1)
+                    self.assertIn(code, output.stderr)
+                    self.assertFalse((repository / "generated").exists())
+                    self.assertEqual(registry_path.read_bytes(), before)
+
+    def test_registry_timestamps_preserve_valid_forms_and_date_only_lifecycle(self) -> None:
+        for timestamp in ("2024-02-29t12:34:56z", "2026-11-23T12:34:56.123456789+05:30", "2026-11-23T12:34:56-00:00"):
+            with self.subTest(timestamp=timestamp), tempfile.TemporaryDirectory() as temporary:
+                repository = Path(temporary) / "consumer"
+                shutil.copytree(VALID_FIXTURE, repository)
+                registry_path = add_registry(repository)
+                source = json.loads(registry_path.read_text(encoding="utf-8"))
+                source["registry"]["reviewedAt"] = timestamp
+                source["channels"][0]["governance"]["provenance"]["capturedAt"] = timestamp
+                write_json(registry_path, source)
+                before = registry_path.read_bytes()
+                self.assertEqual(renderer.validator.validate_identity(repository), [])
+                renderer.build_projection(repository)
+                self.assertEqual(registry_path.read_bytes(), before)
+                self.assertEqual(source["channels"][0]["lifecycle"]["since"], "2026-08-31")
+
     def test_canonical_organization_registry_is_valid_and_honestly_planned(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             repository = Path(temporary) / "consumer"

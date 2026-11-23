@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 """Canonical internal handbook validation; bundled offline by build_identity_validator.py."""
 from __future__ import annotations
-from datetime import datetime
 from pathlib import Path
 from typing import Any
 from .common import (
@@ -21,6 +20,7 @@ from .common import (
     load_json,
     require_closed,
     resolve_local_path,
+    valid_rfc3339_timestamp,
 )
 from .guidance import validate_guidance_governance, validate_guidance_strings, validate_guidance_text_fields
 
@@ -319,9 +319,7 @@ def validate_design_references(
                 "design reference URL must use HTTPS",
                 "Record the original HTTPS source URL.",
             )
-        try:
-            datetime.fromisoformat(str(value.get("capturedAt", "")).replace("Z", "+00:00"))
-        except ValueError:
+        if not valid_rfc3339_timestamp(value.get("capturedAt")):
             diagnostic(
                 diagnostics,
                 "IDN1702",

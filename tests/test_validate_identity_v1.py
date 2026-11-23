@@ -19,6 +19,14 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 VALIDATOR_PATH = REPOSITORY_ROOT / "scripts/validate_identity.py"
 VALID_FIXTURE = REPOSITORY_ROOT / "tests/fixtures/v1/valid/minimal"
 INVALID_FIXTURES = REPOSITORY_ROOT / "tests/fixtures/v1/invalid"
+CAPTURE_TIME_FIELDS = (
+    (".identity/governance/provenance.json", "/assets/0/origin/capturedAt", "IDN1405"),
+    (".identity/guidance/voice.json", "/foundation/governance/provenance/capturedAt", "IDN1602"),
+    (".identity/guidance/usage.json", "/sections/0/rules/0/governance/provenance/capturedAt", "IDN1602"),
+    (".identity/guidance/design-system.json", "/sections/0/principles/0/governance/provenance/capturedAt", "IDN1602"),
+    (".identity/guidance/design-references.json", "/references/0/capturedAt", "IDN1702"),
+    (".identity/guidance/design-references.json", "/references/0/governance/provenance/capturedAt", "IDN1602"),
+)
 SPEC = importlib.util.spec_from_file_location("validate_identity", VALIDATOR_PATH)
 assert SPEC is not None
 assert SPEC.loader is not None
@@ -31,6 +39,15 @@ def write_json(path: Path, value: object) -> None:
     """Write deterministic fixture JSON."""
 
     path.write_text(f"{json.dumps(value, indent=2)}\n", encoding="utf-8")
+
+
+def source_bytes(repository: Path) -> dict[str, bytes]:
+    """Capture every fixture file to detect validation writes or new outputs."""
+
+    return {
+        path.relative_to(repository).as_posix(): path.read_bytes()
+        for path in repository.rglob("*") if path.is_file()
+    }
 
 
 def resolve_pointer(document: object, pointer: str) -> tuple[object, str]:
@@ -168,6 +185,54 @@ class IdentityV1ValidatorTests(unittest.TestCase):
                     snapshot.verify()
                     for field, declared in (("voice", declared_voice), ("usage", declared_usage)):
                         self.assertEqual(f".identity/guidance/{field}.json" in snapshot.files, declared)
+
+    def test_declared_capture_times_reject_dates_coercion_and_missing_offsets(self) -> None:
+        invalid = [
+            "2026-11-23", 20261123, None,
+            "2026-11-23T12:34:56", "2026-11-23T12:34:56+00:60",
+        ]
+        for document, pointer, code in CAPTURE_TIME_FIELDS:
+            for timestamp in invalid:
+                with (
+                    self.subTest(document=document, pointer=pointer, timestamp=timestamp),
+                    tempfile.TemporaryDirectory() as temporary,
+                ):
+                    repository = Path(temporary) / "consumer"
+                    shutil.copytree(VALID_FIXTURE, repository)
+                    apply_mutation(repository, {
+                        "document": document, "pointer": pointer,
+                        "operation": "replace", "value": timestamp,
+                    })
+                    before = source_bytes(repository)
+                    diagnostics = validator.validate_identity(repository)
+                    self.assertEqual([item.code for item in diagnostics], [code])
+                    expected_pointer = (
+                        "/assets/0/origin"
+                        if code == "IDN1405" and not isinstance(timestamp, str) else pointer
+                    )
+                    self.assertEqual(diagnostics[0].path, f"{document}#{expected_pointer}")
+                    self.assertEqual(source_bytes(repository), before)
+
+    def test_declared_capture_times_accept_offsets_without_rewriting_source(self) -> None:
+        valid = [
+            "2024-02-29t12:34:56z", "2026-11-23T12:34:56.123456789+05:30",
+            "2026-11-23T12:34:56-00:00",
+        ]
+        for document, pointer, _ in CAPTURE_TIME_FIELDS:
+            for timestamp in valid:
+                with (
+                    self.subTest(document=document, pointer=pointer, timestamp=timestamp),
+                    tempfile.TemporaryDirectory() as temporary,
+                ):
+                    repository = Path(temporary) / "consumer"
+                    shutil.copytree(VALID_FIXTURE, repository)
+                    apply_mutation(repository, {
+                        "document": document, "pointer": pointer,
+                        "operation": "replace", "value": timestamp,
+                    })
+                    before = source_bytes(repository)
+                    self.assertEqual(validator.validate_identity(repository), [])
+                    self.assertEqual(source_bytes(repository), before)
 
     def test_optional_guidance_keeps_required_keys_and_present_path_diagnostics(self) -> None:
         for field in ("voice", "usage"):

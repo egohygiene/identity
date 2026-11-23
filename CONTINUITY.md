@@ -7,28 +7,25 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T19:15:16.779779+00:00'
+  updated_at: '2026-11-23T06:51:48.946312+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Prepare concrete Identity descriptor/output proposals and a separate mechanically assembled
-    candidate while exact owner choices remain unselected.
+  purpose: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the unchanged
+    reference workflow.
   includes:
-  - Concrete accessible descriptions, H/8 clear-space and digital-size recommendations bound to unchanged
-    SVGs.
-  - Proposed product/core/tokens/metadata plus optional candidate public-usage records; exact layer option
-    A remains independently unselected.
-  - A separate 14-file candidate narrows structural diagnostics to two native reviewedAt null fields and
-    rejects production/verification before output.
-  - Retain stricter parent-validator and local native refusal on the exact unchanged proposal, without
-    source/output mutation.
+  - Pinned public source/toolchain/sender schema and strict ZIP-only local act derivative, with upstream/global
+    tools unchanged.
+  - Actual exact-pinned uploader preflight, full archive hash/inventory and original workflow replay on the
+    combined timestamp/install source candidate.
+  - Strict MIME/protobuf and signed-target negatives; bounded owned-process observation with tokens and signed
+    URLs excluded.
   excludes:
-  - No root identity adoption, selection of layer/descriptor/output proposals, invented timestamps or
-    new human approval.
-  - No runtime/schema/profile/master/rights/ADR lifecycle change, successful actual self-source generation,
-    release, hosted CI or deployment.
+  - No hosted GitHub CI equivalence, security bypass, publication, release signing or platform-matrix promotion.
+  - No creative/source approval, original workflow/action/profile/font/PNG changes, consumer pin changes or
+    global installation.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -37,117 +34,97 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - docs/contracts/IDENTITY_V1.md
-  - docs/decisions/ADR-0001-creative-approval-human-owned.md
-  - docs/decisions/ADR-0012-local-layered-identity-v1.md
-  - docs/work/98/OWNER_ANSWERS_2026-11-22.md
-  - docs/work/98/self-source-review/README.md
-  - docs/work/98/source-assembly/README.md
-  - docs/work/98/source-assembly/DESCRIPTORS.proposed.json
-  - docs/work/98/source-assembly/OUTPUTS.proposed.json
-  - docs/work/98/source-assembly/assembly-validation.json
-  - docs/work/98/source-assembly/REVIEW_TIME_FINDING.md
-  - docs/work/116/qualification-20261122/self-source-strict-preflight.json
-  - docs/work/116/QUALIFICATION_SPRINT_2026-11-22.md
-  - docs/work/116/qualification-20261122/integrated-checks.json
+  - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
+  - docs/LOCAL_WORKFLOW_REPLAY.md
+  - docs/LOCAL_ARTIFACT_TRANSPORT.md
+  - dev/local-actions/act-artifact-compat/lock.json
+  - scripts/prepare_local_act.py
+  - scripts/qualify_local_artifacts.py
+  - scripts/replay_local_artifact_workflow.py
+  - docs/work/80/artifact-transport-2026-11-23/preflight.json
+  - docs/work/70/LOCAL_INSTALL_2026-11-23.md
 work:
-  objective: Prepare concrete Identity descriptor/output proposals and a separate mechanically assembled
-    candidate while exact owner choices remain unselected.
+  objective: Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the
+    unchanged reference workflow.
   success_conditions:
-  - Replace null descriptor proposals with exact reviewable strings and explicit measured facts versus
-    authored guidance.
-  - Keep actual old candidate/root/master bytes unchanged and preserve all pending human choices.
-  - Exercise matching source validation and native refusal without inserting synthetic approval times.
+  - Require exact typed field six, legacy descriptor equivalence, ZIP-only MIME and unchanged signed-target
+    authentication.
+  - Require actual pinned uploader upload/download/SHA256 and complete expected ZIP inventory; retain historical
+    failures separately.
+  - Require whole unchanged workflow exit zero plus actual full archive integrity on a frozen combined source;
+    preserve hosted/creative/release boundaries.
   active_issue:
     provider: github
-    id: egohygiene/identity#98
-    url: https://github.com/egohygiene/identity/issues/98
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: review-exact-descriptor-output-and-layer-choices
-    description: Review the exact descriptor/output proposal and independent inheritance/token question;
-      only then record actual packet-review time and assemble the selected governed source.
+    id: freeze-combined-source-and-run-original-workflow
+    description: Review the bounded observer/caller, freeze the combined167/168/artifact code and execute
+      the full original workflow on the measured owned runtime; retain actual full archive proof.
     readiness: ready
     references:
-    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/80
+    - https://github.com/egohygiene/identity/issues/70
     depends_on: []
 state:
   base:
-    revision: 18674e0cd88fc7316201d925c83fc3616919234f
-    ref: refs/heads/codex/82-qualified-images-stack-20261122
-    verified_at: '2026-11-22T19:15:16.779779+00:00'
+    revision: c27ebc1a53220a629994939ef81f88e44e8b5752
+    ref: refs/heads/codex/70-local-install-stack-20261123
+    verified_at: '2026-11-23T06:51:48.946312+00:00'
   candidate:
-    branch: codex/98-source-proposal-stack-20261122
+    branch: codex/80-artifact-transport-20261123
     revision: null
     pull_request: null
-    handoff_state: ready-for-review
+    handoff_state: in-progress
   live:
     status: verified
-    observed_at: '2026-11-22T19:15:16.779779+00:00'
-    default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
+    observed_at: '2026-11-23T06:51:48.946312+00:00'
+    default_branch_revision: ad8fca58946ca03f6f07d13be6c64046216569d0
     issue_state: open
     pull_request_state: not-applicable
-    notes: Main remains 75ca39f; six Identity finish issues remain open. Earlier158 through162 and Aether140
-      are merged. Parent drafts 163,164,165 are open; this next child PR does not yet exist. No new sprint
-      PR is merged or published.
+    notes: Mainad8 is merged through166. Timestamp167 and its installation child168 are draft; this artifact
+      child includes c27 and has no PR yet. No full original-workflow pass is inferred from the successful
+      small actual sender fixture.
   parallel_changes:
   - provider: github
-    id: egohygiene/identity#163
-    url: https://github.com/egohygiene/identity/pull/163
+    id: egohygiene/identity#167
+    url: https://github.com/egohygiene/identity/pull/167
   - provider: github
-    id: egohygiene/identity#164
-    url: https://github.com/egohygiene/identity/pull/164
+    id: egohygiene/identity#168
+    url: https://github.com/egohygiene/identity/pull/168
   - provider: github
-    id: egohygiene/identity#165
-    url: https://github.com/egohygiene/identity/pull/165
-  - provider: github
-    id: egohygiene/aether#142
-    url: https://github.com/egohygiene/aether/pull/142
+    id: egohygiene/aether#143
+    url: https://github.com/egohygiene/aether/pull/143
 review:
   status: partial
-  reviewed_at: '2026-11-22T19:15:16.610601+00:00'
+  reviewed_at: '2026-11-23T06:51:48.946312+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Existing provenance/usage schemas on new candidate fragments
+  - command: Checksum/tree-bound Go builder; legacy and patched-minus-field6 descriptor proofs; artifact package
+      tests
     outcome: passed
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Two proposed complete descriptor records and candidate-only usage document satisfy closed structural
-      schemas. No installed date-time format checker is available; this is not timestamp-format proof.
-  - command: python3 scripts/validate_identity.py --repository-root docs/work/98/source-assembly/candidate
-      --format json
-    outcome: limited
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Exit1/validfalse with exactly two IDN1404 findings at native reviewedAt nulls. Option A layers/descriptors/output
-      values remain unselected proposals despite mechanical narrowing.
-  - command: cargo build --locked --offline --bin identity; native v1-generate and v1-verify on proposed
-      candidate
-    outcome: limited
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Pinned Rust 1.97.1 local build passes; both producer/verify calls refuse with IDN1404 before
-      output. All 14 candidate files and original active candidate unchanged. This is no release/download
-      qualification.
-  - command: Synthetic14-decision date-only control
-    outcome: limited
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: 'Existing validator at 75ca39f accepts bare 2026-11-22 timestamps; retained bounded finding
-      for root #70 repair. No actual owner timestamp is filled and no parser fix is made here.'
-  - command: Documentation, source inventories, protected-input and whitespace checks
+    observed_at: '2026-11-23T06:51:48.946312+00:00'
+    notes: Actual named v2 derivative e103cd43; 28 top-level Go tests pass,15 MIME cases/six signed-binding
+      negatives; one existing Docker integration test skipped by short mode.
+  - command: Actual final exact-pinned uploader fixture and authenticated signed archive download
     outcome: passed
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Current proposal/manifests match; original active candidate, selected masters, runtime/contracts/profiles/ADRs
-      are unchanged. Documentation links and canonical whitespace pass.
-  - command: Integrated full Python and source/evidence/compiled-input comparisons at33948ad
+    observed_at: '2026-11-23T06:51:48.946312+00:00'
+    notes: Act exit0;334-byte actual ZIP digest043bd208 equals uploader and independent download, complete
+      two-file inventory matches, original input/action bytes preserved.
+  - command: Focused Python transport/observer boundary tests and syntax/whitespace checks
     outcome: passed
-    observed_at: '2026-11-22T19:15:16.610601+00:00'
-    notes: 234discovered:232passes/two existing skips, actualMake/Task. Docs,bundle,extraction,whitespace
-      and reviewed packets/protected inputs match. Selected native inputs equal testededca; no new native
-      execution inferred. Strict source/native refusal preserves14candidate inputs without output.
+    observed_at: '2026-11-23T06:51:48.946312+00:00'
+    notes: 11 methods pass, including real loopback replies, inventory/digest rejection, descriptor delta,
+      threaded owned Node descendant capture and ambient act configuration refusal.
   environment_limitations:
-  - Exact inheritance/token and new descriptor/output/public-usage choices remain pending owner response.
-  - New native review timestamp cannot be supplied without actual explicit packet review; original exact
-    instant remains unknown.
-  - No successful actual source generation/public-kit/publisher/native-platform/release proof is supplied.
-  - Pinned schema/heading/budget validation is narrower than official released EgoLint continuity conformance.
+  - The complete unchanged original workflow has not yet been rerun with this frozen combined candidate; full
+    artifact and browser evidence are pending.
+  - The derivative is explicit task-local Linuxamd64 engineering, not an official act release or publisher-authenticated
+    build.
+  - Existing hosted security limitations, actual self-source choices, human creative review and native release/publication
+    acceptance remain separate.
+  - Pinned continuity schema/headings/budgets are structural checks, not released EgoLint conformance.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -166,48 +143,48 @@ privacy:
 
 ## Purpose and precedence
 
-User/runtime and scoped instructions, live evidence and canonical source outrank this operational snapshot. It records a new reviewable assembly, not selected identity source.
+User/runtime and scoped instructions, live provider evidence and canonical source outrank this checkpoint. The optional local derivative supplies evidence transport under ADR0011; it does not confer creative, hosted-security or release authority.
 
 ## Resume protocol
 
-Read AGENTS, current owner answers, original layer packet and the new source-assembly records. Recheck live main/issue/PR state and actual owner responses before adoption. Prior #158 → #162 and Aether #140 are merged.
+Read AGENTS, the exact lock and LOCAL_ARTIFACT_TRANSPORT. Verify main and draft167/168 before resuming. Preserve official/global act and the original workflow, all action pins, profile/fonts and approved PNG. Use the exact reviewed derivative hash and new private evidence directories.
 
 ## Current objective and success conditions
 
-Prepare concrete Identity descriptor/output proposals and a separate mechanically assembled candidate while exact owner choices remain unselected.
+Qualify strict task-local artifact compatibility and authenticated real ZIP integrity for the unchanged reference workflow.
 
 ## State snapshot
 
-Stack base is `codex/82-qualified-images-stack-20261122` at `18674e0cd88fc7316201d925c83fc3616919234f`. Candidate `codex/98-source-proposal-stack-20261122` is a draft child with no containing-revision or pre-PR self-reference. Main remains `75ca39f3fc7e5e9e0b5578af58c966cd2590a652`. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code.
+Base is installation draft168 at c27ebc1a53220a629994939ef81f88e44e8b5752, including timestamp167. Main remains ad8fca58946ca03f6f07d13be6c64046216569d0. This containing code revision/PR is null until committed. Full original-workflow qualification is pending.
 
 ## Completed and material changes
 
-New concrete descriptors preserve actual SVG titles/artboards and the horizontal old tagline. H/8 clear space and 64/600 CSS px are explicit new recommendations, with no contrast/WCAG guarantee or new license condition. Product/core/tokens/metadata and optional two-SVG public usage remain proposals. The separate candidate resolves option A structurally while native timestamps remain null.
+The public lock/patch restores the exact upstream schema then adds only typed MIME field6 and a strict ZIP guard. The emitted padded signature is URL-escaped; verifier/HMAC/target binding is unchanged. Bounded source/tool builders, real sender preflight and full-workflow observer/caller preserve actual backend replies and independently check authenticated ZIP inventory.
 
 ## Validation and review evidence
 
-Two provenance fragments and candidate usage pass structural schemas. Full proposed consumer returns exactly two IDN1404 findings; native generation and verify refuse without output or input changes. The offline pinned local CLI build succeeds with unchanged product inputs. The historical14-decision probe records date-only acceptance at75ca39f; parent163 fixes that defect. A new strict-preflight integration receipt repeats validator/native refusal against unchanged candidate bytes after that repair. See assembly-validation, REVIEW_TIME_FINDING and the integrated strict-refusal receipt. Integrated Python234 passes with two existing skips; docs/bundle/extraction and exact packet/protected-input checks pass. No real approval or full source pass.
+Reviewed Go production patch1f045f15 and descriptor proofs pass. Actual binary e103cd43 reports0.2.98+identity.zipmime.2;28top-level tests pass with15MIME cases/six target negatives and one explicit existing integration skip. Final actual sender fixture exits0, uploads/downloads334bytes, matches digest043bd208 and both exact file hashes. Eleven Python controls pass including threaded-process ownership and ambient configuration refusal. Full workflow remains pending.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Owner layer/token and exact descriptor/output choices remain unselected. The optional schema-format checker remains unavailable locally, while parent163 now independently enforces complete approval timestamps. The historical parser finding is not used as authority. Review timestamps remain null; original creation/reference history remains unknown. Native Kern PNG support, a new-tagline derivative, actual self-source publisher/release and remaining native-platform/final-merged acceptance stay separate. Original browser and Linux image proofs are retained in parents164/165.
+The tiny ZIP fixture does not prove the complete original workflow or multiblock artifacts. The owned runtime must expose actual measured storage and final clean source. Full observer success is required independently of backend200; inability to identify the actual owned uploader fails proof. No hosted CI, new source/creative approval or release claim is inferred.
 
 ## Next dependency-ready work
 
-Read the final QUALIFICATION_SPRINT_2026-11-22 handoff, then review the concrete source bundle and independent inheritance question, then bind actual selections and the actual new packet-review time. Rerun matching strict source/producer checks before canonical adoption or real publisher handoff. Existing known brand choices need not be selected again.
+Freeze the combined code, run the unchanged workflow on the prepared owned runtime and retain actual full upload/finalization/download/archive SHA plus complete inventory and source-bound browser packets. Reconcile existing70/80/88; actual source/release gates stay under70/98, with116 last.
 
 ## Parallel changes and reconciliation
 
-This checkpoint follows parent draft PRs #163 → #164 → #165. The engineering parent enforces existing approval timestamp validity and retains unknown actual-owner review times. Each browser, development-image and source-assembly record retains its own represented source and qualification limits. Review parents before children; keep source adoption and actual release/deployment separate. Aether metadata projection and installed-host verification retain their separate draft chain under Aether38.
+Review167 then168 then this artifact child. Aether143 owns portable-skill changes. Preserve exact prior timestamp/install/native/consumer receipts and historical official/v1 failures; evidence from a different source is not relabeled as the current candidate.
 
 ## Privacy and redaction
 
-Public-safe brand facts, actual geometry and sanitized source-bound diagnostics only. Exclude private transcript, credentials, personal context and local filesystem topology.
+Public source identities, hashes and bounded outcomes only. Runtime tokens, signed URLs, proxy values, private paths and raw archives/logs remain task-local. The observer reads only bounded PID/PPID metadata globally, then command/environment/cwd only for the exact launched act descendants and owned pinned Node uploader.
 
 ## Handoff update protocol
 
-Refresh after domain checks and before PR handoff. Validate pinned metadata, twelve headings and size limits. Reference ADR-0001/ADR-0004/ADR-0012 and proposed ADR-0035; preparation uses pinned Aether decision 2.1.0/continuity 1.1.0 at dc8a168 and Hygiene policy 1.2.0. No duplicate ADR or new approval authority.
+Refresh after actual domain checks, review the diff and validate pinned schema/twelve headings/budgets. Reference ADR0011 for the optional local evidence adapter; ADR not required for routine caller/tests. Pinned Aether decision2.1.0/continuity1.1.0 remain selected without lifecycle promotion.
 
 ## Compaction and supersession
 
-Git and linked owner records retain earlier exact packets and receipts. Preserve those historical hashes and approvals; replace current operational prose rather than append chronology.
+Git and exact work packets retain earlier observations. Replace stale current-state prose rather than append chronology; preserve source, human approval and release boundaries.

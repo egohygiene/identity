@@ -1,0 +1,14 @@
+{
+  "build.json": {
+    "bytes": 2144,
+    "sha256": "3ca2b3056805ef25001d7e5690c6049b189818a19380583156a279479e201a7d"
+  },
+  "preflight.json": {
+    "bytes": 2117,
+    "sha256": "46cf8af3f996e4dbcc8107eff46073bd9183caa282dc46d3928b488564efbbbb"
+  },
+  "preflight.sanitized.log": {
+    "bytes": 3717,
+    "sha256": "9193b3990ecd6d327dd3f962ac3c5cc452b34ca214834189187c90dbb8272cee"
+  }
+}

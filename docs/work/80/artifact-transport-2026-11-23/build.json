@@ -1,0 +1,66 @@
+{
+  "kind": "identity.local-act-artifact-compat-build/v1",
+  "name": "identity-act-zipmime",
+  "version": "0.2.98+identity.zipmime.2",
+  "upstreamRevision": "4a64dea3f051935e0d8c3aa133124722bc50f770",
+  "sourceGitTreeVerified": true,
+  "patchSha256": "1f045f15640dc0975977f0b6714d221ead386c702486fa882d0c03b3302e80ac",
+  "typedFieldSixOnlyDescriptorDelta": true,
+  "officialActModified": false,
+  "buildStatus": "passed",
+  "commands": [
+    {
+      "name": "patch-check",
+      "exitCode": 0,
+      "rawLogBytes": 0,
+      "rawLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "patch-apply",
+      "exitCode": 0,
+      "rawLogBytes": 0,
+      "rawLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "plugin-build",
+      "exitCode": 0,
+      "rawLogBytes": 51,
+      "rawLogSha256": "7b53e80fed3a6609f2bded64448afee88f3b7673f821ae149fb7bc7ac56a0e5c"
+    },
+    {
+      "name": "legacy-schema-proof",
+      "exitCode": 0,
+      "rawLogBytes": 0,
+      "rawLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "protobuf-regeneration",
+      "exitCode": 0,
+      "rawLogBytes": 0,
+      "rawLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "artifact-tests",
+      "exitCode": 0,
+      "rawLogBytes": 131020,
+      "rawLogSha256": "c65d65df07c07e79b9072863b6051d7a9356256aa989f297759b693e92f0741c"
+    },
+    {
+      "name": "derivative-build",
+      "exitCode": 0,
+      "rawLogBytes": 638,
+      "rawLogSha256": "9a75b65f8ec8daefde03cc6b7bb9707c05d340fa906f7c28fda8f9e22140aa8a"
+    },
+    {
+      "name": "derivative-version",
+      "exitCode": 0,
+      "rawLogBytes": 38,
+      "rawLogSha256": "55bd208a7213ab959f85b52536669e95d5647c7690a47934fd53c2c7724f0875"
+    }
+  ],
+  "legacyDescriptorByteIdentical": true,
+  "generatedSourceMatches": true,
+  "binarySha256": "e103cd431339dd0be997d5b0a9599a7327da8d1d327ed3fe809636b8fdd2ce90",
+  "binaryBytes": 31363357,
+  "reportedVersion": "act version 0.2.98+identity.zipmime.2"
+}
