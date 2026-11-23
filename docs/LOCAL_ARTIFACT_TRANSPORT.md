@@ -101,3 +101,5 @@ force. Local security-action results retain their self-hosted limitations.
 Decision impact: reference ADR-0011. This is an optional, explicitly identified
 local evidence transport adapter for the existing contract; no new creative,
 architecture lifecycle or release decision is accepted by this checkpoint.
+
+The [2026-11-23 actual qualification](work/80/LOCAL_ARTIFACT_TRANSPORT_2026-11-23.md) records the complete unchanged workflow and verified74-file archive on frozen5afa292 source, with explicit local/hidden-file boundaries.

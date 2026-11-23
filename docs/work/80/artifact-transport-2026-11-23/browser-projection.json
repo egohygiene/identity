@@ -1,0 +1,259 @@
+{
+  "kind": "identity.actual-browser-packet-projection/v1",
+  "status": "passed",
+  "sourceRevision": "5afa292c41563fe16f48f321eb5ac37459fda3dd",
+  "actualArchiveSha256": "127fb7ed43c274ff4a15388a79569c6ac561694402e1bd4dbfbaa38e2a9f42e6",
+  "actualArchiveBytes": 4074757,
+  "completeActualSelectedFileCount": 74,
+  "projection": "Explicit fixed public JSON/PNG/Markdown/trace members only; every byte rechecked against actual ZIP inventory and original browser host receipt; no extractall",
+  "packets": [
+    {
+      "mode": "ci",
+      "status": "passed",
+      "sourceRevision": "5afa292c41563fe16f48f321eb5ac37459fda3dd",
+      "sourceBuildInventory": {
+        "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+        "files": 435,
+        "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+        "sha256": "ab0f0819a3cfabb7929446b2c8010f9d90cc3a98fa5d81f6c9ae7d52c8664cb3"
+      },
+      "positive": {
+        "exitCode": 0,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "diffArtifacts": [],
+        "report": "browser-pWi4Pz/positive/report.json"
+      },
+      "negative": {
+        "exitCode": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "diffArtifacts": [
+          {
+            "path": "browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+            "sha256": "a20785f5cd908a88cd4b972ea89ce6cfdab10a78d2c60d331df9e280ad690aa7"
+          }
+        ],
+        "report": "browser-pWi4Pz/negative/report.json",
+        "expectedFailure": "screenshot-comparison",
+        "baselineUnchanged": true
+      },
+      "restored": {
+        "exitCode": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "diffArtifacts": [],
+        "report": "browser-pWi4Pz/restored/report.json"
+      },
+      "baseline": {
+        "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+        "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+        "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+        "unchanged": true
+      },
+      "publishedFiles": [
+        {
+          "path": "browser-ci/qualification.json",
+          "archiveMember": "tmp/identity-browser-ci/qualification.json",
+          "bytes": 38568,
+          "sha256": "ab45f7513eeb588afc4b0eba5b751a6f4a6978cf4b889792674a821adc8b5ab9"
+        },
+        {
+          "path": "browser-ci/host-qualification.json",
+          "archiveMember": "tmp/identity-browser-ci/host-qualification.json",
+          "bytes": 54628,
+          "sha256": "5d79639a47a92c6a42c35520b22c157f12cc8f86949530923ba1333691e4cc4d"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/positive/report.json",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/positive/report.json",
+          "bytes": 12165,
+          "sha256": "2aeed931c8ca2e2f1ac8c4240af7ff206210e88fd0f842d75fa3359f26da994c"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/negative/report.json",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/negative/report.json",
+          "bytes": 10215,
+          "sha256": "2cc42c81037ee52e6e55f577135c3bdbb64c1d2ce1fc8fa35ef26177e719f413"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/restored/report.json",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/restored/report.json",
+          "bytes": 3147,
+          "sha256": "c91b3a730d1c2a3301cefc0e012fc0e6abe8ae5f9302cf7b7ed198d8ff7c460d"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png",
+          "bytes": 130680,
+          "sha256": "f6a4e295255e8135e8b63d9b74e852a545e6fa22850bacd35a477ae2e9c2e7f3"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png",
+          "bytes": 149285,
+          "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+          "bytes": 68619,
+          "sha256": "a20785f5cd908a88cd4b972ea89ce6cfdab10a78d2c60d331df9e280ad690aa7"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md",
+          "bytes": 24465,
+          "sha256": "32155aafff80fcce8cce63fae30373c4b93264fd4fa6f8f998e3da1098d4fe57"
+        },
+        {
+          "path": "browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip",
+          "archiveMember": "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip",
+          "bytes": 500554,
+          "sha256": "b2b3a1c43e4d6b397ad5a27a1ae03163a13adccb36a8f5a3401f682ad775cb3e"
+        }
+      ],
+      "archivedButPrivateLogs": {
+        "browser-pWi4Pz/negative/command.log": "2f47332631c767a551295b5940f2df33dfcd38936edf6aadff158ad0f0751c2e",
+        "browser-pWi4Pz/positive/command.log": "12a4affe197c2bba7d5c0b538f27732a742aa6e5822004c873eaea56bd89b0c3",
+        "browser-pWi4Pz/preview.log": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88",
+        "browser-pWi4Pz/restored/command.log": "f89ee0a4cc937df2aef58beb40049ef3b2d5ee99fb43835323879f813a2aa4e7"
+      },
+      "notUploadedHiddenState": {
+        "browser-pWi4Pz/negative/artifacts/.last-run.json": "f1e1860b159e970da86c936a625e84e254ea2147d8f2b8410572804abe955271",
+        "browser-pWi4Pz/positive/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-pWi4Pz/restored/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      },
+      "selectionBoundary": "Original uploader default omits hidden files. Ten explicit nonlog packet members are public; four logs per packet remain in the private actual ZIP; three hidden state files have host-receipt source hashes only."
+    },
+    {
+      "mode": "local",
+      "status": "passed",
+      "sourceRevision": "5afa292c41563fe16f48f321eb5ac37459fda3dd",
+      "sourceBuildInventory": {
+        "encoding": "sorted UTF-8 relative path, NUL, lowercase SHA-256, newline",
+        "files": 435,
+        "scope": "Critical browser/profile/registry/font-source/workflow files; tracked non-Markdown inputs outside docs; all tracked fixtures. Documentation-only changes are excluded except the critical registry and font source receipts.",
+        "sha256": "ab0f0819a3cfabb7929446b2c8010f9d90cc3a98fa5d81f6c9ae7d52c8664cb3"
+      },
+      "positive": {
+        "exitCode": 0,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "diffArtifacts": [],
+        "report": "browser-GFDXV5/positive/report.json"
+      },
+      "negative": {
+        "exitCode": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "diffArtifacts": [
+          {
+            "path": "browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+            "sha256": "a20785f5cd908a88cd4b972ea89ce6cfdab10a78d2c60d331df9e280ad690aa7"
+          }
+        ],
+        "report": "browser-GFDXV5/negative/report.json",
+        "expectedFailure": "screenshot-comparison",
+        "baselineUnchanged": true
+      },
+      "restored": {
+        "exitCode": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "diffArtifacts": [],
+        "report": "browser-GFDXV5/restored/report.json"
+      },
+      "baseline": {
+        "path": "renderer/tests/e2e/__snapshots__/brand-kit-page.png",
+        "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543",
+        "approvalRevision": "85f650f936950094a608f5c477b9a59d4be29a87",
+        "unchanged": true
+      },
+      "publishedFiles": [
+        {
+          "path": "browser-local/qualification.json",
+          "archiveMember": "tmp/identity-browser-local/qualification.json",
+          "bytes": 38568,
+          "sha256": "74577cafa9a80a16845e59ed367d7b4bf391f60c9268bb366541b06955d051ed"
+        },
+        {
+          "path": "browser-local/host-qualification.json",
+          "archiveMember": "tmp/identity-browser-local/host-qualification.json",
+          "bytes": 54652,
+          "sha256": "234e75ca24e5515b855527e05398106606ac765b13dec8e2862c783206d2c1d2"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/positive/report.json",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/positive/report.json",
+          "bytes": 12173,
+          "sha256": "af1e6f438f835451b67811e6f73a589e37d33e1bcd2f3286196dfeee05fb3ed2"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/negative/report.json",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/negative/report.json",
+          "bytes": 10225,
+          "sha256": "25a763a27eb01e9688d903a38c5e364882b4fe454711e03c5afb04b6e58a8ef7"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/restored/report.json",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/restored/report.json",
+          "bytes": 3157,
+          "sha256": "5dac5a4a5fb4c67335635b876a9b60f6dde82ec2860ab37e2ca34f1dba6bf09a"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png",
+          "bytes": 130680,
+          "sha256": "f6a4e295255e8135e8b63d9b74e852a545e6fa22850bacd35a477ae2e9c2e7f3"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png",
+          "bytes": 149285,
+          "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png",
+          "bytes": 68619,
+          "sha256": "a20785f5cd908a88cd4b972ea89ce6cfdab10a78d2c60d331df9e280ad690aa7"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md",
+          "bytes": 24465,
+          "sha256": "32155aafff80fcce8cce63fae30373c4b93264fd4fa6f8f998e3da1098d4fe57"
+        },
+        {
+          "path": "browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip",
+          "archiveMember": "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip",
+          "bytes": 463558,
+          "sha256": "57b41c03ba8018954613ce2cce24e1a962714d9394db6ac09186e16222deefd0"
+        }
+      ],
+      "archivedButPrivateLogs": {
+        "browser-GFDXV5/negative/command.log": "688e11a43f78af158cc5016d757a5141160574aa018c47f860d5744cd8864fe8",
+        "browser-GFDXV5/positive/command.log": "0b95644d89759361ae81c678000c29aa9c878f077bffe73748b1c3d10f34850b",
+        "browser-GFDXV5/preview.log": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88",
+        "browser-GFDXV5/restored/command.log": "cd4d424c187e5f07d644216490d1ea8bccf1a8b991a6e4d44bfc0a7e0b2f4b9d"
+      },
+      "notUploadedHiddenState": {
+        "browser-GFDXV5/negative/artifacts/.last-run.json": "f1e1860b159e970da86c936a625e84e254ea2147d8f2b8410572804abe955271",
+        "browser-GFDXV5/positive/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-GFDXV5/restored/artifacts/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      },
+      "selectionBoundary": "Original uploader default omits hidden files. Ten explicit nonlog packet members are public; four logs per packet remain in the private actual ZIP; three hidden state files have host-receipt source hashes only."
+    }
+  ],
+  "credentialOrSignedUrlRecorded": false,
+  "hiddenStateClaimedRetained": false,
+  "rawWorkflowLogsPublished": false,
+  "largeOrMultiblockClaim": false
+}

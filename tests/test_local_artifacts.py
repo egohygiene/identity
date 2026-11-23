@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 from contextlib import contextmanager
 import hashlib
+import errno
 import http.server
 import importlib.util
 import io
@@ -166,23 +167,43 @@ class ArtifactTransportTests(unittest.TestCase):
                     worker.run(self.manifest, env)
         self.assertEqual(requests, [])
 
-    def test_archive_cache_rejects_aliases_special_files_and_wrong_bytes(self):
+    @unittest.skipUnless(all(hasattr(os, name) for name in ("O_NOFOLLOW", "O_NONBLOCK")), "Local Linux builder requires no-follow/nonblocking file descriptors")
+    def test_archive_cache_rejects_wrong_bytes(self):
         with tempfile.TemporaryDirectory() as tmp:
             p = Path(tmp) / "archive"
             p.write_bytes(b"archive")
             expected = {"bytes": 7, "sha256": hashlib.sha256(b"archive").hexdigest()}
             self.assertEqual(builder.regular_bytes(p, expected), b"archive")
+            p.write_bytes(b"changed")
+            with self.assertRaises(ValueError):
+                builder.regular_bytes(p, expected)
+
+    @unittest.skipUnless(all(hasattr(os, name) for name in ("O_NOFOLLOW", "O_NONBLOCK", "symlink")), "No-follow symbolic-link rejection requires POSIX link support")
+    def test_archive_cache_rejects_symbolic_alias(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "archive"
+            p.write_bytes(b"archive")
+            expected = {"bytes": 7, "sha256": hashlib.sha256(b"archive").hexdigest()}
             alias = Path(tmp) / "alias"
-            alias.symlink_to(p)
+            try:
+                alias.symlink_to(p)
+            except NotImplementedError:
+                self.skipTest("Symbolic links are unavailable on this host")
+            except OSError as error:
+                if error.errno in {errno.EPERM, errno.EACCES, errno.ENOSYS, errno.ENOTSUP}:
+                    self.skipTest("This host does not permit symbolic-link creation")
+                raise
             with self.assertRaises(OSError):
                 builder.regular_bytes(alias, expected)
+
+    @unittest.skipUnless(all(hasattr(os, name) for name in ("O_NOFOLLOW", "O_NONBLOCK", "mkfifo")), "Special-file rejection requires POSIX FIFO support")
+    def test_archive_cache_rejects_special_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            expected = {"bytes": 7, "sha256": hashlib.sha256(b"archive").hexdigest()}
             fifo = Path(tmp) / "fifo"
             os.mkfifo(fifo)
             with self.assertRaises(ValueError):
                 builder.regular_bytes(fifo, expected)
-            p.write_bytes(b"changed")
-            with self.assertRaises(ValueError):
-                builder.regular_bytes(p, expected)
 
     def test_descriptor_proof_rejects_every_change_beyond_the_one_typed_field(self):
         def wire(n, data):

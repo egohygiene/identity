@@ -1,0 +1,29 @@
+{
+  "kind": "identity.local-artifact-preflight/v1",
+  "status": "failed",
+  "context": "explicit trusted host executor and loopback storage, synthetic fixture only",
+  "toolVersion": "act version 0.2.98+identity.zipmime.1",
+  "toolSha256": "60feaeca0f89765c57d6c716d96eddabf153da3e98e1053e0ec373814ab7c4b7",
+  "uploader": "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+  "uploaderGitTree": "9eac56dcf4bfeeb308ee3d0d7d49913c3d65b676",
+  "fixtureWorkflowSha256": "f61668403affe15c6cbbcc5c3cec5d8f85a023f68048e0104bf02df2209d20e5",
+  "workerSha256": "0803ae55605965fdce2046934ed97fc01702f1eea4843318ab7568f47a499f68",
+  "expectedFiles": {
+    "notes.txt": {
+      "bytes": 58,
+      "sha256": "09726a75c60798802ca92665423eda5acc36d6c91bc63d1a35cf78a07a8923b3"
+    },
+    "media/sample.bin": {
+      "bytes": 21,
+      "sha256": "4782d271bff4b7a21ad9cbaab830e9c580d432340ff8bc2e575a59b49f615c9f"
+    }
+  },
+  "actExitCode": 1,
+  "timedOut": false,
+  "rawLogBytes": 2826,
+  "rawLogSha256": "168c916d73a2c60ef15e9094d830695865a87fd3419dd9e467f047a7ea6479fa",
+  "sanitizedLogSha256": "e811f36155771cbacc2cd2cacf1ba8e7130ec777fe3750028c97eceabc837776",
+  "officialActOverwritten": false,
+  "hostedWorkflowClaim": false,
+  "failure": "Actual local upload/download/inventory proof unavailable; inspect the sanitized log."
+}

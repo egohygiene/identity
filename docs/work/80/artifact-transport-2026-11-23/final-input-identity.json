@@ -1,0 +1,12 @@
+{
+  "kind": "identity.runtime-final-input-identity/v1",
+  "observedAt": "2026-11-23T06:59:44.363485+00:00",
+  "revision": "5afa292c41563fe16f48f321eb5ac37459fda3dd",
+  "clean": true,
+  "allTrackedFilesPreserved": true,
+  "trackedFiles": 866,
+  "workflowSha256": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+  "binarySha256": "e103cd431339dd0be997d5b0a9599a7327da8d1d327ed3fe809636b8fdd2ce90",
+  "helperStillRetained": true,
+  "cleanupPerformed": false
+}

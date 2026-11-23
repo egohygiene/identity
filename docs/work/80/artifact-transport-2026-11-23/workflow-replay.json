@@ -1,0 +1,338 @@
+{
+  "kind": "identity.local-original-workflow-artifact-replay/v1",
+  "status": "passed",
+  "context": "actual unmodified workflow via explicitly named local act derivative and observed loopback artifact backend; not hosted GitHub CI",
+  "sourceRevision": "5afa292c41563fe16f48f321eb5ac37459fda3dd",
+  "sourceCleanBeforeAndAfter": true,
+  "workflowSha256": "56e6ee46a725096cbe3270295ec3156d7dd4555f664281d062b2ad2120beb8d9",
+  "toolVersion": "act version 0.2.98+identity.zipmime.2",
+  "toolSha256": "e103cd431339dd0be997d5b0a9599a7327da8d1d327ed3fe809636b8fdd2ce90",
+  "actionGitTrees": {
+    "step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c": "ff47551a42d7f99402b166673a87d6f19cf49c7c",
+    "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1": "150e70ecad5ebf06a559a01ea3a56d9a3236d2b1",
+    "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38": "e2d479cfddf6ecba7417f6e66c4cf25f31fe4e81",
+    "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a": "9eac56dcf4bfeeb308ee3d0d7d49913c3d65b676"
+  },
+  "actionSourcesPreserved": true,
+  "actExitCode": 0,
+  "timedOut": false,
+  "artifactObservations": [
+    {
+      "status": "passed",
+      "runtimeTokenRecorded": false,
+      "signedUrlRecorded": false,
+      "archiveBytes": 4074757,
+      "archiveSha256": "127fb7ed43c274ff4a15388a79569c6ac561694402e1bd4dbfbaa38e2a9f42e6",
+      "actualFinalizeSha256": "127fb7ed43c274ff4a15388a79569c6ac561694402e1bd4dbfbaa38e2a9f42e6",
+      "files": {
+        "hostexecutor/renderer/dist/CNAME": {
+          "bytes": 23,
+          "sha256": "e1caced0d54a7a591d54d7d7f5cf6df8daecbe23299fa99c5bff3a03933752f7"
+        },
+        "hostexecutor/renderer/dist/README.md": {
+          "bytes": 2509,
+          "sha256": "3b93f7b207b4d9dce90018aa1448f775418e3aaf4a837e3814e65b796a8f5959"
+        },
+        "hostexecutor/renderer/dist/assets/index-Bwltvv3k.js": {
+          "bytes": 248284,
+          "sha256": "78cf05a44ddde33cd9a7e8ab8f84b6774b754158a72088cbd9867aa8e4de3e5a"
+        },
+        "hostexecutor/renderer/dist/assets/index-DaejL57Q.css": {
+          "bytes": 13148,
+          "sha256": "e443500b3973a3dadda766df2175d87f96fb8528d9e0de2f3012fbf73d85864b"
+        },
+        "hostexecutor/renderer/dist/brand/LOGO_USE.md": {
+          "bytes": 4731,
+          "sha256": "f80b941d9e68a816d78ecafff4615220a507b35f38ea8699a1a11f870467af0b"
+        },
+        "hostexecutor/renderer/dist/brand/avatar-square.svg": {
+          "bytes": 2364,
+          "sha256": "093aa646fc0a720d118c8b932068bc11b90db1fcc159abf63a97a3580f69c10d"
+        },
+        "hostexecutor/renderer/dist/brand/banner-readme.svg": {
+          "bytes": 3406,
+          "sha256": "0507b9f8ff011642097032c35baf3fab996654db3ff074f10c16077f957b062e"
+        },
+        "hostexecutor/renderer/dist/brand/banner-hires.webp": {
+          "bytes": 12898,
+          "sha256": "48b5c8f91538362856f21dfca16b274bbf2dddad23a228905a8d95074f32c60f"
+        },
+        "hostexecutor/renderer/dist/brand/banner-readme.webp": {
+          "bytes": 12898,
+          "sha256": "48b5c8f91538362856f21dfca16b274bbf2dddad23a228905a8d95074f32c60f"
+        },
+        "hostexecutor/renderer/dist/brand/emblem.svg": {
+          "bytes": 2387,
+          "sha256": "20e5cd2edaac53f81343ec5c8e6557ab049339e0c907d9641a822eab7554d97c"
+        },
+        "hostexecutor/renderer/dist/brand/lockup-horizontal.svg": {
+          "bytes": 2531,
+          "sha256": "5cece16fe478fdd42a1a91f47546db3fe860ec7af07682e68397977a28e41eed"
+        },
+        "hostexecutor/renderer/dist/brand/open-graph.svg": {
+          "bytes": 2707,
+          "sha256": "50fab81e6ba7d90e27d99a7ef9798927d0f9a9fc2b2e07de8252290293176ab5"
+        },
+        "hostexecutor/renderer/dist/brand/social-preview.svg": {
+          "bytes": 3338,
+          "sha256": "619714e55ee1c8b39236838e429e80cacaf9480612052850d730ebe62e3f15db"
+        },
+        "hostexecutor/renderer/dist/brand-kit/index.html": {
+          "bytes": 596,
+          "sha256": "2d89abc3df0c1cc48d5405c7381a6351381656ac65ad81a9c289a633a635bd4d"
+        },
+        "hostexecutor/renderer/dist/guidelines/color-palette.svg": {
+          "bytes": 4876,
+          "sha256": "6a6683766f9ed077624cb85ae3af605619e3b3497c282bd96e77f379922f1a0e"
+        },
+        "hostexecutor/renderer/dist/guidelines/design-system.svg": {
+          "bytes": 3764,
+          "sha256": "7250bf2e61728c6bef5a9ef02b71cebbc63aab982486d2ae69dd0cd1d5c09f1a"
+        },
+        "hostexecutor/renderer/dist/guidelines/usage-guidelines.svg": {
+          "bytes": 3683,
+          "sha256": "95dec8fc5cc80758082e2f5aad8b409928d4436f3382ba99ad6bef957dca76c5"
+        },
+        "hostexecutor/renderer/dist/index.html": {
+          "bytes": 96862,
+          "sha256": "563a8853466a2e1f12755952ae2e19e8477515f061d4114f0e533c1377a2ea15"
+        },
+        "hostexecutor/renderer/dist/manifest.json": {
+          "bytes": 3644,
+          "sha256": "56695f86f825ffb4c53d7b33093393f5086730adc9992c67ab0e2051c5154f93"
+        },
+        "hostexecutor/renderer/dist/mascot/README.md": {
+          "bytes": 1994,
+          "sha256": "f416c2c66be67aa6545879efb70663ecaa9a6a75e48fdba9c570fe808e033f3f"
+        },
+        "hostexecutor/renderer/dist/mascot/kern-full.png": {
+          "bytes": 692047,
+          "sha256": "56d68e14d92aab9f61b821ee97c1b63a1759b0d0fc2d49141aad962f9d094e3c"
+        },
+        "hostexecutor/renderer/dist/mascot/kern-icon.png": {
+          "bytes": 92515,
+          "sha256": "e902dc0f264f94ae1a06b9020d3b07fae8e4a2ec0c09dab4d9ec35bc0f9089e7"
+        },
+        "hostexecutor/renderer/dist/mascot/kern-portrait.png": {
+          "bytes": 288668,
+          "sha256": "bf3dad6ff9b75ef998f662b9cadd6bde9a5dffeaff54d01a1a1bec8681cefc99"
+        },
+        "hostexecutor/renderer/dist/mascot/manifest.json": {
+          "bytes": 1877,
+          "sha256": "65aa58f19ad8ffbac920b85835df7483eb0f1b905f5f74ab864638fb55d4063c"
+        },
+        "hostexecutor/renderer/dist/packages/identity-brand-kit-v1.0.0.SHA256SUMS": {
+          "bytes": 202,
+          "sha256": "9ffe0c583d72a6536c886f5003549eaeca1103a7c4a7d12a617fcd4c77072019"
+        },
+        "hostexecutor/renderer/dist/packages/identity-brand-kit-v1.0.0.manifest.json": {
+          "bytes": 6527,
+          "sha256": "e44d4b8c677a212f9ac64585fd559ccf8819ba00db4416f0a90dd78af5d5c2af"
+        },
+        "hostexecutor/renderer/dist/packages/identity-brand-kit-v1.0.0.zip": {
+          "bytes": 1152660,
+          "sha256": "e9b7fb335067ecd529674a32c74a54a13fce3467164109e3a2e6b2b8c5f0853a"
+        },
+        "hostexecutor/renderer/dist/reference/avatar-square.webp": {
+          "bytes": 6984,
+          "sha256": "047b2c8810815d46e7391a033e2b601c8129e4a8a5459c860138ada8ce67f3b3"
+        },
+        "hostexecutor/renderer/dist/reference/color-palette.webp": {
+          "bytes": 2486,
+          "sha256": "2a073d229a67bb7a97edf5bb83c4fd4547d6f3eaaeb53659fa7aafb148a1ee8c"
+        },
+        "hostexecutor/renderer/dist/reference/design-system.webp": {
+          "bytes": 2398,
+          "sha256": "a2b160ad9221bb0566c4c07ef9d575c1739f963ecfbb79a0ace0a50910c735e5"
+        },
+        "hostexecutor/renderer/dist/reference/lockup.webp": {
+          "bytes": 1582,
+          "sha256": "5238fa31ff0f973ec773ca6561ca1ffb9f4bf226e0c3e0da56c521033106c001"
+        },
+        "hostexecutor/renderer/dist/reference/master-emblem.webp": {
+          "bytes": 2178,
+          "sha256": "e0f1e74df580991aaeb8d97f780d6358e7200cd7466c3bd6b79ea952b599a8f3"
+        },
+        "hostexecutor/renderer/dist/reference/social-preview.webp": {
+          "bytes": 6954,
+          "sha256": "f3a57194b262e355bcbea3b3b5f06db6e241428463c4d7308c4bd5528a1c0185"
+        },
+        "hostexecutor/renderer/dist/reference/usage-guidelines.webp": {
+          "bytes": 2902,
+          "sha256": "1794238b039440b94ebd5bea5aa77412d7b5d1e18b6dfc980c59b0801ea8fe04"
+        },
+        "hostexecutor/renderer/dist/site.json": {
+          "bytes": 803,
+          "sha256": "7238eb3e374600475b1ded0970c2b25e8f3813ac468b7bf29b4472e6d4789dc4"
+        },
+        "hostexecutor/renderer/dist/web/apple-touch-icon.png": {
+          "bytes": 2176,
+          "sha256": "89ead769af2f301b6646cf01a7de05bca8ce1cfefa5b4bc3d0b4da37c17319dd"
+        },
+        "hostexecutor/renderer/dist/web/favicon-16x16.png": {
+          "bytes": 666,
+          "sha256": "dc7e2b8228b102dacace90989b1df312c5d517d42104be723d06346bec2f85e7"
+        },
+        "hostexecutor/renderer/dist/web/favicon-32x32.png": {
+          "bytes": 819,
+          "sha256": "972b4c9f212cd4f3b3ecc50fbf21598f88b64447c862717e11bec7f69e24974a"
+        },
+        "hostexecutor/renderer/dist/web/favicon-48x48.png": {
+          "bytes": 1039,
+          "sha256": "3311f76384910764fb54ca5df0e13877eff211fb340d077aa05a317c9d1397a8"
+        },
+        "hostexecutor/renderer/dist/web/favicon-64x64.png": {
+          "bytes": 1274,
+          "sha256": "fc84ad701d137901894528747a2350ba6fab0bba176167a7065daaad40b6df8b"
+        },
+        "hostexecutor/renderer/dist/web/favicon.png": {
+          "bytes": 1274,
+          "sha256": "fc84ad701d137901894528747a2350ba6fab0bba176167a7065daaad40b6df8b"
+        },
+        "hostexecutor/renderer/dist/web/icon-192x192.png": {
+          "bytes": 2676,
+          "sha256": "fb88187bc42fb0a8b8264d1af55359a8e3efcafa84daba26c5273574206f0c59"
+        },
+        "hostexecutor/renderer/dist/web/icon.svg": {
+          "bytes": 2364,
+          "sha256": "093aa646fc0a720d118c8b932068bc11b90db1fcc159abf63a97a3580f69c10d"
+        },
+        "hostexecutor/renderer/dist/web/identity-palette.css": {
+          "bytes": 419,
+          "sha256": "8577b7dea2260441827412bd206d86c7213ed75f8973a8b71aae6b0401ade1e8"
+        },
+        "hostexecutor/renderer/dist/web/site.webmanifest": {
+          "bytes": 454,
+          "sha256": "845a186ea096903dafe3def746d47c3673360762c44e799811556e4ac6a3a58a"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png": {
+          "bytes": 130680,
+          "sha256": "f6a4e295255e8135e8b63d9b74e852a545e6fa22850bacd35a477ae2e9c2e7f3"
+        },
+        "hostexecutor/renderer/dist/web/maskable-icon.svg": {
+          "bytes": 2505,
+          "sha256": "7f32b9d17085f8340feca98d809c27bafecbe84c811ea62fe62abb4420b83d1c"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png": {
+          "bytes": 68619,
+          "sha256": "a20785f5cd908a88cd4b972ea89ce6cfdab10a78d2c60d331df9e280ad690aa7"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png": {
+          "bytes": 149285,
+          "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md": {
+          "bytes": 24465,
+          "sha256": "32155aafff80fcce8cce63fae30373c4b93264fd4fa6f8f998e3da1098d4fe57"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip": {
+          "bytes": 500554,
+          "sha256": "b2b3a1c43e4d6b397ad5a27a1ae03163a13adccb36a8f5a3401f682ad775cb3e"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/negative/command.log": {
+          "bytes": 3314,
+          "sha256": "2f47332631c767a551295b5940f2df33dfcd38936edf6aadff158ad0f0751c2e"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/negative/report.json": {
+          "bytes": 10215,
+          "sha256": "2cc42c81037ee52e6e55f577135c3bdbb64c1d2ce1fc8fa35ef26177e719f413"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/positive/command.log": {
+          "bytes": 129,
+          "sha256": "12a4affe197c2bba7d5c0b538f27732a742aa6e5822004c873eaea56bd89b0c3"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/positive/report.json": {
+          "bytes": 12165,
+          "sha256": "2aeed931c8ca2e2f1ac8c4240af7ff206210e88fd0f842d75fa3359f26da994c"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/preview.log": {
+          "bytes": 77,
+          "sha256": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/restored/command.log": {
+          "bytes": 111,
+          "sha256": "f89ee0a4cc937df2aef58beb40049ef3b2d5ee99fb43835323879f813a2aa4e7"
+        },
+        "tmp/identity-browser-ci/browser-pWi4Pz/restored/report.json": {
+          "bytes": 3147,
+          "sha256": "c91b3a730d1c2a3301cefc0e012fc0e6abe8ae5f9302cf7b7ed198d8ff7c460d"
+        },
+        "tmp/identity-browser-ci/host-qualification.json": {
+          "bytes": 54628,
+          "sha256": "5d79639a47a92c6a42c35520b22c157f12cc8f86949530923ba1333691e4cc4d"
+        },
+        "tmp/identity-browser-ci/qualification.json": {
+          "bytes": 38568,
+          "sha256": "ab45f7513eeb588afc4b0eba5b751a6f4a6978cf4b889792674a821adc8b5ab9"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-actual.png": {
+          "bytes": 130680,
+          "sha256": "f6a4e295255e8135e8b63d9b74e852a545e6fa22850bacd35a477ae2e9c2e7f3"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-diff.png": {
+          "bytes": 68619,
+          "sha256": "a20785f5cd908a88cd4b972ea89ce6cfdab10a78d2c60d331df9e280ad690aa7"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/brand-kit-page-expected.png": {
+          "bytes": 149285,
+          "sha256": "53d7d144734ac63ceb730e95c7a39acc47d3fa64c5429f752233978289088543"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/error-context.md": {
+          "bytes": 24465,
+          "sha256": "32155aafff80fcce8cce63fae30373c4b93264fd4fa6f8f998e3da1098d4fe57"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/negative/artifacts/renderer-matches-the-reviewed-desktop-viewport-baseline-chromium/trace.zip": {
+          "bytes": 463558,
+          "sha256": "57b41c03ba8018954613ce2cce24e1a962714d9394db6ac09186e16222deefd0"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/negative/command.log": {
+          "bytes": 3314,
+          "sha256": "688e11a43f78af158cc5016d757a5141160574aa018c47f860d5744cd8864fe8"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/negative/report.json": {
+          "bytes": 10225,
+          "sha256": "25a763a27eb01e9688d903a38c5e364882b4fe454711e03c5afb04b6e58a8ef7"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/positive/command.log": {
+          "bytes": 129,
+          "sha256": "0b95644d89759361ae81c678000c29aa9c878f077bffe73748b1c3d10f34850b"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/positive/report.json": {
+          "bytes": 12173,
+          "sha256": "af1e6f438f835451b67811e6f73a589e37d33e1bcd2f3286196dfeee05fb3ed2"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/preview.log": {
+          "bytes": 77,
+          "sha256": "ae24f783560c59deed04caeff90ef3b84a3c0d3a50ca749550cfeeed2c58dd88"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/restored/command.log": {
+          "bytes": 111,
+          "sha256": "cd4d424c187e5f07d644216490d1ea8bccf1a8b991a6e4d44bfc0a7e0b2f4b9d"
+        },
+        "tmp/identity-browser-local/browser-GFDXV5/restored/report.json": {
+          "bytes": 3157,
+          "sha256": "5dac5a4a5fb4c67335635b876a9b60f6dde82ec2860ab37e2ca34f1dba6bf09a"
+        },
+        "tmp/identity-browser-local/host-qualification.json": {
+          "bytes": 54652,
+          "sha256": "234e75ca24e5515b855527e05398106606ac765b13dec8e2862c783206d2c1d2"
+        },
+        "tmp/identity-browser-local/qualification.json": {
+          "bytes": 38568,
+          "sha256": "74577cafa9a80a16845e59ed367d7b4bf391f60c9268bb366541b06955d051ed"
+        }
+      },
+      "fileCount": 74,
+      "downloadContext": "authenticated actual backend API and signed loopback download before unmodified workflow cleanup",
+      "rawArchiveRetention": "task-local private file; hash/inventory are public-safe evidence"
+    }
+  ],
+  "actualUploaderDigestMatchesDownload": true,
+  "rawLogBytes": 222570,
+  "rawLogSha256": "e2a5aa9d5679d0b44c774adb3531fd323565b69d2debe15f2a5a218807cc20b9",
+  "sanitizedLogSha256": "5342e9f3b162f1ad9b077043fdceb248964883c380dcf54f4f2b0ead7f8857eb",
+  "runtimeTokenRecorded": false,
+  "signedUrlRecorded": false,
+  "originalWorkflowOrActionsEdited": false,
+  "hostedWorkflowClaim": false
+}

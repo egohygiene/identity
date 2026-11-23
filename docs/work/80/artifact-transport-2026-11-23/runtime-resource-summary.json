@@ -1,0 +1,31 @@
+{
+  "kind": "identity.original-workflow-runtime-budget/v1",
+  "scope": "Actual sampled local workflow runtime, not hosted CI or additional product acceptance",
+  "sampleCount": 18,
+  "sampleIntervalSeconds": 15,
+  "firstObservedAt": "2026-11-23T06:54:58.861249+00:00",
+  "lastPeriodicObservedAt": "2026-11-23T06:59:15.985465+00:00",
+  "minimumSampledTmpfsFreeBytes": 5635366912,
+  "maximumSampledHelperCurrentBytes": 5207322624,
+  "maximumSampledParentCurrentBytes": 9521688576,
+  "helperPeakBytes": 5300760576,
+  "parentMemoryPeakInterpretation": "Parent memory.peak is lifetime and predates this run; sampled current maxima are reported separately",
+  "final": {
+    "observedAt": "2026-11-23T06:59:21.024964+00:00",
+    "tmpfsAvailableBytes": 6051201024,
+    "parent": {
+      "memory.current": "7933177856",
+      "memory.max": "17179869184",
+      "memory.peak": "15243288576",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    },
+    "helper": {
+      "memory.current": "3630727168",
+      "memory.max": "12884901888",
+      "memory.peak": "5300760576",
+      "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+    }
+  },
+  "runtimeRetainedForArtifactWorker": true,
+  "cleanupPerformed": false
+}
