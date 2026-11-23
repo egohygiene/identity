@@ -7,7 +7,7 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-23T06:14:09.080304+00:00'
+  updated_at: '2026-11-23T06:17:55.800795+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
@@ -70,33 +70,30 @@ work:
     depends_on: []
 state:
   base:
-    revision: ad8fca58946ca03f6f07d13be6c64046216569d0
-    ref: refs/heads/main
-    verified_at: '2026-11-23T06:12:36.089787+00:00'
+    revision: bef3411e9b374d8cf311fb4e5cadaf236612b7ac
+    ref: refs/heads/codex/70-timestamp-consistency-20261123
+    verified_at: '2026-11-23T06:17:55.800795+00:00'
   candidate:
-    branch: codex/70-local-install-qualification-20261123
+    branch: codex/70-local-install-stack-20261123
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-23T06:14:09.080304+00:00'
+    observed_at: '2026-11-23T06:17:55.800795+00:00'
     default_branch_revision: ad8fca58946ca03f6f07d13be6c64046216569d0
     issue_state: open
     pull_request_state: not-applicable
-    notes: Identity163 through166 and Aether141/142 merged; provider mainad8fca5 checked. Timestamp draft167
-      is open; this local-install child has noPRyet. Existing actual records retain their sources; no
-      release/source approval is inferred.
+    notes: Earlier163 through166 and Aether141/142 are merged; timestamp167 and architecture143 are draft.
+      This new installation child does not yet have a PR. Original code/binary/consumer receipts retain
+      their exact represented inputs; no source choice, release or new native execution is inferred.
   parallel_changes:
   - provider: github
     id: egohygiene/identity#167
     url: https://github.com/egohygiene/identity/pull/167
   - provider: github
-    id: egohygiene/identity#80
-    url: https://github.com/egohygiene/identity/issues/80
-  - provider: github
-    id: egohygiene/identity#98
-    url: https://github.com/egohygiene/identity/issues/98
+    id: egohygiene/aether#143
+    url: https://github.com/egohygiene/aether/pull/143
 review:
   status: partial
   reviewed_at: '2026-11-23T06:14:09.080304+00:00'
@@ -163,7 +160,7 @@ Qualify actual local source-candidate archive download, isolated installation an
 
 ## State snapshot
 
-Base/main isad8fca58946ca03f6f07d13be6c64046216569d0. Candidate branchcodex/70-local-install-qualification-20261123 has no containing-revision or pre-PR self-reference. Actual product source isd159c680/new37ff6ca4 versuspreviousedca416/f6a84021; proof tool isd0ff470, with later docs distinct.
+Stack base is timestamp draft167 at `bef3411e9b374d8cf311fb4e5cadaf236612b7ac`. Candidate `codex/70-local-install-stack-20261123` has null containing revision/pre-PR reference. Main remains `ad8fca58946ca03f6f07d13be6c64046216569d0`. Actual harness source d0ff470, product d159 and baseline edca retain their separate identities.
 
 ## Completed and material changes
 
@@ -183,7 +180,7 @@ Review the local install packet and reconcile with timestamp/artifact fixes; qua
 
 ## Parallel changes and reconciliation
 
-Timestamp draft167 coded159c680 and docs bef3411 are retained as parents. Root owns actual artifact-adapter work, final stack and mutable issue reconciliation. Reconcile continuity by meaning before stacking; do not relabel prior code/binary/tool executions as tests of a later integration revision.
+This child follows timestamp draft167; review parents before children. Aether143 and its audit sibling own portable skills, while the independent local artifact-transport checkpoint owns the remaining uploader protocol. Preserve all exact-source/domain evidence on integration. Pending actual self-source choices and broader native/release/publication gates remain independent.
 
 ## Privacy and redaction
 
