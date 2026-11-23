@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 """Canonical internal guidance validation; bundled offline by build_identity_validator.py."""
 from __future__ import annotations
-from datetime import datetime
 from typing import Any, Sequence
 from .common import (
     Diagnostic,
@@ -11,6 +10,7 @@ from .common import (
     GUIDANCE_STATES,
     diagnostic,
     require_closed,
+    valid_rfc3339_timestamp,
 )
 
 
@@ -136,11 +136,7 @@ def validate_guidance_governance(
                 "guidance provenance method is unsupported",
                 "Use human-authored, handoff-candidate, or imported.",
             )
-        try:
-            datetime.fromisoformat(
-                str(provenance.get("capturedAt", "")).replace("Z", "+00:00")
-            )
-        except ValueError:
+        if not valid_rfc3339_timestamp(provenance.get("capturedAt")):
             diagnostic(
                 diagnostics,
                 "IDN1602",

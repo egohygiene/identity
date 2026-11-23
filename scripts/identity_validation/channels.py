@@ -25,6 +25,7 @@ from .common import (
     load_json,
     require_closed,
     resolve_local_path,
+    valid_rfc3339_timestamp,
 )
 from .guidance import validate_guidance_governance
 
@@ -91,9 +92,7 @@ def validate_channel_registry(
             diagnostic(diagnostics, "IDN2101", f"{path_value}#/registry/version", "channel registry version must be semantic versioning", "Publish registry changes with an explicit x.y.z version.")
         if not isinstance(registry.get("owner"), str) or not registry["owner"].strip():
             diagnostic(diagnostics, "IDN2101", f"{path_value}#/registry/owner", "channel registry owner is empty", "Record the responsible organization.")
-        try:
-            datetime.fromisoformat(str(registry.get("reviewedAt", "")).replace("Z", "+00:00"))
-        except ValueError:
+        if not valid_rfc3339_timestamp(registry.get("reviewedAt")):
             diagnostic(diagnostics, "IDN2101", f"{path_value}#/registry/reviewedAt", "channel registry reviewedAt must be RFC 3339", "Record when the registry was reviewed.")
 
     security = require_closed(
