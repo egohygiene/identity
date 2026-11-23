@@ -1,0 +1,125 @@
+{
+  "schema": "identity-isolated-docker-runtime-observation/v1",
+  "observed_at": "2026-11-22T18:40:02.126168+00:00",
+  "represented_identity_base": "75ca39f3fc7e5e9e0b5578af58c966cd2590a652",
+  "engine": {
+    "ServerVersion": "28.4.0",
+    "Driver": "overlay2",
+    "OSType": "linux",
+    "Architecture": "x86_64",
+    "NCPU": 5,
+    "MemTotal": 18882662400,
+    "CgroupDriver": "cgroupfs",
+    "CgroupVersion": "2",
+    "SecurityOptions": [
+      "name=seccomp,profile=builtin",
+      "name=cgroupns"
+    ],
+    "MemTotal_note": "Engine-visible physical memory; helper and parent cgroup limits are narrower and govern the real budget."
+  },
+  "storage": {
+    "scope": "one task-owned tmpfs shared by source, evidence and isolated Docker data",
+    "device": 34,
+    "inode": 64979,
+    "filesystem_capacity_bytes": 9441329152,
+    "available_bytes_at_observation": 6479904768,
+    "daemon_root_same_path_bind": true,
+    "independent_daemon_namespace_device_and_inode_previously_matched": true,
+    "guards_unchanged": true,
+    "initial_available_bytes_before_heavy_profiles": 9410756608,
+    "parent_cgroup_memory_max": "17179869184",
+    "parent_cgroup_memory_current": "10364391424"
+  },
+  "metadata_probes": [
+    {
+      "reference": "mcr.microsoft.com/playwright@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e",
+      "command": "docker manifest inspect repository@immutable-index-digest",
+      "exit_code": 0,
+      "formatted_stdout_sha256": "5e17303b169ba738681b22477b6280812731de258f61244b5e4eed1a67e86c87",
+      "scope": "metadata-only; Docker CLI reformats JSON, so stdout hash is not the OCI digest",
+      "selected_linux_amd64_manifest": "sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac"
+    },
+    {
+      "reference": "docker.io/library/node@sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0",
+      "command": "docker manifest inspect repository@immutable-index-digest",
+      "exit_code": 0,
+      "formatted_stdout_sha256": "eed6a0f2140958fccfcee08e843049d5d448386bed7ea2354a90844ab3eea95c",
+      "scope": "metadata-only; Docker CLI reformats JSON, so stdout hash is not the OCI digest",
+      "selected_linux_amd64_manifest": "sha256:7f7f17f773027e7f0475fa829fc0d793d75918fda85b9e517c9cc5aa46200406"
+    }
+  ],
+  "limitations": [
+    "Runtime capability and metadata transport probes are not original browser/development-image acceptance.",
+    "No GitHub-hosted runner or paid CI was used.",
+    "Tmpfs capacity is a shared memory and filesystem budget, not three independent reserves.",
+    "No organization policy, Docker global configuration, approved profile or immutable image pin changed."
+  ],
+  "helper": {
+    "base_image": "ghcr.io/catthehacker/ubuntu@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+    "memory_limit_bytes": 12884901888,
+    "nano_cpus": 2000000000,
+    "cgroup_namespace": "private",
+    "added_capabilities": [
+      "CAP_NET_ADMIN",
+      "CAP_SYS_ADMIN",
+      "CAP_SYS_PTRACE"
+    ],
+    "security_options": [
+      "seccomp=unconfined",
+      "apparmor=unconfined"
+    ],
+    "privileged": false,
+    "host_pid_or_network": false,
+    "host_docker_socket_mounted": false
+  },
+  "runtime_executables": {
+    "dockerd": {
+      "sha256": "ced6dbe1cc091efd959774db180954b9450d179acec042b6243b9f0772ecdd67"
+    },
+    "containerd": {
+      "sha256": "e37c549dd42ef88df01eb6fac0fb91791f72cfababac1f136192cd553226254b"
+    },
+    "containerd-shim-runc-v2": {
+      "sha256": "171747f42ac010d2784b874cb7cd423a7e7282338f4d44ff7b418b452bf628b0"
+    },
+    "runc": {
+      "sha256": "37f99361bd5e6ea4c44865697580009f215effb335e02d1966c52c534963c581",
+      "version": "1.3.0",
+      "commit": "4ca628d",
+      "libseccomp": "2.5.4",
+      "normal_file_copy_sha256": "37f99361bd5e6ea4c44865697580009f215effb335e02d1966c52c534963c581"
+    },
+    "docker-init": {
+      "sha256": "8cc70470bb4b21c25ddca7108c5820fa14d5019b5f1ec7e94bfca65de2479990"
+    },
+    "docker-proxy": {
+      "sha256": "7544ade566cb47300b35f21093f00c9d7128ab98c9140ff6141e7fe372f2a477"
+    }
+  },
+  "capability_probes": {
+    "scope": "Generated tiny image only; not product-profile qualification.",
+    "trusted_generated_c_source_sha256": "bfdfb86e25a007baaafabcfd8f1486f5de0e8dd745ce53bc7cc45b297981e0ac",
+    "trusted_generated_static_executable_sha256": "551d8da153af8b73317c81fe6662e4b404c87b5ed7eed0df3f15faaf0c5f2832",
+    "source_recipe": "cc -static -Os -s; image tar contains /hello mode0755 uid0 and /owned mode0644 uid1234/gid1234",
+    "proven": [
+      "native OverlayFS on task tmpfs",
+      "Docker image import and ownership preservation",
+      "UID0 and UID1000 child execution",
+      "none, default-bridge and host child network modes",
+      "CPU/memory-constrained child execution",
+      "BuildKit RUN and image export"
+    ],
+    "tiny_image_id": "sha256:fc35335ee5222fd3003cc4cd256182a1b9a88f08283b2393184c6af70e29bc7a",
+    "tiny_built_image_id": "sha256:83de7d710d0848b0296d5f4b5a4c52e37d2ef76ac914ca7abbb600fb933056b9",
+    "trusted_generated_c_source": "#include <stdio.h>\n#include <unistd.h>\n#include <sys/stat.h>\nint main(void){ struct stat s; if(stat(\"/owned\", &s))return 3; printf(\"{\\\"uid\\\":%lu,\\\"gid\\\":%lu,\\\"owned_uid\\\":%lu}\\n\",(unsigned long)geteuid(),(unsigned long)getegid(),(unsigned long)s.st_uid); return s.st_uid == 1234 ? 0 : 4; }\n"
+  },
+  "network_repair": {
+    "initial_original_pull_failed_before_payload": true,
+    "initial_error": "Client.Timeout exceeded while awaiting headers on first MCR registry /v2/ GET",
+    "uppercase_and_injected_lowercase_proxy_values_differed": true,
+    "normalized_uppercase_from_lowercase_in_owned_daemon_and_clients": true,
+    "tls_verification_disabled": false,
+    "published_proxy_values": false,
+    "host_global_configuration_changed": false
+  }
+}

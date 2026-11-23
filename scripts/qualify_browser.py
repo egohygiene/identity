@@ -323,12 +323,19 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-directory", type=Path, required=True, help="New or empty evidence directory outside the checkout")
     parser.add_argument("--mode", choices=("local", "ci"), default="local", help="Invocation label only; both modes use the same fixed environment")
-    parser.add_argument("--proxy-ca", type=Path, help="Optional build-only CA bundle mounted as a BuildKit secret; never copied into the image")
+    parser.add_argument("--proxy-ca", type=Path, default=os.environ.get("IDENTITY_BROWSER_PROXY_CA") or None,
+                        help="Optional build-only CA bundle (defaults to IDENTITY_BROWSER_PROXY_CA); mounted as a BuildKit secret, never copied into the image")
     args = parser.parse_args()
     try:
         proxy_ca = args.proxy_ca.resolve(strict=True) if args.proxy_ca else None
         if proxy_ca is not None and not proxy_ca.is_file():
-            raise ValueError("--proxy-ca must select a regular CA bundle")
+            raise ValueError("Invalid CA bundle")
+        if proxy_ca is not None and any(character in ',"' or ord(character) < 32 or ord(character) == 127
+                                        for path in (args.proxy_ca, proxy_ca) for character in str(path)):
+            raise ValueError("Invalid CA secret path")
+    except (OSError, ValueError, RuntimeError):
+        parser.error("--proxy-ca must select an existing regular CA bundle")
+    try:
         destination = output_destination(args.output_directory)
         destination.mkdir(parents=True, exist_ok=True)
         receipt_file = reserve_host_receipt(destination)

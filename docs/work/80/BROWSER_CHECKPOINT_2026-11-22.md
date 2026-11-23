@@ -1,5 +1,10 @@
 # Browser workflow checkpoint — 2026-11-22
 
+Historical checkpoint. The later
+[original Docker and local workflow proof](ACTION_REPLAY_2026-11-22.md)
+retains fresh actual source-bound passes and the separate local artifact-server
+failure. The diagnostic/failure results below keep their original scope.
+
 Issue: [#80](https://github.com/egohygiene/identity/issues/80).
 Base: `ec8fce30c3c96c7781238eb0a8899d6f0cee0a40`.
 Executed repaired source: `57704aea75ee12074592ad0a6c9ad1ec692a9b9c`,

@@ -7,24 +7,23 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T18:31:06.092872+00:00'
+  updated_at: '2026-11-22T19:09:31.756431+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Enforce the existing approval review-time date-time contract in the offline validator and embedded
-    native preflight.
+  purpose: Qualify the original Docker browser route and unchanged local workflow through explicit verified
+    action sources and managed-network trust.
   includes:
-  - Require actual strings and complete RFC3339 date/time grammar with explicit offset before calendar
-    validation.
-  - Preserve source bytes, IDN1404 and existing entrypoints; regenerate the offline standalone bundle.
-  - Retain actual before/after fictional-fixture probes and Python/native no-mutation regression evidence.
+  - Prepare full-commit archive and Git-tree verified local action mirrors without workflow edits.
+  - Retain exact matching-source direct, local-act-ci and default-entrypoint browser proof.
+  - Separate original browser step success from the actual local artifact-server failure.
+  - Retain the owned real overlay2 runtime recipe, exact shared filesystem/cgroup measurements and scoped
+    proxy/runc repairs.
   excludes:
-  - No inferred human review times, new approval policy, root-source adoption or creative/ADR lifecycle
-    promotion.
-  - Other timestamp fields, lifecycle date semantics, hosted workflows, new platform qualification and
-    publication remain separate.
+  - GitHub-hosted CI, paid services, publication, tags/releases, baseline changes and new creative approval.
+  - Canonical self-source adoption, full native/platform acceptance and other repository writes.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -33,97 +32,123 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - contracts/v1/approvals.schema.json
-  - scripts/identity_validation/governance.py
-  - scripts/validate_identity.py
-  - docs/work/70/review-time-20261122/VALIDATION.md
-  - docs/work/70/review-time-20261122/before-after.json
-  - docs/work/98/self-source-review/README.md
+  - docs/decisions/ADR-0011-accessibility-and-visual-evidence.md
+  - dev/browser/profile.json
+  - .github/workflows/reference-renderer.yml
+  - dev/local-actions/reference-renderer.lock.json
+  - docs/LOCAL_WORKFLOW_REPLAY.md
+  - docs/work/80/ACTION_REPLAY_2026-11-22.md
+  - docs/work/80/action-replay-2026-11-22/qualification-summary.json
+  - https://github.com/egohygiene/identity/issues/80
+  - https://github.com/egohygiene/identity/issues/88
+  - docs/work/80/ISOLATED_DOCKER_2026-11-22.md
+  - docs/work/80/evidence-2026-11-22/isolated-docker-runtime.json
 work:
-  objective: Enforce the existing approval review-time date-time contract in the offline validator and
-    embedded native preflight.
+  objective: Establish original matching-source local Docker and actual workflow browser proof while retaining
+    exact local transport failures.
   success_conditions:
-  - Reject date-only, naive/basic/week-date, numeric/coerced and malformed-offset approval values.
-  - Accept declared lowercase UTC, arbitrary fractional precision and valid calendar/offset forms without
-    changing source bytes.
-  - Prove authoritative standalone and actual native CLI/library rejection before mutation; keep historical
-    and human evidence limits explicit.
+  - Keep profile/image/font/baseline/workflow pins unchanged and preserve truthful caller contexts.
+  - Run nine positives, deliberate screenshot failure and restored pass from direct and both original
+    workflow browser steps.
+  - Retain complete artifact hashes and actual whole-workflow exit without claiming hosted CI or artifact
+    publication.
   active_issue:
     provider: github
-    id: egohygiene/identity#70
-    url: https://github.com/egohygiene/identity/issues/70
+    id: egohygiene/identity#80
+    url: https://github.com/egohygiene/identity/issues/80
   next:
     kind: action
-    id: qualify-original-browser-and-clean-image-paths
-    description: Continue the separate browser/action acquisition and full clean-image qualification checkpoints,
-      then review the exact self-source choices. Keep all new changes in draft PRs for review.
+    id: review-original-browser-proof-and-artifact-transport
+    description: 'Review the three exact a56399b browser passes for #80/#88 and reconcile the draft stack;
+      repair local act artifact MIME protocol separately before claiming whole-workflow green.'
     readiness: ready
     references:
     - https://github.com/egohygiene/identity/issues/80
-    - https://github.com/egohygiene/identity/issues/82
-    - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/88
+    - https://github.com/egohygiene/identity/issues/70
     depends_on: []
 state:
   base:
-    revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
-    ref: refs/heads/main
-    verified_at: '2026-11-22T18:31:06.092872+00:00'
+    revision: edca416d58d15b06ccc05029b0803bc27e65fe18
+    ref: refs/heads/codex/70-rfc3339-review-times-20261122
+    verified_at: '2026-11-22T19:09:31.756431+00:00'
   candidate:
-    branch: codex/70-rfc3339-review-times-20261122
+    branch: codex/80-qualified-browser-stack-20261122
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
+    observed_at: '2026-11-22T19:09:31.756431+00:00'
     default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
     issue_state: open
     pull_request_state: not-applicable
-    notes: Current main verified; earlier158 through162 and Aether140 are merged. Six Identity issues
-      remain open. This source-repair PR does not yet exist; new browser/dev/source checkpoints are separate
-      in-progress branches.
+    notes: Main remains 75ca39f; six Identity finish issues remain open. Earlier158 through162 and Aether140
+      are merged. Parent drafts 163 are open; this next child PR does not yet exist. No new sprint PR
+      is merged or published.
   parallel_changes:
   - provider: github
-    id: egohygiene/aether#141
-    url: https://github.com/egohygiene/aether/pull/141
+    id: egohygiene/identity#163
+    url: https://github.com/egohygiene/identity/pull/163
+  - provider: github
+    id: egohygiene/aether#142
+    url: https://github.com/egohygiene/aether/pull/142
 review:
   status: partial
-  reviewed_at: '2026-11-22T18:31:06.092872+00:00'
+  reviewed_at: '2026-11-22T19:08:19.581987+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Full generated standalone-validator fixture suite and actual before/after isolated script
-      probes
+  - command: Offline exact archive preparation and actual act --strict --dryrun with four explicit local
+      repositories
     outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: 16methods,18invalid/7valid timestamp subcases and7actual before/after synthetic-fixture probes.
-      Corrects old date-only/numeric/naive admission and lowercase-UTC refusal; no source rewrites.
-  - command: Full Python discovery with IDENTITY_REQUIRE_FRONTENDS=1
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: All four archive SHA256/size and complete reconstructed Git trees match reviewed full-commit
+      locks. Dry-run proves acquisition/planning only; actual action execution is separately retained.
+  - command: Focused Python browser and local-action boundary suites; independent read-only source review
     outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: 212discovered:210passed/two existing optionalexperience/nativeWindows skips. Actual Make and
-      checksum-pinnedTask available.
-  - command: cargo fmt; strict all-target/all-feature Clippy; locked offline cargo test
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: 22 tests pass. Actual Git tree calculation, hostile archives, pin/workflow drift, budgets and
+      duplicate JSON are rejected. CA CLI precedence and generic path errors cover missing/directory/loops,
+      commas/quotes/all ASCII controls and alias targets.
+  - command: Original direct Docker plus unchanged reference-renderer workflow CI/default-local browser
+      steps
     outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: 119native tests pass/four explicithelper ignores. Actual CLI/library date-only/naive preflight
-      negatives preserve source,sentinel,output andcache boundaries.
-  - command: Standalone drift, extraction provenance, docs, whitespace and independent contract review
+    observed_at: '2026-11-22T18:57:35.045Z'
+    notes: All three at clean a56399b33548cab075e4442e64605035bccd973f, same 423-file inventory 07bb513d...,
+      nativeamd64 overlay2; each 9 positives → 1 intended failure → 1 restored pass, 0 skips/retries.
+      Three host receipts and 48 raw artifacts retain exact hashes; PNG/tolerance unchanged.
+  - command: Actual original reference-renderer workflow through act0.2.97 host executor in disposable
+      helper
+    outcome: limited
+    observed_at: '2026-11-22T19:06:52.147364+00:00'
+    notes: 51 source parses, 424 Vitest passes, build/public validation and both browser steps pass; whole
+      job exits 1 after 206.755s because local act artifact server rejects unchanged uploader CreateArtifact
+      mime_type. Original hardening pre/main/post execute self-hosted; no hosted-security or publication
+      claim.
+  - command: Retained evidence hashes, protected-source comparison, documentation/compile/whitespace and
+      pinned continuity schema/headings/budgets
     outcome: passed
-    observed_at: '2026-11-22T18:31:06.092872+00:00'
-    notes: Checks pass; no blocking review finding. No schema/diagnostic-code or platform/release change.
-      See exact source-bound work record.
+    observed_at: '2026-11-22T19:08:19.581987+00:00'
+    notes: 66 retained files hashed; all 48 raw artifact hashes and three 20-file critical-input sets
+      match. Workflow/profile/renderer/assets/contracts/ADR bytes equal 75ca39f. Metadata has 12 headings
+      within 16384 bytes/240 lines; no released EgoLint conformance claim.
   environment_limitations:
-  - Only approval reviewedAt is repaired; other explicit date-time fields need separate bounded checks.
-  - Existing calendar parser leap-second limitation is retained; timestamp syntax does not prove a human
-    event.
-  - Actual source choices and timestamps remain pending owner review; no root adoption or generated self-kit
-    acceptance.
-  - Original Docker/native-platform/consumer/release gates remain; no hosted workflow or publication performed.
-  - No official released EgoLint continuity conformance; pinned schema/headings/budget checks are structural.
+  - Local act is not GitHub-hosted CI; the whole local job remains failed at artifact transport despite
+    passing product/browser steps.
+  - Only recorded native Linux/amd64 original image/profile is qualified; no other platform, release,
+    human visual approval or source adoption follows.
+  - The exact represented source is a56399b; later unrelated integration is not relabeled as an actual
+    run.
+  - Official released EgoLint continuity conformance is not claimed; pinned metadata, headings and budgets
+    are narrower checks.
+  - Owned helper capacity is one shared tmpfs/memory budget; its substantial scoped capabilities are not
+    a supported product installation or hosted security guarantee.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
-  redactions: []
+  redactions:
+  - Private task paths, proxy values and disposable local correlation identifiers in workflow logs; raw/sanitized
+    hashes remain distinct.
   excluded:
   - secrets-and-credentials
   - private-conversation-text
@@ -138,48 +163,50 @@ privacy:
 
 ## Purpose and precedence
 
-Runtime/user and scoped instructions, live evidence and canonical source outrank this operational snapshot. This is a draft implementation repair of an existing validity requirement.
+This handoff follows user/runtime instructions, scoped instructions, live state and canonical source. It records exact browser engineering proof without approving brand source or release policy.
 
 ## Resume protocol
 
-Read AGENTS, the approval schema and source-bound work record. Verify main and current draft PRs before acting. Earlier Identity158→162 and Aether140 are merged; preserve historical receipts and unrelated checkouts.
+Read AGENTS, ADR-0011, the browser profile and ACTION_REPLAY_2026-11-22.md. Recheck main/issues/PRs before continuing. Older #80 diagnostics and merged #158–162 receipts keep their historical sources and limits.
 
 ## Current objective and success conditions
 
-Enforce the existing approval review-time date-time contract in the offline validator and embedded native preflight.
+Verify original local Docker and both original workflow browser paths from one exact clean source, with unchanged baseline/tolerance, bounded local acquisition and explicit trust configuration. Keep the full workflow result honest.
 
 ## State snapshot
 
-Base/main is75ca39f3fc7e5e9e0b5578af58c966cd2590a652. Candidate codex/70-rfc3339-review-times-20261122 has no containing revision or pre-PR reference. This is separate from the ongoing browser/dev/source-assembly checkpoints.
+Stack base is `codex/70-rfc3339-review-times-20261122` at `edca416d58d15b06ccc05029b0803bc27e65fe18`. Candidate `codex/80-qualified-browser-stack-20261122` is a draft child with no containing-revision or pre-PR self-reference. Main remains `75ca39f3fc7e5e9e0b5578af58c966cd2590a652`. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code.
 
 ## Completed and material changes
 
-Approval review timestamps no longer gain an invented midnight or timezone through permissive parsing/coercion. Full grammar and calendar validation preserve IDN1404/source bytes, allow valid lowercase UTC and rebuild the standalone validator used by the native bridge. Actual fixture probes and native preflight negatives retain no-mutation evidence.
+A bounded first-party helper prepares four exact pinned public action mirrors, binding archive SHA256/size and reconstructed Git trees to reviewed workflow bytes. Optional IDENTITY_BROWSER_PROXY_CA uses the existing build-secret transport; explicit CLI wins and unset/empty behavior is unchanged. Invalid CA selectors fail before Docker without leaking paths. The owned overlay2 runtime recipe and observation are included, preserving shared filesystem/cgroup limits and scoped proxy/runc repairs. Default daemon configuration remains untouched. No workflow/action/profile/font/PNG/tolerance/ADR is changed.
 
 ## Validation and review evidence
 
-The work70/review-time-20261122 record contains exact source and before/after probes. Full Python212methods passes with2existing skips; native119passes/4helper ignores, strictClippy,format,standalone drift,extraction,docs andwhitespace pass. Independent read-only contract/standalone review finds no blocker.
+Three complete actual original-Docker runs at clean a56399b share the 423-file 07bb513d... inventory: direct local-host, original local-act-ci and original local-act-local-entrypoint-replay. Each passes 9 positives, intentionally fails the visual mutation and restores 1 pass, with 0 skips/retries. Three raw host receipts bind 48 artifacts, runtime/fonts/settings and unchanged PNG 53d7d144.... The original workflow also passes 51 source parses, 424 Vitest tests and build/public validation. Focused Python22 tests and independent review pass. Detailed hashes/receipts are in the domain packet.
+
+The full actual act job exits 1 at the unchanged uploader's local-server MIME protocol. Pre/main/post hardening run as self-hosted; default act local checkout uses no GitHub secret. This is not hosted hardening, hosted CI or published artifact evidence. Pinned Aether decision 2.1.0 and continuity 1.1.0 guides at dc8a168 were read; Hygiene policy 1.2.0 remains referenced.
 
 ## Blockers, risks, unknowns, and deferred work
 
-This is approval reviewedAt only; other date-time validators and date-only lifecycle semantics are not silently changed. Existing leap-second limitation remains. Actual owner choices/new review instants, original Docker acceptance, native platform/install coverage and release/live/consumer gates remain separate.
+Local act's artifact server rejects CreateArtifact mime_type; repair/upgrade that local protocol before reporting whole-workflow green. Other native/platform, source approval, contrast/manual design, distribution and release gates remain separate. Prior owner choices and unresolved #98 source/governance facts are preserved unchanged.
 
 ## Next dependency-ready work
 
-Finish the source-verified local workflow acquisition and isolated-backend browser/dev qualification. Review exact self-source layer/descriptors/output choices before adoption. #98 retains real producer/publisher/release proof; #116 closes last.
+Review exact #80/#88 browser evidence and reconcile the draft checkpoint. The independent full #82 run at8255c5b has now passed both root/nonroot variants and is being retained in its child draft; continue final #70 acceptance; #116 remains the final aggregate. Do not promote matrix rows or issue acceptance solely from merged preparation.
 
 ## Parallel changes and reconciliation
 
-Aether141 implements build-only metadata projection; its host-adapter child remains separate. Identity browser/dev workers own original qualification paths; source assembly retains explicitly unselected proposals. Reconcile parent continuity by meaning before stacking; do not concatenate stale snapshots.
+This checkpoint follows parent draft PRs #163. The engineering parent enforces existing approval timestamp validity and retains unknown actual-owner review times. Each browser, development-image and source-assembly record retains its own represented source and qualification limits. Review parents before children; keep source adoption and actual release/deployment separate. Aether metadata projection and installed-host verification retain their separate draft chain under Aether38.
 
 ## Privacy and redaction
 
-Public source facts, standard fixture mutations and sanitized evidence only. No credentials, private transcript, host paths or invented actual-owner approvals.
+Retain public source/pin facts and exact raw browser proof. Workflow logs redact private task paths, proxy values and disposable correlation identifiers and distinguish raw/sanitized hashes. The private local replay envfile and unused temporary cache marker were removed. No private transcript, credentials or personal paths are committed.
 
 ## Handoff update protocol
 
-Refresh after domain checks before PR handoff; validate pinned metadata, twelve headings and fixed budgets. Reference ADR0001/0005 and existing approvals schema. The pinned Aether decision/continuity workflow remains selected; no new ADR or lifecycle promotion.
+Refresh after checks/provider reads and before the parent draft handoff. Validate pinned metadata, twelve headings and 16384-byte/240-line budgets. Decision impact: reference accepted ADR-0011; local acquisition/trust transports preserve its existing contract, without a new ADR, approval or lifecycle change.
 
 ## Compaction and supersession
 
-Git and linked work records retain previous observations. This handoff replaces current operational prose while preserving historical source, approvals and release evidence.
+Git, issues and date-scoped domain receipts retain detail. Preserve the exact source/caller/native contexts and known upload failure on compaction; do not replace the old source records with a later merged-head claim.
