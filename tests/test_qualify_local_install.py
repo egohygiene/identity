@@ -4,7 +4,6 @@
 from contextlib import redirect_stderr
 import gzip
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-import importlib.util
 import io
 import json
 import os
@@ -66,7 +65,8 @@ class LocalInstallQualificationTests(unittest.TestCase):
 
     def test_corrupt_truncated_and_oversized_archives_fail_before_installation(self):
         original = qualifier.candidate_archive(b"data")
-        for archive in [b"not gzip", original[:10]]:
+        invalid_deflate = bytes.fromhex("1f8b0800000000000003") + b"\x07" + b"\0" * 8
+        for archive in [b"not gzip", original[:10], invalid_deflate]:
             with self.subTest(archive=archive), self.assertRaises(qualifier.QualificationError):
                 qualifier.archive_binary(archive, qualifier.sha256(b"data"))
         with mock.patch.object(qualifier, "MAX_TAR", 64), self.assertRaises(qualifier.QualificationError):

@@ -32,6 +32,7 @@ import threading
 import urllib.error
 import urllib.parse
 import urllib.request
+import zlib
 
 import verify_consumer_authoring as authoring
 
@@ -93,7 +94,7 @@ def archive_binary(archive: bytes, expected: str) -> bytes:
     try:
         with gzip.GzipFile(fileobj=io.BytesIO(archive)) as stream:
             expanded = stream.read(MAX_TAR + 1)
-    except (OSError, EOFError) as error:
+    except (OSError, EOFError, zlib.error) as error:
         raise QualificationError("archive compression is invalid") from error
     if len(expanded) < 1536 or len(expanded) > MAX_TAR or len(expanded) % 512:
         raise QualificationError("expanded archive is outside its bounded format")
