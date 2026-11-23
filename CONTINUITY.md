@@ -7,28 +7,26 @@ repository:
   continuity_path: CONTINUITY.md
 document:
   status: active
-  updated_at: '2026-11-22T19:15:16.779779+00:00'
+  updated_at: '2026-11-23T06:02:13.695231+00:00'
   max_bytes: 16384
   max_lines: 240
   stale_reason: null
   superseded_by: null
 scope:
-  purpose: Prepare concrete Identity descriptor/output proposals and a separate mechanically assembled
-    candidate while exact owner choices remain unselected.
+  purpose: Enforce the existing complete source date-time contract consistently across approval, capture,
+    design-reference and channel metadata validation.
   includes:
-  - Concrete accessible descriptions, H/8 clear-space and digital-size recommendations bound to unchanged
-    SVGs.
-  - Proposed product/core/tokens/metadata plus optional candidate public-usage records; exact layer option
-    A remains independently unselected.
-  - A separate 14-file candidate narrows structural diagnostics to two native reviewedAt null fields and
-    rejects production/verification before output.
-  - Retain stricter parent-validator and local native refusal on the exact unchanged proposal, without
-    source/output mutation.
+  - Share the unchanged approval grammar/calendar check through common.py while preserving the standalone
+    approval facade.
+  - Reject invalid declared source capture/review times using existing diagnostic families; retain prior
+    incomplete-origin findings.
+  - Retain actual immutable-before/current isolated-script controls, source-preserving Python/native regressions
+    and exact code/log/binary identities.
   excludes:
-  - No root identity adoption, selection of layer/descriptor/output proposals, invented timestamps or
-    new human approval.
-  - No runtime/schema/profile/master/rights/ADR lifecycle change, successful actual self-source generation,
-    release, hosted CI or deployment.
+  - No date-only lifecycle/release or broader publisher string semantics, source timestamp rewrites, owner
+    choices or invented human/capture events.
+  - No schema identifier, dependency, approval/ADR lifecycle, root source adoption, release, hosted CI
+    or deployment change.
   precedence:
   - user-and-runtime-instructions
   - scoped-repository-instructions
@@ -37,117 +35,104 @@ scope:
   - continuity-checkpoint
   canonical_sources:
   - AGENTS.md
-  - docs/contracts/IDENTITY_V1.md
-  - docs/decisions/ADR-0001-creative-approval-human-owned.md
-  - docs/decisions/ADR-0012-local-layered-identity-v1.md
-  - docs/work/98/OWNER_ANSWERS_2026-11-22.md
-  - docs/work/98/self-source-review/README.md
-  - docs/work/98/source-assembly/README.md
-  - docs/work/98/source-assembly/DESCRIPTORS.proposed.json
-  - docs/work/98/source-assembly/OUTPUTS.proposed.json
-  - docs/work/98/source-assembly/assembly-validation.json
-  - docs/work/98/source-assembly/REVIEW_TIME_FINDING.md
-  - docs/work/116/qualification-20261122/self-source-strict-preflight.json
-  - docs/work/116/QUALIFICATION_SPRINT_2026-11-22.md
-  - docs/work/116/qualification-20261122/integrated-checks.json
+  - contracts/v1/approvals.schema.json
+  - contracts/v1/provenance.schema.json
+  - contracts/v1/design-references.schema.json
+  - contracts/v1/channel-registry.schema.json
+  - scripts/identity_validation/common.py
+  - scripts/identity_validation/governance.py
+  - scripts/identity_validation/guidance.py
+  - scripts/identity_validation/handbook.py
+  - scripts/identity_validation/channels.py
+  - scripts/validate_identity.py
+  - docs/work/70/timestamp-consistency-20261123/VALIDATION.md
+  - docs/work/70/timestamp-consistency-20261123/checks.json
+  - docs/work/70/timestamp-consistency-20261123/before-after.json
 work:
-  objective: Prepare concrete Identity descriptor/output proposals and a separate mechanically assembled
-    candidate while exact owner choices remain unselected.
+  objective: Enforce the existing complete source date-time contract consistently across approval, capture,
+    design-reference and channel metadata validation.
   success_conditions:
-  - Replace null descriptor proposals with exact reviewable strings and explicit measured facts versus
-    authored guidance.
-  - Keep actual old candidate/root/master bytes unchanged and preserve all pending human choices.
-  - Exercise matching source validation and native refusal without inserting synthetic approval times.
+  - Reject formerly accepted date-only/naive/coerced source date-time values without changing source bytes
+    or public diagnostic families.
+  - Accept declared lowercase UTC/fraction/offset forms and retain the approval import facade, date-only
+    lifecycle semantics and old incomplete-origin diagnostics.
+  - Prove actual standalone/native/CLI refusal before output/cache mutation without changing actual approval
+    facts.
   active_issue:
     provider: github
-    id: egohygiene/identity#98
-    url: https://github.com/egohygiene/identity/issues/98
+    id: egohygiene/identity#70
+    url: https://github.com/egohygiene/identity/issues/70
   next:
     kind: action
-    id: review-exact-descriptor-output-and-layer-choices
-    description: Review the exact descriptor/output proposal and independent inheritance/token question;
-      only then record actual packet-review time and assemble the selected governed source.
+    id: reconcile-current-source-quality-and-install-proof
+    description: Review this bounded repair with the independent local artifact transport and installation
+      checkpoints, then continue final current-source/native qualification. Resolve exact owner choices
+      before actual self-source adoption.
     readiness: ready
     references:
+    - https://github.com/egohygiene/identity/issues/70
     - https://github.com/egohygiene/identity/issues/98
+    - https://github.com/egohygiene/identity/issues/116
     depends_on: []
 state:
   base:
-    revision: 18674e0cd88fc7316201d925c83fc3616919234f
-    ref: refs/heads/codex/82-qualified-images-stack-20261122
-    verified_at: '2026-11-22T19:15:16.779779+00:00'
+    revision: ad8fca58946ca03f6f07d13be6c64046216569d0
+    ref: refs/heads/main
+    verified_at: '2026-11-23T06:02:13.695231+00:00'
   candidate:
-    branch: codex/98-source-proposal-stack-20261122
+    branch: codex/70-timestamp-consistency-20261123
     revision: null
     pull_request: null
     handoff_state: ready-for-review
   live:
     status: verified
-    observed_at: '2026-11-22T19:15:16.779779+00:00'
-    default_branch_revision: 75ca39f3fc7e5e9e0b5578af58c966cd2590a652
+    observed_at: '2026-11-23T06:02:13.695231+00:00'
+    default_branch_revision: ad8fca58946ca03f6f07d13be6c64046216569d0
     issue_state: open
     pull_request_state: not-applicable
-    notes: Main remains 75ca39f; six Identity finish issues remain open. Earlier158 through162 and Aether140
-      are merged. Parent drafts 163,164,165 are open; this next child PR does not yet exist. No new sprint
-      PR is merged or published.
-  parallel_changes:
-  - provider: github
-    id: egohygiene/identity#163
-    url: https://github.com/egohygiene/identity/pull/163
-  - provider: github
-    id: egohygiene/identity#164
-    url: https://github.com/egohygiene/identity/pull/164
-  - provider: github
-    id: egohygiene/identity#165
-    url: https://github.com/egohygiene/identity/pull/165
-  - provider: github
-    id: egohygiene/aether#142
-    url: https://github.com/egohygiene/aether/pull/142
+    notes: Fresh provider reads verify mainad8fca5 and issue70open, with no open Identity PR at observation.
+      This candidate has no PR yet; the actual tested code is d159c68 and later changes are evidence/continuity
+      only.
+  parallel_changes: []
 review:
   status: partial
-  reviewed_at: '2026-11-22T19:15:16.610601+00:00'
+  reviewed_at: '2026-11-23T06:02:13.695231+00:00'
   reviewed_by: Codex
   evidence:
-  - command: Existing provenance/usage schemas on new candidate fragments
+  - command: Full Python discovery with IDENTITY_REQUIRE_FRONTENDS=1
     outcome: passed
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Two proposed complete descriptor records and candidate-only usage document satisfy closed structural
-      schemas. No installed date-time format checker is available; this is not timestamp-format proof.
-  - command: python3 scripts/validate_identity.py --repository-root docs/work/98/source-assembly/candidate
-      --format json
-    outcome: limited
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Exit1/validfalse with exactly two IDN1404 findings at native reviewedAt nulls. Option A layers/descriptors/output
-      values remain unselected proposals despite mechanical narrowing.
-  - command: cargo build --locked --offline --bin identity; native v1-generate and v1-verify on proposed
-      candidate
-    outcome: limited
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Pinned Rust 1.97.1 local build passes; both producer/verify calls refuse with IDN1404 before
-      output. All 14 candidate files and original active candidate unchanged. This is no release/download
-      qualification.
-  - command: Synthetic14-decision date-only control
-    outcome: limited
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: 'Existing validator at 75ca39f accepts bare 2026-11-22 timestamps; retained bounded finding
-      for root #70 repair. No actual owner timestamp is filled and no parser fix is made here.'
-  - command: Documentation, source inventories, protected-input and whitespace checks
+    observed_at: '2026-11-23T06:02:13.695231+00:00'
+    notes: 238discovered:236passed/two existing optionalexperience/nativeWindows skips; actualMake and
+      pinnedTask3.45.3 available. Focused validator/channel28methods pass.
+  - command: cargo fmt; strict locked offline all-target/all-feature Clippy; locked offline all-feature
+      cargo test
     outcome: passed
-    observed_at: '2026-11-22T18:24:25.121653+00:00'
-    notes: Current proposal/manifests match; original active candidate, selected masters, runtime/contracts/profiles/ADRs
-      are unchanged. Documentation links and canonical whitespace pass.
-  - command: Integrated full Python and source/evidence/compiled-input comparisons at33948ad
+    observed_at: '2026-11-23T06:02:13.695231+00:00'
+    notes: 119native passes/four explicithelper-only ignores, jobs1. Six new actual CLI/library date-only/naive
+      origin/guidance/reference rejection cases preserve changed source, output sentinel and cache boundary.
+      Code bytes audited to d159c68.
+  - command: Actual immutablead8 versus repaired standalone via Python-I-S on disposable fictional consumers
     outcome: passed
-    observed_at: '2026-11-22T19:15:16.610601+00:00'
-    notes: 234discovered:232passes/two existing skips, actualMake/Task. Docs,bundle,extraction,whitespace
-      and reviewed packets/protected inputs match. Selected native inputs equal testededca; no new native
-      execution inferred. Strict source/native refusal preserves14candidate inputs without output.
+    observed_at: '2026-11-23T06:02:13.695231+00:00'
+    notes: 'Twelve controls: eight former bare-date acceptances nowreject; lowercase reference UTC repaired;
+      approval facade, date-only lifecycle and prior incomplete-origin diagnostics preserved. Original
+      fixture and every copied source remain unchanged.'
+  - command: Bundle drift, extraction/provenance, docs, whitespace and independent source/tests review
+    outcome: passed
+    observed_at: '2026-11-23T06:02:13.695231+00:00'
+    notes: Checks pass and no code/test review blocker. Exact nine code inputs plus test/raw-log/local-binary
+      hashes are retained in checks.json. Actual self-source proposal still has exactly two missing-review
+      findings.
   environment_limitations:
-  - Exact inheritance/token and new descriptor/output/public-usage choices remain pending owner response.
-  - New native review timestamp cannot be supplied without actual explicit packet review; original exact
-    instant remains unknown.
-  - No successful actual source generation/public-kit/publisher/native-platform/release proof is supplied.
-  - Pinned schema/heading/budget validation is narrower than official released EgoLint continuity conformance.
+  - Local Linux execution and test binary identity do not establish downloaded/signed releases, other
+    native platforms or hosted CI.
+  - Existing parser leap-second limitation remains; syntactic capture/review time validity does not prove
+    an event occurred.
+  - Date-only since/release.date and publisher/view-model nonempty origin strings retain separate unchanged
+    contracts.
+  - Actual self-source owner choices/review instants remain outside this engineering repair; no unknown
+    value is filled.
+  - Pinned continuity schema/headings/budgets are structural checks, not released EgoLint continuity conformance.
 privacy:
   classification: public-repository
   contains_sensitive_data: false
@@ -166,48 +151,48 @@ privacy:
 
 ## Purpose and precedence
 
-User/runtime and scoped instructions, live evidence and canonical source outrank this operational snapshot. It records a new reviewable assembly, not selected identity source.
+User/runtime and scoped instructions, live evidence and canonical sources outrank this operational checkpoint. It records an existing validity repair, not a new approval or timestamp policy.
 
 ## Resume protocol
 
-Read AGENTS, current owner answers, original layer packet and the new source-assembly records. Recheck live main/issue/PR state and actual owner responses before adoption. Prior #158 → #162 and Aether #140 are merged.
+Read AGENTS, the five canonical validator modules, curated date-time schemas and timestamp-consistency VALIDATION/checks records. Recheck main, issue70 and any new draft peers before continuing. Earlier domain receipts retain their exact source and scope.
 
 ## Current objective and success conditions
 
-Prepare concrete Identity descriptor/output proposals and a separate mechanically assembled candidate while exact owner choices remain unselected.
+Enforce the existing complete source date-time contract consistently across approval, capture, design-reference and channel metadata validation.
 
 ## State snapshot
 
-Stack base is `codex/82-qualified-images-stack-20261122` at `18674e0cd88fc7316201d925c83fc3616919234f`. Candidate `codex/98-source-proposal-stack-20261122` is a draft child with no containing-revision or pre-PR self-reference. Main remains `75ca39f3fc7e5e9e0b5578af58c966cd2590a652`. Domain receipts retain their exact independently represented source; stacking does not relabel earlier runs as tests of later code.
+Base/live main isad8fca58946ca03f6f07d13be6c64046216569d0. Candidate codex/70-timestamp-consistency-20261123 has no containing-revision or pre-PR reference. Executed code bytes equal d159c680e6161e85854fd45c255d4196aec5c34f; later additions are evidence and continuity, not relabeled executions.
 
 ## Completed and material changes
 
-New concrete descriptors preserve actual SVG titles/artboards and the horizontal old tagline. H/8 clear space and 64/600 CSS px are explicit new recommendations, with no contrast/WCAG guarantee or new license condition. Product/core/tokens/metadata and optional two-SVG public usage remain proposals. The separate candidate resolves option A structurally while native timestamps remain null.
+The existing approval parser is shared through common.valid_rfc3339_timestamp, with valid_review_timestamp retained. Declared asset origins, shared guidance provenance, design references and registry reviews now enforce complete offset-bearing string/calendar validity. Existing codes, source bytes and incomplete-origin findings remain. The generated offline standalone/native preflight bundle is regenerated.
 
 ## Validation and review evidence
 
-Two provenance fragments and candidate usage pass structural schemas. Full proposed consumer returns exactly two IDN1404 findings; native generation and verify refuse without output or input changes. The offline pinned local CLI build succeeds with unchanged product inputs. The historical14-decision probe records date-only acceptance at75ca39f; parent163 fixes that defect. A new strict-preflight integration receipt repeats validator/native refusal against unchanged candidate bytes after that repair. See assembly-validation, REVIEW_TIME_FINDING and the integrated strict-refusal receipt. Integrated Python234 passes with two existing skips; docs/bundle/extraction and exact packet/protected-input checks pass. No real approval or full source pass.
+Full Python238 completes236passes/two existing skips; focused28methods pass. Native119passes/four helper-only ignores, strictClippy and format pass. Actual CLI/library negatives preserve changed source, output sentinel and cache. Twelve immutable-before/current isolated-script controls show eight formerly accepted bare-date bindings rejected, valid lowercase UTC repaired, and old facade/date-only/incomplete-origin behavior preserved. Bundle, extraction, docs, whitespace and independent source/tests review pass; exact code/log/binary identities are retained.
 
 ## Blockers, risks, unknowns, and deferred work
 
-Owner layer/token and exact descriptor/output choices remain unselected. The optional schema-format checker remains unavailable locally, while parent163 now independently enforces complete approval timestamps. The historical parser finding is not used as authority. Review timestamps remain null; original creation/reference history remains unknown. Native Kern PNG support, a new-tagline derivative, actual self-source publisher/release and remaining native-platform/final-merged acceptance stay separate. Original browser and Linux image proofs are retained in parents164/165.
+This is local declared-contract enforcement only. Leap seconds retain the old parser limitation. Date-only lifecycle/release and broader publisher-origin strings are not reinterpreted. Actual owner choices and missing review instants remain unknown. Other native/install, local artifact transport, final merged-source quality and release/publication proof retain their owners.
 
 ## Next dependency-ready work
 
-Read the final QUALIFICATION_SPRINT_2026-11-22 handoff, then review the concrete source bundle and independent inheritance question, then bind actual selections and the actual new packet-review time. Rerun matching strict source/producer checks before canonical adoption or real publisher handoff. Existing known brand choices need not be selected again.
+Review this repair with independent artifact-transport and installation proof, then reconcile final current-source quality/native coverage under70. Existing98 source review must precede actual root adoption and successful self-kit generation;116 closes last.
 
 ## Parallel changes and reconciliation
 
-This checkpoint follows parent draft PRs #163 → #164 → #165. The engineering parent enforces existing approval timestamp validity and retains unknown actual-owner review times. Each browser, development-image and source-assembly record retains its own represented source and qualification limits. Review parents before children; keep source adoption and actual release/deployment separate. Aether metadata projection and installed-host verification retain their separate draft chain under Aether38.
+No open Identity PR was observed in the fresh provider read. Root coordinates independently scoped artifact/installation and Aether portability branches; this child changes only timestamp validation/tests/evidence. Reconcile continuity by meaning before stacking; preserve every domain receipt's actual source and qualification limits.
 
 ## Privacy and redaction
 
-Public-safe brand facts, actual geometry and sanitized source-bound diagnostics only. Exclude private transcript, credentials, personal context and local filesystem topology.
+Public schema/code facts, fictional fixture mutations and bounded checks only. Public records retain hashes rather than private task logs or host topology. No transcript, proxy values, credentials, personal context or actual review-time inference is recorded.
 
 ## Handoff update protocol
 
-Refresh after domain checks and before PR handoff. Validate pinned metadata, twelve headings and size limits. Reference ADR-0001/ADR-0004/ADR-0012 and proposed ADR-0035; preparation uses pinned Aether decision 2.1.0/continuity 1.1.0 at dc8a168 and Hygiene policy 1.2.0. No duplicate ADR or new approval authority.
+Refresh after domain checks before PR handoff; verify pinned schema, twelve headings and fixed budgets. Decision impact references ADR-0001/ADR-0005/ADR-0012; no new model, schema identity or policy direction is selected. Pinned Aether decision2.1.0/continuity1.1.0 and Hygiene1.2.0 were read at their immutable revisions.
 
 ## Compaction and supersession
 
-Git and linked owner records retain earlier exact packets and receipts. Preserve those historical hashes and approvals; replace current operational prose rather than append chronology.
+Git and linked work records retain prior observations. Replace current operational prose rather than append chronology; preserve historical source bindings, human dispositions and unresolved owner facts.

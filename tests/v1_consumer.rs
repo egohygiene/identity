@@ -813,13 +813,54 @@ fn cli_and_library_enforce_authoritative_source_diagnostics_before_mutation() {
             serde_json::json!("2026-11-22T18:00:00"),
             "IDN1404",
         ),
+        (
+            ".identity/governance/provenance.json",
+            "/assets/0/origin/capturedAt",
+            serde_json::json!("2026-11-23"),
+            "IDN1405",
+        ),
+        (
+            ".identity/governance/provenance.json",
+            "/assets/0/origin/capturedAt",
+            serde_json::json!("2026-11-23T12:34:56"),
+            "IDN1405",
+        ),
+        (
+            ".identity/guidance/voice.json",
+            "/foundation/governance/provenance/capturedAt",
+            serde_json::json!("2026-11-23"),
+            "IDN1602",
+        ),
+        (
+            ".identity/guidance/voice.json",
+            "/foundation/governance/provenance/capturedAt",
+            serde_json::json!("2026-11-23T12:34:56"),
+            "IDN1602",
+        ),
+        (
+            ".identity/guidance/design-references.json",
+            "/references/0/capturedAt",
+            serde_json::json!("2026-11-23"),
+            "IDN1702",
+        ),
+        (
+            ".identity/guidance/design-references.json",
+            "/references/0/capturedAt",
+            serde_json::json!("2026-11-23T12:34:56"),
+            "IDN1702",
+        ),
     ] {
         let root = TempDir::new().unwrap();
         copy_tree(&fixture_root(), root.path());
         fs::create_dir_all(root.path().join("assets/identity")).unwrap();
         fs::write(root.path().join("assets/identity/sentinel"), b"keep").unwrap();
         change_json(root.path(), document, pointer, value);
+        let changed_source = fs::read(root.path().join(document)).unwrap();
         assert_preflight_rejected(root.path(), code);
+        assert_eq!(
+            fs::read(root.path().join(document)).unwrap(),
+            changed_source
+        );
     }
 }
 

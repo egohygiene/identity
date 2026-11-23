@@ -1,0 +1,367 @@
+{
+  "recordKind": "actual immutable-before/current-standalone fictional-source controls; not real review facts",
+  "observedAt": "2026-11-23T05:58:08.830008+00:00",
+  "baseRevision": "ad8fca58946ca03f6f07d13be6c64046216569d0",
+  "baselineValidatorSha256": "bbde68dfdab6d03f1c59403bbf00f2a6ca290bb61c5447544ef4af30e02e3eb5",
+  "candidateValidatorSha256": "516305a9bdcf79f3129bcc4efba3b18feb8a66e9dc249b34dcd04f5f42f24e40",
+  "commandTemplate": "python3 -I -S <selected-standalone-validator> --repository-root <disposable-fictional-consumer> --format json",
+  "context": "Local Linux; no optional packages, network, hosted CI or source adoption",
+  "results": [
+    {
+      "case": "capture-1",
+      "document": ".identity/governance/provenance.json",
+      "pointer": "/assets/0/origin/capturedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1405",
+              "message": "asset origin capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/governance/provenance.json#/assets/0/origin/capturedAt",
+              "recovery": "Record the source capture time with an explicit UTC offset.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "capture-2",
+      "document": ".identity/guidance/voice.json",
+      "pointer": "/foundation/governance/provenance/capturedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1602",
+              "message": "capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/guidance/voice.json#/foundation/governance/provenance/capturedAt",
+              "recovery": "Record the source capture time with an explicit UTC offset.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "capture-3",
+      "document": ".identity/guidance/usage.json",
+      "pointer": "/sections/0/rules/0/governance/provenance/capturedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1602",
+              "message": "capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/guidance/usage.json#/sections/0/rules/0/governance/provenance/capturedAt",
+              "recovery": "Record the source capture time with an explicit UTC offset.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "capture-4",
+      "document": ".identity/guidance/design-system.json",
+      "pointer": "/sections/0/principles/0/governance/provenance/capturedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1602",
+              "message": "capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/guidance/design-system.json#/sections/0/principles/0/governance/provenance/capturedAt",
+              "recovery": "Record the source capture time with an explicit UTC offset.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "capture-5",
+      "document": ".identity/guidance/design-references.json",
+      "pointer": "/references/0/capturedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1702",
+              "message": "design reference capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/guidance/design-references.json#/references/0/capturedAt",
+              "recovery": "Record when the reference was reviewed.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "capture-6",
+      "document": ".identity/guidance/design-references.json",
+      "pointer": "/references/0/governance/provenance/capturedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1602",
+              "message": "capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/guidance/design-references.json#/references/0/governance/provenance/capturedAt",
+              "recovery": "Record the source capture time with an explicit UTC offset.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "registry-review",
+      "document": ".identity/guidance/channel-registry.json",
+      "pointer": "/registry/reviewedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN2101",
+              "message": "channel registry reviewedAt must be RFC 3339",
+              "path": ".identity/guidance/channel-registry.json#/registry/reviewedAt",
+              "recovery": "Record when the registry was reviewed.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 25,
+      "inputsPreserved": true
+    },
+    {
+      "case": "channel-provenance",
+      "document": ".identity/guidance/channel-registry.json",
+      "pointer": "/channels/0/governance/provenance/capturedAt",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1602",
+              "message": "capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/guidance/channel-registry.json#/channels/0/governance/provenance/capturedAt",
+              "recovery": "Record the source capture time with an explicit UTC offset.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 25,
+      "inputsPreserved": true
+    },
+    {
+      "case": "date-only-lifecycle",
+      "document": ".identity/guidance/channel-registry.json",
+      "pointer": "/channels/0/lifecycle/since",
+      "fictionalValue": "2026-11-23",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        }
+      ],
+      "sourceFiles": 25,
+      "inputsPreserved": true
+    },
+    {
+      "case": "lowercase-reference",
+      "document": ".identity/guidance/design-references.json",
+      "pointer": "/references/0/capturedAt",
+      "fictionalValue": "2024-02-29t12:34:56z",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1702",
+              "message": "design reference capturedAt must be an RFC 3339 timestamp",
+              "path": ".identity/guidance/design-references.json#/references/0/capturedAt",
+              "recovery": "Record when the reference was reviewed.",
+              "severity": "error"
+            }
+          ]
+        },
+        {
+          "label": "after",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "approval-facade",
+      "document": ".identity/governance/approvals.json",
+      "pointer": "/decisions/0/reviewedAt",
+      "fictionalValue": "2024-02-29t12:34:56z",
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        },
+        {
+          "label": "after",
+          "exitCode": 0,
+          "valid": true,
+          "diagnostics": []
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    },
+    {
+      "case": "existing-incomplete-origin",
+      "document": ".identity/governance/provenance.json",
+      "pointer": "/assets/0/origin/capturedAt",
+      "fictionalValue": null,
+      "observations": [
+        {
+          "label": "before",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1405",
+              "message": "asset provenance is incomplete",
+              "path": ".identity/governance/provenance.json#/assets/0/origin",
+              "recovery": "Record creator, method, source, and capture time.",
+              "severity": "error"
+            }
+          ]
+        },
+        {
+          "label": "after",
+          "exitCode": 1,
+          "valid": false,
+          "diagnostics": [
+            {
+              "code": "IDN1405",
+              "message": "asset provenance is incomplete",
+              "path": ".identity/governance/provenance.json#/assets/0/origin",
+              "recovery": "Record creator, method, source, and capture time.",
+              "severity": "error"
+            }
+          ]
+        }
+      ],
+      "sourceFiles": 24,
+      "inputsPreserved": true
+    }
+  ],
+  "originalFixturePreserved": true,
+  "limit": "Timestamp grammar/calendar validation does not prove that a human or capture event occurred; existing leap-second limitation is unchanged.",
+  "candidateCodeRevision": "d159c680e6161e85854fd45c255d4196aec5c34f",
+  "candidateCodeBytesMatchCommit": true
+}

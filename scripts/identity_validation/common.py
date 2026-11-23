@@ -564,6 +564,26 @@ def require_closed(
     return value
 
 
+def valid_rfc3339_timestamp(value: Any) -> bool:
+    """Check declared date-time strings without coercing or rewriting source."""
+
+    if not isinstance(value, str) or re.fullmatch(
+        r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}"
+        r"(?:\.[0-9]+)?(?:[Zz]|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])",
+        value,
+    ) is None:
+        return False
+    normalized = value[:10] + "T" + value[11:]
+    if normalized[-1] in "Zz":
+        normalized = normalized[:-1] + "+00:00"
+    try:
+        # Preserve the existing calendar parser's leap-second limitation and
+        # the recorded bytes; this validates syntax, not an asserted event.
+        return datetime.fromisoformat(normalized).utcoffset() is not None
+    except ValueError:
+        return False
+
+
 def valid_relative_path(value: Any) -> bool:
     """Return whether a string is one normalized repository-relative path."""
 

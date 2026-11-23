@@ -565,6 +565,26 @@ def require_closed(
     return value
 
 
+def valid_rfc3339_timestamp(value: Any) -> bool:
+    """Check declared date-time strings without coercing or rewriting source."""
+
+    if not isinstance(value, str) or re.fullmatch(
+        r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}"
+        r"(?:\.[0-9]+)?(?:[Zz]|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])",
+        value,
+    ) is None:
+        return False
+    normalized = value[:10] + "T" + value[11:]
+    if normalized[-1] in "Zz":
+        normalized = normalized[:-1] + "+00:00"
+    try:
+        # Preserve the existing calendar parser's leap-second limitation and
+        # the recorded bytes; this validates syntax, not an asserted event.
+        return datetime.fromisoformat(normalized).utcoffset() is not None
+    except ValueError:
+        return False
+
+
 def valid_relative_path(value: Any) -> bool:
     """Return whether a string is one normalized repository-relative path."""
 
@@ -1474,23 +1494,9 @@ def validate_aliases(tokens: dict[str, TokenRecord], diagnostics: list[Diagnosti
 
 
 def valid_review_timestamp(value: Any) -> bool:
-    """Require the declared date-time grammar before checking calendar values."""
+    """Retain the existing standalone import facade for approval timestamps."""
 
-    if not isinstance(value, str) or re.fullmatch(
-        r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}"
-        r"(?:\.[0-9]+)?(?:[Zz]|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])",
-        value,
-    ) is None:
-        return False
-    normalized = value[:10] + "T" + value[11:]
-    if normalized[-1] in "Zz":
-        normalized = normalized[:-1] + "+00:00"
-    try:
-        # Keep the existing calendar parser's leap-second limitation. This is
-        # validation only: preserve the actual recorded timestamp bytes.
-        return datetime.fromisoformat(normalized).utcoffset() is not None
-    except ValueError:
-        return False
+    return valid_rfc3339_timestamp(value)
 
 
 def validate_approvals(
@@ -1757,6 +1763,21 @@ def validate_provenance(
                 f"{pointer}/origin/method",
                 "asset origin method is unsupported",
                 "Use first-party, commissioned, licensed, or generated.",
+            )
+        captured_at = origin.get("capturedAt") if origin is not None else None
+        if (
+            isinstance(captured_at, str)
+            and captured_at.strip()
+            and not valid_rfc3339_timestamp(captured_at)
+        ):
+            # Existing missing/non-string provenance keeps its original
+            # incomplete-origin diagnostic; this closes accepted bad strings.
+            diagnostic(
+                diagnostics,
+                "IDN1405",
+                f"{pointer}/origin/capturedAt",
+                "asset origin capturedAt must be an RFC 3339 timestamp",
+                "Record the source capture time with an explicit UTC offset.",
             )
         accessibility = require_closed(
             value.get("accessibility"),
@@ -2041,11 +2062,7 @@ def validate_guidance_governance(
                 "guidance provenance method is unsupported",
                 "Use human-authored, handoff-candidate, or imported.",
             )
-        try:
-            datetime.fromisoformat(
-                str(provenance.get("capturedAt", "")).replace("Z", "+00:00")
-            )
-        except ValueError:
+        if not valid_rfc3339_timestamp(provenance.get("capturedAt")):
             diagnostic(
                 diagnostics,
                 "IDN1602",
@@ -3133,9 +3150,7 @@ def validate_design_references(
                 "design reference URL must use HTTPS",
                 "Record the original HTTPS source URL.",
             )
-        try:
-            datetime.fromisoformat(str(value.get("capturedAt", "")).replace("Z", "+00:00"))
-        except ValueError:
+        if not valid_rfc3339_timestamp(value.get("capturedAt")):
             diagnostic(
                 diagnostics,
                 "IDN1702",
@@ -3230,9 +3245,7 @@ def validate_channel_registry(
             diagnostic(diagnostics, "IDN2101", f"{path_value}#/registry/version", "channel registry version must be semantic versioning", "Publish registry changes with an explicit x.y.z version.")
         if not isinstance(registry.get("owner"), str) or not registry["owner"].strip():
             diagnostic(diagnostics, "IDN2101", f"{path_value}#/registry/owner", "channel registry owner is empty", "Record the responsible organization.")
-        try:
-            datetime.fromisoformat(str(registry.get("reviewedAt", "")).replace("Z", "+00:00"))
-        except ValueError:
+        if not valid_rfc3339_timestamp(registry.get("reviewedAt")):
             diagnostic(diagnostics, "IDN2101", f"{path_value}#/registry/reviewedAt", "channel registry reviewedAt must be RFC 3339", "Record when the registry was reviewed.")
 
     security = require_closed(
